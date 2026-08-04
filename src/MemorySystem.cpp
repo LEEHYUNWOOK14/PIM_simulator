@@ -41,13 +41,16 @@ namespace DRAMSim
 powerCallBack_t MemorySystem::ReportPower = NULL;
 
 MemorySystem::MemorySystem(unsigned id, unsigned int megsOfMemory, CSVWriter& csvOut_,
-                           ostream& simLog, Configuration& configuration)
+                           ostream& simLog, Configuration& configuration,
+                           shared_ptr<LogicDieScheduler> logicScheduler,
+                           shared_ptr<LogicDieWeightBuffer> logicWeightBuffer)
     : dramsimLog(simLog),
       ReturnReadData(NULL),
       WriteDataDone(NULL),
       systemID(id),
       csvOut(csvOut_),
       numOnTheFlyTransactions(0),
+      logicWeightBuffer(logicWeightBuffer),
       config(configuration)
 {
     currentClockCycle = 0;
@@ -136,7 +139,7 @@ MemorySystem::MemorySystem(unsigned id, unsigned int megsOfMemory, CSVWriter& cs
 
     for (size_t i = 0; i < num_ranks_; i++)
     {
-        Rank* r = new Rank(dramsimLog, config);
+        Rank* r = new Rank(dramsimLog, config, logicScheduler, logicWeightBuffer);
         r->setChanId(systemID);
         r->setRankId(i);
         r->attachMemoryController(memoryController);

@@ -163,6 +163,7 @@ class PIMCmdGen
     static vector<PIMCmd> getPIMCmds(KernelType ktype, int num_jump_to_be_taken,
                                      int num_jump_to_be_taken_odd_bank,
                                      int num_jump_to_be_taken_even_bank);
+    static bool isLogicDieCandidate(PIMCmdType cmdType);
 };
 
 #endif  // __PIM_KERNEL_GEN_H__

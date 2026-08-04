@@ -1,0 +1,20 @@
+Note: Google Test filter = PIMBenchFixture.add
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from PIMBenchFixture
+[ RUN      ] PIMBenchFixture.add
+>>Performance Test
+unknown file: Failure
+C++ exception with description "system_hbm_64ch.ini has invalid parameter, line: 11" thrown in the test body.
+
+> Speed-up : -nan
+[  FAILED  ] PIMBenchFixture.add (34 ms)
+[----------] 1 test from PIMBenchFixture (42 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (67 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] PIMBenchFixture.add
+
+ 1 FAILED TEST

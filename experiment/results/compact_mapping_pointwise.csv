@@ -1,0 +1,5 @@
+case,compact,logic_latency,logic_bw,active_channels,physical_output_dim,reads,writes,cycle
+bank_fixed,false,0,0,64,4096,842496,259008,120164
+hybrid_fixed,false,2,64,64,4096,842496,259008,150998
+hybrid_compact_current,true,2,64,3,192,75360,12141,150998
+hybrid_compact_ideal,true,0,0,3,192,75360,12141,120164

@@ -32,6 +32,7 @@
 #define CMDQUEUE_H
 
 #include <vector>
+#include <string>
 
 #include "BankState.h"
 #include "BusPacket.h"
@@ -73,6 +74,7 @@ class CommandQueue : public SimulatorObject
     void needRefresh(unsigned rank);
 
     void print();
+    string getDebugSummary() const;
     void update();  // SimulatorObject requirement
     vector<BusPacket*>& getCommandQueue(unsigned rank, unsigned bank);
 

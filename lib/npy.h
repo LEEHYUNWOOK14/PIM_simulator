@@ -30,6 +30,7 @@
 #include <fstream>
 #include <iostream>
 #include <regex>
+#include <iterator>
 #include <sstream>
 #include <stdexcept>
 #include <string>

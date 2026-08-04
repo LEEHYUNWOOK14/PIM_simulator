@@ -42,6 +42,8 @@
 #include "Configuration.h"
 #include "MemoryController.h"
 #include "MemoryObject.h"
+#include "LogicDieScheduler.h"
+#include "LogicDieWeightBuffer.h"
 #include "Rank.h"
 #include "SimulatorObject.h"
 #include "SystemConfiguration.h"
@@ -57,7 +59,8 @@ class MemorySystem : public MemoryObject
   public:
     // functions
     MemorySystem(unsigned id, unsigned megsOfMemory, CSVWriter& csvOut_, ostream& simLog,
-                 Configuration& config);
+                 Configuration& config, shared_ptr<LogicDieScheduler> logicScheduler,
+                 shared_ptr<LogicDieWeightBuffer> logicWeightBuffer);
     virtual ~MemorySystem();
     void update();
 
@@ -88,6 +91,7 @@ class MemorySystem : public MemoryObject
     static powerCallBack_t ReportPower;
     unsigned systemID;
     uint64_t numOnTheFlyTransactions;
+    shared_ptr<LogicDieWeightBuffer> logicWeightBuffer;
 
   private:
     CSVWriter& csvOut;

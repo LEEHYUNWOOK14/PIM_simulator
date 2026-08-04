@@ -184,7 +184,7 @@ std::string PIMCmd::toStr() const
             ss << opdToStr(dst_, dstIdx_) << ", ";
             ss << opdToStr(src0_, src0Idx_) << ", ";
             ss << opdToStr(src1_, src1Idx_) << ", ";
-            ss << opdToStr(src2_, src1Idx_);
+            ss << opdToStr(src2_, src2Idx_);
             break;
 
         default:

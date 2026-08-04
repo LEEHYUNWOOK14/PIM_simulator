@@ -1,0 +1,10 @@
+fill_policy,fill_channels,fill_activates,fill_precharges,max_completion_cycle,total_cycle
+round_robin,16,768,384,109941,223414
+row_local,16,112,0,110328,223747
+row_interleaved,16,512,0,109889,221870
+round_robin,32,1536,768,109528,224150
+row_local,32,128,0,109714,227073
+row_interleaved,32,1024,0,109388,219729
+round_robin,64,1536,0,108496,219405
+row_local,64,128,0,108553,219752
+row_interleaved,64,2048,0,108495,219404

@@ -1,0 +1,27 @@
+Note: Google Test filter = PIMBenchFixture.gemv
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from PIMBenchFixture
+[ RUN      ] PIMBenchFixture.gemv
+>>Performance Test
+  GEMV (PIM disabled)
+  Weight data dimension : 4096x4096
+  Input data dimension : 4096
+  Output data dimension : 4096
+> Test Results 
+> Cycle : 36082
+
+  GEMV (PIM enabled)
+  Weight data dimension : 4096x4096
+  Input data dimension : 4096
+  Output data dimension : 4096
+> Test Results 
+> Cycle : 13166
+
+> Speed-up : 2.74054
+[       OK ] PIMBenchFixture.gemv (7491 ms)
+[----------] 1 test from PIMBenchFixture (7498 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (7517 ms total)
+[  PASSED  ] 1 test.

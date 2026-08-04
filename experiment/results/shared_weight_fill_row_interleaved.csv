@@ -1,0 +1,4 @@
+fill_policy,fill_channels,physical_weight_bytes,physical_writes,buffer_fill_bursts,buffer_read_hits,buffer_read_misses,active_channels,completed_fill_writes,min_writes_per_channel,max_writes_per_channel,min_completion_cycle,max_completion_cycle,fill_activates,fill_precharges,total_cycle
+row_interleaved,16,114688,225460,3584,702464,0,16,3584,224,224,109889,109889,512,0,221870
+row_interleaved,32,114688,225460,3584,702464,0,32,3584,112,112,109388,109388,1024,0,219729
+row_interleaved,64,114688,225460,3584,702464,0,64,3584,56,56,108495,108495,2048,0,219404

@@ -20,6 +20,8 @@
 #include "Configuration.h"
 #include "PIMBlock.h"
 #include "PIMCmd.h"
+#include "LogicDieScheduler.h"
+#include "LogicDieWeightBuffer.h"
 #include "Rank.h"
 #include "SimulatorObject.h"
 
@@ -59,15 +61,32 @@ class Rank;  // forward declaration
 class PIMRank : public SimulatorObject
 {
   private:
+    enum class PIMRouteMode
+    {
+        BANK_ONLY,
+        LOGIC_ONLY,
+        HYBRID
+    };
     int chanId;
     int rankId;
     ostream& dramsimLog;
     Configuration& config;
     int pimPC_, lastJumpIdx_, numJumpToBeTaken_, lastRepeatIdx_, numRepeatToBeDone_;
     bool pimOpMode_, toggleEvenBank_, toggleOddBank_, toggleRa13h_, crfExit_;
+    uint64_t logicBusyUntil_;
+    uint64_t logicCommandCount_;
+    uint64_t logicComputeCycles_;
+    uint64_t logicTransferBytes_;
+    uint64_t logicTransferCycles_;
+    uint64_t logicServiceCycles_;
+    unsigned lastLogicServiceCycles_;
+    shared_ptr<LogicDieScheduler> logicScheduler_;
+    shared_ptr<LogicDieWeightBuffer> logicWeightBuffer_;
 
   public:
-    PIMRank(ostream& simLog, Configuration& configuration);
+    PIMRank(ostream& simLog, Configuration& configuration,
+            shared_ptr<LogicDieScheduler> logicScheduler,
+            shared_ptr<LogicDieWeightBuffer> logicWeightBuffer);
     ~PIMRank() {}
 
     void attachRank(Rank* r);
@@ -82,10 +101,28 @@ class PIMRank : public SimulatorObject
     void doPIMBlock(BusPacket* packet, PIMCmd curCmd, int pimblock_id);
     void controlPIM(BusPacket* packet);
     void readOpd(int pb, BurstType& bst, PIMOpdType type, BusPacket* packet, int idx, bool is_auto,
-                 bool is_mac);
+                 bool is_mac, bool use_logic_die);
     void writeOpd(int pb, BurstType& bst, PIMOpdType type, BusPacket* packet, int idx, bool is_auto,
-                  bool is_mac);
+                  bool is_mac, bool use_logic_die);
     bool isToggleCond(BusPacket* packet);
+    bool isBankSideEnabled() const;
+    bool isLogicDieEnabled() const;
+    bool isHybridEnabled() const;
+    PIMRouteMode getRouteMode() const;
+    const char* routeModeToStr(PIMRouteMode mode) const;
+    bool shouldRouteToLogicDie(PIMCmd cCmd) const;
+    unsigned reserveLogicDie(PIMCmd cCmd);
+    unsigned consumeLastLogicServiceCycles();
+    bool isLogicDieBusy(uint64_t cycle) const;
+    uint64_t getLogicCommandCount() const;
+    uint64_t getLogicComputeCycles() const;
+    uint64_t getLogicTransferBytes() const;
+    uint64_t getLogicTransferCycles() const;
+    uint64_t getLogicServiceCycles() const;
+    void executeLogicDieCmd(BusPacket* packet, PIMCmd cCmd, int pimblock_id);
+    void dispatchLogicDieStub(PIMCmd cCmd, BusPacket* packet);
+    vector<PIMBlock>& getActivePIMBlocks(bool use_logic_die);
+    const vector<PIMBlock>& getActivePIMBlocks(bool use_logic_die) const;
 
     union crf_t
     {
@@ -116,6 +153,7 @@ class PIMRank : public SimulatorObject
 
     Rank* rank;
     vector<PIMBlock> pimBlocks;
+    vector<PIMBlock> logicPimBlocks;
 };
 }  // namespace DRAMSim
 #endif

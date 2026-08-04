@@ -1,0 +1,10 @@
+name,block,op,height,width,input_channels,output_channels,kernel,stride,placement,source
+uib14_extra_start_dw,uib14_extra_dw,depthwise_conv,28,28,64,64,5,1,bank_side,tf_model_garden_MNV4ConvSmall_BLOCK_SPECS
+uib14_extra_expand,uib14_extra_dw,pointwise_conv,28,28,64,192,1,1,logic_die,tf_model_garden_MNV4ConvSmall_BLOCK_SPECS
+uib14_extra_middle_dw,uib14_extra_dw,depthwise_conv,14,14,192,192,5,2,bank_side,tf_model_garden_MNV4ConvSmall_BLOCK_SPECS
+uib14_extra_project,uib14_extra_dw,pointwise_conv,14,14,192,96,1,1,logic_die,tf_model_garden_MNV4ConvSmall_BLOCK_SPECS
+uib14_ib_expand,uib14_ib,pointwise_conv,14,14,96,192,1,1,logic_die,tf_model_garden_MNV4ConvSmall_BLOCK_SPECS
+uib14_ib_middle_dw,uib14_ib,depthwise_conv,14,14,192,192,3,1,bank_side,tf_model_garden_MNV4ConvSmall_BLOCK_SPECS
+uib14_ib_project,uib14_ib,pointwise_conv,14,14,192,96,1,1,logic_die,tf_model_garden_MNV4ConvSmall_BLOCK_SPECS
+uib14_ib_residual_add,uib14_ib,add,14,14,96,96,1,1,bank_side,project_mapping_interpretation
+uib14_ib_relu,uib14_ib,relu,14,14,96,96,1,1,bank_side,project_mapping_interpretation

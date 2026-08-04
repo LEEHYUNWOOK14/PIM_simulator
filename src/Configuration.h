@@ -37,6 +37,27 @@ class Configuration
         NUM_COLS = getConfigParam(UINT, "NUM_COLS");
         NUM_CHANS = getConfigParam(UINT, "NUM_CHANS");
         NUM_PIM_BLOCKS = getConfigParam(UINT, "NUM_PIM_BLOCKS");
+        ENABLE_BANK_SIDE_PIM = getConfigParam(BOOL, "ENABLE_BANK_SIDE_PIM");
+        ENABLE_LOGIC_DIE_PIM = getConfigParam(BOOL, "ENABLE_LOGIC_DIE_PIM");
+        NUM_LOGIC_PIM_UNITS = getConfigParam(UINT, "NUM_LOGIC_PIM_UNITS");
+        LOGIC_PIM_LATENCY = getConfigParam(UINT, "LOGIC_PIM_LATENCY");
+        LOGIC_PIM_BW = getConfigParam(UINT, "LOGIC_PIM_BW");
+        HIERARCHY_PIM_BW = getConfigParam(UINT, "HIERARCHY_PIM_BW");
+        LOGIC_COMPACT_OUTPUT = getConfigParam(BOOL, "LOGIC_COMPACT_OUTPUT");
+        LOGIC_SPATIAL_GROUPING = getConfigParam(BOOL, "LOGIC_SPATIAL_GROUPING");
+        LOGIC_GLOBAL_SCHEDULER = getConfigParam(BOOL, "LOGIC_GLOBAL_SCHEDULER");
+        LOGIC_CMD_OVERHEAD = getConfigParam(UINT, "LOGIC_CMD_OVERHEAD");
+        LOGIC_CMD_COALESCING = getConfigParam(BOOL, "LOGIC_CMD_COALESCING");
+        LOGIC_SHARED_WEIGHT_BUFFER = getConfigParam(BOOL, "LOGIC_SHARED_WEIGHT_BUFFER");
+        LOGIC_WEIGHT_BUFFER_BYTES = getConfigParam(UINT64, "LOGIC_WEIGHT_BUFFER_BYTES");
+        LOGIC_WEIGHT_FILL_CHANNELS = getConfigParam(UINT, "LOGIC_WEIGHT_FILL_CHANNELS");
+        LOGIC_WEIGHT_FILL_POLICY = getConfigParam(STRING, "LOGIC_WEIGHT_FILL_POLICY");
+        LOGIC_WEIGHT_STAGING_ROW = getConfigParam(UINT, "LOGIC_WEIGHT_STAGING_ROW");
+        LOGIC_WEIGHT_BUFFER_WRITE_PORTS =
+            getConfigParam(UINT, "LOGIC_WEIGHT_BUFFER_WRITE_PORTS");
+        LOGIC_WEIGHT_BUFFER_WRITE_LATENCY =
+            getConfigParam(UINT, "LOGIC_WEIGHT_BUFFER_WRITE_LATENCY");
+        LOGIC_POST_FILL_GUARD_CYCLES = getConfigParam(UINT, "LOGIC_POST_FILL_GUARD_CYCLES");
         NUM_RANKS = getConfigParam(UINT, "NUM_RANKS");
         NUM_ROWS = getConfigParam(UINT, "NUM_ROWS");
         RL = getConfigParam(UINT, "RL");
@@ -134,6 +155,25 @@ class Configuration
     unsigned NUM_COLS;
     unsigned NUM_CHANS;
     unsigned NUM_PIM_BLOCKS;
+    bool ENABLE_BANK_SIDE_PIM;
+    bool ENABLE_LOGIC_DIE_PIM;
+    unsigned NUM_LOGIC_PIM_UNITS;
+    unsigned LOGIC_PIM_LATENCY;
+    unsigned LOGIC_PIM_BW;
+    unsigned HIERARCHY_PIM_BW;
+    bool LOGIC_COMPACT_OUTPUT;
+    bool LOGIC_SPATIAL_GROUPING;
+    bool LOGIC_GLOBAL_SCHEDULER;
+    unsigned LOGIC_CMD_OVERHEAD;
+    bool LOGIC_CMD_COALESCING;
+    bool LOGIC_SHARED_WEIGHT_BUFFER;
+    uint64_t LOGIC_WEIGHT_BUFFER_BYTES;
+    unsigned LOGIC_WEIGHT_FILL_CHANNELS;
+    std::string LOGIC_WEIGHT_FILL_POLICY;
+    unsigned LOGIC_WEIGHT_STAGING_ROW;
+    unsigned LOGIC_WEIGHT_BUFFER_WRITE_PORTS;
+    unsigned LOGIC_WEIGHT_BUFFER_WRITE_LATENCY;
+    unsigned LOGIC_POST_FILL_GUARD_CYCLES;
     unsigned NUM_RANKS;
     unsigned NUM_ROWS;
     unsigned RL;
@@ -167,6 +207,7 @@ class Configuration
 
     PIMMode PIM_MODE;
     PIMPrecision PIM_PRECISION;
+    PIMTarget PIM_TARGET;
     RowBufferPolicy ROW_BUFFER_POLICY;
     SchedulingPolicy SCHEDULING_POLICY;
     QueuingStructure QUEUING_STRUCTURE;

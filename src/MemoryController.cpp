@@ -57,7 +57,12 @@ MemoryController::MemoryController(MemorySystem* parent, CSVWriter& csvOut_, ost
       refreshRank(0),
       refreshBank(0),
       totalReads(0),
-      totalWrites(0)
+      totalWrites(0),
+      logicWeightFillWrites(0),
+      logicWeightFillCompletedWrites(0),
+      logicWeightFillActivates(0),
+      logicWeightFillPrecharges(0),
+      logicWeightFillLastCompletionCycle(0)
 {
     // get handle on parent
     parentMemorySystem = parent;
@@ -172,7 +177,8 @@ void MemoryController::updateCommandQueue(BusPacket* poppedBusPacket)
     {
         writeDataToSend.push_back(new BusPacket(
             DATA, poppedBusPacket->physicalAddress, poppedBusPacket->column, poppedBusPacket->row,
-            poppedBusPacket->rank, poppedBusPacket->bank, poppedBusPacket->data, dramsimLog));
+            poppedBusPacket->rank, poppedBusPacket->bank, poppedBusPacket->data, dramsimLog,
+            poppedBusPacket->tag));
         writeDataCountdown.push_back(config.WL);
     }
 
@@ -181,6 +187,8 @@ void MemoryController::updateCommandQueue(BusPacket* poppedBusPacket)
     unsigned rank = poppedBusPacket->rank;
     unsigned bank = poppedBusPacket->bank;
     auto am = config.addrMapping;
+    const bool is_logic_weight_fill =
+        poppedBusPacket->tag.find("LOGIC_WEIGHT_FILL") != std::string::npos;
 
     switch (poppedBusPacket->busPacketType)
     {
@@ -240,10 +248,12 @@ void MemoryController::updateCommandQueue(BusPacket* poppedBusPacket)
                 }
             }
             totalWrites++;
+            if (is_logic_weight_fill) logicWeightFillWrites++;
 
             break;
 
         case ACTIVATE:
+            if (is_logic_weight_fill) logicWeightFillActivates++;
             setBankStates(rank, bank, RowActive, ACTIVATE, 0,
                           max(currentClockCycle + config.tRC, bankStates[rank][bank].nextActivate));
             bankStates[rank][bank].openRowAddress = poppedBusPacket->row;
@@ -268,6 +278,7 @@ void MemoryController::updateCommandQueue(BusPacket* poppedBusPacket)
             break;
 
         case PRECHARGE:
+            if (is_logic_weight_fill) logicWeightFillPrecharges++;
             setBankStates(rank, bank, Precharging, PRECHARGE, config.tRP,
                           max(currentClockCycle + config.tRP, bankStates[rank][bank].nextActivate));
 
@@ -476,6 +487,12 @@ void MemoryController::update()
         dataCyclesLeft--;
         if (dataCyclesLeft == 0)
         {
+            if (outgoingDataPacket->tag.find("LOGIC_WEIGHT_FILL") != std::string::npos)
+            {
+                logicWeightFillCompletedWrites++;
+                logicWeightFillLastCompletionCycle = currentClockCycle;
+                parentMemorySystem->logicWeightBuffer->completeFill(currentClockCycle);
+            }
             // inform upper levels that a write is done
             if (parentMemorySystem->WriteDataDone != NULL)
             {
@@ -616,6 +633,28 @@ void MemoryController::resetStats()
 void MemoryController::printStats(bool finalStats)
 {
     memoryContStats->printStats(finalStats, parentMemorySystem->systemID, currentClockCycle);
+    if (finalStats)
+    {
+        for (Rank* rank : *ranks)
+        {
+            const PIMRank& pim = *rank->pimRank;
+            if (pim.getLogicCommandCount() == 0)
+                continue;
+            cout << "LOGIC_DIE_STATS"
+                 << " channel[" << parentMemorySystem->systemID << "]"
+                 << " rank[" << rank->getRankId() << "]"
+                 << " commands[" << pim.getLogicCommandCount() << "]"
+                 << " compute_cycles[" << pim.getLogicComputeCycles() << "]"
+                 << " transfer_bytes[" << pim.getLogicTransferBytes() << "]"
+                 << " transfer_cycles[" << pim.getLogicTransferCycles() << "]"
+                 << " service_cycles[" << pim.getLogicServiceCycles() << "]" << endl;
+        }
+    }
+}
+
+string MemoryController::getCommandQueueDebugSummary() const
+{
+    return commandQueue.getDebugSummary();
 }
 
 MemoryController::~MemoryController()

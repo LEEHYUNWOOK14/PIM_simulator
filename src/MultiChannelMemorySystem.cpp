@@ -88,13 +88,30 @@ MultiChannelMemorySystem::MultiChannelMemorySystem(const string& deviceIniFilena
     addrMapping = new AddrMapping();
     configuration = new Configuration(*addrMapping);
     numFence = new unsigned[configuration->NUM_CHANS]();
+    logicDieScheduler = make_shared<LogicDieScheduler>();
+    logicDieWeightBuffer = make_shared<LogicDieWeightBuffer>();
 
     for (size_t i = 0; i < configuration->NUM_CHANS; i++)
     {
         MemorySystem* channel = new MemorySystem(i, megsOfMemory / configuration->NUM_CHANS,
-                                                 (*csvOut), dramsimLog, *configuration);
+                                                 (*csvOut), dramsimLog, *configuration,
+                                                 logicDieScheduler, logicDieWeightBuffer);
         channels.push_back(channel);
     }
+}
+
+void MultiChannelMemorySystem::beginLogicWeightLayer(unsigned groupWidth, uint64_t capacityBytes)
+{
+    logicDieWeightBuffer->beginLayer(
+        groupWidth, capacityBytes, configuration->LOGIC_WEIGHT_BUFFER_WRITE_PORTS,
+        configuration->LOGIC_WEIGHT_BUFFER_WRITE_LATENCY);
+}
+
+bool MultiChannelMemorySystem::storeLogicWeight(uint64_t addr, const BurstType& data)
+{
+    unsigned channel = 0, rank = 0, bank = 0, row = 0, column = 0;
+    addrMapping->addressMapping(addr, channel, rank, bank, row, column);
+    return logicDieWeightBuffer->store(channel, rank, bank, row, column, data);
 }
 
 /* Initialize the ClockDomainCrosser to use the CPU speed

@@ -1,0 +1,25 @@
+scons: Reading SConscript files ...
+running with -j 32
+scons: done reading SConscript files.
+scons: Cleaning targets ...
+Removed bin/AddressMapping.o
+Removed bin/Bank.o
+Removed bin/BankState.o
+Removed bin/BusPacket.o
+Removed bin/ClockDomain.o
+Removed bin/CommandQueue.o
+Removed bin/FP16.o
+Removed bin/MemoryController.o
+Removed bin/MemorySystem.o
+Removed bin/MultiChannelMemorySystem.o
+Removed bin/PIMBlock.o
+Removed bin/PIMRank.o
+Removed bin/PrintMacros.o
+Removed bin/Rank.o
+Removed bin/SimulatorObject.o
+Removed bin/Transaction.o
+Removed bin/tests/KernelAddrGen.o
+Removed bin/tests/PIMCmdGen.o
+Removed bin/tests/PIMKernel.o
+Removed bin/tools/emulator_api/PimSimulator.o
+scons: done cleaning targets.

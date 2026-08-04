@@ -76,6 +76,7 @@ class ParameterReader
         for (unsigned lineNumber = 0; !_fs.eof(); ++lineNumber)
         {
             getline(_fs, line);
+            line.erase(remove(line.begin(), line.end(), '\r'), line.end());
             if (_fs.bad())
             {
                 throw ParameterReaderException("Failed to read " + _filename);

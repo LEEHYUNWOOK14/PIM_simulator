@@ -1,0 +1,5 @@
+fill_policy,fill_channels,buffer_write_ports,buffer_write_latency,physical_weight_bytes,physical_writes,buffer_fill_bursts,buffer_read_hits,buffer_read_misses,active_channels,completed_fill_writes,min_writes_per_channel,max_writes_per_channel,min_completion_cycle,max_completion_cycle,fill_activates,fill_precharges,fill_barrier_cycles,port_wait_cycles,write_queue_cycles,global_queue_cycles,global_service_cycles,total_refreshes,total_cycle
+row_interleaved,32,0,1,114688,225460,3584,702464,0,32,3584,112,112,108559,108559,1024,0,272,0,0,4191473341,407768,0,229856
+row_interleaved,32,4,1,114688,225460,3584,702464,0,32,3584,112,112,108851,108851,1024,0,272,666,602368,4032800036,379392,0,215969
+row_interleaved,32,8,1,114688,225460,3584,702464,0,32,3584,112,112,109044,109044,1024,0,272,218,192768,4153449812,392536,0,222845
+row_interleaved,32,16,1,114688,225460,3584,702464,0,32,3584,112,112,108559,108559,1024,0,272,2,1792,4191546815,407768,0,229857

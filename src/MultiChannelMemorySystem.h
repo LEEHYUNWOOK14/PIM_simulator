@@ -40,6 +40,8 @@
 #include "Configuration.h"
 #include "MemoryObject.h"
 #include "MemorySystem.h"
+#include "LogicDieScheduler.h"
+#include "LogicDieWeightBuffer.h"
 #include "SimulatorObject.h"
 #include "SystemConfiguration.h"
 #include "Transaction.h"
@@ -83,7 +85,12 @@ class MultiChannelMemorySystem : public MemoryObject
     std::ofstream visDataOut;
     ofstream dramsimLog;
     vector<MemorySystem*> channels;
+    shared_ptr<LogicDieScheduler> logicDieScheduler;
+    shared_ptr<LogicDieWeightBuffer> logicDieWeightBuffer;
     AddrMapping* addrMapping;
+
+    void beginLogicWeightLayer(unsigned groupWidth, uint64_t capacityBytes);
+    bool storeLogicWeight(uint64_t addr, const BurstType& data);
 
     void getIniBool(const std::string& field, bool* val)
     {

@@ -1,0 +1,152 @@
+scons: Reading SConscript files ...
+running with -j 32
+scons: done reading SConscript files.
+scons: Building targets ...
+g++ -o bin/AddressMapping.o -c -g -O2 -std=c++14 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/AddressMapping.cpp
+g++ -o bin/Bank.o -c -g -O2 -std=c++14 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/Bank.cpp
+g++ -o bin/BankState.o -c -g -O2 -std=c++14 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/BankState.cpp
+g++ -o bin/BusPacket.o -c -g -O2 -std=c++14 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/BusPacket.cpp
+g++ -o bin/ClockDomain.o -c -g -O2 -std=c++14 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/ClockDomain.cpp
+g++ -o bin/CommandQueue.o -c -g -O2 -std=c++14 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/CommandQueue.cpp
+g++ -o bin/FP16.o -c -g -O2 -std=c++14 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/FP16.cpp
+g++ -o bin/MemoryController.o -c -g -O2 -std=c++14 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/MemoryController.cpp
+g++ -o bin/MemorySystem.o -c -g -O2 -std=c++14 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/MemorySystem.cpp
+g++ -o bin/MultiChannelMemorySystem.o -c -g -O2 -std=c++14 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/MultiChannelMemorySystem.cpp
+g++ -o bin/PIMBlock.o -c -g -O2 -std=c++14 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/PIMBlock.cpp
+g++ -o bin/PIMCmd.o -c -g -O2 -std=c++14 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/PIMCmd.cpp
+g++ -o bin/PIMRank.o -c -g -O2 -std=c++14 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/PIMRank.cpp
+g++ -o bin/PrintMacros.o -c -g -O2 -std=c++14 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/PrintMacros.cpp
+g++ -o bin/Rank.o -c -g -O2 -std=c++14 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/Rank.cpp
+g++ -o bin/SimulatorObject.o -c -g -O2 -std=c++14 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/SimulatorObject.cpp
+g++ -o bin/Transaction.o -c -g -O2 -std=c++14 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/Transaction.cpp
+g++ -o bin/tests/KernelAddrGen.o -c -g -O2 -std=c++14 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/tests/KernelAddrGen.cpp
+g++ -o bin/tests/KernelTestCases.o -c -g -O2 -std=c++14 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/tests/KernelTestCases.cpp
+g++ -o bin/tests/MainTest.o -c -g -O2 -std=c++14 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/tests/MainTest.cpp
+g++ -o bin/tests/MemTestCases.o -c -g -O2 -std=c++14 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/tests/MemTestCases.cpp
+g++ -o bin/tests/PIMBenchTestCases.o -c -g -O2 -std=c++14 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/tests/PIMBenchTestCases.cpp
+g++ -o bin/tests/PIMCmdGen.o -c -g -O2 -std=c++14 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/tests/PIMCmdGen.cpp
+g++ -o bin/tests/PIMKernel.o -c -g -O2 -std=c++14 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/tests/PIMKernel.cpp
+g++ -o bin/tools/emulator_api/PimSimulator.o -c -g -O2 -std=c++14 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools tools/emulator_api/PimSimulator.cpp
+In file included from src/PIMCmd.cpp:13:
+src/PIMCmd.h:169:5: error: 'uint32_t' does not name a type
+  169 |     uint32_t bitmask(int bit) const
+      |     ^~~~~~~~
+src/PIMCmd.h:19:1: note: 'uint32_t' is defined in header '<cstdint>'; this is probably fixable by adding '#include <cstdint>'
+   18 | #include <sstream>
+  +++ |+#include <cstdint>
+   19 | #include <string>
+src/PIMCmd.h:174:5: error: 'uint32_t' does not name a type
+  174 |     uint32_t toBit(uint32_t val, int bit_len, int bit_pos) const
+      |     ^~~~~~~~
+src/PIMCmd.h:174:5: note: 'uint32_t' is defined in header '<cstdint>'; this is probably fixable by adding '#include <cstdint>'
+src/PIMCmd.h:178:5: error: 'uint32_t' does not name a type
+  178 |     uint32_t fromBit(uint32_t val, int bit_len, int bit_pos) const
+      |     ^~~~~~~~
+src/PIMCmd.h:178:5: note: 'uint32_t' is defined in header '<cstdint>'; this is probably fixable by adding '#include <cstdint>'
+src/PIMCmd.h:235:18: error: 'uint32_t' has not been declared
+  235 |     void fromInt(uint32_t val);
+      |                  ^~~~~~~~
+src/PIMCmd.h:235:18: note: 'uint32_t' is defined in header '<cstdint>'; this is probably fixable by adding '#include <cstdint>'
+src/PIMCmd.h:237:5: error: 'uint32_t' does not name a type
+  237 |     uint32_t toInt() const;
+      |     ^~~~~~~~
+src/PIMCmd.h:237:5: note: 'uint32_t' is defined in header '<cstdint>'; this is probably fixable by adding '#include <cstdint>'
+src/PIMCmd.cpp: In function 'bool DRAMSim::operator==(const PIMCmd&, const PIMCmd&)':
+src/PIMCmd.cpp:19:16: error: 'const class DRAMSim::PIMCmd' has no member named 'toInt'; did you mean 'fromInt'?
+   19 |     return lhs.toInt() == rhs.toInt();
+      |                ^~~~~
+      |                fromInt
+src/PIMCmd.cpp:19:31: error: 'const class DRAMSim::PIMCmd' has no member named 'toInt'; did you mean 'fromInt'?
+   19 |     return lhs.toInt() == rhs.toInt();
+      |                               ^~~~~
+      |                               fromInt
+src/PIMCmd.cpp: In function 'bool DRAMSim::operator!=(const PIMCmd&, const PIMCmd&)':
+src/PIMCmd.cpp:24:16: error: 'const class DRAMSim::PIMCmd' has no member named 'toInt'; did you mean 'fromInt'?
+   24 |     return lhs.toInt() != rhs.toInt();
+      |                ^~~~~
+      |                fromInt
+src/PIMCmd.cpp:24:31: error: 'const class DRAMSim::PIMCmd' has no member named 'toInt'; did you mean 'fromInt'?
+   24 |     return lhs.toInt() != rhs.toInt();
+      |                               ^~~~~
+      |                               fromInt
+src/PIMCmd.cpp: At global scope:
+src/PIMCmd.cpp:27:6: error: variable or field 'fromInt' declared void
+   27 | void PIMCmd::fromInt(uint32_t val)
+      |      ^~~~~~
+src/PIMCmd.cpp:27:22: error: 'uint32_t' was not declared in this scope
+   27 | void PIMCmd::fromInt(uint32_t val)
+      |                      ^~~~~~~~
+src/PIMCmd.cpp:14:1: note: 'uint32_t' is defined in header '<cstdint>'; this is probably fixable by adding '#include <cstdint>'
+   13 | #include "PIMCmd.h"
+  +++ |+#include <cstdint>
+   14 | 
+src/PIMCmd.cpp:100:1: error: 'uint32_t' does not name a type
+  100 | uint32_t PIMCmd::toInt() const
+      | ^~~~~~~~
+src/PIMCmd.cpp:100:1: note: 'uint32_t' is defined in header '<cstdint>'; this is probably fixable by adding '#include <cstdint>'
+scons: *** [bin/PIMCmd.o] Error 1
+In file included from /usr/include/gtest/gtest-message.h:57,
+                 from /usr/include/gtest/gtest-assertion-result.h:46,
+                 from /usr/include/gtest/gtest.h:63,
+                 from src/tests/MemTestCases.cpp:13:
+/usr/include/gtest/internal/gtest-port.h:273:2: error: #error C++ versions less than C++17 are not supported.
+  273 | #error C++ versions less than C++17 are not supported.
+      |  ^~~~~
+In file included from /usr/include/gtest/gtest-message.h:57,
+                 from /usr/include/gtest/gtest-assertion-result.h:46,
+                 from /usr/include/gtest/gtest.h:63,
+                 from src/tests/TestCases.h:24,
+                 from src/tests/KernelTestCases.h:19,
+                 from src/tests/KernelTestCases.cpp:13:
+/usr/include/gtest/internal/gtest-port.h:273:2: error: #error C++ versions less than C++17 are not supported.
+  273 | #error C++ versions less than C++17 are not supported.
+      |  ^~~~~
+In file included from /usr/include/gtest/gtest-message.h:57,
+                 from /usr/include/gtest/gtest-assertion-result.h:46,
+                 from /usr/include/gtest/gtest.h:63,
+                 from src/tests/TestCases.h:24,
+                 from src/tests/PIMBenchTestCases.h:19,
+                 from src/tests/PIMBenchTestCases.cpp:13:
+/usr/include/gtest/internal/gtest-port.h:273:2: error: #error C++ versions less than C++17 are not supported.
+  273 | #error C++ versions less than C++17 are not supported.
+      |  ^~~~~
+In file included from /usr/include/gtest/gtest-message.h:57,
+                 from /usr/include/gtest/gtest-assertion-result.h:46,
+                 from /usr/include/gtest/gtest.h:63,
+                 from src/tests/MainTest.cpp:22:
+/usr/include/gtest/internal/gtest-port.h:273:2: error: #error C++ versions less than C++17 are not supported.
+  273 | #error C++ versions less than C++17 are not supported.
+      |  ^~~~~
+In file included from /usr/include/gtest/gtest.h:67:
+/usr/include/gtest/gtest-param-test.h:483:56: error: missing template arguments before '(' token
+  483 |           typename StdFunction = decltype(std::function(std::declval<Func>()))>
+      |                                                        ^
+/usr/include/gtest/gtest-param-test.h:493:56: error: missing template arguments before '(' token
+  493 |           typename StdFunction = decltype(std::function(std::declval<Func>()))>
+      |                                                        ^
+In file included from /usr/include/gtest/gtest.h:67:
+/usr/include/gtest/gtest-param-test.h:483:56: error: missing template arguments before '(' token
+  483 |           typename StdFunction = decltype(std::function(std::declval<Func>()))>
+      |                                                        ^
+/usr/include/gtest/gtest-param-test.h:493:56: error: missing template arguments before '(' token
+  493 |           typename StdFunction = decltype(std::function(std::declval<Func>()))>
+      |                                                        ^
+In file included from /usr/include/gtest/gtest.h:67:
+/usr/include/gtest/gtest-param-test.h:483:56: error: missing template arguments before '(' token
+  483 |           typename StdFunction = decltype(std::function(std::declval<Func>()))>
+      |                                                        ^
+/usr/include/gtest/gtest-param-test.h:493:56: error: missing template arguments before '(' token
+  493 |           typename StdFunction = decltype(std::function(std::declval<Func>()))>
+      |                                                        ^
+scons: *** [bin/tests/KernelTestCases.o] Error 1
+scons: *** [bin/tests/MainTest.o] Error 1
+In file included from /usr/include/gtest/gtest.h:67:
+/usr/include/gtest/gtest-param-test.h:483:56: error: missing template arguments before '(' token
+  483 |           typename StdFunction = decltype(std::function(std::declval<Func>()))>
+      |                                                        ^
+/usr/include/gtest/gtest-param-test.h:493:56: error: missing template arguments before '(' token
+  493 |           typename StdFunction = decltype(std::function(std::declval<Func>()))>
+      |                                                        ^
+scons: *** [bin/tests/MemTestCases.o] Error 1
+scons: *** [bin/tests/PIMBenchTestCases.o] Error 1
+scons: building terminated because of errors.

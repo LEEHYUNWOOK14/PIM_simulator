@@ -16,6 +16,7 @@
 #include <bitset>
 #include <iostream>
 #include <sstream>
+#include <cstdint>
 #include <string>
 
 using namespace std;
@@ -68,6 +69,7 @@ class PIMCmd
     int dstIdx_;
     int src0Idx_;
     int src1Idx_;
+    int src2Idx_;
     int isRelu_;
 
     PIMCmd()
@@ -81,7 +83,8 @@ class PIMCmd
           isAuto_(0),
           dstIdx_(0),
           src0Idx_(0),
-          src1Idx_(0)
+          src1Idx_(0),
+          src2Idx_(0)
     {
     }
 
@@ -97,7 +100,8 @@ class PIMCmd
           isAuto_(0),
           dstIdx_(0),
           src0Idx_(0),
-          src1Idx_(0)
+          src1Idx_(0),
+          src2Idx_(0)
     {
     }
 
@@ -113,7 +117,8 @@ class PIMCmd
           isAuto_(0),
           dstIdx_(0),
           src0Idx_(0),
-          src1Idx_(0)
+          src1Idx_(0),
+          src2Idx_(0)
     {
     }
 
@@ -130,6 +135,7 @@ class PIMCmd
           dstIdx_(dst_idx),
           src0Idx_(src0_idx),
           src1Idx_(src1_idx),
+          src2Idx_(0),
           isRelu_(is_relu)
     {
     }
@@ -146,7 +152,8 @@ class PIMCmd
           isAuto_(is_auto),
           dstIdx_(dst_idx),
           src0Idx_(src0_idx),
-          src1Idx_(src1_idx)
+          src1Idx_(src1_idx),
+          src2Idx_(0)
     {
     }
 
@@ -162,7 +169,8 @@ class PIMCmd
           isAuto_(is_auto),
           dstIdx_(dst_idx),
           src0Idx_(src0_idx),
-          src1Idx_(src1_idx)
+          src1Idx_(src1_idx),
+          src2Idx_(0)
     {
     }
 

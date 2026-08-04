@@ -13,6 +13,7 @@
 #include "tests/PIMCmdGen.h"
 
 #include <memory>
+#include <stdexcept>
 
 vector<PIMCmd> PIMCmdGen::getPIMCmds(KernelType ktype, int num_jump_to_be_taken,
                                      int num_jump_to_be_taken_odd_bank,
@@ -46,4 +47,10 @@ vector<PIMCmd> PIMCmdGen::getPIMCmds(KernelType ktype, int num_jump_to_be_taken,
     }
     return pim_kernel->generateKernel(num_jump_to_be_taken, num_jump_to_be_taken_odd_bank,
                                       num_jump_to_be_taken_even_bank);
+}
+
+bool PIMCmdGen::isLogicDieCandidate(PIMCmdType cmdType)
+{
+    return (cmdType == PIMCmdType::MAC || cmdType == PIMCmdType::MAD ||
+            cmdType == PIMCmdType::MUL);
 }

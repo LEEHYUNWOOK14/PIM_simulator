@@ -1,0 +1,367 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PIMSimulator 사용방법</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #111827;
+      --panel-2: #1f2937;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --line: #334155;
+      --accent: #22c55e;
+      --accent-2: #38bdf8;
+      --warn: #fbbf24;
+      --danger: #fb7185;
+      --code: #0a1224;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Noto Sans KR", Arial, sans-serif;
+      background: linear-gradient(180deg, #08101e 0%, #0f172a 100%);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .wrap {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 36px 20px 64px;
+    }
+    header {
+      padding: 18px 0 22px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 24px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 2rem;
+    }
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      max-width: 920px;
+    }
+    .pill {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--accent-2);
+      color: #07111f;
+      font-weight: 700;
+      font-size: 0.78rem;
+      margin-bottom: 12px;
+    }
+    section {
+      background: rgba(17, 24, 39, 0.88);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px;
+      margin: 0 0 16px;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 1.18rem;
+    }
+    h3 {
+      margin: 16px 0 8px;
+      font-size: 1rem;
+      color: #fff;
+    }
+    p { margin: 10px 0; }
+    ul, ol { margin: 10px 0 0 22px; }
+    li { margin: 6px 0; }
+    code, pre {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.95rem;
+    }
+    pre {
+      margin: 12px 0 0;
+      padding: 14px 16px;
+      background: var(--code);
+      border: 1px solid #24324d;
+      border-radius: 12px;
+      overflow: auto;
+      color: #dbeafe;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .box {
+      background: var(--panel-2);
+      border: 1px solid #2f3d59;
+      border-radius: 12px;
+      padding: 14px;
+    }
+    .box strong { display: block; margin-bottom: 4px; color: #fff; }
+    .note {
+      border-left: 4px solid var(--accent-2);
+      background: rgba(56, 189, 248, 0.08);
+      padding: 12px 14px;
+      border-radius: 10px;
+      color: #dbeafe;
+      margin-top: 12px;
+    }
+    .warn {
+      border-left: 4px solid var(--warn);
+      background: rgba(251, 191, 36, 0.08);
+      padding: 12px 14px;
+      border-radius: 10px;
+      margin-top: 12px;
+    }
+    .danger {
+      border-left: 4px solid var(--danger);
+      background: rgba(251, 113, 133, 0.08);
+      padding: 12px 14px;
+      border-radius: 10px;
+      margin-top: 12px;
+    }
+    .files {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .file {
+      background: rgba(31, 41, 55, 0.82);
+      border: 1px solid #30405c;
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    a { color: #93c5fd; }
+    .small { color: var(--muted); font-size: 0.96rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="pill">처음 쓰는 사람용</div>
+      <h1>PIMSimulator 사용방법</h1>
+      <p class="subtitle">
+        이 문서는 이 저장소를 처음 보는 사람이 실제로 시뮬레이터를 돌릴 수 있도록 만든 실전 안내서입니다.
+        설치, 빌드, 테스트 실행, 설정 파일 조정, 디버그 출력, 자주 만나는 오류까지 한 흐름으로 정리했습니다.
+      </p>
+    </header>
+
+    <section>
+      <h2>1. 이 시뮬레이터가 무엇인지 먼저 이해하기</h2>
+      <p>
+        이 프로젝트는 HBM2 기반 Processing-in-Memory, 즉 PIM 동작을 C++로 시뮬레이션하는 코드입니다.
+        화면이 있는 앱이 아니라, <code>sim</code>이라는 실행 파일을 만들어서 터미널에서 테스트를 돌리는 구조입니다.
+      </p>
+      <div class="grid">
+        <div class="box">
+          <strong>편집 도구</strong>
+          VSCode는 코드를 보기 좋게 편집하는 용도입니다.
+        </div>
+        <div class="box">
+          <strong>실행 도구</strong>
+          실제 시뮬레이션은 터미널에서 <code>./sim</code>으로 실행합니다.
+        </div>
+        <div class="box">
+          <strong>확인 방법</strong>
+          결과는 콘솔에 PASS/FAIL, cycle 수, speed-up 같은 텍스트로 출력됩니다.
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>2. 준비해야 할 것</h2>
+      <ol>
+        <li>Ubuntu 또는 WSL2 환경</li>
+        <li><code>scons</code></li>
+        <li><code>libgtest-dev</code></li>
+        <li>C++ 컴파일러, 보통 <code>g++</code></li>
+      </ol>
+      <pre>sudo apt update
+sudo apt install scons libgtest-dev</pre>
+      <p class="small">
+        저장소의 과거 빌드 기록을 보면 Ubuntu 26.04 LTS + g++ 15.2 + SCons 4.8 환경에서 정상 빌드된 흔적이 있습니다.
+      </p>
+    </section>
+
+    <section>
+      <h2>3. 저장소 구조를 빠르게 잡는 법</h2>
+      <div class="files">
+        <div class="file"><b><code>src/tests/KernelTestCases.cpp</code></b> - 어떤 테스트를 돌리는지 정리된 시작점</div>
+        <div class="file"><b><code>src/tests/PIMKernel.cpp</code></b> - PIM 연산 실행 흐름의 핵심</div>
+        <div class="file"><b><code>src/PIMCmd.*</code></b> - PIM 명령어 인코딩과 생성</div>
+        <div class="file"><b><code>src/MemorySystem.*</code></b> - 메모리 시스템의 진입점</div>
+        <div class="file"><b><code>src/PIMRank.*</code></b> - PIM 모드 전환과 CRF 실행</div>
+        <div class="file"><b><code>system_hbm.ini</code></b> - 실제 실험에 많이 쓰는 설정 파일</div>
+      </div>
+      <div class="note">
+        처음에는 코드 전체를 한 번에 이해하려 하지 말고, <code>KernelTestCases.cpp</code>에서 테스트 이름을 확인한 뒤
+        <code>PIMKernel.cpp</code>로 내려가는 방식이 가장 편합니다.
+      </div>
+    </section>
+
+    <section>
+      <h2>4. 빌드하는 방법</h2>
+      <p>프로젝트 루트에서 아래 명령을 실행합니다.</p>
+      <pre>scons</pre>
+      <p>빌드가 성공하면 다음이 생성됩니다.</p>
+      <ul>
+        <li><code>sim</code> - 실제 실행 파일</li>
+        <li><code>bin/</code> - 중간 객체 파일</li>
+        <li><code>libdramsim/dramsim2</code> - 라이브러리 산출물</li>
+      </ul>
+      <p>옵션 빌드도 가능합니다.</p>
+      <pre>scons NO_STORAGE=1
+scons NO_EMUL=1
+scons NO_LIBRARY=1</pre>
+      <div class="warn">
+        <b>주의:</b> 일부 옵션은 검증 코드나 Emulator API를 빼는 설정입니다. 처음에는 기본 <code>scons</code>로 빌드하는 것이 가장 안전합니다.
+      </div>
+    </section>
+
+    <section>
+      <h2>5. 테스트 목록 확인하기</h2>
+      <p>
+        빌드 후 다음 명령으로 실행 가능한 테스트 이름을 볼 수 있습니다.
+      </p>
+      <pre>./sim --gtest_list_tests</pre>
+      <p>현재 확인된 주요 테스트는 다음과 같습니다.</p>
+      <ul>
+        <li><code>PIMKernelFixture.gemv_tree</code></li>
+        <li><code>PIMKernelFixture.gemv</code></li>
+        <li><code>PIMKernelFixture.mul</code></li>
+        <li><code>PIMKernelFixture.add</code></li>
+        <li><code>PIMKernelFixture.relu</code></li>
+        <li><code>MemBandwidthFixture.hbm_read_bandwidth</code></li>
+        <li><code>MemBandwidthFixture.hbm_write_bandwidth</code></li>
+        <li><code>PIMBenchFixture.gemv</code></li>
+        <li><code>PIMBenchFixture.mul</code></li>
+        <li><code>PIMBenchFixture.add</code></li>
+        <li><code>PIMBenchFixture.relu</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>6. 처음 실행할 때 추천 순서</h2>
+      <ol>
+        <li>가벼운 기능 확인: <code>./sim --gtest_filter=PIMKernelFixture.gemv</code></li>
+        <li>다음 기능 확인: <code>./sim --gtest_filter=PIMKernelFixture.add</code></li>
+        <li>성능 실험: <code>./sim --gtest_filter=PIMBenchFixture.gemv</code></li>
+        <li>대역폭 확인: <code>./sim --gtest_filter=MemBandwidthFixture.hbm_read_bandwidth</code></li>
+      </ol>
+      <pre>./sim --gtest_filter=PIMKernelFixture.gemv
+./sim --gtest_filter=PIMKernelFixture.mul
+./sim --gtest_filter=PIMKernelFixture.add
+./sim --gtest_filter=PIMKernelFixture.relu</pre>
+      <div class="note">
+        기능 테스트는 “정확히 계산되는가”를 보는 쪽이고, 벤치마크 테스트는 “PIM이 얼마나 빨라지는가”를 보는 쪽입니다.
+      </div>
+    </section>
+
+    <section>
+      <h2>7. 설정 파일을 어떻게 바꾸는가</h2>
+      <p>
+        실험에서 가장 자주 바꾸는 것은 채널 수, 주소 매핑, 디버그 출력, PIM 정밀도입니다.
+        기본적으로는 <code>system_hbm.ini</code>를 기준으로 시작합니다.
+      </p>
+      <div class="grid">
+        <div class="box">
+          <strong><code>NUM_CHANS</code></strong>
+          채널 수를 바꿉니다. 1채널, 16채널, 64채널 실험이 가능합니다.
+        </div>
+        <div class="box">
+          <strong><code>ADDRESS_MAPPING_SCHEME</code></strong>
+          PIM 기능은 보통 <code>Scheme8</code>을 사용합니다.
+        </div>
+        <div class="box">
+          <strong><code>PIM_PRECISION</code></strong>
+          <code>FP16</code>, <code>INT8</code>, <code>FP32</code> 중 하나를 선택합니다.
+        </div>
+        <div class="box">
+          <strong>디버그 플래그</strong>
+          <code>DEBUG_CMD_TRACE</code>, <code>DEBUG_PIM_TIME</code>, <code>PRINT_MEM_TRACE</code> 등을 켤 수 있습니다.
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>8. 출력 결과는 어떻게 읽는가</h2>
+      <p>
+        테스트 실행 시 보이는 핵심 수치는 보통 다음과 같습니다.
+      </p>
+      <ul>
+        <li><b>Cycle</b> - 시뮬레이션 사이클 수</li>
+        <li><b>Speed-up</b> - PIM 사용 전후 성능 개선 비율</li>
+        <li><b>PASS/FAIL</b> - 기대 정확도 충족 여부</li>
+      </ul>
+      <p>예를 들어 성능 벤치마크는 이런 형태로 나옵니다.</p>
+      <pre>> Performance Test
+  GEMV (PIM disabled)
+> Test Results
+> Cycle : 36082
+
+  GEMV (PIM enabled)
+> Test Results
+> Cycle : 13166
+
+> Speed-up : 2.74054</pre>
+    </section>
+
+    <section>
+      <h2>9. 자주 만나는 문제와 대처</h2>
+      <div class="danger">
+        <b>문제:</b> <code>./sim: No such file or directory</code><br />
+        <span class="small">대처: 아직 빌드가 안 됐거나, 현재 폴더가 프로젝트 루트가 아닙니다. 먼저 <code>scons</code>를 실행하고 루트 폴더에서 다시 시도합니다.</span>
+      </div>
+      <div class="danger">
+        <b>문제:</b> <code>gtest</code> 관련 링크 에러<br />
+        <span class="small">대처: <code>libgtest-dev</code> 설치 여부를 확인하고, 시스템에 맞는 빌드 환경인지 살펴봅니다.</span>
+      </div>
+      <div class="danger">
+        <b>문제:</b> PIM 테스트가 기대와 다르게 실패함<br />
+        <span class="small">대처: 먼저 <code>system_hbm.ini</code>가 기본값인지 확인하고, 디버그 플래그를 줄여서 다시 실행합니다.</span>
+      </div>
+      <div class="warn">
+        <b>주의:</b> 디버그 출력을 너무 많이 켜면 로그가 길어져서 원인을 보기 어려워집니다. 처음에는 출력 옵션을 최소로 두는 편이 좋습니다.
+      </div>
+    </section>
+
+    <section>
+      <h2>10. 처음 배우는 사람에게 추천하는 학습 순서</h2>
+      <ol>
+        <li>먼저 <code>README.md</code>와 <code>system_hbm.ini</code>를 훑어서 큰 그림을 잡는다.</li>
+        <li><code>./sim --gtest_list_tests</code>로 실행 가능한 테스트를 확인한다.</li>
+        <li><code>PIMKernelFixture.gemv</code>를 실행해 기능이 돌아가는지 본다.</li>
+        <li><code>src/tests/PIMKernel.cpp</code>를 읽으면서 실행 순서를 따라간다.</li>
+        <li>그다음 <code>src/PIMCmd.*</code>, <code>src/MemorySystem.*</code>, <code>src/PIMRank.*</code> 순으로 내려간다.</li>
+      </ol>
+      <div class="note">
+        이 순서로 가면 “돌리는 법”과 “작동 원리”를 분리해서 익힐 수 있어서 훨씬 덜 헷갈립니다.
+      </div>
+    </section>
+
+    <section>
+      <h2>11. 바로 써먹는 명령 모음</h2>
+      <pre>./sim --gtest_list_tests
+./sim --gtest_filter=PIMKernelFixture.gemv
+./sim --gtest_filter=PIMKernelFixture.mul
+./sim --gtest_filter=PIMKernelFixture.add
+./sim --gtest_filter=PIMKernelFixture.relu
+./sim --gtest_filter=PIMBenchFixture.gemv
+./sim --gtest_filter=MemBandwidthFixture.hbm_read_bandwidth</pre>
+    </section>
+
+    <section>
+      <h2>마무리</h2>
+      <p>
+        이 시뮬레이터는 UI를 눌러 조작하는 도구가 아니라, 테스트를 골라 실행하고 결과를 콘솔로 확인하는 연구용 모델입니다.
+        처음에는 <code>gemv</code> 하나만 성공적으로 돌려도 충분하고, 그다음에 설정과 구조를 조금씩 넓혀가는 방식이 가장 편합니다.
+      </p>
+    </section>
+  </div>
+</body>
+</html>
+
+

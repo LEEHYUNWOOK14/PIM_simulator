@@ -1,0 +1,8 @@
+case,mode,units,logic_latency,logic_bw,hierarchy_bw,cycle,bank_speedup
+bank_baseline,bank_only,8,0,0,64,120164,1.000000
+ideal_unlimited,hybrid,8,0,0,0,120164,1.000000
+compute_one_cycle,hybrid,8,1,0,0,120126,1.000316
+balanced_fast,hybrid,8,1,256,256,120126,1.000316
+half_units,hybrid,4,2,0,64,150998,0.795799
+current_model,hybrid,8,2,64,64,150998,0.795799
+constrained,hybrid,2,4,32,32,335180,0.358506

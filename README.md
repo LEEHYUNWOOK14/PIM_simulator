@@ -1,4 +1,4 @@
-# PIMSimulator
+﻿# PIMSimulator
 
 ## 프로젝트 소개
 
@@ -124,3 +124,5 @@ PIM 기능에는 `ADDRESS_MAPPING_SCHEME=Scheme8`을 권장한다. `PIM_PRECISIO
 ## 원본 및 라이선스
 
 이 프로젝트는 [DRAMSim2](https://github.com/umd-memsys/DRAMSim2)를 기반으로 확장되었다. 자세한 라이선스 조건은 `LICENSE-PIMSimulator`와 `LICENSE-DRAMSIM2`를 확인한다.
+
+

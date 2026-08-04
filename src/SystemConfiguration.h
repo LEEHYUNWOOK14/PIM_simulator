@@ -135,6 +135,14 @@ enum class pimBankType
     ODD_BANK,
     ALL_BANK
 };
+
+enum class PIMTarget
+{
+    BANK_SIDE,
+    LOGIC_DIE,
+    HOST,
+    HYBRID
+};
 // set by IniReader.cpp
 
 typedef void (*returnCallBack_t)(unsigned id, uint64_t addr, uint64_t clockcycle);
@@ -458,6 +466,28 @@ class PIMConfiguration
             return 4;
         }
         throw invalid_argument("Invalid PIM data length");
+    }
+
+    static PIMTarget getPIMTarget()
+    {
+        string param = getConfigParam(STRING, "PIM_TARGET");
+        if (param == "bank_side")
+        {
+            return PIMTarget::BANK_SIDE;
+        }
+        else if (param == "logic_die")
+        {
+            return PIMTarget::LOGIC_DIE;
+        }
+        else if (param == "host")
+        {
+            return PIMTarget::HOST;
+        }
+        else if (param == "hybrid")
+        {
+            return PIMTarget::HYBRID;
+        }
+        throw invalid_argument("Invalid PIM target");
     }
 };
 

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PIMSimulator 가이드라인</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --panel-2: #1f2937;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #38bdf8;
+      --accent-2: #a78bfa;
+      --line: #334155;
+      --good: #34d399;
+      --warn: #fbbf24;
+      --code: #0b1220;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Noto Sans KR", Arial, sans-serif;
+      background: linear-gradient(180deg, #0b1020 0%, #0f172a 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px 64px;
+    }
+    header {
+      padding: 24px 0 20px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 28px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 2rem;
+    }
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      max-width: 860px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin: 20px 0 28px;
+    }
+    .card {
+      background: rgba(17, 24, 39, 0.92);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px 18px 16px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+    }
+    .card h2, section h2 {
+      margin: 0 0 10px;
+      font-size: 1.15rem;
+    }
+    .label {
+      display: inline-block;
+      font-size: 0.78rem;
+      letter-spacing: 0.02em;
+      color: #0b1020;
+      background: var(--accent);
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .label.alt { background: var(--accent-2); }
+    .label.good { background: var(--good); }
+    .label.warn { background: var(--warn); }
+    section {
+      background: rgba(17, 24, 39, 0.85);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 18px;
+    }
+    ul, ol { margin: 10px 0 0 22px; }
+    li { margin: 6px 0; }
+    code, pre {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.95rem;
+    }
+    pre {
+      background: var(--code);
+      border: 1px solid #22304a;
+      border-radius: 12px;
+      padding: 14px 16px;
+      overflow: auto;
+      margin: 14px 0 0;
+      color: #dbeafe;
+    }
+    .flow {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .step {
+      background: var(--panel-2);
+      border: 1px solid #2b3a55;
+      border-radius: 12px;
+      padding: 14px 14px 12px;
+    }
+    .step strong {
+      color: #fff;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .small {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+    .note {
+      border-left: 4px solid var(--accent);
+      padding: 12px 14px;
+      background: rgba(56, 189, 248, 0.08);
+      border-radius: 10px;
+      color: #dbeafe;
+      margin-top: 14px;
+    }
+    .file-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .file {
+      background: rgba(31, 41, 55, 0.82);
+      border: 1px solid #30405c;
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .file b { color: #fff; }
+    a { color: #93c5fd; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="label">PIMSimulator</div>
+      <h1>시뮬레이터 구조 안내서</h1>
+      <p class="subtitle">
+        이 문서는 프로젝트의 1번부터 4번까지, 즉 <b>PIMKernel.cpp</b>를 이해하기 위해 먼저 알아야 할 구조를
+        순서대로 정리한 가이드입니다. 화면에 보이는 UI 프로그램이 아니라, C++ 테스트와 시뮬레이터 내부 로직이
+        어떻게 연결되는지 이해하는 데 초점을 맞췄습니다.
+      </p>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <div class="label good">1단계</div>
+        <h2>테스트 진입점</h2>
+        <p class="small">어떤 테스트를 돌리는지 먼저 봅니다.</p>
+        <p><code>src/tests/KernelTestCases.cpp</code></p>
+      </div>
+      <div class="card">
+        <div class="label">2단계</div>
+        <h2>PIM 실행 흐름</h2>
+        <p class="small">실제 PIM 계산 순서를 읽습니다.</p>
+        <p><code>src/tests/PIMKernel.cpp</code></p>
+      </div>
+      <div class="card">
+        <div class="label alt">3단계</div>
+        <h2>명령어 생성</h2>
+        <p class="small">PIM ISA가 어떻게 만들어지는지 봅니다.</p>
+        <p><code>src/PIMCmd.*</code></p>
+      </div>
+      <div class="card">
+        <div class="label warn">4단계</div>
+        <h2>시뮬레이터 본체</h2>
+        <p class="small">메모리 시스템이 명령을 어떻게 처리하는지 봅니다.</p>
+        <p><code>src/MemorySystem.*</code>, <code>src/PIMRank.*</code></p>
+      </div>
+    </div>
+
+    <section>
+      <h2>전체 그림</h2>
+      <div class="flow">
+        <div class="step">
+          <strong>1. 테스트가 시작된다</strong>
+          <span class="small">GoogleTest가 `PIMKernelFixture.gemv`, `add`, `mul`, `relu` 같은 테스트를 실행합니다.</span>
+        </div>
+        <div class="step">
+          <strong>2. PIMKernel가 입력과 명령을 준비한다</strong>
+          <span class="small">데이터를 메모리에 올리고, CRF에 PIM 명령을 넣고, PIM 모드 전환을 처리합니다.</span>
+        </div>
+        <div class="step">
+          <strong>3. 명령어가 실제 시뮬레이션 이벤트로 바뀐다</strong>
+          <span class="small">`PIMCmdGen`와 `PIMCmd`가 만든 명령이 메모리 트랜잭션으로 변환됩니다.</span>
+        </div>
+        <div class="step">
+          <strong>4. 메모리 시스템이 사이클 단위로 실행한다</strong>
+          <span class="small">`MemorySystem`, `MemoryController`, `PIMRank`가 채널, 랭크, 뱅크 상태를 갱신합니다.</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>1. 테스트 진입점부터 보기</h2>
+      <p>
+        가장 먼저 볼 파일은 <code>src/tests/KernelTestCases.cpp</code>입니다. 여기에는
+        <code>TEST_F(PIMKernelFixture, gemv)</code> 같은 테스트가 있고, 각 테스트가 어떤 입력 크기로
+        커널을 실행하는지 확인할 수 있습니다.
+      </p>
+      <ul>
+        <li><code>gemv_tree</code>, <code>gemv</code>, <code>mul</code>, <code>add</code>, <code>relu</code>가 핵심 기능 테스트입니다.</li>
+        <li>이 파일은 “무엇을 시험하는가”를 보여주고, 실제 계산 구현은 <code>PIMKernel.cpp</code>로 넘어갑니다.</li>
+        <li>즉, 이 프로젝트는 UI 버튼이 아니라 <code>./sim --gtest_filter=...</code>로 돌리는 테스트 중심 구조입니다.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>2. PIMKernel.cpp 읽기</h2>
+      <p>
+        이 파일이 핵심입니다. <code>PIMKernel</code> 클래스는 PIM 연산을 시뮬레이터에 “요청”하는 쪽이고,
+        실제로는 메모리 트랜잭션과 상태 전환을 조합해서 연산을 구성합니다.
+      </p>
+      <ol>
+        <li><code>parkIn()</code>, <code>parkOut()</code>로 PIM 모드 진입과 복귀를 준비합니다.</li>
+        <li><code>programCrf()</code>로 PIM 명령어들을 CRF에 씁니다.</li>
+        <li><code>executeGemv()</code>, <code>executeEltwise()</code>가 연산 흐름의 중심입니다.</li>
+        <li><code>computeGemv()</code>, <code>computeAddOrMul()</code>, <code>computeRelu()</code>가 실제 반복 동작을 만듭니다.</li>
+      </ol>
+      <div class="note">
+        이 파일은 “버튼 누르는 UI”가 아니라, “시뮬레이터가 어떤 순서로 메모리 명령을 넣어야 하는지”를 적은 실행 스크립트에 가깝습니다.
+      </div>
+    </section>
+
+    <section>
+      <h2>3. PIMCmd.* 이해하기</h2>
+      <p>
+        <code>src/PIMCmd.h</code>와 <code>src/PIMCmd.cpp</code>는 PIM ISA를 담는 쪽입니다.
+        즉, <code>ADD</code>, <code>MUL</code>, <code>MAC</code>, <code>MOV</code>, <code>FILL</code>,
+        <code>JUMP</code>, <code>EXIT</code> 같은 명령이 어떤 32-bit 값으로 표현되는지 다룹니다.
+      </p>
+      <ul>
+        <li><code>PIMCmdGen</code>는 상황별 명령 묶음을 생성합니다.</li>
+        <li><code>PIMCmd</code>는 그 명령을 인코딩하고 유효성도 체크합니다.</li>
+        <li><code>PIMKernel.cpp</code>는 여기서 만든 명령을 받아 실행 순서에 맞게 적재합니다.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. MemorySystem / PIMRank 보기</h2>
+      <p>
+        마지막으로 <code>src/MemorySystem.*</code>와 <code>src/PIMRank.*</code>를 보면,
+        명령이 실제 시뮬레이터 내부에서 어떻게 전달되고 처리되는지 보입니다.
+      </p>
+      <ul>
+        <li><code>MemorySystem</code>은 전체 요청을 받고, 사이클을 굴리는 상위 시스템입니다.</li>
+        <li><code>MemoryController</code>는 채널 단위 명령 큐와 스케줄링을 관리합니다.</li>
+        <li><code>PIMRank</code>는 PIM 모드 전환, CRF 실행, PIM 블록 연결을 담당합니다.</li>
+      </ul>
+      <p>
+        따라서 <code>PIMKernel.cpp</code>를 읽을 때는 “내가 만든 요청이 어디로 흘러가서 어떤 상태가 바뀌는가”를
+        같이 보면 훨씬 빨리 이해됩니다.
+      </p>
+    </section>
+
+    <section>
+      <h2>추천 학습 순서</h2>
+      <ol>
+        <li><code>src/tests/KernelTestCases.cpp</code>로 테스트 종류를 익힌다.</li>
+        <li><code>src/tests/PIMKernel.cpp</code>로 실행 순서를 따라간다.</li>
+        <li><code>src/PIMCmd.*</code>로 명령어 구조를 이해한다.</li>
+        <li><code>src/MemorySystem.*</code>, <code>src/PIMRank.*</code>로 시뮬레이터 내부 흐름을 확인한다.</li>
+      </ol>
+      <pre>./sim --gtest_list_tests
+./sim --gtest_filter=PIMKernelFixture.gemv
+./sim --gtest_filter=PIMBenchFixture.gemv</pre>
+    </section>
+
+    <section>
+      <h2>한 줄 요약</h2>
+      <p>
+        <code>PIMKernel.cpp</code>는 UI가 아니라, 시뮬레이터 내부에서 PIM 연산을 실제로 “어떻게 돌릴지” 적어둔 핵심 실행 코드입니다.
+        VSCode는 편집기이고, 실행은 터미널에서 `sim`을 돌리는 방식입니다.
+      </p>
+    </section>
+  </div>
+</body>
+</html>

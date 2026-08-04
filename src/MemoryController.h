@@ -66,6 +66,8 @@ class MemoryController : public SimulatorObject
     void printDebugOnUpate();
     void printStats(bool finalStats = false);
     void resetStats();
+    string getCommandQueueDebugSummary() const;
+    uint64_t getTotalRefreshes() const { return totalRefreshes; }
     bool WillAcceptTransaction();
     bool addBarrier();
 
@@ -122,6 +124,11 @@ class MemoryController : public SimulatorObject
     double totalBandwidth;
 
     uint64_t totalReads, totalWrites;
+    uint64_t logicWeightFillWrites;
+    uint64_t logicWeightFillCompletedWrites;
+    uint64_t logicWeightFillActivates;
+    uint64_t logicWeightFillPrecharges;
+    uint64_t logicWeightFillLastCompletionCycle;
 };
 
 class MemoryControllerStats

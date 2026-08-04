@@ -31,6 +31,7 @@
 #ifndef RANK_H
 #define RANK_H
 
+#include <deque>
 #include <vector>
 
 #include "AddressMapping.h"
@@ -39,6 +40,8 @@
 #include "BusPacket.h"
 #include "Configuration.h"
 #include "PIMRank.h"
+#include "LogicDieScheduler.h"
+#include "LogicDieWeightBuffer.h"
 #include "SimulatorObject.h"
 
 using namespace std;
@@ -59,7 +62,9 @@ class Rank : public SimulatorObject
 
   public:
     // functions
-    Rank(ostream& simLog, Configuration& configuration);
+    Rank(ostream& simLog, Configuration& configuration,
+         shared_ptr<LogicDieScheduler> logicScheduler,
+         shared_ptr<LogicDieWeightBuffer> logicWeightBuffer);
     virtual ~Rank();
 
     void receiveFromBus(BusPacket* packet);
@@ -89,8 +94,8 @@ class Rank : public SimulatorObject
     bool refreshWaiting;
 
     // these are vectors so that each element is per-bank
-    vector<BusPacket*> readReturnPacket;
-    vector<unsigned> readReturnCountdown;
+    deque<BusPacket*> readReturnPacket;
+    deque<unsigned> readReturnCountdown;
 
     vector<Bank> banks;
     vector<BankState> bankStates;

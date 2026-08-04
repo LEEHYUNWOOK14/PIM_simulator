@@ -30,6 +30,7 @@
 
 #include "Rank.h"
 
+#include <algorithm>
 #include <iostream>
 
 #include "AddressMapping.h"
@@ -38,7 +39,9 @@
 using namespace std;
 using namespace DRAMSim;
 
-Rank::Rank(ostream& simLog, Configuration& configuration)
+Rank::Rank(ostream& simLog, Configuration& configuration,
+           shared_ptr<LogicDieScheduler> logicScheduler,
+           shared_ptr<LogicDieWeightBuffer> logicWeightBuffer)
     : chanId(-1),
       rankId(-1),
       dramsimLog(simLog),
@@ -57,7 +60,7 @@ Rank::Rank(ostream& simLog, Configuration& configuration)
     currentClockCycle = 0;
     abmr1Even_ = abmr1Odd_ = abmr2Even_ = abmr2Odd_ = sbmr1_ = sbmr2_ = false;
 
-    pimRank = make_shared<PIMRank>(dramsimLog, config);
+    pimRank = make_shared<PIMRank>(dramsimLog, config, logicScheduler, logicWeightBuffer);
     pimRank->attachRank(this);
 }
 
@@ -369,7 +372,22 @@ void Rank::writeSb(BusPacket* packet)
 
 #ifndef NO_STORAGE
     if (!(packet->row == config.PIM_REG_RA) && !pimRank->isReservedRA(packet->row))
+    {
+        static int sb_write_dbg = 0;
+        if (sb_write_dbg < 24)
+        {
+            cout << "BANK_SIDE_SB_WRITE"
+                 << " ch[" << getChanId() << "]"
+                 << " ra[" << getRankId() << "]"
+                 << " bank[" << packet->bank << "]"
+                 << " row[" << packet->row << "]"
+                 << " col[" << packet->column << "]"
+                 << " tag[" << packet->tag << "]"
+                 << " v0[" << packet->data->fp16Data_[0] << "]" << endl;
+            sb_write_dbg++;
+        }
         banks[packet->bank].write(packet);
+    }
 #endif
 }
 
@@ -386,7 +404,7 @@ void Rank::sendToBank(BusPacket* packet)
                 pimRank->readHab(packet);
             packet->busPacketType = DATA;
             readReturnPacket.push_back(packet);
-            readReturnCountdown.push_back(config.RL);
+            readReturnCountdown.push_back(config.RL + pimRank->consumeLastLogicServiceCycles());
             break;
         case WRITE:
             if (mode_ == dramMode::SB)
@@ -395,6 +413,7 @@ void Rank::sendToBank(BusPacket* packet)
                 pimRank->doPIM(packet);
             else
                 pimRank->writeHab(packet);
+            pimRank->consumeLastLogicServiceCycles();
             delete (packet);
             break;
         case ACTIVATE:
@@ -491,20 +510,17 @@ void Rank::update()
         }
     }
 
-    // decrement the counter for all packets waiting to be sent back
-    for (size_t i = 0; i < readReturnCountdown.size(); i++) readReturnCountdown[i]--;
+    // Multiple global logic-PCU lanes can complete reads out of issue order.
+    for (size_t i = 0; i < readReturnCountdown.size(); i++)
+        if (readReturnCountdown[i] > 0) readReturnCountdown[i]--;
 
-    if (readReturnCountdown.size() > 0 && readReturnCountdown[0] == 0)
+    if (outgoingDataPacket == NULL && !readReturnCountdown.empty() &&
+        readReturnCountdown.front() == 0)
     {
-        // RL time has passed since the read was issued; this packet is
-        // ready to go out on the bus
-
-        outgoingDataPacket = readReturnPacket[0];
+        outgoingDataPacket = readReturnPacket.front();
         dataCyclesLeft = config.BL / 2;
-
-        // remove the packet from the ranks
-        readReturnPacket.erase(readReturnPacket.begin());
-        readReturnCountdown.erase(readReturnCountdown.begin());
+        readReturnPacket.pop_front();
+        readReturnCountdown.pop_front();
 
         if (DEBUG_BUS)
         {

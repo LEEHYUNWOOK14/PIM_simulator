@@ -31,6 +31,7 @@
 #include "CommandQueue.h"
 
 #include <assert.h>
+#include <sstream>
 
 #include "AddressMapping.h"
 #include "MemoryController.h"
@@ -293,6 +294,7 @@ bool CommandQueue::process_precharge(BusPacket** busPacket)
     do
     {
         bool found = false;
+        std::string prechargeTag;
         vector<BusPacket*>& queue = getCommandQueue(nextRankPRE, nextBankPRE);
         for (size_t i = 0; i < queue.size(); i++)
         {
@@ -301,6 +303,9 @@ bool CommandQueue::process_precharge(BusPacket** busPacket)
                 bankStates[packet->rank][packet->bank].currentBankState == RowActive &&
                 packet->row == bankStates[packet->rank][packet->bank].openRowAddress)
                 found = true;
+            else if (nextRankPRE == packet->rank && nextBankPRE == packet->bank &&
+                     prechargeTag.empty())
+                prechargeTag = packet->tag;
             if (packet->tag.find("BAR", 0) != std::string::npos)
                 break;
         }
@@ -308,7 +313,7 @@ bool CommandQueue::process_precharge(BusPacket** busPacket)
         {
             *busPacket =
                 new BusPacket(PRECHARGE, 0, 0, bankStates[nextRankPRE][nextBankPRE].openRowAddress,
-                              nextRankPRE, nextBankPRE, nullptr, dramsimLog);
+                              nextRankPRE, nextBankPRE, nullptr, dramsimLog, prechargeTag);
             if (isIssuable(*busPacket))
                 return true;
             else
@@ -412,6 +417,11 @@ vector<BusPacket*>& CommandQueue::getCommandQueue(unsigned rank, unsigned bank)
 // checks if busPacket is allowed to be issued
 bool CommandQueue::isIssuable(BusPacket* busPacket)
 {
+    if (!getConfigParam(BOOL, "LOGIC_GLOBAL_SCHEDULER") && busPacket->busPacketType != REF &&
+        busPacket->busPacketType != RFCSB &&
+        (*ranks)[busPacket->rank]->pimRank->isLogicDieBusy(currentClockCycle))
+        return false;
+
     switch (busPacket->busPacketType)
     {
         case REF:
@@ -555,4 +565,27 @@ void CommandQueue::update()
     // do nothing since pop() is effectively update(),
     // needed for SimulatorObject
     // TODO: make CommandQueue not a SimulatorObject
+}
+string CommandQueue::getDebugSummary() const
+{
+    stringstream summary;
+    unsigned shown = 0;
+    for (unsigned rank = 0; rank < queues.size() && shown < 4; rank++)
+        for (unsigned bank = 0; bank < queues[rank].size() && shown < 4; bank++)
+        {
+            const auto& queue = queues[rank][bank];
+            if (queue.empty()) continue;
+            const BusPacket* packet = queue.front();
+            summary << " q" << rank << ":" << bank << "[" << queue.size() << "]"
+                    << "_packet_bank[" << packet->bank << "]"
+                    << "_type[" << static_cast<int>(packet->busPacketType) << "]"
+                    << "_row[" << packet->row << "]_col[" << packet->column << "]"
+                    << "_tag[" << packet->tag << "]"
+                    << "_state["
+                    << static_cast<int>(bankStates[packet->rank][packet->bank].currentBankState)
+                    << "]_next_act["
+                    << bankStates[packet->rank][packet->bank].nextActivate << "]";
+            shown++;
+        }
+    return summary.str();
 }

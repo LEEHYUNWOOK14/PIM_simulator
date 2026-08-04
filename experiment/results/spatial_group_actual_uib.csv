@@ -1,0 +1,5 @@
+case,compact,spatial_grouping,expand_groups,expand_waves,project_groups,project_waves,reads,writes,transfer_bytes,transfer_cycles,total_cycle
+bank_fixed,false,false,1,196,1,196,2562176,845376,0,0,346600
+hybrid_fixed,false,false,1,196,1,196,2562176,845376,225792,3528,436861
+hybrid_compact,true,false,1,196,1,196,237600,218635,225792,3528,436861
+hybrid_spatial,true,true,21,10,32,7,268800,319668,225792,3528,52277

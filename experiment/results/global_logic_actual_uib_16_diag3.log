@@ -1,0 +1,202 @@
+Global logic PCU units: 16
+scons: Reading SConscript files ...
+running with -j 4
+scons: done reading SConscript files.
+scons: Building targets ...
+g++ -o bin/CommandQueue.o -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/CommandQueue.cpp
+g++ -o bin/CommandQueue.os -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -fPIC -Ilib -Isrc -Itools src/CommandQueue.cpp
+g++ -o bin/MemoryController.o -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/MemoryController.cpp
+g++ -o bin/MemoryController.os -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -fPIC -Ilib -Isrc -Itools src/MemoryController.cpp
+g++ -o bin/MemorySystem.o -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/MemorySystem.cpp
+g++ -o bin/MemorySystem.os -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -fPIC -Ilib -Isrc -Itools src/MemorySystem.cpp
+g++ -o bin/MultiChannelMemorySystem.o -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/MultiChannelMemorySystem.cpp
+g++ -o bin/MultiChannelMemorySystem.os -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -fPIC -Ilib -Isrc -Itools src/MultiChannelMemorySystem.cpp
+g++ -o bin/PIMRank.o -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/PIMRank.cpp
+g++ -o bin/PIMRank.os -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -fPIC -Ilib -Isrc -Itools src/PIMRank.cpp
+g++ -o bin/Rank.o -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/Rank.cpp
+g++ -o bin/Rank.os -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -fPIC -Ilib -Isrc -Itools src/Rank.cpp
+g++ -o bin/tests/KernelAddrGen.o -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/tests/KernelAddrGen.cpp
+g++ -o bin/tests/KernelAddrGen.os -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -fPIC -Ilib -Isrc -Itools src/tests/KernelAddrGen.cpp
+g++ -o bin/tests/KernelTestCases.o -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/tests/KernelTestCases.cpp
+g++ -o bin/tests/MainTest.o -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/tests/MainTest.cpp
+g++ -o bin/tests/MemTestCases.o -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/tests/MemTestCases.cpp
+g++ -o bin/tests/MobileNetV4WorkloadTestCases.o -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/tests/MobileNetV4WorkloadTestCases.cpp
+g++ -o bin/tests/PIMBenchTestCases.o -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/tests/PIMBenchTestCases.cpp
+g++ -o bin/tests/PIMCmdGen.o -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/tests/PIMCmdGen.cpp
+g++ -o bin/tests/PIMCmdGen.os -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -fPIC -Ilib -Isrc -Itools src/tests/PIMCmdGen.cpp
+g++ -o bin/tests/PIMKernel.o -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/tests/PIMKernel.cpp
+g++ -o bin/tests/PIMKernel.os -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -fPIC -Ilib -Isrc -Itools src/tests/PIMKernel.cpp
+g++ -o bin/tools/emulator_api/PimSimulator.o -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools tools/emulator_api/PimSimulator.cpp
+g++ -o bin/tools/emulator_api/PimSimulator.os -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -fPIC -Ilib -Isrc -Itools tools/emulator_api/PimSimulator.cpp
+g++ -o sim -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare bin/AddressMapping.o bin/Bank.o bin/BankState.o bin/BusPacket.o bin/ClockDomain.o bin/CommandQueue.o bin/FP16.o bin/MemoryController.o bin/MemorySystem.o bin/MultiChannelMemorySystem.o bin/PIMBlock.o bin/PIMCmd.o bin/PIMRank.o bin/PrintMacros.o bin/Rank.o bin/SimulatorObject.o bin/Transaction.o bin/tests/KernelAddrGen.o bin/tests/KernelTestCases.o bin/tests/MainTest.o bin/tests/MemTestCases.o bin/tests/MobileNetV4Workload.o bin/tests/MobileNetV4WorkloadTestCases.o bin/tests/PIMBenchTestCases.o bin/tests/PIMCmdGen.o bin/tests/PIMKernel.o bin/tools/emulator_api/PimSimulator.o -L. -lgtest -lpthread
+ar rc libdramsim/libdramsim2.a bin/AddressMapping.o bin/Bank.o bin/BankState.o bin/BusPacket.o bin/ClockDomain.o bin/CommandQueue.o bin/FP16.o bin/MemoryController.o bin/MemorySystem.o bin/MultiChannelMemorySystem.o bin/PIMBlock.o bin/PIMCmd.o bin/PIMRank.o bin/PrintMacros.o bin/Rank.o bin/SimulatorObject.o bin/Transaction.o bin/tests/PIMCmdGen.o bin/tests/PIMKernel.o bin/tests/KernelAddrGen.o bin/tools/emulator_api/PimSimulator.o
+g++ -o libdramsim/libdramsim2.so -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -shared bin/AddressMapping.os bin/Bank.os bin/BankState.os bin/BusPacket.os bin/ClockDomain.os bin/CommandQueue.os bin/FP16.os bin/MemoryController.os bin/MemorySystem.os bin/MultiChannelMemorySystem.os bin/PIMBlock.os bin/PIMCmd.os bin/PIMRank.os bin/PrintMacros.os bin/Rank.os bin/SimulatorObject.os bin/Transaction.os bin/tests/PIMCmdGen.os bin/tests/PIMKernel.os bin/tests/KernelAddrGen.os bin/tools/emulator_api/PimSimulator.os -L. -lgtest -lpthread
+ranlib libdramsim/libdramsim2.a
+scons: done building targets.
+Note: Google Test filter = MobileNetV4WorkloadTest.ActualShapeUibRunsEndToEnd
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MobileNetV4WorkloadTest
+[ RUN      ] MobileNetV4WorkloadTest.ActualShapeUibRunsEndToEnd
+READ_RESULT_TRACE x[0] row[0] col[0] pb[1] bankOffset[1]
+READ_RESULT_TRACE x[8] row[0] col[0] pb[1] bankOffset[1]
+READ_RESULT_TRACE x[16] row[0] col[0] pb[1] bankOffset[1]
+READ_RESULT_TRACE x[24] row[0] col[0] pb[1] bankOffset[1]
+READ_RESULT_TRACE x[32] row[0] col[0] pb[1] bankOffset[1]
+READ_RESULT_TRACE x[40] row[0] col[0] pb[1] bankOffset[1]
+READ_RESULT_TRACE x[48] row[0] col[0] pb[1] bankOffset[1]
+READ_RESULT_TRACE x[56] row[0] col[0] pb[1] bankOffset[1]
+READ_RESULT_TRACE x[64] row[0] col[0] pb[1] bankOffset[1]
+READ_RESULT_TRACE x[72] row[0] col[0] pb[1] bankOffset[1]
+READ_RESULT_TRACE x[80] row[0] col[0] pb[1] bankOffset[1]
+READ_RESULT_TRACE x[88] row[0] col[0] pb[1] bankOffset[1]
+BANK_SIDE_SB_WRITE ch[0] ra[0] bank[0] row[0] col[0] tag[] v0[1]
+BANK_SIDE_SB_WRITE ch[1] ra[0] bank[0] row[0] col[0] tag[] v0[0]
+BANK_SIDE_SB_WRITE ch[2] ra[0] bank[0] row[0] col[0] tag[] v0[0]
+BANK_SIDE_SB_WRITE ch[3] ra[0] bank[0] row[0] col[0] tag[] v0[1]
+BANK_SIDE_SB_WRITE ch[4] ra[0] bank[0] row[0] col[0] tag[] v0[0]
+BANK_SIDE_SB_WRITE ch[5] ra[0] bank[0] row[0] col[0] tag[] v0[0]
+BANK_SIDE_SB_WRITE ch[6] ra[0] bank[0] row[0] col[0] tag[] v0[1]
+BANK_SIDE_SB_WRITE ch[7] ra[0] bank[0] row[0] col[0] tag[] v0[0]
+BANK_SIDE_SB_WRITE ch[8] ra[0] bank[0] row[0] col[0] tag[] v0[0]
+BANK_SIDE_SB_WRITE ch[9] ra[0] bank[0] row[0] col[0] tag[] v0[1]
+BANK_SIDE_SB_WRITE ch[10] ra[0] bank[0] row[0] col[0] tag[] v0[0]
+BANK_SIDE_SB_WRITE ch[11] ra[0] bank[0] row[0] col[0] tag[] v0[0]
+BANK_SIDE_SB_WRITE ch[12] ra[0] bank[0] row[0] col[0] tag[] v0[1]
+BANK_SIDE_SB_WRITE ch[13] ra[0] bank[0] row[0] col[0] tag[] v0[0]
+BANK_SIDE_SB_WRITE ch[14] ra[0] bank[0] row[0] col[0] tag[] v0[0]
+BANK_SIDE_SB_WRITE ch[15] ra[0] bank[0] row[0] col[0] tag[] v0[1]
+BANK_SIDE_SB_WRITE ch[16] ra[0] bank[0] row[0] col[0] tag[] v0[0]
+BANK_SIDE_SB_WRITE ch[17] ra[0] bank[0] row[0] col[0] tag[] v0[0]
+BANK_SIDE_SB_WRITE ch[18] ra[0] bank[0] row[0] col[0] tag[] v0[1]
+BANK_SIDE_SB_WRITE ch[19] ra[0] bank[0] row[0] col[0] tag[] v0[0]
+BANK_SIDE_SB_WRITE ch[20] ra[0] bank[0] row[0] col[0] tag[] v0[0]
+BANK_SIDE_SB_WRITE ch[21] ra[0] bank[0] row[0] col[0] tag[] v0[1]
+BANK_SIDE_SB_WRITE ch[22] ra[0] bank[0] row[0] col[0] tag[] v0[0]
+BANK_SIDE_SB_WRITE ch[23] ra[0] bank[0] row[0] col[0] tag[] v0[0]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[0] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[1] bankEnabled[1]
+ROUTE_LOGIC_DIE mode[HYBRID] pb[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto]
+LOGIC_DIE_MAC mode[HYBRID] pb[0] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[1] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[1] bankEnabled[1]
+ROUTE_LOGIC_DIE mode[HYBRID] pb[1] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto]
+LOGIC_DIE_MAC mode[HYBRID] pb[1] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[2] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[1] bankEnabled[1]
+ROUTE_LOGIC_DIE mode[HYBRID] pb[2] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto]
+LOGIC_DIE_MAC mode[HYBRID] pb[2] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[3] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[1] bankEnabled[1]
+ROUTE_LOGIC_DIE mode[HYBRID] pb[3] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto]
+LOGIC_DIE_MAC mode[HYBRID] pb[3] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[4] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[1] bankEnabled[1]
+ROUTE_LOGIC_DIE mode[HYBRID] pb[4] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto]
+LOGIC_DIE_MAC mode[HYBRID] pb[4] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[5] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[1] bankEnabled[1]
+ROUTE_LOGIC_DIE mode[HYBRID] pb[5] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto]
+LOGIC_DIE_MAC mode[HYBRID] pb[5] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[6] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[1] bankEnabled[1]
+ROUTE_LOGIC_DIE mode[HYBRID] pb[6] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto]
+LOGIC_DIE_MAC mode[HYBRID] pb[6] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[7] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[1] bankEnabled[1]
+ROUTE_LOGIC_DIE mode[HYBRID] pb[7] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto]
+LOGIC_DIE_MAC mode[HYBRID] pb[7] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[0] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[1] bankEnabled[1]
+ROUTE_LOGIC_DIE mode[HYBRID] pb[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[1] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[1] bankEnabled[1]
+ROUTE_LOGIC_DIE mode[HYBRID] pb[1] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[2] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[1] bankEnabled[1]
+ROUTE_LOGIC_DIE mode[HYBRID] pb[2] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[3] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[1] bankEnabled[1]
+ROUTE_LOGIC_DIE mode[HYBRID] pb[3] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[4] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[5] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[6] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[7] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[0] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[1] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[2] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[3] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[4] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[5] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[6] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[7] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[1] bankEnabled[1]
+PIM_RUN_STALL pending[6174] ch0_onfly[128]_pending[140]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch1_onfly[128]_pending[140]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch2_onfly[128]_pending[140]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch3_onfly[128]_pending[140]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch4_onfly[128]_pending[140]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch5_onfly[128]_pending[140]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch6_onfly[128]_pending[140]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch7_onfly[128]_pending[140]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch8_onfly[128]_pending[140]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch9_onfly[128]_pending[140]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch10_onfly[128]_pending[140]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch11_onfly[128]_pending[140]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch12_onfly[128]_pending[140]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch13_onfly[128]_pending[140]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch14_onfly[128]_pending[140]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch15_onfly[128]_pending[140]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch16_onfly[128]_pending[140]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch17_onfly[128]_pending[140]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch18_onfly[128]_pending[140]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch19_onfly[128]_pending[140]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch20_onfly[128]_pending[140]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch21_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch22_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch23_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch24_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch25_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch26_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch27_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch28_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch29_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch30_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch31_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch32_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch33_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch34_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch35_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch36_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch37_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch38_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch39_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch40_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch41_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch42_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch43_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch44_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch45_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch46_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch47_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch48_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch49_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch50_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch51_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch52_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch53_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch54_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch55_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch56_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch57_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch58_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch59_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch60_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch61_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0] ch62_onfly[83]_pending[0]_mcq[19]_returns[0]_bus[0] q0:0[64]_type[1]_row[16383]_col[0]_tag[PIMBAR]_state[0]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[0] busType[WRITE] row[640] col[0] cmd[NOP 8x]
+BANK_SIDE_NOP_WRITEBACK mode[HYBRID] pb[0] bank[0] row[640] col[0] grf[0] tag[GRF_TO_BANK]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[1] busType[WRITE] row[640] col[0] cmd[NOP 8x]
+BANK_SIDE_NOP_WRITEBACK mode[HYBRID] pb[1] bank[0] row[640] col[0] grf[0] tag[GRF_TO_BANK]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[2] busType[WRITE] row[640] col[0] cmd[NOP 8x]
+BANK_SIDE_NOP_WRITEBACK mode[HYBRID] pb[2] bank[0] row[640] col[0] grf[0] tag[GRF_TO_BANK]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[3] busType[WRITE] row[640] col[0] cmd[NOP 8x]
+BANK_SIDE_NOP_WRITEBACK mode[HYBRID] pb[3] bank[0] row[640] col[0] grf[0] tag[GRF_TO_BANK]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[4] busType[WRITE] row[640] col[0] cmd[NOP 8x]
+BANK_SIDE_NOP_WRITEBACK mode[HYBRID] pb[4] bank[0] row[640] col[0] grf[0] tag[GRF_TO_BANK]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[5] busType[WRITE] row[640] col[0] cmd[NOP 8x]
+BANK_SIDE_NOP_WRITEBACK mode[HYBRID] pb[5] bank[0] row[640] col[0] grf[0] tag[GRF_TO_BANK]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[6] busType[WRITE] row[640] col[0] cmd[NOP 8x]
+BANK_SIDE_NOP_WRITEBACK mode[HYBRID] pb[6] bank[0] row[640] col[0] grf[0] tag[GRF_TO_BANK]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[7] busType[WRITE] row[640] col[0] cmd[NOP 8x]
+BANK_SIDE_NOP_WRITEBACK mode[HYBRID] pb[7] bank[0] row[640] col[0] grf[0] tag[GRF_TO_BANK]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[0] busType[WRITE] row[640] col[0] cmd[NOP 8x]
+BANK_SIDE_NOP_WRITEBACK mode[HYBRID] pb[0] bank[0] row[640] col[0] grf[0] tag[GRF_TO_BANK]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[1] busType[WRITE] row[640] col[0] cmd[NOP 8x]
+BANK_SIDE_NOP_WRITEBACK mode[HYBRID] pb[1] bank[0] row[640] col[0] grf[0] tag[GRF_TO_BANK]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[2] busType[WRITE] row[640] col[0] cmd[NOP 8x]
+BANK_SIDE_NOP_WRITEBACK mode[HYBRID] pb[2] bank[0] row[640] col[0] grf[0] tag[GRF_TO_BANK]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[3] busType[WRITE] row[640] col[0] cmd[NOP 8x]
+BANK_SIDE_NOP_WRITEBACK mode[HYBRID] pb[3] bank[0] row[640] col[0] grf[0] tag[GRF_TO_BANK]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[4] busType[WRITE] row[640] col[0] cmd[NOP 8x]
+BANK_SIDE_NOP_WRITEBACK mode[HYBRID] pb[4] bank[0] row[640] col[0] grf[0] tag[GRF_TO_BANK]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[5] busType[WRITE] row[640] col[0] cmd[NOP 8x]
+BANK_SIDE_NOP_WRITEBACK mode[HYBRID] pb[5] bank[0] row[640] col[0] grf[0] tag[GRF_TO_BANK]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[6] busType[WRITE] row[640] col[0] cmd[NOP 8x]
+BANK_SIDE_NOP_WRITEBACK mode[HYBRID] pb[6] bank[0] row[640] col[0] grf[0] tag[GRF_TO_BANK]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[7] busType[WRITE] row[640] col[0] cmd[NOP 8x]
+BANK_SIDE_NOP_WRITEBACK mode[HYBRID] pb[7] bank[0] row[640] col[0] grf[0] tag[GRF_TO_BANK]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[0] busType[WRITE] row[640] col[0] cmd[NOP 8x]
+BANK_SIDE_NOP_WRITEBACK mode[HYBRID] pb[0] bank[0] row[640] col[0] grf[0] tag[GRF_TO_BANK]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[1] busType[WRITE] row[640] col[0] cmd[NOP 8x]
+BANK_SIDE_NOP_WRITEBACK mode[HYBRID] pb[1] bank[0] row[640] col[0] grf[0] tag[GRF_TO_BANK]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[2] busType[WRITE] row[640] col[0] cmd[NOP 8x]
+BANK_SIDE_NOP_WRITEBACK mode[HYBRID] pb[2] bank[0] row[640] col[0] grf[0] tag[GRF_TO_BANK]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[3] busType[WRITE] row[640] col[0] cmd[NOP 8x]
+BANK_SIDE_NOP_WRITEBACK mode[HYBRID] pb[3] bank[0] row[640] col[0] grf[0] tag[GRF_TO_BANK]
+BANK_SIDE_NOP_WRITEBACK mode[HYBRID] pb[4] bank[0] row[640] col[0] grf[0] tag[GRF_TO_BANK]
+BANK_SIDE_NOP_WRITEBACK mode[HYBRID] pb[5] bank[0] row[640] col[0] grf[0] tag[GRF_TO_BANK]
+BANK_SIDE_NOP_WRITEBACK mode[HYBRID] pb[6] bank[0] row[640] col[0] grf[0] tag[GRF_TO_BANK]
+BANK_SIDE_NOP_WRITEBACK mode[HYBRID] pb[7] bank[0] row[640] col[0] grf[0] tag[GRF_TO_BANK]
+BANK_SIDE_GRF_B_WRITE pb[0] grf[0] auto[1] mac[0] row[0] col[0] v0[0]
+BANK_SIDE_GRF_B_WRITE pb[1] grf[0] auto[1] mac[0] row[0] col[0] v0[1]
+BANK_SIDE_GRF_B_WRITE pb[2] grf[0] auto[1] mac[0] row[0] col[0] v0[1]
+BANK_SIDE_GRF_B_WRITE pb[3] grf[0] auto[1] mac[0] row[0] col[0] v0[1]
+BANK_SIDE_GRF_B_WRITE pb[4] grf[0] auto[1] mac[0] row[0] col[0] v0[1]
+BANK_SIDE_GRF_B_WRITE pb[5] grf[0] auto[1] mac[0] row[0] col[0] v0[1]
+BANK_SIDE_GRF_B_WRITE pb[6] grf[0] auto[1] mac[0] row[0] col[0] v0[1]
+BANK_SIDE_GRF_B_WRITE pb[7] grf[0] auto[1] mac[0] row[0] col[0] v0[1]
+BANK_SIDE_GRF_B_WRITE pb[0] grf[0] auto[1] mac[0] row[0] col[0] v0[0]
+BANK_SIDE_GRF_B_WRITE pb[1] grf[0] auto[1] mac[0] row[0] col[0] v0[1]
+BANK_SIDE_GRF_B_WRITE pb[2] grf[0] auto[1] mac[0] row[0] col[0] v0[1]
+BANK_SIDE_GRF_B_WRITE pb[3] grf[0] auto[1] mac[0] row[0] col[0] v0[1]
+PIM_RUN_STALL pending[8229] ch0_onfly[129]_pending[275]_mcq[64]_returns[1]_front[9]_bus[0] q0:0[64]_type[0]_row[0]_col[9]_tag[MAC_]_state[0] ch1_onfly[128]_pending[303]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[10239]_col[31]_tag[END_SB_TO_HAB_BAR]_state[0] ch2_onfly[129]_pending[448]_mcq[64]_returns[1]_front[5]_bus[0] q0:0[64]_type[0]_row[2]_col[2]_tag[output]_state[0] ch3_onfly[129]_pending[277]_mcq[64]_returns[1]_front[9]_bus[0] q0:0[64]_type[0]_row[0]_col[15]_tag[MAC_BAR]_state[1] ch4_onfly[128]_pending[477]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch5_onfly[129]_pending[281]_mcq[64]_returns[1]_front[13]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch6_onfly[128]_pending[477]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch7_onfly[129]_pending[281]_mcq[64]_returns[1]_front[13]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch8_onfly[128]_pending[220]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch9_onfly[129]_pending[56]_mcq[64]_returns[1]_front[17]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch10_onfly[128]_pending[220]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch11_onfly[129]_pending[56]_mcq[64]_returns[1]_front[17]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch12_onfly[128]_pending[220]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch13_onfly[129]_pending[56]_mcq[64]_returns[1]_front[21]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch14_onfly[128]_pending[220]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch15_onfly[129]_pending[56]_mcq[64]_returns[1]_front[21]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch16_onfly[128]_pending[220]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch17_onfly[129]_pending[56]_mcq[64]_returns[1]_front[25]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch18_onfly[128]_pending[220]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch19_onfly[129]_pending[56]_mcq[64]_returns[1]_front[25]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch20_onfly[128]_pending[220]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch21_onfly[129]_pending[56]_mcq[64]_returns[1]_front[29]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch22_onfly[128]_pending[220]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch23_onfly[129]_pending[56]_mcq[64]_returns[1]_front[29]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch24_onfly[128]_pending[220]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch25_onfly[129]_pending[56]_mcq[64]_returns[1]_front[33]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch26_onfly[128]_pending[220]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch27_onfly[129]_pending[56]_mcq[64]_returns[1]_front[33]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch28_onfly[128]_pending[220]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch29_onfly[129]_pending[56]_mcq[64]_returns[1]_front[37]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch30_onfly[128]_pending[220]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch31_onfly[129]_pending[56]_mcq[64]_returns[1]_front[37]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch32_onfly[128]_pending[220]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch33_onfly[129]_pending[56]_mcq[64]_returns[1]_front[41]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch34_onfly[128]_pending[220]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch35_onfly[129]_pending[56]_mcq[64]_returns[1]_front[41]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch36_onfly[128]_pending[220]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch37_onfly[129]_pending[56]_mcq[64]_returns[1]_front[45]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch38_onfly[128]_pending[220]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch39_onfly[129]_pending[56]_mcq[64]_returns[1]_front[45]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch40_onfly[128]_pending[220]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch41_onfly[129]_pending[56]_mcq[64]_returns[1]_front[49]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch42_onfly[128]_pending[220]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch43_onfly[129]_pending[56]_mcq[64]_returns[1]_front[49]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch44_onfly[128]_pending[220]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch45_onfly[129]_pending[56]_mcq[64]_returns[1]_front[53]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch46_onfly[128]_pending[220]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch47_onfly[129]_pending[56]_mcq[64]_returns[1]_front[53]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch48_onfly[128]_pending[220]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch49_onfly[129]_pending[56]_mcq[64]_returns[1]_front[57]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch50_onfly[128]_pending[220]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch51_onfly[129]_pending[56]_mcq[64]_returns[1]_front[57]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch52_onfly[128]_pending[220]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch53_onfly[129]_pending[56]_mcq[64]_returns[1]_front[61]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch54_onfly[128]_pending[220]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch55_onfly[129]_pending[56]_mcq[64]_returns[1]_front[61]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch56_onfly[128]_pending[220]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch57_onfly[129]_pending[56]_mcq[64]_returns[1]_front[65]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch58_onfly[128]_pending[220]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch59_onfly[129]_pending[56]_mcq[64]_returns[1]_front[65]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch60_onfly[129]_pending[220]_mcq[64]_returns[0]_bus[1] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch61_onfly[130]_pending[56]_mcq[64]_returns[1]_front[69]_bus[1] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1] ch62_onfly[129]_pending[220]_mcq[64]_returns[1]_front[3]_bus[0] q0:0[64]_type[1]_row[2]_col[0]_tag[GRFB_TO_BANK_]_state[0] ch63_onfly[130]_pending[56]_mcq[64]_returns[2]_front[3]_bus[0] q0:0[64]_type[0]_row[0]_col[11]_tag[MAC_]_state[1]
+PIM_RUN_STALL pending[128] ch1_onfly[128]_pending[303]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[10239]_col[31]_tag[END_SB_TO_HAB_BAR]_state[0]
+PIM_RUN_STALL pending[128] ch1_onfly[128]_pending[303]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[10239]_col[31]_tag[END_SB_TO_HAB_BAR]_state[0]
+PIM_RUN_STALL pending[128] ch1_onfly[128]_pending[303]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[10239]_col[31]_tag[END_SB_TO_HAB_BAR]_state[0]
+PIM_RUN_STALL pending[128] ch1_onfly[128]_pending[303]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[10239]_col[31]_tag[END_SB_TO_HAB_BAR]_state[0]
+PIM_RUN_STALL pending[128] ch1_onfly[128]_pending[303]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[10239]_col[31]_tag[END_SB_TO_HAB_BAR]_state[0]
+PIM_RUN_STALL pending[128] ch1_onfly[128]_pending[303]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[10239]_col[31]_tag[END_SB_TO_HAB_BAR]_state[0]
+PIM_RUN_STALL pending[128] ch1_onfly[128]_pending[303]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[10239]_col[31]_tag[END_SB_TO_HAB_BAR]_state[0]
+PIM_RUN_STALL pending[128] ch1_onfly[128]_pending[303]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[10239]_col[31]_tag[END_SB_TO_HAB_BAR]_state[0]
+PIM_RUN_STALL pending[128] ch1_onfly[128]_pending[303]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[10239]_col[31]_tag[END_SB_TO_HAB_BAR]_state[0]
+PIM_RUN_STALL pending[128] ch1_onfly[128]_pending[303]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[10239]_col[31]_tag[END_SB_TO_HAB_BAR]_state[3]
+PIM_RUN_STALL pending[128] ch1_onfly[128]_pending[303]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[10239]_col[31]_tag[END_SB_TO_HAB_BAR]_state[0]
+PIM_RUN_STALL pending[128] ch1_onfly[128]_pending[303]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[10239]_col[31]_tag[END_SB_TO_HAB_BAR]_state[0]
+PIM_RUN_STALL pending[128] ch1_onfly[128]_pending[303]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[10239]_col[31]_tag[END_SB_TO_HAB_BAR]_state[0]
+PIM_RUN_STALL pending[128] ch1_onfly[128]_pending[303]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[10239]_col[31]_tag[END_SB_TO_HAB_BAR]_state[0]
+PIM_RUN_STALL pending[128] ch1_onfly[128]_pending[303]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[10239]_col[31]_tag[END_SB_TO_HAB_BAR]_state[0]
+PIM_RUN_STALL pending[128] ch1_onfly[128]_pending[303]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[10239]_col[31]_tag[END_SB_TO_HAB_BAR]_state[0]
+PIM_RUN_STALL pending[128] ch1_onfly[128]_pending[303]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[10239]_col[31]_tag[END_SB_TO_HAB_BAR]_state[0]
+PIM_RUN_STALL pending[128] ch1_onfly[128]_pending[303]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[10239]_col[31]_tag[END_SB_TO_HAB_BAR]_state[0]
+PIM_RUN_STALL pending[128] ch1_onfly[128]_pending[303]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[10239]_col[31]_tag[END_SB_TO_HAB_BAR]_state[0]
+PIM_RUN_STALL pending[128] ch1_onfly[128]_pending[303]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[10239]_col[31]_tag[END_SB_TO_HAB_BAR]_state[0]
+PIM_RUN_STALL pending[128] ch1_onfly[128]_pending[303]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[10239]_col[31]_tag[END_SB_TO_HAB_BAR]_state[0]
+PIM_RUN_STALL pending[128] ch1_onfly[128]_pending[303]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[10239]_col[31]_tag[END_SB_TO_HAB_BAR]_state[0]
+PIM_RUN_STALL pending[128] ch1_onfly[128]_pending[303]_mcq[64]_returns[0]_bus[0] q0:0[64]_type[1]_row[10239]_col[31]_tag[END_SB_TO_HAB_BAR]_state[0]
+Terminated                 ./sim --gtest_filter=MobileNetV4WorkloadTest.ActualShapeUibRunsEndToEnd
