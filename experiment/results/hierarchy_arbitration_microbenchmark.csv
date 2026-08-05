@@ -1,0 +1,5 @@
+policy,completion_cycle,bank_wait_cycles,logic_wait_cycles,bank_max_wait,logic_max_wait,ready_bypasses,arbitration_stall_cycles
+bank_priority,127,2016,6112,63,127,0,0
+logic_priority,127,5088,3040,127,79,0,0
+round_robin,142,4977,5056,141,142,0,15
+ready_bypass,127,3192,4936,111,127,15,0

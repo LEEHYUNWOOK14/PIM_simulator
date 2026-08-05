@@ -1,0 +1,9 @@
+phase,workload,mode_transition_latency,hab_residency,output_buffer_entries,result,total_cycle,outputs_checked,modeled_writes,rank_command_rejects,wall_timeout_seconds
+before_direct_frontend_fix,ActualShapeUibRunsEndToEnd,32,false,2,PASS,235182,18816,225460,1209004,0
+before_direct_frontend_fix,ActualShapeUibRunsEndToEnd,32,true,2,TIMEOUT,NA,NA,NA,NA,600
+before_direct_frontend_fix,NonblockingExpandFeedsTwoDepthwiseTileRows,32,true,2,TIMEOUT,NA,NA,NA,NA,240
+before_direct_frontend_fix,NonblockingExpandFeedsTwoDepthwiseTileRows,32,true,64,TIMEOUT,NA,NA,NA,NA,240
+after_direct_frontend_fix,PointwiseHabResidencyThreeChannelGroup,32,true,2,PASS,1706,384,NA,NA,0
+after_direct_frontend_fix,PointwiseHabResidencyTwoThreeChannelGroups,32,true,2,PASS,2515,768,NA,NA,0
+after_direct_frontend_fix,NonblockingExpandFeedsTwoDepthwiseTileRows,32,true,2,PASS,56572,5376,NA,NA,0
+after_direct_frontend_fix,ActualShapeUibRunsEndToEnd,32,true,2,PASS,235182,18816,220342,NA,0

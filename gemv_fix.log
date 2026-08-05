@@ -1,0 +1,72 @@
+Note: Google Test filter = PIMKernelFixture.gemv
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from PIMKernelFixture
+[ RUN      ] PIMKernelFixture.gemv
+>>PIM Kernel Accuraccy Test
+  Weight data dimension : 4096x1024
+  Input data dimension : 1024
+  Output data dimension : 4096
+GEMV_INPUT_TILE batch[0] inputTile[0] outputTile[0] pb[0] input_idx[0] addr[17179084800]
+GEMV_MAC_BASE batch[0] inputTile[0] outputTile[0] pb[0] colBase[0]
+GEMV_INPUT_TILE batch[0] inputTile[2] outputTile[0] pb[0] input_idx[16] addr[17179084800]
+GEMV_MAC_BASE batch[0] inputTile[2] outputTile[0] pb[0] colBase[64]
+GEMV_INPUT_TILE batch[0] inputTile[4] outputTile[0] pb[0] input_idx[32] addr[17179084800]
+GEMV_MAC_BASE batch[0] inputTile[4] outputTile[0] pb[0] colBase[128]
+GEMV_INPUT_TILE batch[0] inputTile[6] outputTile[0] pb[0] input_idx[48] addr[17179084800]
+GEMV_MAC_BASE batch[0] inputTile[6] outputTile[0] pb[0] colBase[192]
+GEMV_INPUT_TILE batch[0] inputTile[1] outputTile[0] pb[1] input_idx[8] addr[17179084800]
+GEMV_MAC_BASE batch[0] inputTile[1] outputTile[0] pb[1] colBase[0]
+GEMV_INPUT_TILE batch[0] inputTile[3] outputTile[0] pb[1] input_idx[24] addr[17179084800]
+GEMV_MAC_BASE batch[0] inputTile[3] outputTile[0] pb[1] colBase[64]
+GEMV_INPUT_TILE batch[0] inputTile[5] outputTile[0] pb[1] input_idx[40] addr[17179084800]
+GEMV_MAC_BASE batch[0] inputTile[5] outputTile[0] pb[1] colBase[128]
+GEMV_INPUT_TILE batch[0] inputTile[7] outputTile[0] pb[1] input_idx[56] addr[17179084800]
+GEMV_MAC_BASE batch[0] inputTile[7] outputTile[0] pb[1] colBase[192]
+PIMBLOCK_DISPATCH mode[BANK_ONLY] pb[0] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[0] bankEnabled[1]
+BANK_SIDE_GRF_B_WRITE pb[0] grf[0] auto[1] mac[1] row[0] col[0] v0[-0.697754]
+PIMBLOCK_DISPATCH mode[BANK_ONLY] pb[1] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[0] bankEnabled[1]
+BANK_SIDE_GRF_B_WRITE pb[1] grf[0] auto[1] mac[1] row[0] col[0] v0[-0.493652]
+PIMBLOCK_DISPATCH mode[BANK_ONLY] pb[2] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[0] bankEnabled[1]
+BANK_SIDE_GRF_B_WRITE pb[2] grf[0] auto[1] mac[1] row[0] col[0] v0[0.76709]
+PIMBLOCK_DISPATCH mode[BANK_ONLY] pb[3] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[0] bankEnabled[1]
+BANK_SIDE_GRF_B_WRITE pb[3] grf[0] auto[1] mac[1] row[0] col[0] v0[-1.6748]
+PIMBLOCK_DISPATCH mode[BANK_ONLY] pb[4] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[0] bankEnabled[1]
+BANK_SIDE_GRF_B_WRITE pb[4] grf[0] auto[1] mac[1] row[0] col[0] v0[-0.916504]
+PIMBLOCK_DISPATCH mode[BANK_ONLY] pb[5] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[0] bankEnabled[1]
+BANK_SIDE_GRF_B_WRITE pb[5] grf[0] auto[1] mac[1] row[0] col[0] v0[-0.819336]
+PIMBLOCK_DISPATCH mode[BANK_ONLY] pb[6] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[0] bankEnabled[1]
+BANK_SIDE_GRF_B_WRITE pb[6] grf[0] auto[1] mac[1] row[0] col[0] v0[-0.729004]
+PIMBLOCK_DISPATCH mode[BANK_ONLY] pb[7] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[0] bankEnabled[1]
+BANK_SIDE_GRF_B_WRITE pb[7] grf[0] auto[1] mac[1] row[0] col[0] v0[0.841797]
+PIMBLOCK_DISPATCH mode[BANK_ONLY] pb[0] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[0] bankEnabled[1]
+BANK_SIDE_GRF_B_WRITE pb[0] grf[0] auto[1] mac[1] row[0] col[0] v0[-1.80469]
+PIMBLOCK_DISPATCH mode[BANK_ONLY] pb[1] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[0] bankEnabled[1]
+BANK_SIDE_GRF_B_WRITE pb[1] grf[0] auto[1] mac[1] row[0] col[0] v0[1.09082]
+PIMBLOCK_DISPATCH mode[BANK_ONLY] pb[2] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[0] bankEnabled[1]
+BANK_SIDE_GRF_B_WRITE pb[2] grf[0] auto[1] mac[1] row[0] col[0] v0[-0.488281]
+PIMBLOCK_DISPATCH mode[BANK_ONLY] pb[3] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[0] bankEnabled[1]
+BANK_SIDE_GRF_B_WRITE pb[3] grf[0] auto[1] mac[1] row[0] col[0] v0[0.90332]
+PIMBLOCK_DISPATCH mode[BANK_ONLY] pb[4] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[0] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[BANK_ONLY] pb[5] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[0] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[BANK_ONLY] pb[6] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[0] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[BANK_ONLY] pb[7] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[0] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[BANK_ONLY] pb[0] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[0] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[BANK_ONLY] pb[1] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[0] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[BANK_ONLY] pb[2] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[0] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[BANK_ONLY] pb[3] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[0] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[BANK_ONLY] pb[4] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[0] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[BANK_ONLY] pb[5] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[0] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[BANK_ONLY] pb[6] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[0] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[BANK_ONLY] pb[7] busType[READ] row[0] col[0] cmd[MAC GRF_B[0], GRF_A[0], EVEN_BANK, auto] logicEnabled[0] bankEnabled[1]
+
+> Test Result
+  simulated output comparison via pre-calculated values
+> passed : 4096
+> failed : 0
+[       OK ] PIMKernelFixture.gemv (2397 ms)
+[----------] 1 test from PIMKernelFixture (2402 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (2414 ms total)
+[  PASSED  ] 1 test.

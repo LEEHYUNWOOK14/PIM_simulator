@@ -136,3 +136,5 @@ parameter int WEIGHT_BUFFER_WRITE_LATENCY  = 1; // 1~4 cycle 검증 통과
 4-port 최적점은 DRAM timing과 command coalescing의 상호작용으로 생겼다. RTL에서 동일한 이득을 주장하려면 “buffer ready 후 32 channel command를 같은 epoch에 release한다”는 제어가 실제로 구현되어야 한다.
 
 다음 구현은 port wait에 우연히 의존하지 않고 명시적인 post-fill synchronized release를 모델링한다. guard cycle을 sweep해 4-port latency 변화에도 dispatch 약 2,300개 수준을 안정적으로 유지하는지 검증한다.
+
+이 후속 검증은 `report_23_post_fill_synchronized_release.md`에 기록했다. 무제한 port와 128 cycle/layer guard에서 215,865 cycle을 얻어 synchronization 가설을 재현했다.

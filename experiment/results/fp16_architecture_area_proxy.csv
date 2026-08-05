@@ -1,0 +1,8 @@
+architecture,burst_pipelines,fp16_lanes,estimated_generic_cells,estimated_flip_flops
+shared_pipeline_with_512_source_buffers,1,16,19177392,2793984
+shared_pipeline_with_512_source_buffers,2,32,19229024,2793984
+shared_pipeline_with_512_source_buffers,4,64,19332288,2793984
+shared_pipeline_with_512_source_buffers,8,128,19538816,2793984
+shared_pipeline_with_512_source_buffers,16,256,19951872,2793984
+shared_pipeline_with_512_source_buffers,64,1024,22430208,2793984
+shared_pipeline_with_512_source_buffers,512,8192,45561344,2793984

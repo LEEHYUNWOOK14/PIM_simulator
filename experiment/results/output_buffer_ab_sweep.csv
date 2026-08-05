@@ -1,0 +1,4 @@
+mode,enabled,entries,drain_latency,drain_bw,outputs_checked,reservations,retirements,full_retry_channel_cycles,full_wall_cycles,peak_entries,drain_busy_cycles,total_cycle,result
+post_copy,0,2,0,0,18816,392,392,388,0,2,0,214228,PASS
+callback_zero_latency,1,2,0,0,18816,392,392,751369,25987,2,0,214842,PASS
+callback_drain_4_8,1,2,4,8,18816,392,392,891233,30432,2,8624,214947,PASS

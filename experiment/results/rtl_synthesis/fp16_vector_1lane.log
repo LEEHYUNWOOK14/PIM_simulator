@@ -1,0 +1,1279 @@
+
+-- Running command `read_verilog -sv rtl/fp16_add.sv rtl/fp16_vector_add.sv; chparam -set LANES 1 fp16_vector_add; synth -top fp16_vector_add; flatten; opt; stat; ltp -noff' --
+
+1. Executing Verilog-2005 frontend: rtl/fp16_add.sv
+Parsing SystemVerilog input from `rtl/fp16_add.sv' to AST representation.
+Generating RTLIL representation for module `\fp16_add'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: rtl/fp16_vector_add.sv
+Parsing SystemVerilog input from `rtl/fp16_vector_add.sv' to AST representation.
+Generating RTLIL representation for module `\fp16_vector_add'.
+Successfully finished Verilog frontend.
+Parameter \LANES = 1
+
+3. Executing AST frontend in derive mode using pre-parsed AST for module `\fp16_vector_add'.
+Parameter \LANES = 1
+Generating RTLIL representation for module `$paramod\fp16_vector_add\LANES=32'00000000000000000000000000000001'.
+
+4. Executing SYNTH pass.
+
+4.1. Executing HIERARCHY pass (managing design hierarchy).
+
+4.1.1. Analyzing design hierarchy..
+Top module:  \fp16_vector_add
+Used module:     \fp16_add
+
+4.1.2. Analyzing design hierarchy..
+Top module:  \fp16_vector_add
+Used module:     \fp16_add
+Removed 0 unused modules.
+
+4.2. Executing PROC pass (convert processes to netlists).
+
+4.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 26 switch rules as full_case in process $proc$rtl/fp16_add.sv:28$4 in module fp16_add.
+Removed a total of 0 dead cases.
+
+4.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 29 assignments to connections.
+
+4.2.4. Executing PROC_INIT pass (extract init attributes).
+
+4.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+4.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~26 debug messages>
+
+4.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+     1/53: $7\result_o[15:0]
+     2/53: $6\result_o[15:0]
+     3/53: $5\result_o[15:0]
+     4/53: $4\result_o[15:0]
+     5/53: $3\result_o[15:0]
+     6/53: $2\result_o[15:0]
+     7/53: $1\result_o[15:0]
+     8/53: $16\result_exp[31:0]
+     9/53: $1\rounded_sig[11:0]
+    10/53: $15\result_exp[31:0]
+    11/53: $15\magnitude_ext[13:0]
+    12/53: $14\result_exp[31:0]
+    13/53: $14\magnitude_ext[13:0]
+    14/53: $13\result_exp[31:0]
+    15/53: $13\magnitude_ext[13:0]
+    16/53: $12\result_exp[31:0]
+    17/53: $12\magnitude_ext[13:0]
+    18/53: $11\result_exp[31:0]
+    19/53: $11\magnitude_ext[13:0]
+    20/53: $10\result_exp[31:0]
+    21/53: $10\magnitude_ext[13:0]
+    22/53: $9\result_exp[31:0]
+    23/53: $9\magnitude_ext[13:0]
+    24/53: $8\result_exp[31:0]
+    25/53: $8\magnitude_ext[13:0]
+    26/53: $7\result_exp[31:0]
+    27/53: $7\magnitude_ext[13:0]
+    28/53: $6\result_exp[31:0]
+    29/53: $6\magnitude_ext[13:0]
+    30/53: $5\result_exp[31:0]
+    31/53: $5\magnitude_ext[13:0]
+    32/53: $4\result_exp[31:0]
+    33/53: $4\magnitude_ext[13:0]
+    34/53: $3\result_exp[31:0]
+    35/53: $3\magnitude_ext[13:0]
+    36/53: $2\magnitude_ext[13:0] [13:1]
+    37/53: $2\result_exp[31:0]
+    38/53: $2\magnitude_ext[13:0] [0]
+    39/53: $1\result_exp[31:0]
+    40/53: $1\magnitude_ext[13:0]
+    41/53: $1\add_ext[14:0]
+    42/53: $1$fordecl_block$1.normalize_step[31:0]$40
+    43/53: $2\shift_right_sticky$func$rtl/fp16_add.sv:47$3.$result[13:0]$30 [13:1]
+    44/53: $2\shift_right_sticky$func$rtl/fp16_add.sv:47$3.$result[13:0]$30 [0]
+    45/53: $2\shift_right_sticky$func$rtl/fp16_add.sv:47$3.sticky[0:0]$31
+    46/53: $1\shift_right_sticky$func$rtl/fp16_add.sv:47$3.$result[13:0]$27
+    47/53: $1\shift_right_sticky$func$rtl/fp16_add.sv:47$3.sticky[0:0]$28
+    48/53: $1\small_sig[10:0]
+    49/53: $1\large_sig[10:0]
+    50/53: $1\small_exp[4:0]
+    51/53: $1\large_exp[4:0]
+    52/53: $1\small_sign[0:0]
+    53/53: $1\large_sign[0:0]
+
+4.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\fp16_add.\result_o' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\lhs_sign' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\rhs_sign' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\large_sign' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\small_sign' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\result_sign' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\round_up' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\lhs_exp' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\rhs_exp' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\large_exp' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\small_exp' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\lhs_frac' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\rhs_frac' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\lhs_sig' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\rhs_sig' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\large_sig' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\small_sig' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\large_ext' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\small_ext' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\magnitude_ext' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\add_ext' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\rounded_sig' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\result_exp' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\shift_amount' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\shift_right_sticky$func$rtl/fp16_add.sv:47$3.$result' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\shift_right_sticky$func$rtl/fp16_add.sv:47$3.value' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\shift_right_sticky$func$rtl/fp16_add.sv:47$3.amount' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\shift_right_sticky$func$rtl/fp16_add.sv:47$3.sticky' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+Latch inferred for signal `\fp16_add.$fordecl_block$1.normalize_step' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4': $auto$proc_dlatch.cc:432:proc_dlatch$471
+
+4.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+4.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+4.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 26 empty switches in `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+Removing empty process `fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+Cleaned up 26 empty switches.
+
+4.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp16_vector_add.
+Optimizing module fp16_add.
+<suppressed ~34 debug messages>
+
+4.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp16_vector_add.
+Optimizing module fp16_add.
+
+4.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp16_vector_add..
+Finding unused cells or wires in module \fp16_add..
+Removed 6 unused cells and 228 unused wires.
+<suppressed ~8 debug messages>
+
+4.5. Executing CHECK pass (checking for obvious problems).
+Checking module fp16_add...
+Checking module fp16_vector_add...
+Found and reported 0 problems.
+
+4.6. Executing OPT pass (performing simple optimizations).
+
+4.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp16_add.
+Optimizing module fp16_vector_add.
+
+4.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp16_add'.
+<suppressed ~30 debug messages>
+Finding identical cells in module `\fp16_vector_add'.
+Removed a total of 10 cells.
+
+4.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+      Replacing known input bits on port A of cell $procmux$233: $add$rtl/fp16_add.sv:68$113_Y -> { 1'0 $add$rtl/fp16_add.sv:68$113_Y [10:0] }
+      Replacing known input bits on port B of cell $procmux$233: { 1'0 $add$rtl/fp16_add.sv:68$113_Y [11:1] } -> { 2'01 $add$rtl/fp16_add.sv:68$113_Y [10:1] }
+      Replacing known input bits on port B of cell $procmux$393: $add$rtl/fp16_add.sv:51$41_Y [14:2] -> { 1'1 $add$rtl/fp16_add.sv:51$41_Y [13:2] }
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$149.
+    dead port 1/2 on $mux $procmux$152.
+    dead port 1/2 on $mux $procmux$155.
+    dead port 1/2 on $mux $procmux$158.
+    dead port 1/2 on $mux $procmux$161.
+    dead port 1/2 on $mux $procmux$164.
+    dead port 1/2 on $mux $procmux$170.
+    dead port 1/2 on $mux $procmux$173.
+    dead port 1/2 on $mux $procmux$176.
+    dead port 1/2 on $mux $procmux$179.
+    dead port 1/2 on $mux $procmux$182.
+    dead port 1/2 on $mux $procmux$188.
+    dead port 1/2 on $mux $procmux$191.
+    dead port 1/2 on $mux $procmux$194.
+    dead port 1/2 on $mux $procmux$197.
+    dead port 1/2 on $mux $procmux$203.
+    dead port 1/2 on $mux $procmux$206.
+    dead port 1/2 on $mux $procmux$209.
+    dead port 1/2 on $mux $procmux$215.
+    dead port 1/2 on $mux $procmux$218.
+    dead port 1/2 on $mux $procmux$224.
+    dead port 1/2 on $mux $procmux$239.
+    dead port 1/2 on $mux $procmux$245.
+    dead port 2/2 on $mux $procmux$395.
+    dead port 2/2 on $mux $procmux$401.
+    dead port 2/2 on $mux $procmux$407.
+    dead port 1/2 on $mux $procmux$425.
+    dead port 1/2 on $mux $procmux$431.
+Running muxtree optimizer on module \fp16_vector_add..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 28 multiplexer ports.
+<suppressed ~38 debug messages>
+
+4.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fp16_add.
+    New input vector for $reduce_or cell $reduce_or$rtl/fp16_add.sv:10$32: \small_sig
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \fp16_vector_add.
+Performed a total of 1 changes.
+
+4.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp16_add'.
+<suppressed ~12 debug messages>
+Finding identical cells in module `\fp16_vector_add'.
+Removed a total of 4 cells.
+
+4.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_vector_add..
+Removed 0 unused cells and 42 unused wires.
+<suppressed ~1 debug messages>
+
+4.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp16_add.
+Optimizing module fp16_vector_add.
+
+4.6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_vector_add..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~38 debug messages>
+
+4.6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \fp16_vector_add.
+Performed a total of 0 changes.
+
+4.6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_vector_add'.
+Removed a total of 0 cells.
+
+4.6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_vector_add..
+
+4.6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp16_add.
+Optimizing module fp16_vector_add.
+
+4.6.16. Finished OPT passes. (There is nothing left to do.)
+
+4.7. Executing FSM pass (extract and optimize FSM).
+
+4.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+4.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+4.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+4.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_vector_add..
+
+4.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+4.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+4.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+4.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+4.8. Executing OPT pass (performing simple optimizations).
+
+4.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp16_add.
+Optimizing module fp16_vector_add.
+
+4.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_vector_add'.
+Removed a total of 0 cells.
+
+4.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_vector_add..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~38 debug messages>
+
+4.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \fp16_vector_add.
+Performed a total of 0 changes.
+
+4.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_vector_add'.
+Removed a total of 0 cells.
+
+4.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_vector_add..
+
+4.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp16_add.
+Optimizing module fp16_vector_add.
+
+4.8.9. Finished OPT passes. (There is nothing left to do.)
+
+4.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 26 bits (of 32) from port Y of cell fp16_add.$sub$rtl/fp16_add.sv:46$25 ($sub).
+Removed top 26 bits (of 32) from port A of cell fp16_add.$le$rtl/fp16_add.sv:9$26 ($le).
+Removed top 31 bits (of 32) from port B of cell fp16_add.$le$rtl/fp16_add.sv:9$26 ($le).
+Removed top 26 bits (of 32) from port A of cell fp16_add.$ge$rtl/fp16_add.sv:10$29 ($ge).
+Removed top 27 bits (of 32) from port B of cell fp16_add.$ge$rtl/fp16_add.sv:10$29 ($ge).
+Removed top 13 bits (of 14) from port A of cell fp16_add.$shl$rtl/fp16_add.sv:12$33 ($shl).
+Removed top 1 bits (of 15) from port A of cell fp16_add.$add$rtl/fp16_add.sv:51$41 ($add).
+Removed top 1 bits (of 15) from port B of cell fp16_add.$add$rtl/fp16_add.sv:51$41 ($add).
+Removed top 26 bits (of 32) from port A of cell fp16_add.$add$rtl/fp16_add.sv:55$43 ($add).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$add$rtl/fp16_add.sv:55$43 ($add).
+Converting cell fp16_add.$add$rtl/fp16_add.sv:55$43 ($add) from signed to unsigned.
+Removed top 25 bits (of 32) from port Y of cell fp16_add.$add$rtl/fp16_add.sv:55$43 ($add).
+Removed top 1 bits (of 6) from port A of cell fp16_add.$add$rtl/fp16_add.sv:55$43 ($add).
+Removed top 1 bits (of 2) from port B of cell fp16_add.$add$rtl/fp16_add.sv:55$43 ($add).
+Removed top 1 bits (of 7) from port Y of cell fp16_add.$add$rtl/fp16_add.sv:55$43 ($add).
+Removed top 26 bits (of 32) from port A of cell fp16_add.$gt$rtl/fp16_add.sv:61$46 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$46 ($gt).
+Converting cell fp16_add.$gt$rtl/fp16_add.sv:61$46 ($gt) from signed to unsigned.
+Removed top 1 bits (of 6) from port A of cell fp16_add.$gt$rtl/fp16_add.sv:61$46 ($gt).
+Removed top 1 bits (of 2) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$46 ($gt).
+Removed top 26 bits (of 32) from port A of cell fp16_add.$sub$rtl/fp16_add.sv:63$49 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$49 ($sub).
+Converting cell fp16_add.$sub$rtl/fp16_add.sv:63$49 ($sub) from signed to unsigned.
+Removed top 25 bits (of 32) from port Y of cell fp16_add.$sub$rtl/fp16_add.sv:63$49 ($sub).
+Removed top 1 bits (of 6) from port A of cell fp16_add.$sub$rtl/fp16_add.sv:63$49 ($sub).
+Removed top 1 bits (of 2) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$49 ($sub).
+Removed top 1 bits (of 7) from port Y of cell fp16_add.$sub$rtl/fp16_add.sv:63$49 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$51 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$54 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$56 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$59 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$61 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$64 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$66 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$69 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$71 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$74 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$76 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$79 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$81 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$84 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$86 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$89 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$91 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$94 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$96 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$99 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$101 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$104 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$106 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$109 ($sub).
+Removed top 1 bits (of 12) from port A of cell fp16_add.$add$rtl/fp16_add.sv:68$113 ($add).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$add$rtl/fp16_add.sv:71$115 ($add).
+Removed top 26 bits (of 32) from port B of cell fp16_add.$ge$rtl/fp16_add.sv:84$140 ($ge).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$le$rtl/fp16_add.sv:85$141 ($le).
+Removed top 1 bits (of 16) from mux cell fp16_add.$procmux$146 ($mux).
+Removed top 1 bits (of 16) from mux cell fp16_add.$procmux$167 ($mux).
+Removed top 1 bits (of 12) from mux cell fp16_add.$procmux$233 ($mux).
+Removed top 26 bits (of 32) from mux cell fp16_add.$procmux$399 ($mux).
+Removed top 26 bits (of 32) from wire fp16_add.$2\result_exp[31:0].
+Removed top 26 bits (of 32) from wire fp16_add.$add$rtl/fp16_add.sv:55$43_Y.
+Removed top 1 bits (of 12) from wire fp16_add.rounded_sig.
+
+4.10. Executing PEEPOPT pass (run peephole optimizers).
+
+4.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_vector_add..
+Removed 0 unused cells and 3 unused wires.
+<suppressed ~1 debug messages>
+
+4.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module fp16_add:
+  creating $macc model for $add$rtl/fp16_add.sv:51$41 ($add).
+  creating $macc model for $add$rtl/fp16_add.sv:55$43 ($add).
+  creating $macc model for $add$rtl/fp16_add.sv:68$113 ($add).
+  creating $macc model for $add$rtl/fp16_add.sv:71$115 ($add).
+  creating $macc model for $sub$rtl/fp16_add.sv:12$34 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:46$25 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:58$44 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:63$104 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:63$109 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:63$49 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:63$54 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:63$59 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:63$64 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:63$69 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:63$74 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:63$79 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:63$84 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:63$89 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:63$94 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:63$99 ($sub).
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:63$99.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:63$94.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:63$89.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:63$84.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:63$79.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:63$74.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:63$69.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:63$64.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:63$59.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:63$54.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:63$49.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:63$109.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:63$104.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:58$44.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:46$25.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:12$34.
+  creating $alu model for $macc $add$rtl/fp16_add.sv:71$115.
+  creating $alu model for $macc $add$rtl/fp16_add.sv:68$113.
+  creating $alu model for $macc $add$rtl/fp16_add.sv:55$43.
+  creating $alu model for $macc $add$rtl/fp16_add.sv:51$41.
+  creating $alu model for $ge$rtl/fp16_add.sv:10$29 ($ge): new $alu
+  creating $alu model for $ge$rtl/fp16_add.sv:84$140 ($ge): new $alu
+  creating $alu model for $gt$rtl/fp16_add.sv:38$20 ($gt): new $alu
+  creating $alu model for $gt$rtl/fp16_add.sv:61$101 ($gt): merged with $sub$rtl/fp16_add.sv:63$104.
+  creating $alu model for $gt$rtl/fp16_add.sv:61$106 ($gt): merged with $sub$rtl/fp16_add.sv:63$109.
+  creating $alu model for $gt$rtl/fp16_add.sv:61$46 ($gt): merged with $sub$rtl/fp16_add.sv:63$49.
+  creating $alu model for $gt$rtl/fp16_add.sv:61$51 ($gt): merged with $sub$rtl/fp16_add.sv:63$54.
+  creating $alu model for $gt$rtl/fp16_add.sv:61$56 ($gt): merged with $sub$rtl/fp16_add.sv:63$59.
+  creating $alu model for $gt$rtl/fp16_add.sv:61$61 ($gt): merged with $sub$rtl/fp16_add.sv:63$64.
+  creating $alu model for $gt$rtl/fp16_add.sv:61$66 ($gt): merged with $sub$rtl/fp16_add.sv:63$69.
+  creating $alu model for $gt$rtl/fp16_add.sv:61$71 ($gt): merged with $sub$rtl/fp16_add.sv:63$74.
+  creating $alu model for $gt$rtl/fp16_add.sv:61$76 ($gt): merged with $sub$rtl/fp16_add.sv:63$79.
+  creating $alu model for $gt$rtl/fp16_add.sv:61$81 ($gt): merged with $sub$rtl/fp16_add.sv:63$84.
+  creating $alu model for $gt$rtl/fp16_add.sv:61$86 ($gt): merged with $sub$rtl/fp16_add.sv:63$89.
+  creating $alu model for $gt$rtl/fp16_add.sv:61$91 ($gt): merged with $sub$rtl/fp16_add.sv:63$94.
+  creating $alu model for $gt$rtl/fp16_add.sv:61$96 ($gt): merged with $sub$rtl/fp16_add.sv:63$99.
+  creating $alu model for $le$rtl/fp16_add.sv:85$141 ($le): new $alu
+  creating $alu model for $le$rtl/fp16_add.sv:9$26 ($le): new $alu
+  creating $alu cell for $le$rtl/fp16_add.sv:9$26: $auto$alumacc.cc:495:replace_alu$480
+  creating $alu cell for $le$rtl/fp16_add.sv:85$141: $auto$alumacc.cc:495:replace_alu$491
+  creating $alu cell for $gt$rtl/fp16_add.sv:38$20: $auto$alumacc.cc:495:replace_alu$502
+  creating $alu cell for $ge$rtl/fp16_add.sv:84$140: $auto$alumacc.cc:495:replace_alu$513
+  creating $alu cell for $ge$rtl/fp16_add.sv:10$29: $auto$alumacc.cc:495:replace_alu$528
+  creating $alu cell for $add$rtl/fp16_add.sv:51$41: $auto$alumacc.cc:495:replace_alu$543
+  creating $alu cell for $add$rtl/fp16_add.sv:55$43: $auto$alumacc.cc:495:replace_alu$546
+  creating $alu cell for $add$rtl/fp16_add.sv:68$113: $auto$alumacc.cc:495:replace_alu$549
+  creating $alu cell for $add$rtl/fp16_add.sv:71$115: $auto$alumacc.cc:495:replace_alu$552
+  creating $alu cell for $sub$rtl/fp16_add.sv:12$34: $auto$alumacc.cc:495:replace_alu$555
+  creating $alu cell for $sub$rtl/fp16_add.sv:46$25: $auto$alumacc.cc:495:replace_alu$558
+  creating $alu cell for $sub$rtl/fp16_add.sv:58$44: $auto$alumacc.cc:495:replace_alu$561
+  creating $alu cell for $sub$rtl/fp16_add.sv:63$104, $gt$rtl/fp16_add.sv:61$101: $auto$alumacc.cc:495:replace_alu$564
+  creating $alu cell for $sub$rtl/fp16_add.sv:63$109, $gt$rtl/fp16_add.sv:61$106: $auto$alumacc.cc:495:replace_alu$577
+  creating $alu cell for $sub$rtl/fp16_add.sv:63$49, $gt$rtl/fp16_add.sv:61$46: $auto$alumacc.cc:495:replace_alu$590
+  creating $alu cell for $sub$rtl/fp16_add.sv:63$54, $gt$rtl/fp16_add.sv:61$51: $auto$alumacc.cc:495:replace_alu$601
+  creating $alu cell for $sub$rtl/fp16_add.sv:63$59, $gt$rtl/fp16_add.sv:61$56: $auto$alumacc.cc:495:replace_alu$614
+  creating $alu cell for $sub$rtl/fp16_add.sv:63$64, $gt$rtl/fp16_add.sv:61$61: $auto$alumacc.cc:495:replace_alu$627
+  creating $alu cell for $sub$rtl/fp16_add.sv:63$69, $gt$rtl/fp16_add.sv:61$66: $auto$alumacc.cc:495:replace_alu$640
+  creating $alu cell for $sub$rtl/fp16_add.sv:63$74, $gt$rtl/fp16_add.sv:61$71: $auto$alumacc.cc:495:replace_alu$653
+  creating $alu cell for $sub$rtl/fp16_add.sv:63$79, $gt$rtl/fp16_add.sv:61$76: $auto$alumacc.cc:495:replace_alu$666
+  creating $alu cell for $sub$rtl/fp16_add.sv:63$84, $gt$rtl/fp16_add.sv:61$81: $auto$alumacc.cc:495:replace_alu$679
+  creating $alu cell for $sub$rtl/fp16_add.sv:63$89, $gt$rtl/fp16_add.sv:61$86: $auto$alumacc.cc:495:replace_alu$692
+  creating $alu cell for $sub$rtl/fp16_add.sv:63$94, $gt$rtl/fp16_add.sv:61$91: $auto$alumacc.cc:495:replace_alu$705
+  creating $alu cell for $sub$rtl/fp16_add.sv:63$99, $gt$rtl/fp16_add.sv:61$96: $auto$alumacc.cc:495:replace_alu$718
+  created 25 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module fp16_vector_add:
+  created 0 $alu and 0 $macc cells.
+
+4.13. Executing SHARE pass (SAT-based resource sharing).
+Found 2 cells in module fp16_add that may be considered for resource sharing.
+  Analyzing resource sharing options for $shr$rtl/fp16_add.sv:13$37 ($shr):
+    Found 4 activation_patterns using ctrl signal { $auto$rtlil.cc:2783:ReduceOr$527 $auto$rtlil.cc:2783:ReduceOr$542 $auto$rtlil.cc:2783:ReduceOr$490 $logic_and$rtl/fp16_add.sv:85$143_Y $eq$rtl/fp16_add.sv:83$139_Y $logic_and$rtl/fp16_add.sv:80$137_Y $logic_or$rtl/fp16_add.sv:74$128_Y $eq$rtl/fp16_add.sv:75$119_Y $eq$rtl/fp16_add.sv:74$116_Y }.
+    No candidates found.
+  Analyzing resource sharing options for $shl$rtl/fp16_add.sv:12$33 ($shl):
+    Found 4 activation_patterns using ctrl signal { $auto$rtlil.cc:2783:ReduceOr$527 $auto$rtlil.cc:2783:ReduceOr$542 $auto$rtlil.cc:2783:ReduceOr$490 $logic_and$rtl/fp16_add.sv:85$143_Y $eq$rtl/fp16_add.sv:83$139_Y $logic_and$rtl/fp16_add.sv:80$137_Y $logic_or$rtl/fp16_add.sv:74$128_Y $eq$rtl/fp16_add.sv:75$119_Y $eq$rtl/fp16_add.sv:74$116_Y }.
+    No candidates found.
+
+4.14. Executing OPT pass (performing simple optimizations).
+
+4.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp16_add.
+<suppressed ~9 debug messages>
+Optimizing module fp16_vector_add.
+
+4.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_vector_add'.
+Removed a total of 0 cells.
+
+4.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_vector_add..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~38 debug messages>
+
+4.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \fp16_vector_add.
+Performed a total of 0 changes.
+
+4.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_vector_add'.
+Removed a total of 0 cells.
+
+4.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_vector_add..
+Removed 1 unused cells and 24 unused wires.
+<suppressed ~3 debug messages>
+
+4.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp16_add.
+Optimizing module fp16_vector_add.
+
+4.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_vector_add..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~38 debug messages>
+
+4.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \fp16_vector_add.
+Performed a total of 0 changes.
+
+4.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_vector_add'.
+Removed a total of 0 cells.
+
+4.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_vector_add..
+
+4.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp16_add.
+Optimizing module fp16_vector_add.
+
+4.14.16. Finished OPT passes. (There is nothing left to do.)
+
+4.15. Executing MEMORY pass.
+
+4.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+4.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+4.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+4.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+4.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+4.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_vector_add..
+
+4.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+4.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+4.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_vector_add..
+
+4.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+4.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_vector_add..
+
+4.17. Executing OPT pass (performing simple optimizations).
+
+4.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp16_add.
+<suppressed ~35 debug messages>
+Optimizing module fp16_vector_add.
+
+4.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_vector_add'.
+Removed a total of 0 cells.
+
+4.17.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_vector_add..
+Removed 0 unused cells and 27 unused wires.
+<suppressed ~1 debug messages>
+
+4.17.5. Finished fast OPT passes.
+
+4.18. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+4.19. Executing OPT pass (performing simple optimizations).
+
+4.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp16_add.
+Optimizing module fp16_vector_add.
+
+4.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_vector_add'.
+Removed a total of 0 cells.
+
+4.19.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_vector_add..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~38 debug messages>
+
+4.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fp16_add.
+    Consolidated identical input bits for $mux cell $procmux$146:
+      Old ports: A={ \result_exp [4:0] \rounded_sig [9:0] }, B={ 5'00000 \rounded_sig [9:0] }, Y=$7\result_o[15:0] [14:0]
+      New ports: A=\result_exp [4:0], B=5'00000, Y=$7\result_o[15:0] [14:10]
+      New connections: $7\result_o[15:0] [9:0] = \rounded_sig [9:0]
+    Consolidated identical input bits for $mux cell $procmux$380:
+      Old ports: A={ 27'000000000000000000000000000 \large_exp }, B={ $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [4:0] }, Y=$3\result_exp[31:0]
+      New ports: A={ 1'0 \large_exp }, B={ $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [4:0] }, Y=$3\result_exp[31:0] [5:0]
+      New connections: $3\result_exp[31:0] [31:6] = { $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] }
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \fp16_vector_add.
+Performed a total of 2 changes.
+
+4.19.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_vector_add'.
+Removed a total of 0 cells.
+
+4.19.6. Executing OPT_SHARE pass.
+
+4.19.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.19.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_vector_add..
+
+4.19.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp16_add.
+Optimizing module fp16_vector_add.
+
+4.19.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.19.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_vector_add..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~38 debug messages>
+
+4.19.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \fp16_vector_add.
+Performed a total of 0 changes.
+
+4.19.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_vector_add'.
+Removed a total of 0 cells.
+
+4.19.14. Executing OPT_SHARE pass.
+
+4.19.15. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.19.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_vector_add..
+
+4.19.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp16_add.
+Optimizing module fp16_vector_add.
+
+4.19.18. Finished OPT passes. (There is nothing left to do.)
+
+4.20. Executing TECHMAP pass (map to technology primitives).
+
+4.20.1. Executing Verilog-2005 frontend: /home/chandler/.local/yosys/usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/home/chandler/.local/yosys/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+4.20.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $or.
+Using template $paramod$1e402e64350f17d7d96d4d19397585e7730f3657\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $reduce_and.
+Using template $paramod$091610cd349a68bd5539cffd7126f0d76e9bca00\_90_alu for cells of type $alu.
+Using template $paramod$050f15daba5036a0512adf25d3c6631f629623f7\_90_alu for cells of type $alu.
+Using template $paramod$546f3f62de618651dd3a8b3f9e661fb34b30a603\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $reduce_or.
+Using template $paramod$719aadea7a94d31a13cd25a777432aacb0e462b5\_90_alu for cells of type $alu.
+Using template $paramod$constmap:84ecb1fe6cf6c7774af1e6015b4db447afa6c0b1$paramod$419a913ed38c2513939b18df9044de3e442bc66c\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shl.
+Using template $paramod$constmap:b99037b5251b430096ae8426664393d6ae79f5d4$paramod$10d34890fc0a590416fb0bd5f2405603d3bc2a8b\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shr.
+Using extmapper simplemap for cells of type $eq.
+Using template $paramod$5e23d2e0f07f5403e3d2c5b606bab0c16e4174c1\_90_alu for cells of type $alu.
+Using template $paramod$92a1f7a016bf58d33db5a47145e66dde1cbc3210\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $not.
+Using template $paramod$332fab4e157f868977379756d21fa99887c3c6c4\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $logic_or.
+Using template $paramod$6412f7f13655de512a17af2c71a87b50b4a57324\_90_alu for cells of type $alu.
+Using template $paramod$1ed7ec530b1ba361931392f2f8504f82ccdfecaa\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $ne.
+Using extmapper simplemap for cells of type $and.
+Using template $paramod$15650b5f68527c2737f08685d9884042e045002a\_90_alu for cells of type $alu.
+Using template $paramod$6df0329addda9228fcc2546de2aaf14ad26c98e1\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001110 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001100 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000110 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000101 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000010000 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~4527 debug messages>
+
+4.21. Executing OPT pass (performing simple optimizations).
+
+4.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp16_add.
+<suppressed ~2525 debug messages>
+Optimizing module fp16_vector_add.
+
+4.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp16_add'.
+<suppressed ~1779 debug messages>
+Finding identical cells in module `\fp16_vector_add'.
+Removed a total of 593 cells.
+
+4.21.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_vector_add..
+Removed 264 unused cells and 1851 unused wires.
+<suppressed ~265 debug messages>
+
+4.21.5. Finished fast OPT passes.
+
+4.22. Executing ABC pass (technology mapping using ABC).
+
+4.22.1. Extracting gate netlist of module `\fp16_add' to `<abc-temp-dir>/input.blif'..
+Extracted 4245 gates and 4279 wires to a netlist network with 32 inputs and 16 outputs.
+
+4.22.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+4.22.1.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       77
+ABC RESULTS:            ANDNOT cells:     1194
+ABC RESULTS:               MUX cells:      692
+ABC RESULTS:              NAND cells:       45
+ABC RESULTS:               NOR cells:      200
+ABC RESULTS:               NOT cells:      204
+ABC RESULTS:                OR cells:      315
+ABC RESULTS:             ORNOT cells:      187
+ABC RESULTS:              XNOR cells:      150
+ABC RESULTS:               XOR cells:      358
+ABC RESULTS:        internal signals:     4231
+ABC RESULTS:           input signals:       32
+ABC RESULTS:          output signals:       16
+Removing temp directory.
+
+4.22.2. Extracting gate netlist of module `\fp16_vector_add' to `<abc-temp-dir>/input.blif'..
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Don't call ABC as there is nothing to map.
+Removing temp directory.
+
+4.23. Executing OPT pass (performing simple optimizations).
+
+4.23.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp16_add.
+<suppressed ~10 debug messages>
+Optimizing module fp16_vector_add.
+
+4.23.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp16_add'.
+<suppressed ~588 debug messages>
+Finding identical cells in module `\fp16_vector_add'.
+Removed a total of 196 cells.
+
+4.23.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.23.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_vector_add..
+Removed 0 unused cells and 1787 unused wires.
+<suppressed ~12 debug messages>
+
+4.23.5. Finished fast OPT passes.
+
+4.24. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `fp16_vector_add'. Setting top module to fp16_vector_add.
+
+4.24.1. Analyzing design hierarchy..
+Top module:  \fp16_vector_add
+Used module:     \fp16_add
+
+4.24.2. Analyzing design hierarchy..
+Top module:  \fp16_vector_add
+Used module:     \fp16_add
+Removed 0 unused modules.
+
+4.25. Printing statistics.
+
+=== fp16_add ===
+
+   Number of wires:               3227
+   Number of wire bits:           3416
+   Number of public wires:          17
+   Number of public wire bits:     206
+   Number of ports:                  3
+   Number of port bits:             48
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               3226
+     $_ANDNOT_                    1082
+     $_AND_                         70
+     $_MUX_                        678
+     $_NAND_                        45
+     $_NOR_                        200
+     $_NOT_                        196
+     $_ORNOT_                      182
+     $_OR_                         287
+     $_XNOR_                       141
+     $_XOR_                        345
+
+=== fp16_vector_add ===
+
+   Number of wires:                  3
+   Number of wire bits:             48
+   Number of public wires:           3
+   Number of public wire bits:      48
+   Number of ports:                  3
+   Number of port bits:             48
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  1
+     fp16_add                        1
+
+=== design hierarchy ===
+
+   fp16_vector_add                   1
+     fp16_add                        1
+
+   Number of wires:               3230
+   Number of wire bits:           3464
+   Number of public wires:          20
+   Number of public wire bits:     254
+   Number of ports:                  6
+   Number of port bits:             96
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               3226
+     $_ANDNOT_                    1082
+     $_AND_                         70
+     $_MUX_                        678
+     $_NAND_                        45
+     $_NOR_                        200
+     $_NOT_                        196
+     $_ORNOT_                      182
+     $_OR_                         287
+     $_XNOR_                       141
+     $_XOR_                        345
+
+4.26. Executing CHECK pass (checking for obvious problems).
+Checking module fp16_add...
+Checking module fp16_vector_add...
+Found and reported 0 problems.
+
+5. Executing FLATTEN pass (flatten design).
+Deleting now unused module fp16_add.
+<suppressed ~1 debug messages>
+
+6. Executing OPT pass (performing simple optimizations).
+
+6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp16_vector_add.
+
+6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp16_vector_add'.
+Removed a total of 0 cells.
+
+6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fp16_vector_add..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fp16_vector_add.
+Performed a total of 0 changes.
+
+6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp16_vector_add'.
+Removed a total of 0 cells.
+
+6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp16_vector_add..
+
+6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp16_vector_add.
+
+6.9. Finished OPT passes. (There is nothing left to do.)
+
+7. Printing statistics.
+
+=== fp16_vector_add ===
+
+   Number of wires:               3230
+   Number of wire bits:           3464
+   Number of public wires:          20
+   Number of public wire bits:     254
+   Number of ports:                  3
+   Number of port bits:             48
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               3227
+     $_ANDNOT_                    1082
+     $_AND_                         70
+     $_MUX_                        678
+     $_NAND_                        45
+     $_NOR_                        200
+     $_NOT_                        196
+     $_ORNOT_                      182
+     $_OR_                         287
+     $_XNOR_                       141
+     $_XOR_                        345
+     $scopeinfo                      1
+
+8. Executing LTP pass (find longest path).
+
+Longest topological path in fp16_vector_add (length=232):
+    0: \rhs_i [13]
+    1: $flatten\g_lane[0].adder.$abc$9831$new_n50 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$9833)
+    2: $flatten\g_lane[0].adder.$abc$9831$new_n51 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$9834)
+    3: $flatten\g_lane[0].adder.$abc$9831$new_n57 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$9840)
+    4: $flatten\g_lane[0].adder.$abc$9831$new_n81 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$9864)
+    5: $flatten\g_lane[0].adder.$abc$9831$new_n84 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$9867)
+    6: $flatten\g_lane[0].adder.$abc$9831$new_n89 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$9872)
+    7: $flatten\g_lane[0].adder.$abc$9831$new_n95 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$9878)
+    8: $flatten\g_lane[0].adder.$abc$9831$new_n96 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$9879)
+    9: $flatten\g_lane[0].adder.$abc$9831$new_n97 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$9880)
+   10: $flatten\g_lane[0].adder.$abc$9831$new_n98 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$9881)
+   11: $flatten\g_lane[0].adder.$abc$9831$new_n137 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$9920)
+   12: $flatten\g_lane[0].adder.$abc$9831$new_n143 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$9926)
+   13: $flatten\g_lane[0].adder.$abc$9831$new_n171 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$9954)
+   14: $flatten\g_lane[0].adder.$abc$9831$new_n172 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$9955)
+   15: $flatten\g_lane[0].adder.$abc$9831$new_n173 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$9956)
+   16: $flatten\g_lane[0].adder.$abc$9831$new_n174 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$9957)
+   17: $flatten\g_lane[0].adder.$abc$9831$new_n175 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$9958)
+   18: $flatten\g_lane[0].adder.$abc$9831$new_n176 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$9959)
+   19: $flatten\g_lane[0].adder.$abc$9831$new_n177 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$9960)
+   20: $flatten\g_lane[0].adder.$abc$9831$new_n178 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$9961)
+   21: $flatten\g_lane[0].adder.$abc$9831$new_n441 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10224)
+   22: $flatten\g_lane[0].adder.$abc$9831$new_n450 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10233)
+   23: $flatten\g_lane[0].adder.$abc$9831$new_n451 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10234)
+   24: $flatten\g_lane[0].adder.$abc$9831$new_n452 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10235)
+   25: $flatten\g_lane[0].adder.$abc$9831$new_n453 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10236)
+   26: $flatten\g_lane[0].adder.$abc$9831$new_n454 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10237)
+   27: $flatten\g_lane[0].adder.$abc$9831$new_n463 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10246)
+   28: $flatten\g_lane[0].adder.$abc$9831$new_n464 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10247)
+   29: $flatten\g_lane[0].adder.$abc$9831$new_n499 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10282)
+   30: $flatten\g_lane[0].adder.$abc$9831$new_n500 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10283)
+   31: $flatten\g_lane[0].adder.$abc$9831$new_n513 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10296)
+   32: $flatten\g_lane[0].adder.$abc$9831$new_n514 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10297)
+   33: $flatten\g_lane[0].adder.$abc$9831$new_n522 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10305)
+   34: $flatten\g_lane[0].adder.$abc$9831$new_n523 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10306)
+   35: $flatten\g_lane[0].adder.$abc$9831$new_n524 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10307)
+   36: $flatten\g_lane[0].adder.$abc$9831$new_n536 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10319)
+   37: $flatten\g_lane[0].adder.$abc$9831$new_n542 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10325)
+   38: $flatten\g_lane[0].adder.$abc$9831$new_n543 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10326)
+   39: $flatten\g_lane[0].adder.$abc$9831$new_n544 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10327)
+   40: $flatten\g_lane[0].adder.$abc$9831$new_n555 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10338)
+   41: $flatten\g_lane[0].adder.$abc$9831$new_n556 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10339)
+   42: $flatten\g_lane[0].adder.$abc$9831$new_n557 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10340)
+   43: $flatten\g_lane[0].adder.$abc$9831$new_n566 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10349)
+   44: $flatten\g_lane[0].adder.$abc$9831$new_n567 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10350)
+   45: $flatten\g_lane[0].adder.$abc$9831$new_n568 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10351)
+   46: $flatten\g_lane[0].adder.$abc$9831$new_n569 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10352)
+   47: $flatten\g_lane[0].adder.$abc$9831$new_n570 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10353)
+   48: $flatten\g_lane[0].adder.$abc$9831$new_n571 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10354)
+   49: $flatten\g_lane[0].adder.$abc$9831$new_n572 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10355)
+   50: $flatten\g_lane[0].adder.$abc$9831$new_n573 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10356)
+   51: $flatten\g_lane[0].adder.$abc$9831$new_n574 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10357)
+   52: $flatten\g_lane[0].adder.$abc$9831$new_n586 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10369)
+   53: $flatten\g_lane[0].adder.$abc$9831$new_n609 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10392)
+   54: $flatten\g_lane[0].adder.$abc$9831$new_n610 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10393)
+   55: $flatten\g_lane[0].adder.$abc$9831$new_n611 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10394)
+   56: $flatten\g_lane[0].adder.$abc$9831$new_n612 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10395)
+   57: $flatten\g_lane[0].adder.$abc$9831$new_n613 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10396)
+   58: $flatten\g_lane[0].adder.$abc$9831$new_n614 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10397)
+   59: $flatten\g_lane[0].adder.$abc$9831$new_n615 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10398)
+   60: $flatten\g_lane[0].adder.$abc$9831$new_n620 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10403)
+   61: $flatten\g_lane[0].adder.$abc$9831$new_n621 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10404)
+   62: $flatten\g_lane[0].adder.$abc$9831$new_n670 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10451)
+   63: $flatten\g_lane[0].adder.$abc$9831$new_n671 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10452)
+   64: $flatten\g_lane[0].adder.$abc$9831$new_n672 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10453)
+   65: $flatten\g_lane[0].adder.$abc$9831$new_n673 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10454)
+   66: $flatten\g_lane[0].adder.$abc$9831$new_n674 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10455)
+   67: $flatten\g_lane[0].adder.$abc$9831$new_n675 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10456)
+   68: $flatten\g_lane[0].adder.$abc$9831$new_n676 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10457)
+   69: $flatten\g_lane[0].adder.$abc$9831$new_n677 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10458)
+   70: $flatten\g_lane[0].adder.$abc$9831$new_n678 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10459)
+   71: $flatten\g_lane[0].adder.$abc$9831$new_n679 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10460)
+   72: $flatten\g_lane[0].adder.$abc$9831$new_n694 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10475)
+   73: $flatten\g_lane[0].adder.$abc$9831$new_n700 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10481)
+   74: $flatten\g_lane[0].adder.$abc$9831$new_n701 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10482)
+   75: $flatten\g_lane[0].adder.$abc$9831$new_n891 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10672)
+   76: $flatten\g_lane[0].adder.$abc$9831$new_n892 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10673)
+   77: $flatten\g_lane[0].adder.$abc$9831$new_n893 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10674)
+   78: $flatten\g_lane[0].adder.$abc$9831$new_n894 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10675)
+   79: $flatten\g_lane[0].adder.$abc$9831$new_n895 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10676)
+   80: $flatten\g_lane[0].adder.$abc$9831$new_n896 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10677)
+   81: $flatten\g_lane[0].adder.$abc$9831$new_n897 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10678)
+   82: $flatten\g_lane[0].adder.$abc$9831$new_n898 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10679)
+   83: $flatten\g_lane[0].adder.$abc$9831$new_n901 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10682)
+   84: $flatten\g_lane[0].adder.$abc$9831$new_n902 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10683)
+   85: $flatten\g_lane[0].adder.$abc$9831$new_n903 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10684)
+   86: $flatten\g_lane[0].adder.$abc$9831$new_n904 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10685)
+   87: $flatten\g_lane[0].adder.$abc$9831$new_n905 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10686)
+   88: $flatten\g_lane[0].adder.$abc$9831$new_n906 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10687)
+   89: $flatten\g_lane[0].adder.$abc$9831$new_n907 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10688)
+   90: $flatten\g_lane[0].adder.$abc$9831$new_n923 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10704)
+   91: $flatten\g_lane[0].adder.$abc$9831$new_n924 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10705)
+   92: $flatten\g_lane[0].adder.$abc$9831$new_n927 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10708)
+   93: $flatten\g_lane[0].adder.$abc$9831$new_n938 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10719)
+   94: $flatten\g_lane[0].adder.$abc$9831$new_n960 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10741)
+   95: $flatten\g_lane[0].adder.$abc$9831$new_n1007 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10788)
+   96: $flatten\g_lane[0].adder.$abc$9831$new_n1096 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10877)
+   97: $flatten\g_lane[0].adder.$abc$9831$new_n1097 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10878)
+   98: $flatten\g_lane[0].adder.$abc$9831$new_n1105 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10886)
+   99: $flatten\g_lane[0].adder.$abc$9831$new_n1111 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10892)
+  100: $flatten\g_lane[0].adder.$abc$9831$new_n1112 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$10893)
+  101: $flatten\g_lane[0].adder.$abc$9831$new_n1284 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11065)
+  102: $flatten\g_lane[0].adder.$abc$9831$new_n1285 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11066)
+  103: $flatten\g_lane[0].adder.$abc$9831$new_n1286 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11067)
+  104: $flatten\g_lane[0].adder.$abc$9831$new_n1287 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11068)
+  105: $flatten\g_lane[0].adder.$abc$9831$new_n1288 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11069)
+  106: $flatten\g_lane[0].adder.$abc$9831$new_n1289 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11070)
+  107: $flatten\g_lane[0].adder.$abc$9831$new_n1290 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11071)
+  108: $flatten\g_lane[0].adder.$abc$9831$new_n1291 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11072)
+  109: $flatten\g_lane[0].adder.$abc$9831$new_n1294 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11075)
+  110: $flatten\g_lane[0].adder.$abc$9831$new_n1295 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11076)
+  111: $flatten\g_lane[0].adder.$abc$9831$new_n1296 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11077)
+  112: $flatten\g_lane[0].adder.$abc$9831$new_n1297 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11078)
+  113: $flatten\g_lane[0].adder.$abc$9831$new_n1298 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11079)
+  114: $flatten\g_lane[0].adder.$abc$9831$new_n1299 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11080)
+  115: $flatten\g_lane[0].adder.$abc$9831$new_n1300 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11081)
+  116: $flatten\g_lane[0].adder.$abc$9831$new_n1320 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11101)
+  117: $flatten\g_lane[0].adder.$abc$9831$new_n1321 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11102)
+  118: $flatten\g_lane[0].adder.$abc$9831$new_n1324 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11105)
+  119: $flatten\g_lane[0].adder.$abc$9831$new_n1335 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11116)
+  120: $flatten\g_lane[0].adder.$abc$9831$new_n1357 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11138)
+  121: $flatten\g_lane[0].adder.$abc$9831$new_n1404 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11185)
+  122: $flatten\g_lane[0].adder.$abc$9831$new_n1495 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11276)
+  123: $flatten\g_lane[0].adder.$abc$9831$new_n1496 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11277)
+  124: $flatten\g_lane[0].adder.$abc$9831$new_n1504 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11285)
+  125: $flatten\g_lane[0].adder.$abc$9831$new_n1510 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11291)
+  126: $flatten\g_lane[0].adder.$abc$9831$new_n1511 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11292)
+  127: $flatten\g_lane[0].adder.$abc$9831$new_n1689 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11470)
+  128: $flatten\g_lane[0].adder.$abc$9831$new_n1690 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11471)
+  129: $flatten\g_lane[0].adder.$abc$9831$new_n1691 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11472)
+  130: $flatten\g_lane[0].adder.$abc$9831$new_n1692 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11473)
+  131: $flatten\g_lane[0].adder.$abc$9831$new_n1693 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11474)
+  132: $flatten\g_lane[0].adder.$abc$9831$new_n1694 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11475)
+  133: $flatten\g_lane[0].adder.$abc$9831$new_n1695 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11476)
+  134: $flatten\g_lane[0].adder.$abc$9831$new_n1696 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11477)
+  135: $flatten\g_lane[0].adder.$abc$9831$new_n1699 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11480)
+  136: $flatten\g_lane[0].adder.$abc$9831$new_n1700 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11481)
+  137: $flatten\g_lane[0].adder.$abc$9831$new_n1701 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11482)
+  138: $flatten\g_lane[0].adder.$abc$9831$new_n1702 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11483)
+  139: $flatten\g_lane[0].adder.$abc$9831$new_n1703 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11484)
+  140: $flatten\g_lane[0].adder.$abc$9831$new_n1704 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11485)
+  141: $flatten\g_lane[0].adder.$abc$9831$new_n1705 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11486)
+  142: $flatten\g_lane[0].adder.$abc$9831$new_n1725 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11506)
+  143: $flatten\g_lane[0].adder.$abc$9831$new_n1726 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11507)
+  144: $flatten\g_lane[0].adder.$abc$9831$new_n1729 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11510)
+  145: $flatten\g_lane[0].adder.$abc$9831$new_n1740 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11521)
+  146: $flatten\g_lane[0].adder.$abc$9831$new_n1762 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11543)
+  147: $flatten\g_lane[0].adder.$abc$9831$new_n1811 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11592)
+  148: $flatten\g_lane[0].adder.$abc$9831$new_n1902 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11683)
+  149: $flatten\g_lane[0].adder.$abc$9831$new_n1903 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11684)
+  150: $flatten\g_lane[0].adder.$abc$9831$new_n1911 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11692)
+  151: $flatten\g_lane[0].adder.$abc$9831$new_n1917 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11698)
+  152: $flatten\g_lane[0].adder.$abc$9831$new_n1918 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11699)
+  153: $flatten\g_lane[0].adder.$abc$9831$new_n2098 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11879)
+  154: $flatten\g_lane[0].adder.$abc$9831$new_n2099 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11880)
+  155: $flatten\g_lane[0].adder.$abc$9831$new_n2100 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11881)
+  156: $flatten\g_lane[0].adder.$abc$9831$new_n2101 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11882)
+  157: $flatten\g_lane[0].adder.$abc$9831$new_n2102 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11883)
+  158: $flatten\g_lane[0].adder.$abc$9831$new_n2103 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11884)
+  159: $flatten\g_lane[0].adder.$abc$9831$new_n2104 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11885)
+  160: $flatten\g_lane[0].adder.$abc$9831$new_n2105 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11886)
+  161: $flatten\g_lane[0].adder.$abc$9831$new_n2108 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11889)
+  162: $flatten\g_lane[0].adder.$abc$9831$new_n2109 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11890)
+  163: $flatten\g_lane[0].adder.$abc$9831$new_n2110 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11891)
+  164: $flatten\g_lane[0].adder.$abc$9831$new_n2111 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11892)
+  165: $flatten\g_lane[0].adder.$abc$9831$new_n2112 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11893)
+  166: $flatten\g_lane[0].adder.$abc$9831$new_n2113 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11894)
+  167: $flatten\g_lane[0].adder.$abc$9831$new_n2114 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11895)
+  168: $flatten\g_lane[0].adder.$abc$9831$new_n2135 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11916)
+  169: $flatten\g_lane[0].adder.$abc$9831$new_n2136 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11917)
+  170: $flatten\g_lane[0].adder.$abc$9831$new_n2139 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11920)
+  171: $flatten\g_lane[0].adder.$abc$9831$new_n2150 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11931)
+  172: $flatten\g_lane[0].adder.$abc$9831$new_n2172 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$11953)
+  173: $flatten\g_lane[0].adder.$abc$9831$new_n2221 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12002)
+  174: $flatten\g_lane[0].adder.$abc$9831$new_n2312 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12093)
+  175: $flatten\g_lane[0].adder.$abc$9831$new_n2313 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12094)
+  176: $flatten\g_lane[0].adder.$abc$9831$new_n2321 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12102)
+  177: $flatten\g_lane[0].adder.$abc$9831$new_n2327 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12108)
+  178: $flatten\g_lane[0].adder.$abc$9831$new_n2328 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12109)
+  179: $flatten\g_lane[0].adder.$abc$9831$new_n2510 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12291)
+  180: $flatten\g_lane[0].adder.$abc$9831$new_n2511 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12292)
+  181: $flatten\g_lane[0].adder.$abc$9831$new_n2512 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12293)
+  182: $flatten\g_lane[0].adder.$abc$9831$new_n2513 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12294)
+  183: $flatten\g_lane[0].adder.$abc$9831$new_n2514 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12295)
+  184: $flatten\g_lane[0].adder.$abc$9831$new_n2515 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12296)
+  185: $flatten\g_lane[0].adder.$abc$9831$new_n2516 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12297)
+  186: $flatten\g_lane[0].adder.$abc$9831$new_n2517 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12298)
+  187: $flatten\g_lane[0].adder.$abc$9831$new_n2520 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12301)
+  188: $flatten\g_lane[0].adder.$abc$9831$new_n2521 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12302)
+  189: $flatten\g_lane[0].adder.$abc$9831$new_n2522 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12303)
+  190: $flatten\g_lane[0].adder.$abc$9831$new_n2523 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12304)
+  191: $flatten\g_lane[0].adder.$abc$9831$new_n2524 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12305)
+  192: $flatten\g_lane[0].adder.$abc$9831$new_n2525 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12306)
+  193: $flatten\g_lane[0].adder.$abc$9831$new_n2526 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12307)
+  194: $flatten\g_lane[0].adder.$abc$9831$new_n2548 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12329)
+  195: $flatten\g_lane[0].adder.$abc$9831$new_n2549 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12330)
+  196: $flatten\g_lane[0].adder.$abc$9831$new_n2552 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12333)
+  197: $flatten\g_lane[0].adder.$abc$9831$new_n2564 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12345)
+  198: $flatten\g_lane[0].adder.$abc$9831$new_n2586 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12367)
+  199: $flatten\g_lane[0].adder.$abc$9831$new_n2634 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12415)
+  200: $flatten\g_lane[0].adder.$abc$9831$new_n2721 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12502)
+  201: $flatten\g_lane[0].adder.$abc$9831$new_n2722 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12503)
+  202: $flatten\g_lane[0].adder.$abc$9831$new_n2730 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12511)
+  203: $flatten\g_lane[0].adder.$abc$9831$new_n2736 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12517)
+  204: $flatten\g_lane[0].adder.$abc$9831$new_n2737 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12518)
+  205: $flatten\g_lane[0].adder.$abc$9831$new_n3040 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12821)
+  206: $flatten\g_lane[0].adder.$abc$9831$new_n3041 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12822)
+  207: $flatten\g_lane[0].adder.$abc$9831$new_n3042 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12823)
+  208: $flatten\g_lane[0].adder.$abc$9831$new_n3043 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12824)
+  209: $flatten\g_lane[0].adder.$abc$9831$new_n3158 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12939)
+  210: $flatten\g_lane[0].adder.$abc$9831$new_n3159 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12940)
+  211: $flatten\g_lane[0].adder.$abc$9831$new_n3212 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12993)
+  212: $flatten\g_lane[0].adder.$abc$9831$new_n3213 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12994)
+  213: $flatten\g_lane[0].adder.$abc$9831$new_n3214 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12995)
+  214: $flatten\g_lane[0].adder.$abc$9831$new_n3215 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12996)
+  215: $flatten\g_lane[0].adder.$abc$9831$new_n3218 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$12999)
+  216: $flatten\g_lane[0].adder.$abc$9831$new_n3246 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$13027)
+  217: $flatten\g_lane[0].adder.$abc$9831$new_n3247 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$13028)
+  218: $flatten\g_lane[0].adder.$abc$9831$new_n3248 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$13029)
+  219: $flatten\g_lane[0].adder.$abc$9831$new_n3249 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$13030)
+  220: $flatten\g_lane[0].adder.$abc$9831$new_n3250 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$13031)
+  221: $flatten\g_lane[0].adder.$abc$9831$new_n3251 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$13032)
+  222: $flatten\g_lane[0].adder.$abc$9831$new_n3429 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$13200)
+  223: $flatten\g_lane[0].adder.$abc$9831$new_n3437 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$13201)
+  224: $flatten\g_lane[0].adder.$abc$9831$new_n3443 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$13207)
+  225: $flatten\g_lane[0].adder.$abc$9831$new_n3445 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$13209)
+  226: $flatten\g_lane[0].adder.$abc$9831$new_n3474 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$13238)
+  227: $flatten\g_lane[0].adder.$abc$9831$new_n3475 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$13239)
+  228: $flatten\g_lane[0].adder.$abc$9831$new_n3476 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$13240)
+  229: $flatten\g_lane[0].adder.$abc$9831$new_n3477 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$13241)
+  230: $flatten\g_lane[0].adder.$abc$9831$new_n3478 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$13242)
+  231: $flatten\g_lane[0].adder.$abc$9831$new_n3479 (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$13243)
+  232: \g_lane[0].adder.result_o [14] (via $flatten\g_lane[0].adder.$abc$9831$auto$blifparse.cc:396:parse_blif$13244)
+
+End of script. Logfile hash: 523d47c5ea, CPU: user 0.65s system 0.06s, MEM: 41.98 MB peak
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+Time spent: 38% 1x abc (0 sec), 14% 34x opt_expr (0 sec), ...

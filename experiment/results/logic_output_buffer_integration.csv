@@ -1,0 +1,4 @@
+test,capacity,outputs_checked,tile_reservations,tile_retirements,full_stalls,peak_entries,total_cycle,result
+unit_complete_and_retire,2,NA,2,2,0,2,NA,PASS
+unit_backpressure,2,NA,2,0,1,2,NA,PASS
+actual_uib,2,18816,392,392,0,1,247342,PASS

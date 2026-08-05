@@ -1,0 +1,7 @@
+scons: Reading SConscript files ...
+running with -j 4
+scons: done reading SConscript files.
+scons: Building targets ...
+g++ -o bin/tests/MobileNetV4WorkloadTestCases.o -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/tests/MobileNetV4WorkloadTestCases.cpp
+g++ -o sim -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare bin/AddressMapping.o bin/Bank.o bin/BankState.o bin/BusPacket.o bin/ClockDomain.o bin/CommandQueue.o bin/FP16.o bin/MemoryController.o bin/MemorySystem.o bin/MultiChannelMemorySystem.o bin/PIMBlock.o bin/PIMCmd.o bin/PIMRank.o bin/PrintMacros.o bin/Rank.o bin/SimulatorObject.o bin/Transaction.o bin/tests/KernelAddrGen.o bin/tests/KernelTestCases.o bin/tests/MainTest.o bin/tests/MemTestCases.o bin/tests/MobileNetV4Workload.o bin/tests/MobileNetV4WorkloadTestCases.o bin/tests/PIMBenchTestCases.o bin/tests/PIMCmdGen.o bin/tests/PIMKernel.o bin/tools/emulator_api/PimSimulator.o -L. -lgtest -lpthread
+scons: done building targets.

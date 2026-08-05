@@ -1,0 +1,7 @@
+overlap,pipelines,logic_latency,link_bytes_per_cycle,total_cycle,overlap_cycles,wait_cycles,partial_bursts,final_bursts
+false,1,4,64,30334,0,393,384,128
+false,2,4,64,29894,0,201,384,128
+false,4,4,64,29894,0,192,384,128
+true,1,4,64,29894,393,0,384,128
+true,2,4,64,29894,201,0,384,128
+true,4,4,64,29894,192,0,384,128

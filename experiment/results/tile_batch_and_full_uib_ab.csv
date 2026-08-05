@@ -1,0 +1,6 @@
+experiment,logic_depthwise,tile_batch,accumulator_banks,ports_per_bank,entries,outputs,mismatches,peak_total,peak_per_bank,writes,total_cycle,result
+depthwise_28x28_unbatched,true,0,8,1,256,150528,0,256,32,,63910,PASS
+depthwise_28x28_batch1,true,1,8,1,128,150528,0,128,16,,65250,PASS
+full_uib_bank_depthwise,false,0,1,4,128,18816,0,0,0,225460,233365,PASS
+full_uib_central_accumulator,true,0,1,4,128,18816,0,128,128,204468,230514,PASS
+full_uib_banked_accumulator,true,1,8,1,128,18816,0,128,16,204468,230075,PASS

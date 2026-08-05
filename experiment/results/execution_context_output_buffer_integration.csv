@@ -1,0 +1,3 @@
+source_queues,output_buffer,drain_latency,drain_bw,outputs_checked,expand_cycles,depthwise_cycles,project_cycles,add_cycles,relu_cycles,ordered_barriers,mode_barriers,control_barriers,writeback_barriers,output_full_wall_cycles,total_cycle,result
+false,true,4,8,18816,88314,20702,103396,1662,873,0,0,0,0,30432,214947,PASS
+true,true,4,8,18816,88299,37407,103385,3750,715,784,1568,392,392,31661,233556,PASS

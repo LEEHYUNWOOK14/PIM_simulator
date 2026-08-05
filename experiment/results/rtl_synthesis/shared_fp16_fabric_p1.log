@@ -1,0 +1,1824 @@
+
+-- Running command `read_verilog -sv rtl/fp16_add.sv rtl/fp16_vector_add.sv rtl/shared_fp16_pipeline_fabric.sv; chparam -set SOURCES 8 -set PIPELINES 1 -set LANES 16 shared_fp16_pipeline_fabric; synth -top shared_fp16_pipeline_fabric; flatten; opt; stat; ltp -noff' --
+
+1. Executing Verilog-2005 frontend: rtl/fp16_add.sv
+Parsing SystemVerilog input from `rtl/fp16_add.sv' to AST representation.
+Generating RTLIL representation for module `\fp16_add'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: rtl/fp16_vector_add.sv
+Parsing SystemVerilog input from `rtl/fp16_vector_add.sv' to AST representation.
+Generating RTLIL representation for module `\fp16_vector_add'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: rtl/shared_fp16_pipeline_fabric.sv
+Parsing SystemVerilog input from `rtl/shared_fp16_pipeline_fabric.sv' to AST representation.
+Generating RTLIL representation for module `\shared_fp16_pipeline_fabric'.
+Successfully finished Verilog frontend.
+Parameter \SOURCES = 8
+Parameter \PIPELINES = 1
+Parameter \LANES = 16
+
+4. Executing AST frontend in derive mode using pre-parsed AST for module `\shared_fp16_pipeline_fabric'.
+Parameter \SOURCES = 8
+Parameter \PIPELINES = 1
+Parameter \LANES = 16
+Generating RTLIL representation for module `$paramod$00bd9adef55ee4e9e8c9c2e61ba061961db2883a\shared_fp16_pipeline_fabric'.
+
+5. Executing SYNTH pass.
+
+5.1. Executing HIERARCHY pass (managing design hierarchy).
+
+5.1.1. Analyzing design hierarchy..
+Top module:  \shared_fp16_pipeline_fabric
+Used module:     \fp16_vector_add
+Used module:         \fp16_add
+Parameter \LANES = 16
+
+5.1.2. Executing AST frontend in derive mode using pre-parsed AST for module `\fp16_vector_add'.
+Parameter \LANES = 16
+Generating RTLIL representation for module `$paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000'.
+
+5.1.3. Analyzing design hierarchy..
+Top module:  \shared_fp16_pipeline_fabric
+Used module:     $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000
+Used module:         \fp16_add
+
+5.1.4. Analyzing design hierarchy..
+Top module:  \shared_fp16_pipeline_fabric
+Used module:     $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000
+Used module:         \fp16_add
+Removing unused module `\fp16_vector_add'.
+Removed 1 unused modules.
+
+5.2. Executing PROC pass (convert processes to netlists).
+
+5.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+5.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 8 switch rules as full_case in process $proc$rtl/shared_fp16_pipeline_fabric.sv:22$440 in module shared_fp16_pipeline_fabric.
+Marked 1 switch rules as full_case in process $proc$rtl/shared_fp16_pipeline_fabric.sv:45$670 in module shared_fp16_pipeline_fabric.
+Marked 1 switch rules as full_case in process $proc$rtl/shared_fp16_pipeline_fabric.sv:64$686 in module shared_fp16_pipeline_fabric.
+Marked 26 switch rules as full_case in process $proc$rtl/fp16_add.sv:28$4 in module fp16_add.
+Removed a total of 0 dead cases.
+
+5.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 59 assignments to connections.
+
+5.2.4. Executing PROC_INIT pass (extract init attributes).
+
+5.2.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_ni in `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:64$686'.
+
+5.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~36 debug messages>
+
+5.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+     1/56: $8\request_grant_o[7:0]
+     2/56: $1$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:39$438[31:0]$655
+     3/56: $8\grant_source[2:0]
+     4/56: $8\grant_valid[0:0]
+     5/56: $8$unnamed_block$149.selected[7:0]$652
+     6/56: $1$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:36$437[31:0]$654
+     7/56: $8$unnamed_block$149.found[0:0]$653
+     8/56: $7\request_grant_o[7:0]
+     9/56: $1$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:39$436[31:0]$629
+    10/56: $7\grant_source[2:0]
+    11/56: $7\grant_valid[0:0]
+    12/56: $7$unnamed_block$149.selected[7:0]$626
+    13/56: $1$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:36$435[31:0]$628
+    14/56: $7$unnamed_block$149.found[0:0]$627
+    15/56: $6\request_grant_o[7:0]
+    16/56: $1$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:39$434[31:0]$603
+    17/56: $6\grant_source[2:0]
+    18/56: $6\grant_valid[0:0]
+    19/56: $6$unnamed_block$149.selected[7:0]$600
+    20/56: $1$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:36$433[31:0]$602
+    21/56: $6$unnamed_block$149.found[0:0]$601
+    22/56: $5\request_grant_o[7:0]
+    23/56: $1$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:39$432[31:0]$577
+    24/56: $5\grant_source[2:0]
+    25/56: $5\grant_valid[0:0]
+    26/56: $5$unnamed_block$149.selected[7:0]$574
+    27/56: $1$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:36$431[31:0]$576
+    28/56: $5$unnamed_block$149.found[0:0]$575
+    29/56: $4\request_grant_o[7:0]
+    30/56: $1$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:39$430[31:0]$551
+    31/56: $4\grant_source[2:0]
+    32/56: $4\grant_valid[0:0]
+    33/56: $4$unnamed_block$149.selected[7:0]$548
+    34/56: $1$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:36$429[31:0]$550
+    35/56: $4$unnamed_block$149.found[0:0]$549
+    36/56: $3\request_grant_o[7:0]
+    37/56: $1$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:39$428[31:0]$525
+    38/56: $3\grant_source[2:0]
+    39/56: $3\grant_valid[0:0]
+    40/56: $3$unnamed_block$149.selected[7:0]$522
+    41/56: $1$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:36$427[31:0]$524
+    42/56: $3$unnamed_block$149.found[0:0]$523
+    43/56: $2\request_grant_o[7:0]
+    44/56: $1$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:39$426[31:0]$499
+    45/56: $2\grant_source[2:0]
+    46/56: $2\grant_valid[0:0]
+    47/56: $2$unnamed_block$149.selected[7:0]$496
+    48/56: $1$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:36$425[31:0]$498
+    49/56: $2$unnamed_block$149.found[0:0]$497
+    50/56: $1\request_grant_o[7:0]
+    51/56: $1$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:39$424[31:0]$473
+    52/56: $1\grant_source[2:0]
+    53/56: $1\grant_valid[0:0]
+    54/56: $1$unnamed_block$149.selected[7:0]$470
+    55/56: $1$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:36$423[31:0]$472
+    56/56: $1$unnamed_block$149.found[0:0]$471
+Creating decoders for process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:45$670'.
+     1/4: $1\result_o[2047:0]
+     2/4: $1$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:53$439[31:0]$673
+     3/4: $1\pipeline_rhs[255:0]
+     4/4: $1\pipeline_lhs[255:0]
+Creating decoders for process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:64$686'.
+     1/2: $1$fordecl_block$153.pipeline[31:0]$689
+     2/2: $0\round_robin_q[2:0]
+Creating decoders for process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+     1/53: $7\result_o[15:0]
+     2/53: $6\result_o[15:0]
+     3/53: $5\result_o[15:0]
+     4/53: $4\result_o[15:0]
+     5/53: $3\result_o[15:0]
+     6/53: $2\result_o[15:0]
+     7/53: $1\result_o[15:0]
+     8/53: $16\result_exp[31:0]
+     9/53: $1\rounded_sig[11:0]
+    10/53: $15\result_exp[31:0]
+    11/53: $15\magnitude_ext[13:0]
+    12/53: $14\result_exp[31:0]
+    13/53: $14\magnitude_ext[13:0]
+    14/53: $13\result_exp[31:0]
+    15/53: $13\magnitude_ext[13:0]
+    16/53: $12\result_exp[31:0]
+    17/53: $12\magnitude_ext[13:0]
+    18/53: $11\result_exp[31:0]
+    19/53: $11\magnitude_ext[13:0]
+    20/53: $10\result_exp[31:0]
+    21/53: $10\magnitude_ext[13:0]
+    22/53: $9\result_exp[31:0]
+    23/53: $9\magnitude_ext[13:0]
+    24/53: $8\result_exp[31:0]
+    25/53: $8\magnitude_ext[13:0]
+    26/53: $7\result_exp[31:0]
+    27/53: $7\magnitude_ext[13:0]
+    28/53: $6\result_exp[31:0]
+    29/53: $6\magnitude_ext[13:0]
+    30/53: $5\result_exp[31:0]
+    31/53: $5\magnitude_ext[13:0]
+    32/53: $4\result_exp[31:0]
+    33/53: $4\magnitude_ext[13:0]
+    34/53: $3\result_exp[31:0]
+    35/53: $3\magnitude_ext[13:0]
+    36/53: $2\magnitude_ext[13:0] [13:1]
+    37/53: $2\result_exp[31:0]
+    38/53: $2\magnitude_ext[13:0] [0]
+    39/53: $1\result_exp[31:0]
+    40/53: $1\magnitude_ext[13:0]
+    41/53: $1\add_ext[14:0]
+    42/53: $1$fordecl_block$1.normalize_step[31:0]$40
+    43/53: $2\shift_right_sticky$func$rtl/fp16_add.sv:47$3.$result[13:0]$30 [13:1]
+    44/53: $2\shift_right_sticky$func$rtl/fp16_add.sv:47$3.$result[13:0]$30 [0]
+    45/53: $2\shift_right_sticky$func$rtl/fp16_add.sv:47$3.sticky[0:0]$31
+    46/53: $1\shift_right_sticky$func$rtl/fp16_add.sv:47$3.$result[13:0]$27
+    47/53: $1\shift_right_sticky$func$rtl/fp16_add.sv:47$3.sticky[0:0]$28
+    48/53: $1\small_sig[10:0]
+    49/53: $1\large_sig[10:0]
+    50/53: $1\small_exp[4:0]
+    51/53: $1\large_exp[4:0]
+    52/53: $1\small_sign[0:0]
+    53/53: $1\large_sign[0:0]
+
+5.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\shared_fp16_pipeline_fabric.\request_grant_o' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.\grant_valid' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.\grant_source' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.$unnamed_block$149.selected' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.$unnamed_block$149.found' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.$unnamed_block$149.candidate' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.$unnamed_block$149.$fordecl_block$145.pipeline' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.$unnamed_block$149.$fordecl_block$145.$for_loop$146[0].$fordecl_block$147.offset' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:36$423' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:39$424' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:36$425' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:39$426' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:36$427' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:39$428' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:36$429' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:39$430' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:36$431' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:39$432' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:36$433' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:39$434' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:36$435' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:39$436' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:36$437' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:39$438' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.\result_o' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:45$670'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.\pipeline_lhs' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:45$670'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.\pipeline_rhs' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:45$670'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.$fordecl_block$150.pipeline' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:45$670'.
+No latch inferred for signal `\shared_fp16_pipeline_fabric.$bitselwrite$pos$rtl/shared_fp16_pipeline_fabric.sv:53$439' from process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:45$670'.
+No latch inferred for signal `\fp16_add.\result_o' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\lhs_sign' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\rhs_sign' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\large_sign' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\small_sign' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\result_sign' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\round_up' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\lhs_exp' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\rhs_exp' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\large_exp' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\small_exp' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\lhs_frac' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\rhs_frac' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\lhs_sig' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\rhs_sig' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\large_sig' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\small_sig' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\large_ext' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\small_ext' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\magnitude_ext' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\add_ext' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\rounded_sig' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\result_exp' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\shift_amount' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\shift_right_sticky$func$rtl/fp16_add.sv:47$3.$result' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\shift_right_sticky$func$rtl/fp16_add.sv:47$3.value' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\shift_right_sticky$func$rtl/fp16_add.sv:47$3.amount' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+No latch inferred for signal `\fp16_add.\shift_right_sticky$func$rtl/fp16_add.sv:47$3.sticky' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+Latch inferred for signal `\fp16_add.$fordecl_block$1.normalize_step' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$4': $auto$proc_dlatch.cc:432:proc_dlatch$1199
+
+5.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\shared_fp16_pipeline_fabric.\round_robin_q' using process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:64$686'.
+  created $adff cell `$procdff$1204' with positive edge clock and positive level reset.
+Creating register for signal `\shared_fp16_pipeline_fabric.$fordecl_block$153.pipeline' using process `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:64$686'.
+  created $dff cell `$procdff$1211' with positive edge clock.
+
+5.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+5.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 8 empty switches in `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+Removing empty process `shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:22$440'.
+Found and cleaned up 1 empty switch in `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:45$670'.
+Removing empty process `shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:45$670'.
+Found and cleaned up 1 empty switch in `\shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:64$686'.
+Removing empty process `shared_fp16_pipeline_fabric.$proc$rtl/shared_fp16_pipeline_fabric.sv:64$686'.
+Found and cleaned up 26 empty switches in `\fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+Removing empty process `fp16_add.$proc$rtl/fp16_add.sv:28$4'.
+Cleaned up 36 empty switches.
+
+5.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module shared_fp16_pipeline_fabric.
+<suppressed ~12 debug messages>
+Optimizing module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000.
+Optimizing module fp16_add.
+<suppressed ~34 debug messages>
+
+5.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module shared_fp16_pipeline_fabric.
+<suppressed ~23 debug messages>
+Optimizing module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000.
+Optimizing module fp16_add.
+
+5.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \shared_fp16_pipeline_fabric..
+Finding unused cells or wires in module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_add..
+Removed 46 unused cells and 471 unused wires.
+<suppressed ~50 debug messages>
+
+5.5. Executing CHECK pass (checking for obvious problems).
+Checking module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000...
+Checking module fp16_add...
+Checking module shared_fp16_pipeline_fabric...
+Found and reported 0 problems.
+
+5.6. Executing OPT pass (performing simple optimizations).
+
+5.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000.
+Optimizing module fp16_add.
+Optimizing module shared_fp16_pipeline_fabric.
+
+5.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000'.
+Finding identical cells in module `\fp16_add'.
+<suppressed ~30 debug messages>
+Finding identical cells in module `\shared_fp16_pipeline_fabric'.
+<suppressed ~138 debug messages>
+Removed a total of 56 cells.
+
+5.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+      Replacing known input bits on port B of cell $procmux$1121: $add$rtl/fp16_add.sv:51$41_Y [14:2] -> { 1'1 $add$rtl/fp16_add.sv:51$41_Y [13:2] }
+      Replacing known input bits on port A of cell $procmux$961: $add$rtl/fp16_add.sv:68$113_Y -> { 1'0 $add$rtl/fp16_add.sv:68$113_Y [10:0] }
+      Replacing known input bits on port B of cell $procmux$961: { 1'0 $add$rtl/fp16_add.sv:68$113_Y [11:1] } -> { 2'01 $add$rtl/fp16_add.sv:68$113_Y [10:1] }
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$1123.
+    dead port 2/2 on $mux $procmux$1129.
+    dead port 2/2 on $mux $procmux$1135.
+    dead port 1/2 on $mux $procmux$1153.
+    dead port 1/2 on $mux $procmux$1159.
+    dead port 1/2 on $mux $procmux$877.
+    dead port 1/2 on $mux $procmux$880.
+    dead port 1/2 on $mux $procmux$883.
+    dead port 1/2 on $mux $procmux$886.
+    dead port 1/2 on $mux $procmux$889.
+    dead port 1/2 on $mux $procmux$892.
+    dead port 1/2 on $mux $procmux$898.
+    dead port 1/2 on $mux $procmux$901.
+    dead port 1/2 on $mux $procmux$904.
+    dead port 1/2 on $mux $procmux$907.
+    dead port 1/2 on $mux $procmux$910.
+    dead port 1/2 on $mux $procmux$916.
+    dead port 1/2 on $mux $procmux$919.
+    dead port 1/2 on $mux $procmux$922.
+    dead port 1/2 on $mux $procmux$925.
+    dead port 1/2 on $mux $procmux$931.
+    dead port 1/2 on $mux $procmux$934.
+    dead port 1/2 on $mux $procmux$937.
+    dead port 1/2 on $mux $procmux$943.
+    dead port 1/2 on $mux $procmux$946.
+    dead port 1/2 on $mux $procmux$952.
+    dead port 1/2 on $mux $procmux$967.
+    dead port 1/2 on $mux $procmux$973.
+Running muxtree optimizer on module \shared_fp16_pipeline_fabric..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 28 multiplexer ports.
+<suppressed ~66 debug messages>
+
+5.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000.
+  Optimizing cells in module \fp16_add.
+    New input vector for $reduce_or cell $reduce_or$rtl/fp16_add.sv:10$32: \small_sig
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \shared_fp16_pipeline_fabric.
+Performed a total of 1 changes.
+
+5.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000'.
+Finding identical cells in module `\fp16_add'.
+<suppressed ~12 debug messages>
+Finding identical cells in module `\shared_fp16_pipeline_fabric'.
+<suppressed ~78 debug messages>
+Removed a total of 30 cells.
+
+5.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \shared_fp16_pipeline_fabric..
+Removed 0 unused cells and 114 unused wires.
+<suppressed ~2 debug messages>
+
+5.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000.
+Optimizing module fp16_add.
+Optimizing module shared_fp16_pipeline_fabric.
+
+5.6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \shared_fp16_pipeline_fabric..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~59 debug messages>
+
+5.6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000.
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \shared_fp16_pipeline_fabric.
+Performed a total of 0 changes.
+
+5.6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\shared_fp16_pipeline_fabric'.
+Removed a total of 0 cells.
+
+5.6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \shared_fp16_pipeline_fabric..
+
+5.6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000.
+Optimizing module fp16_add.
+Optimizing module shared_fp16_pipeline_fabric.
+
+5.6.16. Finished OPT passes. (There is nothing left to do.)
+
+5.7. Executing FSM pass (extract and optimize FSM).
+
+5.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+5.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+5.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \shared_fp16_pipeline_fabric..
+
+5.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+5.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+5.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+5.8. Executing OPT pass (performing simple optimizations).
+
+5.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000.
+Optimizing module fp16_add.
+Optimizing module shared_fp16_pipeline_fabric.
+
+5.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\shared_fp16_pipeline_fabric'.
+Removed a total of 0 cells.
+
+5.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \shared_fp16_pipeline_fabric..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~59 debug messages>
+
+5.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000.
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \shared_fp16_pipeline_fabric.
+Performed a total of 0 changes.
+
+5.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\shared_fp16_pipeline_fabric'.
+Removed a total of 0 cells.
+
+5.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$1204 ($adff) from module shared_fp16_pipeline_fabric (D = $add$rtl/shared_fp16_pipeline_fabric.sv:68$690_Y, Q = \round_robin_q).
+
+5.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \shared_fp16_pipeline_fabric..
+Removed 1 unused cells and 1 unused wires.
+<suppressed ~2 debug messages>
+
+5.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000.
+Optimizing module fp16_add.
+Optimizing module shared_fp16_pipeline_fabric.
+
+5.8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \shared_fp16_pipeline_fabric..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~58 debug messages>
+
+5.8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000.
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \shared_fp16_pipeline_fabric.
+Performed a total of 0 changes.
+
+5.8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\shared_fp16_pipeline_fabric'.
+Removed a total of 0 cells.
+
+5.8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \shared_fp16_pipeline_fabric..
+
+5.8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000.
+Optimizing module fp16_add.
+Optimizing module shared_fp16_pipeline_fabric.
+
+5.8.16. Finished OPT passes. (There is nothing left to do.)
+
+5.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 26 bits (of 32) from port Y of cell fp16_add.$sub$rtl/fp16_add.sv:46$25 ($sub).
+Removed top 26 bits (of 32) from port A of cell fp16_add.$le$rtl/fp16_add.sv:9$26 ($le).
+Removed top 31 bits (of 32) from port B of cell fp16_add.$le$rtl/fp16_add.sv:9$26 ($le).
+Removed top 26 bits (of 32) from port A of cell fp16_add.$ge$rtl/fp16_add.sv:10$29 ($ge).
+Removed top 27 bits (of 32) from port B of cell fp16_add.$ge$rtl/fp16_add.sv:10$29 ($ge).
+Removed top 13 bits (of 14) from port A of cell fp16_add.$shl$rtl/fp16_add.sv:12$33 ($shl).
+Removed top 1 bits (of 15) from port A of cell fp16_add.$add$rtl/fp16_add.sv:51$41 ($add).
+Removed top 1 bits (of 15) from port B of cell fp16_add.$add$rtl/fp16_add.sv:51$41 ($add).
+Removed top 26 bits (of 32) from port A of cell fp16_add.$add$rtl/fp16_add.sv:55$43 ($add).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$add$rtl/fp16_add.sv:55$43 ($add).
+Converting cell fp16_add.$add$rtl/fp16_add.sv:55$43 ($add) from signed to unsigned.
+Removed top 25 bits (of 32) from port Y of cell fp16_add.$add$rtl/fp16_add.sv:55$43 ($add).
+Removed top 1 bits (of 6) from port A of cell fp16_add.$add$rtl/fp16_add.sv:55$43 ($add).
+Removed top 1 bits (of 2) from port B of cell fp16_add.$add$rtl/fp16_add.sv:55$43 ($add).
+Removed top 1 bits (of 7) from port Y of cell fp16_add.$add$rtl/fp16_add.sv:55$43 ($add).
+Removed top 26 bits (of 32) from port A of cell fp16_add.$gt$rtl/fp16_add.sv:61$46 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$46 ($gt).
+Converting cell fp16_add.$gt$rtl/fp16_add.sv:61$46 ($gt) from signed to unsigned.
+Removed top 1 bits (of 6) from port A of cell fp16_add.$gt$rtl/fp16_add.sv:61$46 ($gt).
+Removed top 1 bits (of 2) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$46 ($gt).
+Removed top 26 bits (of 32) from port A of cell fp16_add.$sub$rtl/fp16_add.sv:63$49 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$49 ($sub).
+Converting cell fp16_add.$sub$rtl/fp16_add.sv:63$49 ($sub) from signed to unsigned.
+Removed top 25 bits (of 32) from port Y of cell fp16_add.$sub$rtl/fp16_add.sv:63$49 ($sub).
+Removed top 1 bits (of 6) from port A of cell fp16_add.$sub$rtl/fp16_add.sv:63$49 ($sub).
+Removed top 1 bits (of 2) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$49 ($sub).
+Removed top 1 bits (of 7) from port Y of cell fp16_add.$sub$rtl/fp16_add.sv:63$49 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$51 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$54 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$56 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$59 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$61 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$64 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$66 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$69 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$71 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$74 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$76 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$79 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$81 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$84 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$86 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$89 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$91 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$94 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$96 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$99 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$101 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$104 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:61$106 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:63$109 ($sub).
+Removed top 1 bits (of 12) from port A of cell fp16_add.$add$rtl/fp16_add.sv:68$113 ($add).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$add$rtl/fp16_add.sv:71$115 ($add).
+Removed top 26 bits (of 32) from port B of cell fp16_add.$ge$rtl/fp16_add.sv:84$140 ($ge).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$le$rtl/fp16_add.sv:85$141 ($le).
+Removed top 26 bits (of 32) from mux cell fp16_add.$procmux$1127 ($mux).
+Removed top 1 bits (of 16) from mux cell fp16_add.$procmux$874 ($mux).
+Removed top 1 bits (of 12) from mux cell fp16_add.$procmux$961 ($mux).
+Removed top 1 bits (of 16) from mux cell fp16_add.$procmux$895 ($mux).
+Removed top 26 bits (of 32) from wire fp16_add.$2\result_exp[31:0].
+Removed top 26 bits (of 32) from wire fp16_add.$add$rtl/fp16_add.sv:55$43_Y.
+Removed top 1 bits (of 14) from wire fp16_add.$sub$rtl/fp16_add.sv:58$44_Y.
+Removed top 1 bits (of 12) from wire fp16_add.rounded_sig.
+Removed top 28 bits (of 32) from port B of cell shared_fp16_pipeline_fabric.$shiftx$rtl/shared_fp16_pipeline_fabric.sv:0$465 ($shiftx).
+Removed top 28 bits (of 32) from port B of cell shared_fp16_pipeline_fabric.$shiftx$rtl/shared_fp16_pipeline_fabric.sv:0$468 ($shiftx).
+Removed top 29 bits (of 33) from port A of cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$478 ($neg).
+Converting cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$478 ($neg) from signed to unsigned.
+Removed top 1 bits (of 4) from port A of cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$478 ($neg).
+Removed top 31 bits (of 32) from port B of cell shared_fp16_pipeline_fabric.$add$rtl/shared_fp16_pipeline_fabric.sv:33$488 ($add).
+Removed top 29 bits (of 32) from port Y of cell shared_fp16_pipeline_fabric.$add$rtl/shared_fp16_pipeline_fabric.sv:33$488 ($add).
+Removed top 28 bits (of 32) from port B of cell shared_fp16_pipeline_fabric.$shiftx$rtl/shared_fp16_pipeline_fabric.sv:0$491 ($shiftx).
+Removed top 28 bits (of 32) from port B of cell shared_fp16_pipeline_fabric.$shiftx$rtl/shared_fp16_pipeline_fabric.sv:0$494 ($shiftx).
+Removed top 29 bits (of 33) from port A of cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$500 ($neg).
+Converting cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$500 ($neg) from signed to unsigned.
+Removed top 1 bits (of 4) from port A of cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$500 ($neg).
+Removed top 30 bits (of 32) from port B of cell shared_fp16_pipeline_fabric.$add$rtl/shared_fp16_pipeline_fabric.sv:33$514 ($add).
+Removed top 29 bits (of 32) from port Y of cell shared_fp16_pipeline_fabric.$add$rtl/shared_fp16_pipeline_fabric.sv:33$514 ($add).
+Removed top 28 bits (of 32) from port B of cell shared_fp16_pipeline_fabric.$shiftx$rtl/shared_fp16_pipeline_fabric.sv:0$517 ($shiftx).
+Removed top 28 bits (of 32) from port B of cell shared_fp16_pipeline_fabric.$shiftx$rtl/shared_fp16_pipeline_fabric.sv:0$520 ($shiftx).
+Removed top 29 bits (of 33) from port A of cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$526 ($neg).
+Converting cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$526 ($neg) from signed to unsigned.
+Removed top 1 bits (of 4) from port A of cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$526 ($neg).
+Removed top 30 bits (of 32) from port B of cell shared_fp16_pipeline_fabric.$add$rtl/shared_fp16_pipeline_fabric.sv:33$540 ($add).
+Removed top 29 bits (of 32) from port Y of cell shared_fp16_pipeline_fabric.$add$rtl/shared_fp16_pipeline_fabric.sv:33$540 ($add).
+Removed top 28 bits (of 32) from port B of cell shared_fp16_pipeline_fabric.$shiftx$rtl/shared_fp16_pipeline_fabric.sv:0$543 ($shiftx).
+Removed top 28 bits (of 32) from port B of cell shared_fp16_pipeline_fabric.$shiftx$rtl/shared_fp16_pipeline_fabric.sv:0$546 ($shiftx).
+Removed top 29 bits (of 33) from port A of cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$552 ($neg).
+Converting cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$552 ($neg) from signed to unsigned.
+Removed top 1 bits (of 4) from port A of cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$552 ($neg).
+Removed top 29 bits (of 32) from port B of cell shared_fp16_pipeline_fabric.$add$rtl/shared_fp16_pipeline_fabric.sv:33$566 ($add).
+Removed top 29 bits (of 32) from port Y of cell shared_fp16_pipeline_fabric.$add$rtl/shared_fp16_pipeline_fabric.sv:33$566 ($add).
+Removed top 28 bits (of 32) from port B of cell shared_fp16_pipeline_fabric.$shiftx$rtl/shared_fp16_pipeline_fabric.sv:0$569 ($shiftx).
+Removed top 28 bits (of 32) from port B of cell shared_fp16_pipeline_fabric.$shiftx$rtl/shared_fp16_pipeline_fabric.sv:0$572 ($shiftx).
+Removed top 29 bits (of 33) from port A of cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$578 ($neg).
+Converting cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$578 ($neg) from signed to unsigned.
+Removed top 1 bits (of 4) from port A of cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$578 ($neg).
+Removed top 29 bits (of 32) from port B of cell shared_fp16_pipeline_fabric.$add$rtl/shared_fp16_pipeline_fabric.sv:33$592 ($add).
+Removed top 29 bits (of 32) from port Y of cell shared_fp16_pipeline_fabric.$add$rtl/shared_fp16_pipeline_fabric.sv:33$592 ($add).
+Removed top 28 bits (of 32) from port B of cell shared_fp16_pipeline_fabric.$shiftx$rtl/shared_fp16_pipeline_fabric.sv:0$595 ($shiftx).
+Removed top 28 bits (of 32) from port B of cell shared_fp16_pipeline_fabric.$shiftx$rtl/shared_fp16_pipeline_fabric.sv:0$598 ($shiftx).
+Removed top 29 bits (of 33) from port A of cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$604 ($neg).
+Converting cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$604 ($neg) from signed to unsigned.
+Removed top 1 bits (of 4) from port A of cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$604 ($neg).
+Removed top 29 bits (of 32) from port B of cell shared_fp16_pipeline_fabric.$add$rtl/shared_fp16_pipeline_fabric.sv:33$618 ($add).
+Removed top 29 bits (of 32) from port Y of cell shared_fp16_pipeline_fabric.$add$rtl/shared_fp16_pipeline_fabric.sv:33$618 ($add).
+Removed top 28 bits (of 32) from port B of cell shared_fp16_pipeline_fabric.$shiftx$rtl/shared_fp16_pipeline_fabric.sv:0$621 ($shiftx).
+Removed top 28 bits (of 32) from port B of cell shared_fp16_pipeline_fabric.$shiftx$rtl/shared_fp16_pipeline_fabric.sv:0$624 ($shiftx).
+Removed top 29 bits (of 33) from port A of cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$630 ($neg).
+Converting cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$630 ($neg) from signed to unsigned.
+Removed top 1 bits (of 4) from port A of cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$630 ($neg).
+Removed top 29 bits (of 32) from port B of cell shared_fp16_pipeline_fabric.$add$rtl/shared_fp16_pipeline_fabric.sv:33$644 ($add).
+Removed top 29 bits (of 32) from port Y of cell shared_fp16_pipeline_fabric.$add$rtl/shared_fp16_pipeline_fabric.sv:33$644 ($add).
+Removed top 28 bits (of 32) from port B of cell shared_fp16_pipeline_fabric.$shiftx$rtl/shared_fp16_pipeline_fabric.sv:0$647 ($shiftx).
+Removed top 28 bits (of 32) from port B of cell shared_fp16_pipeline_fabric.$shiftx$rtl/shared_fp16_pipeline_fabric.sv:0$650 ($shiftx).
+Removed top 29 bits (of 33) from port A of cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$663 ($neg).
+Converting cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$663 ($neg) from signed to unsigned.
+Removed top 1 bits (of 4) from port A of cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$663 ($neg).
+Removed top 20 bits (of 32) from port B of cell shared_fp16_pipeline_fabric.$shiftx$rtl/shared_fp16_pipeline_fabric.sv:0$675 ($shiftx).
+Removed top 20 bits (of 32) from port B of cell shared_fp16_pipeline_fabric.$shiftx$rtl/shared_fp16_pipeline_fabric.sv:0$677 ($shiftx).
+Removed top 21 bits (of 33) from port A of cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$683 ($neg).
+Converting cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$683 ($neg) from signed to unsigned.
+Removed top 1 bits (of 12) from port A of cell shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$683 ($neg).
+Removed top 29 bits (of 32) from wire shared_fp16_pipeline_fabric.$0$unnamed_block$149.candidate[31:0]$443.
+Removed top 29 bits (of 32) from wire shared_fp16_pipeline_fabric.$add$rtl/shared_fp16_pipeline_fabric.sv:33$488_Y.
+Removed top 29 bits (of 32) from wire shared_fp16_pipeline_fabric.$add$rtl/shared_fp16_pipeline_fabric.sv:33$514_Y.
+Removed top 29 bits (of 32) from wire shared_fp16_pipeline_fabric.$add$rtl/shared_fp16_pipeline_fabric.sv:33$540_Y.
+Removed top 29 bits (of 32) from wire shared_fp16_pipeline_fabric.$add$rtl/shared_fp16_pipeline_fabric.sv:33$566_Y.
+Removed top 29 bits (of 32) from wire shared_fp16_pipeline_fabric.$add$rtl/shared_fp16_pipeline_fabric.sv:33$592_Y.
+Removed top 29 bits (of 32) from wire shared_fp16_pipeline_fabric.$add$rtl/shared_fp16_pipeline_fabric.sv:33$618_Y.
+Removed top 19 bits (of 33) from wire shared_fp16_pipeline_fabric.$neg$rtl/shared_fp16_pipeline_fabric.sv:0$478_Y.
+
+5.10. Executing PEEPOPT pass (run peephole optimizers).
+
+5.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \shared_fp16_pipeline_fabric..
+Removed 0 unused cells and 14 unused wires.
+<suppressed ~2 debug messages>
+
+5.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000:
+  created 0 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module fp16_add:
+  creating $macc model for $add$rtl/fp16_add.sv:51$41 ($add).
+  creating $macc model for $add$rtl/fp16_add.sv:55$43 ($add).
+  creating $macc model for $add$rtl/fp16_add.sv:68$113 ($add).
+  creating $macc model for $add$rtl/fp16_add.sv:71$115 ($add).
+  creating $macc model for $sub$rtl/fp16_add.sv:12$34 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:46$25 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:58$44 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:63$104 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:63$109 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:63$49 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:63$54 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:63$59 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:63$64 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:63$69 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:63$74 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:63$79 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:63$84 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:63$89 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:63$94 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:63$99 ($sub).
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:63$99.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:63$94.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:63$89.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:63$84.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:63$79.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:63$74.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:63$69.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:63$64.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:63$59.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:63$54.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:63$49.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:63$109.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:63$104.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:58$44.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:46$25.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:12$34.
+  creating $alu model for $macc $add$rtl/fp16_add.sv:71$115.
+  creating $alu model for $macc $add$rtl/fp16_add.sv:68$113.
+  creating $alu model for $macc $add$rtl/fp16_add.sv:55$43.
+  creating $alu model for $macc $add$rtl/fp16_add.sv:51$41.
+  creating $alu model for $ge$rtl/fp16_add.sv:10$29 ($ge): new $alu
+  creating $alu model for $ge$rtl/fp16_add.sv:84$140 ($ge): new $alu
+  creating $alu model for $gt$rtl/fp16_add.sv:38$20 ($gt): new $alu
+  creating $alu model for $gt$rtl/fp16_add.sv:61$101 ($gt): merged with $sub$rtl/fp16_add.sv:63$104.
+  creating $alu model for $gt$rtl/fp16_add.sv:61$106 ($gt): merged with $sub$rtl/fp16_add.sv:63$109.
+  creating $alu model for $gt$rtl/fp16_add.sv:61$46 ($gt): merged with $sub$rtl/fp16_add.sv:63$49.
+  creating $alu model for $gt$rtl/fp16_add.sv:61$51 ($gt): merged with $sub$rtl/fp16_add.sv:63$54.
+  creating $alu model for $gt$rtl/fp16_add.sv:61$56 ($gt): merged with $sub$rtl/fp16_add.sv:63$59.
+  creating $alu model for $gt$rtl/fp16_add.sv:61$61 ($gt): merged with $sub$rtl/fp16_add.sv:63$64.
+  creating $alu model for $gt$rtl/fp16_add.sv:61$66 ($gt): merged with $sub$rtl/fp16_add.sv:63$69.
+  creating $alu model for $gt$rtl/fp16_add.sv:61$71 ($gt): merged with $sub$rtl/fp16_add.sv:63$74.
+  creating $alu model for $gt$rtl/fp16_add.sv:61$76 ($gt): merged with $sub$rtl/fp16_add.sv:63$79.
+  creating $alu model for $gt$rtl/fp16_add.sv:61$81 ($gt): merged with $sub$rtl/fp16_add.sv:63$84.
+  creating $alu model for $gt$rtl/fp16_add.sv:61$86 ($gt): merged with $sub$rtl/fp16_add.sv:63$89.
+  creating $alu model for $gt$rtl/fp16_add.sv:61$91 ($gt): merged with $sub$rtl/fp16_add.sv:63$94.
+  creating $alu model for $gt$rtl/fp16_add.sv:61$96 ($gt): merged with $sub$rtl/fp16_add.sv:63$99.
+  creating $alu model for $le$rtl/fp16_add.sv:85$141 ($le): new $alu
+  creating $alu model for $le$rtl/fp16_add.sv:9$26 ($le): new $alu
+  creating $alu cell for $le$rtl/fp16_add.sv:9$26: $auto$alumacc.cc:495:replace_alu$1230
+  creating $alu cell for $le$rtl/fp16_add.sv:85$141: $auto$alumacc.cc:495:replace_alu$1241
+  creating $alu cell for $gt$rtl/fp16_add.sv:38$20: $auto$alumacc.cc:495:replace_alu$1252
+  creating $alu cell for $ge$rtl/fp16_add.sv:84$140: $auto$alumacc.cc:495:replace_alu$1263
+  creating $alu cell for $ge$rtl/fp16_add.sv:10$29: $auto$alumacc.cc:495:replace_alu$1278
+  creating $alu cell for $add$rtl/fp16_add.sv:51$41: $auto$alumacc.cc:495:replace_alu$1293
+  creating $alu cell for $add$rtl/fp16_add.sv:55$43: $auto$alumacc.cc:495:replace_alu$1296
+  creating $alu cell for $add$rtl/fp16_add.sv:68$113: $auto$alumacc.cc:495:replace_alu$1299
+  creating $alu cell for $add$rtl/fp16_add.sv:71$115: $auto$alumacc.cc:495:replace_alu$1302
+  creating $alu cell for $sub$rtl/fp16_add.sv:12$34: $auto$alumacc.cc:495:replace_alu$1305
+  creating $alu cell for $sub$rtl/fp16_add.sv:46$25: $auto$alumacc.cc:495:replace_alu$1308
+  creating $alu cell for $sub$rtl/fp16_add.sv:58$44: $auto$alumacc.cc:495:replace_alu$1311
+  creating $alu cell for $sub$rtl/fp16_add.sv:63$104, $gt$rtl/fp16_add.sv:61$101: $auto$alumacc.cc:495:replace_alu$1314
+  creating $alu cell for $sub$rtl/fp16_add.sv:63$109, $gt$rtl/fp16_add.sv:61$106: $auto$alumacc.cc:495:replace_alu$1327
+  creating $alu cell for $sub$rtl/fp16_add.sv:63$49, $gt$rtl/fp16_add.sv:61$46: $auto$alumacc.cc:495:replace_alu$1340
+  creating $alu cell for $sub$rtl/fp16_add.sv:63$54, $gt$rtl/fp16_add.sv:61$51: $auto$alumacc.cc:495:replace_alu$1351
+  creating $alu cell for $sub$rtl/fp16_add.sv:63$59, $gt$rtl/fp16_add.sv:61$56: $auto$alumacc.cc:495:replace_alu$1364
+  creating $alu cell for $sub$rtl/fp16_add.sv:63$64, $gt$rtl/fp16_add.sv:61$61: $auto$alumacc.cc:495:replace_alu$1377
+  creating $alu cell for $sub$rtl/fp16_add.sv:63$69, $gt$rtl/fp16_add.sv:61$66: $auto$alumacc.cc:495:replace_alu$1390
+  creating $alu cell for $sub$rtl/fp16_add.sv:63$74, $gt$rtl/fp16_add.sv:61$71: $auto$alumacc.cc:495:replace_alu$1403
+  creating $alu cell for $sub$rtl/fp16_add.sv:63$79, $gt$rtl/fp16_add.sv:61$76: $auto$alumacc.cc:495:replace_alu$1416
+  creating $alu cell for $sub$rtl/fp16_add.sv:63$84, $gt$rtl/fp16_add.sv:61$81: $auto$alumacc.cc:495:replace_alu$1429
+  creating $alu cell for $sub$rtl/fp16_add.sv:63$89, $gt$rtl/fp16_add.sv:61$86: $auto$alumacc.cc:495:replace_alu$1442
+  creating $alu cell for $sub$rtl/fp16_add.sv:63$94, $gt$rtl/fp16_add.sv:61$91: $auto$alumacc.cc:495:replace_alu$1455
+  creating $alu cell for $sub$rtl/fp16_add.sv:63$99, $gt$rtl/fp16_add.sv:61$96: $auto$alumacc.cc:495:replace_alu$1468
+  created 25 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module shared_fp16_pipeline_fabric:
+  creating $macc model for $add$rtl/shared_fp16_pipeline_fabric.sv:33$488 ($add).
+  creating $macc model for $add$rtl/shared_fp16_pipeline_fabric.sv:33$514 ($add).
+  creating $macc model for $add$rtl/shared_fp16_pipeline_fabric.sv:33$540 ($add).
+  creating $macc model for $add$rtl/shared_fp16_pipeline_fabric.sv:33$566 ($add).
+  creating $macc model for $add$rtl/shared_fp16_pipeline_fabric.sv:33$592 ($add).
+  creating $macc model for $add$rtl/shared_fp16_pipeline_fabric.sv:33$618 ($add).
+  creating $macc model for $add$rtl/shared_fp16_pipeline_fabric.sv:33$644 ($add).
+  creating $macc model for $add$rtl/shared_fp16_pipeline_fabric.sv:68$690 ($add).
+  creating $macc model for $neg$rtl/shared_fp16_pipeline_fabric.sv:0$478 ($neg).
+  creating $macc model for $neg$rtl/shared_fp16_pipeline_fabric.sv:0$500 ($neg).
+  creating $macc model for $neg$rtl/shared_fp16_pipeline_fabric.sv:0$526 ($neg).
+  creating $macc model for $neg$rtl/shared_fp16_pipeline_fabric.sv:0$552 ($neg).
+  creating $macc model for $neg$rtl/shared_fp16_pipeline_fabric.sv:0$578 ($neg).
+  creating $macc model for $neg$rtl/shared_fp16_pipeline_fabric.sv:0$604 ($neg).
+  creating $macc model for $neg$rtl/shared_fp16_pipeline_fabric.sv:0$630 ($neg).
+  creating $macc model for $neg$rtl/shared_fp16_pipeline_fabric.sv:0$663 ($neg).
+  creating $macc model for $neg$rtl/shared_fp16_pipeline_fabric.sv:0$683 ($neg).
+  creating $alu model for $macc $neg$rtl/shared_fp16_pipeline_fabric.sv:0$683.
+  creating $alu model for $macc $neg$rtl/shared_fp16_pipeline_fabric.sv:0$663.
+  creating $alu model for $macc $neg$rtl/shared_fp16_pipeline_fabric.sv:0$630.
+  creating $alu model for $macc $neg$rtl/shared_fp16_pipeline_fabric.sv:0$604.
+  creating $alu model for $macc $neg$rtl/shared_fp16_pipeline_fabric.sv:0$578.
+  creating $alu model for $macc $neg$rtl/shared_fp16_pipeline_fabric.sv:0$552.
+  creating $alu model for $macc $neg$rtl/shared_fp16_pipeline_fabric.sv:0$526.
+  creating $alu model for $macc $neg$rtl/shared_fp16_pipeline_fabric.sv:0$500.
+  creating $alu model for $macc $neg$rtl/shared_fp16_pipeline_fabric.sv:0$478.
+  creating $alu model for $macc $add$rtl/shared_fp16_pipeline_fabric.sv:68$690.
+  creating $alu model for $macc $add$rtl/shared_fp16_pipeline_fabric.sv:33$644.
+  creating $alu model for $macc $add$rtl/shared_fp16_pipeline_fabric.sv:33$618.
+  creating $alu model for $macc $add$rtl/shared_fp16_pipeline_fabric.sv:33$592.
+  creating $alu model for $macc $add$rtl/shared_fp16_pipeline_fabric.sv:33$566.
+  creating $alu model for $macc $add$rtl/shared_fp16_pipeline_fabric.sv:33$540.
+  creating $alu model for $macc $add$rtl/shared_fp16_pipeline_fabric.sv:33$514.
+  creating $alu model for $macc $add$rtl/shared_fp16_pipeline_fabric.sv:33$488.
+  creating $alu cell for $add$rtl/shared_fp16_pipeline_fabric.sv:33$488: $auto$alumacc.cc:495:replace_alu$1481
+  creating $alu cell for $add$rtl/shared_fp16_pipeline_fabric.sv:33$514: $auto$alumacc.cc:495:replace_alu$1484
+  creating $alu cell for $add$rtl/shared_fp16_pipeline_fabric.sv:33$540: $auto$alumacc.cc:495:replace_alu$1487
+  creating $alu cell for $add$rtl/shared_fp16_pipeline_fabric.sv:33$566: $auto$alumacc.cc:495:replace_alu$1490
+  creating $alu cell for $add$rtl/shared_fp16_pipeline_fabric.sv:33$592: $auto$alumacc.cc:495:replace_alu$1493
+  creating $alu cell for $add$rtl/shared_fp16_pipeline_fabric.sv:33$618: $auto$alumacc.cc:495:replace_alu$1496
+  creating $alu cell for $add$rtl/shared_fp16_pipeline_fabric.sv:33$644: $auto$alumacc.cc:495:replace_alu$1499
+  creating $alu cell for $add$rtl/shared_fp16_pipeline_fabric.sv:68$690: $auto$alumacc.cc:495:replace_alu$1502
+  creating $alu cell for $neg$rtl/shared_fp16_pipeline_fabric.sv:0$478: $auto$alumacc.cc:495:replace_alu$1505
+  creating $alu cell for $neg$rtl/shared_fp16_pipeline_fabric.sv:0$500: $auto$alumacc.cc:495:replace_alu$1508
+  creating $alu cell for $neg$rtl/shared_fp16_pipeline_fabric.sv:0$526: $auto$alumacc.cc:495:replace_alu$1511
+  creating $alu cell for $neg$rtl/shared_fp16_pipeline_fabric.sv:0$552: $auto$alumacc.cc:495:replace_alu$1514
+  creating $alu cell for $neg$rtl/shared_fp16_pipeline_fabric.sv:0$578: $auto$alumacc.cc:495:replace_alu$1517
+  creating $alu cell for $neg$rtl/shared_fp16_pipeline_fabric.sv:0$604: $auto$alumacc.cc:495:replace_alu$1520
+  creating $alu cell for $neg$rtl/shared_fp16_pipeline_fabric.sv:0$630: $auto$alumacc.cc:495:replace_alu$1523
+  creating $alu cell for $neg$rtl/shared_fp16_pipeline_fabric.sv:0$663: $auto$alumacc.cc:495:replace_alu$1526
+  creating $alu cell for $neg$rtl/shared_fp16_pipeline_fabric.sv:0$683: $auto$alumacc.cc:495:replace_alu$1529
+  created 17 $alu and 0 $macc cells.
+
+5.13. Executing SHARE pass (SAT-based resource sharing).
+Found 2 cells in module fp16_add that may be considered for resource sharing.
+  Analyzing resource sharing options for $shr$rtl/fp16_add.sv:13$37 ($shr):
+    Found 4 activation_patterns using ctrl signal { $auto$rtlil.cc:2783:ReduceOr$1277 $auto$rtlil.cc:2783:ReduceOr$1292 $auto$rtlil.cc:2783:ReduceOr$1240 $logic_and$rtl/fp16_add.sv:85$143_Y $eq$rtl/fp16_add.sv:83$139_Y $logic_and$rtl/fp16_add.sv:80$137_Y $logic_or$rtl/fp16_add.sv:74$128_Y $eq$rtl/fp16_add.sv:75$119_Y $eq$rtl/fp16_add.sv:74$116_Y }.
+    No candidates found.
+  Analyzing resource sharing options for $shl$rtl/fp16_add.sv:12$33 ($shl):
+    Found 4 activation_patterns using ctrl signal { $auto$rtlil.cc:2783:ReduceOr$1277 $auto$rtlil.cc:2783:ReduceOr$1292 $auto$rtlil.cc:2783:ReduceOr$1240 $logic_and$rtl/fp16_add.sv:85$143_Y $eq$rtl/fp16_add.sv:83$139_Y $logic_and$rtl/fp16_add.sv:80$137_Y $logic_or$rtl/fp16_add.sv:74$128_Y $eq$rtl/fp16_add.sv:75$119_Y $eq$rtl/fp16_add.sv:74$116_Y }.
+    No candidates found.
+
+5.14. Executing OPT pass (performing simple optimizations).
+
+5.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000.
+Optimizing module fp16_add.
+<suppressed ~9 debug messages>
+Optimizing module shared_fp16_pipeline_fabric.
+
+5.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\shared_fp16_pipeline_fabric'.
+Removed a total of 0 cells.
+
+5.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \shared_fp16_pipeline_fabric..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~58 debug messages>
+
+5.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000.
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \shared_fp16_pipeline_fabric.
+Performed a total of 0 changes.
+
+5.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\shared_fp16_pipeline_fabric'.
+Removed a total of 0 cells.
+
+5.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \shared_fp16_pipeline_fabric..
+Removed 1 unused cells and 24 unused wires.
+<suppressed ~3 debug messages>
+
+5.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000.
+Optimizing module fp16_add.
+Optimizing module shared_fp16_pipeline_fabric.
+
+5.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \shared_fp16_pipeline_fabric..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~58 debug messages>
+
+5.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000.
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \shared_fp16_pipeline_fabric.
+Performed a total of 0 changes.
+
+5.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\shared_fp16_pipeline_fabric'.
+Removed a total of 0 cells.
+
+5.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \shared_fp16_pipeline_fabric..
+
+5.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000.
+Optimizing module fp16_add.
+Optimizing module shared_fp16_pipeline_fabric.
+
+5.14.16. Finished OPT passes. (There is nothing left to do.)
+
+5.15. Executing MEMORY pass.
+
+5.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+5.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+5.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+5.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+5.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+5.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \shared_fp16_pipeline_fabric..
+
+5.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+5.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+5.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \shared_fp16_pipeline_fabric..
+
+5.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+5.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \shared_fp16_pipeline_fabric..
+
+5.17. Executing OPT pass (performing simple optimizations).
+
+5.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000.
+Optimizing module fp16_add.
+<suppressed ~35 debug messages>
+Optimizing module shared_fp16_pipeline_fabric.
+<suppressed ~11 debug messages>
+
+5.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\shared_fp16_pipeline_fabric'.
+Removed a total of 0 cells.
+
+5.17.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \shared_fp16_pipeline_fabric..
+Removed 0 unused cells and 28 unused wires.
+<suppressed ~2 debug messages>
+
+5.17.5. Finished fast OPT passes.
+
+5.18. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+5.19. Executing OPT pass (performing simple optimizations).
+
+5.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000.
+Optimizing module fp16_add.
+Optimizing module shared_fp16_pipeline_fabric.
+
+5.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\shared_fp16_pipeline_fabric'.
+Removed a total of 0 cells.
+
+5.19.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \shared_fp16_pipeline_fabric..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~50 debug messages>
+
+5.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000.
+  Optimizing cells in module \fp16_add.
+    Consolidated identical input bits for $mux cell $procmux$1108:
+      Old ports: A={ 27'000000000000000000000000000 \large_exp }, B={ $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [4:0] }, Y=$3\result_exp[31:0]
+      New ports: A={ 1'0 \large_exp }, B={ $sub$rtl/fp16_add.sv:63$49_Y [31] $sub$rtl/fp16_add.sv:63$49_Y [4:0] }, Y=$3\result_exp[31:0] [5:0]
+      New connections: $3\result_exp[31:0] [31:6] = { $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] }
+    Consolidated identical input bits for $mux cell $procmux$874:
+      Old ports: A={ \result_exp [4:0] \rounded_sig [9:0] }, B={ 5'00000 \rounded_sig [9:0] }, Y=$7\result_o[15:0] [14:0]
+      New ports: A=\result_exp [4:0], B=5'00000, Y=$7\result_o[15:0] [14:10]
+      New connections: $7\result_o[15:0] [9:0] = \rounded_sig [9:0]
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \shared_fp16_pipeline_fabric.
+Performed a total of 2 changes.
+
+5.19.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\shared_fp16_pipeline_fabric'.
+Removed a total of 0 cells.
+
+5.19.6. Executing OPT_SHARE pass.
+
+5.19.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.19.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \shared_fp16_pipeline_fabric..
+
+5.19.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000.
+Optimizing module fp16_add.
+Optimizing module shared_fp16_pipeline_fabric.
+
+5.19.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.19.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \shared_fp16_pipeline_fabric..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~50 debug messages>
+
+5.19.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000.
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \shared_fp16_pipeline_fabric.
+Performed a total of 0 changes.
+
+5.19.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\shared_fp16_pipeline_fabric'.
+Removed a total of 0 cells.
+
+5.19.14. Executing OPT_SHARE pass.
+
+5.19.15. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.19.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \shared_fp16_pipeline_fabric..
+
+5.19.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000.
+Optimizing module fp16_add.
+Optimizing module shared_fp16_pipeline_fabric.
+
+5.19.18. Finished OPT passes. (There is nothing left to do.)
+
+5.20. Executing TECHMAP pass (map to technology primitives).
+
+5.20.1. Executing Verilog-2005 frontend: /home/chandler/.local/yosys/usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/home/chandler/.local/yosys/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+5.20.2. Continuing TECHMAP pass.
+Using template $paramod$3ef7d3dd227da7627a99c5e5a6a4deb817573e39\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $adffe.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $or.
+Using template $paramod$constmap:541caf81b84e1de6a0962ed6ecf2935f94a8337c$paramod$2cd5a0fc12c713b111b124c014c3805512a5d620\_90_shift_shiftx for cells of type $shiftx.
+Using extmapper simplemap for cells of type $logic_not.
+Analyzing pattern of constant bits for this cell:
+  Constant input on bit 3 of port B: 1'0
+Creating constmapped module `$paramod$constmap:de64642e95807af510ec2f372d99917387e547b5$paramod$2cd5a0fc12c713b111b124c014c3805512a5d620\_90_shift_shiftx'.
+
+5.20.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$constmap:de64642e95807af510ec2f372d99917387e547b5$paramod$2cd5a0fc12c713b111b124c014c3805512a5d620\_90_shift_shiftx..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$4295.
+    dead port 2/2 on $mux $procmux$4289.
+    dead port 2/2 on $mux $procmux$4283.
+Removed 3 multiplexer ports.
+<suppressed ~268 debug messages>
+
+5.20.11. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$constmap:de64642e95807af510ec2f372d99917387e547b5$paramod$2cd5a0fc12c713b111b124c014c3805512a5d620\_90_shift_shiftx.
+<suppressed ~3 debug messages>
+Removed 0 unused cells and 10 unused wires.
+Using template $paramod$constmap:de64642e95807af510ec2f372d99917387e547b5$paramod$2cd5a0fc12c713b111b124c014c3805512a5d620\_90_shift_shiftx for cells of type $shiftx.
+Using extmapper simplemap for cells of type $logic_and.
+Using template $paramod$e9679b690548ba55b1f1b57f80da909b90290ccf\_90_alu for cells of type $alu.
+Using template $paramod$constmap:51fb3526f3621c6ba109a6fa670766d42e57f474$paramod$3a55d5cb0043d442f8310a0b82c3ba1d6d3f1032\_90_shift_shiftx for cells of type $shift.
+Using template $paramod$175e67c02b86e96b1288b9dc100122520d7240d8\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $and.
+Using template $paramod$79fc7abbb3333dbd5736999d565fd903198fb1eb\_90_alu for cells of type $alu.
+Using template $paramod$fc972a7a46956c1788f3cb5257b53c8f1df2d0cc\_90_alu for cells of type $alu.
+Using template $paramod$78e969f2586efcf3a5b0b0440bcca0db83d5cca2\_90_alu for cells of type $alu.
+Using template $paramod$7e708ae28ab761f11d0fb59d3ffc72f6a4baf5d9\_90_alu for cells of type $alu.
+Using template $paramod$31b3272de9494c923ffcf0520c4f324d36c33cf5\_90_alu for cells of type $alu.
+Using template $paramod$constmap:a4efaa32abb3069d4591f04c7e8f38b8ab7a15f2$paramod$4cf12cc1152cd82151bdaec48d95885645ddb76d\_90_shift_shiftx for cells of type $shiftx.
+Using template $paramod$constmap:4f6cb8977d70ff11e4f7922ff544b5d269aa65e2$paramod$fdc542a400a6757ee0e8d97e68934ead4afbb9d7\_90_shift_shiftx for cells of type $shift.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000011 for cells of type $lcu.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $ne.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100001 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000010 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000001 for cells of type $lcu.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $reduce_and.
+Using template $paramod$1e402e64350f17d7d96d4d19397585e7730f3657\_90_alu for cells of type $alu.
+Using template $paramod$091610cd349a68bd5539cffd7126f0d76e9bca00\_90_alu for cells of type $alu.
+Using template $paramod$050f15daba5036a0512adf25d3c6631f629623f7\_90_alu for cells of type $alu.
+Using template $paramod$546f3f62de618651dd3a8b3f9e661fb34b30a603\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $reduce_or.
+Using template $paramod$719aadea7a94d31a13cd25a777432aacb0e462b5\_90_alu for cells of type $alu.
+Using template $paramod$constmap:84ecb1fe6cf6c7774af1e6015b4db447afa6c0b1$paramod$419a913ed38c2513939b18df9044de3e442bc66c\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shl.
+Using template $paramod$constmap:b99037b5251b430096ae8426664393d6ae79f5d4$paramod$10d34890fc0a590416fb0bd5f2405603d3bc2a8b\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shr.
+Using extmapper simplemap for cells of type $eq.
+Using template $paramod$5e23d2e0f07f5403e3d2c5b606bab0c16e4174c1\_90_alu for cells of type $alu.
+Using template $paramod$92a1f7a016bf58d33db5a47145e66dde1cbc3210\_90_alu for cells of type $alu.
+Using template $paramod$332fab4e157f868977379756d21fa99887c3c6c4\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $logic_or.
+Using template $paramod$6412f7f13655de512a17af2c71a87b50b4a57324\_90_alu for cells of type $alu.
+Using template $paramod$1ed7ec530b1ba361931392f2f8504f82ccdfecaa\_90_alu for cells of type $alu.
+Using template $paramod$15650b5f68527c2737f08685d9884042e045002a\_90_alu for cells of type $alu.
+Using template $paramod$6df0329addda9228fcc2546de2aaf14ad26c98e1\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001110 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001100 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000110 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000101 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000010000 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~7896 debug messages>
+
+5.21. Executing OPT pass (performing simple optimizations).
+
+5.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000.
+Optimizing module fp16_add.
+<suppressed ~2525 debug messages>
+Optimizing module shared_fp16_pipeline_fabric.
+<suppressed ~98056 debug messages>
+
+5.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000'.
+Finding identical cells in module `\fp16_add'.
+<suppressed ~1779 debug messages>
+Finding identical cells in module `\shared_fp16_pipeline_fabric'.
+<suppressed ~1899 debug messages>
+Removed a total of 1226 cells.
+
+5.21.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \shared_fp16_pipeline_fabric..
+Removed 11836 unused cells and 4253 unused wires.
+<suppressed ~11838 debug messages>
+
+5.21.5. Finished fast OPT passes.
+
+5.22. Executing ABC pass (technology mapping using ABC).
+
+5.22.1. Extracting gate netlist of module `$paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000' to `<abc-temp-dir>/input.blif'..
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Don't call ABC as there is nothing to map.
+Removing temp directory.
+
+5.22.2. Extracting gate netlist of module `\fp16_add' to `<abc-temp-dir>/input.blif'..
+Extracted 4245 gates and 4279 wires to a netlist network with 32 inputs and 16 outputs.
+
+5.22.2.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+5.22.2.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       78
+ABC RESULTS:            ANDNOT cells:     1197
+ABC RESULTS:               MUX cells:      692
+ABC RESULTS:              NAND cells:       48
+ABC RESULTS:               NOR cells:      201
+ABC RESULTS:               NOT cells:      207
+ABC RESULTS:                OR cells:      312
+ABC RESULTS:             ORNOT cells:      182
+ABC RESULTS:              XNOR cells:      150
+ABC RESULTS:               XOR cells:      358
+ABC RESULTS:        internal signals:     4231
+ABC RESULTS:           input signals:       32
+ABC RESULTS:          output signals:       16
+Removing temp directory.
+
+5.22.3. Extracting gate netlist of module `\shared_fp16_pipeline_fabric' to `<abc-temp-dir>/input.blif'..
+Extracted 13945 gates and 18309 wires to a netlist network with 4363 inputs and 2572 outputs.
+
+5.22.3.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+5.22.3.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        5
+ABC RESULTS:            ANDNOT cells:     2640
+ABC RESULTS:               MUX cells:     3735
+ABC RESULTS:              NAND cells:      276
+ABC RESULTS:               NOR cells:       11
+ABC RESULTS:               NOT cells:     4389
+ABC RESULTS:                OR cells:     5759
+ABC RESULTS:             ORNOT cells:      817
+ABC RESULTS:              XNOR cells:        4
+ABC RESULTS:               XOR cells:       16
+ABC RESULTS:        internal signals:    11374
+ABC RESULTS:           input signals:     4363
+ABC RESULTS:          output signals:     2572
+Removing temp directory.
+
+5.23. Executing OPT pass (performing simple optimizations).
+
+5.23.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000.
+Optimizing module fp16_add.
+<suppressed ~10 debug messages>
+Optimizing module shared_fp16_pipeline_fabric.
+<suppressed ~1068 debug messages>
+
+5.23.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000'.
+Finding identical cells in module `\fp16_add'.
+<suppressed ~588 debug messages>
+Finding identical cells in module `\shared_fp16_pipeline_fabric'.
+<suppressed ~66 debug messages>
+Removed a total of 218 cells.
+
+5.23.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.23.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \shared_fp16_pipeline_fabric..
+Removed 1 unused cells and 9199 unused wires.
+<suppressed ~14 debug messages>
+
+5.23.5. Finished fast OPT passes.
+
+5.24. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `shared_fp16_pipeline_fabric'. Setting top module to shared_fp16_pipeline_fabric.
+
+5.24.1. Analyzing design hierarchy..
+Top module:  \shared_fp16_pipeline_fabric
+Used module:     $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000
+Used module:         \fp16_add
+
+5.24.2. Analyzing design hierarchy..
+Top module:  \shared_fp16_pipeline_fabric
+Used module:     $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000
+Used module:         \fp16_add
+Removed 0 unused modules.
+
+5.25. Printing statistics.
+
+=== $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000 ===
+
+   Number of wires:                  3
+   Number of wire bits:            768
+   Number of public wires:           3
+   Number of public wire bits:     768
+   Number of ports:                  3
+   Number of port bits:            768
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 16
+     fp16_add                       16
+
+=== fp16_add ===
+
+   Number of wires:               3230
+   Number of wire bits:           3419
+   Number of public wires:          17
+   Number of public wire bits:     206
+   Number of ports:                  3
+   Number of port bits:             48
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               3229
+     $_ANDNOT_                    1085
+     $_AND_                         71
+     $_MUX_                        678
+     $_NAND_                        48
+     $_NOR_                        201
+     $_NOT_                        199
+     $_ORNOT_                      177
+     $_OR_                         284
+     $_XNOR_                       141
+     $_XOR_                        345
+
+=== shared_fp16_pipeline_fabric ===
+
+   Number of wires:              15072
+   Number of wire bits:          22000
+   Number of public wires:          13
+   Number of public wire bits:    6937
+   Number of ports:                  7
+   Number of port bits:           6162
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:              17633
+     $_ANDNOT_                    2640
+     $_AND_                          4
+     $_DFFE_PN0P_                    3
+     $_MUX_                       3735
+     $_NAND_                       271
+     $_NOR_                         11
+     $_NOT_                       4388
+     $_ORNOT_                      807
+     $_OR_                        5753
+     $_XNOR_                         4
+     $_XOR_                         16
+     $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000      1
+
+=== design hierarchy ===
+
+   shared_fp16_pipeline_fabric       1
+     $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000      1
+       fp16_add                     16
+
+   Number of wires:              66755
+   Number of wire bits:          77472
+   Number of public wires:         288
+   Number of public wire bits:   11001
+   Number of ports:                 58
+   Number of port bits:           7698
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:              69296
+     $_ANDNOT_                   20000
+     $_AND_                       1140
+     $_DFFE_PN0P_                    3
+     $_MUX_                      14583
+     $_NAND_                      1039
+     $_NOR_                       3227
+     $_NOT_                       7572
+     $_ORNOT_                     3639
+     $_OR_                       10297
+     $_XNOR_                      2260
+     $_XOR_                       5536
+
+5.26. Executing CHECK pass (checking for obvious problems).
+Checking module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000...
+Checking module fp16_add...
+Checking module shared_fp16_pipeline_fabric...
+Found and reported 0 problems.
+
+6. Executing FLATTEN pass (flatten design).
+Deleting now unused module $paramod\fp16_vector_add\LANES=32'00000000000000000000000000010000.
+Deleting now unused module fp16_add.
+<suppressed ~17 debug messages>
+
+7. Executing OPT pass (performing simple optimizations).
+
+7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module shared_fp16_pipeline_fabric.
+
+7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\shared_fp16_pipeline_fabric'.
+Removed a total of 0 cells.
+
+7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \shared_fp16_pipeline_fabric..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \shared_fp16_pipeline_fabric.
+Performed a total of 0 changes.
+
+7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\shared_fp16_pipeline_fabric'.
+Removed a total of 0 cells.
+
+7.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+7.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \shared_fp16_pipeline_fabric..
+
+7.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module shared_fp16_pipeline_fabric.
+
+7.9. Finished OPT passes. (There is nothing left to do.)
+
+8. Printing statistics.
+
+=== shared_fp16_pipeline_fabric ===
+
+   Number of wires:              66755
+   Number of wire bits:          77472
+   Number of public wires:         288
+   Number of public wire bits:   11001
+   Number of ports:                  7
+   Number of port bits:           6162
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:              69313
+     $_ANDNOT_                   20000
+     $_AND_                       1140
+     $_DFFE_PN0P_                    3
+     $_MUX_                      14583
+     $_NAND_                      1039
+     $_NOR_                       3227
+     $_NOT_                       7572
+     $_ORNOT_                     3639
+     $_OR_                       10297
+     $_XNOR_                      2260
+     $_XOR_                       5536
+     $scopeinfo                     17
+
+9. Executing LTP pass (find longest path).
+
+Longest topological path in shared_fp16_pipeline_fabric (length=292):
+    0: \round_robin_q [2]
+    1: $abc$134787$new_n6936 (via $abc$134787$auto$blifparse.cc:396:parse_blif$134788)
+    2: $abc$134787$new_n6949 (via $abc$134787$auto$blifparse.cc:396:parse_blif$134801)
+    3: $abc$134787$new_n6978 (via $abc$134787$auto$blifparse.cc:396:parse_blif$134830)
+    4: $abc$134787$new_n6979 (via $abc$134787$auto$blifparse.cc:396:parse_blif$134831)
+    5: $abc$134787$new_n6980 (via $abc$134787$auto$blifparse.cc:396:parse_blif$134832)
+    6: $abc$134787$new_n6981 (via $abc$134787$auto$blifparse.cc:396:parse_blif$134833)
+    7: $abc$134787$new_n6982 (via $abc$134787$auto$blifparse.cc:396:parse_blif$134834)
+    8: $abc$134787$new_n6983 (via $abc$134787$auto$blifparse.cc:396:parse_blif$134835)
+    9: $abc$134787$new_n6991 (via $abc$134787$auto$blifparse.cc:396:parse_blif$134843)
+   10: $abc$134787$new_n6992 (via $abc$134787$auto$blifparse.cc:396:parse_blif$134844)
+   11: $abc$134787$new_n6993 (via $abc$134787$auto$blifparse.cc:396:parse_blif$134845)
+   12: $abc$134787$new_n7009 (via $abc$134787$auto$blifparse.cc:396:parse_blif$134861)
+   13: $abc$134787$new_n7060 (via $abc$134787$auto$blifparse.cc:396:parse_blif$134912)
+   14: $abc$134787$new_n7061 (via $abc$134787$auto$blifparse.cc:396:parse_blif$134913)
+   15: $abc$134787$new_n7062 (via $abc$134787$auto$blifparse.cc:396:parse_blif$134914)
+   16: $abc$134787$new_n7063 (via $abc$134787$auto$blifparse.cc:396:parse_blif$134915)
+   17: $abc$134787$new_n7064 (via $abc$134787$auto$blifparse.cc:396:parse_blif$134916)
+   18: $abc$134787$new_n7072 (via $abc$134787$auto$blifparse.cc:396:parse_blif$134924)
+   19: $abc$134787$new_n7124 (via $abc$134787$auto$blifparse.cc:396:parse_blif$134976)
+   20: $abc$134787$new_n7125 (via $abc$134787$auto$blifparse.cc:396:parse_blif$134977)
+   21: $abc$134787$new_n7126 (via $abc$134787$auto$blifparse.cc:396:parse_blif$134978)
+   22: $abc$134787$new_n7127 (via $abc$134787$auto$blifparse.cc:396:parse_blif$134979)
+   23: $abc$134787$new_n7128 (via $abc$134787$auto$blifparse.cc:396:parse_blif$134980)
+   24: $abc$134787$new_n7132 (via $abc$134787$auto$blifparse.cc:396:parse_blif$134984)
+   25: $abc$134787$new_n7182 (via $abc$134787$auto$blifparse.cc:396:parse_blif$135034)
+   26: $abc$134787$new_n7183 (via $abc$134787$auto$blifparse.cc:396:parse_blif$135035)
+   27: $abc$134787$new_n7184 (via $abc$134787$auto$blifparse.cc:396:parse_blif$135036)
+   28: $abc$134787$new_n7185 (via $abc$134787$auto$blifparse.cc:396:parse_blif$135037)
+   29: $abc$134787$new_n7186 (via $abc$134787$auto$blifparse.cc:396:parse_blif$135038)
+   30: $abc$134787$new_n7190 (via $abc$134787$auto$blifparse.cc:396:parse_blif$135042)
+   31: $abc$134787$new_n7238 (via $abc$134787$auto$blifparse.cc:396:parse_blif$135090)
+   32: $abc$134787$new_n7239 (via $abc$134787$auto$blifparse.cc:396:parse_blif$135091)
+   33: $abc$134787$new_n7240 (via $abc$134787$auto$blifparse.cc:396:parse_blif$135092)
+   34: $abc$134787$new_n7241 (via $abc$134787$auto$blifparse.cc:396:parse_blif$135093)
+   35: $abc$134787$new_n7242 (via $abc$134787$auto$blifparse.cc:396:parse_blif$135094)
+   36: $abc$134787$new_n7244 (via $abc$134787$auto$blifparse.cc:396:parse_blif$135096)
+   37: $abc$134787$new_n7292 (via $abc$134787$auto$blifparse.cc:396:parse_blif$135144)
+   38: $abc$134787$new_n7293 (via $abc$134787$auto$blifparse.cc:396:parse_blif$135145)
+   39: $abc$134787$new_n7294 (via $abc$134787$auto$blifparse.cc:396:parse_blif$135146)
+   40: $abc$134787$new_n7295 (via $abc$134787$auto$blifparse.cc:396:parse_blif$135147)
+   41: $abc$134787$new_n7296 (via $abc$134787$auto$blifparse.cc:396:parse_blif$135148)
+   42: $abc$134787$new_n7298 (via $abc$134787$auto$blifparse.cc:396:parse_blif$135150)
+   43: $abc$134787$new_n7346 (via $abc$134787$auto$blifparse.cc:396:parse_blif$135198)
+   44: $abc$134787$new_n7347 (via $abc$134787$auto$blifparse.cc:396:parse_blif$135199)
+   45: $abc$134787$new_n7348 (via $abc$134787$auto$blifparse.cc:396:parse_blif$135200)
+   46: $abc$134787$new_n7349 (via $abc$134787$auto$blifparse.cc:396:parse_blif$135201)
+   47: $abc$134787$new_n7350 (via $abc$134787$auto$blifparse.cc:396:parse_blif$135202)
+   48: $abc$134787$new_n7352 (via $abc$134787$auto$blifparse.cc:396:parse_blif$135204)
+   49: $abc$134787$new_n7363 (via $abc$134787$auto$blifparse.cc:396:parse_blif$135215)
+   50: $abc$134787$new_n15537 (via $abc$134787$auto$blifparse.cc:396:parse_blif$143389)
+   51: $abc$134787$new_n15538 (via $abc$134787$auto$blifparse.cc:396:parse_blif$143390)
+   52: $abc$134787$new_n15539 (via $abc$134787$auto$blifparse.cc:396:parse_blif$143391)
+   53: \g_pipeline[0].adder.g_lane[15].adder.rhs_i [13] (via $abc$134787$auto$blifparse.cc:396:parse_blif$143392)
+   54: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n50 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131363)
+   55: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n51 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131364)
+   56: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n57 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131370)
+   57: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n81 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131394)
+   58: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n84 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131397)
+   59: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n89 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131402)
+   60: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n95 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131408)
+   61: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n96 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131409)
+   62: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n97 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131410)
+   63: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n98 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131411)
+   64: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n137 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131450)
+   65: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n143 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131456)
+   66: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n171 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131484)
+   67: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n172 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131485)
+   68: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n173 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131486)
+   69: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n174 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131487)
+   70: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n175 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131488)
+   71: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n176 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131489)
+   72: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n177 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131490)
+   73: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n178 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131491)
+   74: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n441 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131754)
+   75: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n450 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131763)
+   76: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n451 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131764)
+   77: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n452 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131765)
+   78: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n453 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131766)
+   79: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n454 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131767)
+   80: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n463 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131776)
+   81: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n464 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131777)
+   82: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n499 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131812)
+   83: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n500 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131813)
+   84: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n513 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131826)
+   85: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n514 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131827)
+   86: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n522 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131835)
+   87: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n523 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131836)
+   88: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n524 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131837)
+   89: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n536 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131849)
+   90: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n542 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131855)
+   91: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n543 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131856)
+   92: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n544 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131857)
+   93: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n555 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131868)
+   94: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n556 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131869)
+   95: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n557 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131870)
+   96: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n566 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131879)
+   97: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n567 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131880)
+   98: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n568 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131881)
+   99: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n569 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131882)
+  100: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n570 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131883)
+  101: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n571 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131884)
+  102: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n572 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131885)
+  103: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n573 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131886)
+  104: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n574 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131887)
+  105: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n586 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131899)
+  106: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n609 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131922)
+  107: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n610 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131923)
+  108: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n611 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131924)
+  109: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n612 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131925)
+  110: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n613 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131926)
+  111: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n614 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131927)
+  112: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n615 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131928)
+  113: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n620 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131933)
+  114: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n621 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131934)
+  115: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n670 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131981)
+  116: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n671 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131982)
+  117: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n672 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131983)
+  118: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n673 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131984)
+  119: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n674 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131985)
+  120: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n675 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131986)
+  121: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n676 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131987)
+  122: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n677 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131988)
+  123: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n678 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131989)
+  124: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n679 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$131990)
+  125: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n694 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132005)
+  126: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n700 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132011)
+  127: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n701 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132012)
+  128: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n891 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132202)
+  129: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n892 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132203)
+  130: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n893 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132204)
+  131: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n894 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132205)
+  132: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n895 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132206)
+  133: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n896 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132207)
+  134: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n897 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132208)
+  135: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n898 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132209)
+  136: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n901 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132212)
+  137: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n902 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132213)
+  138: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n903 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132214)
+  139: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n904 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132215)
+  140: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n905 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132216)
+  141: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n906 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132217)
+  142: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n907 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132218)
+  143: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n923 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132234)
+  144: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n924 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132235)
+  145: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n927 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132238)
+  146: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n938 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132249)
+  147: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n960 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132271)
+  148: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1007 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132318)
+  149: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1096 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132407)
+  150: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1097 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132408)
+  151: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1105 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132416)
+  152: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1111 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132422)
+  153: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1112 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132423)
+  154: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1284 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132595)
+  155: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1285 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132596)
+  156: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1286 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132597)
+  157: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1287 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132598)
+  158: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1288 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132599)
+  159: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1289 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132600)
+  160: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1290 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132601)
+  161: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1291 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132602)
+  162: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1294 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132605)
+  163: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1295 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132606)
+  164: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1296 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132607)
+  165: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1297 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132608)
+  166: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1298 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132609)
+  167: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1299 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132610)
+  168: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1300 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132611)
+  169: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1320 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132631)
+  170: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1321 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132632)
+  171: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1324 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132635)
+  172: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1335 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132646)
+  173: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1357 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132668)
+  174: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1404 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132715)
+  175: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1495 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132806)
+  176: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1496 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132807)
+  177: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1504 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132815)
+  178: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1510 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132821)
+  179: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1511 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$132822)
+  180: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1689 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133000)
+  181: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1690 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133001)
+  182: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1691 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133002)
+  183: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1692 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133003)
+  184: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1693 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133004)
+  185: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1694 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133005)
+  186: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1695 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133006)
+  187: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1696 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133007)
+  188: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1699 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133010)
+  189: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1700 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133011)
+  190: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1701 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133012)
+  191: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1702 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133013)
+  192: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1703 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133014)
+  193: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1704 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133015)
+  194: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1705 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133016)
+  195: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1725 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133036)
+  196: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1726 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133037)
+  197: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1729 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133040)
+  198: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1740 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133051)
+  199: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1762 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133073)
+  200: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1811 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133122)
+  201: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1902 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133213)
+  202: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1903 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133214)
+  203: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1911 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133222)
+  204: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1917 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133228)
+  205: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n1918 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133229)
+  206: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2098 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133409)
+  207: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2099 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133410)
+  208: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2100 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133411)
+  209: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2101 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133412)
+  210: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2102 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133413)
+  211: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2103 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133414)
+  212: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2104 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133415)
+  213: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2105 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133416)
+  214: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2108 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133419)
+  215: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2109 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133420)
+  216: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2110 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133421)
+  217: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2111 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133422)
+  218: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2112 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133423)
+  219: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2113 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133424)
+  220: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2114 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133425)
+  221: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2135 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133446)
+  222: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2136 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133447)
+  223: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2139 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133450)
+  224: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2150 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133461)
+  225: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2172 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133483)
+  226: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2221 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133532)
+  227: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2312 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133623)
+  228: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2313 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133624)
+  229: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2321 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133632)
+  230: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2327 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133638)
+  231: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2328 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133639)
+  232: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2510 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133821)
+  233: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2511 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133822)
+  234: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2512 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133823)
+  235: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2513 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133824)
+  236: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2514 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133825)
+  237: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2515 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133826)
+  238: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2516 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133827)
+  239: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2517 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133828)
+  240: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2520 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133831)
+  241: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2521 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133832)
+  242: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2522 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133833)
+  243: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2523 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133834)
+  244: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2524 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133835)
+  245: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2525 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133836)
+  246: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2526 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133837)
+  247: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2548 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133859)
+  248: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2549 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133860)
+  249: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2552 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133863)
+  250: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2564 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133875)
+  251: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2586 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133897)
+  252: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2634 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$133945)
+  253: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2721 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134032)
+  254: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2722 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134033)
+  255: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2730 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134041)
+  256: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2736 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134047)
+  257: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n2737 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134048)
+  258: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3092 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134403)
+  259: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3093 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134404)
+  260: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3094 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134405)
+  261: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3095 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134406)
+  262: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3096 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134407)
+  263: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3097 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134408)
+  264: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3150 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134461)
+  265: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3151 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134462)
+  266: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3152 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134463)
+  267: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3153 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134464)
+  268: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3156 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134467)
+  269: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3249 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134560)
+  270: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3250 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134561)
+  271: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3251 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134562)
+  272: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3252 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134563)
+  273: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3253 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134564)
+  274: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3254 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134565)
+  275: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3432 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134733)
+  276: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3440 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134734)
+  277: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3446 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134740)
+  278: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3448 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134742)
+  279: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3477 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134771)
+  280: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3478 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134772)
+  281: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3479 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134773)
+  282: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3480 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134774)
+  283: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3481 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134775)
+  284: $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$new_n3482 (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134776)
+  285: \g_pipeline[0].adder.g_lane[15].adder.result_o [14] (via $flatten\g_pipeline[0].adder.\g_lane[15].adder.$abc$131361$auto$blifparse.cc:396:parse_blif$134777)
+  286: $abc$134787$new_n17360 (via $abc$134787$auto$blifparse.cc:396:parse_blif$145212)
+  287: $abc$134787$new_n20179 (via $abc$134787$auto$blifparse.cc:396:parse_blif$148031)
+  288: $abc$134787$new_n20180 (via $abc$134787$auto$blifparse.cc:396:parse_blif$148032)
+  289: $abc$134787$new_n22231 (via $abc$134787$auto$blifparse.cc:396:parse_blif$150083)
+  290: $abc$134787$new_n22232 (via $abc$134787$auto$blifparse.cc:396:parse_blif$150084)
+  291: $abc$134787$new_n22233 (via $abc$134787$auto$blifparse.cc:396:parse_blif$150085)
+  292: \result_o [1278] (via $abc$134787$auto$blifparse.cc:396:parse_blif$150086)
+
+End of script. Logfile hash: 21e00f2de6, CPU: user 9.22s system 0.92s, MEM: 259.87 MB peak
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+Time spent: 21% 52x opt_expr (2 sec), 11% 1x abc (1 sec), ...

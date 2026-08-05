@@ -1,0 +1,6 @@
+scope,entries,ports,latency,aggregation_taps,bandwidth_bytes_per_cycle,peak_entries,stall_attempts,outputs_checked,depthwise_cycle,total_cycle,modeled_writes,accuracy
+depthwise_micro,0,0,1,9,64,128,0,37632,33025,33025,153664,PASS
+depthwise_micro,128,8,1,9,64,128,25344,37632,33138,33138,153664,PASS
+depthwise_micro,128,4,1,9,64,128,43968,37632,33622,33622,153664,PASS
+full_uib,0,0,1,9,64,128,0,18816,34880,231178,199350,PASS
+full_uib,128,4,1,9,64,128,43776,18816,35011,231309,199350,PASS

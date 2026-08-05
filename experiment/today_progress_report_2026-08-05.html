@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>계층형 HBM2-PIM 시뮬레이터 개발 진행 보고</title>
+  <style>
+    :root {
+      --ink: #17212b;
+      --muted: #586675;
+      --line: #cbd3da;
+      --soft: #f4f6f7;
+      --paper: #ffffff;
+      --navy: #16324f;
+      --cyan: #087f8c;
+      --green: #277a52;
+      --yellow: #d7a51b;
+      --red: #b6473d;
+      --violet: #6c4aa1;
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.72;
+      letter-spacing: 0;
+    }
+    a { color: var(--cyan); }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255,255,255,.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(8px);
+    }
+    .topbar-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand { font-weight: 800; color: var(--navy); white-space: nowrap; }
+    nav { display: flex; gap: 18px; overflow-x: auto; }
+    nav a { color: var(--muted); text-decoration: none; white-space: nowrap; font-size: 14px; }
+    header {
+      color: white;
+      background: var(--navy);
+      border-bottom: 8px solid var(--cyan);
+    }
+    .hero {
+      max-width: var(--max);
+      min-height: 470px;
+      margin: 0 auto;
+      padding: 72px 24px 54px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(290px, .8fr);
+      align-items: end;
+      gap: 60px;
+    }
+    .eyebrow { color: #9ee4e7; font-weight: 750; }
+    h1 { margin: 10px 0 20px; font-size: 48px; line-height: 1.15; letter-spacing: 0; }
+    .hero p { margin: 0; max-width: 760px; color: #dbe7ef; font-size: 19px; }
+    .hero-meta { border-left: 3px solid #62c6cc; padding-left: 22px; }
+    .hero-meta div { margin: 8px 0; }
+    .hero-meta strong { display: block; color: #9ee4e7; font-size: 13px; }
+    main { overflow: hidden; }
+    section { border-bottom: 1px solid var(--line); }
+    .section-inner { max-width: var(--max); margin: 0 auto; padding: 64px 24px; }
+    section:nth-of-type(even) { background: var(--soft); }
+    h2 { margin: 0 0 12px; font-size: 32px; line-height: 1.3; color: var(--navy); }
+    h3 { margin: 34px 0 10px; font-size: 22px; line-height: 1.4; color: var(--navy); }
+    h4 { margin: 24px 0 8px; font-size: 17px; }
+    .lead { max-width: 880px; color: var(--muted); font-size: 18px; }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      margin-top: 32px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+    .metric { min-height: 150px; padding: 22px; background: white; }
+    .metric b { display: block; font-size: 29px; color: var(--cyan); line-height: 1.2; }
+    .metric span { display: block; margin-top: 8px; color: var(--muted); }
+    .callout { margin: 28px 0; padding: 20px 24px; border-left: 5px solid var(--cyan); background: #eaf5f5; }
+    .callout.warning { border-color: var(--yellow); background: #fff8df; }
+    .callout.correction { border-color: var(--red); background: #fff0ee; }
+    .callout strong { color: var(--navy); }
+    .architecture {
+      display: grid;
+      grid-template-columns: 1fr 70px 1fr 70px 1fr;
+      align-items: stretch;
+      margin: 34px 0;
+    }
+    .arch-box { border: 2px solid var(--navy); background: white; padding: 22px; min-height: 220px; }
+    .arch-box.logic { border-color: var(--cyan); background: #eaf7f7; }
+    .arch-box.host { border-color: var(--muted); }
+    .arrow { display: grid; place-items: center; font-size: 30px; color: var(--cyan); font-weight: 800; }
+    .stack {
+      width: min(520px, 100%);
+      margin: 30px auto;
+      border: 1px solid var(--line);
+      background: white;
+    }
+    .die { padding: 14px 20px; text-align: center; border-bottom: 1px solid var(--line); }
+    .die.dram { background: #edf1f4; }
+    .die.logic { background: #d9f1f1; border: 3px solid var(--cyan); }
+    .die.board { background: var(--navy); color: white; border-bottom: 0; }
+    table { width: 100%; border-collapse: collapse; margin: 22px 0 34px; background: white; }
+    th, td { padding: 13px 14px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { background: var(--navy); color: white; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .status { display: inline-block; padding: 2px 9px; border-radius: 3px; color: white; font-weight: 700; font-size: 13px; }
+    .done { background: var(--green); }
+    .active { background: var(--cyan); }
+    .next { background: var(--yellow); color: #332600; }
+    .research { background: var(--violet); }
+    .bar-chart { margin: 28px 0; }
+    .bar-row { display: grid; grid-template-columns: 170px 1fr 125px; gap: 14px; align-items: center; margin: 12px 0; }
+    .track { height: 24px; background: #e1e6ea; position: relative; overflow: hidden; }
+    .fill { height: 100%; background: var(--cyan); }
+    .fill.depthwise { background: var(--red); }
+    .bar-value { text-align: right; font-variant-numeric: tabular-nums; }
+    .timeline { margin: 30px 0; border-left: 3px solid var(--cyan); }
+    .timeline-item { position: relative; padding: 0 0 28px 30px; }
+    .timeline-item::before { content: ""; position: absolute; left: -9px; top: 7px; width: 15px; height: 15px; background: white; border: 3px solid var(--cyan); border-radius: 50%; }
+    .timeline-item h3 { margin: 0 0 6px; }
+    .two-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+    .plain-panel { border-top: 4px solid var(--cyan); padding-top: 14px; }
+    code { padding: 2px 5px; background: #e8edf0; font-family: Consolas, monospace; font-size: .92em; }
+    pre { overflow-x: auto; padding: 18px; color: #edf7fa; background: #142b3b; border-left: 5px solid var(--cyan); }
+    pre code { padding: 0; color: inherit; background: transparent; }
+    .footnotes { color: var(--muted); font-size: 14px; }
+    footer { color: #dbe7ef; background: var(--navy); }
+    footer .section-inner { padding-top: 32px; padding-bottom: 32px; }
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; min-height: 0; gap: 34px; padding-top: 54px; }
+      h1 { font-size: 38px; }
+      .summary-grid { grid-template-columns: repeat(2, 1fr); }
+      .architecture { grid-template-columns: 1fr; }
+      .arrow { min-height: 55px; transform: rotate(90deg); }
+      .two-col { grid-template-columns: 1fr; }
+      .bar-row { grid-template-columns: 115px 1fr; }
+      .bar-value { grid-column: 2; text-align: left; }
+    }
+    @media (max-width: 560px) {
+      .topbar-inner { padding: 8px 14px; }
+      .brand { display: none; }
+      .hero, .section-inner { padding-left: 18px; padding-right: 18px; }
+      h1 { font-size: 32px; }
+      h2 { font-size: 27px; }
+      .summary-grid { grid-template-columns: 1fr; }
+      table { display: block; overflow-x: auto; white-space: nowrap; }
+    }
+    @media print {
+      .topbar { display: none; }
+      body { font-size: 11pt; }
+      .hero { min-height: 0; padding: 38px 24px; }
+      section { break-inside: avoid; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">STOB Hierarchical PIM</div>
+      <nav aria-label="문서 목차">
+        <a href="#summary">요약</a><a href="#logic-die-overview">로직 다이</a><a href="#concept">개념</a><a href="#model">모델링</a>
+        <a href="#placement">배치</a><a href="#results">수행 결과</a><a href="#diagnosis">병목</a><a href="#roadmap">향후 계획</a>
+      </nav>
+    </div>
+  </div>
+
+  <header>
+    <div class="hero">
+      <div>
+        <div class="eyebrow">2026년 8월 5일 · 연구개발 진행 보고</div>
+        <h1>계층형 HBM2-PIM<br>시뮬레이터 개발 현황</h1>
+        <p>기존 HBM2의 bank 인접 PCU를 유지하면서 HBM logic die에 공유 PCU를 추가해, 여러 bank를 연결하는 복잡한 연산의 메모리 이동을 줄이는 구조를 연구하고 있습니다.</p>
+      </div>
+      <div class="hero-meta">
+        <div><strong>기준 워크로드</strong>MobileNetV4 Conv-S UIB, 14×14×96</div>
+        <div><strong>현재 검증 규모</strong>최종 FP16 출력 18,816개</div>
+        <div><strong>현재 단계</strong>C++ cycle-level 모델 및 기능 검증</div>
+        <div><strong>현재 구현</strong>Logic-die depthwise accumulation 1차 프로토타입</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="summary">
+      <div class="section-inner">
+        <h2>한눈에 보는 현재 상태</h2>
+        <p class="lead">처음에는 기존 bank-side PIM이 정상 작동하는지 확인하는 것부터 시작했습니다. 현재는 64개 HBM 채널이 공유하는 logic-die PCU, 명령 스케줄러, 계층 간 전송, 공유 가중치·출력 버퍼와 독립 실행 문맥을 시뮬레이터 시간축에 연결한 상태입니다.</p>
+        <div class="summary-grid">
+          <div class="metric"><b>18,816 / 18,816</b><span>실제 UIB 최종 출력 정확도 통과</span></div>
+          <div class="metric"><b>235,182 cycle</b><span>현재 상세 계측 조건의 전체 UIB 실행시간</span></div>
+          <div class="metric"><b>225,792 B</b><span>bank↔logic 경계의 논리 tensor 이동량</span></div>
+          <div class="metric"><b>72차</b><span>기초 검증부터 병목 분해까지 누적 실험 기록</span></div>
+        </div>
+        <div class="callout">
+          <strong>오늘 보고의 핵심 결론:</strong> logic die는 단순히 “연산기를 하나 더 붙인 가상 옵션”이 아니라, 모든 채널이 공유하는 제한된 자원으로 모델링했습니다. Pointwise 연산과 depthwise logic-die 누산을 연결한 전체 UIB에서 최종 FP16 출력 18,816개가 모두 통과했습니다. 신규 누산 경로는 DRAM write를 줄였지만 직렬 전송 비용 때문에 아직 기준 구조보다 느립니다.
+        </div>
+        <div class="callout warning">
+          <strong>기준 결과와 신규 실험의 구분:</strong> 위의 18,816/18,816과 235,182 cycle은 검증이 끝난 기준 구조의 결과입니다. 기준 구조는 expand/project pointwise를 logic die에서, depthwise와 ADD/ReLU를 bank-side에서 수행합니다. 새 depthwise logic 누산 경로는 아직 기준 구조를 대체하지 않았습니다.
+        </div>
+      </div>
+    </section>
+
+    <section id="logic-die-overview">
+      <div class="section-inner">
+        <h2>로직 다이 모델링·배치·연산·향후 계획</h2>
+        <p class="lead">이 절은 이번 프로젝트에서 로직 다이를 어떤 원리로 표현했고, HBM 안의 어디에 둔 것으로 가정했으며, 현재 실제로 어디까지 계산했는지를 한 흐름으로 정리합니다. 아래의 로직 다이는 아직 물리 배치가 끝난 칩이 아니라 C++ cycle-level 시뮬레이션 모델입니다.</p>
+
+        <h3>1. 어떤 원리로 모델링했는가</h3>
+        <p>핵심 원리는 <strong>여러 HBM channel과 bank가 함께 사용하는 유한한 중앙 자원</strong>입니다. 로직 다이에 PCU가 있다고 표시만 한 것이 아니라, 명령이 기다리는 queue, 실제 PCU 개수, 명령 처리 latency, bank와 logic die 사이의 전송 bandwidth, buffer 용량, 자원이 찼을 때의 backpressure를 시뮬레이터 시간에 반영했습니다.</p>
+        <table>
+          <thead><tr><th>모델 요소</th><th>표현한 원리</th><th>시뮬레이션에 미치는 영향</th></tr></thead>
+          <tbody>
+            <tr><td>Global scheduler</td><td>64개 channel이 하나의 logic PCU pool을 공유</td><td>PCU가 사용 중이면 다음 명령이 queue에서 대기</td></tr>
+            <tr><td>Hierarchy interconnect</td><td>bank↔logic 데이터 이동에 bandwidth와 latency 부여</td><td>이동 byte가 많거나 link가 좁으면 cycle 증가</td></tr>
+            <tr><td>Shared buffer</td><td>weight, output, partial sum을 제한된 entry에 저장</td><td>용량·port 부족 시 stall과 backpressure 발생</td></tr>
+            <tr><td>독립 실행 context</td><td>bank PCU와 logic PCU의 CRF·register·상태 분리</td><td>두 계층의 명령이 서로의 실행 상태를 덮어쓰지 않음</td></tr>
+            <tr><td>정확도 경로</td><td>FP16 산술 결과를 다음 UIB 단계의 실제 입력으로 연결</td><td>단순 성능 추정이 아니라 end-to-end 수치 검증 가능</td></tr>
+          </tbody>
+        </table>
+
+        <h3>2. 로직 다이는 어디에 놓았는가</h3>
+        <p>물리 구조 가정에서는 적층된 DRAM die 아래의 <strong>base logic die</strong>에 global PCU array, scheduler, shared buffer와 누산기를 둡니다. 기존 bank 인접 local PCU는 그대로 유지합니다. 코드에서는 <code>MultiChannelMemorySystem</code>에 공유 자원을 한 번만 만들고, 64개 <code>MemorySystem/Rank/PIMRank</code>가 같은 객체를 참조하게 하여 이 배치를 표현했습니다.</p>
+        <div class="callout">
+          <strong>중요한 구분:</strong> 현재 모델이 결정한 것은 “모든 channel 아래에서 공유되는 논리적 위치와 자원 범위”입니다. 실제 RTL의 좌표, TSV 연결 수, 배선 길이, 면적, 전력과 발열은 아직 정하지 않았으며 Verilog 합성·물리 설계 단계에서 검증해야 합니다.
+        </div>
+
+        <h3>3. 연산은 어디까지 수행했는가</h3>
+        <table>
+          <thead><tr><th>검증 범위</th><th>연산 배치</th><th>현재 결과</th></tr></thead>
+          <tbody>
+            <tr><td>기본 PIM kernel</td><td>ADD, MUL, ReLU, GEMV, GEMV_TREE를 bank-side 기준으로 검증</td><td><span class="status done">정확도 PASS</span></td></tr>
+            <tr><td>MobileNetV4 UIB pointwise</td><td>Expand·project의 GEMV/MAC을 logic-die PCU에서 수행</td><td><span class="status done">실제 shape PASS</span></td></tr>
+            <tr><td>MobileNetV4 depthwise</td><td>bank PCU에서 3×3 tap MUL과 local aggregation 수행</td><td><span class="status done">37,632 outputs PASS</span></td></tr>
+            <tr><td>계층형 depthwise 후보</td><td>bank partial을 logic-die accumulator에서 모아 최종값만 write</td><td><span class="status done">기능·FP16 rounding PASS</span></td></tr>
+            <tr><td>전체 UIB</td><td>Expand → depthwise → project → residual/activation을 실제 tensor로 연결</td><td><span class="status done">18,816 / 18,816 PASS</span></td></tr>
+          </tbody>
+        </table>
+        <p>현재 가장 유망한 계층형 후보는 depthwise의 9개 tap을 bank에서 먼저 합친 뒤 최종 partial만 logic die로 보내는 방식입니다. 이 후보는 bank→logic 전송량을 2,359,296 B에서 262,144 B로 88.89% 줄였고, 전체 modeled DRAM write를 220,342건에서 199,350건으로 9.53% 줄였습니다. 제한된 128-entry, 4-port accumulator 모델에서도 최종 출력 18,816개가 모두 일치했고 총 231,309 cycle로 bank 기준 235,182 cycle보다 1.65% 빨랐습니다.</p>
+
+        <h3>4. 향후 어떻게 진행할 것인가</h3>
+        <ol>
+          <li><strong>자원 구조 현실화 완료:</strong> accumulator를 최대 8개 bank로 나누고 port 충돌, bank별 entry와 28×28 shape의 peak 사용량까지 측정했습니다.</li>
+          <li><strong>MobileNetV4 범위 확대:</strong> 현재 한 UIB block에서 여러 해상도·channel 조합과 연속 block 실행으로 검증 범위를 넓힙니다.</li>
+          <li><strong>배치 정책 비교:</strong> bank-local, logic-die, hybrid 배치를 같은 정확도와 자원 조건에서 비교해 어떤 연산을 어느 계층에 둘지 정량화합니다.</li>
+          <li><strong>RTL 인터페이스 확정:</strong> C++에서 검증한 PCU 수, buffer depth, link width, valid/ready, channel mask, barrier 규칙을 Verilog module parameter와 port로 옮깁니다.</li>
+          <li><strong>합성 결과로 재보정:</strong> Verilog 합성 후 얻은 주파수·면적·전력·실제 latency를 C++ 설정에 되돌려 넣고 성능 결과를 다시 계산합니다.</li>
+          <li><strong>범용성 검증:</strong> MobileNetV4에서 확정한 규칙을 다른 CNN 및 reduction 중심 workload에 적용해 특정 모델에만 맞춘 구조가 아닌지 확인합니다.</li>
+        </ol>
+        <div class="callout">
+          <strong>추가 완료 결과:</strong> 14×14×192에서 4 banks×1 port는 33,622 cycle, 8 banks×1 port는 33,138 cycle이었고 출력 37,632개가 모두 일치했습니다. 28×28×192에서도 출력 150,528개가 모두 통과했으며 peak는 총 256 entry, bank당 32 entry였습니다. 따라서 128-entry는 고정 사양이 아니라 tile 수에 따라 달라지는 값입니다.
+        </div>
+        <div class="callout correction">
+          <strong>Tile-batch 및 전체 UIB 후속 결과:</strong> 28×28을 한 tile씩 처리하면 peak를 256에서 128 entry로 줄이면서 출력 150,528개를 유지했고, cycle은 63,910에서 65,250으로 2.10% 증가했습니다. 동일 설정의 전체 UIB에서 8 banks×1 port 후보는 230,075 cycle로 bank-depthwise 기준 233,365 cycle보다 1.41% 빨랐고, write는 225,460건에서 204,468건으로 9.31% 감소했습니다. 최종 출력 18,816개는 모두 일치했습니다.
+        </div>
+        <div class="callout warning">
+          <strong>Verilog 전환 시작:</strong> C++ 후보를 8-bank, bank당 16-entry, valid/ready 구조로 작성하고 2×256-bit dual-link arbiter까지 연결했습니다. Reduction buffer부터 공유 link까지 네 self-checking testbench가 Icarus Verilog 12.0에서 모두 PASS했고 최대 데이터 폭은 C++ 후보와 같은 64 B/cycle입니다. 다만 sustained bandwidth, FP16 합성, 전체 HBM 연결, 면적·주파수·전력은 아직 검증해야 합니다.
+        </div>
+        <div class="callout correction">
+          <strong>RTL stress 후속 검증:</strong> 512-cycle 포화 트래픽에서 1,024개의 32 B burst를 전송해 64 B/cycle을 지속했습니다. 2,000-cycle random valid/ready에서는 1,052 burst와 모든 source의 진행을 확인했습니다. 이 과정에서 stall 중 새 source가 들어오면 output이 바뀌는 결함을 발견해 grant와 payload를 hold register에 고정하도록 수정했으며 전체 RTL 회귀가 다시 PASS했습니다.
+        </div>
+        <div class="callout warning">
+          <strong>64채널 범위 정정:</strong> 초기 RTL 통합 경로는 한 rank의 8개 PIM block만 표현했습니다. 새 top-level은 64개 channel 각각의 8→1 local arbiter와 base logic die의 64→2 global arbiter를 연결합니다. 축소 기능 test와 실제 64채널 기본 parameter elaboration이 PASS했습니다. Accumulator data array도 4 KiB가 stack 전체가 아니라 rank당 값이므로 64채널 전체 하한은 256 KiB입니다.
+        </div>
+        <div class="callout correction">
+          <strong>실제 MobileNetV4 trace replay:</strong> C++에서 14×14×192 depthwise의 bank-local flush 8,192개를 cycle·channel·PIM-block별로 기록했습니다. C++ 2단계 arbitration과 64채널 RTL이 모두 정확히 4,096개의 dual-lane full cycle로 drain했고 partial·idle cycle은 0이었습니다. 따라서 이 workload에서는 64 B/cycle이 최대폭뿐 아니라 실제 trace의 sustained bandwidth와도 일치합니다.
+        </div>
+        <div class="callout correction">
+          <strong>현재 단계의 결론:</strong> “로직 다이를 추가하면 무조건 빨라진다”가 아니라, bank에서 끝낼 수 있는 연산은 가까이서 처리하고 여러 bank·channel의 결과를 모아야 하는 연산만 base logic die로 보내야 데이터 이동 감소가 성능 향상으로 이어집니다.
+        </div>
+        <div class="callout correction">
+          <strong>공유 연산기 최신 결과:</strong> 8개 source가 16-lane FP16 누산 파이프라인을 공유하는 RTL을 만들고 파이프라인 1·2·4개를 비교했습니다. 실제 MobileNetV4 64채널 trace에서는 세 후보 모두 24,576개의 부분합을 8,192개의 최종 결과로 만들었고 전체 배출 시간은 13,879 cycle로 같았습니다. 64 B/cycle link는 32 B 파이프라인 두 개로 채울 수 있어, 파이프라인 2개가 현재 면적과 처리량 사이의 우선 후보입니다.
+        </div>
+      </div>
+    </section>
+
+    <section id="depthwise-prototype">
+      <div class="section-inner">
+        <h2>오늘 추가한 Logic-die 누산 프로토타입</h2>
+        <p class="lead">기존 depthwise는 9번의 MUL과 8번의 ADD를 bank-side에서 처리하면서 중간값을 DRAM에 반복 기록합니다. 새 경로는 bank PCU가 각 tap의 곱셈 결과만 만들고, base logic die의 공유 누산 버퍼가 같은 출력 주소의 9개 부분합을 모은 뒤 최종값만 DRAM에 기록하도록 모델링했습니다.</p>
+        <table>
+          <thead><tr><th>항목</th><th>구현 원리</th><th>현재 결과</th></tr></thead>
+          <tbody>
+            <tr><td>물리적 배치 가정</td><td>64개 채널 아래의 base logic die에 공유 accumulator와 제어 경로를 하나 배치</td><td>모든 channel/rank가 동일 객체를 공유</td></tr>
+            <tr><td>부분합 식별</td><td>channel, rank, PIM block, bank parity, row, column을 key로 사용</td><td>서로 다른 출력 burst를 구분</td></tr>
+            <tr><td>연산 분담</td><td>Bank PCU: FP16 MUL, Logic die: 9-tap FP16 accumulation, Bank: 최종 write</td><td>기능 경로 연결 완료</td></tr>
+            <tr><td>전송 모델</td><td>누산 link bandwidth와 latency로 부분합 전송 cycle을 시뮬레이터 clock에 반영</td><td>2,359,296 B, 36,873 cycle</td></tr>
+            <tr><td>1채널 검증</td><td>1,152개 부분 burst를 128개 최종 burst로 축약</td><td><span class="status done">PASS · 미완료 entry 0</span></td></tr>
+            <tr><td>64채널 실제 shape 검증</td><td>37,632개 출력, 73,728개 부분 burst를 8,192개 최종 burst로 축약</td><td><span class="status done">PASS · 미완료 entry 0</span></td></tr>
+            <tr><td>전체 UIB 정확도</td><td>최종 FP16 출력 18,816개를 CPU 기준값과 비교</td><td><span class="status done">PASS</span></td></tr>
+          </tbody>
+        </table>
+        <div class="callout correction">
+          <strong>오류 해결:</strong> 초기에는 중간 writeback 패킷을 없앨 때 CRF의 PC/NOP 진행도 함께 사라져 odd-bank 입력 FILL이 건너뛰었습니다. Accumulator-direct 패킷이 DRAM에는 쓰지 않되 CRF context를 진행하도록 수정해 corner, edge, center를 포함한 전체 정확도를 복구했습니다.
+        </div>
+        <p>전체 UIB에서 modeled DRAM write는 220,342건에서 199,350건으로 9.53% 감소했습니다. 64 B/cycle 직렬 전송은 265,022 cycle로 느렸고, bank MUL과 전송을 겹치면 256,484 cycle로 개선됐습니다. Link를 256 B/cycle로 높인 overlap 후보는 231,650 cycle로 기준 235,182 cycle보다 1.50% 빨라져 최초 성능 crossover를 달성했습니다.</p>
+        <div class="callout warning">
+          <strong>확정 사양은 아닙니다:</strong> 256 B/cycle은 2,048-bit/cycle에 해당하므로 배선, TSV, 주파수, 면적과 전력 비용을 RTL 합성으로 검증해야 합니다. 더 현실적인 다음 후보는 128 B/cycle link를 유지하면서 bank-side에서 여러 tap partial을 먼저 합쳐 전송량 자체를 줄이는 구조입니다.
+        </div>
+        <h3>Bank-local aggregation 후속 결과</h3>
+        <p>후속 구현에서는 depthwise tap을 logic die로 모두 보내지 않고 bank PCU가 먼저 합치도록 했습니다. 128 B/cycle·3-tap 후보는 231,727 cycle, 64 B/cycle·9-tap 후보는 231,178 cycle을 기록했습니다. 최종 후보는 기준보다 1.70% 빠르고, modeled write를 9.53% 줄이며, bank→logic partial 전송량을 2,359,296 B에서 262,144 B로 88.89% 줄였습니다.</p>
+        <div class="callout correction">
+          <strong>계층형 배치 판단:</strong> Depthwise tap은 같은 channel과 bank 안에서 끝낼 수 있으므로 bank-local PCU가 누산하고 최종값만 logic die로 넘기는 편이 좋습니다. Logic die는 이후 여러 bank/channel을 연결하는 project pointwise와 tensor 경계·공유 buffer 관리를 담당합니다. 즉 두 PCU 중 하나를 없애는 것이 아니라 연산의 지역성에 따라 역할을 나누는 구조입니다.
+        </div>
+        <h3>유한 자원으로 현실화한 후보</h3>
+        <p>무제한 C++ buffer 가정을 제거하고 rank당 128 entries, 4 update ports, latency 1로 제한했습니다. 실측 peak는 정확히 128 entries였고 전체 UIB는 231,309 cycle, 최종 출력 18,816개 PASS, modeled write 199,350건을 유지했습니다. 기준보다 1.65% 빠르며 data array 하한은 rank당 약 4 KiB입니다.</p>
+        <p>Signed fractional FP16 입력도 추가 검증했습니다. Factor 1과 factor 9 모두 software FP16 golden 128개와 정확히 일치했고 FP32 기준 최대 절대오차는 0.00601459로 같았습니다. 현재 구조는 tap 순서를 유지하므로 aggregation이 rounding 순서를 바꾸지 않습니다.</p>
+
+        <h3>공유 FP16 pipeline과 실제 64채널 trace</h3>
+        <p>누산기 하나를 source마다 복제하면 면적이 커지므로, 한 channel의 8개 source가 제한된 수의 FP16 pipeline을 round-robin으로 공유하도록 RTL을 확장했습니다. 각 pipeline은 한 cycle에 32 B, 즉 FP16 16개를 처리합니다. 따라서 64 B/cycle link를 모두 사용하려면 최소 2개가 필요합니다.</p>
+        <table>
+          <thead><tr><th>후보</th><th class="num">8-source channel 합성 proxy</th><th class="num">실제 trace 완료 cycle</th><th>판단</th></tr></thead>
+          <tbody>
+            <tr><td>Pipeline 1개</td><td class="num">368,153 generic cells</td><td class="num">13,879</td><td>가장 작지만 source queue 대기가 큼</td></tr>
+            <tr><td>Pipeline 2개</td><td class="num">436,915 generic cells</td><td class="num">13,879</td><td><span class="status next">현재 Pareto 후보</span></td></tr>
+            <tr><td>Pipeline 4개</td><td class="num">578,780 generic cells</td><td class="num">13,879</td><td>내부 대기는 줄지만 최종 완료 시간 이득 없음</td></tr>
+          </tbody>
+        </table>
+        <p>Channel 0의 실제 trace 384개 부분합도 SystemVerilog에 cycle 그대로 재생했습니다. 세 후보 모두 128개 최종값을 C++ 기준값과 bit 단위로 일치시켰고 재생 시간은 9,966 cycle이었습니다. 전체 폭 검증에서는 131,072개의 FP16 값이 모두 C++와 일치했습니다.</p>
+        <div class="callout warning">
+          <strong>합성 수치 해석:</strong> 위 cell 수는 Yosys generic synthesis의 구성요소 합산값입니다. ASIC 면적, GHz 또는 전력을 뜻하지 않으며, 공정 library를 사용한 합성과 물리 설계 전에는 상대적 규모 비교에만 사용해야 합니다.
+        </div>
+      </div>
+    </section>
+
+    <section id="concept">
+      <div class="section-inner">
+        <h2>먼저 알아야 할 개념</h2>
+        <p class="lead">PIM은 Processing-In-Memory의 약자로, 데이터를 CPU나 GPU까지 멀리 옮긴 뒤 계산하는 대신 메모리 가까이에서 계산하는 방식입니다. 이 프로젝트는 메모리 가까운 곳도 다시 두 층으로 나눕니다.</p>
+        <div class="architecture" aria-label="계층형 PIM 개념도">
+          <div class="arch-box host">
+            <h3>호스트 CPU/GPU</h3>
+            <p>모델 실행을 지휘하고, PIM에 명령을 보냅니다. 모든 데이터를 가져와 계산하면 외부 메모리 I/O가 커집니다.</p>
+          </div>
+          <div class="arrow">↔</div>
+          <div class="arch-box">
+            <h3>Bank-side PCU</h3>
+            <p>각 HBM bank 가까이에 있는 로컬 연산기입니다. 자기 bank 안의 데이터를 빠르게 처리하는 ADD, MUL, ReLU와 로컬 depthwise에 유리합니다.</p>
+          </div>
+          <div class="arrow">↔</div>
+          <div class="arch-box logic">
+            <h3>Logic-die PCU</h3>
+            <p>HBM 아래쪽 logic die에 놓이는 공유 연산기입니다. 여러 bank·channel의 데이터를 모으는 GEMV, reduction, 전역 누산에 사용하려는 구조입니다.</p>
+          </div>
+        </div>
+        <div class="callout warning">
+          <strong>비유:</strong> bank-side PCU가 각 창고 안에서 물건을 분류하는 작업자라면, logic-die PCU는 여러 창고의 결과를 모아 조립하는 중앙 작업대입니다. 모든 일을 중앙으로 보내는 것이 아니라, 가까이서 끝낼 일은 bank에서 하고 여러 bank가 함께해야 할 일만 logic die로 보냅니다.
+        </div>
+      </div>
+    </section>
+
+    <section id="model">
+      <div class="section-inner">
+        <h2>Logic die를 어떤 원리로 모델링했는가</h2>
+        <p class="lead">현재 모델은 Verilog RTL이나 트랜지스터 회로가 아니라 DRAMSim2 기반 C++ cycle-level 모델입니다. “어떤 명령이 어디로 가고, 자원이 몇 개이며, 언제까지 바쁘고, 데이터 이동 때문에 몇 cycle을 기다리는가”를 계산합니다.</p>
+
+        <h3>1. 연산 위치를 먼저 분리</h3>
+        <p>설정값 <code>ENABLE_BANK_SIDE_PIM</code>, <code>ENABLE_LOGIC_DIE_PIM</code>, <code>PIM_TARGET</code>으로 bank-only, logic-only, hybrid 모드를 구분합니다. PIM 명령은 <code>PIMKernel → MemoryController/CommandQueue → Rank → PIMRank</code>를 지나며, 명령 종류와 태그에 따라 bank 실행 문맥 또는 logic 실행 문맥으로 라우팅됩니다.</p>
+
+        <h3>2. 64채널 전체가 공유하는 제한된 PCU로 모델링</h3>
+        <p>초기 spatial-group 모델은 채널마다 logic PCU가 복제된 것처럼 동작해 성능을 과대평가했습니다. 이후 <code>MultiChannelMemorySystem</code>이 하나의 <code>LogicDieScheduler</code>를 만들고 모든 채널·rank가 이를 공유하도록 변경했습니다. 따라서 PCU가 16개이면 64채널 각각에 16개가 있는 것이 아니라, logic die 전체에 16개가 있는 모델입니다.</p>
+        <pre><code>compute_cycles  = ceil(사용 PIM block / 명령당 PCU) × PCU latency
+transfer_cycles = ceil(명령 데이터 byte / logic 내부 bandwidth)
+service_cycles  = max(compute_cycles, transfer_cycles)
+completion      = queue_wait + service_cycles</code></pre>
+        <p>연산과 내부 전송은 일부 겹칠 수 있다고 가정해 둘 중 큰 값을 서비스 시간으로 사용합니다. PCU가 모두 바쁘면 다음 명령은 scheduler queue에서 기다립니다.</p>
+
+        <h3>3. Bank↔logic 이동 비용을 공통 시간축에 반영</h3>
+        <p>계층이 바뀌는 tensor는 <code>HIERARCHY_PIM_BW</code>에 따라 전송 cycle을 계산합니다. FP16 tensor라면 원소당 2 byte이며, 현재 64 B/cycle 조건에서 UIB의 네 번 계층 전환은 총 225,792 B, 3,528 cycle입니다. 이 값은 통계만 세는 것이 아니라 그만큼 시뮬레이터 clock을 진행시킵니다.</p>
+
+        <h3>4. Bank와 logic의 상태를 독립 하드웨어처럼 분리</h3>
+        <p>실제 두 PCU가 동시에 존재하려면 레지스터와 제어 상태를 공유해서는 안 됩니다. 그래서 bank/logic의 GRF·SRF, CRF, program counter, jump/repeat, mode와 command frontend를 분리했습니다. 한쪽 CRF를 프로그램했을 때 다른 쪽 결과가 0으로 오염되던 문제를 이 과정에서 발견하고 수정했습니다.</p>
+
+        <h3>5. 공유 버퍼와 명령 broadcast를 모델링</h3>
+        <table>
+          <thead><tr><th>구성 요소</th><th>모델링한 역할</th><th>왜 필요한가</th></tr></thead>
+          <tbody>
+            <tr><td>Global scheduler</td><td>PCU lane 예약, queue wait, completion 관리</td><td>채널별 무한 자원처럼 보이는 과대평가 방지</td></tr>
+            <tr><td>Command coalescer</td><td>같은 cycle·같은 명령을 channel mask broadcast로 병합</td><td>동일 제어 명령의 반복 전송 감소</td></tr>
+            <tr><td>Shared weight buffer</td><td>pointwise weight 한 벌을 logic die에서 재사용</td><td>채널 group마다 같은 weight를 복제하지 않기 위해</td></tr>
+            <tr><td>Output buffer</td><td>logic 결과를 조립하고 downstream으로 순서대로 배출</td><td>계산 완료와 DRAM writeback을 분리하기 위해</td></tr>
+            <tr><td>Epoch/barrier</td><td>여러 채널 명령의 순서와 완료 조건 관리</td><td>다른 wave의 명령이 섞여 오답이 나는 것을 방지</td></tr>
+            <tr><td>Backpressure</td><td>queue 또는 buffer가 가득 차면 발행 중지</td><td>유한한 RTL 자원을 현실적으로 표현</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warning">
+          <strong>현재 수치의 의미:</strong> PCU 16개, latency 2, logic 내부 64 B/cycle 등의 값은 확정 칩 사양이 아니라 시뮬레이션 후보점입니다. 향후 Verilog 합성 결과와 면적·전력 분석으로 다시 보정해야 합니다.
+        </div>
+      </div>
+    </section>
+
+    <section id="placement">
+      <div class="section-inner">
+        <h2>Logic die는 어디에 놓았는가</h2>
+        <p class="lead">물리 개념상 HBM은 여러 DRAM die를 수직으로 쌓고, 가장 아래 base logic die가 채널 I/O와 제어를 담당합니다. 추가 PCU는 각 bank 옆에 복제하는 것이 아니라 이 base logic die의 공유 연산 영역에 놓는 것으로 가정했습니다.</p>
+        <div class="stack" aria-label="HBM 적층 구조에서 logic die 위치">
+          <div class="die dram">DRAM Die 4 · 여러 channel과 bank</div>
+          <div class="die dram">DRAM Die 3 · 각 bank 옆 기존 local PCU</div>
+          <div class="die dram">DRAM Die 2 · 각 bank 옆 기존 local PCU</div>
+          <div class="die dram">DRAM Die 1 · 각 bank 옆 기존 local PCU</div>
+          <div class="die logic"><strong>Base Logic Die</strong><br>Global PCU array · scheduler · shared weight/output buffer · hierarchy interconnect</div>
+          <div class="die board">Package / Host Interface</div>
+        </div>
+        <div class="two-col">
+          <div class="plain-panel">
+            <h3>물리 아키텍처 관점</h3>
+            <p>기존 local PCU는 bank 가까이에 유지합니다. 새 global PCU는 logic die에 모아 여러 channel의 부분합과 tensor를 받을 수 있게 합니다. 두 계층 사이에는 channel mask, payload, valid/ready, backpressure를 가진 interconnect가 필요합니다.</p>
+          </div>
+          <div class="plain-panel">
+            <h3>시뮬레이터 코드 관점</h3>
+            <p><code>MultiChannelMemorySystem</code>에 scheduler, weight buffer, output buffer를 각각 하나만 생성해 64개 <code>MemorySystem/Rank/PIMRank</code>가 공유합니다. 이것이 “logic die 전체에 하나의 공유 자원”이라는 배치를 코드로 표현한 부분입니다.</p>
+          </div>
+        </div>
+        <div class="callout correction">
+          <strong>아직 하지 않은 것:</strong> logic die의 실제 좌표, 배선 길이, TSV 배치, clock tree, 열 분포, 면적은 아직 모델링하지 않았습니다. 현재는 구조적 위치와 공유 범위, 시간·대역폭·queue 제약을 표현한 단계입니다.
+        </div>
+      </div>
+    </section>
+
+    <section id="results">
+      <div class="section-inner">
+        <h2>현재까지 연산을 어디까지 수행했는가</h2>
+        <p class="lead">기능 검증은 작은 연산부터 전체 MobileNetV4 UIB까지 단계적으로 확대했습니다. 정확도 통과와 성능 모델 검증을 구분해 기록했습니다.</p>
+
+        <h3>Bank-side 기준선</h3>
+        <table>
+          <thead><tr><th>연산</th><th>검증 규모</th><th>현재 위치</th><th>결과</th></tr></thead>
+          <tbody>
+            <tr><td>ADD</td><td>1,048,576 outputs</td><td>Bank-side</td><td><span class="status done">PASS</span></td></tr>
+            <tr><td>MUL</td><td>1,048,576 outputs</td><td>Bank-side</td><td><span class="status done">PASS</span></td></tr>
+            <tr><td>ReLU</td><td>1,048,576 outputs</td><td>Bank-side</td><td><span class="status done">PASS</span></td></tr>
+            <tr><td>GEMV</td><td>4096×1024 weight, 4096 outputs</td><td>기준선 및 logic 후보</td><td><span class="status done">PASS</span></td></tr>
+            <tr><td>GEMV_TREE</td><td>4096 outputs</td><td>Bank-side reduction 기준</td><td><span class="status done">PASS</span></td></tr>
+          </tbody>
+        </table>
+        <p>초기 GEMV 성능은 non-PIM 36,082 cycle, PIM 13,166 cycle로 측정했습니다. ADD benchmark의 1.98597배 speed-up은 테스트가 요구하는 2.0배를 0.7%가량 밑돌아 성능 assertion은 실패했지만, 계산 결과 자체는 모두 맞았습니다.</p>
+
+        <h3>MobileNetV4 UIB 계층 실행</h3>
+        <table>
+          <thead><tr><th>UIB 단계</th><th>연산</th><th>현재 배치</th><th>검증 상태</th></tr></thead>
+          <tbody>
+            <tr><td>Expand pointwise</td><td>1×1 Conv, GEMV/MAC</td><td>Logic-die PCU</td><td><span class="status done">실제 수치 PASS</span></td></tr>
+            <tr><td>Depthwise</td><td>3×3, 9 MUL + 8 ADD</td><td>Bank-side PCU</td><td><span class="status done">실제 수치 PASS</span></td></tr>
+            <tr><td>Project pointwise</td><td>1×1 Conv, GEMV/MAC</td><td>Logic-die PCU</td><td><span class="status done">실제 수치 PASS</span></td></tr>
+            <tr><td>Residual ADD</td><td>Elementwise ADD</td><td>Bank-side PCU</td><td><span class="status done">실제 수치 PASS</span></td></tr>
+            <tr><td>Activation/readback</td><td>ReLU 및 결과 회수</td><td>Bank-side / 독립 output</td><td><span class="status done">실제 수치 PASS</span></td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout">
+          <strong>End-to-end 결과:</strong> 14×14×96 = 18,816개 최종 FP16 출력을 CPU 기준값과 비교해 모두 통과했습니다. 즉 명령이 logic die로 “갔다고 표시만 한 것”이 아니라 expand 결과가 depthwise 입력이 되고, project와 residual을 거쳐 최종값까지 이어지는 수치 연쇄를 검증했습니다.
+        </div>
+
+        <h3>성능 모델에서 확인한 주요 결과</h3>
+        <table>
+          <thead><tr><th>실험</th><th class="num">핵심 결과</th><th>해석</th></tr></thead>
+          <tbody>
+            <tr><td>Compact output mapping</td><td class="num">4096 → 192/128 outputs</td><td>필요한 channel만 활성화해 불필요한 transaction 제거</td></tr>
+            <tr><td>Spatial grouping</td><td class="num">52,277 cycle</td><td>채널별 독립 서비스라는 상한 모델에서 위치 병렬성 확인</td></tr>
+            <tr><td>Global PCU 8개</td><td class="num">400,340 cycle</td><td>공유 자원 queue 병목으로 bank 기준보다 느림</td></tr>
+            <tr><td>Global PCU 16개</td><td class="num">215,687 cycle</td><td>현재 조건에서 bank 기준을 넘는 최초 후보점</td></tr>
+            <tr><td>Global PCU 32개</td><td class="num">123,376 cycle</td><td>PCU lane 증가에 따라 queue 감소</td></tr>
+            <tr><td>Global PCU 64개</td><td class="num">76,842 cycle</td><td>빠르지만 면적·전력 검토가 필요한 상위 후보</td></tr>
+            <tr><td>공유 weight buffer</td><td class="num">96.34% weight traffic 감소</td><td>3,129,344 B → 114,688 B, read miss 0</td></tr>
+            <tr><td>HAB residency</td><td class="num">modeled writes 2.27% 감소</td><td>cycle은 같지만 제어성 write 5,118건 감소</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warning">
+          <strong>서로 다른 cycle을 직접 비교할 때 주의:</strong> 52,277 cycle은 채널 group이 독립 자원을 갖는 상한 모델이고, 215,687 cycle은 global PCU 16개를 공유하는 현실적인 자원 제한 모델입니다. 최신 235,182 cycle은 여기에 source queue, output buffer, HAB residency, mode latency 32와 상세 계측 조건까지 포함한 검증점입니다.
+        </div>
+      </div>
+    </section>
+
+    <section id="diagnosis">
+      <div class="section-inner">
+        <h2>현재 병목은 무엇인가</h2>
+        <p class="lead">단순히 “느리다”로 끝내지 않고, 모든 활성 채널이 동시에 멈춘 cycle을 원인별로 계측했습니다. 최신 결과에서 가장 강한 구조적 병목은 depthwise 중간 결과의 반복 writeback입니다.</p>
+        <div class="bar-chart" aria-label="단계별 계층 정지 비율">
+          <div class="bar-row"><strong>Expand</strong><div class="track"><div class="fill" style="width:4.36%"></div></div><div class="bar-value">3,849 / 88,345</div></div>
+          <div class="bar-row"><strong>Depthwise</strong><div class="track"><div class="fill depthwise" style="width:77.60%"></div></div><div class="bar-value">30,173 / 38,884</div></div>
+          <div class="bar-row"><strong>Project</strong><div class="track"><div class="fill" style="width:3.67%"></div></div><div class="bar-value">3,800 / 103,431</div></div>
+          <div class="bar-row"><strong>Residual ADD</strong><div class="track"><div class="fill" style="width:83.61%"></div></div><div class="bar-value">3,106 / 3,715</div></div>
+          <div class="bar-row"><strong>ReLU/read</strong><div class="track"><div class="fill" style="width:53.41%"></div></div><div class="bar-value">431 / 807</div></div>
+        </div>
+        <p>ADD는 비율은 높지만 절대 시간이 3,715 cycle로 작습니다. Depthwise는 38,884 cycle 중 30,173 cycle이 계층 조건에 막혀 절대 영향이 가장 큽니다.</p>
+
+        <table>
+          <thead><tr><th>Depthwise 정지 원인</th><th class="num">All-active cycle</th><th class="num">단계 대비 비율</th><th>뜻</th></tr></thead>
+          <tbody>
+            <tr><td>Write bus busy</td><td class="num">22,394</td><td class="num">57.59%</td><td>이전 중간 결과를 쓰는 동안 다음 쓰기를 진행하지 못함</td></tr>
+            <tr><td>Epoch mismatch</td><td class="num">10,031</td><td class="num">25.80%</td><td>선행 명령 묶음이 끝나지 않아 다음 묶음을 발행하지 못함</td></tr>
+            <tr><td>Barrier outstanding</td><td class="num">8,729</td><td class="num">22.45%</td><td>선행 데이터·명령 완료를 기다림</td></tr>
+          </tbody>
+        </table>
+        <p class="footnotes">세 원인은 같은 cycle에 동시에 참일 수 있으므로 합산하면 안 됩니다. 중복 제거 합집합이 30,173 cycle입니다.</p>
+
+        <div class="callout correction">
+          <strong>중요한 계측 정정:</strong> 한때 bank-state-only 병목이 175,229 cycle로 보였지만, workload 요청이 없는 bank를 둘러보는 speculative PRECHARGE probe까지 통계에 들어간 오류였습니다. 스케줄러 동작은 바꾸지 않고 통계 조건만 수정했으며, 출력 18,816개와 235,182 cycle은 그대로 유지됐습니다. 정정 후 bank-state-only 병목은 0 cycle입니다.
+        </div>
+      </div>
+    </section>
+
+    <section id="timeline">
+      <div class="section-inner">
+        <h2>진행 과정</h2>
+        <div class="timeline">
+          <div class="timeline-item"><h3>1단계 · 기존 시뮬레이터 이해와 기준선 확보</h3><p>설정 파일, 64채널 전제, PIMKernel/PIMRank/CommandQueue 경로를 분석하고 ADD, MUL, ReLU, GEMV, GEMV_TREE 정확도를 검증했습니다.</p></div>
+          <div class="timeline-item"><h3>2단계 · MobileNetV4 연산표와 bank/logic 배치</h3><p>UIB의 pointwise, depthwise, residual을 분해하고 local elementwise는 bank-side, cross-bank MAC/GEMV는 logic-die 후보로 분류했습니다.</p></div>
+          <div class="timeline-item"><h3>3단계 · Logic-die 자원 모델 연결</h3><p>PCU 수, latency, 내부 bandwidth가 실제 queue와 completion cycle에 영향을 주도록 연결하고 계층 tensor 전송 비용을 공통 clock에 반영했습니다.</p></div>
+          <div class="timeline-item"><h3>4단계 · 실제 UIB와 공간 병렬성</h3><p>14×14×96 실제 shape, compact channel mapping, spatial wave scheduler를 구현해 최종 출력 18,816개를 검증했습니다.</p></div>
+          <div class="timeline-item"><h3>5단계 · 공유 Logic die 현실화</h3><p>global PCU scheduler, command coalescing, weight buffer, finite broadcast queue, backpressure를 추가해 64채널이 하나의 logic 자원을 경쟁하도록 만들었습니다.</p></div>
+          <div class="timeline-item"><h3>6단계 · 독립 실행 문맥과 출력 경로</h3><p>bank/logic CRF·register·mode를 분리하고, logic output이 일반 DRAM row 상태에 종속되어 생긴 교착을 독립 output frontend로 수정했습니다.</p></div>
+          <div class="timeline-item"><h3>7단계 · 전 채널 병목 계측</h3><p>mode, bank state, timing, epoch, barrier, write bus를 any/all-active로 분해하고 잘못된 PRECHARGE 통계를 정정해 depthwise writeback을 다음 설계 대상으로 확정했습니다.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap">
+      <div class="section-inner">
+        <h2>향후 어떻게 진행할 것인가</h2>
+        <p class="lead">계층형 depthwise 누산, 유한 banked accumulator, 64채널 link, 공유 FP16 pipeline의 기능 검증까지 완료했습니다. 다음 목표는 분리해서 검증한 expand pointwise·depthwise·project 경로를 하나의 연속 RTL/C++ trace로 묶고, 공정 library 합성값으로 C++ 자원과 지연 파라미터를 보정하는 것입니다.</p>
+
+        <h3>다음 개선: 전체 UIB 통합 trace와 설계값 보정</h3>
+        <table>
+          <thead><tr><th>순서</th><th>현재 구조</th><th>변경 구조</th><th>검증 지표</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Pointwise와 depthwise trace를 개별 검증</td><td>Expand→depthwise→project 연속 request trace 생성</td><td>18,816개 최종 FP16 값</td></tr>
+            <tr><td>2</td><td>대표 channel과 전체 폭을 나누어 RTL 검증</td><td>64채널 scheduler·buffer·link를 한 통합 testbench로 재생</td><td>Cycle, 순서, backpressure, bit 일치</td></tr>
+            <tr><td>3</td><td>Pipeline 2개를 상대적 합성값으로 선택</td><td>공정 library에서 timing·area·power 합성</td><td>ns, mm², mW 및 critical path</td></tr>
+            <tr><td>4</td><td>C++ latency와 bandwidth를 후보값으로 설정</td><td>RTL 합성·측정값을 설정 파일에 역반영</td><td>C++/RTL cycle 오차</td></tr>
+            <tr><td>5</td><td>MobileNetV4 한 UIB 중심</td><td>여러 shape·연속 block 후 다른 모델로 확대</td><td>배치 정책의 재현성과 범용성</td></tr>
+          </tbody>
+        </table>
+
+        <h3>검증 계획</h3>
+        <ol>
+          <li>현재 통과한 bank-only와 계층형 경로를 회귀 기준선으로 고정합니다.</li>
+          <li>실제 MobileNetV4 UIB의 expand·depthwise·project 요청을 하나의 시간순 trace로 기록합니다.</li>
+          <li>통합 trace를 C++ replay와 RTL에서 각각 실행해 출력값, 요청 순서와 완료 cycle을 비교합니다.</li>
+          <li>Pipeline 2개 후보에서 queue depth, accumulator entry, link stall을 함께 sweep합니다.</li>
+          <li>공정 library 합성 후 latency와 bandwidth를 C++ 설정에 되돌려 넣어 end-to-end 결과를 다시 계산합니다.</li>
+        </ol>
+
+        <h3>Verilog RTL로 이어질 항목</h3>
+        <div class="two-col">
+          <div class="plain-panel">
+            <h4>시뮬레이터가 먼저 제공할 것</h4>
+            <ul>
+              <li>PCU count와 latency 후보 범위</li>
+              <li>Command/expected channel mask</li>
+              <li>Epoch·ordinal·barrier 규칙</li>
+              <li>Buffer depth와 backpressure 조건</li>
+              <li>Hierarchy link bandwidth 민감도</li>
+              <li>정확도 및 cycle 회귀 테스트</li>
+            </ul>
+          </div>
+          <div class="plain-panel">
+            <h4>연구자와 RTL 설계가 결정할 것</h4>
+            <ul>
+              <li>Logic PCU와 accumulator의 실제 개수</li>
+              <li>FP16/INT8 및 누산 정밀도</li>
+              <li>Reduction network topology</li>
+              <li>TSV·channel 연결과 arbitration</li>
+              <li>면적·전력·주파수·열 제약</li>
+              <li>다른 모델까지 일반화할 배치 정책</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>단계별 완료 기준</h3>
+        <table>
+          <thead><tr><th>단계</th><th>현재 상태</th><th>완료라고 판단할 근거</th></tr></thead>
+          <tbody>
+            <tr><td>Bank-side 기준선</td><td><span class="status done">완료</span></td><td>ADD/MUL/ReLU/GEMV/GEMV_TREE 정확도 회귀</td></tr>
+            <tr><td>Logic pointwise 경로</td><td><span class="status done">완료</span></td><td>실제 UIB 수치 연쇄 및 global resource 모델 통과</td></tr>
+            <tr><td>계층 독립 실행 기반</td><td><span class="status done">완료</span></td><td>독립 CRF/context/output과 full UIB 진행성 통과</td></tr>
+            <tr><td>Depthwise logic accumulation</td><td><span class="status done">기능 검증 완료</span></td><td>37,632개 depthwise 출력과 전체 UIB 18,816개 PASS</td></tr>
+            <tr><td>공유 pipeline 후보</td><td><span class="status done">1차 후보 도출</span></td><td>Pipeline 1·2·4 RTL/trace 비교에서 2개를 Pareto 후보로 선정</td></tr>
+            <tr><td>전체 UIB 통합 RTL trace</td><td><span class="status next">다음 실험</span></td><td>Expand→depthwise→project의 값·순서·cycle 일치</td></tr>
+            <tr><td>Verilog RTL 물리 평가</td><td><span class="status research">연구 설계</span></td><td>공정 library timing/area/power 결과와 C++ 모델 보정</td></tr>
+            <tr><td>범용 workload 검증</td><td><span class="status research">연구 설계</span></td><td>MobileNetV4 외 모델에서 placement 정책 재현</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="limits">
+      <div class="section-inner">
+        <h2>현재 결과를 해석할 때의 한계</h2>
+        <ul>
+          <li>Logic-die 핵심 reduction·arbiter·FP16 pipeline은 SystemVerilog로 구현했지만, 전체 HBM/모든 UIB 단계를 합친 완성 RTL은 아닙니다.</li>
+          <li>PCU 수와 bandwidth 후보값은 물리 합성 전 가정입니다.</li>
+          <li>전력·열·TSV 배선·면적은 아직 직접 계산하지 않았습니다.</li>
+          <li>현재 end-to-end 기준 workload는 MobileNetV4 UIB 한 블록입니다.</li>
+          <li>일부 성능 개선은 서로 다른 자원 모델 조건이므로 같은 표의 숫자만 보고 단순 비교하면 안 됩니다.</li>
+          <li>현재 가장 강한 주장은 “pointwise와 depthwise 누산을 포함한 C++ 전체 UIB가 정확하고, 실제 depthwise trace가 64채널 RTL과 FP16 bit 수준에서 일치한다”는 것입니다. 이는 최종 칩 성능이나 물리 실현 가능성의 확정을 뜻하지 않습니다.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="references">
+      <div class="section-inner">
+        <h2>저장소 내 근거 문서</h2>
+        <p>MobileNetV4의 연산 구성은 원 논문과 공식 구현을 근거로 삼았습니다. 다만 어떤 연산을 bank-side 또는 logic-die에 놓을지는 원 논문의 주장이 아니라 본 프로젝트가 제안하고 검증하는 아키텍처 해석입니다.</p>
+        <ul>
+          <li><a href="https://arxiv.org/abs/2404.10518">MobileNetV4: Universal Models for the Mobile Ecosystem</a> · 모델과 UIB 구조의 논문 근거</li>
+          <li><a href="https://github.com/tensorflow/models">TensorFlow Model Garden</a> · 공식 구현 참고</li>
+        </ul>
+        <p>본 보고서의 구현 수치와 결론은 다음 저장소 내 기록을 바탕으로 작성했습니다.</p>
+        <ul>
+          <li><a href="../design/logic_pim_rtl_parameter_interface.md">Logic-PIM RTL 파라미터 인터페이스 초안</a></li>
+          <li><a href="../design/mobilenetv4_blockwise_pim_placement.md">MobileNetV4 블록별 PIM 배치</a></li>
+          <li><a href="report_12_actual_shape_uib.md">12차 실제 MobileNetV4 UIB shape 검증</a></li>
+          <li><a href="report_16_global_logic_pcu_scheduler.md">16차 global logic-PCU scheduler</a></li>
+          <li><a href="report_18_shared_weight_buffer.md">18차 공유 weight buffer</a></li>
+          <li><a href="report_42_hierarchy_shared_drain_and_split_crf.md">42차 bank/logic 독립 CRF와 공동 drain</a></li>
+          <li><a href="report_64_direct_output_frontend_fix_and_full_uib_validation.md">64차 독립 logic output frontend</a></li>
+          <li><a href="report_71_speculative_precharge_metric_correction.md">71차 계측 정정</a></li>
+          <li><a href="report_72_stage_predicate_breakdown_and_next_architecture.md">72차 단계별 병목과 다음 아키텍처</a></li>
+          <li><a href="report_73_depthwise_hierarchical_accumulation.md">73차 logic-die depthwise 누산</a></li>
+          <li><a href="report_74_depthwise_overlap_bandwidth_crossover.md">74차 overlap과 link bandwidth crossover</a></li>
+          <li><a href="report_75_bank_local_aggregation.md">75차 bank-local aggregation과 계층형 배치 판단</a></li>
+          <li><a href="report_76_finite_bank_local_accumulator.md">76차 유한 bank-local accumulator 자원 검증</a></li>
+          <li><a href="report_77_fp16_aggregation_rounding.md">77차 FP16 aggregation rounding 검증</a></li>
+          <li><a href="report_89_shared_fp16_pipeline_scheduler.md">89차 공유 FP16 pipeline scheduler와 합성 proxy</a></li>
+          <li><a href="report_90_actual_64ch_shared_pipeline_trace.md">90차 실제 64채널 shared-pipeline trace 검증</a></li>
+          <li><a href="report_91_uib_integration_trace_contract.md">91차 MobileNetV4 UIB 통합 trace 계약</a></li>
+          <li><a href="report_92_actual_uib_pointwise_request_trace.md">92차 실제 UIB pointwise logic-PCU 요청 trace</a></li>
+          <li><a href="report_93_pointwise_pcu_trace_replay.md">93차 pointwise PCU 8·16·32·64 trace replay</a></li>
+          <li><a href="report_94_bounded_pointwise_ready_queue.md">94차 bounded pointwise ready queue</a></li>
+          <li><a href="report_95_finite_source_and_cxx_pcu_queue.md">95차 finite source와 C++ PCU queue backpressure</a></li>
+          <li><a href="results/stage_predicate_breakdown.csv">최신 단계별 병목 CSV</a></li>
+          <li><a href="results/depthwise_overlap_bandwidth_sweep.csv">Depthwise overlap bandwidth sweep CSV</a></li>
+          <li><a href="results/bank_local_aggregation_sweep.csv">Bank-local aggregation sweep CSV</a></li>
+          <li><a href="results/finite_bank_local_accumulator.csv">유한 accumulator entry/port 결과 CSV</a></li>
+          <li><a href="results/shared_fp16_fabric_synthesis.csv">공유 FP16 pipeline generic synthesis CSV</a></li>
+          <li><a href="results/shared_pipeline_64ch_trace_replay.csv">실제 64채널 trace replay CSV</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="section-inner">
+      <strong>STOB Hierarchical HBM2-PIM Simulator</strong><br>
+      본 문서는 2026년 8월 5일 저장소 상태를 기준으로 생성했습니다. 내용은 한글로 유지하고 브라우저 인쇄/PDF 저장에 대응합니다.
+    </div>
+  </footer>
+</body>
+</html>

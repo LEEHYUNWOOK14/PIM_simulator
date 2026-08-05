@@ -1,0 +1,10 @@
+[Full UIB direct staging=false]
+[Full UIB direct staging=true]
+Result: /mnt/c/Users/Chandler/OneDrive/2026-하계/STOB 반도체 경진대회/STOB_PIM2/experiment/results/direct_staging_ab.csv
+direct_staging  result  outputs_checked  total_cycle  modeled_writes  fill_completed_writes  fill_activates  fill_precharges  bank_state_any_cycles  bank_state_all_active_cycles  bank_state_only_cycles  hierarchy_union_all_active_cycles
+false           PASS    18816            235182       220342          3584                   1120            0                224126                 219645                        175229                  41359
+true            PASS    18816            235130       220342          3584                   0               0                223266                 220833                        175205                  42631
+Stage result: /mnt/c/Users/Chandler/OneDrive/2026-하계/STOB 반도체 경진대회/STOB_PIM2/experiment/results/direct_staging_stage_breakdown.csv
+direct_staging  result  expand_cycles  expand_bank_only  expand_bank_all  expand_hierarchy_all  depthwise_cycles  depthwise_bank_only  depthwise_bank_all  depthwise_hierarchy_all  project_cycles  project_bank_only  project_bank_all  project_hierarchy_all  add_cycles  add_bank_only  add_bank_all  add_hierarchy_all  relu_cycles  relu_bank_only  relu_bank_all  relu_hierarchy_all  total_cycle
+false           PASS    88345          79748             84078            3849                  38884             665                  32206               30173                    103431          94758              99579             3800                   3715        38             3217          3106               807          20              565            431                 235182
+true            PASS    88297          79710             84788            4637                  38932             665                  32250               30218                    103379          94772              100013            4239                   3715        38             3217          3106               807          20              565            431                 235130

@@ -1,0 +1,4 @@
+case,source_queues,logic_accumulation,outputs_checked,partial_bursts,final_bursts,transfer_bytes,transfer_cycles,dram_writes,total_cycle,accuracy
+bank_depthwise_64ch,true,false,9,0,0,0,0,174656,36426,PASS
+logic_accum_micro_64ch,true,true,37632,73728,8192,2359296,36873,153664,66716,PASS
+logic_accum_full_uib,true,true,18816,73728,8192,2359296,36873,199350,265022,PASS

@@ -1,0 +1,6 @@
+[Full UIB direct staging=false]
+[Full UIB direct staging=true]
+Result: /mnt/c/Users/Chandler/OneDrive/2026-하계/STOB 반도체 경진대회/STOB_PIM2/experiment/results/direct_staging_ab.csv
+direct_staging  result  outputs_checked  total_cycle  modeled_writes  fill_completed_writes  fill_activates  fill_precharges  bank_state_any_cycles  bank_state_all_active_cycles  bank_state_only_cycles  hierarchy_union_all_active_cycles
+false           PASS    18816            235182       220342          3584                   1120            0                224126                 219645                        175229                  41359
+true            PASS    18816            235130       220342          3584                   0               0                223266                 220833                        175205                  42631

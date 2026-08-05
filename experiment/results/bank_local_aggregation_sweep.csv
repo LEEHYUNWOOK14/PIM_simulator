@@ -1,0 +1,7 @@
+scope,bandwidth_bytes_per_cycle,aggregation_taps,outputs_checked,partial_bursts,transfer_bytes,raw_transfer_cycles,overlap_cycles,wait_cycles,depthwise_cycle,total_cycle,modeled_writes,accuracy
+depthwise_micro,256,1,37632,73728,2359296,9225,4930,4295,34447,34447,153664,PASS
+depthwise_micro,128,3,37632,24576,786432,6147,1681,4466,34310,34310,153664,PASS
+depthwise_micro,64,9,37632,8192,262144,4097,543,3554,33025,33025,153664,PASS
+full_uib,256,1,18816,73728,2359296,9225,5247,3978,35352,231650,199350,PASS
+full_uib,128,3,18816,24576,786432,6147,1585,4562,35674,231727,199350,PASS
+full_uib,64,9,18816,8192,262144,4097,635,3462,34880,231178,199350,PASS

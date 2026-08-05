@@ -1,0 +1,10 @@
+scope,configuration,bandwidth_bytes_per_cycle,overlap,outputs_checked,raw_transfer_cycles,overlap_cycles,wait_cycles,depthwise_cycle,total_cycle,modeled_writes,accuracy
+depthwise_micro,bank_only,0,false,37632,0,0,0,36426,36426,174656,PASS
+depthwise_micro,logic_serial,64,false,37632,36873,0,36873,66716,66716,153664,PASS
+depthwise_micro,logic_overlap,64,true,37632,36873,7321,29552,59023,59023,153664,PASS
+depthwise_micro,logic_overlap,128,true,37632,18441,5273,13168,42639,42639,153664,PASS
+depthwise_micro,logic_overlap,256,true,37632,9225,4930,4295,34447,34447,153664,PASS
+full_uib,bank_depthwise_baseline,0,false,18816,0,0,0,38884,235182,220342,PASS
+full_uib,logic_serial,64,false,18816,36873,0,36873,68724,265022,199350,PASS
+full_uib,logic_overlap,64,true,18816,36873,8774,28099,59928,256484,199350,PASS
+full_uib,logic_overlap,256,true,18816,9225,5247,3978,35352,231650,199350,PASS

@@ -1,0 +1,13 @@
+running with -j 32
+g++ -o bin/PIMRank.o -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -Ilib -Isrc -Itools src/PIMRank.cpp
+g++ -o bin/PIMRank.os -c -g -O2 -std=c++17 -Wall -Wno-reorder -Wno-sign-compare -fPIC -Ilib -Isrc -Itools src/PIMRank.cpp
+src/PIMRank.cpp: In member function 'void DRAMSim::PIMRank::doPIMBlock(DRAMSim::BusPacket*, DRAMSim::PIMCmd, int)':
+src/PIMRank.cpp:827:14: error: 'use_logic_die' was not declared in this scope
+  827 |         if (!use_logic_die && cCmd.type_ == PIMCmdType::MAC && packet->busPacketType == WRITE)
+      |              ^~~~~~~~~~~~~
+src/PIMRank.cpp: In member function 'void DRAMSim::PIMRank::doPIMBlock(DRAMSim::BusPacket*, DRAMSim::PIMCmd, int)':
+src/PIMRank.cpp:827:14: error: 'use_logic_die' was not declared in this scope
+  827 |         if (!use_logic_die && cCmd.type_ == PIMCmdType::MAC && packet->busPacketType == WRITE)
+      |              ^~~~~~~~~~~~~
+scons: *** [bin/PIMRank.os] Error 1
+scons: *** [bin/PIMRank.o] Error 1

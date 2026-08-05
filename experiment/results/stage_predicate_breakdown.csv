@@ -1,0 +1,7 @@
+stage,stage_cycles,hierarchy_all_active_cycles,epoch_all_active_cycles,barrier_all_active_cycles,write_bus_all_active_cycles,hierarchy_ratio_percent,epoch_ratio_percent,barrier_ratio_percent,write_bus_ratio_percent
+expand,88345,3849,3783,3094,886,4.3568,4.2821,3.5022,1.0030
+depthwise,38884,30173,10031,8729,22394,77.5970,25.7978,22.4488,57.5918
+project,103431,3800,3705,2278,241,3.6739,3.5821,2.2024,0.2330
+add,3715,3106,1921,1280,2366,83.6070,51.7093,34.4549,63.6878
+relu_readback,807,431,426,337,126,53.4077,52.7881,41.7596,15.6134
+full_workload,235182,41359,19866,15718,26013,17.5859,8.4461,6.6832,11.0610

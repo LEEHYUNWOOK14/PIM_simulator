@@ -7,8 +7,7 @@ RESULT_FILE="${RESULT_FILE:-$ROOT_DIR/experiment/results/shared_weight_buffer_po
 TMP_DIR="$(mktemp -d)"
 trap 'rm -rf "$TMP_DIR"' EXIT
 
-printf 'fill_policy,fill_channels,buffer_write_ports,buffer_write_latency,post_fill_guard_setting,physical_weight_bytes,physical_writes,buffer_fill_bursts,buffer_read_hits,buffer_read_misses,active_channels,completed_fill_writes,min_writes_per_channel,max_writes_per_channel,min_completion_cycle,max_completion_cycle,fill_activates,fill_precharges,fill_barrier_cycles,port_wait_cycles,post_fill_guard_cycles,write_queue_cycles,global_commands,global_dispatches,global_coalesced,global_dispatch_overhead_cycles,global_queue_cycles,global_service_cycles,total_refreshes,total_cycle\n' \
-  > "$RESULT_FILE"
+first=true
 
 for ports in $PORTS_LIST; do
   echo "[weight buffer write ports=$ports]"
@@ -18,8 +17,13 @@ for ports in $PORTS_LIST; do
   BUFFER_WRITE_PORTS="$ports" \
   BUFFER_WRITE_LATENCY="${BUFFER_WRITE_LATENCY:-1}" \
   POST_FILL_GUARD_CYCLES="${POST_FILL_GUARD_CYCLES:-0}" \
+  EPOCH_RELEASE="${EPOCH_RELEASE:-false}" \
   RESULT_FILE="$child_result" \
     bash "$ROOT_DIR/experiment/run_shared_weight_fill_channel_sweep.sh" >/dev/null
+  if [[ "$first" == "true" ]]; then
+    head -n 1 "$child_result" > "$RESULT_FILE"
+    first=false
+  fi
   tail -n 1 "$child_result" >> "$RESULT_FILE"
 done
 

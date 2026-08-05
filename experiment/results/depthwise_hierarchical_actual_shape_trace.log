@@ -1,0 +1,112 @@
+Note: Google Test filter = MobileNetV4WorkloadTest.DepthwiseHierarchicalActualShape
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MobileNetV4WorkloadTest
+[ RUN      ] MobileNetV4WorkloadTest.DepthwiseHierarchicalActualShape
+BANK_SIDE_SB_WRITE ch[0] ra[0] bank[0] row[0] col[0] tag[BANK_DOMAIN_PRELOAD_DATABANK_SEQ_0_BANK_EPOCH_0_] v0[0]
+BANK_SIDE_SB_WRITE ch[1] ra[0] bank[0] row[0] col[0] tag[BANK_DOMAIN_PRELOAD_DATABANK_SEQ_0_BANK_EPOCH_0_] v0[0]
+BANK_SIDE_SB_WRITE ch[2] ra[0] bank[0] row[0] col[0] tag[BANK_DOMAIN_PRELOAD_DATABANK_SEQ_0_BANK_EPOCH_0_] v0[0]
+BANK_SIDE_SB_WRITE ch[3] ra[0] bank[0] row[0] col[0] tag[BANK_DOMAIN_PRELOAD_DATABANK_SEQ_0_BANK_EPOCH_0_] v0[0]
+BANK_SIDE_SB_WRITE ch[4] ra[0] bank[0] row[0] col[0] tag[BANK_DOMAIN_PRELOAD_DATABANK_SEQ_0_BANK_EPOCH_0_] v0[0]
+BANK_SIDE_SB_WRITE ch[5] ra[0] bank[0] row[0] col[0] tag[BANK_DOMAIN_PRELOAD_DATABANK_SEQ_0_BANK_EPOCH_0_] v0[0]
+BANK_SIDE_SB_WRITE ch[6] ra[0] bank[0] row[0] col[0] tag[BANK_DOMAIN_PRELOAD_DATABANK_SEQ_0_BANK_EPOCH_0_] v0[0]
+BANK_SIDE_SB_WRITE ch[7] ra[0] bank[0] row[0] col[0] tag[BANK_DOMAIN_PRELOAD_DATABANK_SEQ_0_BANK_EPOCH_0_] v0[0]
+BANK_SIDE_SB_WRITE ch[8] ra[0] bank[0] row[0] col[0] tag[BANK_DOMAIN_PRELOAD_DATABANK_SEQ_0_BANK_EPOCH_0_] v0[0]
+BANK_SIDE_SB_WRITE ch[9] ra[0] bank[0] row[0] col[0] tag[BANK_DOMAIN_PRELOAD_DATABANK_SEQ_0_BANK_EPOCH_0_] v0[0]
+BANK_SIDE_SB_WRITE ch[10] ra[0] bank[0] row[0] col[0] tag[BANK_DOMAIN_PRELOAD_DATABANK_SEQ_0_BANK_EPOCH_0_] v0[0]
+BANK_SIDE_SB_WRITE ch[11] ra[0] bank[0] row[0] col[0] tag[BANK_DOMAIN_PRELOAD_DATABANK_SEQ_0_BANK_EPOCH_0_] v0[0]
+BANK_SIDE_SB_WRITE ch[12] ra[0] bank[0] row[0] col[0] tag[BANK_DOMAIN_PRELOAD_DATABANK_SEQ_0_BANK_EPOCH_0_] v0[0]
+BANK_SIDE_SB_WRITE ch[13] ra[0] bank[0] row[0] col[0] tag[BANK_DOMAIN_PRELOAD_DATABANK_SEQ_0_BANK_EPOCH_0_] v0[0]
+BANK_SIDE_SB_WRITE ch[14] ra[0] bank[0] row[0] col[0] tag[BANK_DOMAIN_PRELOAD_DATABANK_SEQ_0_BANK_EPOCH_0_] v0[0]
+BANK_SIDE_SB_WRITE ch[15] ra[0] bank[0] row[0] col[0] tag[BANK_DOMAIN_PRELOAD_DATABANK_SEQ_0_BANK_EPOCH_0_] v0[0]
+BANK_SIDE_SB_WRITE ch[16] ra[0] bank[0] row[0] col[0] tag[BANK_DOMAIN_PRELOAD_DATABANK_SEQ_0_BANK_EPOCH_0_] v0[0]
+BANK_SIDE_SB_WRITE ch[17] ra[0] bank[0] row[0] col[0] tag[BANK_DOMAIN_PRELOAD_DATABANK_SEQ_0_BANK_EPOCH_0_] v0[0]
+BANK_SIDE_SB_WRITE ch[18] ra[0] bank[0] row[0] col[0] tag[BANK_DOMAIN_PRELOAD_DATABANK_SEQ_0_BANK_EPOCH_0_] v0[0]
+BANK_SIDE_SB_WRITE ch[19] ra[0] bank[0] row[0] col[0] tag[BANK_DOMAIN_PRELOAD_DATABANK_SEQ_0_BANK_EPOCH_0_] v0[0]
+BANK_SIDE_SB_WRITE ch[20] ra[0] bank[0] row[0] col[0] tag[BANK_DOMAIN_PRELOAD_DATABANK_SEQ_0_BANK_EPOCH_0_] v0[0]
+BANK_SIDE_SB_WRITE ch[21] ra[0] bank[0] row[0] col[0] tag[BANK_DOMAIN_PRELOAD_DATABANK_SEQ_0_BANK_EPOCH_0_] v0[0]
+BANK_SIDE_SB_WRITE ch[22] ra[0] bank[0] row[0] col[0] tag[BANK_DOMAIN_PRELOAD_DATABANK_SEQ_0_BANK_EPOCH_0_] v0[0]
+BANK_SIDE_SB_WRITE ch[23] ra[0] bank[0] row[0] col[0] tag[BANK_DOMAIN_PRELOAD_DATABANK_SEQ_0_BANK_EPOCH_0_] v0[0]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[0] busType[READ] row[0] col[0] cmd[FILL GRF_A[0], EVEN_BANK] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[1] busType[READ] row[0] col[0] cmd[FILL GRF_A[0], EVEN_BANK] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[2] busType[READ] row[0] col[0] cmd[FILL GRF_A[0], EVEN_BANK] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[3] busType[READ] row[0] col[0] cmd[FILL GRF_A[0], EVEN_BANK] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[4] busType[READ] row[0] col[0] cmd[FILL GRF_A[0], EVEN_BANK] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[5] busType[READ] row[0] col[0] cmd[FILL GRF_A[0], EVEN_BANK] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[6] busType[READ] row[0] col[0] cmd[FILL GRF_A[0], EVEN_BANK] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[7] busType[READ] row[0] col[0] cmd[FILL GRF_A[0], EVEN_BANK] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[0] busType[READ] row[0] col[0] cmd[FILL GRF_A[0], EVEN_BANK] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[1] busType[READ] row[0] col[0] cmd[FILL GRF_A[0], EVEN_BANK] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[2] busType[READ] row[0] col[0] cmd[FILL GRF_A[0], EVEN_BANK] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[3] busType[READ] row[0] col[0] cmd[FILL GRF_A[0], EVEN_BANK] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[4] busType[READ] row[0] col[0] cmd[FILL GRF_A[0], EVEN_BANK] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[5] busType[READ] row[0] col[0] cmd[FILL GRF_A[0], EVEN_BANK] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[6] busType[READ] row[0] col[0] cmd[FILL GRF_A[0], EVEN_BANK] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[7] busType[READ] row[0] col[0] cmd[FILL GRF_A[0], EVEN_BANK] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[0] busType[READ] row[0] col[0] cmd[FILL GRF_A[0], EVEN_BANK] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[1] busType[READ] row[0] col[0] cmd[FILL GRF_A[0], EVEN_BANK] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[2] busType[READ] row[0] col[0] cmd[FILL GRF_A[0], EVEN_BANK] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[3] busType[READ] row[0] col[0] cmd[FILL GRF_A[0], EVEN_BANK] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[4] busType[READ] row[0] col[0] cmd[FILL GRF_A[0], EVEN_BANK] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[5] busType[READ] row[0] col[0] cmd[FILL GRF_A[0], EVEN_BANK] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[6] busType[READ] row[0] col[0] cmd[FILL GRF_A[0], EVEN_BANK] logicEnabled[1] bankEnabled[1]
+PIMBLOCK_DISPATCH mode[HYBRID] pb[7] busType[READ] row[0] col[0] cmd[FILL GRF_A[0], EVEN_BANK] logicEnabled[1] bankEnabled[1]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[0] busType[READ] row[0] col[0] cmd[NOP 8x]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[1] busType[READ] row[0] col[0] cmd[NOP 8x]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[2] busType[READ] row[0] col[0] cmd[NOP 8x]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[3] busType[READ] row[0] col[0] cmd[NOP 8x]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[4] busType[READ] row[0] col[0] cmd[NOP 8x]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[5] busType[READ] row[0] col[0] cmd[NOP 8x]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[6] busType[READ] row[0] col[0] cmd[NOP 8x]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[7] busType[READ] row[0] col[0] cmd[NOP 8x]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[0] busType[READ] row[0] col[0] cmd[NOP 8x]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[1] busType[READ] row[0] col[0] cmd[NOP 8x]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[2] busType[READ] row[0] col[0] cmd[NOP 8x]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[3] busType[READ] row[0] col[0] cmd[NOP 8x]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[4] busType[READ] row[0] col[0] cmd[NOP 8x]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[5] busType[READ] row[0] col[0] cmd[NOP 8x]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[6] busType[READ] row[0] col[0] cmd[NOP 8x]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[7] busType[READ] row[0] col[0] cmd[NOP 8x]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[0] busType[READ] row[0] col[0] cmd[NOP 8x]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[1] busType[READ] row[0] col[0] cmd[NOP 8x]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[2] busType[READ] row[0] col[0] cmd[NOP 8x]
+LOGIC_DIE_NOP_ENTER mode[HYBRID] pb[3] busType[READ] row[0] col[0] cmd[NOP 8x]
+BANK_SIDE_GRF_B_WRITE pb[0] grf[0] auto[1] mac[0] row[256] col[0] v0[1]
+BANK_SIDE_GRF_B_WRITE pb[1] grf[0] auto[1] mac[0] row[256] col[0] v0[1]
+BANK_SIDE_GRF_B_WRITE pb[2] grf[0] auto[1] mac[0] row[256] col[0] v0[1]
+BANK_SIDE_GRF_B_WRITE pb[3] grf[0] auto[1] mac[0] row[256] col[0] v0[1]
+BANK_SIDE_GRF_B_WRITE pb[4] grf[0] auto[1] mac[0] row[256] col[0] v0[1]
+BANK_SIDE_GRF_B_WRITE pb[5] grf[0] auto[1] mac[0] row[256] col[0] v0[1]
+BANK_SIDE_GRF_B_WRITE pb[6] grf[0] auto[1] mac[0] row[256] col[0] v0[1]
+BANK_SIDE_GRF_B_WRITE pb[7] grf[0] auto[1] mac[0] row[256] col[0] v0[1]
+BANK_SIDE_GRF_B_WRITE pb[0] grf[0] auto[1] mac[0] row[256] col[0] v0[1]
+BANK_SIDE_GRF_B_WRITE pb[1] grf[0] auto[1] mac[0] row[256] col[0] v0[1]
+BANK_SIDE_GRF_B_WRITE pb[2] grf[0] auto[1] mac[0] row[256] col[0] v0[1]
+BANK_SIDE_GRF_B_WRITE pb[3] grf[0] auto[1] mac[0] row[256] col[0] v0[1]
+LOGIC_ACCUM_TRACE key[ch0_ra0_pb0_b0_r640_c1] tap[0] lane0[1]
+LOGIC_ACCUM_TRACE key[ch0_ra0_pb0_b0_r640_c1] tap[1] lane0[1]
+LOGIC_ACCUM_TRACE key[ch0_ra0_pb0_b0_r640_c1] tap[2] lane0[1]
+LOGIC_ACCUM_TRACE key[ch0_ra0_pb0_b0_r640_c1] tap[3] lane0[1]
+LOGIC_ACCUM_TRACE key[ch0_ra0_pb0_b0_r640_c1] tap[4] lane0[1]
+LOGIC_ACCUM_TRACE key[ch0_ra0_pb0_b0_r640_c1] tap[5] lane0[1]
+LOGIC_ACCUM_TRACE key[ch0_ra0_pb0_b0_r640_c1] tap[6] lane0[1]
+LOGIC_ACCUM_TRACE key[ch0_ra0_pb0_b0_r640_c1] tap[7] lane0[1]
+LOGIC_ACCUM_TRACE key[ch0_ra0_pb0_b0_r640_c1] tap[8] lane0[1]
+DEPTHWISE_HIERARCHICAL_ACTUAL_SHAPE_RESULT outputs_checked[37632] mismatches[4544] first_index[1024] first_y[0] first_x[5] first_channel[64] first_expected[6] first_actual[9] partial_bursts[73728] final_bursts[8192] total_cycle[66708]
+src/tests/MobileNetV4WorkloadTestCases.cpp:2426: Failure
+Expected equality of these values:
+  mismatches
+    Which is: 4544
+  0u
+    Which is: 0
+
+[  FAILED  ] MobileNetV4WorkloadTest.DepthwiseHierarchicalActualShape (192140 ms)
+[----------] 1 test from MobileNetV4WorkloadTest (192145 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (192153 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] MobileNetV4WorkloadTest.DepthwiseHierarchicalActualShape
+
+ 1 FAILED TEST

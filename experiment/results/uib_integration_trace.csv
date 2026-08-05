@@ -1,0 +1,6 @@
+sequence,stage,target,start_cycle,end_cycle,cycles,input_elements,output_elements,input_fp16_hash,output_fp16_hash
+0,expand_pointwise,logic_die,0,88033,88033,18816,37632,9a0207c240d61b83,74007ac4392f3383
+1,depthwise_3x3,bank_to_logic,88033,122852,34819,37632,37632,74007ac4392f3383,8ec112e26e631b83
+2,project_pointwise,logic_die,122852,226472,103620,37632,18816,8ec112e26e631b83,7493deec3b380f83
+3,residual_add,bank_side,226472,230141,3669,37632,18816,7493deec3b380f83+9a0207c240d61b83,4068a98fc1531583
+4,relu_readback,bank_side,230141,230856,715,18816,18816,4068a98fc1531583,4068a98fc1531583

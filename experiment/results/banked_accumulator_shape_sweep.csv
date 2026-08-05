@@ -1,0 +1,5 @@
+shape,logical_outputs,padded_elements,total_entries,accumulator_banks,ports_per_bank,peak_total_entries,peak_entries_per_bank,stalls,total_cycle,mismatches,result
+14x14x192,37632,131072,128,1,4,128,128,43968,33622,0,PASS
+14x14x192,37632,131072,128,4,1,128,32,43968,33622,0,PASS
+14x14x192,37632,131072,128,8,1,128,16,25344,33138,0,PASS
+28x28x192,150528,262144,256,8,1,256,32,50688,63910,0,PASS
