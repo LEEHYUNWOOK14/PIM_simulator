@@ -44,6 +44,8 @@
 #include "MemoryObject.h"
 #include "LogicDieScheduler.h"
 #include "LogicDieWeightBuffer.h"
+#include "LogicDieOutputBuffer.h"
+#include "LogicDieAccumulator.h"
 #include "Rank.h"
 #include "SimulatorObject.h"
 #include "SystemConfiguration.h"
@@ -60,14 +62,18 @@ class MemorySystem : public MemoryObject
     // functions
     MemorySystem(unsigned id, unsigned megsOfMemory, CSVWriter& csvOut_, ostream& simLog,
                  Configuration& config, shared_ptr<LogicDieScheduler> logicScheduler,
-                 shared_ptr<LogicDieWeightBuffer> logicWeightBuffer);
+                 shared_ptr<LogicDieWeightBuffer> logicWeightBuffer,
+                 shared_ptr<LogicDieOutputBuffer> logicOutputBuffer,
+                 shared_ptr<LogicDieAccumulator> logicAccumulator);
     virtual ~MemorySystem();
     void update();
 
     virtual bool addTransaction(Transaction* trans);
     virtual bool addTransaction(bool isWrite, uint64_t addr, BurstType* data);
     virtual bool addTransaction(bool isWrite, uint64_t addr, const std::string& tag,
-                                BurstType* data);
+                                BurstType* data,
+                                WriteCompletionClass completionClass =
+                                    WriteCompletionClass::ORDERED);
 
     bool addBarrier();
     bool WillAcceptTransaction();
@@ -92,6 +98,8 @@ class MemorySystem : public MemoryObject
     unsigned systemID;
     uint64_t numOnTheFlyTransactions;
     shared_ptr<LogicDieWeightBuffer> logicWeightBuffer;
+    shared_ptr<LogicDieOutputBuffer> logicOutputBuffer;
+    shared_ptr<LogicDieAccumulator> logicAccumulator;
 
   private:
     CSVWriter& csvOut;

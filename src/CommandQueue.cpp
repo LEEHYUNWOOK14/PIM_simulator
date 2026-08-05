@@ -48,8 +48,14 @@ CommandQueue::CommandQueue(vector<vector<BankState>>& states, ostream& simLog)
       refreshRank(0),
       refreshBank(0),
       refreshWaiting(false),
-      sendAct(true)
+      sendAct(true),
+      predicateRejectCycles_(0),
+      predicateHolCycles_(0),
+      predicateHolCandidates_(0),
+      predicateHolMaxCandidates_(0),
+      predicateBypassIssues_(0)
 {
+    issuabilityRejectLastCycle_.fill(std::numeric_limits<uint64_t>::max());
     // set here to avoid compile errors
     currentClockCycle = 0;
 
@@ -207,10 +213,13 @@ bool CommandQueue::process_refresh(BusPacket** busPacket)
     return false;
 }
 
-bool CommandQueue::process_command(BusPacket** busPacket)
+bool CommandQueue::process_command(BusPacket** busPacket,
+                                   const std::function<bool(BusPacket*)>& issuePredicate,
+                                   const std::function<bool(BusPacket*)>& probePredicate)
 {
     unsigned startingRank = nextRank;
     unsigned startingBank = nextBank;
+    bool bypassingRejectedCommand = false;
     // if(refreshWaiting)
     //         return false;
     do
@@ -220,33 +229,44 @@ bool CommandQueue::process_command(BusPacket** busPacket)
         {
             BusPacket* packet = queue[i];
 
-            if (isIssuable(packet))
+            if (isIssuable(packet, true))
             {
-                if (i != 0 && queue[i]->tag.find("BAR", 0) != std::string::npos)
-                {
+                if (!getConfigParam(BOOL, "HIERARCHY_SOURCE_QUEUES") && i != 0 &&
+                    queue[i]->tag.find("BAR", 0) != std::string::npos)
                     break;
-                }
-                else
                 {
-                    bool depend = false;
-                    for (size_t j = 0; j < i; j++)
+                    if (!hasPriorDependency(queue, i))
                     {
-                        if (queue[i]->bank == queue[j]->bank && queue[i]->row == queue[j]->row &&
-                            queue[i]->column == queue[j]->column)
+                        const bool accepted =
+                            !issuePredicate ||
+                            (bypassingRejectedCommand && probePredicate
+                                 ? probePredicate(packet)
+                                 : issuePredicate(packet));
+                        if (!accepted)
                         {
-                            depend = true;
-                            break;
+                            if (!bypassingRejectedCommand)
+                            {
+                                predicateRejectCycles_++;
+                                const uint64_t candidates =
+                                    countPredicateBypassCandidates(packet, probePredicate);
+                                if (candidates > 0)
+                                {
+                                    predicateHolCycles_++;
+                                    predicateHolCandidates_ += candidates;
+                                    predicateHolMaxCandidates_ =
+                                        max(predicateHolMaxCandidates_, candidates);
+                                }
+                            }
+                            if (getConfigParam(BOOL, "HIERARCHY_READY_BYPASS"))
+                            {
+                                bypassingRejectedCommand = true;
+                                continue;
+                            }
+                            return false;
                         }
-                        if (queue[j]->tag.find("BAR", 0) != std::string::npos)
-                        {
-                            depend = true;
-                            break;
-                        }
-                    }
-                    if (!depend)
-                    {
                         *busPacket = packet;
                         queue.erase(queue.begin() + i);
+                        if (bypassingRejectedCommand) predicateBypassIssues_++;
                         return true;
                     }
                 }
@@ -255,18 +275,21 @@ bool CommandQueue::process_command(BusPacket** busPacket)
 
         for (size_t i = 0; i < queue.size(); i++)
         {
-            if (i != 0 && queue[i]->tag.find("BAR", 0) != std::string::npos)
-            {
+            if (!getConfigParam(BOOL, "HIERARCHY_SOURCE_QUEUES") && i != 0 &&
+                queue[i]->tag.find("BAR", 0) != std::string::npos)
                 break;
-            }
-
             BusPacket* packet = queue[i];
+            if (getConfigParam(BOOL, "HIERARCHY_SOURCE_QUEUES") &&
+                hasPriorDependency(queue, i))
+                continue;
+            if (issuePredicate && !issuePredicate(packet))
+                continue;
             if (bankStates[packet->rank][packet->bank].currentBankState == Idle)
             {
                 *busPacket =
                     new BusPacket(ACTIVATE, packet->physicalAddress, packet->column, packet->row,
                                   packet->rank, packet->bank, nullptr, dramsimLog, packet->tag);
-                if (isIssuable(*busPacket))
+                if (isIssuable(*busPacket, true))
                 {
                     return true;
                 }
@@ -286,7 +309,8 @@ bool CommandQueue::process_command(BusPacket** busPacket)
     return false;
 }
 
-bool CommandQueue::process_precharge(BusPacket** busPacket)
+bool CommandQueue::process_precharge(
+    BusPacket** busPacket, const std::function<bool(BusPacket*)>& probePredicate)
 {
     unsigned startingRank = nextRankPRE;
     unsigned startingBank = nextBankPRE;
@@ -299,6 +323,8 @@ bool CommandQueue::process_precharge(BusPacket** busPacket)
         for (size_t i = 0; i < queue.size(); i++)
         {
             BusPacket* packet = queue[i];
+            if (probePredicate && !probePredicate(packet))
+                continue;
             if (nextRankPRE == packet->rank && nextBankPRE == packet->bank &&
                 bankStates[packet->rank][packet->bank].currentBankState == RowActive &&
                 packet->row == bankStates[packet->rank][packet->bank].openRowAddress)
@@ -314,7 +340,9 @@ bool CommandQueue::process_precharge(BusPacket** busPacket)
             *busPacket =
                 new BusPacket(PRECHARGE, 0, 0, bankStates[nextRankPRE][nextBankPRE].openRowAddress,
                               nextRankPRE, nextBankPRE, nullptr, dramsimLog, prechargeTag);
-            if (isIssuable(*busPacket))
+            // An empty tag means this is only the scheduler's speculative scan of
+            // an unrelated bank, not a PRE required by a queued request.
+            if (isIssuable(*busPacket, !prechargeTag.empty()))
                 return true;
             else
                 delete *busPacket;
@@ -325,8 +353,13 @@ bool CommandQueue::process_precharge(BusPacket** busPacket)
     return false;
 }
 
-bool CommandQueue::pop(BusPacket** busPacket)
+bool CommandQueue::pop(BusPacket** busPacket,
+                       const std::function<bool(BusPacket*)>& issuePredicate,
+                       const std::function<bool(BusPacket*)>& probePredicate)
 {
+    issuabilityRejectedThisPop_.fill(false);
+    bankStateTagRejectedThisPop_.fill(false);
+    bankStateRawTagsRejectedThisPop_.clear();
     if (queuingStructure_ == PerRankPerBank)
     {
         ERROR("== Error - queuingStructure_ PerRankPerBank is not allowed");
@@ -343,9 +376,9 @@ bool CommandQueue::pop(BusPacket** busPacket)
 
     if (process_refresh(busPacket))
         return true;
-    else if (process_command(busPacket))
+    else if (process_command(busPacket, issuePredicate, probePredicate))
         return true;
-    else if (process_precharge(busPacket))
+    else if (process_precharge(busPacket, probePredicate))
         return true;
     else
         return false;
@@ -415,12 +448,72 @@ vector<BusPacket*>& CommandQueue::getCommandQueue(unsigned rank, unsigned bank)
 }
 
 // checks if busPacket is allowed to be issued
-bool CommandQueue::isIssuable(BusPacket* busPacket)
+CommandTagClass CommandQueue::classifyTag(const string& tag)
+{
+    if (tag.find("LOGIC_WEIGHT_FILL") != string::npos) return CommandTagClass::WEIGHT_FILL;
+    if (tag.find("PARK_") != string::npos) return CommandTagClass::PARK;
+    if (tag.find("SB_TO_HAB") != string::npos ||
+        tag.find("HAB_TO_SB") != string::npos || tag.find("_PIM") != string::npos)
+        return CommandTagClass::MODE_CONTROL;
+    if (tag.find("PROGRAM_LOGIC_CRF") != string::npos ||
+        tag.find("PROGRAM_BANK_CRF") != string::npos)
+        return CommandTagClass::CRF_CONTROL;
+    if (tag.find("WRIO_TO_GRF") != string::npos ||
+        tag.find("PRELOAD_DATA") != string::npos)
+        return CommandTagClass::INPUT_UPLOAD;
+    if (tag.find("MAC_") != string::npos) return CommandTagClass::MAC;
+    if (tag.find("OUTPUT") != string::npos || tag.find("output") != string::npos ||
+        tag.find("GRFB_TO_BANK") != string::npos)
+        return CommandTagClass::OUTPUT;
+    return CommandTagClass::OTHER;
+}
+
+string CommandQueue::normalizeTag(const string& tag)
+{
+    string normalized = tag;
+    const string logicDomain = "LOGIC_DOMAIN_";
+    const string bankDomain = "BANK_DOMAIN_";
+    if (normalized.rfind(logicDomain, 0) == 0)
+        normalized.erase(0, logicDomain.size());
+    else if (normalized.rfind(bankDomain, 0) == 0)
+        normalized.erase(0, bankDomain.size());
+    size_t metadata = normalized.find("LOGIC_SEQ_");
+    if (metadata == string::npos) metadata = normalized.find("BANK_SEQ_");
+    if (metadata != string::npos) normalized.erase(metadata);
+    size_t barrier = normalized.find("BAR");
+    if (barrier != string::npos) normalized.erase(barrier);
+    while (!normalized.empty() && normalized.back() == '_') normalized.pop_back();
+    return normalized.empty() ? "EMPTY" : normalized;
+}
+
+void CommandQueue::recordIssuabilityReject(CommandIssuabilityRejectReason reason,
+                                            const BusPacket* packet)
+{
+    const size_t index = static_cast<size_t>(reason);
+    issuabilityRejectedThisPop_[index] = true;
+    if (reason == CommandIssuabilityRejectReason::BANK_STATE && packet != nullptr)
+    {
+        bankStateTagRejectedThisPop_[static_cast<size_t>(classifyTag(packet->tag))] = true;
+        bankStateRawTagsRejectedThisPop_.insert(normalizeTag(packet->tag));
+    }
+    issuabilityRejectAttempts_[index]++;
+    if (issuabilityRejectLastCycle_[index] != currentClockCycle)
+    {
+        issuabilityRejectLastCycle_[index] = currentClockCycle;
+        issuabilityRejectWallCycles_[index]++;
+    }
+}
+
+bool CommandQueue::isIssuable(BusPacket* busPacket, bool recordReject)
 {
     if (!getConfigParam(BOOL, "LOGIC_GLOBAL_SCHEDULER") && busPacket->busPacketType != REF &&
         busPacket->busPacketType != RFCSB &&
         (*ranks)[busPacket->rank]->pimRank->isLogicDieBusy(currentClockCycle))
+    {
+        if (recordReject)
+            recordIssuabilityReject(CommandIssuabilityRejectReason::LOGIC_PCU_BUSY);
         return false;
+    }
 
     switch (busPacket->busPacketType)
     {
@@ -430,60 +523,108 @@ bool CommandQueue::isIssuable(BusPacket* busPacket)
             break;
         case ACTIVATE:
 
-            if ((*ranks)[busPacket->rank]->mode_ != dramMode::SB && busPacket->bank >= 2)
+            if ((*ranks)[busPacket->rank]->getModeForPacket(busPacket) != dramMode::SB &&
+                busPacket->bank >= 2)
             {
+                if (recordReject)
+                    recordIssuabilityReject(CommandIssuabilityRejectReason::MODE_BLOCKED);
                 return false;
             }
 
-            if ((bankStates[busPacket->rank][busPacket->bank].currentBankState == Idle ||
-                 bankStates[busPacket->rank][busPacket->bank].currentBankState == Refreshing) &&
-                currentClockCycle >= bankStates[busPacket->rank][busPacket->bank].nextActivate &&
-                tXAWCountdown[busPacket->rank].size() < xaw_)
+            if (bankStates[busPacket->rank][busPacket->bank].currentBankState != Idle &&
+                bankStates[busPacket->rank][busPacket->bank].currentBankState != Refreshing)
             {
-                return true;
-            }
-            else
-            {
+                if (recordReject)
+                    recordIssuabilityReject(CommandIssuabilityRejectReason::BANK_STATE,
+                                            busPacket);
                 return false;
             }
+            if (currentClockCycle < bankStates[busPacket->rank][busPacket->bank].nextActivate)
+            {
+                if (recordReject)
+                    recordIssuabilityReject(CommandIssuabilityRejectReason::TIMING);
+                return false;
+            }
+            if (tXAWCountdown[busPacket->rank].size() >= xaw_)
+            {
+                if (recordReject)
+                    recordIssuabilityReject(CommandIssuabilityRejectReason::XAW_LIMIT);
+                return false;
+            }
+            return true;
             break;
 
         case WRITE:
-            if (bankStates[busPacket->rank][busPacket->bank].currentBankState == RowActive &&
-                currentClockCycle >= bankStates[busPacket->rank][busPacket->bank].nextWrite &&
-                busPacket->row == bankStates[busPacket->rank][busPacket->bank].openRowAddress &&
-                rowAccessCounters[busPacket->rank][busPacket->bank] < total_row_accesses_)
+            if (bankStates[busPacket->rank][busPacket->bank].currentBankState != RowActive)
             {
-                return true;
-            }
-            else
-            {
+                if (recordReject)
+                    recordIssuabilityReject(CommandIssuabilityRejectReason::BANK_STATE,
+                                            busPacket);
                 return false;
             }
+            if (currentClockCycle < bankStates[busPacket->rank][busPacket->bank].nextWrite)
+            {
+                if (recordReject)
+                    recordIssuabilityReject(CommandIssuabilityRejectReason::TIMING);
+                return false;
+            }
+            if (busPacket->row != bankStates[busPacket->rank][busPacket->bank].openRowAddress)
+            {
+                if (recordReject)
+                    recordIssuabilityReject(CommandIssuabilityRejectReason::ROW_MISMATCH);
+                return false;
+            }
+            if (rowAccessCounters[busPacket->rank][busPacket->bank] >= total_row_accesses_)
+            {
+                if (recordReject)
+                    recordIssuabilityReject(CommandIssuabilityRejectReason::ROW_ACCESS_LIMIT);
+                return false;
+            }
+            return true;
             break;
         case READ:
-            if (bankStates[busPacket->rank][busPacket->bank].currentBankState == RowActive &&
-                currentClockCycle >= bankStates[busPacket->rank][busPacket->bank].nextRead &&
-                busPacket->row == bankStates[busPacket->rank][busPacket->bank].openRowAddress &&
-                rowAccessCounters[busPacket->rank][busPacket->bank] < total_row_accesses_)
+            if (bankStates[busPacket->rank][busPacket->bank].currentBankState != RowActive)
             {
-                return true;
-            }
-            else
-            {
+                if (recordReject)
+                    recordIssuabilityReject(CommandIssuabilityRejectReason::BANK_STATE,
+                                            busPacket);
                 return false;
             }
+            if (currentClockCycle < bankStates[busPacket->rank][busPacket->bank].nextRead)
+            {
+                if (recordReject)
+                    recordIssuabilityReject(CommandIssuabilityRejectReason::TIMING);
+                return false;
+            }
+            if (busPacket->row != bankStates[busPacket->rank][busPacket->bank].openRowAddress)
+            {
+                if (recordReject)
+                    recordIssuabilityReject(CommandIssuabilityRejectReason::ROW_MISMATCH);
+                return false;
+            }
+            if (rowAccessCounters[busPacket->rank][busPacket->bank] >= total_row_accesses_)
+            {
+                if (recordReject)
+                    recordIssuabilityReject(CommandIssuabilityRejectReason::ROW_ACCESS_LIMIT);
+                return false;
+            }
+            return true;
             break;
         case PRECHARGE:
-            if (bankStates[busPacket->rank][busPacket->bank].currentBankState == RowActive &&
-                currentClockCycle >= bankStates[busPacket->rank][busPacket->bank].nextPrecharge)
+            if (bankStates[busPacket->rank][busPacket->bank].currentBankState != RowActive)
             {
-                return true;
-            }
-            else
-            {
+                if (recordReject)
+                    recordIssuabilityReject(CommandIssuabilityRejectReason::BANK_STATE,
+                                            busPacket);
                 return false;
             }
+            if (currentClockCycle < bankStates[busPacket->rank][busPacket->bank].nextPrecharge)
+            {
+                if (recordReject)
+                    recordIssuabilityReject(CommandIssuabilityRejectReason::TIMING);
+                return false;
+            }
+            return true;
             break;
 
         default:
@@ -583,9 +724,81 @@ string CommandQueue::getDebugSummary() const
                     << "_tag[" << packet->tag << "]"
                     << "_state["
                     << static_cast<int>(bankStates[packet->rank][packet->bank].currentBankState)
+                    << "]_open["
+                    << bankStates[packet->rank][packet->bank].openRowAddress
+                    << "]_next_read["
+                    << bankStates[packet->rank][packet->bank].nextRead
+                    << "]_next_write["
+                    << bankStates[packet->rank][packet->bank].nextWrite
                     << "]_next_act["
                     << bankStates[packet->rank][packet->bank].nextActivate << "]";
             shown++;
         }
     return summary.str();
+}
+
+bool CommandQueue::popDirect(
+    BusPacket** busPacket, const std::function<bool(BusPacket*)>& issuePredicate)
+{
+    unsigned startingRank = nextRank;
+    unsigned startingBank = nextBank;
+    do
+    {
+        BusPacket1D& queue = getCommandQueue(nextRank, nextBank);
+        for (size_t index = 0; index < queue.size(); index++)
+        {
+            BusPacket* packet = queue[index];
+            if (hasPriorDependency(queue, index)) continue;
+            if (issuePredicate && !issuePredicate(packet)) continue;
+            *busPacket = packet;
+            queue.erase(queue.begin() + index);
+            return true;
+        }
+        if (queuingStructure_ == PerRank)
+            nextRank = (nextRank + 1) % num_ranks_;
+        else
+            nextRankAndBank(nextRank, nextBank);
+    } while (!(startingRank == nextRank && startingBank == nextBank));
+    return false;
+}
+
+bool CommandQueue::hasPriorDependency(const BusPacket1D& queue, size_t index) const
+{
+    const bool source_queues = getConfigParam(BOOL, "HIERARCHY_SOURCE_QUEUES");
+    const bool logic = queue[index]->tag.find("LOGIC_DOMAIN_") != std::string::npos;
+    if (!source_queues && index != 0 && queue[index]->tag.find("BAR", 0) != std::string::npos)
+        return true;
+    for (size_t prior = 0; prior < index; prior++)
+    {
+        const bool prior_logic =
+            queue[prior]->tag.find("LOGIC_DOMAIN_") != std::string::npos;
+        if (source_queues && logic != prior_logic) continue;
+        if (queue[index]->bank == queue[prior]->bank &&
+            queue[index]->row == queue[prior]->row &&
+            queue[index]->column == queue[prior]->column)
+            return true;
+        if (queue[prior]->tag.find("BAR", 0) != std::string::npos) return true;
+    }
+    return false;
+}
+
+uint64_t CommandQueue::countPredicateBypassCandidates(
+    BusPacket* blockedPacket, const std::function<bool(BusPacket*)>& probePredicate)
+{
+    uint64_t candidates = 0;
+    for (auto& rankQueues : queues)
+    {
+        for (auto& queue : rankQueues)
+        {
+            for (size_t index = 0; index < queue.size(); index++)
+            {
+                BusPacket* packet = queue[index];
+                if (packet == blockedPacket || !isIssuable(packet) ||
+                    hasPriorDependency(queue, index))
+                    continue;
+                if (!probePredicate || probePredicate(packet)) candidates++;
+            }
+        }
+    }
+    return candidates;
 }

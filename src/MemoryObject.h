@@ -17,7 +17,9 @@ class MemoryObject : public SimulatorObject
     virtual bool addTransaction(Transaction* trans) = 0;
     virtual bool addTransaction(bool isWrite, uint64_t addr, BurstType* data) = 0;
     virtual bool addTransaction(bool isWrite, uint64_t addr, const std::string& tag,
-                                BurstType* data) = 0;
+                                BurstType* data,
+                                WriteCompletionClass completionClass =
+                                    WriteCompletionClass::ORDERED) = 0;
 };
 
 }  // namespace DRAMSim

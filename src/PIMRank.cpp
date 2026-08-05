@@ -25,19 +25,15 @@ using namespace DRAMSim;
 
 PIMRank::PIMRank(ostream& simLog, Configuration& configuration,
                  shared_ptr<LogicDieScheduler> logicScheduler,
-                 shared_ptr<LogicDieWeightBuffer> logicWeightBuffer)
+                 shared_ptr<LogicDieWeightBuffer> logicWeightBuffer,
+                 shared_ptr<LogicDieAccumulator> logicAccumulator)
     : chanId(-1),
       rankId(-1),
       dramsimLog(simLog),
-      pimPC_(0),
-      lastJumpIdx_(-1),
-      numJumpToBeTaken_(-1),
-      lastRepeatIdx_(-1),
-      numRepeatToBeDone_(-1),
-      crfExit_(false),
       config(configuration),
       logicScheduler_(logicScheduler),
       logicWeightBuffer_(logicWeightBuffer),
+      logicAccumulator_(logicAccumulator),
       pimBlocks(getConfigParam(UINT, "NUM_PIM_BLOCKS"),
                 PIMBlock(PIMConfiguration::getPIMPrecision()))
 {
@@ -51,6 +47,8 @@ PIMRank::PIMRank(ostream& simLog, Configuration& configuration,
     logicTransferCycles_ = 0;
     logicServiceCycles_ = 0;
     lastLogicServiceCycles_ = 0;
+    lastLogicReleaseEpoch_ = 0;
+    logicCommandOrdinal_ = 0;
 
     if (config.ENABLE_LOGIC_DIE_PIM && config.NUM_LOGIC_PIM_UNITS == 0)
         throw invalid_argument("NUM_LOGIC_PIM_UNITS must be greater than zero when logic-die PIM is enabled");
@@ -106,6 +104,62 @@ bool PIMRank::shouldRouteToLogicDie(PIMCmd cCmd) const
     return getRouteMode() != PIMRouteMode::BANK_ONLY;
 }
 
+bool PIMRank::peekNextExecutableCommand(PIMCmd& command, bool logic_die) const
+{
+    const PIMExecutionContext& context =
+        config.HIERARCHY_SOURCE_QUEUES && logic_die ? logicContext_ : bankContext_;
+    const crf_t& activeCrf = logic_die ? logicCrf : crf;
+    int pc = context.pc;
+    int lastJump = context.lastJump;
+    int jumpsRemaining = context.jumpsRemaining;
+    for (unsigned guard = 0; guard < 32; guard++)
+    {
+        if (pc < 0 || pc >= 32) return false;
+        command.fromInt(activeCrf.data[pc]);
+        if (command.type_ != PIMCmdType::JUMP) return command.type_ != PIMCmdType::EXIT;
+        if (lastJump != pc && command.loopCounter_ > 0)
+        {
+            lastJump = pc;
+            jumpsRemaining = command.loopCounter_;
+        }
+        if (jumpsRemaining > 0)
+        {
+            pc -= command.loopOffset_;
+            jumpsRemaining--;
+        }
+        pc++;
+    }
+    return false;
+}
+
+LogicCommandContext PIMRank::peekLogicCommandContext() const
+{
+    if (!config.LOGIC_EPOCH_RELEASE) return LogicCommandContext();
+    const uint64_t epoch = logicScheduler_->getReleaseEpochCount();
+    const uint64_t ordinal = epoch == lastLogicReleaseEpoch_ ? logicCommandOrdinal_ : 0;
+    return {epoch, ordinal,
+            static_cast<uint64_t>(getChanId()) * config.NUM_RANKS + getRankId(), true};
+}
+
+bool PIMRank::canAcceptLogicDieCommand(const BusPacket* packet, bool recordStall) const
+{
+    if (!config.LOGIC_GLOBAL_SCHEDULER || !config.LOGIC_EPOCH_RELEASE) return true;
+    PIMCmd command;
+    const bool logic_packet = isLogicCommandPacket(packet);
+    if (!peekNextExecutableCommand(command, logic_packet) ||
+        !shouldRouteToLogicDie(command))
+        return true;
+    const bool accepted = logicScheduler_->canAccept(
+        command.toInt(), peekLogicCommandContext(), currentClockCycle,
+        config.LOGIC_PCU_QUEUE_DEPTH, config.NUM_CHANS);
+    if (!accepted && recordStall)
+    {
+        const auto context = peekLogicCommandContext();
+        logicScheduler_->recordOnlineIssueStall(context.streamId, currentClockCycle);
+    }
+    return accepted;
+}
+
 unsigned PIMRank::reserveLogicDie(PIMCmd cCmd)
 {
     if (!shouldRouteToLogicDie(cCmd))
@@ -114,10 +168,20 @@ unsigned PIMRank::reserveLogicDie(PIMCmd cCmd)
     const uint64_t blocks = config.NUM_PIM_BLOCKS;
     if (config.LOGIC_GLOBAL_SCHEDULER)
     {
+        LogicCommandContext context = peekLogicCommandContext();
+        if (context.valid)
+        {
+            if (context.epochId != lastLogicReleaseEpoch_)
+            {
+                lastLogicReleaseEpoch_ = context.epochId;
+                logicCommandOrdinal_ = 0;
+            }
+            context.commandOrdinal = logicCommandOrdinal_++;
+        }
         const LogicDieReservation reservation = logicScheduler_->reserve(
             currentClockCycle, blocks, config.NUM_LOGIC_PIM_UNITS, config.LOGIC_PIM_LATENCY,
             config.LOGIC_PIM_BW, sizeof(BurstType), cCmd.toInt(), config.LOGIC_CMD_OVERHEAD,
-            config.LOGIC_CMD_COALESCING);
+            config.LOGIC_CMD_COALESCING, context);
         logicCommandCount_++;
         logicComputeCycles_ += reservation.computeCycles;
         logicTransferBytes_ += reservation.transferBytes;
@@ -344,6 +408,8 @@ void PIMRank::update() {}
 
 void PIMRank::controlPIM(BusPacket* packet)
 {
+    PIMExecutionContext& context = contextForPacket(packet);
+    const bool logic_domain = isLogicCommandPacket(packet);
     uint8_t grf_a_zeroize = packet->data->u8Data_[20];
     if (grf_a_zeroize)
     {
@@ -355,8 +421,10 @@ void PIMRank::controlPIM(BusPacket* packet)
         for (int pb = 0; pb < config.NUM_PIM_BLOCKS; pb++)
             for (int i = 0; i < 8; i++)
             {
-                if (isBankSideEnabled()) pimBlocks[pb].grfA[i] = burst_zero;
-                if (isLogicDieEnabled()) logicPimBlocks[pb].grfA[i] = burst_zero;
+                if ((!config.HIERARCHY_SOURCE_QUEUES || !logic_domain) && isBankSideEnabled())
+                    pimBlocks[pb].grfA[i] = burst_zero;
+                if ((!config.HIERARCHY_SOURCE_QUEUES || logic_domain) && isLogicDieEnabled())
+                    logicPimBlocks[pb].grfA[i] = burst_zero;
             }
     }
     uint8_t grf_b_zeroize = packet->data->u8Data_[21];
@@ -370,47 +438,51 @@ void PIMRank::controlPIM(BusPacket* packet)
         for (int pb = 0; pb < config.NUM_PIM_BLOCKS; pb++)
             for (int i = 0; i < 8; i++)
             {
-                if (isBankSideEnabled()) pimBlocks[pb].grfB[i] = burst_zero;
-                if (isLogicDieEnabled()) logicPimBlocks[pb].grfB[i] = burst_zero;
+                if ((!config.HIERARCHY_SOURCE_QUEUES || !logic_domain) && isBankSideEnabled())
+                    pimBlocks[pb].grfB[i] = burst_zero;
+                if ((!config.HIERARCHY_SOURCE_QUEUES || logic_domain) && isLogicDieEnabled())
+                    logicPimBlocks[pb].grfB[i] = burst_zero;
             }
     }
-    pimOpMode_ = packet->data->u8Data_[0] & 1;
-    toggleEvenBank_ = !(packet->data->u8Data_[16] & 1);
-    toggleOddBank_ = !(packet->data->u8Data_[16] & 2);
-    toggleRa13h_ = (packet->data->u8Data_[16] & 4);
+    context.pimOpMode = packet->data->u8Data_[0] & 1;
+    context.toggleEvenBank = !(packet->data->u8Data_[16] & 1);
+    context.toggleOddBank = !(packet->data->u8Data_[16] & 2);
+    context.toggleRa13h = packet->data->u8Data_[16] & 4;
 
-    if (pimOpMode_)
+    if (context.pimOpMode)
     {
-        rank->mode_ = dramMode::HAB_PIM;
-        pimPC_ = 0;
-        lastJumpIdx_ = numJumpToBeTaken_ = lastRepeatIdx_ = numRepeatToBeDone_ = -1;
-        crfExit_ = false;
+        rank->setModeForPacket(packet, dramMode::HAB_PIM);
+        context.pc = 0;
+        context.lastJump = context.jumpsRemaining = context.lastRepeat =
+            context.repeatsRemaining = -1;
+        context.crfExit = false;
         PRINTC(RED, OUTLOG_CH_RA("HAB_PIM"));
     }
     else
     {
-        rank->mode_ = dramMode::HAB;
+        rank->setModeForPacket(packet, dramMode::HAB);
         PRINTC(RED, OUTLOG_CH_RA("HAB mode"));
     }
 }
 
 bool PIMRank::isToggleCond(BusPacket* packet)
 {
-    if (pimOpMode_ && !crfExit_)
+    const PIMExecutionContext& context = contextForPacket(packet);
+    if (context.pimOpMode && !context.crfExit)
     {
-        if (toggleRa13h_)
+        if (context.toggleRa13h)
         {
-            if (toggleEvenBank_ && ((packet->bank & 1) == 0))
+            if (context.toggleEvenBank && ((packet->bank & 1) == 0))
                 return true;
-            else if (toggleOddBank_ && ((packet->bank & 1) == 1))
+            else if (context.toggleOddBank && ((packet->bank & 1) == 1))
                 return true;
             return false;
         }
-        else if (!toggleRa13h_ && !isReservedRA(packet->row))
+        else if (!context.toggleRa13h && !isReservedRA(packet->row))
         {
-            if (toggleEvenBank_ && ((packet->bank & 1) == 0))
+            if (context.toggleEvenBank && ((packet->bank & 1) == 0))
                 return true;
-            else if (toggleOddBank_ && ((packet->bank & 1) == 1))
+            else if (context.toggleOddBank && ((packet->bank & 1) == 1))
                 return true;
             return false;
         }
@@ -441,6 +513,20 @@ void PIMRank::readHab(BusPacket* packet)
         }
 #endif
     }
+}
+
+void PIMRank::readLogicOutput(BusPacket* packet)
+{
+#ifndef NO_STORAGE
+    const unsigned pimblock = packet->bank / 2;
+    const unsigned grf = getGrfIdx(packet->column);
+    if (pimblock >= logicPimBlocks.size())
+    {
+        ERROR("Logic-die output drain selected an invalid PIM block");
+        abort();
+    }
+    *(packet->data) = logicPimBlocks[pimblock].grfB[grf];
+#endif
 }
 
 void PIMRank::writeHab(BusPacket* packet)
@@ -493,7 +579,10 @@ void PIMRank::writeHab(BusPacket* packet)
         {
             if (DEBUG_CMD_TRACE)
                 PRINTC(GREEN, OUTLOG_B_CRF("BWRITE_CRF"));
-            crf.bst[packet->column - 0x04] = *(packet->data);
+            if (packet->tag.find("PROGRAM_LOGIC_CRF") != std::string::npos)
+                logicCrf.bst[packet->column - 0x04] = *(packet->data);
+            else
+                crf.bst[packet->column - 0x04] = *(packet->data);
         }
         else if (packet->column == 0x1)
         {
@@ -710,38 +799,40 @@ void PIMRank::writeOpd(int pb, BurstType& bst, PIMOpdType type, BusPacket* packe
 void PIMRank::doPIM(BusPacket* packet)
 {
     PIMCmd cCmd;
+    PIMExecutionContext& context = contextForPacket(packet);
+    crf_t& activeCrf = isLogicCommandPacket(packet) ? logicCrf : crf;
     packet->row = masked2accessibleRA(packet->row);
     do
     {
-        cCmd.fromInt(crf.data[pimPC_]);
+        cCmd.fromInt(activeCrf.data[context.pc]);
         if (DEBUG_CMD_TRACE)
         {
             PRINTC(CYAN, string((packet->busPacketType == READ) ? "READ ch" : "WRITE ch")
                              << getChanId() << " ra" << getRankId() << " bg"
                              << config.addrMapping.bankgroupId(packet->bank) << " b" << packet->bank
-                             << " r" << packet->row << " c" << packet->column << "|| [" << pimPC_
+                             << " r" << packet->row << " c" << packet->column << "|| [" << context.pc
                              << "] " << cCmd.toStr() << " @ " << currentClockCycle);
         }
 
         if (cCmd.type_ == PIMCmdType::EXIT)
         {
-            crfExit_ = true;
+            context.crfExit = true;
             break;
         }
         else if (cCmd.type_ == PIMCmdType::JUMP)
         {
-            if (lastJumpIdx_ != pimPC_)
+            if (context.lastJump != context.pc)
             {
                 if (cCmd.loopCounter_ > 0)
                 {
-                    lastJumpIdx_ = pimPC_;
-                    numJumpToBeTaken_ = cCmd.loopCounter_;
+                    context.lastJump = context.pc;
+                    context.jumpsRemaining = cCmd.loopCounter_;
                 }
             }
-            if (numJumpToBeTaken_ > 0)
+            if (context.jumpsRemaining > 0)
             {
-                pimPC_ -= cCmd.loopOffset_;
-                numJumpToBeTaken_--;
+                context.pc -= cCmd.loopOffset_;
+                context.jumpsRemaining--;
             }
         }
         else
@@ -749,35 +840,35 @@ void PIMRank::doPIM(BusPacket* packet)
             reserveLogicDie(cCmd);
             if (cCmd.type_ == PIMCmdType::FILL || cCmd.isAuto_)
             {
-                if (lastRepeatIdx_ != pimPC_)
+                if (context.lastRepeat != context.pc)
                 {
-                    lastRepeatIdx_ = pimPC_;
-                    numRepeatToBeDone_ = 8 - 1;
+                    context.lastRepeat = context.pc;
+                    context.repeatsRemaining = 8 - 1;
                 }
 
-                if (numRepeatToBeDone_ > 0)
+                if (context.repeatsRemaining > 0)
                 {
-                    pimPC_ -= 1;
-                    numRepeatToBeDone_--;
+                    context.pc -= 1;
+                    context.repeatsRemaining--;
                 }
                 else
-                    lastRepeatIdx_ = -1;
+                    context.lastRepeat = -1;
             }
             else if (cCmd.type_ == PIMCmdType::NOP)
             {
-                if (lastRepeatIdx_ != pimPC_)
+                if (context.lastRepeat != context.pc)
                 {
-                    lastRepeatIdx_ = pimPC_;
-                    numRepeatToBeDone_ = cCmd.loopCounter_;
+                    context.lastRepeat = context.pc;
+                    context.repeatsRemaining = cCmd.loopCounter_;
                 }
 
-                if (numRepeatToBeDone_ > 0)
+                if (context.repeatsRemaining > 0)
                 {
-                    pimPC_ -= 1;
-                    numRepeatToBeDone_--;
+                    context.pc -= 1;
+                    context.repeatsRemaining--;
                 }
                 else
-                    lastRepeatIdx_ = -1;
+                    context.lastRepeat = -1;
             }
 
             for (int pimblock_id = 0; pimblock_id < config.NUM_PIM_BLOCKS; pimblock_id++)
@@ -793,17 +884,21 @@ void PIMRank::doPIM(BusPacket* packet)
                 }
             }
         }
-        pimPC_++;
+        context.pc++;
         // EXIT check
         PIMCmd next_cmd;
-        next_cmd.fromInt(crf.data[pimPC_]);
+        next_cmd.fromInt(activeCrf.data[context.pc]);
         if (next_cmd.type_ == PIMCmdType::EXIT)
-            crfExit_ = true;
+            context.crfExit = true;
     } while (cCmd.type_ == PIMCmdType::JUMP);
 }
 
 void PIMRank::doPIMBlock(BusPacket* packet, PIMCmd cCmd, int pimblock_id)
 {
+    // This packet replaces a normal bank writeback. doPIM() advances the CRF
+    // context, while the shared accumulator consumes the GRF after dispatch.
+    if (packet->logicAccumulatorDirect) return;
+
     auto isEltwiseWritebackTag = [](const std::string& tag) {
         return tag.find("GRF_TO_BANK") != std::string::npos ||
                tag.find("GRF_A_TO_EVEN_BANK") != std::string::npos ||
@@ -825,6 +920,11 @@ void PIMRank::doPIMBlock(BusPacket* packet, PIMCmd cCmd, int pimblock_id)
              << " bankEnabled[" << isBankSideEnabled() << "]" << endl;
         block_trace_count++;
     }
+
+    if (pimblock_id == 0 && cCmd.type_ != PIMCmdType::NOP &&
+        cCmd.type_ != PIMCmdType::JUMP && cCmd.type_ != PIMCmdType::EXIT)
+        logicScheduler_->recordHierarchyIssue(shouldRouteToLogicDie(cCmd),
+                                              currentClockCycle);
 
     if (packet->busPacketType == WRITE &&
         packet->tag.find("GRFB_TO_BANK_") != std::string::npos)
@@ -1099,4 +1199,135 @@ void PIMRank::doPIMBlock(BusPacket* packet, PIMCmd cCmd, int pimblock_id)
             }
         }
     }
+}
+
+void PIMRank::handleLogicAccumulatorPacket(BusPacket* packet)
+{
+    if (packet == nullptr ||
+        (!packet->logicAccumulatorDirect && !packet->logicAccumulatorFinal))
+        throw invalid_argument("Invalid logic accumulator packet");
+    const int grfId = getGrfIdx(packet->column);
+    for (unsigned pimBlock = 0; pimBlock < pimBlocks.size(); pimBlock++)
+    {
+        const uint64_t key = LogicDieAccumulator::makeKey(
+            static_cast<unsigned>(chanId), static_cast<unsigned>(rankId), pimBlock,
+            packet->bank & 1u, packet->row, packet->column);
+        if (packet->logicAccumulatorDirect)
+        {
+            const BurstType& partial = packet->bank == 0
+                                           ? pimBlocks[pimBlock].grfA[grfId]
+                                           : pimBlocks[pimBlock].grfB[grfId];
+            const unsigned accumulatorBank = pimBlock % config.BANK_LOCAL_ACCUMULATOR_BANKS;
+            const bool newEntry = bankLocalAccumulator_.find(key) == bankLocalAccumulator_.end();
+            if (newEntry && config.BANK_LOCAL_ACCUMULATOR_ENTRIES != 0)
+            {
+                const unsigned entriesPerBank = config.BANK_LOCAL_ACCUMULATOR_ENTRIES /
+                                                config.BANK_LOCAL_ACCUMULATOR_BANKS;
+                if (bankLocalAccumulatorEntriesPerBank_[accumulatorBank] >= entriesPerBank)
+                    throw overflow_error("Bank-local accumulator bank capacity exceeded");
+            }
+            BurstType& local = bankLocalAccumulator_[key];
+            if (newEntry)
+            {
+                const unsigned entries = ++bankLocalAccumulatorEntriesPerBank_[accumulatorBank];
+                bankLocalAccumulatorPeakEntriesPerBank_[accumulatorBank] =
+                    max(bankLocalAccumulatorPeakEntriesPerBank_[accumulatorBank], entries);
+            }
+            for (unsigned lane = 0; lane < 16; lane++)
+                local.fp16Data_[lane] = local.fp16Data_[lane] + partial.fp16Data_[lane];
+            bankLocalAccumulatorCounts_[key]++;
+            bankLocalAccumulatorPeakEntries_ =
+                max<uint64_t>(bankLocalAccumulatorPeakEntries_, bankLocalAccumulator_.size());
+            if (packet->logicAccumulatorFlush)
+            {
+                if (bankLocalAccumulatorCounts_[key] != config.BANK_LOCAL_AGGREGATION_TAPS)
+                    throw logic_error("Bank-local accumulator flushed with incomplete tap group");
+                logicAccumulator_->recordArrival(currentClockCycle, static_cast<unsigned>(chanId),
+                                                 static_cast<unsigned>(rankId), pimBlock, key,
+                                                 local);
+                logicAccumulator_->accumulate(key, local);
+                bankLocalAccumulator_.erase(key);
+                bankLocalAccumulatorCounts_.erase(key);
+                bankLocalAccumulatorEntriesPerBank_[accumulatorBank]--;
+            }
+        }
+        else
+        {
+            *(packet->data) = logicAccumulator_->finalize(key);
+            if (packet->bank == 0)
+                rank->banks[pimBlock * 2].write(packet);
+            else
+                rank->banks[pimBlock * 2 + 1].write(packet);
+        }
+    }
+    if (packet->logicAccumulatorDirect && config.BANK_LOCAL_ACCUMULATOR_PORTS != 0)
+    {
+        const unsigned updatesPerBank =
+            (pimBlocks.size() + config.BANK_LOCAL_ACCUMULATOR_BANKS - 1) /
+            config.BANK_LOCAL_ACCUMULATOR_BANKS;
+        const uint64_t serviceCycles =
+            ((updatesPerBank + config.BANK_LOCAL_ACCUMULATOR_PORTS - 1) /
+             config.BANK_LOCAL_ACCUMULATOR_PORTS) *
+            config.BANK_LOCAL_ACCUMULATOR_LATENCY;
+        bankLocalAccumulatorBusyUntil_ = currentClockCycle + serviceCycles;
+    }
+}
+
+void PIMRank::beginBankLocalAccumulation()
+{
+    if (!bankLocalAccumulator_.empty() || !bankLocalAccumulatorCounts_.empty())
+        throw logic_error("Previous bank-local accumulation layer did not flush");
+    bankLocalAccumulatorBusyUntil_ = 0;
+    bankLocalAccumulatorStalls_ = 0;
+    bankLocalAccumulatorPeakEntries_ = 0;
+    if (config.BANK_LOCAL_ACCUMULATOR_BANKS == 0 ||
+        config.BANK_LOCAL_ACCUMULATOR_BANKS > pimBlocks.size() ||
+        pimBlocks.size() % config.BANK_LOCAL_ACCUMULATOR_BANKS != 0)
+        throw invalid_argument(
+            "BANK_LOCAL_ACCUMULATOR_BANKS must be a non-zero divisor of the PIM block count");
+    if (config.BANK_LOCAL_ACCUMULATOR_ENTRIES != 0 &&
+        config.BANK_LOCAL_ACCUMULATOR_ENTRIES % config.BANK_LOCAL_ACCUMULATOR_BANKS != 0)
+        throw invalid_argument(
+            "BANK_LOCAL_ACCUMULATOR_ENTRIES must be divisible by BANK_LOCAL_ACCUMULATOR_BANKS");
+    bankLocalAccumulatorEntriesPerBank_.assign(config.BANK_LOCAL_ACCUMULATOR_BANKS, 0);
+    bankLocalAccumulatorPeakEntriesPerBank_.assign(config.BANK_LOCAL_ACCUMULATOR_BANKS, 0);
+}
+
+uint64_t PIMRank::getBankLocalAccumulatorPeakEntriesPerBank() const
+{
+    if (bankLocalAccumulatorPeakEntriesPerBank_.empty()) return 0;
+    return *max_element(bankLocalAccumulatorPeakEntriesPerBank_.begin(),
+                        bankLocalAccumulatorPeakEntriesPerBank_.end());
+}
+
+bool PIMRank::canAcceptBankLocalAccumulator(const BusPacket* packet, bool recordStall)
+{
+    if (packet == nullptr || !packet->logicAccumulatorDirect ||
+        config.BANK_LOCAL_ACCUMULATOR_PORTS == 0)
+        return true;
+    const bool ready = currentClockCycle >= bankLocalAccumulatorBusyUntil_;
+    if (!ready && recordStall) bankLocalAccumulatorStalls_++;
+    return ready;
+}
+
+bool PIMRank::isLogicCommandPacket(const BusPacket* packet) const
+{
+    if (packet == nullptr) return false;
+    if (config.HIERARCHY_SOURCE_QUEUES)
+        return packet->tag.find("LOGIC_DOMAIN_") != std::string::npos;
+    return packet->tag.find("MAC_") != std::string::npos ||
+           packet->tag.find("GRFB_TO_BANK_") != std::string::npos ||
+           packet->tag.find("RESET_GRF_B") != std::string::npos;
+}
+
+PIMRank::PIMExecutionContext& PIMRank::contextForPacket(const BusPacket* packet)
+{
+    return config.HIERARCHY_SOURCE_QUEUES && isLogicCommandPacket(packet) ? logicContext_
+                                                                          : bankContext_;
+}
+
+const PIMRank::PIMExecutionContext& PIMRank::contextForPacket(const BusPacket* packet) const
+{
+    return config.HIERARCHY_SOURCE_QUEUES && isLogicCommandPacket(packet) ? logicContext_
+                                                                          : bankContext_;
 }

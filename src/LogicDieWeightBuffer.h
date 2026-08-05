@@ -43,13 +43,14 @@ class LogicDieWeightBuffer
     LogicDieWeightBuffer()
         : active_(false), groupWidth_(0), capacityBytes_(0), storedBytes_(0), fillBursts_(0),
           readHits_(0), readMisses_(0), writeLatency_(1), readyCycle_(0),
-          completedFillBursts_(0), writeQueueCycles_(0)
+          completedFillBursts_(0), writeQueueCycles_(0), layerGeneration_(0)
     {
     }
 
     void beginLayer(unsigned group_width, uint64_t capacity_bytes, unsigned write_ports,
                     unsigned write_latency)
     {
+        layerGeneration_++;
         entries_.clear();
         active_ = group_width > 0 && capacity_bytes >= sizeof(BurstType);
         groupWidth_ = group_width;
@@ -125,6 +126,7 @@ class LogicDieWeightBuffer
     uint64_t getReadyCycle() const { return readyCycle_; }
     uint64_t getCompletedFillBursts() const { return completedFillBursts_; }
     uint64_t getWriteQueueCycles() const { return writeQueueCycles_; }
+    uint64_t getLayerGeneration() const { return layerGeneration_; }
 
   private:
     bool active_;
@@ -138,6 +140,7 @@ class LogicDieWeightBuffer
     uint64_t readyCycle_;
     uint64_t completedFillBursts_;
     uint64_t writeQueueCycles_;
+    uint64_t layerGeneration_;
     std::vector<uint64_t> writePortBusyUntil_;
     std::unordered_map<Key, BurstType, KeyHash> entries_;
 };

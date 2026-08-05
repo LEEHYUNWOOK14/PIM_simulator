@@ -59,11 +59,23 @@ class Transaction
     uint64_t timeAdded;
     uint64_t timeReturned;
     std::string tag;
+    WriteCompletionClass writeCompletionClass = WriteCompletionClass::ORDERED;
+    bool logicOutput = false;
+    bool logicOutputDirect = false;
+    bool logicAccumulatorDirect = false;
+    bool logicAccumulatorFinal = false;
+    bool logicAccumulatorFlush = false;
+    uint64_t logicOutputLayer = 0;
+    uint64_t logicOutputPosition = 0;
+    uint64_t logicOutputChannelTile = 0;
+    uint64_t logicOutputBurst = 0;
+    uint64_t logicOutputExpectedBursts = 0;
 
     friend ostream& operator<<(ostream& os, const Transaction& t);
     // functions
     Transaction(TransactionType transType, uint64_t addr, BurstType* dat);
-    Transaction(TransactionType transType, uint64_t addr, const std::string& str, BurstType* dat);
+    Transaction(TransactionType transType, uint64_t addr, const std::string& str, BurstType* dat,
+                WriteCompletionClass completionClass = WriteCompletionClass::ORDERED);
     Transaction(const Transaction& t);
 
     BusPacketType getBusPacketType()

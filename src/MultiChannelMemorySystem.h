@@ -32,6 +32,7 @@
 #define __MULTI_CHANNEL_MEMORY_SYSTEM_H__H__
 
 #include <string>
+#include <array>
 #include <vector>
 
 #include "AddressMapping.h"
@@ -42,6 +43,8 @@
 #include "MemorySystem.h"
 #include "LogicDieScheduler.h"
 #include "LogicDieWeightBuffer.h"
+#include "LogicDieOutputBuffer.h"
+#include "LogicDieAccumulator.h"
 #include "SimulatorObject.h"
 #include "SystemConfiguration.h"
 #include "Transaction.h"
@@ -58,7 +61,9 @@ class MultiChannelMemorySystem : public MemoryObject
     virtual bool addTransaction(Transaction* trans);
     virtual bool addTransaction(bool isWrite, uint64_t addr, BurstType* data);
     virtual bool addTransaction(bool isWrite, uint64_t addr, const std::string& tag,
-                                BurstType* data);
+                                BurstType* data,
+                                WriteCompletionClass completionClass =
+                                    WriteCompletionClass::ORDERED);
 
     bool addBarrier(int chanId);
 
@@ -78,6 +83,86 @@ class MultiChannelMemorySystem : public MemoryObject
 
     int hasPendingTransactions();
 
+    uint64_t getGlobalAnyBlockedCycles(CommandIssuabilityRejectReason reason) const
+    {
+        return globalAnyBlockedCycles_[static_cast<size_t>(reason)];
+    }
+    uint64_t getGlobalAllActiveBlockedCycles(CommandIssuabilityRejectReason reason) const
+    {
+        return globalAllActiveBlockedCycles_[static_cast<size_t>(reason)];
+    }
+    uint64_t getGlobalPeakBlockedChannels(CommandIssuabilityRejectReason reason) const
+    {
+        return globalPeakBlockedChannels_[static_cast<size_t>(reason)];
+    }
+    uint64_t getGlobalRankModeAnyBlockedCycles() const
+    {
+        return globalRankModeAnyBlockedCycles_;
+    }
+    uint64_t getGlobalRankModeAllActiveBlockedCycles() const
+    {
+        return globalRankModeAllActiveBlockedCycles_;
+    }
+    uint64_t getGlobalRankModePeakBlockedChannels() const
+    {
+        return globalRankModePeakBlockedChannels_;
+    }
+    uint64_t getGlobalPredicateAnyBlockedCycles(HierarchyPredicateBlockReason reason) const
+    {
+        return globalPredicateAnyBlockedCycles_[static_cast<size_t>(reason)];
+    }
+    uint64_t getGlobalPredicateAllActiveBlockedCycles(
+        HierarchyPredicateBlockReason reason) const
+    {
+        return globalPredicateAllActiveBlockedCycles_[static_cast<size_t>(reason)];
+    }
+    uint64_t getGlobalPredicatePeakBlockedChannels(
+        HierarchyPredicateBlockReason reason) const
+    {
+        return globalPredicatePeakBlockedChannels_[static_cast<size_t>(reason)];
+    }
+    uint64_t getGlobalHierarchyUnionAnyBlockedCycles() const
+    {
+        return globalHierarchyUnionAnyBlockedCycles_;
+    }
+    uint64_t getGlobalHierarchyUnionAllActiveBlockedCycles() const
+    {
+        return globalHierarchyUnionAllActiveBlockedCycles_;
+    }
+    uint64_t getGlobalHierarchyUnionPeakBlockedChannels() const
+    {
+        return globalHierarchyUnionPeakBlockedChannels_;
+    }
+    uint64_t getGlobalBankStateAllNoHierarchyCycles() const
+    {
+        return globalBankStateAllNoHierarchyCycles_;
+    }
+    uint64_t getGlobalBankStateAllWithHierarchyCycles() const
+    {
+        return globalBankStateAllWithHierarchyCycles_;
+    }
+    uint64_t getGlobalBankStateOnlyCycles() const { return globalBankStateOnlyCycles_; }
+    uint64_t getGlobalHierarchyAllNoIssuabilityCycles() const
+    {
+        return globalHierarchyAllNoIssuabilityCycles_;
+    }
+    uint64_t getGlobalBankHierarchyAllIntersectionCycles() const
+    {
+        return globalBankHierarchyAllIntersectionCycles_;
+    }
+    uint64_t getGlobalBankTagAnyBlockedCycles(CommandTagClass tagClass) const
+    {
+        return globalBankTagAnyBlockedCycles_[static_cast<size_t>(tagClass)];
+    }
+    uint64_t getGlobalBankTagAllActiveBlockedCycles(CommandTagClass tagClass) const
+    {
+        return globalBankTagAllActiveBlockedCycles_[static_cast<size_t>(tagClass)];
+    }
+    uint64_t getGlobalBankTagPeakBlockedChannels(CommandTagClass tagClass) const
+    {
+        return globalBankTagPeakBlockedChannels_[static_cast<size_t>(tagClass)];
+    }
+
     bool willAcceptTransaction(uint64_t addr);
     bool willAcceptTransaction();
 
@@ -87,10 +172,16 @@ class MultiChannelMemorySystem : public MemoryObject
     vector<MemorySystem*> channels;
     shared_ptr<LogicDieScheduler> logicDieScheduler;
     shared_ptr<LogicDieWeightBuffer> logicDieWeightBuffer;
+    shared_ptr<LogicDieOutputBuffer> logicDieOutputBuffer;
+    shared_ptr<LogicDieAccumulator> logicDieAccumulator;
     AddrMapping* addrMapping;
 
     void beginLogicWeightLayer(unsigned groupWidth, uint64_t capacityBytes);
     bool storeLogicWeight(uint64_t addr, const BurstType& data);
+    void beginLogicDepthwiseAccumulation(unsigned expectedTaps, size_t capacityEntries = 0);
+    void beginLogicReleaseEpoch(
+        unsigned expectedStreams,
+        const std::vector<std::pair<uint64_t, uint64_t>>& streamOrdinals = {});
 
     void getIniBool(const std::string& field, bool* val)
     {
@@ -131,6 +222,34 @@ class MultiChannelMemorySystem : public MemoryObject
     unsigned* numFence;
 
     Configuration* configuration;
+    static constexpr size_t issuabilityRejectReasonCount_ =
+        static_cast<size_t>(CommandIssuabilityRejectReason::COUNT);
+    array<uint64_t, issuabilityRejectReasonCount_> globalAnyBlockedCycles_{};
+    array<uint64_t, issuabilityRejectReasonCount_> globalAllActiveBlockedCycles_{};
+    array<uint64_t, issuabilityRejectReasonCount_> globalPeakBlockedChannels_{};
+    uint64_t globalRankModeAnyBlockedCycles_ = 0;
+    uint64_t globalRankModeAllActiveBlockedCycles_ = 0;
+    uint64_t globalRankModePeakBlockedChannels_ = 0;
+    static constexpr size_t hierarchyPredicateBlockReasonCount_ =
+        static_cast<size_t>(HierarchyPredicateBlockReason::COUNT);
+    array<uint64_t, hierarchyPredicateBlockReasonCount_> globalPredicateAnyBlockedCycles_{};
+    array<uint64_t, hierarchyPredicateBlockReasonCount_>
+        globalPredicateAllActiveBlockedCycles_{};
+    array<uint64_t, hierarchyPredicateBlockReasonCount_>
+        globalPredicatePeakBlockedChannels_{};
+    uint64_t globalHierarchyUnionAnyBlockedCycles_ = 0;
+    uint64_t globalHierarchyUnionAllActiveBlockedCycles_ = 0;
+    uint64_t globalHierarchyUnionPeakBlockedChannels_ = 0;
+    uint64_t globalBankStateAllNoHierarchyCycles_ = 0;
+    uint64_t globalBankStateAllWithHierarchyCycles_ = 0;
+    uint64_t globalBankStateOnlyCycles_ = 0;
+    uint64_t globalHierarchyAllNoIssuabilityCycles_ = 0;
+    uint64_t globalBankHierarchyAllIntersectionCycles_ = 0;
+    static constexpr size_t commandTagClassCount_ =
+        static_cast<size_t>(CommandTagClass::COUNT);
+    array<uint64_t, commandTagClassCount_> globalBankTagAnyBlockedCycles_{};
+    array<uint64_t, commandTagClassCount_> globalBankTagAllActiveBlockedCycles_{};
+    array<uint64_t, commandTagClassCount_> globalBankTagPeakBlockedChannels_{};
 };
 }  // namespace DRAMSim
 

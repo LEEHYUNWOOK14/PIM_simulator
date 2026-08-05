@@ -122,6 +122,16 @@ enum PIMPrecision
     FP32
 };
 
+enum class WriteCompletionClass
+{
+    ORDERED,
+    BULK_DATA,
+    PIM_MODE,
+    PIM_CONTROL,
+    PIM_WRITEBACK,
+    COUNT
+};
+
 enum class dramMode
 {
     SB,

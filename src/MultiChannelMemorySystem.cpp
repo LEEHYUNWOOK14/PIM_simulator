@@ -90,14 +90,28 @@ MultiChannelMemorySystem::MultiChannelMemorySystem(const string& deviceIniFilena
     numFence = new unsigned[configuration->NUM_CHANS]();
     logicDieScheduler = make_shared<LogicDieScheduler>();
     logicDieWeightBuffer = make_shared<LogicDieWeightBuffer>();
+    logicDieOutputBuffer = make_shared<LogicDieOutputBuffer>(
+        configuration->LOGIC_OUTPUT_BUFFER_ENTRIES,
+        configuration->LOGIC_OUTPUT_DRAIN_LATENCY,
+        configuration->LOGIC_OUTPUT_DRAIN_BW);
+    logicDieAccumulator = make_shared<LogicDieAccumulator>();
 
     for (size_t i = 0; i < configuration->NUM_CHANS; i++)
     {
         MemorySystem* channel = new MemorySystem(i, megsOfMemory / configuration->NUM_CHANS,
                                                  (*csvOut), dramsimLog, *configuration,
-                                                 logicDieScheduler, logicDieWeightBuffer);
+                                                 logicDieScheduler, logicDieWeightBuffer,
+                                                 logicDieOutputBuffer, logicDieAccumulator);
         channels.push_back(channel);
     }
+}
+
+void MultiChannelMemorySystem::beginLogicDepthwiseAccumulation(unsigned expectedTaps,
+                                                               size_t capacityEntries)
+{
+    logicDieAccumulator->beginLayer(expectedTaps, capacityEntries);
+    for (MemorySystem* channel : channels)
+        for (Rank* rank : *channel->ranks) rank->pimRank->beginBankLocalAccumulation();
 }
 
 void MultiChannelMemorySystem::beginLogicWeightLayer(unsigned groupWidth, uint64_t capacityBytes)
@@ -112,6 +126,14 @@ bool MultiChannelMemorySystem::storeLogicWeight(uint64_t addr, const BurstType& 
     unsigned channel = 0, rank = 0, bank = 0, row = 0, column = 0;
     addrMapping->addressMapping(addr, channel, rank, bank, row, column);
     return logicDieWeightBuffer->store(channel, rank, bank, row, column, data);
+}
+
+void MultiChannelMemorySystem::beginLogicReleaseEpoch(
+    unsigned expectedStreams,
+    const std::vector<std::pair<uint64_t, uint64_t>>& streamOrdinals)
+{
+    logicDieScheduler->beginReleaseEpoch(expectedStreams, streamOrdinals,
+                                         configuration->LOGIC_BROADCAST_QUEUE_DEPTH);
 }
 
 /* Initialize the ClockDomainCrosser to use the CPU speed
@@ -425,6 +447,102 @@ void MultiChannelMemorySystem::actual_update()
         channels[i]->update();
     }
 
+    uint64_t activeChannels = 0;
+    array<uint64_t, issuabilityRejectReasonCount_> blockedChannels{};
+    array<uint64_t, hierarchyPredicateBlockReasonCount_> predicateBlockedChannels{};
+    array<uint64_t, commandTagClassCount_> bankTagBlockedChannels{};
+    uint64_t rankModeBlockedChannels = 0;
+    uint64_t hierarchyUnionBlockedChannels = 0;
+    for (const auto* channel : channels)
+    {
+        if (channel->numOnTheFlyTransactions == 0) continue;
+        activeChannels++;
+        for (size_t reason = 0; reason < issuabilityRejectReasonCount_; reason++)
+            if (channel->memoryController->wasIssuabilityBlockedThisCycle(
+                    static_cast<CommandIssuabilityRejectReason>(reason)))
+                blockedChannels[reason]++;
+        if (channel->memoryController->wasRankModeBlockedThisCycle())
+            rankModeBlockedChannels++;
+        bool hierarchyBlocked = channel->memoryController->wasRankModeBlockedThisCycle() ||
+                                channel->memoryController->wasRankLogicQueueBlockedThisCycle();
+        for (size_t reason = 0; reason < hierarchyPredicateBlockReasonCount_; reason++)
+            if (channel->memoryController->wasHierarchyPredicateBlockedThisCycle(
+                    static_cast<HierarchyPredicateBlockReason>(reason)))
+            {
+                predicateBlockedChannels[reason]++;
+                hierarchyBlocked = true;
+            }
+        if (hierarchyBlocked) hierarchyUnionBlockedChannels++;
+        for (size_t tagClass = 0; tagClass < commandTagClassCount_; tagClass++)
+            if (channel->memoryController->wasBankStateTagBlockedThisCycle(
+                    static_cast<CommandTagClass>(tagClass)))
+                bankTagBlockedChannels[tagClass]++;
+    }
+    if (activeChannels > 0)
+    {
+        for (size_t reason = 0; reason < issuabilityRejectReasonCount_; reason++)
+        {
+            if (blockedChannels[reason] > 0) globalAnyBlockedCycles_[reason]++;
+            if (blockedChannels[reason] == activeChannels)
+                globalAllActiveBlockedCycles_[reason]++;
+            globalPeakBlockedChannels_[reason] =
+                max(globalPeakBlockedChannels_[reason], blockedChannels[reason]);
+        }
+        if (rankModeBlockedChannels > 0) globalRankModeAnyBlockedCycles_++;
+        if (rankModeBlockedChannels == activeChannels)
+            globalRankModeAllActiveBlockedCycles_++;
+        globalRankModePeakBlockedChannels_ =
+            max(globalRankModePeakBlockedChannels_, rankModeBlockedChannels);
+        for (size_t reason = 0; reason < hierarchyPredicateBlockReasonCount_; reason++)
+        {
+            if (predicateBlockedChannels[reason] > 0)
+                globalPredicateAnyBlockedCycles_[reason]++;
+            if (predicateBlockedChannels[reason] == activeChannels)
+                globalPredicateAllActiveBlockedCycles_[reason]++;
+            globalPredicatePeakBlockedChannels_[reason] =
+                max(globalPredicatePeakBlockedChannels_[reason],
+                    predicateBlockedChannels[reason]);
+        }
+        if (hierarchyUnionBlockedChannels > 0) globalHierarchyUnionAnyBlockedCycles_++;
+        if (hierarchyUnionBlockedChannels == activeChannels)
+            globalHierarchyUnionAllActiveBlockedCycles_++;
+        globalHierarchyUnionPeakBlockedChannels_ =
+            max(globalHierarchyUnionPeakBlockedChannels_, hierarchyUnionBlockedChannels);
+
+        const size_t bankState = static_cast<size_t>(
+            CommandIssuabilityRejectReason::BANK_STATE);
+        const bool bankAll = blockedChannels[bankState] == activeChannels;
+        const bool hierarchyAny = hierarchyUnionBlockedChannels > 0;
+        bool anyIssuability = false;
+        bool anyOtherIssuability = false;
+        for (size_t reason = 0; reason < issuabilityRejectReasonCount_; reason++)
+        {
+            anyIssuability = anyIssuability || blockedChannels[reason] > 0;
+            if (reason != bankState)
+                anyOtherIssuability = anyOtherIssuability || blockedChannels[reason] > 0;
+        }
+        if (bankAll && !hierarchyAny) globalBankStateAllNoHierarchyCycles_++;
+        if (bankAll && hierarchyAny) globalBankStateAllWithHierarchyCycles_++;
+        if (bankAll && !hierarchyAny && !anyOtherIssuability)
+            globalBankStateOnlyCycles_++;
+        if (hierarchyUnionBlockedChannels == activeChannels && !anyIssuability)
+            globalHierarchyAllNoIssuabilityCycles_++;
+        if (bankAll && hierarchyUnionBlockedChannels == activeChannels)
+            globalBankHierarchyAllIntersectionCycles_++;
+        for (size_t tagClass = 0; tagClass < commandTagClassCount_; tagClass++)
+        {
+            if (bankTagBlockedChannels[tagClass] > 0)
+                globalBankTagAnyBlockedCycles_[tagClass]++;
+            if (bankTagBlockedChannels[tagClass] == activeChannels)
+                globalBankTagAllActiveBlockedCycles_[tagClass]++;
+            globalBankTagPeakBlockedChannels_[tagClass] =
+                max(globalBankTagPeakBlockedChannels_[tagClass],
+                    bankTagBlockedChannels[tagClass]);
+        }
+    }
+
+    logicDieOutputBuffer->advance(currentClockCycle);
+
     currentClockCycle++;
 }
 
@@ -480,10 +598,11 @@ bool MultiChannelMemorySystem::addTransaction(bool isWrite, uint64_t addr, Burst
 }
 
 bool MultiChannelMemorySystem::addTransaction(bool isWrite, uint64_t addr, const std::string& tag,
-                                              BurstType* data)
+                                              BurstType* data,
+                                              WriteCompletionClass completionClass)
 {
     unsigned channelNumber = findChannelNumber(addr);
-    return channels[channelNumber]->addTransaction(isWrite, addr, tag, data);
+    return channels[channelNumber]->addTransaction(isWrite, addr, tag, data, completionClass);
 }
 
 void MultiChannelMemorySystem::printStats(bool finalStats)
@@ -600,6 +719,8 @@ int MultiChannelMemorySystem::hasPendingTransactions()
     {
         num += chan->numOnTheFlyTransactions;
     }
+    if (configuration->LOGIC_OUTPUT_BUFFER_ENABLE && logicDieOutputBuffer->hasPendingDrain())
+        num++;
     return num;
 }
 

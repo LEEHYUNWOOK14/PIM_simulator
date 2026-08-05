@@ -14,6 +14,7 @@
 #define _PIMRANK_H_
 
 #include <vector>
+#include <unordered_map>
 
 #include "AddressMapping.h"
 #include "BusPacket.h"
@@ -22,6 +23,7 @@
 #include "PIMCmd.h"
 #include "LogicDieScheduler.h"
 #include "LogicDieWeightBuffer.h"
+#include "LogicDieAccumulator.h"
 #include "Rank.h"
 #include "SimulatorObject.h"
 
@@ -71,8 +73,21 @@ class PIMRank : public SimulatorObject
     int rankId;
     ostream& dramsimLog;
     Configuration& config;
-    int pimPC_, lastJumpIdx_, numJumpToBeTaken_, lastRepeatIdx_, numRepeatToBeDone_;
-    bool pimOpMode_, toggleEvenBank_, toggleOddBank_, toggleRa13h_, crfExit_;
+    struct PIMExecutionContext
+    {
+        int pc = 0;
+        int lastJump = -1;
+        int jumpsRemaining = -1;
+        int lastRepeat = -1;
+        int repeatsRemaining = -1;
+        bool pimOpMode = false;
+        bool toggleEvenBank = false;
+        bool toggleOddBank = false;
+        bool toggleRa13h = false;
+        bool crfExit = false;
+    };
+    PIMExecutionContext bankContext_;
+    PIMExecutionContext logicContext_;
     uint64_t logicBusyUntil_;
     uint64_t logicCommandCount_;
     uint64_t logicComputeCycles_;
@@ -80,13 +95,24 @@ class PIMRank : public SimulatorObject
     uint64_t logicTransferCycles_;
     uint64_t logicServiceCycles_;
     unsigned lastLogicServiceCycles_;
+    uint64_t lastLogicReleaseEpoch_;
+    uint64_t logicCommandOrdinal_;
     shared_ptr<LogicDieScheduler> logicScheduler_;
     shared_ptr<LogicDieWeightBuffer> logicWeightBuffer_;
+    shared_ptr<LogicDieAccumulator> logicAccumulator_;
+    unordered_map<uint64_t, BurstType> bankLocalAccumulator_;
+    unordered_map<uint64_t, unsigned> bankLocalAccumulatorCounts_;
+    uint64_t bankLocalAccumulatorBusyUntil_ = 0;
+    uint64_t bankLocalAccumulatorStalls_ = 0;
+    uint64_t bankLocalAccumulatorPeakEntries_ = 0;
+    vector<unsigned> bankLocalAccumulatorEntriesPerBank_;
+    vector<unsigned> bankLocalAccumulatorPeakEntriesPerBank_;
 
   public:
     PIMRank(ostream& simLog, Configuration& configuration,
             shared_ptr<LogicDieScheduler> logicScheduler,
-            shared_ptr<LogicDieWeightBuffer> logicWeightBuffer);
+            shared_ptr<LogicDieWeightBuffer> logicWeightBuffer,
+            shared_ptr<LogicDieAccumulator> logicAccumulator);
     ~PIMRank() {}
 
     void attachRank(Rank* r);
@@ -112,6 +138,7 @@ class PIMRank : public SimulatorObject
     const char* routeModeToStr(PIMRouteMode mode) const;
     bool shouldRouteToLogicDie(PIMCmd cCmd) const;
     unsigned reserveLogicDie(PIMCmd cCmd);
+    bool canAcceptLogicDieCommand(const BusPacket* packet, bool recordStall = true) const;
     unsigned consumeLastLogicServiceCycles();
     bool isLogicDieBusy(uint64_t cycle) const;
     uint64_t getLogicCommandCount() const;
@@ -123,6 +150,25 @@ class PIMRank : public SimulatorObject
     void dispatchLogicDieStub(PIMCmd cCmd, BusPacket* packet);
     vector<PIMBlock>& getActivePIMBlocks(bool use_logic_die);
     const vector<PIMBlock>& getActivePIMBlocks(bool use_logic_die) const;
+    void readLogicOutput(BusPacket* packet);
+    void handleLogicAccumulatorPacket(BusPacket* packet);
+    void beginBankLocalAccumulation();
+    bool canAcceptBankLocalAccumulator(const BusPacket* packet, bool recordStall = true);
+    uint64_t getBankLocalAccumulatorStalls() const { return bankLocalAccumulatorStalls_; }
+    uint64_t getBankLocalAccumulatorPeakEntries() const
+    {
+        return bankLocalAccumulatorPeakEntries_;
+    }
+    uint64_t getBankLocalAccumulatorPeakEntriesPerBank() const;
+
+  private:
+    bool peekNextExecutableCommand(PIMCmd& command, bool logic_die) const;
+    LogicCommandContext peekLogicCommandContext() const;
+    bool isLogicCommandPacket(const BusPacket* packet) const;
+    PIMExecutionContext& contextForPacket(const BusPacket* packet);
+    const PIMExecutionContext& contextForPacket(const BusPacket* packet) const;
+
+  public:
 
     union crf_t
     {
@@ -132,7 +178,7 @@ class PIMRank : public SimulatorObject
         {
             memset(data, 0, sizeof(uint32_t) * 32);
         }
-    } crf;
+    } crf, logicCrf;
 
     unsigned inline getGrfIdx(unsigned idx)
     {

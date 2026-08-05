@@ -42,6 +42,7 @@
 #include "PIMRank.h"
 #include "LogicDieScheduler.h"
 #include "LogicDieWeightBuffer.h"
+#include "LogicDieAccumulator.h"
 #include "SimulatorObject.h"
 
 using namespace std;
@@ -49,6 +50,14 @@ using namespace DRAMSim;
 
 namespace DRAMSim
 {
+enum class RankCommandRejectReason
+{
+    NONE,
+    MODE_TRANSITION,
+    LOGIC_QUEUE_BACKPRESSURE,
+    BANK_LOCAL_ACCUMULATOR_BACKPRESSURE
+};
+
 class MemoryController;  // forward declaration
 class PIMRank;           // forward declaration
 class Rank : public SimulatorObject
@@ -64,13 +73,19 @@ class Rank : public SimulatorObject
     // functions
     Rank(ostream& simLog, Configuration& configuration,
          shared_ptr<LogicDieScheduler> logicScheduler,
-         shared_ptr<LogicDieWeightBuffer> logicWeightBuffer);
+         shared_ptr<LogicDieWeightBuffer> logicWeightBuffer,
+         shared_ptr<LogicDieAccumulator> logicAccumulator);
     virtual ~Rank();
 
     void receiveFromBus(BusPacket* packet);
     void check(BusPacket* packet);
     void updateState(BusPacket* packet);
     void sendToBank(BusPacket* packet);
+    bool canAcceptCommand(BusPacket* packet, bool recordStall = true);
+    RankCommandRejectReason getLastCommandRejectReason() const
+    {
+        return lastCommandRejectReason_;
+    }
 
     void checkBank(BusPacketType type, int bank, int row);
     void updateBank(BusPacketType type, int bank, int row, bool targetBank, bool targetBankgroup);
@@ -85,6 +100,8 @@ class Rank : public SimulatorObject
 
     void readSb(BusPacket* packet);
     void writeSb(BusPacket* packet);
+    dramMode getModeForPacket(const BusPacket* packet) const;
+    void setModeForPacket(const BusPacket* packet, dramMode mode);
 
     // fields
     MemoryController* memoryController;
@@ -102,6 +119,12 @@ class Rank : public SimulatorObject
 
     dramMode mode_;
     bool abmr1Even_, abmr1Odd_, abmr2Even_, abmr2Odd_, sbmr1_, sbmr2_;
+    dramMode logicMode_ = dramMode::SB;
+    uint64_t modeReadyCycle_ = 0;
+    uint64_t logicModeReadyCycle_ = 0;
+    RankCommandRejectReason lastCommandRejectReason_ = RankCommandRejectReason::NONE;
+    bool logicAbmr1Even_ = false, logicAbmr1Odd_ = false, logicAbmr2Even_ = false,
+         logicAbmr2Odd_ = false, logicSbmr1_ = false, logicSbmr2_ = false;
 
     const char* getModeColor()
     {

@@ -13,6 +13,7 @@
 #ifndef __PIM_KERNEL_HPP__
 #define __PIM_KERNEL_HPP__
 
+#include <deque>
 #include <memory>
 #include <sstream>
 #include <string>
@@ -25,6 +26,56 @@
 
 using namespace std;
 using namespace DRAMSim;
+
+struct PointwiseSpatialHandle
+{
+    NumpyBurstType compactWeights;
+    vector<NumpyBurstType> positionInputs;
+    vector<vector<BurstType>> physicalOutput;
+    unsigned logicalOutputDim = 0;
+    unsigned batchSize = 0;
+    uint64_t outputLayer = 0;
+    bool waited = false;
+    bool consumed = false;
+};
+
+struct PointwiseSpatialSession
+{
+    NumpyBurstType weights;
+    NumpyBurstType input;
+    unsigned height = 0;
+    unsigned width = 0;
+    unsigned logicalOutputDim = 0;
+    unsigned nextRow = 0;
+    unsigned activeRowStart = 0;
+    unsigned activeRowCount = 0;
+    uint64_t weightLayerGeneration = 0;
+    uint64_t weightFillBursts = 0;
+    uint64_t reusedWeightFillBursts = 0;
+    uint64_t crfProgramCalls = 0;
+    uint64_t reusedCrfProgramCalls = 0;
+    unsigned reusedRowRanges = 0;
+    bool weightResident = false;
+    vector<bool> logicCrfResidentGroups;
+    shared_ptr<PointwiseSpatialHandle> activeHandle;
+    vector<fp16> output;
+};
+
+struct DepthwiseLoweredHandle
+{
+    int dim = 0;
+    unsigned kernelSize = 0;
+    int inputBaseRow = 0;
+    int weightBaseRow = 0;
+    int productRow = 0;
+    int accumulatorRow = 0;
+    int resultRow = 0;
+    int tapRowStride = 0;
+    unsigned nextStage = 0;
+    unsigned totalStages = 0;
+    bool stagePending = false;
+    bool complete = false;
+};
 
 class PIMKernel
 {
@@ -43,17 +94,26 @@ class PIMKernel
           hierarchyTransferCount_(0),
           hierarchyTransferBytes_(0),
           hierarchyTransferCycles_(0),
+          depthwiseAccumulatorTransferBytes_(0),
+          depthwiseAccumulatorTransferCycles_(0),
+          depthwiseAccumulatorOverlapCycles_(0),
+          depthwiseAccumulatorWaitCycles_(0),
           lastPointwiseActiveChannels_(num_pim_chan),
           lastPointwisePhysicalOutputDim_(0),
           lastPointwiseSpatialGroups_(1),
           lastPointwiseBatchWaves_(0),
+          logicHabEntries_(0),
+          logicHabExits_(0),
           baselineLogicWeightBytes_(0),
           physicalLogicWeightBytes_(0),
           modeledLogicWeightBytes_(0),
           savedLogicWeightBytes_(0),
           logicWeightFillBarrierCycles_(0),
           logicWeightBufferPortWaitCycles_(0),
-          logicPostFillGuardCycles_(0)
+          logicPostFillGuardCycles_(0),
+          logicBroadcastQueueAppliedCycles_(0),
+          logicBroadcastQueueLastPreStallCycle_(0),
+          pointwiseSpatialOutstanding_(false)
     {
         transaction_size_ = getConfigParam(UINT, "BL") *
                             (getConfigParam(UINT, "JEDEC_DATA_BUS_BITS") / 8);  // in byte
@@ -84,10 +144,24 @@ class PIMKernel
     uint64_t getHierarchyTransferCount() const;
     uint64_t getHierarchyTransferBytes() const;
     uint64_t getHierarchyTransferCycles() const;
+    uint64_t getDepthwiseAccumulatorTransferBytes() const;
+    uint64_t getDepthwiseAccumulatorTransferCycles() const;
+    uint64_t getDepthwiseAccumulatorOverlapCycles() const;
+    uint64_t getDepthwiseAccumulatorWaitCycles() const;
+    uint64_t getDepthwiseAccumulatorPartialBursts() const;
+    uint64_t getDepthwiseAccumulatorFinalBursts() const;
+    uint64_t getDepthwiseAccumulatorPeakEntries() const;
+    uint64_t getBankLocalAccumulatorStalls() const;
+    uint64_t getBankLocalAccumulatorPeakEntries() const;
+    uint64_t getBankLocalAccumulatorPeakEntriesPerBank() const;
+    DRAMSim::LogicDieAccumulator::LinkReplayStats getDepthwiseLinkReplayStats() const;
+    void writeDepthwiseAccumulatorTrace(const std::string& path) const;
     unsigned getLastPointwiseActiveChannels() const;
     unsigned getLastPointwisePhysicalOutputDim() const;
     unsigned getLastPointwiseSpatialGroups() const;
     unsigned getLastPointwiseBatchWaves() const;
+    uint64_t getLogicHabEntries() const;
+    uint64_t getLogicHabExits() const;
     uint64_t getTotalReads() const;
     uint64_t getTotalWrites() const;
     uint64_t getGlobalLogicCommandCount() const;
@@ -97,6 +171,87 @@ class PIMKernel
     uint64_t getGlobalLogicDispatchCount() const;
     uint64_t getGlobalLogicCoalescedCommandCount() const;
     uint64_t getGlobalLogicDispatchOverheadCycles() const;
+    void resetHierarchyActivity();
+    HierarchyActivityStats getHierarchyActivityStats() const;
+    uint64_t getLogicReleaseEpochCount() const;
+    uint64_t getLogicReleaseMaxStreams() const;
+    uint64_t getLogicReleaseCompleteMasks() const;
+    uint64_t getLogicReleaseIncompleteMasks() const;
+    uint64_t getLogicBroadcastMaskCount() const;
+    uint64_t getLogicBroadcastFanout() const;
+    uint64_t getLogicBroadcastMinFanout() const;
+    uint64_t getLogicBroadcastMaxFanout() const;
+    LogicEpochStats getLogicEpochStats(uint64_t epochId) const;
+    uint64_t getLogicBroadcastQueueStallCycles() const;
+    uint64_t getLogicBroadcastQueueFullEvents() const;
+    uint64_t getLogicBroadcastQueueAppliedCycles() const;
+    uint64_t getLogicBroadcastQueueLastPreStallCycle() const;
+    uint64_t getLogicOnlineIssueStallCycles() const;
+    uint64_t getLogicOnlineIssueBusyOverlapCycles() const;
+    uint64_t getLogicBlockedWallCycles() const;
+    uint64_t getLogicBlockedStreamCount() const;
+    uint64_t getLogicMinBlockedCyclesPerStream() const;
+    uint64_t getLogicMaxBlockedCyclesPerStream() const;
+    uint64_t getLogicMinIssuedCommandsPerStream() const;
+    uint64_t getLogicMaxIssuedCommandsPerStream() const;
+    uint64_t getLogicBlockedStreamMaskLow() const;
+    uint64_t getLogicBlockedStreamMaskHigh() const;
+    uint64_t getCommandPredicateRejectCycles() const;
+    uint64_t getCommandPredicateHolCycles() const;
+    uint64_t getCommandPredicateHolCandidates() const;
+    uint64_t getCommandPredicateHolMaxCandidates() const;
+    uint64_t getCommandPredicateBypassIssues() const;
+    uint64_t getIssuabilityRejectAttempts(CommandIssuabilityRejectReason reason) const;
+    uint64_t getIssuabilityRejectWallCycles(CommandIssuabilityRejectReason reason) const;
+    uint64_t getIssuabilityBlockedControllerCycles(
+        CommandIssuabilityRejectReason reason) const;
+    uint64_t getGlobalAnyBlockedCycles(CommandIssuabilityRejectReason reason) const;
+    uint64_t getGlobalAllActiveBlockedCycles(CommandIssuabilityRejectReason reason) const;
+    uint64_t getGlobalPeakBlockedChannels(CommandIssuabilityRejectReason reason) const;
+    uint64_t getGlobalRankModeAnyBlockedCycles() const;
+    uint64_t getGlobalRankModeAllActiveBlockedCycles() const;
+    uint64_t getGlobalRankModePeakBlockedChannels() const;
+    uint64_t getGlobalPredicateAnyBlockedCycles(HierarchyPredicateBlockReason reason) const;
+    uint64_t getGlobalPredicateAllActiveBlockedCycles(
+        HierarchyPredicateBlockReason reason) const;
+    uint64_t getGlobalPredicatePeakBlockedChannels(
+        HierarchyPredicateBlockReason reason) const;
+    uint64_t getGlobalHierarchyUnionAnyBlockedCycles() const;
+    uint64_t getGlobalHierarchyUnionAllActiveBlockedCycles() const;
+    uint64_t getGlobalHierarchyUnionPeakBlockedChannels() const;
+    uint64_t getGlobalBankStateAllNoHierarchyCycles() const;
+    uint64_t getGlobalBankStateAllWithHierarchyCycles() const;
+    uint64_t getGlobalBankStateOnlyCycles() const;
+    uint64_t getGlobalHierarchyAllNoIssuabilityCycles() const;
+    uint64_t getGlobalBankHierarchyAllIntersectionCycles() const;
+    uint64_t getGlobalBankTagAnyBlockedCycles(CommandTagClass tagClass) const;
+    uint64_t getGlobalBankTagAllActiveBlockedCycles(CommandTagClass tagClass) const;
+    uint64_t getGlobalBankTagPeakBlockedChannels(CommandTagClass tagClass) const;
+    map<string, uint64_t> getBankStateBlockedCyclesByRawTag() const;
+    uint64_t getEpochMismatchRejects() const;
+    uint64_t getBarrierOutstandingRejects() const;
+    uint64_t getWriteBusBusyRejects() const;
+    uint64_t getRankCommandRejects() const;
+    uint64_t getRankModeTransitionRejects() const;
+    uint64_t getRankLogicQueueRejects() const;
+    uint64_t getRankBankDomainRejects() const;
+    uint64_t getRankLogicDomainRejects() const;
+    uint64_t getRankModeBlockedControllerCycles() const;
+    uint64_t getRankLogicQueueBlockedControllerCycles() const;
+    uint64_t getWriteDataCompletions(WriteCompletionClass completionClass) const;
+    uint64_t getWriteBarrierCompletions(WriteCompletionClass completionClass) const;
+    uint64_t getBarrierOutstandingRejects(WriteCompletionClass completionClass) const;
+    uint64_t getEpochMismatchRejects(WriteCompletionClass completionClass) const;
+    uint64_t getBarrierOutstandingRejects(BarrierTagClass tagClass) const;
+    uint64_t getEpochMismatchRejects(BarrierTagClass tagClass) const;
+    map<string, uint64_t> getBarrierOutstandingRejectsByRawTag() const;
+    map<string, uint64_t> getEpochMismatchRejectsByRawTag() const;
+    uint64_t getLogicOutputBufferReservations() const;
+    uint64_t getLogicOutputBufferRetirements() const;
+    uint64_t getLogicOutputBufferFullStalls() const;
+    uint64_t getLogicOutputBufferPeakEntries() const;
+    uint64_t getLogicOutputBufferDrainBusyCycles() const;
+    uint64_t getLogicOutputBufferFullWallCycles() const;
     uint64_t getBaselineLogicWeightBytes() const;
     uint64_t getPhysicalLogicWeightBytes() const;
     uint64_t getModeledLogicWeightBytes() const;
@@ -122,7 +277,9 @@ class PIMKernel
     void parkOut();
     void changePIMMode(dramMode mode1, dramMode mode2);
     void addTransactionAll(bool isWrite, int bg, int bank, int row, int col, const std::string tag,
-                           BurstType* bst, bool use_barrier = false, int num_loop = 1);
+                           BurstType* bst, bool use_barrier = false, int num_loop = 1,
+                           WriteCompletionClass completionClass =
+                               WriteCompletionClass::ORDERED);
     void addTransactionAll(bool isWrite, int bg, int bank, int row, int col, BurstType* bst,
                            bool use_barrier = false, int num_loop = 1);
     /*
@@ -135,7 +292,7 @@ class PIMKernel
     /*
     void programSrf();
     */
-    void programCrf(vector<PIMCmd>& cmds);
+    void programCrf(vector<PIMCmd>& cmds, bool logic_die = false);
     void setControl(BurstType* bst, bool op, int crf_toggle_cond, bool grfA_zero, bool grfB_zero);
     unsigned getResultColGemv(int input_dim, int output_dim);
     void changeBank(pimBankType bank_types, int& cidx, int& rank, int& bg, int& bank,
@@ -147,7 +304,8 @@ class PIMKernel
     void preloadEltwise(NumpyBurstType* operand, pimBankType bank_types, unsigned startingRow,
                         unsigned startingCol);
     */
-    void executeGemv(NumpyBurstType* w_data, NumpyBurstType* i_data, bool is_tree);
+    void executeGemv(NumpyBurstType* w_data, NumpyBurstType* i_data, bool is_tree,
+                     bool program_crf = true, bool enter_hab = true, bool exit_hab = true);
     std::vector<fp16> executePointwiseAndRead(NumpyBurstType* weights, NumpyBurstType* input,
                                               unsigned logical_output_dim);
     std::vector<fp16> executePointwiseBatchAndRead(NumpyBurstType* weights,
@@ -157,12 +315,31 @@ class PIMKernel
     std::vector<fp16> executePointwiseSpatialGroupsAndRead(NumpyBurstType* weights,
                                                            NumpyBurstType* input,
                                                            unsigned logical_output_dim);
+    shared_ptr<PointwiseSpatialHandle> enqueuePointwiseSpatialGroups(
+        NumpyBurstType* weights, NumpyBurstType* input, unsigned logical_output_dim);
+    void waitPointwiseSpatial(const shared_ptr<PointwiseSpatialHandle>& handle);
+    vector<fp16> readPointwiseSpatial(const shared_ptr<PointwiseSpatialHandle>& handle);
+    shared_ptr<PointwiseSpatialSession> beginPointwiseSpatialSession(
+        NumpyBurstType* weights, NumpyBurstType* input, unsigned height, unsigned width,
+        unsigned logical_output_dim);
+    void enqueuePointwiseRows(const shared_ptr<PointwiseSpatialSession>& session,
+                              unsigned row_start, unsigned row_count);
+    void waitPointwiseRows(const shared_ptr<PointwiseSpatialSession>& session);
+    vector<fp16> readPointwiseRows(const shared_ptr<PointwiseSpatialSession>& session);
     void executeEltwise(int dim, pimBankType bank_types, KernelType ktype, int input0_row,
                         int result_row, int input1_row = 0);
     void executeDepthwiseLowered(int dim, unsigned kernel_size, int input_base_row,
                                  int weight_base_row, int product_row, int accumulator_row,
                                  int result_row,
                                  int tap_row_stride = 128);
+    void executeDepthwiseHierarchical(int dim, unsigned kernel_size, int input_base_row,
+                                      int weight_base_row, int result_row,
+                                      int tap_row_stride = 128);
+    shared_ptr<DepthwiseLoweredHandle> beginDepthwiseLowered(
+        int dim, unsigned kernel_size, int input_base_row, int weight_base_row,
+        int product_row, int accumulator_row, int result_row, int tap_row_stride = 128);
+    void enqueueDepthwiseStage(const shared_ptr<DepthwiseLoweredHandle>& handle);
+    void waitDepthwiseStage(const shared_ptr<DepthwiseLoweredHandle>& handle);
     void executeLogicDieStub(const std::string& op_name);
     void computeGemv(NumpyBurstType* data, int num_input_tiles, int num_output_tile, int input_tile,
                      int output_tile, int batch_idx, pimBankType bank_types);
@@ -173,19 +350,31 @@ class PIMKernel
     bool usesLogicDiePIM() const;
 
     void readResult(BurstType* resultBst, pimBankType bank_types, int output_dim,
-                    uint64_t baseAddr = 0, unsigned startingRow = 0, unsigned startingCol = 0);
+                    uint64_t baseAddr = 0, unsigned startingRow = 0, unsigned startingCol = 0,
+                    uint64_t outputLayer = 0, uint64_t outputPosition = 0);
     void readData(BurstType* bst_data, size_t bst_cnt, unsigned s_row = 0, unsigned s_col = 0);
     void adderTree(BurstType* result, int output_dim, int numTile, int step, fp16* temp);
 
   private:
+    shared_ptr<PointwiseSpatialHandle> enqueuePointwiseSpatialGroupsInternal(
+        NumpyBurstType* weights, NumpyBurstType* input, unsigned logical_output_dim,
+        bool reuse_shared_weight_layer, vector<bool>* crf_resident_groups = nullptr);
+    string domainTag(const string& tag) const;
     unsigned cycle_;
     uint64_t hierarchyTransferCount_;
     uint64_t hierarchyTransferBytes_;
     uint64_t hierarchyTransferCycles_;
+    uint64_t depthwiseAccumulatorTransferBytes_;
+    uint64_t depthwiseAccumulatorTransferCycles_;
+    uint64_t depthwiseAccumulatorOverlapCycles_;
+    uint64_t depthwiseAccumulatorWaitCycles_;
+    deque<BurstType> depthwiseAccumulatorWritePayloads_;
     unsigned lastPointwiseActiveChannels_;
     unsigned lastPointwisePhysicalOutputDim_;
     unsigned lastPointwiseSpatialGroups_;
     unsigned lastPointwiseBatchWaves_;
+    uint64_t logicHabEntries_;
+    uint64_t logicHabExits_;
     uint64_t baselineLogicWeightBytes_;
     uint64_t physicalLogicWeightBytes_;
     uint64_t modeledLogicWeightBytes_;
@@ -193,6 +382,13 @@ class PIMKernel
     uint64_t logicWeightFillBarrierCycles_;
     uint64_t logicWeightBufferPortWaitCycles_;
     uint64_t logicPostFillGuardCycles_;
+    uint64_t logicBroadcastQueueAppliedCycles_;
+    uint64_t logicBroadcastQueueLastPreStallCycle_;
+    bool pointwiseSpatialOutstanding_;
+    bool depthwiseLoweredOutstanding_ = false;
+    uint64_t crfProgramCalls_ = 0;
+    uint64_t outputLayerGeneration_ = 0;
+    bool logicTransactionDomain_ = false;
     unsigned num_banks_, num_pim_blocks_, num_bank_groups_, num_total_pim_blocks_;
     BurstType null_bst_, bst_hab_pim_, bst_hab_;
     BurstType crf_bst_[4];
@@ -207,6 +403,11 @@ class PIMKernel
 
     void setActivePimChannels(unsigned channels, unsigned channel_start = 0);
     void setActivePimChannelList(const vector<int>& channels);
+    void addDepthwiseAccumulatorTransactions(int row, int col, int bank, bool final,
+                                             bool flush, int num_loop);
+    void computeMulToAccumulator(int tile_start, int tile_count, int input_row, int weight_row,
+                                 int result_row, bool flush_partial, bool final_tap);
+    void advanceDepthwiseAccumulatorTransfer(uint64_t bytes, uint64_t overlap_window);
 
     int inline getToggleCond(pimBankType pb_type = pimBankType::ALL_BANK)
     {

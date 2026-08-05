@@ -43,7 +43,9 @@ powerCallBack_t MemorySystem::ReportPower = NULL;
 MemorySystem::MemorySystem(unsigned id, unsigned int megsOfMemory, CSVWriter& csvOut_,
                            ostream& simLog, Configuration& configuration,
                            shared_ptr<LogicDieScheduler> logicScheduler,
-                           shared_ptr<LogicDieWeightBuffer> logicWeightBuffer)
+                           shared_ptr<LogicDieWeightBuffer> logicWeightBuffer,
+                           shared_ptr<LogicDieOutputBuffer> logicOutputBuffer,
+                           shared_ptr<LogicDieAccumulator> logicAccumulator_)
     : dramsimLog(simLog),
       ReturnReadData(NULL),
       WriteDataDone(NULL),
@@ -51,6 +53,8 @@ MemorySystem::MemorySystem(unsigned id, unsigned int megsOfMemory, CSVWriter& cs
       csvOut(csvOut_),
       numOnTheFlyTransactions(0),
       logicWeightBuffer(logicWeightBuffer),
+      logicOutputBuffer(logicOutputBuffer),
+      logicAccumulator(logicAccumulator_),
       config(configuration)
 {
     currentClockCycle = 0;
@@ -139,7 +143,8 @@ MemorySystem::MemorySystem(unsigned id, unsigned int megsOfMemory, CSVWriter& cs
 
     for (size_t i = 0; i < num_ranks_; i++)
     {
-        Rank* r = new Rank(dramsimLog, config, logicScheduler, logicWeightBuffer);
+        Rank* r = new Rank(dramsimLog, config, logicScheduler, logicWeightBuffer,
+                           logicAccumulator);
         r->setChanId(systemID);
         r->setRankId(i);
         r->attachMemoryController(memoryController);
@@ -183,31 +188,24 @@ bool MemorySystem::addTransaction(bool isWrite, uint64_t addr, BurstType* data)
 }
 
 bool MemorySystem::addTransaction(bool isWrite, uint64_t addr, const std::string& str,
-                                  BurstType* data)
+                                  BurstType* data, WriteCompletionClass completionClass)
 {
     TransactionType type = isWrite ? DATA_WRITE : DATA_READ;
-    Transaction* trans = new Transaction(type, addr, str, data);
+    Transaction* trans = new Transaction(type, addr, str, data, completionClass);
     return addTransaction(trans);
 }
 
 bool MemorySystem::addBarrier()
 {
-    if (memoryController->WillAcceptTransaction())
+    // pendingTransactions is logically newer than every transaction already in
+    // the controller. Preserve enqueue order even if a controller slot opened
+    // between the final addTransaction() and this barrier call.
+    if (pendingTransactions.size())
     {
-        return memoryController->addBarrier();
+        pendingTransactions.back()->tag += "BAR";
+        return true;
     }
-    else
-    {
-        if (pendingTransactions.size())
-        {
-            pendingTransactions.back()->tag += "BAR";
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+    return memoryController->addBarrier();
 }
 
 bool MemorySystem::addTransaction(Transaction* trans)

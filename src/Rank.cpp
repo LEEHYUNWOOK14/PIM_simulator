@@ -41,7 +41,8 @@ using namespace DRAMSim;
 
 Rank::Rank(ostream& simLog, Configuration& configuration,
            shared_ptr<LogicDieScheduler> logicScheduler,
-           shared_ptr<LogicDieWeightBuffer> logicWeightBuffer)
+           shared_ptr<LogicDieWeightBuffer> logicWeightBuffer,
+           shared_ptr<LogicDieAccumulator> logicAccumulator)
     : chanId(-1),
       rankId(-1),
       dramsimLog(simLog),
@@ -60,7 +61,8 @@ Rank::Rank(ostream& simLog, Configuration& configuration,
     currentClockCycle = 0;
     abmr1Even_ = abmr1Odd_ = abmr2Even_ = abmr2Odd_ = sbmr1_ = sbmr2_ = false;
 
-    pimRank = make_shared<PIMRank>(dramsimLog, config, logicScheduler, logicWeightBuffer);
+    pimRank = make_shared<PIMRank>(dramsimLog, config, logicScheduler, logicWeightBuffer,
+                                   logicAccumulator);
     pimRank->attachRank(this);
 }
 
@@ -109,7 +111,13 @@ void Rank::receiveFromBus(BusPacket* packet)
     {
         packet->print(currentClockCycle, false);
     }
-    if (!pimRank->isReservedRA(packet->row))
+    const bool directLogicStaging =
+        config.LOGIC_DIRECT_STAGING_COMMAND_PATH &&
+        packet->tag.find("LOGIC_WEIGHT_FILL") != std::string::npos;
+    if (!packet->logicOutputDirect && !packet->logicAccumulatorDirect &&
+        !packet->logicAccumulatorFinal &&
+        !directLogicStaging &&
+        !pimRank->isReservedRA(packet->row))
     {
         check(packet);
         updateState(packet);
@@ -128,7 +136,12 @@ void Rank::checkBank(BusPacketType type, int bank, int row)
             {
                 ERROR("== Error - ch " << getChanId() << " ra" << getRankId() << " ba" << bank
                                        << " received a READ when not allowed @ "
-                                       << currentClockCycle);
+                                       << currentClockCycle << " state "
+                                       << static_cast<int>(bankStates[bank].currentBankState)
+                                       << " requested_row " << row << " open_row "
+                                       << bankStates[bank].openRowAddress << " next_read "
+                                       << bankStates[bank].nextRead);
+                bankStates[bank].print();
                 exit(-1);
             }
             break;
@@ -391,14 +404,77 @@ void Rank::writeSb(BusPacket* packet)
 #endif
 }
 
+dramMode Rank::getModeForPacket(const BusPacket* packet) const
+{
+    if (config.HIERARCHY_SOURCE_QUEUES && packet != nullptr &&
+        packet->tag.find("LOGIC_DOMAIN_") != std::string::npos)
+        return logicMode_;
+    return mode_;
+}
+
+void Rank::setModeForPacket(const BusPacket* packet, dramMode mode)
+{
+    const bool logicDomain = config.HIERARCHY_SOURCE_QUEUES && packet != nullptr &&
+                             packet->tag.find("LOGIC_DOMAIN_") != std::string::npos;
+    dramMode& activeMode = logicDomain ? logicMode_ : mode_;
+    uint64_t& readyCycle = logicDomain ? logicModeReadyCycle_ : modeReadyCycle_;
+    if (activeMode != mode)
+    {
+        activeMode = mode;
+        readyCycle = currentClockCycle + config.LOGIC_MODE_TRANSITION_LATENCY;
+    }
+}
+
 void Rank::sendToBank(BusPacket* packet)
 {
+    const bool logicDomain = config.HIERARCHY_SOURCE_QUEUES &&
+                             packet->tag.find("LOGIC_DOMAIN_") != std::string::npos;
+    dramMode& packetMode = logicDomain ? logicMode_ : mode_;
+    bool& abmr1Even = logicDomain ? logicAbmr1Even_ : abmr1Even_;
+    bool& abmr1Odd = logicDomain ? logicAbmr1Odd_ : abmr1Odd_;
+    bool& abmr2Even = logicDomain ? logicAbmr2Even_ : abmr2Even_;
+    bool& abmr2Odd = logicDomain ? logicAbmr2Odd_ : abmr2Odd_;
+    bool& sbmr1 = logicDomain ? logicSbmr1_ : sbmr1_;
+    bool& sbmr2 = logicDomain ? logicSbmr2_ : sbmr2_;
+    if (config.HIERARCHY_SOURCE_QUEUES && packet->busPacketType == WRITE &&
+        pimRank->isReservedRA(packet->row))
+    {
+        if (packetMode == dramMode::SB && packet->row == config.PIM_ABMR_RA &&
+            packet->column == 0x1f)
+        {
+            abmr1Even = packet->bank == 0 ? true : abmr1Even;
+            abmr1Odd = packet->bank == 1 ? true : abmr1Odd;
+            abmr2Even = packet->bank == 8 ? true : abmr2Even;
+            abmr2Odd = packet->bank == 9 ? true : abmr2Odd;
+            if ((config.NUM_BANKS <= 2 && abmr1Even && abmr1Odd) ||
+                (config.NUM_BANKS > 2 && abmr1Even && abmr1Odd && abmr2Even && abmr2Odd))
+            {
+                abmr1Even = abmr1Odd = abmr2Even = abmr2Odd = false;
+                setModeForPacket(packet, dramMode::HAB);
+            }
+            return;
+        }
+        if (packetMode == dramMode::HAB && packet->row == config.PIM_SBMR_RA &&
+            packet->column == 0x1f)
+        {
+            sbmr1 = packet->bank == 0 ? true : sbmr1;
+            sbmr2 = packet->bank == 1 ? true : sbmr2;
+            if (sbmr1 && sbmr2)
+            {
+                sbmr1 = sbmr2 = false;
+                setModeForPacket(packet, dramMode::SB);
+            }
+            return;
+        }
+    }
     switch (packet->busPacketType)
     {
         case READ:
-            if (mode_ == dramMode::SB)
+            if (packet->logicOutputDirect)
+                pimRank->readLogicOutput(packet);
+            else if (packetMode == dramMode::SB)
                 readSb(packet);
-            else if (mode_ == dramMode::HAB_PIM && pimRank->isToggleCond(packet))
+            else if (packetMode == dramMode::HAB_PIM && pimRank->isToggleCond(packet))
                 pimRank->doPIM(packet);
             else
                 pimRank->readHab(packet);
@@ -407,9 +483,17 @@ void Rank::sendToBank(BusPacket* packet)
             readReturnCountdown.push_back(config.RL + pimRank->consumeLastLogicServiceCycles());
             break;
         case WRITE:
-            if (mode_ == dramMode::SB)
+            if (packet->logicAccumulatorDirect)
+            {
+                if (packetMode == dramMode::HAB_PIM && pimRank->isToggleCond(packet))
+                    pimRank->doPIM(packet);
+                pimRank->handleLogicAccumulatorPacket(packet);
+            }
+            else if (packet->logicAccumulatorFinal)
+                pimRank->handleLogicAccumulatorPacket(packet);
+            else if (packetMode == dramMode::SB)
                 writeSb(packet);
-            else if (mode_ == dramMode::HAB_PIM && pimRank->isToggleCond(packet))
+            else if (packetMode == dramMode::HAB_PIM && pimRank->isToggleCond(packet))
                 pimRank->doPIM(packet);
             else
                 pimRank->writeHab(packet);
@@ -421,19 +505,19 @@ void Rank::sendToBank(BusPacket* packet)
             {
                 PRINTC(getModeColor(), OUTLOG_ALL("ACTIVATE") << " tag : " << packet->tag);
             }
-            if (mode_ == dramMode::SB && packet->row == config.PIM_ABMR_RA &&
+            if (packetMode == dramMode::SB && packet->row == config.PIM_ABMR_RA &&
                 packet->column == 0x1f)
             {
-                abmr1Even_ = (packet->bank == 0) ? true : abmr1Even_;
-                abmr1Odd_ = (packet->bank == 1) ? true : abmr1Odd_;
-                abmr2Even_ = (packet->bank == 8) ? true : abmr2Even_;
-                abmr2Odd_ = (packet->bank == 9) ? true : abmr2Odd_;
+                abmr1Even = packet->bank == 0 ? true : abmr1Even;
+                abmr1Odd = packet->bank == 1 ? true : abmr1Odd;
+                abmr2Even = packet->bank == 8 ? true : abmr2Even;
+                abmr2Odd = packet->bank == 9 ? true : abmr2Odd;
 
-                if ((config.NUM_BANKS <= 2 && abmr1Even_ && abmr1Odd_) ||
-                    (config.NUM_BANKS > 2 && abmr1Even_ && abmr1Odd_ && abmr2Even_ && abmr2Odd_))
+                if ((config.NUM_BANKS <= 2 && abmr1Even && abmr1Odd) ||
+                    (config.NUM_BANKS > 2 && abmr1Even && abmr1Odd && abmr2Even && abmr2Odd))
                 {
-                    abmr1Even_ = abmr1Odd_ = abmr2Even_ = abmr2Odd_ = false;
-                    mode_ = dramMode::HAB;
+                    abmr1Even = abmr1Odd = abmr2Even = abmr2Odd = false;
+                    setModeForPacket(packet, dramMode::HAB);
                     if (DEBUG_CMD_TRACE)
                     {
                         PRINTC(RED, OUTLOG_CH_RA("HAB") << " tag : " << packet->tag);
@@ -445,7 +529,7 @@ void Rank::sendToBank(BusPacket* packet)
         case PRECHARGE:
             if (DEBUG_CMD_TRACE)
             {
-                if (mode_ == dramMode::SB || packet->bank < 2)
+                if (packetMode == dramMode::SB || packet->bank < 2)
                 {
                     PRINTC(getModeColor(), OUTLOG_PRECHARGE("PRECHARGE"));
                 }
@@ -455,15 +539,15 @@ void Rank::sendToBank(BusPacket* packet)
                 }
             }
 
-            if (mode_ == dramMode::HAB && packet->row == config.PIM_SBMR_RA)
+            if (packetMode == dramMode::HAB && packet->row == config.PIM_SBMR_RA)
             {
-                sbmr1_ = (packet->bank == 0) ? true : sbmr1_;
-                sbmr2_ = (packet->bank == 1) ? true : sbmr2_;
+                sbmr1 = packet->bank == 0 ? true : sbmr1;
+                sbmr2 = packet->bank == 1 ? true : sbmr2;
 
-                if (sbmr1_ && sbmr2_)
+                if (sbmr1 && sbmr2)
                 {
-                    sbmr1_ = sbmr2_ = false;
-                    mode_ = dramMode::SB;
+                    sbmr1 = sbmr2 = false;
+                    setModeForPacket(packet, dramMode::SB);
                     if (DEBUG_CMD_TRACE)
                     {
                         PRINTC(RED, OUTLOG_CH_RA("SB mode"));
@@ -492,6 +576,33 @@ void Rank::sendToBank(BusPacket* packet)
             exit(0);
             break;
     }
+}
+
+bool Rank::canAcceptCommand(BusPacket* packet, bool recordStall)
+{
+    lastCommandRejectReason_ = RankCommandRejectReason::NONE;
+    const bool logicDomain = config.HIERARCHY_SOURCE_QUEUES && packet != nullptr &&
+                             packet->tag.find("LOGIC_DOMAIN_") != std::string::npos;
+    const uint64_t readyCycle = logicDomain ? logicModeReadyCycle_ : modeReadyCycle_;
+    if (currentClockCycle < readyCycle)
+    {
+        lastCommandRejectReason_ = RankCommandRejectReason::MODE_TRANSITION;
+        return false;
+    }
+    if (!pimRank->canAcceptBankLocalAccumulator(packet, recordStall))
+    {
+        lastCommandRejectReason_ =
+            RankCommandRejectReason::BANK_LOCAL_ACCUMULATOR_BACKPRESSURE;
+        return false;
+    }
+    if (!config.LOGIC_ONLINE_QUEUE_BACKPRESSURE) return true;
+    if ((packet->busPacketType != READ && packet->busPacketType != WRITE) ||
+        getModeForPacket(packet) != dramMode::HAB_PIM || !pimRank->isToggleCond(packet))
+        return true;
+    const bool accepted = pimRank->canAcceptLogicDieCommand(packet, recordStall);
+    if (!accepted)
+        lastCommandRejectReason_ = RankCommandRejectReason::LOGIC_QUEUE_BACKPRESSURE;
+    return accepted;
 }
 
 void Rank::update()

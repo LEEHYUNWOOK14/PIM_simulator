@@ -45,11 +45,14 @@ MemoryController::MemoryController(MemorySystem* parent, CSVWriter& csvOut_, ost
       config(configuration),
       bankStates(getConfigParam(UINT, "NUM_RANKS"),
                  vector<BankState>(getConfigParam(UINT, "NUM_BANKS"), dramsimLog)),
+      logicControlBankStates(getConfigParam(UINT, "NUM_RANKS"),
+                             vector<BankState>(getConfigParam(UINT, "NUM_BANKS"), dramsimLog)),
       outgoingCmdPacket(NULL),
       outgoingDataPacket(NULL),
       dataCyclesLeft(0),
       cmdCyclesLeft(0),
       commandQueue(bankStates, simLog),
+      logicControlCommandQueue(logicControlBankStates, simLog),
       poppedBusPacket(NULL),
       csvOut(csvOut_),
       totalTransactions(0),
@@ -62,7 +65,10 @@ MemoryController::MemoryController(MemorySystem* parent, CSVWriter& csvOut_, ost
       logicWeightFillCompletedWrites(0),
       logicWeightFillActivates(0),
       logicWeightFillPrecharges(0),
-      logicWeightFillLastCompletionCycle(0)
+      logicWeightFillLastCompletionCycle(0),
+      logicAccumulatorDirectTransfers(0),
+      logicAccumulatorCompletedTransfers(0),
+      logicAccumulatorFinalWrites(0)
 {
     // get handle on parent
     parentMemorySystem = parent;
@@ -142,6 +148,29 @@ bool MemoryController::addBarrier()
     if (transactionQueue.size())
     {
         transactionQueue.back()->tag += "BAR";
+        if (config.HIERARCHY_SOURCE_QUEUES)
+        {
+            if (transactionQueue.back()->tag.find("LOGIC_DOMAIN_") != string::npos)
+            {
+                logicEpochBarrierClass_[logicEpochToAssign_] =
+                    transactionQueue.back()->writeCompletionClass;
+                logicEpochBarrierTagClass_[logicEpochToAssign_] =
+                    classifyBarrierTag(transactionQueue.back()->tag);
+                logicEpochBarrierRawTag_[logicEpochToAssign_] =
+                    normalizeBarrierTag(transactionQueue.back()->tag);
+                logicEpochToAssign_++;
+            }
+            else
+            {
+                bankEpochBarrierClass_[bankEpochToAssign_] =
+                    transactionQueue.back()->writeCompletionClass;
+                bankEpochBarrierTagClass_[bankEpochToAssign_] =
+                    classifyBarrierTag(transactionQueue.back()->tag);
+                bankEpochBarrierRawTag_[bankEpochToAssign_] =
+                    normalizeBarrierTag(transactionQueue.back()->tag);
+                bankEpochToAssign_++;
+            }
+        }
         return true;
     }
     return false;
@@ -152,6 +181,244 @@ void MemoryController::attachRanks(vector<Rank*>* ranks)
 {
     this->ranks = ranks;
     commandQueue.ranks = ranks;
+    logicControlCommandQueue.ranks = ranks;
+}
+
+BarrierTagClass MemoryController::classifyBarrierTag(const string& tag)
+{
+    if (tag.find("PARK_") != string::npos) return BarrierTagClass::PARK;
+    if (tag.find("BANK_TO_GRF") != string::npos ||
+        tag.find("WRIO_TO_GRF") != string::npos ||
+        tag.find("FILL") != string::npos || tag.find("PRELOAD_DATA") != string::npos)
+        return BarrierTagClass::OPERAND_LOAD;
+    if (tag.find("ADD") != string::npos || tag.find("MUL") != string::npos ||
+        tag.find("ReLU") != string::npos)
+        return BarrierTagClass::ALU;
+    if (tag.find("MAC_") != string::npos) return BarrierTagClass::MAC;
+    if (tag.find("output") != string::npos || tag.find("RESULT") != string::npos)
+        return BarrierTagClass::OUTPUT;
+    return BarrierTagClass::OTHER;
+}
+
+string MemoryController::normalizeBarrierTag(const string& tag)
+{
+    string normalized = tag;
+    const string logicDomain = "LOGIC_DOMAIN_";
+    const string bankDomain = "BANK_DOMAIN_";
+    if (normalized.rfind(logicDomain, 0) == 0)
+        normalized.erase(0, logicDomain.size());
+    else if (normalized.rfind(bankDomain, 0) == 0)
+        normalized.erase(0, bankDomain.size());
+
+    size_t metadata = normalized.find("LOGIC_SEQ_");
+    if (metadata == string::npos) metadata = normalized.find("BANK_SEQ_");
+    if (metadata != string::npos) normalized.erase(metadata);
+    size_t barrier = normalized.find("BAR");
+    if (barrier != string::npos) normalized.erase(barrier);
+    while (!normalized.empty() && normalized.back() == '_') normalized.pop_back();
+    return normalized.empty() ? "EMPTY" : normalized;
+}
+
+bool MemoryController::isLogicControlPacket(const BusPacket* packet) const
+{
+    if (packet == nullptr) return false;
+    if (packet->logicOutputDirect) return true;
+    if (packet->logicAccumulatorDirect || packet->logicAccumulatorFinal) return true;
+    if (config.LOGIC_DIRECT_STAGING_COMMAND_PATH &&
+        packet->tag.find("LOGIC_WEIGHT_FILL") != string::npos)
+        return true;
+    return config.HIERARCHY_SOURCE_QUEUES && (packet->row & (1u << 13));
+}
+
+bool MemoryController::isLogicControlTransaction(const Transaction* transaction,
+                                                 unsigned row) const
+{
+    if (transaction == nullptr) return false;
+    if (transaction->logicOutputDirect) return true;
+    if (transaction->logicAccumulatorDirect || transaction->logicAccumulatorFinal) return true;
+    if (config.LOGIC_DIRECT_STAGING_COMMAND_PATH &&
+        transaction->tag.find("LOGIC_WEIGHT_FILL") != string::npos)
+        return true;
+    return config.HIERARCHY_SOURCE_QUEUES && (row & (1u << 13));
+}
+
+uint64_t MemoryController::logicEpoch(const string& tag) const
+{
+    static const string prefix = "LOGIC_EPOCH_";
+    const size_t begin = tag.find(prefix);
+    if (begin == string::npos) return UINT64_MAX;
+    const size_t digits = begin + prefix.size();
+    return stoull(tag.substr(digits, tag.find('_', digits) - digits));
+}
+
+uint64_t MemoryController::bankEpoch(const string& tag) const
+{
+    static const string prefix = "BANK_EPOCH_";
+    const size_t begin = tag.find(prefix);
+    if (begin == string::npos) return UINT64_MAX;
+    const size_t digits = begin + prefix.size();
+    return stoull(tag.substr(digits, tag.find('_', digits) - digits));
+}
+
+bool MemoryController::canIssueEpochBarrier(const BusPacket* packet) const
+{
+    if (!config.HIERARCHY_SOURCE_QUEUES) return true;
+    if (packet == nullptr || packet->tag.find("BAR") == string::npos) return true;
+    const uint64_t logic_epoch = logicEpoch(packet->tag);
+    if (logic_epoch != UINT64_MAX)
+    {
+        const auto it = logicEpochOutstanding_.find(logic_epoch);
+        return it != logicEpochOutstanding_.end() && it->second == 1;
+    }
+    const uint64_t bank_epoch = bankEpoch(packet->tag);
+    const auto it = bankEpochOutstanding_.find(bank_epoch);
+    return bank_epoch != UINT64_MAX && it != bankEpochOutstanding_.end() && it->second == 1;
+}
+
+bool MemoryController::hasWriteDataSlot() const
+{
+    const uint64_t newStart = config.WL;
+    const uint64_t newEnd = newStart + config.BL / 2;
+    if (outgoingDataPacket != nullptr && newStart < dataCyclesLeft) return false;
+    for (const unsigned countdown : writeDataCountdown)
+    {
+        const uint64_t scheduledStart = countdown;
+        const uint64_t scheduledEnd = scheduledStart + config.BL / 2;
+        if (scheduledStart < newEnd && newStart < scheduledEnd) return false;
+    }
+    return true;
+}
+
+bool MemoryController::canIssueHierarchyCommand(BusPacket* packet, bool updateRankState,
+                                                bool countRejection)
+{
+    const uint64_t logic_epoch = logicEpoch(packet->tag);
+    const uint64_t bank_epoch = bankEpoch(packet->tag);
+    if ((logic_epoch != UINT64_MAX && logic_epoch != logicEpochToIssue_) ||
+        (bank_epoch != UINT64_MAX && bank_epoch != bankEpochToIssue_))
+    {
+        if (countRejection)
+        {
+            epochMismatchRejects_++;
+            hierarchyPredicateRejectedThisCycle_[static_cast<size_t>(
+                HierarchyPredicateBlockReason::EPOCH_MISMATCH)] = true;
+            const auto& classes = logic_epoch != UINT64_MAX ? logicEpochBarrierClass_
+                                                             : bankEpochBarrierClass_;
+            const auto& tagClasses = logic_epoch != UINT64_MAX ? logicEpochBarrierTagClass_
+                                                                : bankEpochBarrierTagClass_;
+            const auto& rawTags = logic_epoch != UINT64_MAX ? logicEpochBarrierRawTag_
+                                                             : bankEpochBarrierRawTag_;
+            const uint64_t blocked_epoch =
+                logic_epoch != UINT64_MAX ? logicEpochToIssue_ : bankEpochToIssue_;
+            const auto found = classes.find(blocked_epoch);
+            const WriteCompletionClass completionClass =
+                found == classes.end() ? WriteCompletionClass::ORDERED : found->second;
+            epochMismatchRejectsByClass_[static_cast<size_t>(completionClass)]++;
+            const auto tagFound = tagClasses.find(blocked_epoch);
+            const BarrierTagClass tagClass =
+                tagFound == tagClasses.end() ? BarrierTagClass::OTHER : tagFound->second;
+            epochMismatchRejectsByTag_[static_cast<size_t>(tagClass)]++;
+            const auto rawFound = rawTags.find(blocked_epoch);
+            epochMismatchRejectsByRawTag_[rawFound == rawTags.end() ? "MISSING_METADATA"
+                                                                    : rawFound->second]++;
+        }
+        return false;
+    }
+    if (!canIssueEpochBarrier(packet))
+    {
+        if (countRejection)
+        {
+            barrierOutstandingRejects_++;
+            hierarchyPredicateRejectedThisCycle_[static_cast<size_t>(
+                HierarchyPredicateBlockReason::BARRIER_OUTSTANDING)] = true;
+            barrierOutstandingRejectsByClass_[static_cast<size_t>(
+                packet->writeCompletionClass)]++;
+            barrierOutstandingRejectsByTag_[static_cast<size_t>(
+                classifyBarrierTag(packet->tag))]++;
+            barrierOutstandingRejectsByRawTag_[normalizeBarrierTag(packet->tag)]++;
+        }
+        return false;
+    }
+    const bool bulkWrite = packet->writeCompletionClass == WriteCompletionClass::BULK_DATA;
+    const bool writeBlocked = packet->logicAccumulatorDirect
+                                  ? false
+                                  : bulkWrite ? !hasWriteDataSlot()
+                                       : (!writeDataCountdown.empty() ||
+                                          outgoingDataPacket != nullptr);
+    if (config.HIERARCHY_SOURCE_QUEUES && packet->busPacketType == WRITE && writeBlocked)
+    {
+        if (countRejection)
+        {
+            writeBusBusyRejects_++;
+            hierarchyPredicateRejectedThisCycle_[static_cast<size_t>(
+                HierarchyPredicateBlockReason::WRITE_BUS_BUSY)] = true;
+        }
+        return false;
+    }
+    const bool accepted = (*ranks)[packet->rank]->canAcceptCommand(packet, updateRankState);
+    if (!accepted && countRejection)
+    {
+        rankCommandRejects_++;
+        const bool logicDomain = packet->logicOutputDirect || packet->logicAccumulatorDirect ||
+                                 packet->tag.find("LOGIC_DOMAIN_") != string::npos;
+        if (logicDomain)
+            rankLogicDomainRejects_++;
+        else
+            rankBankDomainRejects_++;
+        switch ((*ranks)[packet->rank]->getLastCommandRejectReason())
+        {
+            case RankCommandRejectReason::MODE_TRANSITION:
+                rankModeTransitionRejects_++;
+                rankModeRejectedThisCycle_ = true;
+                break;
+            case RankCommandRejectReason::LOGIC_QUEUE_BACKPRESSURE:
+                rankLogicQueueRejects_++;
+                rankLogicQueueRejectedThisCycle_ = true;
+                break;
+            case RankCommandRejectReason::BANK_LOCAL_ACCUMULATOR_BACKPRESSURE:
+                break;
+            case RankCommandRejectReason::NONE:
+                break;
+        }
+    }
+    return accepted;
+}
+
+void MemoryController::completeEpochTransaction(const BusPacket* packet)
+{
+    const uint64_t logic_epoch = logicEpoch(packet->tag);
+    if (logic_epoch != UINT64_MAX)
+    {
+        auto it = logicEpochOutstanding_.find(logic_epoch);
+        if (it != logicEpochOutstanding_.end() && --it->second == 0)
+            logicEpochOutstanding_.erase(it);
+        return;
+    }
+    const uint64_t bank_epoch = bankEpoch(packet->tag);
+    auto it = bankEpochOutstanding_.find(bank_epoch);
+    if (bank_epoch != UINT64_MAX && it != bankEpochOutstanding_.end() && --it->second == 0)
+        bankEpochOutstanding_.erase(it);
+}
+
+void MemoryController::completeEpochAndAdvance(const BusPacket* packet)
+{
+    if (!config.HIERARCHY_SOURCE_QUEUES || packet == nullptr) return;
+    completeEpochTransaction(packet);
+    if (packet->tag.find("BAR") == string::npos) return;
+    if (logicEpoch(packet->tag) != UINT64_MAX)
+    {
+        logicEpochBarrierClass_.erase(logicEpochToIssue_);
+        logicEpochBarrierTagClass_.erase(logicEpochToIssue_);
+        logicEpochBarrierRawTag_.erase(logicEpochToIssue_);
+        logicEpochToIssue_++;
+    }
+    else if (bankEpoch(packet->tag) != UINT64_MAX)
+    {
+        bankEpochBarrierClass_.erase(bankEpochToIssue_);
+        bankEpochBarrierTagClass_.erase(bankEpochToIssue_);
+        bankEpochBarrierRawTag_.erase(bankEpochToIssue_);
+        bankEpochToIssue_++;
+    }
 }
 
 void MemoryController::setBankStatesRW(size_t ra, size_t ba, uint64_t RdCycle, uint64_t WrCycle)
@@ -173,12 +440,30 @@ void MemoryController::setBankStates(size_t rank, size_t bank, CurrentBankState 
 
 void MemoryController::updateCommandQueue(BusPacket* poppedBusPacket)
 {
-    if (poppedBusPacket->busPacketType == WRITE)
+    vector<vector<BankState>>& activeStates =
+        isLogicControlPacket(poppedBusPacket) ? logicControlBankStates : bankStates;
+    auto setActiveStatesRW = [&](size_t ra, size_t ba, uint64_t nextRead,
+                                 uint64_t nextWrite) {
+        activeStates[ra][ba].nextRead =
+            max(activeStates[ra][ba].nextRead, currentClockCycle + nextRead);
+        activeStates[ra][ba].nextWrite =
+            max(activeStates[ra][ba].nextWrite, currentClockCycle + nextWrite);
+    };
+    auto setActiveState = [&](size_t ra, size_t ba, CurrentBankState state,
+                              BusPacketType command, uint64_t countdown, uint64_t nextAct) {
+        activeStates[ra][ba].currentBankState = state;
+        activeStates[ra][ba].lastCommand = command;
+        if (countdown != 0) activeStates[ra][ba].stateChangeCountdown = countdown;
+        activeStates[ra][ba].nextActivate = nextAct;
+    };
+    if (poppedBusPacket->busPacketType == WRITE &&
+        !poppedBusPacket->logicAccumulatorDirect)
     {
         writeDataToSend.push_back(new BusPacket(
             DATA, poppedBusPacket->physicalAddress, poppedBusPacket->column, poppedBusPacket->row,
             poppedBusPacket->rank, poppedBusPacket->bank, poppedBusPacket->data, dramsimLog,
             poppedBusPacket->tag));
+        writeDataToSend.back()->writeCompletionClass = poppedBusPacket->writeCompletionClass;
         writeDataCountdown.push_back(config.WL);
     }
 
@@ -190,22 +475,43 @@ void MemoryController::updateCommandQueue(BusPacket* poppedBusPacket)
     const bool is_logic_weight_fill =
         poppedBusPacket->tag.find("LOGIC_WEIGHT_FILL") != std::string::npos;
 
-    switch (poppedBusPacket->busPacketType)
+    const bool directLogicControl = isLogicControlPacket(poppedBusPacket);
+    if (directLogicControl)
+    {
+        if (poppedBusPacket->busPacketType == READ)
+            totalReads++;
+        else if (poppedBusPacket->busPacketType == WRITE)
+        {
+            if (poppedBusPacket->logicAccumulatorDirect)
+                logicAccumulatorDirectTransfers++;
+            else
+                totalWrites++;
+            if (is_logic_weight_fill) logicWeightFillWrites++;
+            if (poppedBusPacket->logicAccumulatorFinal) logicAccumulatorFinalWrites++;
+        }
+        else
+        {
+            ERROR("== Error - Direct logic control frontend received a non-data command");
+            exit(0);
+        }
+    }
+    else switch (poppedBusPacket->busPacketType)
     {
         case READ:
-            bankStates[rank][bank].nextPrecharge = max(currentClockCycle + config.READ_TO_PRE_DELAY,
-                                                       bankStates[rank][bank].nextPrecharge);
-            bankStates[rank][bank].lastCommand = READ;
+            activeStates[rank][bank].nextPrecharge =
+                max(currentClockCycle + config.READ_TO_PRE_DELAY,
+                    activeStates[rank][bank].nextPrecharge);
+            activeStates[rank][bank].lastCommand = READ;
             for (size_t i = 0; i < config.NUM_RANKS; i++)
             {
                 for (size_t j = 0; j < config.NUM_BANKS; j++)
                 {
                     if (i != poppedBusPacket->rank)
                     {
-                        if (bankStates[i][j].currentBankState == RowActive)
+                        if (activeStates[i][j].currentBankState == RowActive)
                         {
-                            setBankStatesRW(i, j, config.BL / 2 + config.tRTRS,
-                                            config.READ_TO_WRITE_DELAY);
+                            setActiveStatesRW(i, j, config.BL / 2 + config.tRTRS,
+                                              config.READ_TO_WRITE_DELAY);
                         }
                     }
                     else
@@ -213,7 +519,7 @@ void MemoryController::updateCommandQueue(BusPacket* poppedBusPacket)
                         uint64_t RdCycle =
                             max((am.isSameBankgroup(j, bank) ? config.tCCDL : config.tCCDS),
                                 config.BL / 2);
-                        setBankStatesRW(i, j, RdCycle, config.READ_TO_WRITE_DELAY);
+                        setActiveStatesRW(i, j, RdCycle, config.READ_TO_WRITE_DELAY);
                     }
                 }
             }
@@ -222,20 +528,20 @@ void MemoryController::updateCommandQueue(BusPacket* poppedBusPacket)
             break;
 
         case WRITE:
-            bankStates[rank][bank].nextPrecharge =
+            activeStates[rank][bank].nextPrecharge =
                 max(currentClockCycle + config.WRITE_TO_PRE_DELAY,
-                    bankStates[rank][bank].nextPrecharge);
-            bankStates[rank][bank].lastCommand = WRITE;
+                    activeStates[rank][bank].nextPrecharge);
+            activeStates[rank][bank].lastCommand = WRITE;
             for (size_t i = 0; i < config.NUM_RANKS; i++)
             {
                 for (size_t j = 0; j < config.NUM_BANKS; j++)
                 {
                     if (i != poppedBusPacket->rank)
                     {
-                        if (bankStates[i][j].currentBankState == RowActive)
+                        if (activeStates[i][j].currentBankState == RowActive)
                         {
-                            setBankStatesRW(i, j, config.WRITE_TO_READ_DELAY_R,
-                                            config.BL / 2 + config.tRTRS);
+                            setActiveStatesRW(i, j, config.WRITE_TO_READ_DELAY_R,
+                                              config.BL / 2 + config.tRTRS);
                         }
                     }
                     else
@@ -243,7 +549,7 @@ void MemoryController::updateCommandQueue(BusPacket* poppedBusPacket)
                         uint64_t WrCycle =
                             max((am.isSameBankgroup(j, bank) ? config.tCCDL : config.tCCDS),
                                 config.BL / 2);
-                        setBankStatesRW(i, j, config.WRITE_TO_READ_DELAY_B_LONG, WrCycle);
+                        setActiveStatesRW(i, j, config.WRITE_TO_READ_DELAY_B_LONG, WrCycle);
                     }
                 }
             }
@@ -254,24 +560,26 @@ void MemoryController::updateCommandQueue(BusPacket* poppedBusPacket)
 
         case ACTIVATE:
             if (is_logic_weight_fill) logicWeightFillActivates++;
-            setBankStates(rank, bank, RowActive, ACTIVATE, 0,
-                          max(currentClockCycle + config.tRC, bankStates[rank][bank].nextActivate));
-            bankStates[rank][bank].openRowAddress = poppedBusPacket->row;
-            bankStates[rank][bank].nextPrecharge =
-                max(currentClockCycle + config.tRAS, bankStates[rank][bank].nextPrecharge);
+            setActiveState(rank, bank, RowActive, ACTIVATE, 0,
+                           max(currentClockCycle + config.tRC,
+                               activeStates[rank][bank].nextActivate));
+            activeStates[rank][bank].openRowAddress = poppedBusPacket->row;
+            activeStates[rank][bank].nextPrecharge =
+                max(currentClockCycle + config.tRAS, activeStates[rank][bank].nextPrecharge);
 
             // if we are using posted-CAS, the next column access can be sooner than normal
             // operation
-            setBankStatesRW(rank, bank, (config.tRCDRD - config.AL), (config.tRCDWR - config.AL));
+            setActiveStatesRW(rank, bank, (config.tRCDRD - config.AL),
+                              (config.tRCDWR - config.AL));
 
             for (size_t i = 0; i < config.NUM_BANKS; i++)
             {
                 if (i != poppedBusPacket->bank)
                 {
-                    bankStates[rank][i].nextActivate =
+                    activeStates[rank][i].nextActivate =
                         max(currentClockCycle +
                                 (am.isSameBankgroup(i, bank) ? config.tRRDL : config.tRRDS),
-                            bankStates[rank][i].nextActivate);
+                            activeStates[rank][i].nextActivate);
                 }
             }
 
@@ -279,15 +587,16 @@ void MemoryController::updateCommandQueue(BusPacket* poppedBusPacket)
 
         case PRECHARGE:
             if (is_logic_weight_fill) logicWeightFillPrecharges++;
-            setBankStates(rank, bank, Precharging, PRECHARGE, config.tRP,
-                          max(currentClockCycle + config.tRP, bankStates[rank][bank].nextActivate));
+            setActiveState(rank, bank, Precharging, PRECHARGE, config.tRP,
+                           max(currentClockCycle + config.tRP,
+                               activeStates[rank][bank].nextActivate));
 
             break;
 
         case REF:
             for (size_t i = 0; i < config.NUM_BANKS; i++)
-                setBankStates(rank, i, Refreshing, REF, config.tRFC,
-                              currentClockCycle + config.tRFC);
+                setActiveState(rank, i, Refreshing, REF, config.tRFC,
+                               currentClockCycle + config.tRFC);
 
             break;
         default:
@@ -316,8 +625,24 @@ void MemoryController::updateCommandQueue(BusPacket* poppedBusPacket)
 void MemoryController::updateTransactionQueue()
 {
     auto am = config.addrMapping;
-    for (size_t i = 0; i < transactionQueue.size(); i++)
+    vector<size_t> transactionOrder;
+    transactionOrder.reserve(transactionQueue.size());
+    if (config.HIERARCHY_SOURCE_QUEUES)
     {
+        for (unsigned pass = 0; pass < 2; pass++)
+            for (size_t i = 0; i < transactionQueue.size(); i++)
+            {
+                const bool logic =
+                    transactionQueue[i]->tag.find("LOGIC_DOMAIN_") != std::string::npos;
+                const bool wanted = pass == 0 ? nextLogicTransaction_ : !nextLogicTransaction_;
+                if (logic == wanted) transactionOrder.push_back(i);
+            }
+    }
+    else
+        for (size_t i = 0; i < transactionQueue.size(); i++) transactionOrder.push_back(i);
+    for (size_t orderIndex = 0; orderIndex < transactionOrder.size(); orderIndex++)
+    {
+        const size_t i = transactionOrder[orderIndex];
         // pop off top transaction from queue assuming simple scheduling at the moment
         // will eventually add policies here
         Transaction* transaction = transactionQueue[i];
@@ -332,7 +657,11 @@ void MemoryController::updateTransactionQueue()
 
         // if we have room, break up the transaction into the appropriate commands
         // and add them to the command queue
-        if (commandQueue.hasRoomFor(1, newTransactionRank, newTransactionBank))
+        CommandQueue& targetQueue =
+            isLogicControlTransaction(transaction, newTransactionRow)
+                ? logicControlCommandQueue
+                : commandQueue;
+        if (targetQueue.hasRoomFor(1, newTransactionRank, newTransactionBank))
         {
             if (DEBUG_ADDR_MAP)
             {
@@ -359,7 +688,15 @@ void MemoryController::updateTransactionQueue()
                                     newTransactionRow, newTransactionRank, newTransactionBank,
                                     transaction->data, dramsimLog);
             command->tag = transaction->tag;
-            commandQueue.enqueue(command);
+            command->writeCompletionClass = transaction->writeCompletionClass;
+            command->logicOutputDirect = transaction->logicOutputDirect;
+            command->logicAccumulatorDirect = transaction->logicAccumulatorDirect;
+            command->logicAccumulatorFinal = transaction->logicAccumulatorFinal;
+            command->logicAccumulatorFlush = transaction->logicAccumulatorFlush;
+            targetQueue.enqueue(command);
+            if (config.HIERARCHY_SOURCE_QUEUES)
+                nextLogicTransaction_ =
+                    transaction->tag.find("LOGIC_DOMAIN_") == std::string::npos;
 
             // If we have a read, save the transaction so when the data comes back
             // in a bus packet, we can staple it back into a transaction and return it
@@ -422,32 +759,33 @@ void MemoryController::printDebugOnUpate()
 
 void MemoryController::updateBankState()
 {
-    for (size_t i = 0; i < config.NUM_RANKS; i++)
-    {
-        for (size_t j = 0; j < config.NUM_BANKS; j++)
+    auto updateStates = [&](vector<vector<BankState>>& states) {
+        for (size_t i = 0; i < config.NUM_RANKS; i++)
         {
-            if (bankStates[i][j].stateChangeCountdown > 0)
+            for (size_t j = 0; j < config.NUM_BANKS; j++)
             {
-                // decrement counters
-                bankStates[i][j].stateChangeCountdown--;
-
-                // if counter has reached 0, change state
-                if (bankStates[i][j].stateChangeCountdown == 0)
+                if (states[i][j].stateChangeCountdown > 0)
                 {
-                    switch (bankStates[i][j].lastCommand)
+                    states[i][j].stateChangeCountdown--;
+                    if (states[i][j].stateChangeCountdown == 0)
                     {
-                        case REF:
-                        case RFCSB:
-                        case PRECHARGE:
-                            bankStates[i][j].currentBankState = Idle;
-                            break;
-                        default:
-                            break;
+                        switch (states[i][j].lastCommand)
+                        {
+                            case REF:
+                            case RFCSB:
+                            case PRECHARGE:
+                                states[i][j].currentBankState = Idle;
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 }
             }
         }
-    }
+    };
+    updateStates(bankStates);
+    updateStates(logicControlBankStates);
 }
 
 void MemoryController::updateRefresh()
@@ -476,7 +814,21 @@ void MemoryController::update()
         cmdCyclesLeft--;
         if (cmdCyclesLeft == 0)  // packet is ready to be received by rank
         {
-            (*ranks)[outgoingCmdPacket->rank]->receiveFromBus(outgoingCmdPacket);
+            const bool directAccumulator = outgoingCmdPacket->logicAccumulatorDirect;
+            const uint64_t completedAddress = outgoingCmdPacket->physicalAddress;
+            const unsigned completedRank = outgoingCmdPacket->rank;
+            if (directAccumulator) completeEpochAndAdvance(outgoingCmdPacket);
+            (*ranks)[completedRank]->receiveFromBus(outgoingCmdPacket);
+            if (directAccumulator)
+            {
+                if (parentMemorySystem->WriteDataDone != NULL)
+                    (*parentMemorySystem->WriteDataDone)(parentMemorySystem->systemID,
+                                                         completedAddress,
+                                                         currentClockCycle);
+                parentMemorySystem->numOnTheFlyTransactions--;
+                totalTransactions++;
+                logicAccumulatorCompletedTransfers++;
+            }
             outgoingCmdPacket = NULL;
         }
     }
@@ -501,6 +853,15 @@ void MemoryController::update()
                                                      currentClockCycle);
             }
             parentMemorySystem->numOnTheFlyTransactions--;
+            if (config.HIERARCHY_SOURCE_QUEUES)
+            {
+                const size_t completionClass =
+                    static_cast<size_t>(outgoingDataPacket->writeCompletionClass);
+                writeDataCompletions_[completionClass]++;
+                if (outgoingDataPacket->tag.find("BAR") != string::npos)
+                    writeBarrierCompletions_[completionClass]++;
+            }
+            completeEpochAndAdvance(outgoingDataPacket);
             (*ranks)[outgoingDataPacket->rank]->receiveFromBus(outgoingDataPacket);
             outgoingDataPacket = NULL;
         }
@@ -547,8 +908,77 @@ void MemoryController::update()
 
     // pass a pointer to a poppedBusPacket
     // function returns true if there is something valid in poppedBusPacket
-    if (commandQueue.pop(&poppedBusPacket))
+    auto popCommand = [this](CommandQueue& queue) {
+        return queue.pop(
+            &poppedBusPacket,
+            [this](BusPacket* packet) {
+                return canIssueHierarchyCommand(packet, true, true);
+            },
+            [this](BusPacket* packet) {
+                return canIssueHierarchyCommand(packet, false, false);
+            });
+    };
+    auto popLogicControl = [this]() {
+        return logicControlCommandQueue.popDirect(
+            &poppedBusPacket, [this](BusPacket* packet) {
+                return canIssueHierarchyCommand(packet, true, true);
+            });
+    };
+    rankModeRejectedThisCycle_ = false;
+    rankLogicQueueRejectedThisCycle_ = false;
+    hierarchyPredicateRejectedThisCycle_.fill(false);
+    hierarchyPredicateBlockedThisCycle_.fill(false);
+    rankModeBlockedThisCycle_ = false;
+    rankLogicQueueBlockedThisCycle_ = false;
+    issuabilityBlockedThisCycle_.fill(false);
+    bankStateTagBlockedThisCycle_.fill(false);
+    bool commandPopped = false;
+    if (config.HIERARCHY_SOURCE_QUEUES && nextLogicControlCommand_)
+        commandPopped = popLogicControl() || popCommand(commandQueue);
+    else
+        commandPopped = popCommand(commandQueue) ||
+                        (config.HIERARCHY_SOURCE_QUEUES &&
+                         popLogicControl());
+    if (!commandPopped)
     {
+        if (rankModeRejectedThisCycle_)
+        {
+            rankModeBlockedControllerCycles_++;
+            rankModeBlockedThisCycle_ = true;
+        }
+        if (rankLogicQueueRejectedThisCycle_)
+        {
+            rankLogicQueueBlockedControllerCycles_++;
+            rankLogicQueueBlockedThisCycle_ = true;
+        }
+        for (size_t reason = 0;
+             reason < static_cast<size_t>(CommandIssuabilityRejectReason::COUNT); reason++)
+        {
+            const auto rejectReason = static_cast<CommandIssuabilityRejectReason>(reason);
+            if (commandQueue.hadIssuabilityRejectThisPop(rejectReason))
+            {
+                issuabilityBlockedControllerCycles_[reason]++;
+                issuabilityBlockedThisCycle_[reason] = true;
+            }
+        }
+        for (size_t reason = 0; reason < hierarchyPredicateBlockReasonCount_; reason++)
+            if (hierarchyPredicateRejectedThisCycle_[reason])
+            {
+                hierarchyPredicateBlockedControllerCycles_[reason]++;
+                hierarchyPredicateBlockedThisCycle_[reason] = true;
+            }
+        for (size_t tagClass = 0; tagClass < commandTagClassCount_; tagClass++)
+            if (commandQueue.hadBankStateTagRejectThisPop(
+                    static_cast<CommandTagClass>(tagClass)))
+                bankStateTagBlockedThisCycle_[tagClass] = true;
+        for (const auto& tag : commandQueue.getBankStateRawTagsRejectedThisPop())
+            bankStateBlockedCyclesByRawTag_[tag]++;
+    }
+    if (commandPopped)
+    {
+        nextLogicControlCommand_ = !isLogicControlPacket(poppedBusPacket);
+        if (poppedBusPacket->busPacketType == READ)
+            completeEpochAndAdvance(poppedBusPacket);
         updateCommandQueue(poppedBusPacket);
     }
 
@@ -562,6 +992,7 @@ void MemoryController::update()
         totalTransactions++;
 
         bool foundMatch = false;
+        bool logicOutputBlocked = false;
         // find the pending read transaction to calculate latency
         for (size_t i = 0; i < pendingReadTransactions.size(); i++)
         {
@@ -572,6 +1003,31 @@ void MemoryController::update()
                                                   row, col);
                 memoryContStats->insertHistogram(
                     currentClockCycle - pendingReadTransactions[i]->timeAdded, rank, bank);
+                if (pendingReadTransactions[i]->logicOutput)
+                {
+                    const Transaction* output = pendingReadTransactions[i];
+                    const LogicDieOutputBuffer::TileId tile{
+                        output->logicOutputLayer, output->logicOutputPosition,
+                        output->logicOutputChannelTile};
+                    if (!parentMemorySystem->logicOutputBuffer->contains(tile) &&
+                        !parentMemorySystem->logicOutputBuffer->reserve(
+                            tile, output->logicOutputExpectedBursts))
+                    {
+                        // Preserve the returned packet until an older tile frees an entry.
+                        parentMemorySystem->logicOutputBuffer->recordFullWallCycle(
+                            currentClockCycle);
+                        logicOutputBlocked = true;
+                        break;
+                    }
+                    if (output->data == nullptr ||
+                        !parentMemorySystem->logicOutputBuffer->write(
+                            tile, output->logicOutputBurst, *output->data))
+                    {
+                        ERROR("Logic-die output completion did not match a reserved tile");
+                        abort();
+                    }
+                    parentMemorySystem->logicOutputBuffer->advance(currentClockCycle);
+                }
                 // FIXME. Is it correct?
                 // memcpy(pendingReadTransactions[i]->data,
                 // returnTransaction[0]->data, config.BL * (JEDEC_DATA_BUS_BITS / 8));
@@ -583,14 +1039,17 @@ void MemoryController::update()
                 break;
             }
         }
-        if (!foundMatch)
+        if (!foundMatch && !logicOutputBlocked)
         {
             ERROR("Can't find a matching transaction for 0x" << hex << returnTransaction[0]->address
                                                              << dec);
             abort();
         }
-        delete returnTransaction[0];
-        returnTransaction.erase(returnTransaction.begin());
+        if (foundMatch)
+        {
+            delete returnTransaction[0];
+            returnTransaction.erase(returnTransaction.begin());
+        }
     }
 
     // decrement refresh counters
@@ -601,6 +1060,7 @@ void MemoryController::update()
     printDebugOnUpate();
 
     commandQueue.step();
+    logicControlCommandQueue.step();
 }
 
 bool MemoryController::WillAcceptTransaction()
@@ -613,6 +1073,35 @@ bool MemoryController::addTransaction(Transaction* trans)
 {
     if (WillAcceptTransaction())
     {
+        if (config.HIERARCHY_SOURCE_QUEUES &&
+            trans->tag.find("LOGIC_DOMAIN_") != std::string::npos)
+        {
+            trans->tag += "LOGIC_SEQ_" + to_string(nextLogicSequenceToAssign_++) +
+                          "_LOGIC_EPOCH_" + to_string(logicEpochToAssign_) + "_";
+            logicEpochOutstanding_[logicEpochToAssign_]++;
+            if (trans->tag.find("BAR") != string::npos)
+            {
+                logicEpochBarrierClass_[logicEpochToAssign_] = trans->writeCompletionClass;
+                logicEpochBarrierTagClass_[logicEpochToAssign_] =
+                    classifyBarrierTag(trans->tag);
+                logicEpochBarrierRawTag_[logicEpochToAssign_] = normalizeBarrierTag(trans->tag);
+                logicEpochToAssign_++;
+            }
+        }
+        else if (config.HIERARCHY_SOURCE_QUEUES)
+        {
+            trans->tag += "BANK_SEQ_" + to_string(nextBankSequenceToAssign_++) +
+                          "_BANK_EPOCH_" + to_string(bankEpochToAssign_) + "_";
+            bankEpochOutstanding_[bankEpochToAssign_]++;
+            if (trans->tag.find("BAR") != string::npos)
+            {
+                bankEpochBarrierClass_[bankEpochToAssign_] = trans->writeCompletionClass;
+                bankEpochBarrierTagClass_[bankEpochToAssign_] =
+                    classifyBarrierTag(trans->tag);
+                bankEpochBarrierRawTag_[bankEpochToAssign_] = normalizeBarrierTag(trans->tag);
+                bankEpochToAssign_++;
+            }
+        }
         parentMemorySystem->numOnTheFlyTransactions++;
         trans->timeAdded = currentClockCycle;
         transactionQueue.push_back(trans);
@@ -654,7 +1143,18 @@ void MemoryController::printStats(bool finalStats)
 
 string MemoryController::getCommandQueueDebugSummary() const
 {
-    return commandQueue.getDebugSummary();
+    return commandQueue.getDebugSummary() + " logic_epoch[" +
+           to_string(logicEpochToIssue_) + "] bank_epoch[" +
+           to_string(bankEpochToIssue_) + "] logic_outstanding[" +
+           to_string(logicEpochOutstanding_.count(logicEpochToIssue_)
+                         ? logicEpochOutstanding_.at(logicEpochToIssue_)
+                         : 0) +
+           "] bank_outstanding[" +
+           to_string(bankEpochOutstanding_.count(bankEpochToIssue_)
+                         ? bankEpochOutstanding_.at(bankEpochToIssue_)
+                         : 0) +
+           "] logic_ctrl" +
+           logicControlCommandQueue.getDebugSummary();
 }
 
 MemoryController::~MemoryController()

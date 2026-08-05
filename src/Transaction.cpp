@@ -47,8 +47,9 @@ Transaction::Transaction(TransactionType transType, uint64_t addr, BurstType* da
 }
 
 Transaction::Transaction(TransactionType transType, uint64_t addr, const std::string& str,
-                         BurstType* dat)
-    : transactionType(transType), address(addr), tag(str), data(dat)
+                         BurstType* dat, WriteCompletionClass completionClass)
+    : transactionType(transType), address(addr), tag(str), data(dat),
+      writeCompletionClass(completionClass)
 {
     rowBufferPolicy = PIMConfiguration::getRowBufferPolicy();
 }
@@ -58,7 +59,19 @@ Transaction::Transaction(const Transaction& t)
       address(t.address),
       data(NULL),
       timeAdded(t.timeAdded),
-      timeReturned(t.timeReturned)
+      timeReturned(t.timeReturned),
+      tag(t.tag),
+      writeCompletionClass(t.writeCompletionClass),
+      logicOutput(t.logicOutput),
+      logicOutputDirect(t.logicOutputDirect),
+      logicAccumulatorDirect(t.logicAccumulatorDirect),
+      logicAccumulatorFinal(t.logicAccumulatorFinal),
+      logicAccumulatorFlush(t.logicAccumulatorFlush),
+      logicOutputLayer(t.logicOutputLayer),
+      logicOutputPosition(t.logicOutputPosition),
+      logicOutputChannelTile(t.logicOutputChannelTile),
+      logicOutputBurst(t.logicOutputBurst),
+      logicOutputExpectedBursts(t.logicOutputExpectedBursts)
 {
     rowBufferPolicy = PIMConfiguration::getRowBufferPolicy();
 #ifndef NO_STORAGE

@@ -31,6 +31,7 @@
 #ifndef MEMORYCONTROLLER_H
 #define MEMORYCONTROLLER_H
 
+#include <array>
 #include <map>
 #include <vector>
 
@@ -48,9 +49,27 @@ using namespace std;
 
 namespace DRAMSim
 {
+enum class HierarchyPredicateBlockReason
+{
+    EPOCH_MISMATCH,
+    BARRIER_OUTSTANDING,
+    WRITE_BUS_BUSY,
+    COUNT
+};
+
 class Rank;
 class MemorySystem;
 class MemoryControllerStats;
+enum class BarrierTagClass : size_t
+{
+    PARK,
+    OPERAND_LOAD,
+    ALU,
+    MAC,
+    OUTPUT,
+    OTHER,
+    COUNT
+};
 class MemoryController : public SimulatorObject
 {
   public:
@@ -68,6 +87,112 @@ class MemoryController : public SimulatorObject
     void resetStats();
     string getCommandQueueDebugSummary() const;
     uint64_t getTotalRefreshes() const { return totalRefreshes; }
+    uint64_t getCommandPredicateRejectCycles() const
+    {
+        return commandQueue.getPredicateRejectCycles();
+    }
+    uint64_t getCommandPredicateHolCycles() const
+    {
+        return commandQueue.getPredicateHolCycles();
+    }
+    uint64_t getCommandPredicateHolCandidates() const
+    {
+        return commandQueue.getPredicateHolCandidates();
+    }
+    uint64_t getCommandPredicateHolMaxCandidates() const
+    {
+        return commandQueue.getPredicateHolMaxCandidates();
+    }
+    uint64_t getCommandPredicateBypassIssues() const
+    {
+        return commandQueue.getPredicateBypassIssues();
+    }
+    uint64_t getIssuabilityRejectAttempts(CommandIssuabilityRejectReason reason) const
+    {
+        return commandQueue.getIssuabilityRejectAttempts(reason);
+    }
+    uint64_t getIssuabilityRejectWallCycles(CommandIssuabilityRejectReason reason) const
+    {
+        return commandQueue.getIssuabilityRejectWallCycles(reason);
+    }
+    uint64_t getIssuabilityBlockedControllerCycles(CommandIssuabilityRejectReason reason) const
+    {
+        return issuabilityBlockedControllerCycles_[static_cast<size_t>(reason)];
+    }
+    bool wasIssuabilityBlockedThisCycle(CommandIssuabilityRejectReason reason) const
+    {
+        return issuabilityBlockedThisCycle_[static_cast<size_t>(reason)];
+    }
+    bool wasRankModeBlockedThisCycle() const { return rankModeBlockedThisCycle_; }
+    bool wasRankLogicQueueBlockedThisCycle() const
+    {
+        return rankLogicQueueBlockedThisCycle_;
+    }
+    bool wasHierarchyPredicateBlockedThisCycle(HierarchyPredicateBlockReason reason) const
+    {
+        return hierarchyPredicateBlockedThisCycle_[static_cast<size_t>(reason)];
+    }
+    uint64_t getHierarchyPredicateBlockedControllerCycles(
+        HierarchyPredicateBlockReason reason) const
+    {
+        return hierarchyPredicateBlockedControllerCycles_[static_cast<size_t>(reason)];
+    }
+    bool wasBankStateTagBlockedThisCycle(CommandTagClass tagClass) const
+    {
+        return bankStateTagBlockedThisCycle_[static_cast<size_t>(tagClass)];
+    }
+    const map<string, uint64_t>& getBankStateBlockedCyclesByRawTag() const
+    {
+        return bankStateBlockedCyclesByRawTag_;
+    }
+    uint64_t getEpochMismatchRejects() const { return epochMismatchRejects_; }
+    uint64_t getBarrierOutstandingRejects() const { return barrierOutstandingRejects_; }
+    uint64_t getWriteBusBusyRejects() const { return writeBusBusyRejects_; }
+    uint64_t getRankCommandRejects() const { return rankCommandRejects_; }
+    uint64_t getRankModeTransitionRejects() const { return rankModeTransitionRejects_; }
+    uint64_t getRankLogicQueueRejects() const { return rankLogicQueueRejects_; }
+    uint64_t getRankBankDomainRejects() const { return rankBankDomainRejects_; }
+    uint64_t getRankLogicDomainRejects() const { return rankLogicDomainRejects_; }
+    uint64_t getRankModeBlockedControllerCycles() const
+    {
+        return rankModeBlockedControllerCycles_;
+    }
+    uint64_t getRankLogicQueueBlockedControllerCycles() const
+    {
+        return rankLogicQueueBlockedControllerCycles_;
+    }
+    uint64_t getWriteDataCompletions(WriteCompletionClass completionClass) const
+    {
+        return writeDataCompletions_[static_cast<size_t>(completionClass)];
+    }
+    uint64_t getWriteBarrierCompletions(WriteCompletionClass completionClass) const
+    {
+        return writeBarrierCompletions_[static_cast<size_t>(completionClass)];
+    }
+    uint64_t getBarrierOutstandingRejects(WriteCompletionClass completionClass) const
+    {
+        return barrierOutstandingRejectsByClass_[static_cast<size_t>(completionClass)];
+    }
+    uint64_t getEpochMismatchRejects(WriteCompletionClass completionClass) const
+    {
+        return epochMismatchRejectsByClass_[static_cast<size_t>(completionClass)];
+    }
+    uint64_t getBarrierOutstandingRejects(BarrierTagClass tagClass) const
+    {
+        return barrierOutstandingRejectsByTag_[static_cast<size_t>(tagClass)];
+    }
+    uint64_t getEpochMismatchRejects(BarrierTagClass tagClass) const
+    {
+        return epochMismatchRejectsByTag_[static_cast<size_t>(tagClass)];
+    }
+    const map<string, uint64_t>& getBarrierOutstandingRejectsByRawTag() const
+    {
+        return barrierOutstandingRejectsByRawTag_;
+    }
+    const map<string, uint64_t>& getEpochMismatchRejectsByRawTag() const
+    {
+        return epochMismatchRejectsByRawTag_;
+    }
     bool WillAcceptTransaction();
     bool addBarrier();
 
@@ -77,6 +202,7 @@ class MemoryController : public SimulatorObject
   private:
     ostream& dramsimLog;
     vector<vector<BankState>> bankStates;
+    vector<vector<BankState>> logicControlBankStates;
 
     // functions
     void insertHistogram(unsigned latencyValue, unsigned rank, unsigned bank);
@@ -84,6 +210,16 @@ class MemoryController : public SimulatorObject
     void updateTransactionQueue();
     void updateBankState();
     void updateRefresh();
+    bool isLogicControlPacket(const BusPacket* packet) const;
+    bool isLogicControlTransaction(const Transaction* transaction, unsigned row) const;
+    uint64_t logicEpoch(const string& tag) const;
+    uint64_t bankEpoch(const string& tag) const;
+    bool canIssueEpochBarrier(const BusPacket* packet) const;
+    bool hasWriteDataSlot() const;
+    bool canIssueHierarchyCommand(BusPacket* packet, bool updateRankState,
+                                  bool countRejection);
+    void completeEpochTransaction(const BusPacket* packet);
+    void completeEpochAndAdvance(const BusPacket* packet);
     void setBankStatesRW(size_t rank, size_t bank, uint64_t nextRead, uint64_t nextWrite);
     void setBankStates(size_t rank, size_t bank, CurrentBankState currentBankState,
                        BusPacketType lastCommand, uint64_t stateChangeCountdown, uint64_t nextAct);
@@ -92,6 +228,7 @@ class MemoryController : public SimulatorObject
     MemorySystem* parentMemorySystem;
 
     CommandQueue commandQueue;
+    CommandQueue logicControlCommandQueue;
     BusPacket* poppedBusPacket;
     vector<BusPacket*> writeDataToSend;
     vector<unsigned> writeDataCountdown;
@@ -116,6 +253,64 @@ class MemoryController : public SimulatorObject
     vector<unsigned> refreshCountdown, refreshCountdownBank;
     Configuration& config;
     MemoryControllerStats* memoryContStats;
+    bool nextLogicTransaction_ = false;
+    bool nextLogicControlCommand_ = false;
+    uint64_t nextLogicSequenceToAssign_ = 0;
+    uint64_t nextBankSequenceToAssign_ = 0;
+    uint64_t logicEpochToAssign_ = 0;
+    uint64_t logicEpochToIssue_ = 0;
+    uint64_t bankEpochToAssign_ = 0;
+    uint64_t bankEpochToIssue_ = 0;
+    map<uint64_t, uint64_t> logicEpochOutstanding_;
+    map<uint64_t, uint64_t> bankEpochOutstanding_;
+    map<uint64_t, WriteCompletionClass> logicEpochBarrierClass_;
+    map<uint64_t, WriteCompletionClass> bankEpochBarrierClass_;
+    map<uint64_t, BarrierTagClass> logicEpochBarrierTagClass_;
+    map<uint64_t, BarrierTagClass> bankEpochBarrierTagClass_;
+    map<uint64_t, string> logicEpochBarrierRawTag_;
+    map<uint64_t, string> bankEpochBarrierRawTag_;
+    uint64_t epochMismatchRejects_ = 0;
+    uint64_t barrierOutstandingRejects_ = 0;
+    uint64_t writeBusBusyRejects_ = 0;
+    uint64_t rankCommandRejects_ = 0;
+    uint64_t rankModeTransitionRejects_ = 0;
+    uint64_t rankLogicQueueRejects_ = 0;
+    uint64_t rankBankDomainRejects_ = 0;
+    uint64_t rankLogicDomainRejects_ = 0;
+    bool rankModeRejectedThisCycle_ = false;
+    bool rankLogicQueueRejectedThisCycle_ = false;
+    uint64_t rankModeBlockedControllerCycles_ = 0;
+    uint64_t rankLogicQueueBlockedControllerCycles_ = 0;
+    bool rankModeBlockedThisCycle_ = false;
+    bool rankLogicQueueBlockedThisCycle_ = false;
+    static constexpr size_t issuabilityRejectReasonCount_ =
+        static_cast<size_t>(CommandIssuabilityRejectReason::COUNT);
+    array<uint64_t, issuabilityRejectReasonCount_> issuabilityBlockedControllerCycles_{};
+    array<bool, issuabilityRejectReasonCount_> issuabilityBlockedThisCycle_{};
+    static constexpr size_t commandTagClassCount_ =
+        static_cast<size_t>(CommandTagClass::COUNT);
+    array<bool, commandTagClassCount_> bankStateTagBlockedThisCycle_{};
+    map<string, uint64_t> bankStateBlockedCyclesByRawTag_;
+    static constexpr size_t hierarchyPredicateBlockReasonCount_ =
+        static_cast<size_t>(HierarchyPredicateBlockReason::COUNT);
+    array<bool, hierarchyPredicateBlockReasonCount_> hierarchyPredicateRejectedThisCycle_{};
+    array<bool, hierarchyPredicateBlockReasonCount_> hierarchyPredicateBlockedThisCycle_{};
+    array<uint64_t, hierarchyPredicateBlockReasonCount_>
+        hierarchyPredicateBlockedControllerCycles_{};
+    static constexpr size_t writeCompletionClassCount_ =
+        static_cast<size_t>(WriteCompletionClass::COUNT);
+    array<uint64_t, writeCompletionClassCount_> writeDataCompletions_{};
+    array<uint64_t, writeCompletionClassCount_> writeBarrierCompletions_{};
+    array<uint64_t, writeCompletionClassCount_> barrierOutstandingRejectsByClass_{};
+    array<uint64_t, writeCompletionClassCount_> epochMismatchRejectsByClass_{};
+    static constexpr size_t barrierTagClassCount_ =
+        static_cast<size_t>(BarrierTagClass::COUNT);
+    array<uint64_t, barrierTagClassCount_> barrierOutstandingRejectsByTag_{};
+    array<uint64_t, barrierTagClassCount_> epochMismatchRejectsByTag_{};
+    static BarrierTagClass classifyBarrierTag(const string& tag);
+    static string normalizeBarrierTag(const string& tag);
+    map<string, uint64_t> barrierOutstandingRejectsByRawTag_;
+    map<string, uint64_t> epochMismatchRejectsByRawTag_;
 
   public:
     // energy values are per rank -- SST uses these directly, so make these public
@@ -129,6 +324,9 @@ class MemoryController : public SimulatorObject
     uint64_t logicWeightFillActivates;
     uint64_t logicWeightFillPrecharges;
     uint64_t logicWeightFillLastCompletionCycle;
+    uint64_t logicAccumulatorDirectTransfers;
+    uint64_t logicAccumulatorCompletedTransfers;
+    uint64_t logicAccumulatorFinalWrites;
 };
 
 class MemoryControllerStats

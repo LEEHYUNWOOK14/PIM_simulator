@@ -64,6 +64,11 @@ class BusPacket
     uint64_t physicalAddress;
     BurstType* data;
     std::string tag;
+    WriteCompletionClass writeCompletionClass = WriteCompletionClass::ORDERED;
+    bool logicOutputDirect = false;
+    bool logicAccumulatorDirect = false;
+    bool logicAccumulatorFinal = false;
+    bool logicAccumulatorFlush = false;
 
     // Functions
     BusPacket(BusPacketType packtype, uint64_t physicalAddr, unsigned col, unsigned rw, unsigned r,

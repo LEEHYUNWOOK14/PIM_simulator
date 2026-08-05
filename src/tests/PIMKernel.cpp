@@ -13,6 +13,8 @@
 #include "tests/PIMKernel.h"
 
 #include <iomanip>
+#include <deque>
+#include <fstream>
 #include <string>
 #include <stdexcept>
 
@@ -60,12 +62,15 @@ void PIMKernel::executeLogicDieStub(const std::string& op_name)
 void PIMKernel::runPIM()
 {
     uint64_t local_cycles = 0;
+    const uint64_t watchdogCycles = getConfigParam(UINT64, "PIM_RUN_WATCHDOG_CYCLES");
+    const uint64_t reportInterval = watchdogCycles == 0 ? 1000000 : min<uint64_t>(10000, watchdogCycles);
     while (mem_->hasPendingTransactions())
     {
         cycle_++;
         local_cycles++;
         mem_->update();
-        if (DEBUG_CMD_TRACE && local_cycles % 1000000 == 0)
+        if ((DEBUG_CMD_TRACE || getConfigParam(BOOL, "HIERARCHY_SOURCE_QUEUES") ||
+             watchdogCycles != 0) && local_cycles % reportInterval == 0)
         {
             cout << "PIM_RUN_STALL cycle[" << cycle_ << "] pending["
                  << mem_->hasPendingTransactions() << "] global_busy_until["
@@ -84,10 +89,16 @@ void PIMKernel::runPIM()
                 if (!rank->readReturnCountdown.empty())
                     cout << "_front[" << rank->readReturnCountdown.front() << "]";
                 cout << "_bus[" << (rank->outgoingDataPacket != nullptr) << "]";
+                cout << "_mode[" << static_cast<int>(rank->mode_) << "]"
+                     << "_logic_mode[" << static_cast<int>(rank->logicMode_) << "]"
+                     << "_mode_ready[" << rank->modeReadyCycle_ << "]"
+                     << "_logic_ready[" << rank->logicModeReadyCycle_ << "]";
                 cout << memory_system->memoryController->getCommandQueueDebugSummary();
             }
             cout << endl;
         }
+        if (watchdogCycles != 0 && local_cycles >= watchdogCycles)
+            throw runtime_error("PIM run watchdog reached while transactions remain pending");
     }
 }
 
@@ -115,6 +126,98 @@ uint64_t PIMKernel::accountHierarchyTransfer(uint64_t bytes, uint64_t bytes_per_
 uint64_t PIMKernel::getHierarchyTransferCount() const { return hierarchyTransferCount_; }
 uint64_t PIMKernel::getHierarchyTransferBytes() const { return hierarchyTransferBytes_; }
 uint64_t PIMKernel::getHierarchyTransferCycles() const { return hierarchyTransferCycles_; }
+uint64_t PIMKernel::getDepthwiseAccumulatorTransferBytes() const
+{
+    return depthwiseAccumulatorTransferBytes_;
+}
+uint64_t PIMKernel::getDepthwiseAccumulatorTransferCycles() const
+{
+    return depthwiseAccumulatorTransferCycles_;
+}
+uint64_t PIMKernel::getDepthwiseAccumulatorOverlapCycles() const
+{
+    return depthwiseAccumulatorOverlapCycles_;
+}
+uint64_t PIMKernel::getDepthwiseAccumulatorWaitCycles() const
+{
+    return depthwiseAccumulatorWaitCycles_;
+}
+uint64_t PIMKernel::getDepthwiseAccumulatorPartialBursts() const
+{
+    return mem_->logicDieAccumulator->partialBursts();
+}
+uint64_t PIMKernel::getDepthwiseAccumulatorFinalBursts() const
+{
+    return mem_->logicDieAccumulator->finalizedBursts();
+}
+uint64_t PIMKernel::getDepthwiseAccumulatorPeakEntries() const
+{
+    return mem_->logicDieAccumulator->peakEntries();
+}
+uint64_t PIMKernel::getBankLocalAccumulatorStalls() const
+{
+    uint64_t total = 0;
+    for (const MemorySystem* channel : mem_->channels)
+        for (const Rank* rank : *channel->ranks)
+            total += rank->pimRank->getBankLocalAccumulatorStalls();
+    return total;
+}
+uint64_t PIMKernel::getBankLocalAccumulatorPeakEntries() const
+{
+    uint64_t peak = 0;
+    for (const MemorySystem* channel : mem_->channels)
+        for (const Rank* rank : *channel->ranks)
+            peak = max(peak, rank->pimRank->getBankLocalAccumulatorPeakEntries());
+    return peak;
+}
+uint64_t PIMKernel::getBankLocalAccumulatorPeakEntriesPerBank() const
+{
+    uint64_t peak = 0;
+    for (const MemorySystem* channel : mem_->channels)
+        for (const Rank* rank : *channel->ranks)
+            peak = max(peak, rank->pimRank->getBankLocalAccumulatorPeakEntriesPerBank());
+    return peak;
+}
+DRAMSim::LogicDieAccumulator::LinkReplayStats PIMKernel::getDepthwiseLinkReplayStats() const
+{
+    return mem_->logicDieAccumulator->replayTwoStageLink(num_pim_chans_, 2);
+}
+void PIMKernel::writeDepthwiseAccumulatorTrace(const std::string& path) const
+{
+    if (path.empty() || path == "none") return;
+    std::ofstream output(path);
+    if (!output) throw std::runtime_error("Unable to open accumulator trace: " + path);
+    output << "sequence,cycle,channel,rank,pim_block,key\n";
+    uint64_t sequence = 0;
+    for (const auto& event : mem_->logicDieAccumulator->arrivalEvents())
+        output << sequence++ << ',' << event.cycle << ',' << event.channel << ',' << event.rank
+               << ',' << event.pimBlock << ',' << event.key << '\n';
+
+    std::ofstream payload(path + ".payload.csv");
+    if (!payload)
+        throw std::runtime_error("Unable to open accumulator payload trace: " + path);
+    payload << "sequence,cycle,channel,rank,pim_block,key,tap_index,tap_count,partial_hex,final_hex\n";
+    sequence = 0;
+    const auto writeBurst = [](std::ostream& stream, const BurstType& burst) {
+        const auto oldFlags = stream.flags();
+        const auto oldFill = stream.fill();
+        stream << std::hex << std::setfill('0');
+        for (int lane = 15; lane >= 0; --lane)
+            stream << std::setw(4) << burst.u16Data_[lane];
+        stream.flags(oldFlags);
+        stream.fill(oldFill);
+    };
+    for (const auto& event : mem_->logicDieAccumulator->arrivalEvents())
+    {
+        payload << sequence++ << ',' << event.cycle << ',' << event.channel << ',' << event.rank
+                << ',' << event.pimBlock << ',' << event.key << ',' << event.tapIndex << ','
+                << mem_->logicDieAccumulator->expectedTaps() << ',';
+        writeBurst(payload, event.partial);
+        payload << ',';
+        writeBurst(payload, mem_->logicDieAccumulator->finalizedResult(event.key));
+        payload << '\n';
+    }
+}
 unsigned PIMKernel::getLastPointwiseActiveChannels() const
 {
     return lastPointwiseActiveChannels_;
@@ -128,6 +231,8 @@ unsigned PIMKernel::getLastPointwiseSpatialGroups() const
     return lastPointwiseSpatialGroups_;
 }
 unsigned PIMKernel::getLastPointwiseBatchWaves() const { return lastPointwiseBatchWaves_; }
+uint64_t PIMKernel::getLogicHabEntries() const { return logicHabEntries_; }
+uint64_t PIMKernel::getLogicHabExits() const { return logicHabExits_; }
 uint64_t PIMKernel::getTotalReads() const
 {
     uint64_t total = 0;
@@ -169,6 +274,420 @@ uint64_t PIMKernel::getGlobalLogicCoalescedCommandCount() const
 uint64_t PIMKernel::getGlobalLogicDispatchOverheadCycles() const
 {
     return mem_->logicDieScheduler->getDispatchOverheadCycles();
+}
+
+void PIMKernel::resetHierarchyActivity()
+{
+    mem_->logicDieScheduler->resetHierarchyActivity();
+}
+
+HierarchyActivityStats PIMKernel::getHierarchyActivityStats() const
+{
+    return mem_->logicDieScheduler->getHierarchyActivityStats();
+}
+uint64_t PIMKernel::getLogicReleaseEpochCount() const
+{
+    return mem_->logicDieScheduler->getReleaseEpochCount();
+}
+uint64_t PIMKernel::getLogicReleaseMaxStreams() const
+{
+    return mem_->logicDieScheduler->getMaxReleaseStreams();
+}
+uint64_t PIMKernel::getLogicReleaseCompleteMasks() const
+{
+    return mem_->logicDieScheduler->getCompletedReadyMasks();
+}
+uint64_t PIMKernel::getLogicReleaseIncompleteMasks() const
+{
+    return mem_->logicDieScheduler->getIncompleteReadyMasks();
+}
+uint64_t PIMKernel::getLogicBroadcastMaskCount() const
+{
+    return mem_->logicDieScheduler->getBroadcastMaskCount();
+}
+uint64_t PIMKernel::getLogicBroadcastFanout() const
+{
+    return mem_->logicDieScheduler->getBroadcastFanout();
+}
+uint64_t PIMKernel::getLogicBroadcastMinFanout() const
+{
+    return mem_->logicDieScheduler->getMinBroadcastFanout();
+}
+uint64_t PIMKernel::getLogicBroadcastMaxFanout() const
+{
+    return mem_->logicDieScheduler->getMaxBroadcastFanout();
+}
+LogicEpochStats PIMKernel::getLogicEpochStats(uint64_t epochId) const
+{
+    return mem_->logicDieScheduler->getEpochStats(epochId);
+}
+uint64_t PIMKernel::getLogicBroadcastQueueStallCycles() const
+{
+    return mem_->logicDieScheduler->getBroadcastQueueStallCycles();
+}
+uint64_t PIMKernel::getLogicBroadcastQueueFullEvents() const
+{
+    return mem_->logicDieScheduler->getBroadcastQueueFullEvents();
+}
+uint64_t PIMKernel::getLogicBroadcastQueueAppliedCycles() const
+{
+    return logicBroadcastQueueAppliedCycles_;
+}
+uint64_t PIMKernel::getLogicBroadcastQueueLastPreStallCycle() const
+{
+    return logicBroadcastQueueLastPreStallCycle_;
+}
+uint64_t PIMKernel::getLogicOnlineIssueStallCycles() const
+{
+    return mem_->logicDieScheduler->getOnlineIssueStallCycles();
+}
+uint64_t PIMKernel::getLogicOnlineIssueBusyOverlapCycles() const
+{
+    return mem_->logicDieScheduler->getOnlineIssueBusyOverlapCycles();
+}
+uint64_t PIMKernel::getLogicBlockedWallCycles() const
+{
+    return mem_->logicDieScheduler->getBlockedWallCycles();
+}
+uint64_t PIMKernel::getLogicBlockedStreamCount() const
+{
+    return mem_->logicDieScheduler->getBlockedStreamCount();
+}
+uint64_t PIMKernel::getLogicMinBlockedCyclesPerStream() const
+{
+    return mem_->logicDieScheduler->getMinBlockedCyclesPerStream();
+}
+uint64_t PIMKernel::getLogicMaxBlockedCyclesPerStream() const
+{
+    return mem_->logicDieScheduler->getMaxBlockedCyclesPerStream();
+}
+uint64_t PIMKernel::getLogicMinIssuedCommandsPerStream() const
+{
+    return mem_->logicDieScheduler->getMinIssuedCommandsPerStream();
+}
+uint64_t PIMKernel::getLogicMaxIssuedCommandsPerStream() const
+{
+    return mem_->logicDieScheduler->getMaxIssuedCommandsPerStream();
+}
+uint64_t PIMKernel::getLogicBlockedStreamMaskLow() const
+{
+    return mem_->logicDieScheduler->getBlockedStreamMaskLow();
+}
+uint64_t PIMKernel::getLogicBlockedStreamMaskHigh() const
+{
+    return mem_->logicDieScheduler->getBlockedStreamMaskHigh();
+}
+uint64_t PIMKernel::getCommandPredicateRejectCycles() const
+{
+    uint64_t total = 0;
+    for (const auto& channel : mem_->channels)
+        total += channel->memoryController->getCommandPredicateRejectCycles();
+    return total;
+}
+uint64_t PIMKernel::getCommandPredicateHolCycles() const
+{
+    uint64_t total = 0;
+    for (const auto& channel : mem_->channels)
+        total += channel->memoryController->getCommandPredicateHolCycles();
+    return total;
+}
+uint64_t PIMKernel::getCommandPredicateHolCandidates() const
+{
+    uint64_t total = 0;
+    for (const auto& channel : mem_->channels)
+        total += channel->memoryController->getCommandPredicateHolCandidates();
+    return total;
+}
+uint64_t PIMKernel::getCommandPredicateHolMaxCandidates() const
+{
+    uint64_t maximum = 0;
+    for (const auto& channel : mem_->channels)
+        maximum = max(maximum,
+                      channel->memoryController->getCommandPredicateHolMaxCandidates());
+    return maximum;
+}
+uint64_t PIMKernel::getCommandPredicateBypassIssues() const
+{
+    uint64_t total = 0;
+    for (const auto& channel : mem_->channels)
+        total += channel->memoryController->getCommandPredicateBypassIssues();
+    return total;
+}
+uint64_t PIMKernel::getIssuabilityRejectAttempts(
+    CommandIssuabilityRejectReason reason) const
+{
+    uint64_t total = 0;
+    for (const auto* channel : mem_->channels)
+        total += channel->memoryController->getIssuabilityRejectAttempts(reason);
+    return total;
+}
+uint64_t PIMKernel::getIssuabilityRejectWallCycles(
+    CommandIssuabilityRejectReason reason) const
+{
+    uint64_t total = 0;
+    for (const auto* channel : mem_->channels)
+        total += channel->memoryController->getIssuabilityRejectWallCycles(reason);
+    return total;
+}
+uint64_t PIMKernel::getIssuabilityBlockedControllerCycles(
+    CommandIssuabilityRejectReason reason) const
+{
+    uint64_t total = 0;
+    for (const auto* channel : mem_->channels)
+        total += channel->memoryController->getIssuabilityBlockedControllerCycles(reason);
+    return total;
+}
+uint64_t PIMKernel::getGlobalAnyBlockedCycles(CommandIssuabilityRejectReason reason) const
+{
+    return mem_->getGlobalAnyBlockedCycles(reason);
+}
+uint64_t PIMKernel::getGlobalAllActiveBlockedCycles(
+    CommandIssuabilityRejectReason reason) const
+{
+    return mem_->getGlobalAllActiveBlockedCycles(reason);
+}
+uint64_t PIMKernel::getGlobalPeakBlockedChannels(
+    CommandIssuabilityRejectReason reason) const
+{
+    return mem_->getGlobalPeakBlockedChannels(reason);
+}
+uint64_t PIMKernel::getGlobalRankModeAnyBlockedCycles() const
+{
+    return mem_->getGlobalRankModeAnyBlockedCycles();
+}
+uint64_t PIMKernel::getGlobalRankModeAllActiveBlockedCycles() const
+{
+    return mem_->getGlobalRankModeAllActiveBlockedCycles();
+}
+uint64_t PIMKernel::getGlobalRankModePeakBlockedChannels() const
+{
+    return mem_->getGlobalRankModePeakBlockedChannels();
+}
+uint64_t PIMKernel::getGlobalPredicateAnyBlockedCycles(
+    HierarchyPredicateBlockReason reason) const
+{
+    return mem_->getGlobalPredicateAnyBlockedCycles(reason);
+}
+uint64_t PIMKernel::getGlobalPredicateAllActiveBlockedCycles(
+    HierarchyPredicateBlockReason reason) const
+{
+    return mem_->getGlobalPredicateAllActiveBlockedCycles(reason);
+}
+uint64_t PIMKernel::getGlobalPredicatePeakBlockedChannels(
+    HierarchyPredicateBlockReason reason) const
+{
+    return mem_->getGlobalPredicatePeakBlockedChannels(reason);
+}
+uint64_t PIMKernel::getGlobalHierarchyUnionAnyBlockedCycles() const
+{
+    return mem_->getGlobalHierarchyUnionAnyBlockedCycles();
+}
+uint64_t PIMKernel::getGlobalHierarchyUnionAllActiveBlockedCycles() const
+{
+    return mem_->getGlobalHierarchyUnionAllActiveBlockedCycles();
+}
+uint64_t PIMKernel::getGlobalHierarchyUnionPeakBlockedChannels() const
+{
+    return mem_->getGlobalHierarchyUnionPeakBlockedChannels();
+}
+uint64_t PIMKernel::getGlobalBankStateAllNoHierarchyCycles() const
+{
+    return mem_->getGlobalBankStateAllNoHierarchyCycles();
+}
+uint64_t PIMKernel::getGlobalBankStateAllWithHierarchyCycles() const
+{
+    return mem_->getGlobalBankStateAllWithHierarchyCycles();
+}
+uint64_t PIMKernel::getGlobalBankStateOnlyCycles() const
+{
+    return mem_->getGlobalBankStateOnlyCycles();
+}
+uint64_t PIMKernel::getGlobalHierarchyAllNoIssuabilityCycles() const
+{
+    return mem_->getGlobalHierarchyAllNoIssuabilityCycles();
+}
+uint64_t PIMKernel::getGlobalBankHierarchyAllIntersectionCycles() const
+{
+    return mem_->getGlobalBankHierarchyAllIntersectionCycles();
+}
+uint64_t PIMKernel::getGlobalBankTagAnyBlockedCycles(CommandTagClass tagClass) const
+{
+    return mem_->getGlobalBankTagAnyBlockedCycles(tagClass);
+}
+uint64_t PIMKernel::getGlobalBankTagAllActiveBlockedCycles(CommandTagClass tagClass) const
+{
+    return mem_->getGlobalBankTagAllActiveBlockedCycles(tagClass);
+}
+uint64_t PIMKernel::getGlobalBankTagPeakBlockedChannels(CommandTagClass tagClass) const
+{
+    return mem_->getGlobalBankTagPeakBlockedChannels(tagClass);
+}
+map<string, uint64_t> PIMKernel::getBankStateBlockedCyclesByRawTag() const
+{
+    map<string, uint64_t> total;
+    for (const auto* channel : mem_->channels)
+        for (const auto& entry :
+             channel->memoryController->getBankStateBlockedCyclesByRawTag())
+            total[entry.first] += entry.second;
+    return total;
+}
+
+uint64_t PIMKernel::getEpochMismatchRejects() const
+{
+    uint64_t total = 0;
+    for (const auto* channel : mem_->channels)
+        total += channel->memoryController->getEpochMismatchRejects();
+    return total;
+}
+
+uint64_t PIMKernel::getBarrierOutstandingRejects() const
+{
+    uint64_t total = 0;
+    for (const auto* channel : mem_->channels)
+        total += channel->memoryController->getBarrierOutstandingRejects();
+    return total;
+}
+
+uint64_t PIMKernel::getWriteBusBusyRejects() const
+{
+    uint64_t total = 0;
+    for (const auto* channel : mem_->channels)
+        total += channel->memoryController->getWriteBusBusyRejects();
+    return total;
+}
+
+uint64_t PIMKernel::getRankCommandRejects() const
+{
+    uint64_t total = 0;
+    for (const auto* channel : mem_->channels)
+        total += channel->memoryController->getRankCommandRejects();
+    return total;
+}
+uint64_t PIMKernel::getRankModeTransitionRejects() const
+{
+    uint64_t total = 0;
+    for (const auto* channel : mem_->channels)
+        total += channel->memoryController->getRankModeTransitionRejects();
+    return total;
+}
+uint64_t PIMKernel::getRankLogicQueueRejects() const
+{
+    uint64_t total = 0;
+    for (const auto* channel : mem_->channels)
+        total += channel->memoryController->getRankLogicQueueRejects();
+    return total;
+}
+uint64_t PIMKernel::getRankBankDomainRejects() const
+{
+    uint64_t total = 0;
+    for (const auto* channel : mem_->channels)
+        total += channel->memoryController->getRankBankDomainRejects();
+    return total;
+}
+uint64_t PIMKernel::getRankLogicDomainRejects() const
+{
+    uint64_t total = 0;
+    for (const auto* channel : mem_->channels)
+        total += channel->memoryController->getRankLogicDomainRejects();
+    return total;
+}
+uint64_t PIMKernel::getRankModeBlockedControllerCycles() const
+{
+    uint64_t total = 0;
+    for (const auto* channel : mem_->channels)
+        total += channel->memoryController->getRankModeBlockedControllerCycles();
+    return total;
+}
+uint64_t PIMKernel::getRankLogicQueueBlockedControllerCycles() const
+{
+    uint64_t total = 0;
+    for (const auto* channel : mem_->channels)
+        total += channel->memoryController->getRankLogicQueueBlockedControllerCycles();
+    return total;
+}
+uint64_t PIMKernel::getWriteDataCompletions(WriteCompletionClass completionClass) const
+{
+    uint64_t total = 0;
+    for (const auto* channel : mem_->channels)
+        total += channel->memoryController->getWriteDataCompletions(completionClass);
+    return total;
+}
+uint64_t PIMKernel::getWriteBarrierCompletions(WriteCompletionClass completionClass) const
+{
+    uint64_t total = 0;
+    for (const auto* channel : mem_->channels)
+        total += channel->memoryController->getWriteBarrierCompletions(completionClass);
+    return total;
+}
+uint64_t PIMKernel::getBarrierOutstandingRejects(
+    WriteCompletionClass completionClass) const
+{
+    uint64_t total = 0;
+    for (const auto* channel : mem_->channels)
+        total += channel->memoryController->getBarrierOutstandingRejects(completionClass);
+    return total;
+}
+uint64_t PIMKernel::getEpochMismatchRejects(WriteCompletionClass completionClass) const
+{
+    uint64_t total = 0;
+    for (const auto* channel : mem_->channels)
+        total += channel->memoryController->getEpochMismatchRejects(completionClass);
+    return total;
+}
+uint64_t PIMKernel::getBarrierOutstandingRejects(BarrierTagClass tagClass) const
+{
+    uint64_t total = 0;
+    for (const auto* channel : mem_->channels)
+        total += channel->memoryController->getBarrierOutstandingRejects(tagClass);
+    return total;
+}
+uint64_t PIMKernel::getEpochMismatchRejects(BarrierTagClass tagClass) const
+{
+    uint64_t total = 0;
+    for (const auto* channel : mem_->channels)
+        total += channel->memoryController->getEpochMismatchRejects(tagClass);
+    return total;
+}
+map<string, uint64_t> PIMKernel::getBarrierOutstandingRejectsByRawTag() const
+{
+    map<string, uint64_t> totals;
+    for (const auto* channel : mem_->channels)
+        for (const auto& entry :
+             channel->memoryController->getBarrierOutstandingRejectsByRawTag())
+            totals[entry.first] += entry.second;
+    return totals;
+}
+map<string, uint64_t> PIMKernel::getEpochMismatchRejectsByRawTag() const
+{
+    map<string, uint64_t> totals;
+    for (const auto* channel : mem_->channels)
+        for (const auto& entry : channel->memoryController->getEpochMismatchRejectsByRawTag())
+            totals[entry.first] += entry.second;
+    return totals;
+}
+uint64_t PIMKernel::getLogicOutputBufferReservations() const
+{
+    return mem_->logicDieOutputBuffer->getReservations();
+}
+uint64_t PIMKernel::getLogicOutputBufferRetirements() const
+{
+    return mem_->logicDieOutputBuffer->getRetirements();
+}
+uint64_t PIMKernel::getLogicOutputBufferFullStalls() const
+{
+    return mem_->logicDieOutputBuffer->getFullStalls();
+}
+uint64_t PIMKernel::getLogicOutputBufferPeakEntries() const
+{
+    return mem_->logicDieOutputBuffer->getPeakEntries();
+}
+uint64_t PIMKernel::getLogicOutputBufferDrainBusyCycles() const
+{
+    return mem_->logicDieOutputBuffer->getDrainBusyCycles();
+}
+uint64_t PIMKernel::getLogicOutputBufferFullWallCycles() const
+{
+    return mem_->logicDieOutputBuffer->getFullWallCycles();
 }
 uint64_t PIMKernel::getBaselineLogicWeightBytes() const { return baselineLogicWeightBytes_; }
 uint64_t PIMKernel::getPhysicalLogicWeightBytes() const { return physicalLogicWeightBytes_; }
@@ -314,7 +833,7 @@ void PIMKernel::parkIn()
                         str = "END_" + str;
                     mem_->addTransaction(
                         false,
-                        pim_addr_mgr_->addrGen(ch_idx, ra_idx, bg_idx, bank_idx, (1 << 13), 0), str,
+                        pim_addr_mgr_->addrGen(ch_idx, ra_idx, bg_idx, bank_idx, (1 << 13), 0), domainTag(str),
                         &null_bst_);
                 }
             }
@@ -340,7 +859,7 @@ void PIMKernel::parkOut()
                         str = "END_" + str;
                     mem_->addTransaction(
                         false,
-                        pim_addr_mgr_->addrGen(ch_idx, ra_idx, bg_idx, bank_idx, (1 << 13), 0), str,
+                        pim_addr_mgr_->addrGen(ch_idx, ra_idx, bg_idx, bank_idx, (1 << 13), 0), domainTag(str),
                         &null_bst_);
                 }
             }
@@ -350,7 +869,8 @@ void PIMKernel::parkOut()
 }
 
 void PIMKernel::addTransactionAll(bool is_write, int bg_idx, int bank_idx, int row, int col,
-                                  const string tag, BurstType* bst, bool use_barrier, int num_loop)
+                                  const string tag, BurstType* bst, bool use_barrier, int num_loop,
+                                  WriteCompletionClass completionClass)
 {
     for (int& ch_idx : pim_chans_)
         for (int& ra_idx : pim_ranks_)
@@ -361,14 +881,22 @@ void PIMKernel::addTransactionAll(bool is_write, int bg_idx, int bank_idx, int r
             {
                 uint64_t addr = pim_addr_mgr_->addrGenSafe(ch_idx, ra_idx, bg_idx, bank_idx,
                                                            local_row, local_col);
-                (tag != "") ? mem_->addTransaction(is_write, addr, tag, bst)
-                            : mem_->addTransaction(is_write, addr, bst);
+                const string tagged = domainTag(tag);
+                (tagged != "") ? mem_->addTransaction(is_write, addr, tagged, bst,
+                                                       completionClass)
+                               : mem_->addTransaction(is_write, addr, bst);
                 local_col++;
             }
         }
 
     if (use_barrier)
         addBarrier();
+}
+
+string PIMKernel::domainTag(const string& tag) const
+{
+    if (!getConfigParam(BOOL, "HIERARCHY_SOURCE_QUEUES")) return tag;
+    return string(logicTransactionDomain_ ? "LOGIC_DOMAIN_" : "BANK_DOMAIN_") + tag;
 }
 
 void PIMKernel::addTransactionAll(bool is_write, int bg_idx, int bank_idx, int row, int col,
@@ -386,28 +914,36 @@ void PIMKernel::changePIMMode(dramMode curMode, dramMode nextMode)
 {
     if (curMode == dramMode::SB && nextMode == dramMode::HAB)
     {
-        addTransactionAll(true, 0, 0, pim_abmr_ra_, 0x1f, "START_SB_TO_HAB_", &null_bst_);
-        addTransactionAll(true, 0, 1, pim_abmr_ra_, 0x1f, &null_bst_);
+        addTransactionAll(true, 0, 0, pim_abmr_ra_, 0x1f, "START_SB_TO_HAB_", &null_bst_, false,
+                          1, WriteCompletionClass::PIM_MODE);
+        addTransactionAll(true, 0, 1, pim_abmr_ra_, 0x1f, "SB_TO_HAB_BANK1", &null_bst_, false, 1,
+                          WriteCompletionClass::PIM_MODE);
         if (num_banks_ >= 2)
         {
-            addTransactionAll(true, 2, 0, pim_abmr_ra_, 0x1f, &null_bst_);
-            addTransactionAll(true, 2, 1, pim_abmr_ra_, 0x1f, "END_SB_TO_HAB_", &null_bst_);
+            addTransactionAll(true, 2, 0, pim_abmr_ra_, 0x1f, "SB_TO_HAB_BANK8", &null_bst_, false, 1,
+                              WriteCompletionClass::PIM_MODE);
+            addTransactionAll(true, 2, 1, pim_abmr_ra_, 0x1f, "END_SB_TO_HAB_", &null_bst_,
+                              false, 1, WriteCompletionClass::PIM_MODE);
         }
     }
     else if (curMode == dramMode::HAB)
     {
         if (nextMode == dramMode::SB)
         {
-            addTransactionAll(true, 0, 0, pim_sbmr_ra_, 0x1f, "START_HAB_TO_SB", &null_bst_);
-            addTransactionAll(true, 0, 1, pim_sbmr_ra_, 0x1f, "END_HAB_TO_SB", &null_bst_);
+            addTransactionAll(true, 0, 0, pim_sbmr_ra_, 0x1f, "START_HAB_TO_SB", &null_bst_,
+                              false, 1, WriteCompletionClass::PIM_MODE);
+            addTransactionAll(true, 0, 1, pim_sbmr_ra_, 0x1f, "END_HAB_TO_SB", &null_bst_, false,
+                              1, WriteCompletionClass::PIM_MODE);
         }
         else if (nextMode == dramMode::HAB_PIM)
         {
-            addTransactionAll(true, 0, 0, pim_reg_ra_, 0x0, "PIM", &bst_hab_pim_);
+            addTransactionAll(true, 0, 0, pim_reg_ra_, 0x0, "PIM", &bst_hab_pim_, false, 1,
+                              WriteCompletionClass::PIM_MODE);
         }
     }
     else if (curMode == dramMode::HAB_PIM && nextMode == dramMode::HAB)
-        addTransactionAll(true, 0, 0, pim_reg_ra_, 0x0, "PIM", &bst_hab_);
+        addTransactionAll(true, 0, 0, pim_reg_ra_, 0x0, "PIM", &bst_hab_, false, 1,
+                          WriteCompletionClass::PIM_MODE);
 
     addBarrier();
 }
@@ -482,8 +1018,9 @@ void PIMKernel::programSrf()
 }
 */
 
-void PIMKernel::programCrf(vector<PIMCmd>& cmds)
+void PIMKernel::programCrf(vector<PIMCmd>& cmds, bool logic_die)
 {
+    crfProgramCalls_++;
     PIMCmd nop_cmd(PIMCmdType::NOP, 0);
     for (int i = 0; i < 4; i++)
     {
@@ -497,7 +1034,9 @@ void PIMKernel::programCrf(vector<PIMCmd>& cmds)
                 break;
             crf_bst_[i].u32Data_[j] = cmds[i * 8 + j].toInt();
         }
-        addTransactionAll(true, 0, 1, pim_reg_ra_, 0x4 + i, "PROGRAM_CRF", &(crf_bst_[i]));
+        addTransactionAll(true, 0, 1, pim_reg_ra_, 0x4 + i,
+                          logic_die ? "PROGRAM_LOGIC_CRF" : "PROGRAM_BANK_CRF",
+                          &(crf_bst_[i]), false, 1, WriteCompletionClass::PIM_CONTROL);
     }
     addBarrier();
 }
@@ -646,7 +1185,8 @@ void PIMKernel::preloadGemv(NumpyBurstType* operand, unsigned starting_row, unsi
                             }
                         }
                         mem_->addTransaction(true, transaction_addr, "LOGIC_WEIGHT_FILL",
-                                             &operand->bData[d_idx]);
+                                              &operand->bData[d_idx],
+                                              WriteCompletionClass::BULK_DATA);
                     }
                 }
                 is_odd ? changeBank(pimBankType::ODD_BANK, ch_idx, ra_idx, bg_idx, bank_idx,
@@ -666,7 +1206,7 @@ void PIMKernel::preloadNoReplacement(NumpyBurstType* operand, unsigned starting_
     for (int x = 0; x < operand->getTotalDim(); x++)
     {
         uint64_t addr = init_addr + x * transaction_size_;
-        mem_->addTransaction(true, addr, &operand->bData[x]);
+        mem_->addTransaction(true, addr, domainTag("PRELOAD_DATA"), &operand->bData[x]);
     }
 }
 /*
@@ -697,8 +1237,11 @@ void PIMKernel::preloadEltwise(NumpyBurstType* operand, pimBankType pb_type,
    }
 }
 */
-void PIMKernel::executeGemv(NumpyBurstType* w_data, NumpyBurstType* i_data, bool is_tree)
+void PIMKernel::executeGemv(NumpyBurstType* w_data, NumpyBurstType* i_data, bool is_tree,
+                            bool program_crf, bool enter_hab, bool exit_hab)
 {
+    const bool previous_domain = logicTransactionDomain_;
+    logicTransactionDomain_ = usesLogicDiePIM() && !is_tree;
     int num_output_tiles = ceil(((double)w_data->bShape[0] / (num_total_pim_blocks_)) / num_grfB_);
     int num_input_tiles = ceil((double)w_data->bShape[1] / (double)num_grfA_);
     int num_batch = i_data->bShape[0];
@@ -737,9 +1280,20 @@ void PIMKernel::executeGemv(NumpyBurstType* w_data, NumpyBurstType* i_data, bool
             PIMCmdGen::getPIMCmds(KernelType::GEMV, 0, num_jump_of_odd_bank, num_jump_of_even_bank);
     }
     setControl(&bst_hab_pim_, true, getToggleCond(), false, true);
-    parkIn();
-    changePIMMode(dramMode::SB, dramMode::HAB);
-    programCrf(pim_cmds);
+    if (enter_hab)
+    {
+        logicHabEntries_++;
+        parkIn();
+        changePIMMode(dramMode::SB, dramMode::HAB);
+    }
+    else
+    {
+        // parkIn() normally provides the cross-channel boundary before a new
+        // GEMV wave. HAB residency removes the parking commands, not that
+        // dependency: every channel must retire the previous wave first.
+        addBarrier();
+    }
+    if (program_crf) programCrf(pim_cmds, true);
 
     for (int j = 0; j < num_output_tiles; j++)
     {
@@ -756,7 +1310,7 @@ void PIMKernel::executeGemv(NumpyBurstType* w_data, NumpyBurstType* i_data, bool
                     computeGemv(i_data, num_input_tiles, num_output_tiles, i, j, b,
                                 (i % 2 == 0) ? pimBankType::EVEN_BANK : pimBankType::ODD_BANK);
                     addTransactionAll(true, 0, 1, 0, col, "GRFB_TO_BANK_", &null_bst_, true,
-                                      num_grf_);
+                                      num_grf_, WriteCompletionClass::PIM_WRITEBACK);
                     addTransactionAll(false, 0, 0, zero_row, 0, "RESET_GRF_B", &null_bst_, true,
                                       num_grfB_);
                 }
@@ -769,13 +1323,19 @@ void PIMKernel::executeGemv(NumpyBurstType* w_data, NumpyBurstType* i_data, bool
                 for (int i = 1; i < num_input_tiles; i += 2)
                     computeGemv(i_data, num_input_tiles, num_output_tiles, i, j, b,
                                 pimBankType::ODD_BANK);
-                addTransactionAll(true, 0, 1, 0, col, "GRFB_TO_BANK_", &null_bst_, true, num_grf_);
+                addTransactionAll(true, 0, 1, 0, col, "GRFB_TO_BANK_", &null_bst_, true,
+                                  num_grf_, WriteCompletionClass::PIM_WRITEBACK);
             }
             changePIMMode(dramMode::HAB_PIM, dramMode::HAB);  // for grfBReset
         }
     }
-    changePIMMode(dramMode::HAB, dramMode::SB);
-    parkOut();
+    if (exit_hab)
+    {
+        logicHabExits_++;
+        changePIMMode(dramMode::HAB, dramMode::SB);
+        parkOut();
+    }
+    logicTransactionDomain_ = previous_domain;
 }
 
 void PIMKernel::computeGemv(NumpyBurstType* data, int num_input_tiles, int num_output_tiles,
@@ -803,7 +1363,7 @@ void PIMKernel::computeGemv(NumpyBurstType* data, int num_input_tiles, int num_o
                          << " input_idx[" << input_idx << "]"
                          << " addr[" << addr << "]" << endl;
                 }
-                mem_->addTransaction(true, addr, str, &data->bData[input_idx]);
+                mem_->addTransaction(true, addr, domainTag(str), &data->bData[input_idx]);
             }
             mem_->addBarrier(pim_chans_[ch_idx]);
         }
@@ -827,7 +1387,8 @@ void PIMKernel::computeGemv(NumpyBurstType* data, int num_input_tiles, int num_o
 }
 
 void PIMKernel::readResult(BurstType* resultBst, pimBankType pb_type, int output_dim,
-                           uint64_t base_addr, unsigned starting_row, unsigned starting_col)
+                           uint64_t base_addr, unsigned starting_row, unsigned starting_col,
+                           uint64_t output_layer, uint64_t output_position)
 {
     int ch_idx = 0;
     int ra_idx = 0;
@@ -857,7 +1418,20 @@ void PIMKernel::readResult(BurstType* resultBst, pimBankType pb_type, int output
         {
             addr = pim_addr_mgr_->addrGenSafe(pim_chans_[ch_idx], ra_idx, bg_idx,
                                               bank_idx + bank_offset, row, col);
-            mem_->addTransaction(false, base_addr + addr, "output", &resultBst[x + grf_idx]);
+            Transaction* transaction = new Transaction(
+                DATA_READ, base_addr + addr, domainTag("output"), &resultBst[x + grf_idx]);
+            if (output_layer != 0 && getConfigParam(BOOL, "LOGIC_OUTPUT_BUFFER_ENABLE"))
+            {
+                transaction->logicOutput = true;
+                transaction->logicOutputDirect = true;
+                transaction->tag = domainTag("LOGIC_OUTPUT_DRAIN");
+                transaction->logicOutputLayer = output_layer;
+                transaction->logicOutputPosition = output_position;
+                transaction->logicOutputChannelTile = 0;
+                transaction->logicOutputBurst = x + grf_idx;
+                transaction->logicOutputExpectedBursts = output_dim;
+            }
+            mem_->addTransaction(transaction);
             col++;
         }
         changeBank(pb_type, ch_idx, ra_idx, bg_idx, bank_idx, starting_row, starting_col, row, col);
@@ -978,6 +1552,21 @@ vector<fp16> PIMKernel::executePointwiseSpatialGroupsAndRead(NumpyBurstType* wei
                                                               NumpyBurstType* input,
                                                               unsigned logical_output_dim)
 {
+    auto handle = enqueuePointwiseSpatialGroups(weights, input, logical_output_dim);
+    waitPointwiseSpatial(handle);
+    return readPointwiseSpatial(handle);
+}
+
+shared_ptr<PointwiseSpatialHandle> PIMKernel::enqueuePointwiseSpatialGroups(
+    NumpyBurstType* weights, NumpyBurstType* input, unsigned logical_output_dim)
+{
+    return enqueuePointwiseSpatialGroupsInternal(weights, input, logical_output_dim, false);
+}
+
+shared_ptr<PointwiseSpatialHandle> PIMKernel::enqueuePointwiseSpatialGroupsInternal(
+    NumpyBurstType* weights, NumpyBurstType* input, unsigned logical_output_dim,
+    bool reuse_shared_weight_layer, vector<bool>* crf_resident_groups)
+{
     if (weights == nullptr || input == nullptr || weights->bShape.size() != 2 ||
         input->bShape.size() != 2 || input->bShape[0] == 0)
         throw invalid_argument("Spatial pointwise adapter expects 2D weights and input");
@@ -986,6 +1575,13 @@ vector<fp16> PIMKernel::executePointwiseSpatialGroupsAndRead(NumpyBurstType* wei
     if (weights->bShape[1] != input->bShape[1] || logical_output_dim == 0 ||
         logical_output_dim > weights->bShape[0])
         throw invalid_argument("Spatial pointwise dimensions are inconsistent");
+    if (pointwiseSpatialOutstanding_)
+        throw logic_error("Only one spatial pointwise handle may be outstanding");
+
+    auto handle = make_shared<PointwiseSpatialHandle>();
+    handle->logicalOutputDim = logical_output_dim;
+    handle->outputLayer = ++outputLayerGeneration_;
+    mem_->logicDieOutputBuffer->beginLayer(handle->outputLayer);
 
     const vector<int> original_channels = pim_chans_;
     const unsigned outputs_per_channel = num_pim_blocks_ * num_pim_ranks_ * num_grfB_;
@@ -996,8 +1592,13 @@ vector<fp16> PIMKernel::executePointwiseSpatialGroupsAndRead(NumpyBurstType* wei
     const unsigned group_count =
         min(static_cast<unsigned>(original_channels.size()) / channels_per_group, batch_size);
     if (group_count == 0) throw invalid_argument("Not enough HBM channels for one spatial group");
+    const unsigned group_capacity =
+        static_cast<unsigned>(original_channels.size()) / channels_per_group;
+    if (crf_resident_groups != nullptr && crf_resident_groups->size() < group_capacity)
+        crf_resident_groups->resize(group_capacity, false);
 
-    NumpyBurstType compact_weights = *weights;
+    NumpyBurstType& compact_weights = handle->compactWeights;
+    compact_weights = *weights;
     compact_weights.shape[0] = compact_output_dim;
     compact_weights.bShape[0] = compact_output_dim;
     compact_weights.bData.resize(static_cast<uint64_t>(compact_output_dim) *
@@ -1008,20 +1609,25 @@ vector<fp16> PIMKernel::executePointwiseSpatialGroupsAndRead(NumpyBurstType* wei
     const bool shared_weight_hit = getConfigParam(BOOL, "LOGIC_SHARED_WEIGHT_BUFFER") &&
                                    getConfigParam(UINT64, "LOGIC_WEIGHT_BUFFER_BYTES") >=
                                        one_weight_copy_bytes;
+    if (reuse_shared_weight_layer &&
+        (!shared_weight_hit || !mem_->logicDieWeightBuffer->isActive()))
+        throw logic_error("Spatial session shared weight layer is no longer resident");
     const uint64_t physical_weight_bytes =
-        shared_weight_hit ? one_weight_copy_bytes : baseline_weight_bytes;
+        shared_weight_hit ? (reuse_shared_weight_layer ? 0 : one_weight_copy_bytes)
+                          : baseline_weight_bytes;
     const uint64_t modeled_weight_bytes = physical_weight_bytes;
     baselineLogicWeightBytes_ += baseline_weight_bytes;
     physicalLogicWeightBytes_ += physical_weight_bytes;
     modeledLogicWeightBytes_ += modeled_weight_bytes;
     savedLogicWeightBytes_ += baseline_weight_bytes - physical_weight_bytes;
-    if (shared_weight_hit)
+    if (shared_weight_hit && !reuse_shared_weight_layer)
         mem_->beginLogicWeightLayer(channels_per_group,
                                     getConfigParam(UINT64, "LOGIC_WEIGHT_BUFFER_BYTES"));
-    else
+    else if (!shared_weight_hit)
         mem_->beginLogicWeightLayer(0, 0);
 
-    vector<NumpyBurstType> position_inputs(batch_size);
+    vector<NumpyBurstType>& position_inputs = handle->positionInputs;
+    position_inputs.resize(batch_size);
     const uint64_t input_bursts = input->bShape[1];
     for (unsigned position = 0; position < batch_size; position++)
     {
@@ -1033,13 +1639,47 @@ vector<fp16> PIMKernel::executePointwiseSpatialGroupsAndRead(NumpyBurstType* wei
 
     const unsigned read_output_dim =
         ((logical_output_dim + num_grf_ - 1) / num_grf_) * num_grf_;
-    vector<vector<BurstType>> physical_output(batch_size,
-                                               vector<BurstType>(read_output_dim));
+    vector<vector<BurstType>>& physical_output = handle->physicalOutput;
+    physical_output.assign(batch_size, vector<BurstType>(read_output_dim));
+    handle->batchSize = batch_size;
     vector<bool> weights_preloaded(group_count, false);
-    bool shared_weights_preloaded = false;
+    vector<bool> hab_resident(group_count, false);
+    bool shared_weights_preloaded = reuse_shared_weight_layer;
+    const bool keep_hab_resident =
+        getConfigParam(BOOL, "LOGIC_HAB_RESIDENCY") &&
+        getConfigParam(BOOL, "LOGIC_OUTPUT_BUFFER_ENABLE");
+
+    const auto begin_release_epoch = [&]() {
+        if (!getConfigParam(BOOL, "LOGIC_EPOCH_RELEASE")) return;
+        // GEMV CRF executes eight auto-repeats across eight GRF lanes per populated
+        // even/odd input-tile pair; an empty odd side still executes one repeat set.
+        const uint64_t input_tiles =
+            (compact_weights.bShape[1] + num_grfA_ - 1) / num_grfA_;
+        const uint64_t even_commands = 64 * ((input_tiles + 1) / 2);
+        const uint64_t odd_commands = input_tiles / 2 == 0 ? 8 : 64 * (input_tiles / 2);
+        const uint64_t commands_per_position = even_commands + odd_commands;
+        vector<pair<uint64_t, uint64_t>> stream_ordinals;
+        for (unsigned expected_group = 0; expected_group < group_count; expected_group++)
+        {
+            const uint64_t positions =
+                (batch_size + group_count - 1 - expected_group) / group_count;
+            for (unsigned local_channel = 0; local_channel < channels_per_group;
+                 local_channel++)
+                for (int rank : pim_ranks_)
+                {
+                    const uint64_t channel =
+                        expected_group * channels_per_group + local_channel;
+                    stream_ordinals.push_back(
+                        {channel * getConfigParam(UINT, "NUM_RANKS") + rank,
+                         positions * commands_per_position});
+                }
+        }
+        mem_->beginLogicReleaseEpoch(stream_ordinals.size(), stream_ordinals);
+    };
 
     try
     {
+        if (reuse_shared_weight_layer) begin_release_epoch();
         for (unsigned position = 0; position < batch_size; position++)
         {
             const unsigned group = position % group_count;
@@ -1066,32 +1706,37 @@ vector<fp16> PIMKernel::executePointwiseSpatialGroupsAndRead(NumpyBurstType* wei
                     logicPostFillGuardCycles_++;
                     mem_->update();
                 }
+                begin_release_epoch();
             }
             else if (!shared_weight_hit && !weights_preloaded[group])
             {
                 preloadGemv(&compact_weights);
                 weights_preloaded[group] = true;
             }
-            executeGemv(&compact_weights, &position_inputs[position], false);
+            const bool program_crf =
+                crf_resident_groups == nullptr || !(*crf_resident_groups)[group];
+            const bool previous_domain = logicTransactionDomain_;
+            logicTransactionDomain_ = true;
+            const bool enter_hab = !keep_hab_resident || !hab_resident[group];
+            const bool last_position_for_group = position + group_count >= batch_size;
+            const bool exit_hab = !keep_hab_resident || last_position_for_group;
+            executeGemv(&compact_weights, &position_inputs[position], false, program_crf,
+                        enter_hab, exit_hab);
+            hab_resident[group] = !exit_hab;
+            if (crf_resident_groups != nullptr) (*crf_resident_groups)[group] = true;
             const unsigned end_col =
                 getResultColGemv(position_inputs[position].bShape[1], compact_output_dim);
             readResult(physical_output[position].data(), pimBankType::ODD_BANK, read_output_dim, 0,
-                       0, end_col);
+                       0, end_col, handle->outputLayer, position);
+            logicTransactionDomain_ = previous_domain;
         }
-        runPIM();
-
-        vector<fp16> logical_output(static_cast<uint64_t>(batch_size) * logical_output_dim);
-        for (unsigned position = 0; position < batch_size; position++)
-            for (unsigned output = 0; output < logical_output_dim; output++)
-                logical_output[static_cast<uint64_t>(position) * logical_output_dim + output] =
-                    physical_output[position][output].fp16ReduceSum();
-
         lastPointwiseActiveChannels_ = channels_per_group;
         lastPointwisePhysicalOutputDim_ = compact_output_dim;
         lastPointwiseSpatialGroups_ = group_count;
         lastPointwiseBatchWaves_ = (batch_size + group_count - 1) / group_count;
         setActivePimChannelList(original_channels);
-        return logical_output;
+        pointwiseSpatialOutstanding_ = true;
+        return handle;
     }
     catch (...)
     {
@@ -1100,31 +1745,430 @@ vector<fp16> PIMKernel::executePointwiseSpatialGroupsAndRead(NumpyBurstType* wei
     }
 }
 
+void PIMKernel::waitPointwiseSpatial(const shared_ptr<PointwiseSpatialHandle>& handle)
+{
+    if (!pointwiseSpatialOutstanding_ || handle == nullptr || handle->consumed)
+        throw logic_error("Invalid spatial pointwise handle");
+    if (handle->waited) return;
+    runPIM();
+
+    if (getConfigParam(BOOL, "LOGIC_EPOCH_RELEASE") &&
+        !getConfigParam(BOOL, "LOGIC_ONLINE_QUEUE_BACKPRESSURE"))
+    {
+        const auto backpressure = mem_->logicDieScheduler->applyBroadcastQueueDepth(
+            getConfigParam(UINT, "LOGIC_BROADCAST_QUEUE_DEPTH"));
+        logicBroadcastQueueLastPreStallCycle_ = cycle_;
+        for (uint64_t stall = 0; stall < backpressure.stallCycles; stall++)
+        {
+            cycle_++;
+            logicBroadcastQueueAppliedCycles_++;
+            mem_->update();
+        }
+    }
+    handle->waited = true;
+}
+
+vector<fp16> PIMKernel::readPointwiseSpatial(
+    const shared_ptr<PointwiseSpatialHandle>& handle)
+{
+    if (!pointwiseSpatialOutstanding_ || handle == nullptr || handle->consumed)
+        throw logic_error("Invalid spatial pointwise handle");
+    if (!handle->waited) throw logic_error("Spatial pointwise handle must be waited before read");
+
+    vector<fp16> logical_output(
+        static_cast<uint64_t>(handle->batchSize) * handle->logicalOutputDim);
+    if (!getConfigParam(BOOL, "LOGIC_OUTPUT_BUFFER_ENABLE"))
+    {
+        deque<unsigned> pending_positions;
+        const auto drain_tile = [&](unsigned position) {
+            const LogicDieOutputBuffer::TileId tile{handle->outputLayer, position, 0};
+            for (unsigned output = 0; output < handle->logicalOutputDim; output++)
+            {
+                BurstType buffered;
+                if (!mem_->logicDieOutputBuffer->read(tile, output, buffered))
+                    throw logic_error("Logic-die output buffer tile was not ready");
+                logical_output[static_cast<uint64_t>(position) * handle->logicalOutputDim +
+                               output] = buffered.fp16ReduceSum();
+            }
+            if (!mem_->logicDieOutputBuffer->retire(tile))
+                throw logic_error("Logic-die output buffer retirement order was violated");
+        };
+        for (unsigned position = 0; position < handle->batchSize; position++)
+        {
+            const LogicDieOutputBuffer::TileId tile{handle->outputLayer, position, 0};
+            if (!mem_->logicDieOutputBuffer->reserve(
+                    tile, handle->physicalOutput[position].size()))
+            {
+                if (!mem_->logicDieOutputBuffer->full() || pending_positions.empty())
+                    throw logic_error("Logic-die output buffer rejected a valid tile");
+                drain_tile(pending_positions.front());
+                pending_positions.pop_front();
+                if (!mem_->logicDieOutputBuffer->reserve(
+                        tile, handle->physicalOutput[position].size()))
+                    throw logic_error("Logic-die output buffer retry failed after retirement");
+            }
+            for (size_t burst = 0; burst < handle->physicalOutput[position].size(); burst++)
+                if (!mem_->logicDieOutputBuffer->write(
+                        tile, burst, handle->physicalOutput[position][burst]))
+                    throw logic_error("Logic-die output buffer rejected a completed burst");
+            pending_positions.push_back(position);
+        }
+        while (!pending_positions.empty())
+        {
+            drain_tile(pending_positions.front());
+            pending_positions.pop_front();
+        }
+        handle->consumed = true;
+        pointwiseSpatialOutstanding_ = false;
+        return logical_output;
+    }
+
+    for (unsigned position = 0; position < handle->batchSize; position++)
+    {
+        const LogicDieOutputBuffer::TileId tile{handle->outputLayer, position, 0};
+        for (unsigned output = 0; output < handle->logicalOutputDim; output++)
+        {
+            BurstType buffered;
+            if (!mem_->logicDieOutputBuffer->readCommitted(tile, output, buffered))
+                throw logic_error("Logic-die output tile was not committed by READ completion");
+            logical_output[static_cast<uint64_t>(position) * handle->logicalOutputDim + output] =
+                buffered.fp16ReduceSum();
+        }
+        if (!mem_->logicDieOutputBuffer->releaseCommitted(tile))
+            throw logic_error("Logic-die output committed tile release failed");
+    }
+    handle->consumed = true;
+    pointwiseSpatialOutstanding_ = false;
+    return logical_output;
+}
+
+shared_ptr<PointwiseSpatialSession> PIMKernel::beginPointwiseSpatialSession(
+    NumpyBurstType* weights, NumpyBurstType* input, unsigned height, unsigned width,
+    unsigned logical_output_dim)
+{
+    if (weights == nullptr || input == nullptr || height == 0 || width == 0 ||
+        input->bShape.size() != 2 || input->bShape[0] != height * width ||
+        logical_output_dim == 0)
+        throw invalid_argument("Invalid spatial pointwise session dimensions");
+    auto session = make_shared<PointwiseSpatialSession>();
+    session->weights = *weights;
+    session->input = *input;
+    session->height = height;
+    session->width = width;
+    session->logicalOutputDim = logical_output_dim;
+    session->output.resize(static_cast<uint64_t>(height) * width * logical_output_dim);
+    return session;
+}
+
+void PIMKernel::enqueuePointwiseRows(const shared_ptr<PointwiseSpatialSession>& session,
+                                     unsigned row_start, unsigned row_count)
+{
+    if (session != nullptr && session->activeHandle != nullptr)
+        throw logic_error("Previous spatial pointwise row range is still active");
+    if (session == nullptr || row_count == 0 || row_start != session->nextRow ||
+        row_start + row_count > session->height)
+        throw invalid_argument("Spatial pointwise rows must be nonempty and contiguous");
+
+    const uint64_t positions = static_cast<uint64_t>(row_count) * session->width;
+    const uint64_t firstPosition = static_cast<uint64_t>(row_start) * session->width;
+    const uint64_t burstsPerPosition = session->input.bShape[1];
+    NumpyBurstType rowInput;
+    rowInput.shape = {static_cast<unsigned long>(positions), session->input.shape[1]};
+    rowInput.bShape = {static_cast<unsigned long>(positions), session->input.bShape[1]};
+    const auto begin = session->input.bData.begin() + firstPosition * burstsPerPosition;
+    rowInput.bData.assign(begin, begin + positions * burstsPerPosition);
+    if (session->weightResident &&
+        session->weightLayerGeneration !=
+            mem_->logicDieWeightBuffer->getLayerGeneration())
+        throw logic_error("Spatial session weight layer was replaced by another operation");
+    const uint64_t fill_before = mem_->logicDieWeightBuffer->getFillBursts();
+    const uint64_t crf_before = crfProgramCalls_;
+    const bool reused = session->weightResident;
+    session->activeHandle = enqueuePointwiseSpatialGroupsInternal(
+        &session->weights, &rowInput, session->logicalOutputDim, reused,
+        &session->logicCrfResidentGroups);
+    const uint64_t fill_after = mem_->logicDieWeightBuffer->getFillBursts();
+    const uint64_t crf_after = crfProgramCalls_;
+    session->weightFillBursts += fill_after - fill_before;
+    session->crfProgramCalls += crf_after - crf_before;
+    if (reused)
+    {
+        session->reusedRowRanges++;
+        session->reusedWeightFillBursts += fill_after - fill_before;
+        session->reusedCrfProgramCalls += crf_after - crf_before;
+    }
+    session->weightResident = mem_->logicDieWeightBuffer->isActive();
+    session->weightLayerGeneration = mem_->logicDieWeightBuffer->getLayerGeneration();
+    session->activeRowStart = row_start;
+    session->activeRowCount = row_count;
+}
+
+void PIMKernel::waitPointwiseRows(const shared_ptr<PointwiseSpatialSession>& session)
+{
+    if (session == nullptr || session->activeHandle == nullptr)
+        throw logic_error("No active spatial pointwise row range");
+    waitPointwiseSpatial(session->activeHandle);
+}
+
+vector<fp16> PIMKernel::readPointwiseRows(
+    const shared_ptr<PointwiseSpatialSession>& session)
+{
+    if (session == nullptr || session->activeHandle == nullptr)
+        throw logic_error("No active spatial pointwise row range");
+    vector<fp16> rows = readPointwiseSpatial(session->activeHandle);
+    const uint64_t destination =
+        static_cast<uint64_t>(session->activeRowStart) * session->width *
+        session->logicalOutputDim;
+    copy(rows.begin(), rows.end(), session->output.begin() + destination);
+    session->nextRow += session->activeRowCount;
+    session->activeRowStart = 0;
+    session->activeRowCount = 0;
+    session->activeHandle.reset();
+    return rows;
+}
+
 void PIMKernel::executeDepthwiseLowered(int dim, unsigned kernel_size, int input_base_row,
                                         int weight_base_row, int product_row,
                                         int accumulator_row, int result_row, int tap_row_stride)
 {
-    if (kernel_size == 0 || kernel_size % 2 == 0)
-        throw invalid_argument("Depthwise kernel size must be a positive odd number");
-
-    const unsigned taps = kernel_size * kernel_size;
-    for (unsigned tap = 0; tap < taps; tap++)
+    if (getConfigParam(BOOL, "LOGIC_DEPTHWISE_ACCUMULATION"))
     {
-        int input_row = input_base_row + tap * tap_row_stride;
-        int weight_row = weight_base_row + tap * tap_row_stride;
-        int tap_product_row = (tap == 0) ? result_row : product_row;
+        if (!usesBankSidePIM() || !usesLogicDiePIM())
+            throw logic_error("Hierarchical depthwise accumulation requires hybrid PIM");
+        executeDepthwiseHierarchical(dim, kernel_size, input_base_row, weight_base_row,
+                                     result_row, tap_row_stride);
+        return;
+    }
+    auto handle = beginDepthwiseLowered(dim, kernel_size, input_base_row, weight_base_row,
+                                        product_row, accumulator_row, result_row,
+                                        tap_row_stride);
+    while (!handle->complete)
+    {
+        enqueueDepthwiseStage(handle);
+        waitDepthwiseStage(handle);
+    }
+}
 
-        executeEltwise(dim, pimBankType::ALL_BANK, KernelType::MUL, input_row, tap_product_row,
-                       weight_row);
-        runPIM();
-        if (tap > 0)
+void PIMKernel::advanceDepthwiseAccumulatorTransfer(uint64_t bytes,
+                                                     uint64_t overlap_window)
+{
+    depthwiseAccumulatorTransferBytes_ += bytes;
+    const uint64_t bandwidth = getConfigParam(UINT, "LOGIC_ACCUMULATOR_BW");
+    const uint64_t transferCycles = bandwidth == 0 ? 0 : (bytes + bandwidth - 1) / bandwidth;
+    const uint64_t latency = getConfigParam(UINT, "LOGIC_ACCUMULATOR_LATENCY");
+    const uint64_t pipelines = getConfigParam(UINT, "LOGIC_ACCUMULATOR_PIPELINES");
+    uint64_t cycles = transferCycles + latency;
+    if (pipelines != 0 && bytes != 0)
+    {
+        const uint64_t bursts = (bytes + sizeof(BurstType) - 1) / sizeof(BurstType);
+        const uint64_t serviceCycles = (bursts + pipelines - 1) / pipelines;
+        const uint64_t computeCycles = latency + serviceCycles - 1;
+        cycles = max(transferCycles, computeCycles);
+    }
+    depthwiseAccumulatorTransferCycles_ += cycles;
+    const uint64_t overlap = getConfigParam(BOOL, "LOGIC_ACCUMULATOR_OVERLAP")
+                                 ? min(cycles, overlap_window)
+                                 : 0;
+    const uint64_t waitCycles = cycles - overlap;
+    depthwiseAccumulatorOverlapCycles_ += overlap;
+    depthwiseAccumulatorWaitCycles_ += waitCycles;
+    for (uint64_t i = 0; i < waitCycles; i++)
+    {
+        cycle_++;
+        mem_->update();
+    }
+}
+
+void PIMKernel::addDepthwiseAccumulatorTransactions(int row, int col, int bank, bool final,
+                                                     bool flush, int num_loop)
+{
+    for (int& ch_idx : pim_chans_)
+        for (int& ra_idx : pim_ranks_)
         {
-            int source_accumulator = (tap % 2 == 1) ? result_row : accumulator_row;
-            int destination_accumulator = (tap % 2 == 1) ? accumulator_row : result_row;
-            executeEltwise(dim, pimBankType::ALL_BANK, KernelType::ADD, source_accumulator,
-                           destination_accumulator, product_row);
-            runPIM();
+            unsigned localRow = row;
+            unsigned localCol = col;
+            for (int i = 0; i < num_loop; i++)
+            {
+                const uint64_t address = pim_addr_mgr_->addrGenSafe(
+                    ch_idx, ra_idx, 0, bank, localRow, localCol);
+                BurstType* payload = &null_bst_;
+                if (final)
+                {
+                    depthwiseAccumulatorWritePayloads_.emplace_back();
+                    payload = &depthwiseAccumulatorWritePayloads_.back();
+                }
+                Transaction* transaction = new Transaction(
+                    DATA_WRITE, address,
+                    domainTag(final ? "LOGIC_ACCUM_TO_BANK" : "BANK_TO_LOGIC_ACCUM"),
+                    payload, WriteCompletionClass::PIM_WRITEBACK);
+                transaction->logicAccumulatorDirect = !final;
+                transaction->logicAccumulatorFinal = final;
+                transaction->logicAccumulatorFlush = flush;
+                mem_->addTransaction(transaction);
+                localCol++;
+            }
         }
+    addBarrier();
+}
+
+void PIMKernel::computeMulToAccumulator(int tile_start, int tile_count, int input_row,
+                                        int weight_row,
+                                        int result_row, bool flush_partial, bool final_tap)
+{
+    for (int tile = tile_start; tile < tile_start + tile_count; tile++)
+    {
+        const int column = num_grf_ * tile;
+        for (int bank = 0; bank < 2; bank++)
+        {
+            addTransactionAll(false, 0, bank, input_row, column, "BANK_TO_GRF_",
+                              &null_bst_, true, num_grf_);
+            addTransactionAll(false, 0, bank, weight_row, column, "MUL_ACCUM",
+                              &null_bst_, true, num_grf_);
+            addDepthwiseAccumulatorTransactions(result_row, column, bank, false,
+                                                flush_partial, num_grf_);
+        }
+        if (final_tap)
+            for (int bank = 0; bank < 2; bank++)
+                addDepthwiseAccumulatorTransactions(result_row, column, bank, true,
+                                                    false, num_grf_);
+    }
+}
+
+void PIMKernel::executeDepthwiseHierarchical(int dim, unsigned kernel_size,
+                                              int input_base_row, int weight_base_row,
+                                              int result_row, int tap_row_stride)
+{
+    if (dim <= 0 || kernel_size == 0 || kernel_size % 2 == 0 || tap_row_stride <= 0)
+        throw invalid_argument("Hierarchical depthwise dimensions must be positive with odd kernel");
+    if (!getConfigParam(BOOL, "HIERARCHY_SOURCE_QUEUES"))
+        throw logic_error("Hierarchical depthwise accumulation requires source queues");
+    const unsigned taps = kernel_size * kernel_size;
+    const unsigned aggregationTaps =
+        getConfigParam(UINT, "BANK_LOCAL_AGGREGATION_TAPS");
+    if (aggregationTaps == 0 || taps % aggregationTaps != 0)
+        throw invalid_argument(
+            "BANK_LOCAL_AGGREGATION_TAPS must be a nonzero divisor of depthwise taps");
+    depthwiseAccumulatorWritePayloads_.clear();
+    mem_->beginLogicDepthwiseAccumulation(
+        taps / aggregationTaps, getConfigParam(UINT, "LOGIC_ACCUMULATOR_ENTRIES"));
+    const int numTile = dim / (num_banks_ * num_pim_chans_ * num_pim_ranks_ * num_grf_);
+    if (numTile <= 0) throw invalid_argument("Hierarchical depthwise requires at least one tile");
+    const unsigned configuredBatch =
+        getConfigParam(UINT, "BANK_LOCAL_ACCUMULATOR_TILE_BATCH");
+    const int tileBatch = configuredBatch == 0
+                              ? numTile
+                              : min<int>(static_cast<int>(configuredBatch), numTile);
+    const int burstsPerTile =
+        num_banks_ * num_pim_chans_ * num_pim_ranks_ * num_grf_;
+
+    for (int tileStart = 0; tileStart < numTile; tileStart += tileBatch)
+    {
+        const int batchCount = min(tileBatch, numTile - tileStart);
+        const int jumps = batchCount - 1;
+        vector<PIMCmd> commands = PIMCmdGen::getPIMCmds(KernelType::MUL, jumps, 0, 0);
+        for (unsigned tap = 0; tap < taps; tap++)
+        {
+            const uint64_t tapStartCycle = cycle_;
+            setControl(&bst_hab_pim_, true, getToggleCond(pimBankType::ALL_BANK), false,
+                       false);
+            setControl(&bst_hab_, false, getToggleCond(pimBankType::ALL_BANK), false, false);
+            parkIn();
+            changePIMMode(dramMode::SB, dramMode::HAB);
+            programCrf(commands);
+            changePIMMode(dramMode::HAB, dramMode::HAB_PIM);
+            const bool flushPartial = (tap + 1) % aggregationTaps == 0;
+            computeMulToAccumulator(tileStart, batchCount,
+                                    input_base_row + tap * tap_row_stride,
+                                    weight_base_row + tap * tap_row_stride, result_row,
+                                    flushPartial, tap + 1 == taps);
+            changePIMMode(dramMode::HAB_PIM, dramMode::HAB);
+            changePIMMode(dramMode::HAB, dramMode::SB);
+            parkOut();
+            runPIM();
+            if (flushPartial)
+                advanceDepthwiseAccumulatorTransfer(
+                    static_cast<uint64_t>(batchCount) * burstsPerTile * transaction_size_,
+                    cycle_ - tapStartCycle);
+        }
+    }
+
+    if (!mem_->logicDieAccumulator->empty())
+        throw logic_error(
+            "Hierarchical depthwise left accumulator entries pending: entries=" +
+            to_string(mem_->logicDieAccumulator->size()) +
+            " partial=" + to_string(mem_->logicDieAccumulator->partialBursts()) +
+            " final=" + to_string(mem_->logicDieAccumulator->finalizedBursts()));
+}
+
+shared_ptr<DepthwiseLoweredHandle> PIMKernel::beginDepthwiseLowered(
+    int dim, unsigned kernel_size, int input_base_row, int weight_base_row, int product_row,
+    int accumulator_row, int result_row, int tap_row_stride)
+{
+    if (dim <= 0 || kernel_size == 0 || kernel_size % 2 == 0 || tap_row_stride <= 0)
+        throw invalid_argument("Depthwise lowered dimensions must be positive with odd kernel");
+    if (depthwiseLoweredOutstanding_)
+        throw logic_error("Only one lowered depthwise handle may be outstanding");
+    auto handle = make_shared<DepthwiseLoweredHandle>();
+    handle->dim = dim;
+    handle->kernelSize = kernel_size;
+    handle->inputBaseRow = input_base_row;
+    handle->weightBaseRow = weight_base_row;
+    handle->productRow = product_row;
+    handle->accumulatorRow = accumulator_row;
+    handle->resultRow = result_row;
+    handle->tapRowStride = tap_row_stride;
+    const unsigned taps = kernel_size * kernel_size;
+    handle->totalStages = 2 * taps - 1;
+    depthwiseLoweredOutstanding_ = true;
+    return handle;
+}
+
+void PIMKernel::enqueueDepthwiseStage(const shared_ptr<DepthwiseLoweredHandle>& handle)
+{
+    if (!depthwiseLoweredOutstanding_ || handle == nullptr || handle->complete)
+        throw logic_error("Invalid lowered depthwise handle");
+    if (handle->stagePending)
+        throw logic_error("Previous lowered depthwise stage is still pending");
+
+    unsigned tap = 0;
+    bool is_add = false;
+    if (handle->nextStage > 0)
+    {
+        const unsigned stage = handle->nextStage - 1;
+        tap = 1 + stage / 2;
+        is_add = stage % 2 == 1;
+    }
+    if (!is_add)
+    {
+        const int tap_product_row = tap == 0 ? handle->resultRow : handle->productRow;
+        executeEltwise(handle->dim, pimBankType::ALL_BANK, KernelType::MUL,
+                       handle->inputBaseRow + tap * handle->tapRowStride, tap_product_row,
+                       handle->weightBaseRow + tap * handle->tapRowStride);
+    }
+    else
+    {
+        const int source_accumulator = tap % 2 == 1 ? handle->resultRow
+                                                     : handle->accumulatorRow;
+        const int destination_accumulator = tap % 2 == 1 ? handle->accumulatorRow
+                                                          : handle->resultRow;
+        executeEltwise(handle->dim, pimBankType::ALL_BANK, KernelType::ADD,
+                       source_accumulator, destination_accumulator, handle->productRow);
+    }
+    handle->stagePending = true;
+}
+
+void PIMKernel::waitDepthwiseStage(const shared_ptr<DepthwiseLoweredHandle>& handle)
+{
+    if (!depthwiseLoweredOutstanding_ || handle == nullptr || handle->complete ||
+        !handle->stagePending)
+        throw logic_error("No pending lowered depthwise stage");
+    runPIM();
+    handle->stagePending = false;
+    handle->nextStage++;
+    if (handle->nextStage == handle->totalStages)
+    {
+        handle->complete = true;
+        depthwiseLoweredOutstanding_ = false;
     }
 }
 
@@ -1138,7 +2182,8 @@ void PIMKernel::computeAddOrMul(int num_tile, int input0_row, int result_row, in
             addTransactionAll(false, 0, b, input0_row, c, "BANK_TO_GRF_", &null_bst_, true,
                               num_grf_);
             addTransactionAll(false, 0, b, input1_row, c, "ADD", &null_bst_, true, num_grf_);
-            addTransactionAll(true, 0, b, result_row, c, "GRF_TO_BANK", &null_bst_, true, num_grf_);
+            addTransactionAll(true, 0, b, result_row, c, "GRF_TO_BANK", &null_bst_, true,
+                              num_grf_, WriteCompletionClass::PIM_WRITEBACK);
         }
     }
 }
@@ -1168,7 +2213,7 @@ void PIMKernel::computeBn(int num_tile, int input0_row, int result_row)
             addTransactionAll(false, 0, b, input0_row, num_grf_ * i, "MAD2", &null_bst_,
                               true, num_grf_);
             addTransactionAll(true , 0, b, result_row, num_grf_ * i, "GRF_TO_BANK", &null_bst_,
-                              true, num_grf_);
+                              true, num_grf_, WriteCompletionClass::PIM_WRITEBACK);
         }
     }
 }
@@ -1181,10 +2226,10 @@ void PIMKernel::computeRelu(int num_tile, int input0_row, int result_row)
         int c = num_grf_ * i;
         addTransactionAll(false, 0, 0, input0_row, c, "FILL&ReLU", &null_bst_, true, num_grf_);
         addTransactionAll(true, 0, 0, result_row, c, "GRF_A_TO_EVEN_BANK", &null_bst_, true,
-                          num_grf_);
+                          num_grf_, WriteCompletionClass::PIM_WRITEBACK);
         addTransactionAll(false, 0, 1, input0_row, c, "FILL&ReLU", &null_bst_, true, num_grf_);
         addTransactionAll(true, 0, 1, result_row, c, "GRF_B_TO_ODD_BANK", &null_bst_, true,
-                          num_grf_);
+                          num_grf_, WriteCompletionClass::PIM_WRITEBACK);
     }
 }
 
