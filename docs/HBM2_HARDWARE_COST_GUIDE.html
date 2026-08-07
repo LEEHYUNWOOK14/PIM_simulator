@@ -21,7 +21,7 @@ main{padding:30px 20px 70px}section{scroll-margin-top:65px;margin:34px 0}.card{b
   <h1>열을 포함한 전체<br>HBM2 하드웨어 비용 분석</h1>
   <p>HBM2 PIM 설계를 실제로 만들 때 필요한 실리콘 면적, 3차원 패키지, 제조수율, 전력·성능과 열·냉각부담을 한 흐름으로 비교하는 방법을 회로·소자 관점의 언어로 설명합니다.</p>
 </div></header>
-<nav><div class="wrap"><a href="#why">왜 필요한가</a><a href="#flow">파이프라인</a><a href="#axes">5개 비용축</a><a href="#source">근거와 출처</a><a href="#result">현재 결과</a><a href="#rtl">RTL 완료 후</a><a href="#github">GitHub에서 찾기</a><a href="#run">실행법</a></div></nav>
+<nav><div class="wrap"><a href="#why">왜 필요한가</a><a href="#flow">파이프라인</a><a href="#axes">5개 비용축</a><a href="#source">근거 분류</a><a href="#sources-all">전체 출처</a><a href="#result">현재 결과</a><a href="#rtl">RTL 완료 후</a><a href="#github">GitHub에서 찾기</a><a href="#run">실행법</a></div></nav>
 <main><div class="wrap">
 
 <section id="why" class="card"><h2>1. 왜 온도 이외의 비용을 보는가?</h2>
@@ -58,6 +58,58 @@ main{padding:30px 20px 70px}section{scroll-margin-top:65px;margin:34px 0}.card{b
 </tbody></table>
 <p>CACTI나 McPAT 논문이 존재한다고 해서 현재 설정한 4.8 mm² PIM 면적을 보증하지는 않습니다. 그래서 <em>식의 출처</em>와 <em>숫자의 출처</em>를 분리했고, 공개되지 않은 숫자는 모두 <code>project_cost_assumption</code>으로 표시했습니다.</p>
 <div class="good"><b>핵심 공개 근거:</b> Samsung Aquabolt HBM2, Samsung Flashbolt HBM2E, SK hynix TSV/HBM2 설명, CACTI 7, McPAT, 3D stacked-IC yield 연구, negative-binomial yield 연구, Berkeley Roofline 모델.</div></section>
+
+<section id="sources-all" class="card"><h2>4.1 파이프라인 구성에 사용한 전체 출처</h2>
+<p class="lead">아래 목록은 HBM 구조 정의부터 면적·패키지·수율·전력·성능·열 분석까지 사용한 공개 근거와 프로젝트 내부 가정을 한곳에 모은 것입니다. <b>출처가 있다는 사실이 프로젝트의 추정값을 제조사 실측값으로 바꾸지는 않습니다.</b></p>
+<div class="note"><b>확인 기준일:</b> 2026-08-07 · 오픈소스 모델은 재현성을 위해 commit을 고정했습니다. 외부 링크는 원문, 내부 링크는 이 저장소의 <b>PIM_Simulator</b> 브랜치를 가리킵니다.</div>
+
+<h3>A. HBM 표준과 제조사 공개 사양</h3>
+<table><thead><tr><th>출처</th><th>파이프라인에서의 용도</th><th>한계</th></tr></thead><tbody>
+<tr><td><a href="https://www.jedec.org/" target="_blank" rel="noopener">JEDEC HBM 표준 범위</a></td><td>stack/die/channel/interface가 표준화된 구조임을 확인</td><td>JESD235 상세는 접근권한이 필요할 수 있으며 vendor GDS·원가·수율은 제공하지 않음</td></tr>
+<tr><td><a href="https://semiconductor.samsung.com/news-events/news/samsung-starts-producing-8-gigabyte-high-bandwidth-memory-2-with-highest-data-transmission-speed/" target="_blank" rel="noopener">Samsung 8GB Aquabolt HBM2</a></td><td>2.4 Gbps/pin, 1.2 V, 307 GB/s/stack, 8GB 공개 사양 검산</td><td>보도자료이며 상세 전력·die 면적·수율·가격은 없음</td></tr>
+<tr><td><a href="https://semiconductor.samsung.com/news-events/news/samsung-to-advance-high-performance-computing-systems-with-launch-of-industrys-first-3rd-generation-16gb-hbm2e/" target="_blank" rel="noopener">Samsung Flashbolt HBM2E</a></td><td>8×16Gb die, 4만 개 이상 TSV micro-bump 연결, die당 5,600개 이상 hole의 규모 교차확인</td><td>HBM2E 자료이므로 HBM2의 정확한 물리 pin-map으로 사용하지 않음</td></tr>
+<tr><td><a href="https://news.skhynix.com/creating-new-values-in-dram-using-through-silicon-via-technology-for-continued-scaling-in-memory-system-performance-and-capacity/" target="_blank" rel="noopener">SK hynix TSV/HBM2 기술 설명</a></td><td>4Hi/8Hi, 1024 pin, 1.6–2.4 Gbps, 204–307 GB/s와 적층 제조 난이도 확인</td><td>기술 개요이며 실제 제품 수율과 가격은 없음</td></tr>
+<tr><td><a href="https://semiconductor.samsung.com/news-events/news/samsung-develops-industrys-first-high-bandwidth-memory-with-ai-processing-power/" target="_blank" rel="noopener">Samsung HBM-PIM 공개자료</a></td><td>bank-side PIM의 산업적 방향과 시스템 workload 평가 사례 확인</td><td>마케팅 성능 수치를 현재 RTL의 보정값으로 직접 사용하지 않음</td></tr>
+</tbody></table>
+
+<h3 style="margin-top:24px">B. HBM 구조·타이밍 오픈소스 모델</h3>
+<table><thead><tr><th>출처</th><th>파이프라인에서의 용도</th><th>한계</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/SAITPublic/PIMSimulator/tree/3703d1f19c8f027360cc33a3243eb271e3bb6898" target="_blank" rel="noopener">SAIT PIMSimulator</a><br><span class="small">commit 3703d1f…</span></td><td>HBM2 bank/PIM block/timing과 device·system 설정의 기준 모델</td><td>연구용 동작 모델이며 특정 제조사의 물리 layout·원가 모델이 아님</td></tr>
+<tr><td><a href="https://github.com/umd-memsys/DRAMsim3/tree/29817593b3389f1337235d63cac515024ab8fd6e" target="_blank" rel="noopener">DRAMsim3 HBM2</a><br><span class="small">commit 2981759…</span></td><td>channel/bank/timing/refresh 및 전력·열 설정의 독립 교차검증</td><td>설정·IDD 기반 모델이며 현재 칩의 측정 데이터가 아님</td></tr>
+<tr><td><a href="https://github.com/LEEHYUNWOOK14/PIM_simulator/blob/PIM_Simulator/design/hbm2_architecture.json" target="_blank" rel="noopener">프로젝트 HBM2 architecture JSON</a></td><td>stack, channel, die, TSV, bump, logic die와 PIM 확장의 단일 구조 입력</td><td>설계 탐색용 illustrative geometry이며 vendor GDS가 아님</td></tr>
+<tr><td><a href="https://github.com/LEEHYUNWOOK14/PIM_simulator/blob/PIM_Simulator/output/hbm2_arch/parameter_provenance.json" target="_blank" rel="noopener">구조 parameter provenance</a></td><td>각 구조 파라미터가 SAIT·DRAMsim3·프로젝트 중 어디서 왔는지 추적</td><td>출처 추적표이며 그 자체가 실측 검증은 아님</td></tr>
+</tbody></table>
+
+<h3 style="margin-top:24px">C. 면적·수율·전력·성능 방법론</h3>
+<table><thead><tr><th>출처</th><th>파이프라인에서의 용도</th><th>한계</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/HewlettPackard/cacti" target="_blank" rel="noopener">CACTI 7</a></td><td>memory area/power/timing 모델링 방법과 향후 SRAM/DRAM 교차검증 adapter의 근거</td><td>공정 가정이 다르며 현재 기본 실행에서 직접 산출기로 사용하지 않음</td></tr>
+<tr><td><a href="https://dl.acm.org/doi/10.1145/1669112.1669172" target="_blank" rel="noopener">McPAT (HPCA 2009)</a></td><td>architecture 수준에서 power·area·timing을 통합하는 방법론 참고</td><td>processor 모델링 선례이며 HBM 제조원가 자료가 아님</td></tr>
+<tr><td><a href="https://www.cse.cuhk.edu.hk/~qxu/xu-aspdac12.pdf" target="_blank" rel="noopener">Xu et al., 3D IC yield review (ASPDAC 2012)</a></td><td>die·bond·TSV yield 분리, KGD·pre-bond test·redundancy 고려</td><td>vendor HBM2의 실제 yield parameter는 제공하지 않음</td></tr>
+<tr><td><a href="https://link.springer.com/article/10.1007/s10836-012-5314-3" target="_blank" rel="noopener">Stacked-memory yield model (2012)</a></td><td>적층 die 수율과 interconnect 수율을 함께 계산하는 구조의 근거</td><td>일반 적층 메모리 모델이며 특정 HBM2 제품값이 아님</td></tr>
+<tr><td><a href="https://www.sciencedirect.com/science/article/abs/pii/S0360835202000086" target="_blank" rel="noopener">Negative-binomial yield model</a></td><td>결함 clustering을 포함한 die yield 식의 근거</td><td>식만 차용하며 defect density와 α는 프로젝트 범위 가정</td></tr>
+<tr><td><a href="https://www2.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-134.pdf" target="_blank" rel="noopener">Berkeley Roofline model</a></td><td>operational intensity와 memory/compute ceiling을 이용한 성능 해석</td><td>성능 방법론이며 package·제조비용은 설명하지 않음</td></tr>
+</tbody></table>
+
+<h3 style="margin-top:24px">D. 3D 열해석·재료·solver 교차검증</h3>
+<table><thead><tr><th>출처</th><th>파이프라인에서의 용도</th><th>한계</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/uvahotspot/HotSpot/tree/f18831e48cef5d62580585cca0d7fab6c71bc3cc" target="_blank" rel="noopener">HotSpot</a><br><span class="small">commit f18831e…</span></td><td>architecture-level compact thermal solver와 export 교차검증</td><td>세부 CFD·signoff 도구를 대체하지 않음</td></tr>
+<tr><td><a href="https://github.com/esl-epfl/3d-ice/tree/4953952a1ef6d38807ff307212a6f15e5b2ef935" target="_blank" rel="noopener">3D-ICE</a><br><span class="small">commit 4953952…</span></td><td>transient 3D-IC thermal simulation 구조와 stack 표현의 참고·교차검증</td><td>현재 프로젝트의 경계조건과 mesh가 동일하다는 뜻은 아님</td></tr>
+<tr><td><a href="https://jsts.org/jsts/XmlViewer/f436715" target="_blank" rel="noopener">JSTS HBM thermal modeling study</a></td><td>32 µm silicon die와 15 µm die gap의 문헌 기반 geometry 참고</td><td>특정 프로젝트 vendor package의 단면 측정값이 아님</td></tr>
+<tr><td><a href="https://nvlpubs.nist.gov/nistpubs/Legacy/MONO/nbsmonograph131.pdf" target="_blank" rel="noopener">NIST silicon thermal conductivity</a></td><td>silicon 열전도도 범위와 온도 의존성의 물성 근거</td><td>실제 박막·도핑·방향성 효과는 별도 보정이 필요</td></tr>
+<tr><td><a href="https://www.nist.gov/publications/thermal-conductivity-aluminum-copper-iron-and-tungsten-temperatures-1-k-melting-point" target="_blank" rel="noopener">NIST copper thermal conductivity</a></td><td>TSV·배선용 copper 열전도도 범위의 물성 근거</td><td>미세구조와 계면 열저항은 bulk 물성과 다를 수 있음</td></tr>
+<tr><td><a href="https://github.com/LEEHYUNWOOK14/PIM_simulator/blob/PIM_Simulator/references/thermal/SOURCES.md" target="_blank" rel="noopener">프로젝트 thermal source registry</a></td><td>solver commit, geometry, material 출처와 접근일을 고정</td><td>등록되지 않은 추정값은 아래 project assumption으로 취급</td></tr>
+<tr><td><a href="https://github.com/LEEHYUNWOOK14/PIM_simulator/blob/PIM_Simulator/output/hbm2_thermal/reference/summary.json" target="_blank" rel="noopener">프로젝트 3D thermal 결과</a></td><td>peak temperature, ΔT, K/W, headroom, required conductance와 thermal cost 입력</td><td>RTL power·package 측정으로 보정 전인 synthetic architectural 결과</td></tr>
+</tbody></table>
+
+<h3 style="margin-top:24px">E. 프로젝트 가정과 숫자 원장</h3>
+<table><thead><tr><th>출처</th><th>파이프라인에서의 용도</th><th>한계</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/LEEHYUNWOOK14/PIM_simulator/blob/PIM_Simulator/hardware_cost/config.json" target="_blank" rel="noopener">hardware_cost/config.json</a></td><td>공개되지 않은 PIM 면적, defect density, bond/TSV yield, 가중치, uncertainty range의 단일 원장</td><td><b>제조사 사실이 아니라 비교를 위한 명시적 가정</b></td></tr>
+<tr><td><a href="https://github.com/LEEHYUNWOOK14/PIM_simulator/blob/PIM_Simulator/design/thermal/hbm2_materials.json" target="_blank" rel="noopener">thermal material config</a></td><td>silicon/copper/underfill/substrate/TIM의 k·density·specific heat 입력</td><td>underfill·organic substrate·TIM과 일부 열용량 값은 engineering estimate</td></tr>
+<tr><td><a href="https://github.com/LEEHYUNWOOK14/PIM_simulator/blob/PIM_Simulator/hardware_cost/sources.json" target="_blank" rel="noopener">hardware_cost/sources.json</a></td><td>비열 비용축의 source ID, claim, 사용처, 한계와 접근일을 기계 판독 가능하게 관리</td><td>registry는 근거를 기록하지만 누락된 vendor data를 만들어내지 않음</td></tr>
+<tr><td><a href="https://github.com/LEEHYUNWOOK14/PIM_simulator/blob/PIM_Simulator/output/hbm2_hardware_cost/source_traceability.md" target="_blank" rel="noopener">생성된 source traceability</a></td><td>최종 보고서의 주장과 source ID·assumption을 연결</td><td>파이프라인 재실행 시 config와 함께 다시 검토해야 함</td></tr>
+</tbody></table>
+<div class="warn"><b>현재 공개 출처로 확정할 수 없는 항목:</b> 제조사 GDS, 실제 die 면적, wafer 가격, package BOM, 고객 가격, defect density, die/bond/TSV/assembly 수율, 실제 냉각기 가격, package 계면 열저항과 silicon/underfill/TIM의 제품별 물성입니다. 이 값들은 vendor/NDA 자료나 제작 후 측정이 들어오기 전까지 범위 분석 대상으로 유지됩니다.</div>
+</section>
 
 <section id="result" class="card"><h2>5. 현재 비교 결과</h2>
 <p>기준은 <b>1-stack 8Hi PIM</b>이며 area·package·yield·energy·thermal의 다섯 비용지수를 기준 1.0으로 정규화했습니다. 낮은 비용과 높은 성능이 좋지만, 요구 용량과 열 제한을 먼저 만족해야 합니다.</p>
