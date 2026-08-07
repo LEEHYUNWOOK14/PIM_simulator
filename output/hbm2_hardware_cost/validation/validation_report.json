@@ -1,0 +1,186 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "poisson analytic",
+      "pass": true,
+      "detail": 0.8187307530779818
+    },
+    {
+      "name": "negative-binomial analytic",
+      "pass": true,
+      "detail": 0.823974609375
+    },
+    {
+      "name": "Samsung HBM2 bandwidth identity",
+      "pass": true,
+      "detail": "307.2 GB/s"
+    },
+    {
+      "name": "cumulative silicon monotonic",
+      "pass": true,
+      "detail": [
+        484.8,
+        868.8,
+        1252.8
+      ]
+    },
+    {
+      "name": "bond count monotonic",
+      "pass": true,
+      "detail": [
+        4,
+        8,
+        12
+      ]
+    },
+    {
+      "name": "stack yield nonincreasing",
+      "pass": true,
+      "detail": [
+        0.5443231198080322,
+        0.3655886772414155,
+        0.24554364138393456
+      ]
+    },
+    {
+      "name": "all yields valid",
+      "pass": true,
+      "detail": "0 < Y <= 1"
+    },
+    {
+      "name": "baseline normalized",
+      "pass": true,
+      "detail": {
+        "area": 1.0,
+        "package": 1.0,
+        "yield": 1.0,
+        "energy": 1.0
+      }
+    },
+    {
+      "name": "physical/logical channels separated",
+      "pass": true,
+      "detail": "8 physical, 64 logical simulator partitions"
+    },
+    {
+      "name": "capacity gate rejects 4Hi for 8GB workload",
+      "pass": true,
+      "detail": {
+        "4Hi_GB": 4.0,
+        "required_GB": 8.0
+      }
+    },
+    {
+      "name": "perfect inputs yield one",
+      "pass": true,
+      "detail": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "all parameter sources resolve",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "invalid probability rejected",
+      "pass": true,
+      "detail": "assembly_yield=1.5"
+    },
+    {
+      "name": "all pipeline READMEs exist",
+      "pass": true,
+      "detail": [
+        "hardware_cost/README.md",
+        "hardware_cost/area/README.md",
+        "hardware_cost/package/README.md",
+        "hardware_cost/yield/README.md",
+        "hardware_cost/power_performance/README.md",
+        "hardware_cost/integration/README.md"
+      ]
+    },
+    {
+      "name": "required outputs exist",
+      "pass": true,
+      "detail": [
+        "integrated_metrics.json",
+        "design_comparison.csv",
+        "pareto_frontier.csv",
+        "uncertainty_summary.csv",
+        "uncertainty_samples.csv",
+        "hardware_cost_report.md",
+        "parameter_provenance.json",
+        "source_traceability.md",
+        "cost_indices.png",
+        "uncertainty_performance_per_cost.png",
+        "area/area_report.md",
+        "package/package_report.md",
+        "yield/yield_report.md",
+        "power_performance/power_performance_report.md"
+      ]
+    },
+    {
+      "name": "seeded uncertainty reproducible",
+      "pass": true,
+      "detail": [
+        {
+          "scenario": "hbm2_4hi_1stack",
+          "p05": 1.3996366236935671,
+          "p50": 1.571175729876553,
+          "p95": 1.79380038465123,
+          "best_rank_probability": 0.0,
+          "samples": 2000
+        },
+        {
+          "scenario": "hbm2_8hi_1stack",
+          "p05": 1.0,
+          "p50": 1.0,
+          "p95": 1.0,
+          "best_rank_probability": 0.547,
+          "samples": 2000
+        },
+        {
+          "scenario": "hbm2_12hi_1stack",
+          "p05": 0.6106832366601816,
+          "p50": 0.6959681730410109,
+          "p95": 0.78053768656189,
+          "best_rank_probability": 0.0,
+          "samples": 2000
+        },
+        {
+          "scenario": "hbm2_8hi_2stack",
+          "p05": 0.7371982531783742,
+          "p50": 0.9651920108375455,
+          "p95": 1.2235028429006596,
+          "best_rank_probability": 0.4295,
+          "samples": 2000
+        },
+        {
+          "scenario": "hbm2_8hi_no_pim",
+          "p05": 0.35178869604005364,
+          "p50": 0.5440231833955338,
+          "p95": 0.9741646757249615,
+          "best_rank_probability": 0.0235,
+          "samples": 2000
+        }
+      ]
+    },
+    {
+      "name": "rank probabilities sum to one",
+      "pass": true,
+      "detail": [
+        0.0,
+        0.547,
+        0.0,
+        0.4295,
+        0.0235
+      ]
+    }
+  ],
+  "scope": "Architectural model verification; not validation against proprietary HBM2 manufacturing data."
+}

@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "disclaimer": "Architectural relative cost model; not a vendor quote, manufacturing yield disclosure, or signoff result.",
+  "baseline": "hbm2_8hi_1stack",
+  "architecture_path": "design/hbm2_architecture.json",
+  "thermal_summary_path": "output/hbm2_thermal/reference/summary.json",
+  "models": {
+    "die_yield": "negative_binomial",
+    "combined_index": "weighted_geometric_mean",
+    "monte_carlo_samples": 2000,
+    "random_seed": 235
+  },
+  "area": {
+    "logic_die_area_mm2": {"value": 96.0, "unit": "mm^2", "classification": "illustrative", "source_id": "project_architecture", "confidence": "low", "uncertainty": {"distribution": "uniform", "min": 75.0, "max": 120.0}},
+    "dram_die_area_mm2": {"value": 96.0, "unit": "mm^2", "classification": "illustrative", "source_id": "project_architecture", "confidence": "low", "uncertainty": {"distribution": "uniform", "min": 75.0, "max": 120.0}},
+    "pim_logic_area_mm2": {"value": 4.8, "unit": "mm^2", "classification": "estimated", "source_id": "project_cost_assumption", "confidence": "low", "uncertainty": {"distribution": "uniform", "min": 2.0, "max": 9.0}},
+    "phy_reserved_area_mm2": {"value": 8.0, "unit": "mm^2", "classification": "estimated", "source_id": "project_cost_assumption", "confidence": "low", "uncertainty": {"distribution": "uniform", "min": 4.0, "max": 14.0}},
+    "tsv_koz_diameter_um": {"value": 50.0, "unit": "um", "classification": "illustrative", "source_id": "project_cost_assumption", "confidence": "low", "uncertainty": {"distribution": "uniform", "min": 35.0, "max": 80.0}}
+  },
+  "package": {
+    "weights": {"interposer": 0.30, "microbump": 0.20, "tsv": 0.20, "bond": 0.15, "routing": 0.15},
+    "routing_demand_factor": {"value": 1.0, "unit": "ratio", "classification": "illustrative", "source_id": "project_cost_assumption", "confidence": "low", "uncertainty": {"distribution": "uniform", "min": 0.8, "max": 1.4}}
+  },
+  "yield": {
+    "logic_defect_density_per_cm2": {"value": 0.20, "unit": "1/cm^2", "classification": "illustrative", "source_id": "project_cost_assumption", "confidence": "low", "uncertainty": {"distribution": "uniform", "min": 0.05, "max": 0.50}},
+    "dram_defect_density_per_cm2": {"value": 0.10, "unit": "1/cm^2", "classification": "illustrative", "source_id": "project_cost_assumption", "confidence": "low", "uncertainty": {"distribution": "uniform", "min": 0.02, "max": 0.30}},
+    "clustering_alpha": {"value": 3.0, "unit": "dimensionless", "classification": "illustrative", "source_id": "project_cost_assumption", "confidence": "low", "uncertainty": {"distribution": "uniform", "min": 1.0, "max": 8.0}},
+    "bond_yield_per_interface": {"value": 0.995, "unit": "probability", "classification": "illustrative", "source_id": "project_cost_assumption", "confidence": "low", "uncertainty": {"distribution": "uniform", "min": 0.985, "max": 0.9995}},
+    "tsv_group_yield": {"value": 0.995, "unit": "probability", "classification": "illustrative", "source_id": "project_cost_assumption", "confidence": "low", "uncertainty": {"distribution": "uniform", "min": 0.98, "max": 0.9995}},
+    "assembly_yield": {"value": 0.99, "unit": "probability", "classification": "illustrative", "source_id": "project_cost_assumption", "confidence": "low", "uncertainty": {"distribution": "uniform", "min": 0.97, "max": 0.999}}
+  },
+  "power_performance": {
+    "bus_width_bits": {"value": 1024, "unit": "bit", "classification": "manufacturer_public", "source_id": "skhynix_hbm2_tsv", "confidence": "high"},
+    "pin_rate_Gbps": {"value": 2.4, "unit": "Gb/s/pin", "classification": "manufacturer_public", "source_id": "samsung_aquabolt_hbm2", "confidence": "high"},
+    "dram_die_capacity_GB": {"value": 1.0, "unit": "GB", "classification": "manufacturer_public", "source_id": "skhynix_hbm2_tsv", "confidence": "high"},
+    "workload_required_capacity_GB": {"value": 8.0, "unit": "GB", "classification": "project_config", "source_id": "project_cost_assumption", "confidence": "low"},
+    "bandwidth_utilization": {"value": 0.70, "unit": "ratio", "classification": "estimated", "source_id": "project_cost_assumption", "confidence": "low", "uncertainty": {"distribution": "uniform", "min": 0.35, "max": 0.9}},
+    "baseline_power_W": {"value": 4.0, "unit": "W", "classification": "project_config", "source_id": "project_thermal", "confidence": "low", "uncertainty": {"distribution": "uniform", "min": 2.5, "max": 8.0}},
+    "pim_speedup": {"value": 1.8, "unit": "ratio", "classification": "estimated", "source_id": "project_cost_assumption", "confidence": "low", "uncertainty": {"distribution": "uniform", "min": 1.0, "max": 2.5}},
+    "pim_power_multiplier": {"value": 1.15, "unit": "ratio", "classification": "estimated", "source_id": "project_cost_assumption", "confidence": "low", "uncertainty": {"distribution": "uniform", "min": 1.0, "max": 1.5}},
+    "thermal_limit_K": {"value": 358.15, "unit": "K", "classification": "project_config", "source_id": "project_thermal", "confidence": "low"}
+  },
+  "integration_weights": {"area": 0.25, "package": 0.25, "yield": 0.25, "energy": 0.25},
+  "scenarios": [
+    {"name": "hbm2_4hi_1stack", "stacks": 1, "dies": 4, "pim_enabled": true, "workload_scale": 1.0},
+    {"name": "hbm2_8hi_1stack", "stacks": 1, "dies": 8, "pim_enabled": true, "workload_scale": 1.0},
+    {"name": "hbm2_12hi_1stack", "stacks": 1, "dies": 12, "pim_enabled": true, "workload_scale": 1.0},
+    {"name": "hbm2_8hi_2stack", "stacks": 2, "dies": 8, "pim_enabled": true, "workload_scale": 2.0},
+    {"name": "hbm2_8hi_no_pim", "stacks": 1, "dies": 8, "pim_enabled": false, "workload_scale": 1.0}
+  ]
+}

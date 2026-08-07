@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "accessed_on": "2026-08-07",
+  "sources": [
+    {
+      "id": "jedec_hbm_scope",
+      "title": "JEDEC standards scope: High Bandwidth Memory",
+      "organization": "JEDEC Solid State Technology Association",
+      "url": "https://www.jedec.org/",
+      "type": "standard_organization",
+      "used_for": ["HBM is a JEDEC-standardized memory family", "interface standards do not provide vendor manufacturing cost or GDS"],
+      "variables": [],
+      "limitations": "The detailed JESD235 document may require JEDEC access; no proprietary layout or cost data is inferred."
+    },
+    {
+      "id": "samsung_aquabolt_hbm2",
+      "title": "Samsung Starts Producing 8-Gigabyte High Bandwidth Memory-2",
+      "organization": "Samsung Electronics",
+      "url": "https://semiconductor.samsung.com/news-events/news/samsung-starts-producing-8-gigabyte-high-bandwidth-memory-2-with-highest-data-transmission-speed/",
+      "type": "manufacturer_public",
+      "used_for": ["2.4 Gbps/pin", "1.2 V", "307 GB/s per stack", "8 GB HBM2 product reference"],
+      "variables": ["pin_rate_Gbps", "voltage_V", "reference_bandwidth_GBs"],
+      "limitations": "Product announcement, not a detailed power, die-area, yield, or cost disclosure."
+    },
+    {
+      "id": "samsung_flashbolt_hbm2e",
+      "title": "Samsung Launches 16GB HBM2E Flashbolt",
+      "organization": "Samsung Electronics",
+      "url": "https://semiconductor.samsung.com/news-events/news/samsung-to-advance-high-performance-computing-systems-with-launch-of-industrys-first-3rd-generation-16gb-hbm2e/",
+      "type": "manufacturer_public",
+      "used_for": ["eight 16Gb DRAM dies", "more than 40,000 TSV microbump connections", "more than 5,600 TSV-related holes per die", "3.2 Gbps and 410 GB/s product context"],
+      "variables": [],
+      "limitations": "HBM2E cross-check only; counts cannot be treated as an exact HBM2 pin map."
+    },
+    {
+      "id": "skhynix_hbm2_tsv",
+      "title": "Creating New Values in DRAM Using TSV Technology",
+      "organization": "SK hynix",
+      "url": "https://news.skhynix.com/creating-new-values-in-dram-using-through-silicon-via-technology-for-continued-scaling-in-memory-system-performance-and-capacity/",
+      "type": "manufacturer_public",
+      "used_for": ["HBM2 4Hi/8Hi and 1024 data pins", "1.6–2.4 Gbps/pin", "204–307 GB/s/stack", "TSV pitch/diameter/aspect ratio, die thinning, and assembly yield are scaling challenges"],
+      "variables": ["physical_stack_options", "bus_width_bits"],
+      "limitations": "Technology overview; does not disclose manufacturing yield or price."
+    },
+    {
+      "id": "samsung_hbm_pim",
+      "title": "Samsung Develops Industry's First HBM with AI Processing Power",
+      "organization": "Samsung Electronics",
+      "url": "https://semiconductor.samsung.com/news-events/news/samsung-develops-industrys-first-high-bandwidth-memory-with-ai-processing-power/",
+      "type": "manufacturer_public",
+      "used_for": ["HBM-PIM is a real manufacturer research direction", "PIM benefits must be evaluated at workload/system level"],
+      "variables": [],
+      "limitations": "Marketing-level performance claims are not used as calibrated project inputs."
+    },
+    {
+      "id": "cacti7",
+      "title": "CACTI 7.0: cache, memory, 3D stacking and off-chip I/O model",
+      "organization": "Hewlett Packard",
+      "url": "https://github.com/HewlettPackard/cacti",
+      "type": "open_source_model",
+      "used_for": ["memory area/power/timing co-modeling precedent", "future SRAM/DRAM cross-check adapter"],
+      "variables": [],
+      "limitations": "Technology-node and organization assumptions differ from a proprietary HBM2 implementation; not directly executed by the default pipeline."
+    },
+    {
+      "id": "mcpat_hpca2009",
+      "title": "McPAT: An Integrated Power, Area, and Timing Modeling Framework",
+      "organization": "HPCA 2009 / ACM",
+      "doi": "10.1145/1669112.1669172",
+      "url": "https://dl.acm.org/doi/10.1145/1669112.1669172",
+      "type": "peer_reviewed",
+      "used_for": ["architectural power-area-timing co-modeling methodology"],
+      "variables": [],
+      "limitations": "Processor model precedent, not an HBM manufacturing cost model."
+    },
+    {
+      "id": "xu_3d_yield_review",
+      "title": "Yield Enhancement for 3D-Stacked ICs: Recent Advances and Challenges",
+      "organization": "ASP-DAC 2012 / IEEE",
+      "doi": "10.1109/ASPDAC.2012.6165052",
+      "url": "https://www.cse.cuhk.edu.hk/~qxu/xu-aspdac12.pdf",
+      "type": "peer_reviewed",
+      "used_for": ["separate die, bonding and TSV yield factors", "known-good-die, pre-bond test and TSV redundancy rationale"],
+      "variables": [],
+      "limitations": "Provides modeling structure, not current vendor-specific HBM2 yield parameters."
+    },
+    {
+      "id": "stacked_memory_yield_2012",
+      "title": "Yield Improvement for 3D Wafer-to-Wafer Stacked Memories",
+      "organization": "Journal of Electronic Testing",
+      "doi": "10.1007/s10836-012-5314-3",
+      "url": "https://link.springer.com/article/10.1007/s10836-012-5314-3",
+      "type": "peer_reviewed",
+      "used_for": ["stacked-die yield and interconnect yield must both be represented"],
+      "variables": [],
+      "limitations": "Generic stacked-memory study, not manufacturer HBM2 data."
+    },
+    {
+      "id": "negative_binomial_yield",
+      "title": "Semiconductor yield models using contagious distributions and their limiting forms",
+      "organization": "Microelectronics Reliability",
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S0360835202000086",
+      "type": "peer_reviewed",
+      "used_for": ["negative-binomial yield equation (1 + D0 A / alpha)^(-alpha) and clustered-defect rationale"],
+      "variables": [],
+      "limitations": "Equation source only; project defect-density and alpha values remain illustrative."
+    },
+    {
+      "id": "roofline_berkeley",
+      "title": "Roofline: An Insightful Visual Performance Model for Floating-Point Programs and Multicore Architectures",
+      "organization": "Lawrence Berkeley National Laboratory / UC Berkeley",
+      "url": "https://www2.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-134.pdf",
+      "type": "peer_reviewed_preprint",
+      "used_for": ["separate workload operational intensity, memory-bandwidth ceiling and compute ceiling"],
+      "variables": [],
+      "limitations": "Performance-bound methodology; does not establish HBM package cost."
+    },
+    {
+      "id": "project_cost_assumption",
+      "title": "STOB hardware-cost design-space assumption",
+      "organization": "This project",
+      "path": "hardware_cost/config.json",
+      "type": "project_assumption",
+      "used_for": ["default numeric ranges where no public vendor manufacturing value exists"],
+      "variables": ["PIM/PHY area", "TSV KOZ", "defect density", "clustering", "bond/TSV/assembly yield", "utilization", "PIM speedup and power multiplier"],
+      "limitations": "These values are not supported by a vendor disclosure; they exist solely for sensitivity analysis and must not be cited as measured facts."
+    },
+    {
+      "id": "project_architecture",
+      "title": "STOB HBM2 PIM architecture configuration",
+      "organization": "This project",
+      "path": "design/hbm2_architecture.json",
+      "type": "project_config",
+      "used_for": ["illustrative geometry, stack/channel/TSV/bump organization"],
+      "variables": ["geometry", "layout", "stack_count", "dram_dies_per_stack"],
+      "limitations": "Geometry is estimated or illustrative, not vendor GDS."
+    },
+    {
+      "id": "project_thermal",
+      "title": "STOB HBM2 reference thermal analysis",
+      "organization": "This project",
+      "path": "output/hbm2_thermal/reference/summary.json",
+      "type": "project_derived",
+      "used_for": ["architectural total power and thermal feasibility"],
+      "variables": ["input_power_W", "peak_temperature_K"],
+      "limitations": "Synthetic and uncalibrated unless replaced with measured/activity-derived power."
+    }
+  ]
+}

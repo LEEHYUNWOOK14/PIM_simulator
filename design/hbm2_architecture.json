@@ -1,0 +1,54 @@
+{
+  "model_name": "STOB HBM2 PIM architecture",
+  "standard_profile": "HBM2 / JESD235 family",
+  "stack_count": 1,
+  "dram_dies_per_stack": 8,
+  "physical_channels_per_stack": 8,
+  "channel_width_bits": 128,
+  "pseudo_channel_mode": false,
+  "logical_channel_mapping": {
+    "type": "simulator_only_logical_partition",
+    "logical_channels": 64,
+    "description": "The experiment exposes 64 logical simulator partitions over one illustrative 8-channel HBM2 stack; these are not 64 physical HBM2 channels."
+  },
+  "sait_device_file": "ini/HBM2_samsung_2M_16B_x64.ini",
+  "sait_upstream_reference_file": "references/hbm2/SAIT_HBM2_samsung_2M_16B_x64.ini",
+  "sait_system_file": "system_hbm_64ch.ini",
+  "dramsim3_reference_file": "references/hbm2/DRAMsim3_HBM2_8Gb_x128.ini",
+  "source_priority": ["standard", "project_config", "open_source_model", "rtl_derived", "estimated", "illustrative"],
+  "rtl_modules": [
+    "logic_die_64ch_reduction_top",
+    "bank_local_reduction_buffer",
+    "bank_local_fp16_reduction",
+    "hierarchical_reduction_path",
+    "logic_die_link_arbiter",
+    "logic_die_dual_link_arbiter",
+    "shared_fp16_pipeline_fabric",
+    "shared_fp16_reduction_cluster"
+  ],
+  "geometry_um": {
+    "package_width": {"value": 12000, "classification": "illustrative"},
+    "package_height": {"value": 16000, "classification": "illustrative"},
+    "interposer_width": {"value": 10500, "classification": "illustrative"},
+    "interposer_height": {"value": 14500, "classification": "illustrative"},
+    "die_width": {"value": 8000, "classification": "illustrative"},
+    "die_height": {"value": 12000, "classification": "illustrative"},
+    "logic_die_thickness": {"value": 100, "classification": "estimated"},
+    "dram_die_thickness": {"value": 50, "classification": "estimated"},
+    "die_gap": {"value": 12, "classification": "illustrative"},
+    "interposer_thickness": {"value": 100, "classification": "illustrative"},
+    "substrate_thickness": {"value": 180, "classification": "illustrative"},
+    "tsv_size": {"value": 28, "classification": "illustrative"},
+    "microbump_size": {"value": 22, "classification": "illustrative"},
+    "visual_scale_xy": {"value": 0.01, "classification": "illustrative"},
+    "visual_scale_z": {"value": 0.05, "classification": "illustrative"}
+  },
+  "layout": {
+    "bank_columns": 4,
+    "bank_rows": 4,
+    "tsv_groups_per_channel": 1,
+    "tsvs_per_group": 8,
+    "microbump_columns": 24,
+    "microbump_rows": 32
+  }
+}

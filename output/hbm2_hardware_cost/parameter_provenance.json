@@ -1,0 +1,24 @@
+{
+  "config": "hardware_cost/config.json",
+  "sources": "hardware_cost/sources.json",
+  "source_ids_used": [
+    "project_architecture",
+    "project_cost_assumption",
+    "project_thermal",
+    "samsung_aquabolt_hbm2",
+    "skhynix_hbm2_tsv"
+  ],
+  "method_source_ids": [
+    "cacti7",
+    "mcpat_hpca2009",
+    "negative_binomial_yield",
+    "xu_3d_yield_review",
+    "stacked_memory_yield_2012",
+    "roofline_berkeley"
+  ],
+  "model_equations": {
+    "die_yield": "hardware_cost/yield/README.md",
+    "integration": "hardware_cost/integration/README.md"
+  },
+  "warning": "Method sources do not validate illustrative numeric defaults. See hardware_cost/RESEARCH_BASIS.md."
+}
