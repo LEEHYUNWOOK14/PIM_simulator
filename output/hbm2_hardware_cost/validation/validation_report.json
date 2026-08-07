@@ -55,7 +55,8 @@
         "area": 1.0,
         "package": 1.0,
         "yield": 1.0,
-        "energy": 1.0
+        "energy": 1.0,
+        "thermal": 1.0
       }
     },
     {
@@ -70,6 +71,20 @@
         "4Hi_GB": 4.0,
         "required_GB": 8.0
       }
+    },
+    {
+      "name": "thermal burden monotonic across 4/8/12Hi",
+      "pass": true,
+      "detail": [
+        0.11187474107616352,
+        0.18080766234531476,
+        0.26556125406968106
+      ]
+    },
+    {
+      "name": "thermal metrics physically ordered",
+      "pass": true,
+      "detail": "Tpeak >= Tambient and headroom identity"
     },
     {
       "name": "perfect inputs yield one",
@@ -101,6 +116,7 @@
         "hardware_cost/package/README.md",
         "hardware_cost/yield/README.md",
         "hardware_cost/power_performance/README.md",
+        "hardware_cost/thermal/README.md",
         "hardware_cost/integration/README.md"
       ]
     },
@@ -121,7 +137,9 @@
         "area/area_report.md",
         "package/package_report.md",
         "yield/yield_report.md",
-        "power_performance/power_performance_report.md"
+        "power_performance/power_performance_report.md",
+        "thermal/thermal_metrics.json",
+        "thermal/thermal_report.md"
       ]
     },
     {
@@ -130,9 +148,9 @@
       "detail": [
         {
           "scenario": "hbm2_4hi_1stack",
-          "p05": 1.3996366236935671,
-          "p50": 1.571175729876553,
-          "p95": 1.79380038465123,
+          "p05": 1.4413874905241968,
+          "p50": 1.5829500186428498,
+          "p95": 1.769086999690303,
           "best_rank_probability": 0.0,
           "samples": 2000
         },
@@ -141,31 +159,31 @@
           "p05": 1.0,
           "p50": 1.0,
           "p95": 1.0,
-          "best_rank_probability": 0.547,
+          "best_rank_probability": 0.561,
           "samples": 2000
         },
         {
           "scenario": "hbm2_12hi_1stack",
-          "p05": 0.6106832366601816,
-          "p50": 0.6959681730410109,
-          "p95": 0.78053768656189,
+          "p05": 0.62059973734796,
+          "p50": 0.6918069237379679,
+          "p95": 0.7588892795043177,
           "best_rank_probability": 0.0,
           "samples": 2000
         },
         {
           "scenario": "hbm2_8hi_2stack",
-          "p05": 0.7371982531783742,
-          "p50": 0.9651920108375455,
-          "p95": 1.2235028429006596,
-          "best_rank_probability": 0.4295,
+          "p05": 0.7816718662963362,
+          "p50": 0.9626269147978861,
+          "p95": 1.1733855650724303,
+          "best_rank_probability": 0.4,
           "samples": 2000
         },
         {
           "scenario": "hbm2_8hi_no_pim",
-          "p05": 0.35178869604005364,
-          "p50": 0.5440231833955338,
-          "p95": 0.9741646757249615,
-          "best_rank_probability": 0.0235,
+          "p05": 0.3751081987689367,
+          "p50": 0.571176238936531,
+          "p95": 1.0117441752519263,
+          "best_rank_probability": 0.039,
           "samples": 2000
         }
       ]
@@ -175,10 +193,10 @@
       "pass": true,
       "detail": [
         0.0,
-        0.547,
+        0.561,
         0.0,
-        0.4295,
-        0.0235
+        0.4,
+        0.039
       ]
     }
   ],

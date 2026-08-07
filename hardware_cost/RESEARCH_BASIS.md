@@ -53,7 +53,13 @@ ASP-DAC의 3D stacked IC yield review는 known-good-die, pre-bond testing, TSV r
 
 ## 통합 지표의 근거와 정책성
 
-Area, package, yield cost, energy는 단위가 달라 직접 합산할 수 없다. 각 항목을 baseline 비율로 만든 후 가중 기하평균한다. 이는 비율 척도의 균형을 위한 **프로젝트 의사결정 규칙**이며 특정 논문이나 제조사의 가격 공식이 아니다. 결과는 개별 지수, 물리량, Pareto frontier와 함께만 해석한다.
+## Thermal 비용의 근거
+
+열 파이프라인은 3D finite-volume reference solver가 계산한 최고온도와 입력전력으로 등가 열저항을 유도한다 (`project_thermal`). 온도상승이 허용 온도상승에서 차지하는 비율을 cooling burden으로 정의한다. 높은 thermal burden은 더 좋은 TIM, heat spreader, heatsink 또는 냉각 유량과 성능 throttling 여유가 필요하다는 설계비용 proxy다. 공개 제조사 패키지로 보정되지 않았으므로 절대 냉각비용이나 실제 junction 온도로 주장하지 않는다.
+
+## 통합 지표의 근거와 정책성
+
+Area, package, yield cost, energy, thermal은 단위가 달라 직접 합산할 수 없다. 각 항목을 baseline 비율로 만든 후 가중 기하평균한다. 이는 비율 척도의 균형을 위한 **프로젝트 의사결정 규칙**이며 특정 논문이나 제조사의 가격 공식이 아니다. 전력과 열은 결합되어 있어 중복계상 가능성이 있으므로 각각의 원 물리량과 가중치 민감도를 함께 본다. 결과는 개별 지수, 물리량, Pareto frontier와 함께만 해석한다.
 
 ## 공개정보로 확정할 수 없는 항목
 

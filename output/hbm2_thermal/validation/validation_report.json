@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "checks": {
+    "steady_equation_residual_W": {
+      "value": 3.623767952376511e-13,
+      "limit": 1e-08,
+      "pass": true
+    },
+    "uniform_symmetry_K": {
+      "value": 4.718003765447065e-12,
+      "limit": 1e-08,
+      "pass": true
+    },
+    "zero_power_ambient_K": {
+      "value": 8.526512829121202e-12,
+      "limit": 1e-07,
+      "pass": true
+    },
+    "grid_convergence_peak_K": {
+      "value": 3.5413449950283393e-11,
+      "limit": 0.05,
+      "pass": true
+    },
+    "variants": {
+      "value": {
+        "4Hi": {
+          "peak_K": 306.63054627837454,
+          "pass": true
+        },
+        "8Hi": {
+          "peak_K": 309.142578752469,
+          "pass": true
+        },
+        "12Hi": {
+          "peak_K": 311.76711362275427,
+          "pass": true
+        }
+      },
+      "pass": true
+    },
+    "tsv_effective_comparison_K": {
+      "value": 0.002158885461369664,
+      "pass": true
+    },
+    "analytic_single_slab_K": {
+      "value": 0.0,
+      "limit": 1e-12,
+      "pass": true
+    },
+    "timestep_convergence_K": {
+      "value": 8.942044183868347e-05,
+      "limit": 0.25,
+      "pass": true,
+      "coarse_K": 300.0315151325157,
+      "fine_K": 300.03160455295756
+    }
+  },
+  "disclaimer": "Architectural model verification, not silicon calibration or signoff."
+}

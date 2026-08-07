@@ -1,0 +1,27 @@
+{
+  "model_name": "STOB HBM2 PIM reference thermal model",
+  "stack_config": "design/hbm2_architecture.json",
+  "materials": "design/thermal/hbm2_materials.json",
+  "boundaries": "design/thermal/hbm2_boundary_conditions.json",
+  "solver": "reference_finite_volume",
+  "grid": {"nx_per_stack": 32, "ny": 16},
+  "analysis": {"steady": true, "transient": true, "timestep_s": 0.0001, "duration_s": 0.005, "tolerance_K": 1e-8},
+  "geometry_um": {
+    "substrate_thickness": {"value": 180.0, "classification": "illustrative", "source": "architecture model"},
+    "interposer_thickness": {"value": 100.0, "classification": "illustrative", "source": "architecture model"},
+    "base_die_thickness": {"value": 100.0, "classification": "estimated", "source": "architecture model", "uncertainty": {"min": 50.0, "max": 150.0}},
+    "bump_plane_thickness": {"value": 15.0, "classification": "literature_estimate", "source": "JSTS HBM modeling study reports 15 um chip gap", "source_url": "https://jsts.org/jsts/XmlViewer/f436715", "uncertainty": {"min": 10.0, "max": 25.0}},
+    "dram_die_thickness": {"value": 32.0, "classification": "literature_estimate", "source": "JSTS HBM modeling study reports 32 um silicon die", "source_url": "https://jsts.org/jsts/XmlViewer/f436715", "uncertainty": {"min": 25.0, "max": 50.0}},
+    "tim_thickness": {"value": 50.0, "classification": "estimated", "source": "generic TIM architectural assumption", "uncertainty": {"min": 20.0, "max": 100.0}},
+    "lid_thickness": {"value": 500.0, "classification": "estimated", "source": "generic copper heat-spreader assumption", "uncertainty": {"min": 250.0, "max": 1000.0}}
+  },
+  "tsv": {"model": "effective", "fill_ratio": {"value": 0.02, "classification": "illustrative", "source": "architecture TSV-grid assumption", "uncertainty": {"min": 0.005, "max": 0.08}}},
+  "bump": {"fill_ratio": {"value": 0.05, "classification": "illustrative", "source": "architecture bump-grid assumption", "uncertainty": {"min": 0.01, "max": 0.15}}},
+  "default_power_profile": "uniform",
+  "power_profiles": ["uniform", "single_bank_hotspot", "single_channel_hotspot", "bank_pim_hotspot", "logic_pcu_hotspot", "all_channel_balanced", "refresh_heavy", "bursty_transient"],
+  "external_solvers": {
+    "hotspot": {"url": "https://github.com/uvahotspot/HotSpot", "commit": "f18831e48cef5d62580585cca0d7fab6c71bc3cc", "license": "BSD-style; inspect upstream LICENSE"},
+    "3d_ice": {"url": "https://github.com/esl-epfl/3d-ice", "commit": "4953952a1ef6d38807ff307212a6f15e5b2ef935", "license": "GPL-3.0"}
+  },
+  "disclaimer": "Architectural reference thermal model; not calibrated and not signoff."
+}

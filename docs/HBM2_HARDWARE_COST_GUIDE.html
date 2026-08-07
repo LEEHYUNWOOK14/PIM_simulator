@@ -18,10 +18,10 @@ main{padding:30px 20px 70px}section{scroll-margin-top:65px;margin:34px 0}.card{b
 <body>
 <header><div class="wrap">
   <span class="badge">대상: 전자공학 전공자</span><span class="badge">컴퓨터구조 선수지식 불필요</span><span class="badge">HBM2 PIM</span>
-  <h1>열만 보지 않는<br>HBM2 하드웨어 비용 분석</h1>
-  <p>HBM2 PIM 설계를 실제로 만들 때 필요한 실리콘 면적, 3차원 패키지, 제조수율, 전력과 성능을 한 흐름으로 비교하는 방법을 회로·소자 관점의 언어로 설명합니다.</p>
+  <h1>열을 포함한 전체<br>HBM2 하드웨어 비용 분석</h1>
+  <p>HBM2 PIM 설계를 실제로 만들 때 필요한 실리콘 면적, 3차원 패키지, 제조수율, 전력·성능과 열·냉각부담을 한 흐름으로 비교하는 방법을 회로·소자 관점의 언어로 설명합니다.</p>
 </div></header>
-<nav><div class="wrap"><a href="#why">왜 필요한가</a><a href="#flow">파이프라인</a><a href="#axes">4개 비용축</a><a href="#source">근거와 출처</a><a href="#result">현재 결과</a><a href="#rtl">RTL 완료 후</a><a href="#github">GitHub에서 찾기</a><a href="#run">실행법</a></div></nav>
+<nav><div class="wrap"><a href="#why">왜 필요한가</a><a href="#flow">파이프라인</a><a href="#axes">5개 비용축</a><a href="#source">근거와 출처</a><a href="#result">현재 결과</a><a href="#rtl">RTL 완료 후</a><a href="#github">GitHub에서 찾기</a><a href="#run">실행법</a></div></nav>
 <main><div class="wrap">
 
 <section id="why" class="card"><h2>1. 왜 온도 이외의 비용을 보는가?</h2>
@@ -31,19 +31,21 @@ main{padding:30px 20px 70px}section{scroll-margin-top:65px;margin:34px 0}.card{b
  <div><div class="metric">TSV</div><b>패키지</b><p>수직 배선, 범프, 접합면, interposer가 요구하는 제조 자원입니다.</p></div>
  <div><div class="metric">Y</div><b>수율</b><p>여러 die와 접합이 모두 정상인 완성 stack을 얻을 확률입니다.</p></div>
  <div><div class="metric">J/op</div><b>전력·성능</b><p>유용한 연산이나 데이터 전송 하나를 위해 쓴 에너지입니다.</p></div>
+ <div><div class="metric">K/W</div><b>열·냉각</b><p>발생 전력이 만드는 온도상승, 열저항, 열 여유와 필요한 냉각부담입니다.</p></div>
 </div>
 <div class="warn"><b>중요:</b> 이 분석은 제조사의 실제 원가표가 아닙니다. 공개되지 않은 wafer 가격·결함밀도·접합수율은 범위로만 다루며, 결과는 설계 대안의 상대 비교용입니다.</div></section>
 
 <section id="flow" class="card"><h2>2. 전체 파이프라인</h2>
-<div class="flow"><div>HBM 구조 JSON<br><span class="small">die/channel/TSV</span></div><span class="arrow">＋</span><div>합성·배치<br><span class="small">면적/혼잡도</span></div><span class="arrow">＋</span><div>전력·성능 trace<br><span class="small">VCD/SAIF/simulator</span></div><span class="arrow">→</span><div>4개 분석기<br><span class="small">area/package/yield/P·P</span></div><span class="arrow">→</span><div>통합 분석<br><span class="small">Pareto/불확실성</span></div></div>
+<div class="flow"><div>HBM 구조 JSON<br><span class="small">die/channel/TSV</span></div><span class="arrow">＋</span><div>합성·배치<br><span class="small">면적/혼잡도</span></div><span class="arrow">＋</span><div>전력·성능 trace<br><span class="small">VCD/SAIF/simulator</span></div><span class="arrow">＋</span><div>3D 열해석<br><span class="small">온도장/열저항</span></div><span class="arrow">→</span><div>5개 분석기<br><span class="small">area/package/yield/P·P/thermal</span></div><span class="arrow">→</span><div>통합 분석<br><span class="small">Pareto/불확실성</span></div></div>
 <p>각 분석기는 JSON 결과만 주고받습니다. 따라서 RTL이 수정 중일 때는 synthetic 입력으로 실행하고, RTL이 끝나면 합성·배치·activity 결과만 교체할 수 있습니다.</p>
 <div class="note"><b>숫자를 합치는 순서:</b> 먼저 단위가 있는 물리량을 계산하고 → 기준 8Hi를 1.0으로 정규화하고 → 비용지수와 성능을 분리해 비교하고 → 마지막에 열·용량 제약과 불확실성을 적용합니다.</div></section>
 
-<section id="axes"><h2>3. 네 개의 비용축</h2><div class="grid four">
+<section id="axes"><h2>3. 다섯 개의 비용축</h2><div class="grid four">
  <article class="card"><h3>① Area</h3><p>logic die, DRAM die, PIM 추가 logic, PHY 예약영역, TSV keep-out zone을 분리합니다.</p><div class="formula">누적 실리콘 = logic + N<sub>die</sub> × DRAM</div><p class="small">현재 절대 면적은 illustrative입니다. RTL 완료 후 Yosys/OpenROAD 면적으로 교체합니다.</p></article>
  <article class="card"><h3>② Package</h3><p>interposer 면적, micro-bump 수, TSV 수, 접합면 수, 배선 요구량을 사용합니다.</p><div class="formula">package index = Σ wᵢ × 정규화 자원ᵢ</div><p class="small">가중치는 가격표가 아니라 비교 정책이며 모두 설정파일에 노출됩니다.</p></article>
  <article class="card"><h3>③ Yield</h3><p>die 결함과 3D 접합 실패를 분리합니다. 결함 clustering을 고려하는 negative-binomial 식을 사용합니다.</p><div class="formula">Y<sub>die</sub>=(1+D₀A/α)<sup>−α</sup></div><div class="formula">Y<sub>stack</sub>=Y<sub>logic</sub>·ΠY<sub>DRAM</sub>·Y<sub>bond</sub>·Y<sub>TSV</sub>·Y<sub>assembly</sub></div></article>
  <article class="card"><h3>④ Power / Performance</h3><p>이론 대역폭, 실제 사용률, 전력, energy/bit, PIM speedup을 계산합니다.</p><div class="formula">1024 bit ÷ 8 × 2.4 Gb/s = 307.2 GB/s</div><p class="small">307 GB/s는 Samsung 공개 HBM2 사양과 일치하는 검산점입니다.</p></article>
+ <article class="card"><h3>⑤ Thermal</h3><p>3D 온도장에서 최고온도, 온도상승, 등가 열저항, 열 여유와 냉각부담을 계산합니다.</p><div class="formula">thermal burden = ΔT / (T<sub>limit</sub>−T<sub>ambient</sub>)</div><p class="small">비용지수에 포함되지만 실제 heatsink 가격이나 제조사 signoff 온도는 아닙니다.</p></article>
 </div></section>
 
 <section id="source" class="card"><h2>4. 근거를 어떻게 구분했나?</h2>
@@ -58,26 +60,26 @@ main{padding:30px 20px 70px}section{scroll-margin-top:65px;margin:34px 0}.card{b
 <div class="good"><b>핵심 공개 근거:</b> Samsung Aquabolt HBM2, Samsung Flashbolt HBM2E, SK hynix TSV/HBM2 설명, CACTI 7, McPAT, 3D stacked-IC yield 연구, negative-binomial yield 연구, Berkeley Roofline 모델.</div></section>
 
 <section id="result" class="card"><h2>5. 현재 비교 결과</h2>
-<p>기준은 <b>1-stack 8Hi PIM</b>이며 각 비용지수는 기준을 1.0으로 정규화했습니다. 낮은 비용과 높은 성능이 좋지만, 요구 용량과 열 제한을 먼저 만족해야 합니다.</p>
-<table><thead><tr><th>설계</th><th class="num">통합 비용</th><th class="num">상대 성능</th><th class="num">성능/비용</th><th>판정</th></tr></thead><tbody>
-<tr><td>4Hi 1-stack PIM</td><td class="num">0.672</td><td class="num">1.000</td><td class="num">1.488</td><td><span class="pill no">4GB: 용량 미달</span></td></tr>
-<tr><td>8Hi 1-stack PIM</td><td class="num">1.000</td><td class="num">1.000</td><td class="num">1.000</td><td><span class="pill ok">Pareto</span></td></tr>
-<tr><td>12Hi 1-stack PIM</td><td class="num">1.360</td><td class="num">1.000</td><td class="num">0.735</td><td>용량 여유, 비용 증가</td></tr>
-<tr><td>8Hi 2-stack PIM</td><td class="num">1.819</td><td class="num">2.000</td><td class="num">1.100</td><td><span class="pill ok">Pareto</span></td></tr>
-<tr><td>8Hi 1-stack no-PIM</td><td class="num">1.114</td><td class="num">0.556</td><td class="num">0.498</td><td>비교 기준 후보</td></tr>
+<p>기준은 <b>1-stack 8Hi PIM</b>이며 area·package·yield·energy·thermal의 다섯 비용지수를 기준 1.0으로 정규화했습니다. 낮은 비용과 높은 성능이 좋지만, 요구 용량과 열 제한을 먼저 만족해야 합니다.</p>
+<table><thead><tr><th>설계</th><th class="num">Thermal</th><th class="num">통합 비용</th><th class="num">상대 성능</th><th class="num">성능/비용</th><th>판정</th></tr></thead><tbody>
+<tr><td>4Hi 1-stack PIM</td><td class="num">0.619</td><td class="num">0.661</td><td class="num">1.000</td><td class="num">1.513</td><td><span class="pill no">4GB: 용량 미달</span></td></tr>
+<tr><td>8Hi 1-stack PIM</td><td class="num">1.000</td><td class="num">1.000</td><td class="num">1.000</td><td class="num">1.000</td><td><span class="pill ok">Pareto</span></td></tr>
+<tr><td>12Hi 1-stack PIM</td><td class="num">1.469</td><td class="num">1.381</td><td class="num">1.000</td><td class="num">0.724</td><td>용량 여유, 열·비용 증가</td></tr>
+<tr><td>8Hi 2-stack PIM</td><td class="num">2.000</td><td class="num">1.854</td><td class="num">2.000</td><td class="num">1.079</td><td><span class="pill ok">Pareto</span></td></tr>
+<tr><td>8Hi 1-stack no-PIM</td><td class="num">0.870</td><td class="num">1.061</td><td class="num">0.556</td><td class="num">0.524</td><td>비교 기준 후보</td></tr>
 </tbody></table>
 <h3 style="margin-top:22px">불확실성 2,000회 분석</h3>
 <svg viewBox="0 0 900 210" role="img" aria-label="최고 성능 비용 확률 막대그래프" style="width:100%;background:#f8fafc;border-radius:12px">
  <text x="20" y="27" font-size="16" fill="#172033">feasible 설계 중 최고 성능/비용이 될 확률</text>
- <text x="20" y="72">8Hi 1-stack PIM</text><rect x="210" y="50" width="547" height="28" rx="5" fill="#2563eb"/><text x="767" y="70">54.7%</text>
- <text x="20" y="122">8Hi 2-stack PIM</text><rect x="210" y="100" width="430" height="28" rx="5" fill="#06b6d4"/><text x="650" y="120">42.95%</text>
- <text x="20" y="172">8Hi no-PIM</text><rect x="210" y="150" width="24" height="28" rx="5" fill="#d97706"/><text x="244" y="170">2.35%</text>
+ <text x="20" y="72">8Hi 1-stack PIM</text><rect x="210" y="50" width="561" height="28" rx="5" fill="#2563eb"/><text x="781" y="70">56.1%</text>
+ <text x="20" y="122">8Hi 2-stack PIM</text><rect x="210" y="100" width="400" height="28" rx="5" fill="#06b6d4"/><text x="620" y="120">40.0%</text>
+ <text x="20" y="172">8Hi no-PIM</text><rect x="210" y="150" width="39" height="28" rx="5" fill="#d97706"/><text x="259" y="170">3.9%</text>
 </svg>
 <p class="small">이 확률은 실제 제조 통계가 아니라 설정된 uncertainty range 안에서의 순위 안정성입니다. 입력 범위가 바뀌면 결과도 바뀝니다.</p></section>
 
 <section id="rtl" class="card"><h2>6. RTL 수정이 끝나면 무엇이 달라지는가?</h2>
 <div class="grid">
- <div><h3>실제값으로 승격 가능</h3><ul><li>표준셀/PIM/버퍼 면적</li><li>배치 utilization과 혼잡도</li><li>VCD/SAIF 기반 동적 전력</li><li>처리량·지연·유효 대역폭</li><li>블록별 전력의 3D 위치 매핑</li></ul></div>
+ <div><h3>실제값으로 승격 가능</h3><ul><li>표준셀/PIM/버퍼 면적</li><li>배치 utilization과 혼잡도</li><li>VCD/SAIF 기반 동적 전력</li><li>처리량·지연·유효 대역폭</li><li>블록별 전력의 3D 위치 매핑</li><li>시나리오별 온도장·hotspot·열저항</li></ul></div>
  <div><h3>여전히 추정으로 남음</h3><ul><li>제조사 웨이퍼 가격</li><li>실제 defect density</li><li>bond/TSV/assembly yield</li><li>고객별 HBM 가격</li><li>제조사 내부 PHY/TSV GDS</li></ul></div>
 </div><p>즉 RTL 완료 후 면적·전력·성능은 훨씬 현실적으로 바뀌지만, 제조수율과 가격은 vendor/NDA 또는 측정자료가 없으면 계속 범위 모델입니다.</p></section>
 
@@ -87,7 +89,12 @@ main{padding:30px 20px 70px}section{scroll-margin-top:65px;margin:34px 0}.card{b
 <a href="https://github.com/LEEHYUNWOOK14/PIM_simulator/blob/PIM_Simulator/hardware_cost/README.md">🧭 전체 설계: hardware_cost/README.md</a>
 <a href="https://github.com/LEEHYUNWOOK14/PIM_simulator/blob/PIM_Simulator/hardware_cost/RESEARCH_BASIS.md">📚 선행연구와 논리: hardware_cost/RESEARCH_BASIS.md</a>
 <a href="https://github.com/LEEHYUNWOOK14/PIM_simulator/blob/PIM_Simulator/hardware_cost/sources.json">🔗 출처 원장: hardware_cost/sources.json</a>
-<a href="https://github.com/LEEHYUNWOOK14/PIM_simulator/tree/PIM_Simulator/hardware_cost">🧩 파이프라인별 README: hardware_cost/{area,package,yield,power_performance,integration}/</a>
+<a href="https://github.com/LEEHYUNWOOK14/PIM_simulator/tree/PIM_Simulator/hardware_cost">🧩 파이프라인별 README: hardware_cost/{area,package,yield,power_performance,thermal,integration}/</a>
+<a href="https://github.com/LEEHYUNWOOK14/PIM_simulator/blob/PIM_Simulator/hardware_cost/thermal/README.md">🌡️ 열 비용축: hardware_cost/thermal/README.md</a>
+<a href="https://github.com/LEEHYUNWOOK14/PIM_simulator/blob/PIM_Simulator/docs/HBM2_THERMAL_ANALYSIS.md">🔥 3D 열해석 상세: docs/HBM2_THERMAL_ANALYSIS.md</a>
+<a href="https://github.com/LEEHYUNWOOK14/PIM_simulator/blob/PIM_Simulator/output/hbm2_hardware_cost/thermal/thermal_report.md">🌡️ 통합 Thermal 비용 보고서: output/hbm2_hardware_cost/thermal/thermal_report.md</a>
+<a href="https://github.com/LEEHYUNWOOK14/PIM_simulator/blob/PIM_Simulator/output/hbm2_thermal/reference/temperature_heatmap.png">🗺️ 기준 8Hi 온도 heatmap: output/hbm2_thermal/reference/temperature_heatmap.png</a>
+<a href="https://github.com/LEEHYUNWOOK14/PIM_simulator/blob/PIM_Simulator/output/hbm2_thermal/validation/validation_report.json">🧪 3D 열 solver 검증: output/hbm2_thermal/validation/validation_report.json</a>
 <a href="https://github.com/LEEHYUNWOOK14/PIM_simulator/blob/PIM_Simulator/output/hbm2_hardware_cost/hardware_cost_report.md">📊 통합 결과: output/hbm2_hardware_cost/hardware_cost_report.md</a>
 <a href="https://github.com/LEEHYUNWOOK14/PIM_simulator/blob/PIM_Simulator/output/hbm2_hardware_cost/source_traceability.md">🧾 출처 추적표: output/hbm2_hardware_cost/source_traceability.md</a>
 <a href="https://github.com/LEEHYUNWOOK14/PIM_simulator/blob/PIM_Simulator/output/hbm2_hardware_cost/validation/validation_report.md">✅ 검증 결과: output/hbm2_hardware_cost/validation/validation_report.md</a>
@@ -98,7 +105,7 @@ main{padding:30px 20px 70px}section{scroll-margin-top:65px;margin:34px 0}.card{b
 <p>입력 수정 위치는 <code>hardware_cost/config.json</code>입니다. 결과는 <code>output/hbm2_hardware_cost/</code> 아래에 다시 생성됩니다.</p>
 <h3>결과를 읽는 권장 순서</h3><ol><li>이 HTML로 개념을 이해합니다.</li><li><code>hardware_cost_report.md</code>에서 설계별 결과를 봅니다.</li><li><code>uncertainty_summary.csv</code>에서 가정 변화에 따른 범위를 봅니다.</li><li><code>source_traceability.md</code>에서 각 주장의 근거와 한계를 확인합니다.</li><li>정밀 검토 시 각 pipeline README와 metrics JSON을 확인합니다.</li></ol></section>
 
-<section class="card"><h2>9. 한 문장 결론</h2><p class="lead"><b>이 파이프라인은 “HBM2 PIM이 얼마인가?”를 단정하는 계산기가 아니라, “어떤 설계가 면적·패키지·수율위험·에너지·성능 사이에서 더 합리적인가?”를 출처와 불확실성을 보존하며 비교하는 도구입니다.</b></p></section>
+<section class="card"><h2>9. 한 문장 결론</h2><p class="lead"><b>이 파이프라인은 “HBM2 PIM이 얼마인가?”를 단정하는 계산기가 아니라, “어떤 설계가 면적·패키지·수율위험·에너지·성능·열과 냉각 사이에서 더 합리적인가?”를 출처와 불확실성을 보존하며 비교하는 도구입니다.</b></p></section>
 </div></main>
 <div class="footer">STOB PIM2 · HBM2 architectural hardware-cost model · 비제조사·비견적·비signoff 결과</div>
 </body></html>

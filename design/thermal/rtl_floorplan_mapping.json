@@ -1,0 +1,9 @@
+{
+  "logic_pcu": "logic_die.pcu_cluster",
+  "logic_shared_buffer": "logic_die.shared_buffer",
+  "logic_die_link_arbiter": "logic_die.arbiter",
+  "logic_die_dual_link_arbiter": "logic_die.arbiter",
+  "bank_pim_core[channel][block]": "dram_die[channel].bank_pim[block]",
+  "bank_local_reduction_buffer": "dram_die[channel].bank_pim[block]",
+  "note": "Adapter contract only. The thermal solver does not require RTL or modify it."
+}

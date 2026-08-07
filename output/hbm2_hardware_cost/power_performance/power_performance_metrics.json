@@ -11,9 +11,6 @@
     "energy_per_GB_work_J": 0.008913070436507936,
     "io_energy_per_transferred_bit_pJ": 2.0054408482142856,
     "pim_speedup_assumption": 1.8,
-    "predicted_peak_temperature_K": 306.5055161935789,
-    "thermal_limit_K": 358.15,
-    "thermal_feasible": true,
     "power_evidence": "architectural/synthetic unless replaced by activity or measurement"
   },
   "hbm2_8hi_1stack": {
@@ -28,9 +25,6 @@
     "energy_per_GB_work_J": 0.011884093915343914,
     "io_energy_per_transferred_bit_pJ": 2.6739211309523805,
     "pim_speedup_assumption": 1.8,
-    "predicted_peak_temperature_K": 310.51396556538003,
-    "thermal_limit_K": 358.15,
-    "thermal_feasible": true,
     "power_evidence": "architectural/synthetic unless replaced by activity or measurement"
   },
   "hbm2_12hi_1stack": {
@@ -45,9 +39,6 @@
     "energy_per_GB_work_J": 0.014855117394179895,
     "io_energy_per_transferred_bit_pJ": 3.3424014136904763,
     "pim_speedup_assumption": 1.8,
-    "predicted_peak_temperature_K": 315.44238692415195,
-    "thermal_limit_K": 358.15,
-    "thermal_feasible": true,
     "power_evidence": "architectural/synthetic unless replaced by activity or measurement"
   },
   "hbm2_8hi_2stack": {
@@ -62,9 +53,6 @@
     "energy_per_GB_work_J": 0.011884093915343914,
     "io_energy_per_transferred_bit_pJ": 2.6739211309523805,
     "pim_speedup_assumption": 1.8,
-    "predicted_peak_temperature_K": 321.0279311307601,
-    "thermal_limit_K": 358.15,
-    "thermal_feasible": true,
     "power_evidence": "architectural/synthetic unless replaced by activity or measurement"
   },
   "hbm2_8hi_no_pim": {
@@ -79,9 +67,6 @@
     "energy_per_GB_work_J": 0.018601190476190476,
     "io_energy_per_transferred_bit_pJ": 2.3251488095238098,
     "pim_speedup_assumption": 1.0,
-    "predicted_peak_temperature_K": 309.1425787525044,
-    "thermal_limit_K": 358.15,
-    "thermal_feasible": true,
     "power_evidence": "architectural/synthetic unless replaced by activity or measurement"
   }
 }

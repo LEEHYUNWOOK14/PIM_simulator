@@ -37,10 +37,15 @@
     "bandwidth_utilization": {"value": 0.70, "unit": "ratio", "classification": "estimated", "source_id": "project_cost_assumption", "confidence": "low", "uncertainty": {"distribution": "uniform", "min": 0.35, "max": 0.9}},
     "baseline_power_W": {"value": 4.0, "unit": "W", "classification": "project_config", "source_id": "project_thermal", "confidence": "low", "uncertainty": {"distribution": "uniform", "min": 2.5, "max": 8.0}},
     "pim_speedup": {"value": 1.8, "unit": "ratio", "classification": "estimated", "source_id": "project_cost_assumption", "confidence": "low", "uncertainty": {"distribution": "uniform", "min": 1.0, "max": 2.5}},
-    "pim_power_multiplier": {"value": 1.15, "unit": "ratio", "classification": "estimated", "source_id": "project_cost_assumption", "confidence": "low", "uncertainty": {"distribution": "uniform", "min": 1.0, "max": 1.5}},
-    "thermal_limit_K": {"value": 358.15, "unit": "K", "classification": "project_config", "source_id": "project_thermal", "confidence": "low"}
+    "pim_power_multiplier": {"value": 1.15, "unit": "ratio", "classification": "estimated", "source_id": "project_cost_assumption", "confidence": "low", "uncertainty": {"distribution": "uniform", "min": 1.0, "max": 1.5}}
   },
-  "integration_weights": {"area": 0.25, "package": 0.25, "yield": 0.25, "energy": 0.25},
+  "thermal": {
+    "ambient_temperature_K": {"value": 300.0, "unit": "K", "classification": "project_config", "source_id": "project_thermal", "confidence": "medium", "uncertainty": {"distribution": "uniform", "min": 293.15, "max": 318.15}},
+    "temperature_limit_K": {"value": 358.15, "unit": "K", "classification": "project_config", "source_id": "project_thermal", "confidence": "low"},
+    "stack_height_penalty_base": {"value": 0.65, "unit": "ratio", "classification": "derived", "source_id": "project_thermal", "confidence": "low", "uncertainty": {"distribution": "uniform", "min": 0.5, "max": 0.8}},
+    "stack_height_penalty_slope": {"value": 0.35, "unit": "ratio", "classification": "derived", "source_id": "project_thermal", "confidence": "low", "uncertainty": {"distribution": "uniform", "min": 0.2, "max": 0.5}}
+  },
+  "integration_weights": {"area": 0.20, "package": 0.20, "yield": 0.20, "energy": 0.20, "thermal": 0.20},
   "scenarios": [
     {"name": "hbm2_4hi_1stack", "stacks": 1, "dies": 4, "pim_enabled": true, "workload_scale": 1.0},
     {"name": "hbm2_8hi_1stack", "stacks": 1, "dies": 8, "pim_enabled": true, "workload_scale": 1.0},

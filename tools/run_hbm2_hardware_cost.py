@@ -79,22 +79,30 @@ def pp_metrics(cfg,s,thermal):
     achieved=theoretical*val(p["bandwidth_utilization"]); speed=val(p["pim_speedup"]) if s["pim_enabled"] else 1.0
     useful=achieved*speed; power=val(p["baseline_power_W"])*s["stacks"]*(0.5+0.5*s["dies"]/8)*(val(p["pim_power_multiplier"]) if s["pim_enabled"] else 1)
     energy_per_gb=power/useful if useful>0 else math.inf; energy_bit_pj=power/(achieved*8e9)*1e12 if achieved>0 else math.inf
-    ambient=300.; ref_peak=float(thermal.get("peak_temperature_K",309.1426)); ref_power=max(float(thermal.get("input_power_W",4)),1e-12); predicted=ambient+(ref_peak-ambient)*(power/ref_power)*(0.65+0.35*s["dies"]/8)
     capacity=s["stacks"]*s["dies"]*val(p["dram_die_capacity_GB"]); capacity_ok=capacity>=val(p["workload_required_capacity_GB"])
-    return {"capacity_GB":capacity,"required_capacity_GB":val(p["workload_required_capacity_GB"]),"capacity_feasible":capacity_ok,"theoretical_bandwidth_GBs":theoretical,"achieved_bandwidth_GBs":achieved,"bandwidth_utilization":val(p["bandwidth_utilization"]),"normalized_useful_performance":useful,"estimated_power_W":power,"energy_per_GB_work_J":energy_per_gb,"io_energy_per_transferred_bit_pJ":energy_bit_pj,"pim_speedup_assumption":speed,"predicted_peak_temperature_K":predicted,"thermal_limit_K":val(p["thermal_limit_K"]),"thermal_feasible":predicted<=val(p["thermal_limit_K"]),"power_evidence":"architectural/synthetic unless replaced by activity or measurement"}
+    return {"capacity_GB":capacity,"required_capacity_GB":val(p["workload_required_capacity_GB"]),"capacity_feasible":capacity_ok,"theoretical_bandwidth_GBs":theoretical,"achieved_bandwidth_GBs":achieved,"bandwidth_utilization":val(p["bandwidth_utilization"]),"normalized_useful_performance":useful,"estimated_power_W":power,"energy_per_GB_work_J":energy_per_gb,"io_energy_per_transferred_bit_pJ":energy_bit_pj,"pim_speedup_assumption":speed,"power_evidence":"architectural/synthetic unless replaced by activity or measurement"}
+
+def thermal_metrics(cfg,s,pp,reference):
+    t=cfg["thermal"]; ambient=val(t["ambient_temperature_K"]); limit=val(t["temperature_limit_K"])
+    ref_ambient=300.0; ref_peak=float(reference.get("peak_temperature_K",309.1426)); ref_power=max(float(reference.get("input_power_W",4)),1e-12)
+    reference_r=(ref_peak-ref_ambient)/ref_power
+    height_factor=val(t["stack_height_penalty_base"])+val(t["stack_height_penalty_slope"])*s["dies"]/8
+    predicted_delta=reference_r*pp["estimated_power_W"]*height_factor; predicted=ambient+predicted_delta
+    allowable=max(limit-ambient,1e-12); burden=predicted_delta/allowable
+    return {"ambient_temperature_K":ambient,"predicted_peak_temperature_K":predicted,"peak_temperature_rise_K":predicted_delta,"temperature_limit_K":limit,"thermal_headroom_K":limit-predicted,"equivalent_stack_thermal_resistance_K_W":predicted_delta/max(pp["estimated_power_W"],1e-12),"required_cooling_conductance_W_K":pp["estimated_power_W"]/allowable,"thermal_burden_ratio":burden,"thermal_feasible":predicted<=limit,"reference_solver":"output/hbm2_thermal/reference/summary.json","evidence":"derived from the uncalibrated architectural thermal reference model"}
 
 def analyze(cfg,arch,thermal):
     base_s=next(s for s in cfg["scenarios"] if s["name"]==cfg["baseline"]); base_pkg=package_physical(cfg,arch,base_s)
     rows=[]
     for s in cfg["scenarios"]:
-      ar=area_metrics(cfg,arch,s); pkg=package_physical(cfg,arch,s); pm,terms=package_metric(cfg,pkg,base_pkg); yi=yield_metrics(cfg,ar,s); pp=pp_metrics(cfg,s,thermal)
-      rows.append({"scenario":s["name"],"settings":s,"area":ar,"package":{**pkg,"package_complexity_index":pm,"normalized_terms":terms},"yield":yi,"power_performance":pp})
+      ar=area_metrics(cfg,arch,s); pkg=package_physical(cfg,arch,s); pm,terms=package_metric(cfg,pkg,base_pkg); yi=yield_metrics(cfg,ar,s); pp=pp_metrics(cfg,s,thermal); tm=thermal_metrics(cfg,s,pp,thermal)
+      rows.append({"scenario":s["name"],"settings":s,"area":ar,"package":{**pkg,"package_complexity_index":pm,"normalized_terms":terms},"yield":yi,"power_performance":pp,"thermal":tm})
     base=next(r for r in rows if r["scenario"]==cfg["baseline"]); w=cfg["integration_weights"]
     for r in rows:
-      indices={"area":r["area"]["cumulative_silicon_mm2"]/base["area"]["cumulative_silicon_mm2"],"package":r["package"]["package_complexity_index"],"yield":r["yield"]["expected_attempts_per_good_system"]/base["yield"]["expected_attempts_per_good_system"],"energy":r["power_performance"]["energy_per_GB_work_J"]/base["power_performance"]["energy_per_GB_work_J"]}
+      indices={"area":r["area"]["cumulative_silicon_mm2"]/base["area"]["cumulative_silicon_mm2"],"package":r["package"]["package_complexity_index"],"yield":r["yield"]["expected_attempts_per_good_system"]/base["yield"]["expected_attempts_per_good_system"],"energy":r["power_performance"]["energy_per_GB_work_J"]/base["power_performance"]["energy_per_GB_work_J"],"thermal":r["thermal"]["thermal_burden_ratio"]/base["thermal"]["thermal_burden_ratio"]}
       combined=math.exp(sum(w[k]*math.log(max(indices[k],1e-15)) for k in w)); perf=r["power_performance"]["normalized_useful_performance"]/base["power_performance"]["normalized_useful_performance"]
-      feasible=r["power_performance"]["thermal_feasible"] and r["power_performance"]["capacity_feasible"]
-      r["integration"]={"indices":indices,"combined_cost_index":combined,"normalized_performance":perf,"performance_per_cost":perf/combined,"feasible":feasible,"feasibility":{"thermal":r["power_performance"]["thermal_feasible"],"capacity":r["power_performance"]["capacity_feasible"]}}
+      feasible=r["thermal"]["thermal_feasible"] and r["power_performance"]["capacity_feasible"]
+      r["integration"]={"indices":indices,"combined_cost_index":combined,"normalized_performance":perf,"performance_per_cost":perf/combined,"feasible":feasible,"feasibility":{"thermal":r["thermal"]["thermal_feasible"],"capacity":r["power_performance"]["capacity_feasible"]}}
     # Pareto: minimize all costs and maximize performance.
     for a in rows:
       dominated=not a["integration"]["feasible"]
@@ -125,26 +133,27 @@ def uncertainty(cfg,arch,thermal):
     for sample in range(cfg["models"]["monte_carlo_samples"]):
       result=analyze(sampled_config(cfg,rng),arch,thermal); eligible=[r for r in result if r["integration"]["feasible"]]; best=max(eligible,key=lambda r:r["integration"]["performance_per_cost"])["scenario"]; wins[best]+=1
       for r in result:
-        score=r["integration"]["performance_per_cost"]; data[r["scenario"]].append(score); samples.append({"sample":sample,"scenario":r["scenario"],"performance_per_cost":score,"combined_cost_index":r["integration"]["combined_cost_index"],"normalized_performance":r["integration"]["normalized_performance"]})
+        score=r["integration"]["performance_per_cost"]; data[r["scenario"]].append(score); samples.append({"sample":sample,"scenario":r["scenario"],"area_index":r["integration"]["indices"]["area"],"package_index":r["integration"]["indices"]["package"],"yield_cost_index":r["integration"]["indices"]["yield"],"energy_index":r["integration"]["indices"]["energy"],"thermal_index":r["integration"]["indices"]["thermal"],"combined_cost_index":r["integration"]["combined_cost_index"],"normalized_performance":r["integration"]["normalized_performance"],"performance_per_cost":score})
     summary=[{"scenario":k,"p05":float(np.quantile(v,.05)),"p50":float(np.quantile(v,.5)),"p95":float(np.quantile(v,.95)),"best_rank_probability":wins[k]/len(v),"samples":len(v)} for k,v in data.items()]
     return summary,samples
 
 def flatten_rows(rows):
     out=[]
     for r in rows:
-      i=r["integration"]; out.append({"scenario":r["scenario"],"area_index":i["indices"]["area"],"package_index":i["indices"]["package"],"yield_cost_index":i["indices"]["yield"],"energy_index":i["indices"]["energy"],"combined_cost_index":i["combined_cost_index"],"normalized_performance":i["normalized_performance"],"performance_per_cost":i["performance_per_cost"],"thermal_feasible":i["feasibility"]["thermal"],"capacity_feasible":i["feasibility"]["capacity"],"overall_feasible":i["feasible"],"pareto_optimal":i["pareto_optimal"]})
+      i=r["integration"]; out.append({"scenario":r["scenario"],"area_index":i["indices"]["area"],"package_index":i["indices"]["package"],"yield_cost_index":i["indices"]["yield"],"energy_index":i["indices"]["energy"],"thermal_index":i["indices"]["thermal"],"combined_cost_index":i["combined_cost_index"],"normalized_performance":i["normalized_performance"],"performance_per_cost":i["performance_per_cost"],"thermal_feasible":i["feasibility"]["thermal"],"capacity_feasible":i["feasibility"]["capacity"],"overall_feasible":i["feasible"],"pareto_optimal":i["pareto_optimal"]})
     return out
 
 def write_csv(path,rows):
     with open(path,"w",newline="",encoding="utf-8") as f: w=csv.DictWriter(f,fieldnames=rows[0]); w.writeheader(); w.writerows(rows)
 
 def write_pipeline_reports(out,cfg,rows,sources):
-    titles={"area":"Area","package":"Package","yield":"Yield","power_performance":"Power / Performance"}
+    titles={"area":"Area","package":"Package","yield":"Yield","power_performance":"Power / Performance","thermal":"Thermal"}
     methods={
       "area":["footprint와 누적 실리콘 면적을 분리한다.","PIM 추가 면적과 TSV KOZ 상한을 별도 보고한다.","방법론 근거는 cacti7/mcpat_hpca2009이며 현재 절대 면적은 project_cost_assumption/project_architecture다."],
       "package":["interposer, microbump, TSV, 접합면, routing demand를 독립 proxy로 정규화한다.","공개 교차검증은 samsung_flashbolt_hbm2e/skhynix_hbm2_tsv이며 가중치는 견적식이 아닌 프로젝트 정책이다."],
       "yield":["negative-binomial die yield와 bond/TSV group/assembly yield를 곱한다.","식과 분해 근거는 negative_binomial_yield/xu_3d_yield_review/stacked_memory_yield_2012다.","모든 기본 수율 숫자는 project_cost_assumption이며 제조사 공개 수율이 아니다."],
-      "power_performance":["1024 bit × 2.4 Gbps를 307.2 GB/s 공개 상한과 교차검증한다.","방법론은 roofline_berkeley, 제품 사양은 samsung_aquabolt_hbm2에 근거한다.","utilization, PIM speedup, power multiplier는 project_cost_assumption이다."]}
+      "power_performance":["1024 bit × 2.4 Gbps를 307.2 GB/s 공개 상한과 교차검증한다.","방법론은 roofline_berkeley, 제품 사양은 samsung_aquabolt_hbm2에 근거한다.","utilization, PIM speedup, power multiplier는 project_cost_assumption이다."],
+      "thermal":["3D finite-volume reference solver의 기준 온도상승과 전력을 사용해 등가 열저항을 유도한다.","온도상승/허용 온도상승으로 냉각부담을 정의하고 baseline 대비 thermal cost index로 통합한다.","현재 결과는 비보정 architectural estimate이며 실제 냉각기 가격이나 signoff 온도가 아니다."]}
     for key,title in titles.items():
       lines=[f"# {title} 분석 보고서","",f"> {cfg['disclaimer']}","","## 계산 논리"]+[f"- {x}" for x in methods[key]]+["","## 시나리오 결과","","|Scenario|핵심 결과|","|---|---|"]
       for r in rows:
@@ -163,7 +172,8 @@ def write_plots(out,flat,unc):
     import matplotlib.pyplot as plt
     names=[r["scenario"].replace("hbm2_","") for r in flat]; x=np.arange(len(names)); width=.18
     fig,ax=plt.subplots(figsize=(11,5))
-    for j,key in enumerate(("area_index","package_index","yield_cost_index","energy_index")): ax.bar(x+(j-1.5)*width,[r[key] for r in flat],width,label=key)
+    keys=("area_index","package_index","yield_cost_index","energy_index","thermal_index"); width=.15
+    for j,key in enumerate(keys): ax.bar(x+(j-2)*width,[r[key] for r in flat],width,label=key)
     ax.set_xticks(x,names,rotation=20); ax.set_ylabel("Normalized cost index (8Hi 1-stack = 1)"); ax.legend(ncol=2); fig.tight_layout(); fig.savefig(out/"cost_indices.png",dpi=170); plt.close(fig)
     fig,ax=plt.subplots(figsize=(10,5)); med=np.array([r["p50"] for r in unc]); low=med-np.array([r["p05"] for r in unc]); high=np.array([r["p95"] for r in unc])-med
     ax.errorbar(x,med,yerr=np.vstack([low,high]),fmt="o",capsize=5); ax.axhline(1,color="gray",ls="--"); ax.set_xticks(x,names,rotation=20); ax.set_ylabel("Performance / cost (P5, P50, P95)"); fig.tight_layout(); fig.savefig(out/"uncertainty_performance_per_cost.png",dpi=170); plt.close(fig)
@@ -175,7 +185,7 @@ def main():
     (out/"integrated_metrics.json").write_text(json.dumps({"disclaimer":cfg["disclaimer"],"baseline":cfg["baseline"],"results":rows,"uncertainty":unc},indent=2),encoding="utf-8")
     flat=flatten_rows(rows); write_csv(out/"design_comparison.csv",flat); write_csv(out/"pareto_frontier.csv",[r for r in flat if r["pareto_optimal"]]); write_csv(out/"uncertainty_summary.csv",unc); write_csv(out/"uncertainty_samples.csv",unc_samples)
     write_plots(out,flat,unc)
-    for key in ("area","package","yield","power_performance"):
+    for key in ("area","package","yield","power_performance","thermal"):
       d=out/key; d.mkdir(exist_ok=True); (d/f"{key}_metrics.json").write_text(json.dumps({r["scenario"]:r[key] for r in rows},indent=2),encoding="utf-8")
     write_pipeline_reports(out,cfg,rows,sources)
     found=set()
@@ -188,9 +198,9 @@ def main():
     find_sources(cfg)
     provenance={"config":a.config,"sources":"hardware_cost/sources.json","source_ids_used":sorted(found),"method_source_ids":["cacti7","mcpat_hpca2009","negative_binomial_yield","xu_3d_yield_review","stacked_memory_yield_2012","roofline_berkeley"],"model_equations":{"die_yield":"hardware_cost/yield/README.md","integration":"hardware_cost/integration/README.md"},"warning":"Method sources do not validate illustrative numeric defaults. See hardware_cost/RESEARCH_BASIS.md."}
     (out/"parameter_provenance.json").write_text(json.dumps(provenance,indent=2),encoding="utf-8")
-    lines=["# HBM2 PIM 하드웨어 비용 분석 보고서","",f"> {cfg['disclaimer']}","","## 설계 비교","","|설계|Area|Package|Yield cost|Energy|통합 cost|성능|성능/비용|열|용량|종합 feasible|Pareto|","|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|"]
-    for r in flat: lines.append(f"|{r['scenario']}|{r['area_index']:.3f}|{r['package_index']:.3f}|{r['yield_cost_index']:.3f}|{r['energy_index']:.3f}|{r['combined_cost_index']:.3f}|{r['normalized_performance']:.3f}|{r['performance_per_cost']:.3f}|{r['thermal_feasible']}|{r['capacity_feasible']}|{r['overall_feasible']}|{r['pareto_optimal']}|")
-    lines += ["","## 해석 근거와 한계","","- Area는 누적 실리콘 면적, PIM 추가 면적 및 TSV KOZ 상한을 분리한다. 방법 근거: `cacti7`, `mcpat_hpca2009`.","- Package는 interposer, microbump, TSV, 접합면, routing proxy를 사용한다. 공개 규모 교차검증: `samsung_flashbolt_hbm2e`, `skhynix_hbm2_tsv`.","- Yield는 negative-binomial die yield와 die/bond/TSV/assembly 분해를 사용한다. 식/구조 근거: `negative_binomial_yield`, `xu_3d_yield_review`, `stacked_memory_yield_2012`.","- Power/performance는 1024-bit × 2.4 Gbps = 307.2 GB/s/stack을 상한 검증점으로 사용한다: `samsung_aquabolt_hbm2`. 실제 utilization, PIM speedup, power는 추정 범위다.","- 통합값은 동일 가중 기하평균이라는 프로젝트 정책이며 제조사 가격식이 아니다. 개별 물리량과 Pareto 결과를 우선 해석한다.","","전체 서지정보와 각 주장의 적용 범위는 `hardware_cost/sources.json`을 참조한다."]
+    lines=["# HBM2 PIM 전체 하드웨어 비용 분석 보고서","",f"> {cfg['disclaimer']}","","## 설계 비교","","|설계|Area|Package|Yield|Energy|Thermal|통합 cost|성능|성능/비용|열|용량|종합 feasible|Pareto|","|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|"]
+    for r in flat: lines.append(f"|{r['scenario']}|{r['area_index']:.3f}|{r['package_index']:.3f}|{r['yield_cost_index']:.3f}|{r['energy_index']:.3f}|{r['thermal_index']:.3f}|{r['combined_cost_index']:.3f}|{r['normalized_performance']:.3f}|{r['performance_per_cost']:.3f}|{r['thermal_feasible']}|{r['capacity_feasible']}|{r['overall_feasible']}|{r['pareto_optimal']}|")
+    lines += ["","## 해석 근거와 한계","","- Area는 누적 실리콘 면적, PIM 추가 면적 및 TSV KOZ 상한을 분리한다. 방법 근거: `cacti7`, `mcpat_hpca2009`.","- Package는 interposer, microbump, TSV, 접합면, routing proxy를 사용한다. 공개 규모 교차검증: `samsung_flashbolt_hbm2e`, `skhynix_hbm2_tsv`.","- Yield는 negative-binomial die yield와 die/bond/TSV/assembly 분해를 사용한다. 식/구조 근거: `negative_binomial_yield`, `xu_3d_yield_review`, `stacked_memory_yield_2012`.","- Power/performance는 1024-bit × 2.4 Gbps = 307.2 GB/s/stack을 상한 검증점으로 사용한다: `samsung_aquabolt_hbm2`. 실제 utilization, PIM speedup, power는 추정 범위다.","- Thermal은 3D reference solver의 온도상승/전력으로 등가 열저항을 구하고 허용 온도상승 대비 냉각부담을 다섯 번째 비용축으로 사용한다: `project_thermal`.","- 통합값은 5개 축의 동일 가중 기하평균이라는 프로젝트 정책이며 제조사 가격식이 아니다. 전력과 열은 결합되어 있으므로 개별 지수도 함께 해석한다.","","전체 서지정보와 각 주장의 적용 범위는 `hardware_cost/sources.json`을 참조한다."]
     (out/"hardware_cost_report.md").write_text("\n".join(lines)+"\n",encoding="utf-8"); print(json.dumps({"status":"PASS","output":str(out),"scenarios":flat,"uncertainty":unc},indent=2))
 
 if __name__=="__main__": main()

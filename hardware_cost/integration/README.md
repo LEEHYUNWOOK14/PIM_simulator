@@ -2,7 +2,7 @@
 
 ## 목적
 
-서로 다른 단위의 네 분석 결과를 잃지 않고 비교표, 정규화 지수, Pareto frontier 및 불확실성 범위로 통합한다.
+서로 다른 단위의 area, package, yield, power/performance, thermal 다섯 분석 결과를 잃지 않고 비교표, 정규화 지수, Pareto frontier 및 불확실성 범위로 통합한다.
 
 ## 기준 설계
 
@@ -14,6 +14,8 @@
 - 작은 값이 좋은 비용축만 cost index로 사용한다.
 - 성능은 큰 값이 좋으므로 별도 normalized performance로 둔다.
 - yield는 수율 자체가 아니라 good-stack resource multiplier `1/Y`를 비용축으로 사용한다.
+- thermal은 온도상승/허용 온도상승으로 정의한 냉각부담을 기준 설계 대비 정규화한다.
+- energy와 thermal은 상관된 축이므로 개별 결과와 가중치 민감도를 반드시 함께 본다.
 - 열 제한을 넘은 설계는 순위는 보이되 feasible frontier에서 제외한다.
 - workload 최소 메모리 용량을 만족하지 못한 설계도 같은 방식으로 feasible frontier와 최상위 순위 확률에서 제외한다.
 - 기본 가중치는 정책 선택이지 논문/제조사 사실이 아님을 표시한다.

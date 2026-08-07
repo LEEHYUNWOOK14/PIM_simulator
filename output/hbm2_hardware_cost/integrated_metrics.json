@@ -62,21 +62,32 @@
         "energy_per_GB_work_J": 0.008913070436507936,
         "io_energy_per_transferred_bit_pJ": 2.0054408482142856,
         "pim_speedup_assumption": 1.8,
-        "predicted_peak_temperature_K": 306.5055161935789,
-        "thermal_limit_K": 358.15,
-        "thermal_feasible": true,
         "power_evidence": "architectural/synthetic unless replaced by activity or measurement"
+      },
+      "thermal": {
+        "ambient_temperature_K": 300.0,
+        "predicted_peak_temperature_K": 306.5055161935789,
+        "peak_temperature_rise_K": 6.505516193578906,
+        "temperature_limit_K": 358.15,
+        "thermal_headroom_K": 51.64448380642108,
+        "equivalent_stack_thermal_resistance_K_W": 1.8856568677040308,
+        "required_cooling_conductance_W_K": 0.05932932072227001,
+        "thermal_burden_ratio": 0.11187474107616352,
+        "thermal_feasible": true,
+        "reference_solver": "output/hbm2_thermal/reference/summary.json",
+        "evidence": "derived from the uncalibrated architectural thermal reference model"
       },
       "integration": {
         "indices": {
           "area": 0.5580110497237569,
           "package": 0.725,
           "yield": 0.671639076014902,
-          "energy": 0.7500000000000001
+          "energy": 0.7500000000000001,
+          "thermal": 0.61875
         },
-        "combined_cost_index": 0.6718843202565274,
+        "combined_cost_index": 0.6609044061581876,
         "normalized_performance": 1.0,
-        "performance_per_cost": 1.488351446597529,
+        "performance_per_cost": 1.5130781254931591,
         "feasible": false,
         "feasibility": {
           "thermal": true,
@@ -145,17 +156,28 @@
         "energy_per_GB_work_J": 0.011884093915343914,
         "io_energy_per_transferred_bit_pJ": 2.6739211309523805,
         "pim_speedup_assumption": 1.8,
-        "predicted_peak_temperature_K": 310.51396556538003,
-        "thermal_limit_K": 358.15,
-        "thermal_feasible": true,
         "power_evidence": "architectural/synthetic unless replaced by activity or measurement"
+      },
+      "thermal": {
+        "ambient_temperature_K": 300.0,
+        "predicted_peak_temperature_K": 310.51396556538003,
+        "peak_temperature_rise_K": 10.51396556538005,
+        "temperature_limit_K": 358.15,
+        "thermal_headroom_K": 47.636034434619944,
+        "equivalent_stack_thermal_resistance_K_W": 2.285644688126098,
+        "required_cooling_conductance_W_K": 0.07910576096302668,
+        "thermal_burden_ratio": 0.18080766234531476,
+        "thermal_feasible": true,
+        "reference_solver": "output/hbm2_thermal/reference/summary.json",
+        "evidence": "derived from the uncalibrated architectural thermal reference model"
       },
       "integration": {
         "indices": {
           "area": 1.0,
           "package": 1.0,
           "yield": 1.0,
-          "energy": 1.0
+          "energy": 1.0,
+          "thermal": 1.0
         },
         "combined_cost_index": 1.0,
         "normalized_performance": 1.0,
@@ -228,21 +250,32 @@
         "energy_per_GB_work_J": 0.014855117394179895,
         "io_energy_per_transferred_bit_pJ": 3.3424014136904763,
         "pim_speedup_assumption": 1.8,
-        "predicted_peak_temperature_K": 315.44238692415195,
-        "thermal_limit_K": 358.15,
-        "thermal_feasible": true,
         "power_evidence": "architectural/synthetic unless replaced by activity or measurement"
+      },
+      "thermal": {
+        "ambient_temperature_K": 300.0,
+        "predicted_peak_temperature_K": 315.44238692415195,
+        "peak_temperature_rise_K": 15.442386924151947,
+        "temperature_limit_K": 358.15,
+        "thermal_headroom_K": 42.70761307584803,
+        "equivalent_stack_thermal_resistance_K_W": 2.6856325085481645,
+        "required_cooling_conductance_W_K": 0.09888220120378335,
+        "thermal_burden_ratio": 0.26556125406968106,
+        "thermal_feasible": true,
+        "reference_solver": "output/hbm2_thermal/reference/summary.json",
+        "evidence": "derived from the uncalibrated architectural thermal reference model"
       },
       "integration": {
         "indices": {
           "area": 1.441988950276243,
           "package": 1.2750000000000001,
           "yield": 1.4888949075646285,
-          "energy": 1.2500000000000002
+          "energy": 1.2500000000000002,
+          "thermal": 1.46875
         },
-        "combined_cost_index": 1.3600708847059568,
+        "combined_cost_index": 1.3811435222928024,
         "normalized_performance": 1.0,
-        "performance_per_cost": 0.7352557953008434,
+        "performance_per_cost": 0.7240377150232183,
         "feasible": true,
         "feasibility": {
           "thermal": true,
@@ -311,21 +344,32 @@
         "energy_per_GB_work_J": 0.011884093915343914,
         "io_energy_per_transferred_bit_pJ": 2.6739211309523805,
         "pim_speedup_assumption": 1.8,
-        "predicted_peak_temperature_K": 321.0279311307601,
-        "thermal_limit_K": 358.15,
-        "thermal_feasible": true,
         "power_evidence": "architectural/synthetic unless replaced by activity or measurement"
+      },
+      "thermal": {
+        "ambient_temperature_K": 300.0,
+        "predicted_peak_temperature_K": 321.0279311307601,
+        "peak_temperature_rise_K": 21.0279311307601,
+        "temperature_limit_K": 358.15,
+        "thermal_headroom_K": 37.122068869239854,
+        "equivalent_stack_thermal_resistance_K_W": 2.285644688126098,
+        "required_cooling_conductance_W_K": 0.15821152192605337,
+        "thermal_burden_ratio": 0.3616153246906295,
+        "thermal_feasible": true,
+        "reference_solver": "output/hbm2_thermal/reference/summary.json",
+        "evidence": "derived from the uncalibrated architectural thermal reference model"
       },
       "integration": {
         "indices": {
           "area": 2.0,
           "package": 2.0,
           "yield": 2.735314472936077,
-          "energy": 1.0
+          "energy": 1.0,
+          "thermal": 2.0
         },
-        "combined_cost_index": 1.8187240664454964,
+        "combined_cost_index": 1.853614636538505,
         "normalized_performance": 2.0,
-        "performance_per_cost": 1.0996720376108444,
+        "performance_per_cost": 1.0789729216504567,
         "feasible": true,
         "feasibility": {
           "thermal": true,
@@ -394,21 +438,32 @@
         "energy_per_GB_work_J": 0.018601190476190476,
         "io_energy_per_transferred_bit_pJ": 2.3251488095238098,
         "pim_speedup_assumption": 1.0,
-        "predicted_peak_temperature_K": 309.1425787525044,
-        "thermal_limit_K": 358.15,
-        "thermal_feasible": true,
         "power_evidence": "architectural/synthetic unless replaced by activity or measurement"
+      },
+      "thermal": {
+        "ambient_temperature_K": 300.0,
+        "predicted_peak_temperature_K": 309.1425787525044,
+        "peak_temperature_rise_K": 9.142578752504392,
+        "temperature_limit_K": 358.15,
+        "thermal_headroom_K": 49.007421247495586,
+        "equivalent_stack_thermal_resistance_K_W": 2.285644688126098,
+        "required_cooling_conductance_W_K": 0.06878761822871886,
+        "thermal_burden_ratio": 0.1572240542133172,
+        "thermal_feasible": true,
+        "reference_solver": "output/hbm2_thermal/reference/summary.json",
+        "evidence": "derived from the uncalibrated architectural thermal reference model"
       },
       "integration": {
         "indices": {
           "area": 0.994475138121547,
           "package": 1.0,
           "yield": 0.9910314438118207,
-          "energy": 1.5652173913043481
+          "energy": 1.5652173913043481,
+          "thermal": 0.8695652173913044
         },
-        "combined_cost_index": 1.114458772899055,
+        "combined_cost_index": 1.0605023561968878,
         "normalized_performance": 0.5555555555555556,
-        "performance_per_cost": 0.4984980773316381,
+        "performance_per_cost": 0.5238607460975917,
         "feasible": true,
         "feasibility": {
           "thermal": true,
@@ -421,9 +476,9 @@
   "uncertainty": [
     {
       "scenario": "hbm2_4hi_1stack",
-      "p05": 1.3996366236935671,
-      "p50": 1.571175729876553,
-      "p95": 1.79380038465123,
+      "p05": 1.4413874905241968,
+      "p50": 1.5829500186428498,
+      "p95": 1.769086999690303,
       "best_rank_probability": 0.0,
       "samples": 2000
     },
@@ -432,31 +487,31 @@
       "p05": 1.0,
       "p50": 1.0,
       "p95": 1.0,
-      "best_rank_probability": 0.547,
+      "best_rank_probability": 0.561,
       "samples": 2000
     },
     {
       "scenario": "hbm2_12hi_1stack",
-      "p05": 0.6106832366601816,
-      "p50": 0.6959681730410109,
-      "p95": 0.78053768656189,
+      "p05": 0.62059973734796,
+      "p50": 0.6918069237379679,
+      "p95": 0.7588892795043177,
       "best_rank_probability": 0.0,
       "samples": 2000
     },
     {
       "scenario": "hbm2_8hi_2stack",
-      "p05": 0.7371982531783742,
-      "p50": 0.9651920108375455,
-      "p95": 1.2235028429006596,
-      "best_rank_probability": 0.4295,
+      "p05": 0.7816718662963362,
+      "p50": 0.9626269147978861,
+      "p95": 1.1733855650724303,
+      "best_rank_probability": 0.4,
       "samples": 2000
     },
     {
       "scenario": "hbm2_8hi_no_pim",
-      "p05": 0.35178869604005364,
-      "p50": 0.5440231833955338,
-      "p95": 0.9741646757249615,
-      "best_rank_probability": 0.0235,
+      "p05": 0.3751081987689367,
+      "p50": 0.571176238936531,
+      "p95": 1.0117441752519263,
+      "best_rank_probability": 0.039,
       "samples": 2000
     }
   ]

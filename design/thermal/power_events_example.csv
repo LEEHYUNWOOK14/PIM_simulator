@@ -1,0 +1,4 @@
+time_ns,duration_ns,stack,die,physical_channel,bank,block,power_mw,source,confidence
+0,1000000,0,logic_die,0,-1,pcu,3000,synthetic,estimated
+1000000,2000000,0,dram_0,0,0,bank_pim_0,1200,synthetic,estimated
+3000000,2000000,0,dram_7,7,15,bank_array,1200,synthetic,estimated

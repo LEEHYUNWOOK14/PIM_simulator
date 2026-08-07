@@ -1,0 +1,13 @@
+{
+  "disclaimer": "Illustrative event-energy adapter defaults; replace with sourced device measurements before absolute prediction.",
+  "event_energy_pJ": {
+    "ACT": {"value": 1200, "classification": "estimated", "confidence": "low"},
+    "PRE": {"value": 500, "classification": "estimated", "confidence": "low"},
+    "RD": {"value": 900, "classification": "estimated", "confidence": "low"},
+    "WR": {"value": 950, "classification": "estimated", "confidence": "low"},
+    "REF": {"value": 6000, "classification": "estimated", "confidence": "low"},
+    "PIM": {"value": 3000, "classification": "estimated", "confidence": "low"}
+  },
+  "background_power_mW": {"value": 1.0, "classification": "estimated", "confidence": "low"},
+  "note": "SAIT IDD values that are zero are not used as evidence. Supply calibrated DRAMsim3 or measured energy values through this file."
+}

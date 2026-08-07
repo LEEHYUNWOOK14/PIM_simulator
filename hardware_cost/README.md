@@ -2,7 +2,7 @@
 
 ## 1. 목적과 설계 철학
 
-이 디렉터리는 HBM2 PIM 구조의 열전달 이외 하드웨어 비용을 `area`, `package`, `yield`, `power_performance` 네 축으로 분석하고, 마지막에 통합 비교 지표를 만든다. 목표는 제조사의 실제 판매가격을 맞히는 것이 아니라 설계 대안 사이의 비용·효율·위험 차이를 재현 가능하게 비교하는 것이다.
+이 디렉터리는 HBM2 PIM 구조의 전체 하드웨어 비용을 `area`, `package`, `yield`, `power_performance`, `thermal` 다섯 축으로 분석하고 마지막에 통합 비교 지표를 만든다. 열은 단순 통과 조건이 아니라 온도상승, 열저항, 열 여유와 냉각부담을 나타내는 독립 비용축이다. 목표는 제조사의 실제 판매가격을 맞히는 것이 아니라 설계 대안 사이의 비용·효율·위험 차이를 재현 가능하게 비교하는 것이다.
 
 제조사 공개자료는 용량, 적층 수, 핀 속도, 대역폭, 전압, 일부 TSV/마이크로범프 수는 제공하지만 웨이퍼 가격, 결함밀도, 접합수율, 실제 다이 면적, 실제 PHY/TSV 좌표 및 제조원가는 공개하지 않는다. 따라서 결과는 다음 두 계층으로 분리한다.
 
@@ -19,9 +19,10 @@ OpenROAD/Yosys report adapter ─┘
 
 architecture + area ─────────────> package
 area + package assumptions ──────> yield
-thermal power + simulator trace ─> power_performance
+thermal solver + power trace ─────> thermal
+simulator/activity trace ─────────> power_performance
 
-area/package/yield/power-performance
+area/package/yield/power-performance/thermal
                   └──────────────> integration
                                       ├─ physical metrics
                                       ├─ normalized cost indices
@@ -52,13 +53,14 @@ area/package/yield/power-performance
 
 ## 4. 통합 방법
 
-네 비용축은 차원이 다르므로 임의로 더하지 않는다. 먼저 각 축을 기준 설계로 정규화한다.
+다섯 비용축은 차원이 다르므로 임의로 더하지 않는다. 먼저 각 축을 기준 설계로 정규화한다.
 
 ```text
 area_index       = candidate_area_metric / baseline_area_metric
 package_index    = candidate_package_metric / baseline_package_metric
 yield_cost_index = baseline_good_stack_yield / candidate_good_stack_yield
 energy_index     = candidate_energy_per_work / baseline_energy_per_work
+thermal_index    = candidate_cooling_burden / baseline_cooling_burden
 ```
 
 사용자가 명시한 가중치가 있을 때만 가중 기하평균을 계산한다.
@@ -81,7 +83,8 @@ performance_per_cost = normalized_performance / combined_cost_index
 - `package/README.md`: interposer·범프·TSV·배선·적층 복잡도
 - `yield/README.md`: 다이·TSV·접합·조립 수율과 known-good-die
 - `power_performance/README.md`: 전력, 에너지/비트, 대역폭, 지연, PIM 처리량
-- `integration/README.md`: 정규화, 가중치, Pareto, 불확실성 전파
+- `thermal/README.md`: 3D 온도, 열저항, 열 여유, 냉각부담
+- `integration/README.md`: 5축 정규화, 가중치, Pareto, 불확실성 전파
 - `sources.json`: 출처와 적용 주장
 - `config.json`: 기준 설계, 추정 범위, 가중치
 
@@ -101,4 +104,4 @@ performance_per_cost = normalized_performance / combined_cost_index
 .\tools\run_hbm2_hardware_cost_analysis.ps1
 ```
 
-완료 조건은 스키마 검증, 네 분석 결과, 통합 결과, sensitivity/Monte Carlo 결과, 출처 완전성 검사, 기준/4Hi/12Hi/multi-stack 시나리오, 단위 테스트 및 기존 RTL 회귀가 모두 통과하는 것이다.
+완료 조건은 스키마 검증, 다섯 분석 결과, 통합 결과, sensitivity/Monte Carlo 결과, 출처 완전성 검사, 기준/4Hi/12Hi/multi-stack 시나리오, thermal solver 검증, 단위 테스트 및 기존 RTL 회귀가 모두 통과하는 것이다.

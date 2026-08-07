@@ -141,8 +141,8 @@
       "organization": "This project",
       "path": "output/hbm2_thermal/reference/summary.json",
       "type": "project_derived",
-      "used_for": ["architectural total power and thermal feasibility"],
-      "variables": ["input_power_W", "peak_temperature_K"],
+      "used_for": ["architectural total power", "thermal feasibility", "equivalent thermal resistance and cooling-burden cost axis"],
+      "variables": ["input_power_W", "peak_temperature_K", "thermal_index"],
       "limitations": "Synthetic and uncalibrated unless replaced with measured/activity-derived power."
     }
   ]

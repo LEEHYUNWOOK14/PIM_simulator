@@ -1,0 +1,40 @@
+{
+  "disclaimer": "Literature/open-model properties for architectural thermal analysis; not signoff material data.",
+  "materials": {
+    "silicon": {
+      "kx_W_mK": {"value": 130.0, "unit": "W/(m*K)", "classification": "literature_estimate", "source": "NIST thermal-conductivity compilations", "source_url": "https://nvlpubs.nist.gov/nistpubs/Legacy/MONO/nbsmonograph131.pdf", "confidence": "medium", "uncertainty": {"min": 100.0, "max": 150.0}},
+      "ky_W_mK": {"value": 130.0, "unit": "W/(m*K)", "classification": "derived", "source": "same as kx", "confidence": "medium", "uncertainty": {"min": 100.0, "max": 150.0}},
+      "kz_W_mK": {"value": 130.0, "unit": "W/(m*K)", "classification": "derived", "source": "same as kx", "confidence": "medium", "uncertainty": {"min": 100.0, "max": 150.0}},
+      "density_kg_m3": {"value": 2330.0, "unit": "kg/m^3", "classification": "literature_estimate", "source": "standard room-temperature silicon property", "confidence": "medium", "uncertainty": {"min": 2320.0, "max": 2340.0}},
+      "specific_heat_J_kgK": {"value": 700.0, "unit": "J/(kg*K)", "classification": "literature_estimate", "source": "room-temperature engineering approximation", "confidence": "medium", "uncertainty": {"min": 650.0, "max": 750.0}}
+    },
+    "copper": {
+      "kx_W_mK": {"value": 400.0, "unit": "W/(m*K)", "classification": "literature_estimate", "source": "NIST copper thermal-conductivity references", "source_url": "https://www.nist.gov/publications/thermal-conductivity-aluminum-copper-iron-and-tungsten-temperatures-1-k-melting-point", "confidence": "high", "uncertainty": {"min": 380.0, "max": 410.0}},
+      "ky_W_mK": {"value": 400.0, "unit": "W/(m*K)", "classification": "derived", "source": "same as kx", "confidence": "high", "uncertainty": {"min": 380.0, "max": 410.0}},
+      "kz_W_mK": {"value": 400.0, "unit": "W/(m*K)", "classification": "derived", "source": "same as kx", "confidence": "high", "uncertainty": {"min": 380.0, "max": 410.0}},
+      "density_kg_m3": {"value": 8960.0, "unit": "kg/m^3", "classification": "literature_estimate", "source": "room-temperature copper property", "confidence": "high", "uncertainty": {"min": 8900.0, "max": 9000.0}},
+      "specific_heat_J_kgK": {"value": 385.0, "unit": "J/(kg*K)", "classification": "literature_estimate", "source": "room-temperature copper property", "confidence": "high", "uncertainty": {"min": 370.0, "max": 400.0}}
+    },
+    "underfill_bump_effective": {
+      "kx_W_mK": {"value": 1.5, "unit": "W/(m*K)", "classification": "estimated", "source": "homogenized underfill/solder plane assumption", "confidence": "low", "uncertainty": {"min": 0.6, "max": 5.0}},
+      "ky_W_mK": {"value": 1.5, "unit": "W/(m*K)", "classification": "estimated", "source": "homogenized underfill/solder plane assumption", "confidence": "low", "uncertainty": {"min": 0.6, "max": 5.0}},
+      "kz_W_mK": {"value": 5.0, "unit": "W/(m*K)", "classification": "estimated", "source": "homogenized bump fill-ratio assumption", "confidence": "low", "uncertainty": {"min": 1.0, "max": 20.0}},
+      "density_kg_m3": {"value": 2200.0, "unit": "kg/m^3", "classification": "estimated", "source": "effective mixture assumption", "confidence": "low", "uncertainty": {"min": 1500.0, "max": 4000.0}},
+      "specific_heat_J_kgK": {"value": 800.0, "unit": "J/(kg*K)", "classification": "estimated", "source": "effective mixture assumption", "confidence": "low", "uncertainty": {"min": 400.0, "max": 1100.0}}
+    },
+    "organic_substrate": {
+      "kx_W_mK": {"value": 0.6, "unit": "W/(m*K)", "classification": "estimated", "source": "effective organic package assumption", "confidence": "low", "uncertainty": {"min": 0.3, "max": 2.0}},
+      "ky_W_mK": {"value": 0.6, "unit": "W/(m*K)", "classification": "estimated", "source": "effective organic package assumption", "confidence": "low", "uncertainty": {"min": 0.3, "max": 2.0}},
+      "kz_W_mK": {"value": 0.5, "unit": "W/(m*K)", "classification": "estimated", "source": "effective organic package assumption", "confidence": "low", "uncertainty": {"min": 0.2, "max": 1.5}},
+      "density_kg_m3": {"value": 1900.0, "unit": "kg/m^3", "classification": "estimated", "source": "effective package assumption", "confidence": "low", "uncertainty": {"min": 1500.0, "max": 2200.0}},
+      "specific_heat_J_kgK": {"value": 1000.0, "unit": "J/(kg*K)", "classification": "estimated", "source": "effective package assumption", "confidence": "low", "uncertainty": {"min": 700.0, "max": 1300.0}}
+    },
+    "tim": {
+      "kx_W_mK": {"value": 4.0, "unit": "W/(m*K)", "classification": "estimated", "source": "generic TIM architectural assumption", "confidence": "low", "uncertainty": {"min": 1.0, "max": 8.0}},
+      "ky_W_mK": {"value": 4.0, "unit": "W/(m*K)", "classification": "estimated", "source": "generic TIM architectural assumption", "confidence": "low", "uncertainty": {"min": 1.0, "max": 8.0}},
+      "kz_W_mK": {"value": 4.0, "unit": "W/(m*K)", "classification": "estimated", "source": "generic TIM architectural assumption", "confidence": "low", "uncertainty": {"min": 1.0, "max": 8.0}},
+      "density_kg_m3": {"value": 2500.0, "unit": "kg/m^3", "classification": "estimated", "source": "generic TIM assumption", "confidence": "low", "uncertainty": {"min": 1800.0, "max": 3500.0}},
+      "specific_heat_J_kgK": {"value": 900.0, "unit": "J/(kg*K)", "classification": "estimated", "source": "generic TIM assumption", "confidence": "low", "uncertainty": {"min": 600.0, "max": 1200.0}}
+    }
+  }
+}
