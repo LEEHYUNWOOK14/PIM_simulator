@@ -9,8 +9,8 @@ ROOT=Path(__file__).resolve().parents[1]
 
 def check(name,condition,detail,checks): checks.append({"name":name,"pass":bool(condition),"detail":detail})
 def main():
- ap=argparse.ArgumentParser(); ap.add_argument("--output",default="output/hbm2_hardware_cost"); a=ap.parse_args(); checks=[]
- cfg=hc.read("hardware_cost/config.json"); src=hc.read("hardware_cost/sources.json"); hc.validate_config(cfg,src); arch=hc.read(cfg["architecture_path"]); thermal=hc.read(cfg["thermal_summary_path"]); rows=hc.analyze(cfg,arch,thermal); by={r["scenario"]:r for r in rows}
+ ap=argparse.ArgumentParser(); ap.add_argument("--output",default="output/hbm2_hardware_cost"); ap.add_argument("--thermal-summary"); a=ap.parse_args(); checks=[]
+ cfg=hc.read("hardware_cost/config.json"); src=hc.read("hardware_cost/sources.json"); hc.validate_config(cfg,src); arch=hc.read(cfg["architecture_path"]); thermal=hc.read(a.thermal_summary or cfg["thermal_summary_path"]); rows=hc.analyze(cfg,arch,thermal); by={r["scenario"]:r for r in rows}
  # Formula-level tests.
  yp=hc.die_yield(100,0.2,3,"poisson"); check("poisson analytic",abs(yp-math.exp(-.2))<1e-14,yp,checks)
  yn=hc.die_yield(100,0.2,3,"negative_binomial"); check("negative-binomial analytic",abs(yn-(1+.2/3)**-3)<1e-14,yn,checks)
@@ -44,7 +44,8 @@ def main():
  check("required outputs exist",all((out/p).exists() for p in required),required,checks)
  # Monte Carlo is deterministic for the configured seed.
  u1,_=hc.uncertainty(cfg,arch,thermal); u2,_=hc.uncertainty(cfg,arch,thermal); check("seeded uncertainty reproducible",u1==u2,u1,checks)
- check("rank probabilities sum to one",abs(sum(x["best_rank_probability"] for x in u1)-1)<1e-12,[x["best_rank_probability"] for x in u1],checks)
+ probability_total=sum(x["best_rank_probability"] for x in u1)+u1[0]["no_feasible_probability"]
+ check("rank and no-feasible probabilities sum to one",abs(probability_total-1)<1e-12,{"rank":[x["best_rank_probability"] for x in u1],"no_feasible":u1[0]["no_feasible_probability"]},checks)
  report={"status":"PASS" if all(c["pass"] for c in checks) else "FAIL","checks":checks,"scope":"Architectural model verification; not validation against proprietary HBM2 manufacturing data."}
  vd=out/"validation"; vd.mkdir(parents=True,exist_ok=True); (vd/"validation_report.json").write_text(json.dumps(report,indent=2),encoding="utf-8")
  lines=["# Hardware cost validation","",f"Status: **{report['status']}**","", "|Check|Pass|Detail|","|---|---|---|"]+[f"|{c['name']}|{c['pass']}|`{str(c['detail'])[:300]}`|" for c in checks]

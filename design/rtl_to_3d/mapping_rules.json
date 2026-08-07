@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "coordinate_system": "local die coordinates; origin at lower-left; x right; y up",
+  "unmapped_policy": "error",
+  "area_mismatch_tolerance_ratio": 0.05,
+  "power_conservation_tolerance_W": 1e-12,
+  "rules": [
+    {
+      "id": "bank_side_indexed",
+      "match": "(?:bank_pim_core|bank_local_reduction_buffer|bank_local_fp16_reduction).*?(?:ch|channel)[_\\[]?(?P<channel>[0-7]).*?(?:bank|block)[_\\[]?(?P<bank>1[0-5]|[0-9])",
+      "target": "dram",
+      "die": 0,
+      "stack": 0,
+      "placement": "hbm_bank_tile"
+    },
+    {
+      "id": "bank_side_hint",
+      "match": "(?:bank_pim_core|bank_local_reduction_buffer|bank_local_fp16_reduction)",
+      "target": "dram",
+      "die": 0,
+      "stack": 0,
+      "placement": "require_target_hint"
+    },
+    {
+      "id": "logic_die",
+      "match": "(?:logic_|shared_|hierarchical_|cross_channel_)",
+      "target": "logic",
+      "stack": 0,
+      "placement": "input_or_area_preserving_tile"
+    }
+  ]
+}

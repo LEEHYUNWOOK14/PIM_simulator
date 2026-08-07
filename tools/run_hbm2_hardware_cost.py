@@ -129,12 +129,15 @@ def sampled_config(cfg,rng):
     walk(x); return x
 
 def uncertainty(cfg,arch,thermal):
-    rng=np.random.default_rng(cfg["models"]["random_seed"]); data={s["name"]:[] for s in cfg["scenarios"]}; samples=[]; wins={k:0 for k in data}
+    rng=np.random.default_rng(cfg["models"]["random_seed"]); data={s["name"]:[] for s in cfg["scenarios"]}; samples=[]; wins={k:0 for k in data}; no_feasible=0
     for sample in range(cfg["models"]["monte_carlo_samples"]):
-      result=analyze(sampled_config(cfg,rng),arch,thermal); eligible=[r for r in result if r["integration"]["feasible"]]; best=max(eligible,key=lambda r:r["integration"]["performance_per_cost"])["scenario"]; wins[best]+=1
+      result=analyze(sampled_config(cfg,rng),arch,thermal); eligible=[r for r in result if r["integration"]["feasible"]]
+      if eligible:
+        best=max(eligible,key=lambda r:r["integration"]["performance_per_cost"])["scenario"]; wins[best]+=1
+      else: no_feasible+=1
       for r in result:
         score=r["integration"]["performance_per_cost"]; data[r["scenario"]].append(score); samples.append({"sample":sample,"scenario":r["scenario"],"area_index":r["integration"]["indices"]["area"],"package_index":r["integration"]["indices"]["package"],"yield_cost_index":r["integration"]["indices"]["yield"],"energy_index":r["integration"]["indices"]["energy"],"thermal_index":r["integration"]["indices"]["thermal"],"combined_cost_index":r["integration"]["combined_cost_index"],"normalized_performance":r["integration"]["normalized_performance"],"performance_per_cost":score})
-    summary=[{"scenario":k,"p05":float(np.quantile(v,.05)),"p50":float(np.quantile(v,.5)),"p95":float(np.quantile(v,.95)),"best_rank_probability":wins[k]/len(v),"samples":len(v)} for k,v in data.items()]
+    summary=[{"scenario":k,"p05":float(np.quantile(v,.05)),"p50":float(np.quantile(v,.5)),"p95":float(np.quantile(v,.95)),"best_rank_probability":wins[k]/len(v),"no_feasible_probability":no_feasible/len(v),"samples":len(v)} for k,v in data.items()]
     return summary,samples
 
 def flatten_rows(rows):
@@ -179,8 +182,8 @@ def write_plots(out,flat,unc):
     ax.errorbar(x,med,yerr=np.vstack([low,high]),fmt="o",capsize=5); ax.axhline(1,color="gray",ls="--"); ax.set_xticks(x,names,rotation=20); ax.set_ylabel("Performance / cost (P5, P50, P95)"); fig.tight_layout(); fig.savefig(out/"uncertainty_performance_per_cost.png",dpi=170); plt.close(fig)
 
 def main():
-    ap=argparse.ArgumentParser(); ap.add_argument("--config",default="hardware_cost/config.json"); ap.add_argument("--output",default="output/hbm2_hardware_cost"); a=ap.parse_args()
-    cfg=read(a.config); sources=read("hardware_cost/sources.json"); validate_config(cfg,sources); arch=read(cfg["architecture_path"]); thermal=read(cfg["thermal_summary_path"])
+    ap=argparse.ArgumentParser(); ap.add_argument("--config",default="hardware_cost/config.json"); ap.add_argument("--output",default="output/hbm2_hardware_cost"); ap.add_argument("--thermal-summary",help="override the thermal result without editing the cost config"); a=ap.parse_args()
+    cfg=read(a.config); sources=read("hardware_cost/sources.json"); validate_config(cfg,sources); arch=read(cfg["architecture_path"]); thermal_path=a.thermal_summary or cfg["thermal_summary_path"]; thermal=read(thermal_path)
     rows=analyze(cfg,arch,thermal); unc,unc_samples=uncertainty(cfg,arch,thermal); out=ROOT/a.output; out.mkdir(parents=True,exist_ok=True)
     (out/"integrated_metrics.json").write_text(json.dumps({"disclaimer":cfg["disclaimer"],"baseline":cfg["baseline"],"results":rows,"uncertainty":unc},indent=2),encoding="utf-8")
     flat=flatten_rows(rows); write_csv(out/"design_comparison.csv",flat); write_csv(out/"pareto_frontier.csv",[r for r in flat if r["pareto_optimal"]]); write_csv(out/"uncertainty_summary.csv",unc); write_csv(out/"uncertainty_samples.csv",unc_samples)
@@ -196,7 +199,7 @@ def main():
       elif isinstance(x,list):
        for v in x: find_sources(v)
     find_sources(cfg)
-    provenance={"config":a.config,"sources":"hardware_cost/sources.json","source_ids_used":sorted(found),"method_source_ids":["cacti7","mcpat_hpca2009","negative_binomial_yield","xu_3d_yield_review","stacked_memory_yield_2012","roofline_berkeley"],"model_equations":{"die_yield":"hardware_cost/yield/README.md","integration":"hardware_cost/integration/README.md"},"warning":"Method sources do not validate illustrative numeric defaults. See hardware_cost/RESEARCH_BASIS.md."}
+    provenance={"config":a.config,"thermal_summary":thermal_path,"sources":"hardware_cost/sources.json","source_ids_used":sorted(found),"method_source_ids":["cacti7","mcpat_hpca2009","negative_binomial_yield","xu_3d_yield_review","stacked_memory_yield_2012","roofline_berkeley"],"model_equations":{"die_yield":"hardware_cost/yield/README.md","integration":"hardware_cost/integration/README.md"},"warning":"Method sources do not validate illustrative numeric defaults. See hardware_cost/RESEARCH_BASIS.md."}
     (out/"parameter_provenance.json").write_text(json.dumps(provenance,indent=2),encoding="utf-8")
     lines=["# HBM2 PIM 전체 하드웨어 비용 분석 보고서","",f"> {cfg['disclaimer']}","","## 설계 비교","","|설계|Area|Package|Yield|Energy|Thermal|통합 cost|성능|성능/비용|열|용량|종합 feasible|Pareto|","|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|"]
     for r in flat: lines.append(f"|{r['scenario']}|{r['area_index']:.3f}|{r['package_index']:.3f}|{r['yield_cost_index']:.3f}|{r['energy_index']:.3f}|{r['thermal_index']:.3f}|{r['combined_cost_index']:.3f}|{r['normalized_performance']:.3f}|{r['performance_per_cost']:.3f}|{r['thermal_feasible']}|{r['capacity_feasible']}|{r['overall_feasible']}|{r['pareto_optimal']}|")

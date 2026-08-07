@@ -1,0 +1,6 @@
+instance,dynamic_W,leakage_W,toggle_count,duration_s,activity_format,stack,die,channel,bank
+top.logic_pcu,1.8,0.2,180000,0.001,VCD,,,,
+top.logic_shared_buffer,0.72,0.08,65000,0.001,VCD,,,,
+top.logic_die_link_arbiter,0.15,0.05,12000,0.001,VCD,,,,
+top.bank_pim_core_ch0_bank0,0.63,0.07,82000,0.001,VCD,0,0,0,0
+top.bank_local_reduction_buffer_ch7_bank15,0.27,0.03,34000,0.001,VCD,0,0,7,15

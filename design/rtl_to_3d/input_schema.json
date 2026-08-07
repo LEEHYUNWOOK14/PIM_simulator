@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stob-pim2.local/schemas/rtl-to-3d-input-v1.json",
+  "title": "STOB RTL/OpenROAD/power activity normalized input",
+  "type": "object",
+  "required": ["schema_version", "units", "sources", "blocks"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "units": {
+      "type": "object",
+      "required": ["length", "area", "power"],
+      "properties": {
+        "length": {"const": "um"},
+        "area": {"const": "um^2"},
+        "power": {"const": "W"}
+      },
+      "additionalProperties": false
+    },
+    "sources": {
+      "type": "object",
+      "required": ["synthesis", "placement", "activity", "power"],
+      "properties": {
+        "synthesis": {"type": "string"},
+        "placement": {"type": "string"},
+        "activity": {"type": "string", "description": "VCD, SAIF, or normalized activity report"},
+        "power": {"type": "string", "description": "Block power report derived using the activity source"}
+      }
+    },
+    "blocks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["instance", "module", "area_um2", "power"],
+        "properties": {
+          "instance": {"type": "string", "minLength": 1},
+          "module": {"type": "string", "minLength": 1},
+          "area_um2": {"type": "number", "exclusiveMinimum": 0},
+          "placement": {
+            "type": "object",
+            "required": ["x_um", "y_um", "width_um", "height_um"],
+            "properties": {
+              "x_um": {"type": "number", "minimum": 0},
+              "y_um": {"type": "number", "minimum": 0},
+              "width_um": {"type": "number", "exclusiveMinimum": 0},
+              "height_um": {"type": "number", "exclusiveMinimum": 0}
+            }
+          },
+          "power": {
+            "type": "object",
+            "required": ["dynamic_W", "leakage_W"],
+            "properties": {
+              "dynamic_W": {"type": "number", "minimum": 0},
+              "leakage_W": {"type": "number", "minimum": 0}
+            }
+          },
+          "activity": {
+            "type": "object",
+            "properties": {
+              "format": {"enum": ["VCD", "SAIF", "normalized", "synthetic"]},
+              "toggle_count": {"type": "number", "minimum": 0},
+              "duration_s": {"type": "number", "exclusiveMinimum": 0}
+            }
+          }
+        }
+      }
+    }
+  }
+}

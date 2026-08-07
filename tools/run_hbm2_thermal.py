@@ -64,6 +64,32 @@ def power_map(profile, layers, nx, ny, stack_count, event_csv=None):
                 except Exception as exc: raise ValueError(f"invalid power event at line {line}: {exc}") from exc
     return p,events
 
+def mapped_power_map(mapped_json, layers, nx, ny, stack_count, width, height):
+    """Rasterize RTL/OpenROAD block rectangles while conserving every block's power."""
+    data=json.loads(Path(mapped_json).read_text(encoding="utf-8"))
+    if data.get("status") not in ("PASS","PASS_WITH_UNMAPPED"):
+        raise ValueError("mapped power input did not pass adapter validation")
+    if data.get("unmapped_blocks"):
+        raise ValueError("thermal analysis rejects mapped inputs containing unmapped blocks")
+    p=np.zeros((len(layers),ny,nx)); sw=nx//stack_count
+    die_w=width/stack_count*1e6; die_h=height*1e6
+    logic=next(i for i,l in enumerate(layers) if l.kind=="logic")
+    dram={l.die:i for i,l in enumerate(layers) if l.kind=="dram"}
+    for b in data["blocks"]:
+        t=b["target"]; r=b["rectangle_um"]; stack=int(t["stack"])
+        if not 0<=stack<stack_count: raise ValueError(f"mapped block {b['instance']} has invalid stack")
+        z=logic if t["layer"]=="logic" else dram[int(t["die"])]
+        x0=stack*sw+max(0,min(sw-1,int(np.floor(float(r["x_um"])/die_w*sw))))
+        x1=stack*sw+max(1,min(sw,int(np.ceil((float(r["x_um"])+float(r["width_um"]))/die_w*sw))))
+        y0=max(0,min(ny-1,int(np.floor(float(r["y_um"])/die_h*ny))))
+        y1=max(1,min(ny,int(np.ceil((float(r["y_um"])+float(r["height_um"]))/die_h*ny))))
+        if x1<=x0 or y1<=y0: raise ValueError(f"mapped block {b['instance']} collapsed during rasterization")
+        watts=float(b["total_power_W"]); p[z,y0:y1,x0:x1]+=watts/((x1-x0)*(y1-y0))
+    expected=float(data["checks"]["mapped_power_W"]); actual=float(p.sum())
+    if abs(expected-actual)>max(1e-12,abs(expected)*1e-12):
+        raise ValueError(f"mapped power rasterization lost power: expected {expected}, got {actual}")
+    return p,[],data
+
 def apply_events(base, events, layers, nx, ny, stacks, t):
     p=base.copy(); sw=nx//stacks
     for e in events:
@@ -167,7 +193,13 @@ def run(args):
     if args.stacks: arch["stack_count"]=args.stacks
     stacks=arch["stack_count"]; nx=cfg["grid"]["nx_per_stack"]*stacks; ny=cfg["grid"]["ny"]
     width=arch["geometry_um"]["die_width"]["value"]*1e-6*stacks; height=arch["geometry_um"]["die_height"]["value"]*1e-6
-    layers=build_layers(cfg,arch); p,events=power_map(args.profile,layers,nx,ny,stacks,args.events)
+    layers=build_layers(cfg,arch); mapped_meta=None
+    if args.mapped_power:
+        mapped_path=Path(args.mapped_power)
+        if not mapped_path.is_absolute(): mapped_path=ROOT/mapped_path
+        p,events,mapped_meta=mapped_power_map(mapped_path,layers,nx,ny,stacks,width,height)
+    else:
+        p,events=power_map(args.profile,layers,nx,ny,stacks,args.events)
     K,b,cap=assemble(layers,mats,nx,ny,width,height,bounds,float(cfg["tsv"]["fill_ratio"]["value"])); shape=(len(layers),ny,nx)
     T=spsolve(K,p.ravel()+b).reshape(shape); history=[]
     if args.transient:
@@ -180,7 +212,7 @@ def run(args):
     (inputs/"resolved_stack.json").write_text(json.dumps(arch,indent=2),encoding="utf-8"); (inputs/"resolved_materials.json").write_text(json.dumps(mats,indent=2),encoding="utf-8"); (inputs/"resolved_boundaries.json").write_text(json.dumps(bounds,indent=2),encoding="utf-8")
     total=float((apply_events(p,events,layers,nx,ny,stacks,0) if events else p).sum())
     hot=np.unravel_index(np.argmax(T),T.shape); blocks=block_stats(T,layers,stacks)
-    result={"status":"PASS","disclaimer":cfg["disclaimer"],"profile":args.profile,"grid":[nx,ny,len(layers)],"stack_count":stacks,"dram_dies_per_stack":arch["dram_dies_per_stack"],"input_power_W":total,"peak_temperature_K":float(T.max()),"peak_delta_K":float(T.max()-bounds["ambient_temperature_K"]["value"]),"hotspot":{"layer":layers[hot[0]].name,"x_index":int(hot[2]),"y_index":int(hot[1])},"layers":layer_stats(T,layers),"external_solver_adapters":cfg["external_solvers"]}
+    result={"status":"PASS","disclaimer":cfg["disclaimer"],"profile":"rtl_mapped" if mapped_meta else args.profile,"mapped_power_input":args.mapped_power if mapped_meta else None,"grid":[nx,ny,len(layers)],"stack_count":stacks,"dram_dies_per_stack":arch["dram_dies_per_stack"],"input_power_W":total,"peak_temperature_K":float(T.max()),"peak_delta_K":float(T.max()-bounds["ambient_temperature_K"]["value"]),"hotspot":{"layer":layers[hot[0]].name,"x_index":int(hot[2]),"y_index":int(hot[1])},"layers":layer_stats(T,layers),"external_solver_adapters":cfg["external_solvers"]}
     (out/"summary.json").write_text(json.dumps(result,indent=2),encoding="utf-8")
     (out/"thermal_summary.md").write_text(f"# Thermal summary\n\n- Status: PASS\n- Profile: `{args.profile}`\n- Total input power: {total:.6g} W\n- Peak: {T.max():.6f} K\n- Hotspot: `{layers[hot[0]].name}` at grid ({hot[2]}, {hot[1]})\n- Scope: {cfg['disclaimer']}\n",encoding="utf-8")
     with open(out/"layer_temperatures.csv","w",newline="",encoding="utf-8") as f:
@@ -194,5 +226,5 @@ def run(args):
     print(json.dumps(result,indent=2)); return result
 
 def main():
-    ap=argparse.ArgumentParser(); ap.add_argument("--config",default="design/thermal/hbm2_thermal_config.json"); ap.add_argument("--output",default="output/hbm2_thermal/reference"); ap.add_argument("--profile",default="uniform"); ap.add_argument("--events"); ap.add_argument("--dies",type=int); ap.add_argument("--stacks",type=int); ap.add_argument("--transient",action="store_true"); ap.add_argument("--dt",type=float); ap.add_argument("--duration",type=float); args=ap.parse_args(); run(args)
+    ap=argparse.ArgumentParser(); ap.add_argument("--config",default="design/thermal/hbm2_thermal_config.json"); ap.add_argument("--output",default="output/hbm2_thermal/reference"); ap.add_argument("--profile",default="uniform"); ap.add_argument("--events"); ap.add_argument("--mapped-power"); ap.add_argument("--dies",type=int); ap.add_argument("--stacks",type=int); ap.add_argument("--transient",action="store_true"); ap.add_argument("--dt",type=float); ap.add_argument("--duration",type=float); args=ap.parse_args(); run(args)
 if __name__=="__main__": main()

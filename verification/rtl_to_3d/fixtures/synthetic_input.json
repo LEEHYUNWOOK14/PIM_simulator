@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "description": "Synthetic stand-in for synthesis, OpenROAD placement, VCD activity, and block power reports.",
+  "units": {"length": "um", "area": "um^2", "power": "W"},
+  "sources": {
+    "synthesis": "synthetic://yosys-area-report",
+    "placement": "synthetic://openroad-floorplan",
+    "activity": "synthetic://workload.vcd",
+    "power": "synthetic://block-power-report"
+  },
+  "blocks": [
+    {
+      "instance": "top.logic_pcu",
+      "module": "logic_pcu",
+      "area_um2": 4800000,
+      "placement": {"x_um": 400, "y_um": 1000, "width_um": 2400, "height_um": 2000},
+      "power": {"dynamic_W": 1.8, "leakage_W": 0.2},
+      "activity": {"format": "synthetic", "toggle_count": 180000, "duration_s": 0.001}
+    },
+    {
+      "instance": "top.logic_shared_buffer",
+      "module": "logic_shared_buffer",
+      "area_um2": 3600000,
+      "placement": {"x_um": 4200, "y_um": 7200, "width_um": 1800, "height_um": 2000},
+      "power": {"dynamic_W": 0.72, "leakage_W": 0.08},
+      "activity": {"format": "synthetic", "toggle_count": 65000, "duration_s": 0.001}
+    },
+    {
+      "instance": "top.logic_die_link_arbiter",
+      "module": "logic_die_link_arbiter",
+      "area_um2": 1000000,
+      "placement": {"x_um": 6500, "y_um": 1000, "width_um": 1000, "height_um": 1000},
+      "power": {"dynamic_W": 0.15, "leakage_W": 0.05},
+      "activity": {"format": "synthetic", "toggle_count": 12000, "duration_s": 0.001}
+    },
+    {
+      "instance": "top.bank_pim_core_ch0_bank0",
+      "module": "bank_pim_core",
+      "area_um2": 1500000,
+      "power": {"dynamic_W": 0.63, "leakage_W": 0.07},
+      "activity": {"format": "synthetic", "toggle_count": 82000, "duration_s": 0.001}
+    },
+    {
+      "instance": "top.bank_local_reduction_buffer_ch7_bank15",
+      "module": "bank_local_reduction_buffer",
+      "area_um2": 1500000,
+      "power": {"dynamic_W": 0.27, "leakage_W": 0.03},
+      "activity": {"format": "synthetic", "toggle_count": 34000, "duration_s": 0.001}
+    }
+  ]
+}
