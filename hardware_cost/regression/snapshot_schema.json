@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "STOB hardware-cost revision snapshot",
+  "type": "object",
+  "required": ["schema_version", "revision", "parameter_status", "calibration", "observations", "block_metrics", "physical_totals", "thermal", "workload", "categories", "source_files"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "revision": {
+      "type": "object",
+      "required": ["id", "label", "git_commit", "working_tree_dirty", "captured_at"]
+    },
+    "parameter_status": {
+      "type": "object",
+      "required": ["final_architecture_parameters_selected", "reason"],
+      "properties": {"final_architecture_parameters_selected": {"const": false}}
+    },
+    "observations": {"type": "array"},
+    "block_metrics": {"type": "array"},
+    "categories": {"type": "object"},
+    "physical_totals": {"type": "object"},
+    "thermal": {"type": "object"},
+    "workload": {"type": "object"},
+    "source_files": {"type": "array"}
+  }
+}

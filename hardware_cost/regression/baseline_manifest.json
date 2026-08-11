@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "revision_id": "provisional_baseline_2026_08_11",
+  "label": "Temporary RTL plus synthetic physical baseline",
+  "captured_at": "2026-08-11T00:00:00+09:00",
+  "parameter_status": {
+    "final_architecture_parameters_selected": false,
+    "reason": "GR00T workload evaluation and RTL stabilization are in progress."
+  },
+  "mapped_power_json": "output/rtl_to_3d/mapped_power.json",
+  "thermal_summary_json": "output/hbm2_thermal/rtl_mapped/summary.json",
+  "gr00t_workload_json": "hardware_cost/regression/gr00t_pending.json",
+  "synthesis_observations": [
+    {
+      "name": "hierarchical_normalization_fp16_candidate",
+      "precision": "FP16",
+      "category": "normalization_rounding",
+      "metrics_file": "hardware_cost/regression/baseline_synthesis_observations.json"
+    },
+    {
+      "name": "hierarchical_normalization_bf16_candidate",
+      "precision": "BF16",
+      "category": "normalization_rounding",
+      "metrics_file": "hardware_cost/regression/baseline_synthesis_observations.json"
+    }
+  ],
+  "block_category_overrides": {
+    "top.logic_pcu": "bf16_fp16",
+    "top.logic_shared_buffer": "buffer_register",
+    "top.logic_die_link_arbiter": "control_routing",
+    "top.bank_pim_core_ch0_bank0": "accumulator_reduction",
+    "top.bank_local_reduction_buffer_ch7_bank15": "buffer_register"
+  },
+  "notes": [
+    "Physical area and power are synthetic fixtures, not post-layout measurements.",
+    "Yosys generic path length is retained as a structural proxy and is not timing in ns.",
+    "FP16 and BF16 observations are candidates; neither fixes the final architecture."
+  ]
+}

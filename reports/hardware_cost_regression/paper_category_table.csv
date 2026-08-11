@@ -1,0 +1,6 @@
+revision,category,mapped_area_um2,area_vs_baseline_ratio,dynamic_power_W,leakage_power_W,total_power_W,power_vs_baseline_ratio,fp16_generic_cells,bf16_generic_cells,calibration
+provisional_baseline_2026_08_11,bf16_fp16,4800000.0,1.0,1.8,0.2,2.0,1.0,,,synthetic
+provisional_baseline_2026_08_11,normalization_rounding,0.0,,0.0,0.0,0.0,,129805,104699,not_available
+provisional_baseline_2026_08_11,accumulator_reduction,750000.0,1.0,0.63,0.07,0.7,1.0,,,synthetic
+provisional_baseline_2026_08_11,buffer_register,4350000.0,1.0,0.99,0.11,1.1,1.0,,,synthetic
+provisional_baseline_2026_08_11,control_routing,1000000.0,1.0,0.15,0.05,0.2,1.0,,,synthetic

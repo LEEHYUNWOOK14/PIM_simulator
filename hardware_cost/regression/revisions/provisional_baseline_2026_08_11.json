@@ -1,0 +1,308 @@
+{
+  "schema_version": 1,
+  "revision": {
+    "id": "provisional_baseline_2026_08_11",
+    "label": "Temporary RTL plus synthetic physical baseline",
+    "git_commit": "3beb9c33a4c172be3b0546aeb8af799dc6d42048",
+    "working_tree_dirty": true,
+    "captured_at": "2026-08-11T00:00:00+09:00"
+  },
+  "parameter_status": {
+    "final_architecture_parameters_selected": false,
+    "reason": "GR00T workload evaluation and RTL stabilization are in progress."
+  },
+  "calibration": {
+    "synthesis": "synthesis_generic",
+    "physical": "synthetic",
+    "power": "synthetic",
+    "thermal": "synthetic_architectural",
+    "timing": "not_available",
+    "workload": "pending"
+  },
+  "observations": [
+    {
+      "name": "hierarchical_normalization_fp16_candidate",
+      "precision": "FP16",
+      "category": "normalization_rounding",
+      "generic_cells": 129805,
+      "generic_topological_path_length": 666,
+      "technology_mapped_area_um2": null,
+      "critical_path_ns": null,
+      "slack_ns": null,
+      "calibration": "synthesis_generic",
+      "evidence": "hardware_cost/regression/baseline_synthesis_observations.json",
+      "upstream_evidence": {
+        "source_log": "reports/groot_normalization/results/hierarchical_normalization_datapath_fp16_yosys.log",
+        "source_log_sha256": "6d0d4949a7d3d1512d08f1ec6c066a75098606458bd646b202cb46f2ad18805d"
+      },
+      "warning": "Generic cells/path are not technology-mapped area or timing."
+    },
+    {
+      "name": "hierarchical_normalization_bf16_candidate",
+      "precision": "BF16",
+      "category": "normalization_rounding",
+      "generic_cells": 104699,
+      "generic_topological_path_length": 563,
+      "technology_mapped_area_um2": null,
+      "critical_path_ns": null,
+      "slack_ns": null,
+      "calibration": "synthesis_generic",
+      "evidence": "hardware_cost/regression/baseline_synthesis_observations.json",
+      "upstream_evidence": {
+        "source_log": "reports/groot_normalization/results/hierarchical_normalization_datapath_bf16_yosys.log",
+        "source_log_sha256": "973e0298ff2ecb18ad25d1317a27db6d58f0898ec2002796647ff4cc6e98ca1a"
+      },
+      "warning": "Generic cells/path are not technology-mapped area or timing."
+    }
+  ],
+  "block_metrics": [
+    {
+      "instance": "top.logic_pcu",
+      "module": "logic_pcu",
+      "category": "bf16_fp16",
+      "target": {
+        "stack": 0,
+        "layer": "logic",
+        "die": -1,
+        "channel": -1,
+        "bank": -1
+      },
+      "mapped_area_um2": 4800000.0,
+      "dynamic_power_W": 1.8,
+      "leakage_power_W": 0.2,
+      "total_power_W": 2.0,
+      "power_density_W_mm2": 0.4166666666666667,
+      "calibration": "synthetic"
+    },
+    {
+      "instance": "top.logic_shared_buffer",
+      "module": "logic_shared_buffer",
+      "category": "buffer_register",
+      "target": {
+        "stack": 0,
+        "layer": "logic",
+        "die": -1,
+        "channel": -1,
+        "bank": -1
+      },
+      "mapped_area_um2": 3600000.0,
+      "dynamic_power_W": 0.72,
+      "leakage_power_W": 0.08,
+      "total_power_W": 0.7999999999999999,
+      "power_density_W_mm2": 0.22222222222222218,
+      "calibration": "synthetic"
+    },
+    {
+      "instance": "top.logic_die_link_arbiter",
+      "module": "logic_die_link_arbiter",
+      "category": "control_routing",
+      "target": {
+        "stack": 0,
+        "layer": "logic",
+        "die": -1,
+        "channel": -1,
+        "bank": -1
+      },
+      "mapped_area_um2": 1000000.0,
+      "dynamic_power_W": 0.15,
+      "leakage_power_W": 0.05,
+      "total_power_W": 0.2,
+      "power_density_W_mm2": 0.2,
+      "calibration": "synthetic"
+    },
+    {
+      "instance": "top.bank_pim_core_ch0_bank0",
+      "module": "bank_pim_core",
+      "category": "accumulator_reduction",
+      "target": {
+        "stack": 0,
+        "layer": "dram",
+        "die": 0,
+        "channel": 0,
+        "bank": 0
+      },
+      "mapped_area_um2": 750000.0,
+      "dynamic_power_W": 0.63,
+      "leakage_power_W": 0.07,
+      "total_power_W": 0.7,
+      "power_density_W_mm2": 0.9333333333333333,
+      "calibration": "synthetic"
+    },
+    {
+      "instance": "top.bank_local_reduction_buffer_ch7_bank15",
+      "module": "bank_local_reduction_buffer",
+      "category": "buffer_register",
+      "target": {
+        "stack": 0,
+        "layer": "dram",
+        "die": 0,
+        "channel": 7,
+        "bank": 15
+      },
+      "mapped_area_um2": 750000.0,
+      "dynamic_power_W": 0.27,
+      "leakage_power_W": 0.03,
+      "total_power_W": 0.30000000000000004,
+      "power_density_W_mm2": 0.4,
+      "calibration": "synthetic"
+    }
+  ],
+  "physical_totals": {
+    "primary_observation": null,
+    "generic_cells": null,
+    "technology_mapped_area_um2": null,
+    "mapped_floorplan_area_um2": 10900000.0,
+    "dynamic_power_W": 3.57,
+    "leakage_power_W": 0.43000000000000005,
+    "total_power_W": 4.0,
+    "critical_path_ns": null,
+    "slack_ns": null,
+    "note": "Alternative synthesis observations are not summed. primary_observation selects only the revision-under-test and does not finalize system architecture."
+  },
+  "thermal": {
+    "peak_temperature_K": 322.58181130666975,
+    "peak_delta_K": 22.58181130666975,
+    "hotspot": {
+      "layer": "dram_0",
+      "x_index": 0,
+      "y_index": 1
+    },
+    "calibration": "synthetic_architectural"
+  },
+  "workload": {
+    "status": "pending",
+    "name": null,
+    "precision": null,
+    "operation_count": null,
+    "latency_cycles": null,
+    "clock_period_ns": null,
+    "throughput_ops_s": null,
+    "energy_per_op_J": null,
+    "calibration": "pending",
+    "note": "Energy/op remains null until throughput or equivalent completed-work timing is supplied."
+  },
+  "categories": {
+    "bf16_fp16": {
+      "mapped_area_um2": 4800000.0,
+      "dynamic_power_W": 1.8,
+      "leakage_power_W": 0.2,
+      "total_power_W": 2.0,
+      "blocks": [
+        "top.logic_pcu"
+      ],
+      "synthesis_observations": [],
+      "power_density_W_mm2": 0.4166666666666667,
+      "physical_data_available": true,
+      "physical_calibration": "synthetic"
+    },
+    "normalization_rounding": {
+      "mapped_area_um2": 0.0,
+      "dynamic_power_W": 0.0,
+      "leakage_power_W": 0.0,
+      "total_power_W": 0.0,
+      "blocks": [],
+      "synthesis_observations": [
+        {
+          "name": "hierarchical_normalization_fp16_candidate",
+          "precision": "FP16",
+          "generic_cells": 129805,
+          "generic_topological_path_length": 666,
+          "calibration": "synthesis_generic"
+        },
+        {
+          "name": "hierarchical_normalization_bf16_candidate",
+          "precision": "BF16",
+          "generic_cells": 104699,
+          "generic_topological_path_length": 563,
+          "calibration": "synthesis_generic"
+        }
+      ],
+      "power_density_W_mm2": null,
+      "physical_data_available": false,
+      "physical_calibration": "not_available"
+    },
+    "accumulator_reduction": {
+      "mapped_area_um2": 750000.0,
+      "dynamic_power_W": 0.63,
+      "leakage_power_W": 0.07,
+      "total_power_W": 0.7,
+      "blocks": [
+        "top.bank_pim_core_ch0_bank0"
+      ],
+      "synthesis_observations": [],
+      "power_density_W_mm2": 0.9333333333333332,
+      "physical_data_available": true,
+      "physical_calibration": "synthetic"
+    },
+    "buffer_register": {
+      "mapped_area_um2": 4350000.0,
+      "dynamic_power_W": 0.99,
+      "leakage_power_W": 0.11,
+      "total_power_W": 1.1,
+      "blocks": [
+        "top.logic_shared_buffer",
+        "top.bank_local_reduction_buffer_ch7_bank15"
+      ],
+      "synthesis_observations": [],
+      "power_density_W_mm2": 0.25287356321839083,
+      "physical_data_available": true,
+      "physical_calibration": "synthetic"
+    },
+    "control_routing": {
+      "mapped_area_um2": 1000000.0,
+      "dynamic_power_W": 0.15,
+      "leakage_power_W": 0.05,
+      "total_power_W": 0.2,
+      "blocks": [
+        "top.logic_die_link_arbiter"
+      ],
+      "synthesis_observations": [],
+      "power_density_W_mm2": 0.2,
+      "physical_data_available": true,
+      "physical_calibration": "synthetic"
+    }
+  },
+  "source_files": [
+    {
+      "role": "manifest",
+      "path": "hardware_cost/regression/baseline_manifest.json",
+      "sha256": "a628190b690205502fc73c23a75e64019813741e058eca661990536c22f690a4",
+      "bytes": 1630
+    },
+    {
+      "role": "mapped_power",
+      "path": "output/rtl_to_3d/mapped_power.json",
+      "sha256": "4d28bed40751f4d8e498c30d067e2ff2bf53725aa2523cb596a05cc1ed0242f8",
+      "bytes": 5426
+    },
+    {
+      "role": "thermal",
+      "path": "output/hbm2_thermal/rtl_mapped/summary.json",
+      "sha256": "96441903a049f5b4c88722761a0ce645d8ff6fc0f5b56f6738ae7fb70aa14d28",
+      "bytes": 4014
+    },
+    {
+      "role": "gr00t_contract",
+      "path": "hardware_cost/regression/gr00t_pending.json",
+      "sha256": "30d9012e77dd930a690a28b786c1a1b21a3a032f75e63d1ab10aeab0ec4a8e73",
+      "bytes": 592
+    },
+    {
+      "role": "yosys:hierarchical_normalization_fp16_candidate",
+      "path": "hardware_cost/regression/baseline_synthesis_observations.json",
+      "sha256": "dd60a7c80fc5b8ae6f3b6bb94ac31b1fb515a8c038bd9383ce733c94997e02b3",
+      "bytes": 1186
+    },
+    {
+      "role": "yosys:hierarchical_normalization_bf16_candidate",
+      "path": "hardware_cost/regression/baseline_synthesis_observations.json",
+      "sha256": "dd60a7c80fc5b8ae6f3b6bb94ac31b1fb515a8c038bd9383ce733c94997e02b3",
+      "bytes": 1186
+    }
+  ],
+  "notes": [
+    "Physical area and power are synthetic fixtures, not post-layout measurements.",
+    "Yosys generic path length is retained as a structural proxy and is not timing in ns.",
+    "FP16 and BF16 observations are candidates; neither fixes the final architecture."
+  ]
+}

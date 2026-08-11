@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "categories": [
+    "bf16_fp16",
+    "normalization_rounding",
+    "accumulator_reduction",
+    "buffer_register",
+    "control_routing"
+  ],
+  "description": "Mutually exclusive reporting categories; explicit manifest category wins.",
+  "rules": [
+    {"category": "normalization_rounding", "pattern": "normalization|normalize|rsqrt|round|convert"},
+    {"category": "accumulator_reduction", "pattern": "accum|reduction|reducer|reduce"},
+    {"category": "buffer_register", "pattern": "buffer|register|fifo|queue|storage"},
+    {"category": "control_routing", "pattern": "control|router|routing|arbiter|scheduler|decoder|dispatch"},
+    {"category": "bf16_fp16", "pattern": "bf16|fp16|floating|vector_alu|logic_pcu|pim_core"}
+  ],
+  "unclassified_policy": "error"
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Pending GR00T workload-to-hardware-cost contract",
+  "type": "object",
+  "required": ["schema_version", "status", "final_architecture_parameters_selected", "workload", "metrics"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "status": {"enum": ["pending", "available"]},
+    "final_architecture_parameters_selected": {"const": false},
+    "workload": {
+      "type": "object",
+      "properties": {
+        "name": {"type": ["string", "null"]},
+        "precision": {"enum": ["FP16", "BF16", "mixed", null]},
+        "source_revision": {"type": ["string", "null"]}
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "operation_count": {"type": ["integer", "null"], "minimum": 1},
+        "bytes_transferred": {"type": ["integer", "null"], "minimum": 0},
+        "active_channels": {"type": ["integer", "null"], "minimum": 0},
+        "active_banks": {"type": ["integer", "null"], "minimum": 0},
+        "pim_utilization": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "latency_cycles": {"type": ["integer", "null"], "minimum": 1},
+        "clock_period_ns": {"type": ["number", "null"], "exclusiveMinimum": 0},
+        "throughput_ops_s": {"type": ["number", "null"], "exclusiveMinimum": 0},
+        "accuracy_metric": {"type": ["number", "null"]},
+        "activity_trace": {"type": ["string", "null"]}
+      }
+    }
+  }
+}
