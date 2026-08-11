@@ -4,8 +4,8 @@ module logic_die_64ch_reduction_top #(
     parameter int unsigned ENTRIES_PER_BANK = 16,
     parameter int unsigned KEY_WIDTH = 64,
     parameter int unsigned DATA_WIDTH = 256,
-    parameter int unsigned SLOT_WIDTH = $clog2(ENTRIES_PER_BANK),
-    parameter int unsigned CHANNEL_WIDTH = $clog2(CHANNELS),
+    parameter int unsigned SLOT_WIDTH = ENTRIES_PER_BANK > 1 ? $clog2(ENTRIES_PER_BANK) : 1,
+    parameter int unsigned CHANNEL_WIDTH = CHANNELS > 1 ? $clog2(CHANNELS) : 1,
     parameter bit USE_INTERNAL_FP16 = 1'b0,
     parameter int unsigned FP16_LANES = DATA_WIDTH / 16
 ) (
@@ -86,11 +86,12 @@ module logic_die_64ch_reduction_top #(
             .input_ready_o(block_final_ready[channel]),
             .input_key_i(block_final_key[channel]),
             .input_data_i(block_final_data[channel]),
+            .input_route_i('0),
             .output_valid_o(channel_valid[channel]),
             .output_ready_i(channel_ready[channel]),
             .output_key_o(channel_key[channel]),
             .output_data_o(channel_data[channel]),
-            .output_source_o()
+            .output_source_o(),.output_route_o()
         );
     end
 

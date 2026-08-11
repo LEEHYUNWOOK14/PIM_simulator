@@ -5,8 +5,8 @@ module shared_fp16_reduction_cluster #(
     parameter int unsigned KEY_WIDTH = 64,
     parameter int unsigned LANES = 16,
     parameter int unsigned DATA_WIDTH = LANES * 16,
-    parameter int unsigned SLOT_WIDTH = $clog2(ENTRIES_PER_SOURCE),
-    parameter int unsigned SOURCE_WIDTH = $clog2(SOURCES)
+    parameter int unsigned SLOT_WIDTH = ENTRIES_PER_SOURCE > 1 ? $clog2(ENTRIES_PER_SOURCE) : 1,
+    parameter int unsigned SOURCE_WIDTH = SOURCES > 1 ? $clog2(SOURCES) : 1
 ) (
     input  logic clk_i,
     input  logic rst_ni,

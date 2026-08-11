@@ -1,0 +1,40 @@
+Audit working directory:
+  C:\Users\Chandler\OneDrive\2026-하계\STOB 반도체 경진대회\STOB_PIM2
+Audit window:
+  start 2026-08-06T16:49:09+09:00
+  end   2026-08-06T17:16:35+09:00 (report finalization)
+
+Baseline (exit 0):
+  git branch --show-current
+  git rev-parse HEAD
+  git status --short
+  rg --files rtl src ini design flow output
+
+Existing functional checks:
+  wsl bash rtl/run_full_pim_tests.sh                  # exit 0
+  wsl bash rtl/run_shared_cluster_tests.sh            # exit 0
+  wsl timeout 300s bash rtl/run_tests.sh              # terminated/TIMEOUT at 64ch timed payload
+
+Independent arithmetic:
+  g++ ... verification/rtl_audit/generate_fp16_mul_vectors.cpp
+  iverilog ... fp16_mul_random_audit_tb.sv && vvp ... # exit 1, 452 mismatches
+  existing C++ half generator + fp16_add_random_tb    # exit 0, 4096 PASS
+
+Defect reproduction:
+  iverilog/vvp bank_operand_validity_repro_tb         # exit 0, defect reproduced
+  iverilog/vvp dram_read_backpressure_repro_tb        # exit 0, defect reproduced
+  iverilog/vvp invalid_crf_deadlock_repro_tb          # exit 0, defect reproduced
+  iverilog/vvp crf_jump_repro_tb                      # exit 0, defect reproduced
+  iverilog/vvp logic_tag_channel_repro_tb             # exit 0, two defects reproduced
+
+Elaboration/lint:
+  iverilog -g2012 -Wall -s full_pim_system_top ... (default and reduced)
+  yosys read_verilog; hierarchy -check; check; stat (default: environment failure)
+
+Synthesis:
+  yosys bank_pim_core DATA_WIDTH=32; synth; check; stat
+  yosys logic_pcu_scheduler PCUS=2 DATA_WIDTH=32; synth; check; stat
+  yosys full_pim_system_top 2ch/4bank/2PB/2PCU/DW32; hierarchy; check; stat
+
+Formal:
+  yosys read_verilog -formal ... logic_result_router_formal.sv; prep; flatten; sat -prove ok 1 -verify

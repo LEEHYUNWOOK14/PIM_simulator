@@ -1,47 +1,40 @@
-# Logic-die PIM command frontend contract
+# Logic-die PIM 명령 프런트엔드 계약
 
-## 1. 목적
+## 목적
 
-계층형 PIM은 bank-side PCU와 logic-die PCU가 서로 다른 연산 상태를 유지하면서,
-실제 HBM 데이터 전송 자원만 공유해야 한다. 현재 `HIERARCHY_SOURCE_QUEUES=true`
-경로는 태그와 PC/CRF/mode만 분리하고 동일한 DRAM `CommandQueue`와 `BankState`를
-사용하므로 이 계약을 만족하지 못한다.
+Bank-side PIM과 logic-die PIM은 독립된 CRF, PC, 반복 상태와 실행 문맥을 가지되 실제 HBM command/data bus와 bank timing은 공유한다. 명령의 문자열 tag만으로 control/data domain을 판정하지 않으며, 명시적인 domain과 packet class를 사용한다.
 
-## 2. 패킷 분류
+## 패킷 분류
 
-| 실행원 | 패킷 역할 | 대표 태그/주소 | 소유 상태 | 공유 자원 |
-|---|---|---|---|---|
-| Bank PCU | Bank 제어 | `BANK_DOMAIN_`, PIM 예약 주소 | bank CRF, PC, mode, GRF | command bus |
-| Logic PCU | Logic 제어 | `LOGIC_DOMAIN_` + PIM 예약 주소 | logic CRF, PC, mode, GRF | command bus만 중재 |
-| Bank PCU | 데이터 | 일반 HBM row의 operand/result | 물리 HBM bank/row | HBM bank state, data bus |
-| Logic PCU | 데이터 | weight/input/output 일반 HBM row | 물리 HBM bank/row, logic weight buffer | HBM bank state, data bus |
+| 실행 주체 | 분류 | 소유 상태 | 공유 자원 |
+|---|---|---|---|
+| Bank PIM | `BANK_CONTROL` | bank CRF, PC, mode, GRF | command/data bus |
+| Logic PIM | `LOGIC_CONTROL` | logic CRF, PC, epoch, operand context | command bus |
+| Bank PIM | `BANK_DATA` | HBM bank/row data | bank timing, data bus |
+| Logic PIM | `LOGIC_DATA` | weight/input/output row와 shared buffer | bank timing, data bus |
 
-PIM 예약 주소는 `PIMRank::isReservedRA()`가 판정한다. 태그 문자열만으로 제어와
-데이터를 구분하지 않는다. 예를 들어 `LOGIC_WEIGHT_FILL`은 logic용 데이터지만
-일반 HBM row를 접근하므로 물리 bank timing을 따라야 한다.
+PIM 예약 주소 여부는 `PIMRank::isReservedRA()`로 판정한다. `LOGIC_WEIGHT_FILL`처럼 logic용 payload도 물리 HBM row를 접근하므로 DRAM timing을 우회하지 않는다.
 
-## 3. 구현 불변조건
+## 불변 조건
 
-1. Bank와 logic은 각각 독립된 CRF, PC, 반복/점프 상태, mode latch를 가진다.
-2. Logic 제어 패킷의 ACT/PRE 상태는 bank PCU의 열린 row를 변경하지 않는다.
-3. 일반 row 데이터 패킷은 실행원과 무관하게 동일한 물리 HBM timing을 따른다.
-4. command/data bus가 같은 cycle에 두 패킷을 전송하지 않도록 최종 중재한다.
-5. read completion은 해당 실행원의 실제 연산 발행 후에만 완료될 수 있다.
-6. `HIERARCHY_SOURCE_QUEUES=false`는 기존 bank-PIM 기준 동작을 그대로 보존한다.
+1. Bank와 logic domain은 CRF, PC, JUMP/repeat 상태, mode latch를 공유하지 않는다.
+2. Logic control packet은 ACT/PRE 상태를 임의로 바꾸지 않는다.
+3. 일반 row data packet은 실행 domain과 무관하게 동일한 물리 timing 제약을 따른다.
+4. 공유 bus에서는 한 cycle에 허용된 수보다 많은 packet을 발행하지 않는다.
+5. read completion은 해당 domain의 실제 연산 발행 이후에만 완료될 수 있다.
+6. `HIERARCHY_SOURCE_QUEUES=false`에서 기존 bank-PIM 경로의 동작을 보존한다.
 
-## 4. 구현 순서
+## RTL 대응
 
-1. `BusPacket`을 `{BANK, LOGIC} x {CONTROL, DATA}`로 분류하는 단일 함수를 만든다.
-2. Logic CONTROL용 command queue와 가상 bank-state를 추가한다.
-3. 물리 DATA queue와 logic CONTROL queue의 발행 결과를 command bus 앞에서 중재한다.
-4. Logic CONTROL은 `logicMode_`와 `logicContext_`만 갱신한다.
-5. 공유 drain 테스트에서 정확도와 `logic_issues > 0`을 먼저 확인한다.
-6. 이후 `overlapping_window_cycles > 0`을 확인하고 전체 MobileNetV4 UIB를 회귀한다.
+- Bank control: `bank_side_pim_subsystem` + `pim_crf`
+- Logic control: `logic_command_coalescer` + `logic_epoch_barrier`
+- Operand context: `logic_operand_context_buffer`
+- Bank-to-logic arbitration: `logic_die_link_arbiter`
+- Logic execution: `logic_die_pim_top` + `logic_pcu_scheduler`
 
-## 5. 완료 판정
+## 완료 기준
 
-- source queue OFF: 실제 UIB `outputs_checked=18816`, 테스트 통과
-- source queue ON: shared drain `logic_outputs_checked=12`, 테스트 통과
-- source queue ON: `bank_issues>0`, `logic_issues>0`
-- 잘못된 조기 완료 없음: logic issue가 0인 상태에서 logic read가 반환되지 않음
-- 전체 정확도 테스트와 기존 bank-PIM 테스트 회귀 통과
+- Bank와 logic issue가 모두 0보다 크고 독립 PC로 진행한다.
+- 잘못된 조기 completion이 없다.
+- 공유 bus backpressure에서 valid/data/domain metadata가 안정적이다.
+- source queue ON/OFF 회귀가 모두 통과한다.

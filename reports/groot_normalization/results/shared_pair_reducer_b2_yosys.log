@@ -1,0 +1,1663 @@
+
+-- Running command `read_verilog -sv rtl/fp16_add.sv rtl/fp16_vector_add.sv rtl/bank_local_reduction_buffer.sv rtl/bank_local_fp16_reduction.sv; chparam -set BANKS 2 -set ENTRIES_PER_BANK 2 -set LANES 2 bank_local_fp16_reduction; hierarchy -check -top bank_local_fp16_reduction; synth -top bank_local_fp16_reduction; stat; check -assert' --
+
+1. Executing Verilog-2005 frontend: rtl/fp16_add.sv
+Parsing SystemVerilog input from `rtl/fp16_add.sv' to AST representation.
+Generating RTLIL representation for module `\fp16_add'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: rtl/fp16_vector_add.sv
+Parsing SystemVerilog input from `rtl/fp16_vector_add.sv' to AST representation.
+Generating RTLIL representation for module `\fp16_vector_add'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: rtl/bank_local_reduction_buffer.sv
+Parsing SystemVerilog input from `rtl/bank_local_reduction_buffer.sv' to AST representation.
+Generating RTLIL representation for module `\bank_local_reduction_buffer'.
+Warning: Replacing memory \g_accumulator_bank[7].entry_data_q with list of registers. See rtl/bank_local_reduction_buffer.sv:78
+Warning: Replacing memory \g_accumulator_bank[7].entry_key_q with list of registers. See rtl/bank_local_reduction_buffer.sv:77
+Warning: Replacing memory \g_accumulator_bank[6].entry_data_q with list of registers. See rtl/bank_local_reduction_buffer.sv:78
+Warning: Replacing memory \g_accumulator_bank[6].entry_key_q with list of registers. See rtl/bank_local_reduction_buffer.sv:77
+Warning: Replacing memory \g_accumulator_bank[5].entry_data_q with list of registers. See rtl/bank_local_reduction_buffer.sv:78
+Warning: Replacing memory \g_accumulator_bank[5].entry_key_q with list of registers. See rtl/bank_local_reduction_buffer.sv:77
+Warning: Replacing memory \g_accumulator_bank[4].entry_data_q with list of registers. See rtl/bank_local_reduction_buffer.sv:78
+Warning: Replacing memory \g_accumulator_bank[4].entry_key_q with list of registers. See rtl/bank_local_reduction_buffer.sv:77
+Warning: Replacing memory \g_accumulator_bank[3].entry_data_q with list of registers. See rtl/bank_local_reduction_buffer.sv:78
+Warning: Replacing memory \g_accumulator_bank[3].entry_key_q with list of registers. See rtl/bank_local_reduction_buffer.sv:77
+Warning: Replacing memory \g_accumulator_bank[2].entry_data_q with list of registers. See rtl/bank_local_reduction_buffer.sv:78
+Warning: Replacing memory \g_accumulator_bank[2].entry_key_q with list of registers. See rtl/bank_local_reduction_buffer.sv:77
+Warning: Replacing memory \g_accumulator_bank[1].entry_data_q with list of registers. See rtl/bank_local_reduction_buffer.sv:78
+Warning: Replacing memory \g_accumulator_bank[1].entry_key_q with list of registers. See rtl/bank_local_reduction_buffer.sv:77
+Warning: Replacing memory \g_accumulator_bank[0].entry_data_q with list of registers. See rtl/bank_local_reduction_buffer.sv:78
+Warning: Replacing memory \g_accumulator_bank[0].entry_key_q with list of registers. See rtl/bank_local_reduction_buffer.sv:77
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: rtl/bank_local_fp16_reduction.sv
+Parsing SystemVerilog input from `rtl/bank_local_fp16_reduction.sv' to AST representation.
+Generating RTLIL representation for module `\bank_local_fp16_reduction'.
+Successfully finished Verilog frontend.
+Parameter \BANKS = 2
+Parameter \ENTRIES_PER_BANK = 2
+Parameter \LANES = 2
+
+5. Executing AST frontend in derive mode using pre-parsed AST for module `\bank_local_fp16_reduction'.
+Parameter \BANKS = 2
+Parameter \ENTRIES_PER_BANK = 2
+Parameter \LANES = 2
+Generating RTLIL representation for module `$paramod$86a8ecba5ff6e4b1379cbe91a658acfc1067e796\bank_local_fp16_reduction'.
+
+6. Executing HIERARCHY pass (managing design hierarchy).
+
+6.1. Analyzing design hierarchy..
+Top module:  \bank_local_fp16_reduction
+Used module:     \bank_local_reduction_buffer
+Used module:     \fp16_add
+Parameter \BANKS = 2
+Parameter \ENTRIES_PER_BANK = 2
+Parameter \KEY_WIDTH = 64
+Parameter \DATA_WIDTH = 32
+Parameter \SLOT_WIDTH = 1
+
+6.2. Executing AST frontend in derive mode using pre-parsed AST for module `\bank_local_reduction_buffer'.
+Parameter \BANKS = 2
+Parameter \ENTRIES_PER_BANK = 2
+Parameter \KEY_WIDTH = 64
+Parameter \DATA_WIDTH = 32
+Parameter \SLOT_WIDTH = 1
+Generating RTLIL representation for module `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer'.
+Warning: Replacing memory \g_accumulator_bank[1].entry_data_q with list of registers. See rtl/bank_local_reduction_buffer.sv:78
+Warning: Replacing memory \g_accumulator_bank[1].entry_key_q with list of registers. See rtl/bank_local_reduction_buffer.sv:77
+Warning: Replacing memory \g_accumulator_bank[0].entry_data_q with list of registers. See rtl/bank_local_reduction_buffer.sv:78
+Warning: Replacing memory \g_accumulator_bank[0].entry_key_q with list of registers. See rtl/bank_local_reduction_buffer.sv:77
+
+6.3. Analyzing design hierarchy..
+Top module:  \bank_local_fp16_reduction
+Used module:     $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer
+Used module:     \fp16_add
+
+6.4. Analyzing design hierarchy..
+Top module:  \bank_local_fp16_reduction
+Used module:     $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer
+Used module:     \fp16_add
+Removing unused module `\bank_local_reduction_buffer'.
+Removing unused module `\fp16_vector_add'.
+Removed 2 unused modules.
+
+7. Executing SYNTH pass.
+
+7.1. Executing HIERARCHY pass (managing design hierarchy).
+
+7.1.1. Analyzing design hierarchy..
+Top module:  \bank_local_fp16_reduction
+Used module:     $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer
+Used module:     \fp16_add
+
+7.1.2. Analyzing design hierarchy..
+Top module:  \bank_local_fp16_reduction
+Used module:     $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer
+Used module:     \fp16_add
+Removed 0 unused modules.
+
+7.2. Executing PROC pass (convert processes to netlists).
+
+7.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+7.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 5 switch rules as full_case in process $proc$rtl/bank_local_reduction_buffer.sv:61$939 in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+Removed 3 dead cases from process $proc$rtl/bank_local_reduction_buffer.sv:42$908 in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+Marked 3 switch rules as full_case in process $proc$rtl/bank_local_reduction_buffer.sv:42$908 in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+Marked 5 switch rules as full_case in process $proc$rtl/bank_local_reduction_buffer.sv:61$862 in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+Removed 3 dead cases from process $proc$rtl/bank_local_reduction_buffer.sv:42$831 in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+Marked 3 switch rules as full_case in process $proc$rtl/bank_local_reduction_buffer.sv:42$831 in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+Marked 26 switch rules as full_case in process $proc$rtl/fp16_add.sv:28$3 in module fp16_add.
+Removed a total of 6 dead cases.
+
+7.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 65 assignments to connections.
+
+7.2.4. Executing PROC_INIT pass (extract init attributes).
+
+7.2.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_ni in `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$939'.
+Found async reset \rst_ni in `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$862'.
+
+7.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~42 debug messages>
+
+7.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$939'.
+     1/28: $3$lookahead\g_accumulator_bank[1].entry_valid_q$938[1:0]$970
+     2/28: $3$bitselwrite$pos$rtl/bank_local_reduction_buffer.sv:74$819[0:0]$969
+     3/28: $3$bitselwrite$pos$rtl/bank_local_reduction_buffer.sv:76$820[0:0]$968
+     4/28: $3$mem2reg_wr$\g_accumulator_bank[1].entry_key_q$rtl/bank_local_reduction_buffer.sv:77$829_ADDR[0:0]$967
+     5/28: $3$mem2reg_wr$\g_accumulator_bank[1].entry_key_q$rtl/bank_local_reduction_buffer.sv:77$829_DATA[63:0]$966
+     6/28: $3$mem2reg_wr$\g_accumulator_bank[1].entry_data_q$rtl/bank_local_reduction_buffer.sv:78$830_ADDR[0:0]$965
+     7/28: $3$mem2reg_wr$\g_accumulator_bank[1].entry_data_q$rtl/bank_local_reduction_buffer.sv:78$830_DATA[31:0]$964
+     8/28: $2$lookahead\g_accumulator_bank[1].entry_valid_q$938[1:0]$963
+     9/28: $2$bitselwrite$pos$rtl/bank_local_reduction_buffer.sv:74$819[0:0]$962
+    10/28: $2$bitselwrite$pos$rtl/bank_local_reduction_buffer.sv:76$820[0:0]$961
+    11/28: $2$mem2reg_wr$\g_accumulator_bank[1].entry_key_q$rtl/bank_local_reduction_buffer.sv:77$829_ADDR[0:0]$960
+    12/28: $2$mem2reg_wr$\g_accumulator_bank[1].entry_key_q$rtl/bank_local_reduction_buffer.sv:77$829_DATA[63:0]$959
+    13/28: $2$mem2reg_wr$\g_accumulator_bank[1].entry_data_q$rtl/bank_local_reduction_buffer.sv:78$830_ADDR[0:0]$958
+    14/28: $2$mem2reg_wr$\g_accumulator_bank[1].entry_data_q$rtl/bank_local_reduction_buffer.sv:78$830_DATA[31:0]$957
+    15/28: $1$lookahead\g_accumulator_bank[1].entry_valid_q$938[1:0]$954
+    16/28: $1$bitselwrite$pos$rtl/bank_local_reduction_buffer.sv:74$819[0:0]$953
+    17/28: $1$bitselwrite$pos$rtl/bank_local_reduction_buffer.sv:76$820[0:0]$952
+    18/28: $1$mem2reg_wr$\g_accumulator_bank[1].entry_key_q$rtl/bank_local_reduction_buffer.sv:77$829_ADDR[0:0]$951
+    19/28: $1$mem2reg_wr$\g_accumulator_bank[1].entry_key_q$rtl/bank_local_reduction_buffer.sv:77$829_DATA[63:0]$950
+    20/28: $1$mem2reg_wr$\g_accumulator_bank[1].entry_data_q$rtl/bank_local_reduction_buffer.sv:78$830_ADDR[0:0]$949
+    21/28: $1$mem2reg_wr$\g_accumulator_bank[1].entry_data_q$rtl/bank_local_reduction_buffer.sv:78$830_DATA[31:0]$948
+    22/28: $0\g_accumulator_bank[1].entry_data_q[1][31:0]
+    23/28: $0\g_accumulator_bank[1].entry_data_q[0][31:0]
+    24/28: $0\g_accumulator_bank[1].entry_key_q[1][63:0]
+    25/28: $0\g_accumulator_bank[1].entry_key_q[0][63:0]
+    26/28: $0\g_accumulator_bank[1].final_data_q[31:0]
+    27/28: $0\g_accumulator_bank[1].final_key_q[63:0]
+    28/28: $0\g_accumulator_bank[1].final_valid_q[0:0]
+Creating decoders for process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:42$908'.
+     1/3: $1$mem2reg_rd$\g_accumulator_bank[1].entry_key_q$rtl/bank_local_reduction_buffer.sv:59$828_DATA[63:0]$929
+     2/3: $1$mem2reg_rd$\g_accumulator_bank[1].entry_data_q$rtl/bank_local_reduction_buffer.sv:52$827_DATA[31:0]$927
+     3/3: $1$mem2reg_rd$\g_accumulator_bank[1].entry_key_q$rtl/bank_local_reduction_buffer.sv:47$826_DATA[63:0]$915
+Creating decoders for process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$862'.
+     1/28: $3$lookahead\g_accumulator_bank[0].entry_valid_q$861[1:0]$887
+     2/28: $3$bitselwrite$pos$rtl/bank_local_reduction_buffer.sv:74$817[0:0]$893
+     3/28: $3$bitselwrite$pos$rtl/bank_local_reduction_buffer.sv:76$818[0:0]$892
+     4/28: $3$mem2reg_wr$\g_accumulator_bank[0].entry_key_q$rtl/bank_local_reduction_buffer.sv:77$824_ADDR[0:0]$891
+     5/28: $3$mem2reg_wr$\g_accumulator_bank[0].entry_key_q$rtl/bank_local_reduction_buffer.sv:77$824_DATA[63:0]$890
+     6/28: $3$mem2reg_wr$\g_accumulator_bank[0].entry_data_q$rtl/bank_local_reduction_buffer.sv:78$825_ADDR[0:0]$889
+     7/28: $3$mem2reg_wr$\g_accumulator_bank[0].entry_data_q$rtl/bank_local_reduction_buffer.sv:78$825_DATA[31:0]$888
+     8/28: $2$bitselwrite$pos$rtl/bank_local_reduction_buffer.sv:74$817[0:0]$886
+     9/28: $2$bitselwrite$pos$rtl/bank_local_reduction_buffer.sv:76$818[0:0]$885
+    10/28: $2$mem2reg_wr$\g_accumulator_bank[0].entry_key_q$rtl/bank_local_reduction_buffer.sv:77$824_ADDR[0:0]$884
+    11/28: $2$mem2reg_wr$\g_accumulator_bank[0].entry_key_q$rtl/bank_local_reduction_buffer.sv:77$824_DATA[63:0]$883
+    12/28: $2$mem2reg_wr$\g_accumulator_bank[0].entry_data_q$rtl/bank_local_reduction_buffer.sv:78$825_ADDR[0:0]$882
+    13/28: $2$mem2reg_wr$\g_accumulator_bank[0].entry_data_q$rtl/bank_local_reduction_buffer.sv:78$825_DATA[31:0]$881
+    14/28: $2$lookahead\g_accumulator_bank[0].entry_valid_q$861[1:0]$880
+    15/28: $1$bitselwrite$pos$rtl/bank_local_reduction_buffer.sv:74$817[0:0]$877
+    16/28: $1$bitselwrite$pos$rtl/bank_local_reduction_buffer.sv:76$818[0:0]$876
+    17/28: $1$mem2reg_wr$\g_accumulator_bank[0].entry_key_q$rtl/bank_local_reduction_buffer.sv:77$824_ADDR[0:0]$875
+    18/28: $1$mem2reg_wr$\g_accumulator_bank[0].entry_key_q$rtl/bank_local_reduction_buffer.sv:77$824_DATA[63:0]$874
+    19/28: $1$mem2reg_wr$\g_accumulator_bank[0].entry_data_q$rtl/bank_local_reduction_buffer.sv:78$825_ADDR[0:0]$873
+    20/28: $1$mem2reg_wr$\g_accumulator_bank[0].entry_data_q$rtl/bank_local_reduction_buffer.sv:78$825_DATA[31:0]$872
+    21/28: $1$lookahead\g_accumulator_bank[0].entry_valid_q$861[1:0]$871
+    22/28: $0\g_accumulator_bank[0].entry_data_q[1][31:0]
+    23/28: $0\g_accumulator_bank[0].entry_data_q[0][31:0]
+    24/28: $0\g_accumulator_bank[0].entry_key_q[1][63:0]
+    25/28: $0\g_accumulator_bank[0].entry_key_q[0][63:0]
+    26/28: $0\g_accumulator_bank[0].final_data_q[31:0]
+    27/28: $0\g_accumulator_bank[0].final_key_q[63:0]
+    28/28: $0\g_accumulator_bank[0].final_valid_q[0:0]
+Creating decoders for process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:42$831'.
+     1/3: $1$mem2reg_rd$\g_accumulator_bank[0].entry_key_q$rtl/bank_local_reduction_buffer.sv:59$823_DATA[63:0]$852
+     2/3: $1$mem2reg_rd$\g_accumulator_bank[0].entry_data_q$rtl/bank_local_reduction_buffer.sv:52$822_DATA[31:0]$850
+     3/3: $1$mem2reg_rd$\g_accumulator_bank[0].entry_key_q$rtl/bank_local_reduction_buffer.sv:47$821_DATA[63:0]$838
+Creating decoders for process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+     1/53: $7\result_o[15:0]
+     2/53: $6\result_o[15:0]
+     3/53: $5\result_o[15:0]
+     4/53: $4\result_o[15:0]
+     5/53: $3\result_o[15:0]
+     6/53: $2\result_o[15:0]
+     7/53: $1\result_o[15:0]
+     8/53: $16\result_exp[31:0]
+     9/53: $1\rounded_sig[11:0]
+    10/53: $15\result_exp[31:0]
+    11/53: $15\magnitude_ext[13:0]
+    12/53: $14\result_exp[31:0]
+    13/53: $14\magnitude_ext[13:0]
+    14/53: $13\result_exp[31:0]
+    15/53: $13\magnitude_ext[13:0]
+    16/53: $12\result_exp[31:0]
+    17/53: $12\magnitude_ext[13:0]
+    18/53: $11\result_exp[31:0]
+    19/53: $11\magnitude_ext[13:0]
+    20/53: $10\result_exp[31:0]
+    21/53: $10\magnitude_ext[13:0]
+    22/53: $9\result_exp[31:0]
+    23/53: $9\magnitude_ext[13:0]
+    24/53: $8\result_exp[31:0]
+    25/53: $8\magnitude_ext[13:0]
+    26/53: $7\result_exp[31:0]
+    27/53: $7\magnitude_ext[13:0]
+    28/53: $6\result_exp[31:0]
+    29/53: $6\magnitude_ext[13:0]
+    30/53: $5\result_exp[31:0]
+    31/53: $5\magnitude_ext[13:0]
+    32/53: $4\result_exp[31:0]
+    33/53: $4\magnitude_ext[13:0]
+    34/53: $3\result_exp[31:0]
+    35/53: $3\magnitude_ext[13:0]
+    36/53: $2\magnitude_ext[13:0] [13:1]
+    37/53: $2\result_exp[31:0]
+    38/53: $2\magnitude_ext[13:0] [0]
+    39/53: $1\result_exp[31:0]
+    40/53: $1\magnitude_ext[13:0]
+    41/53: $1\add_ext[14:0]
+    42/53: $1\normalize_step[31:0]
+    43/53: $2\shift_right_sticky$func$rtl/fp16_add.sv:47$2.$result[13:0]$28 [13:1]
+    44/53: $2\shift_right_sticky$func$rtl/fp16_add.sv:47$2.$result[13:0]$28 [0]
+    45/53: $2\shift_right_sticky$func$rtl/fp16_add.sv:47$2.sticky[0:0]$29
+    46/53: $1\shift_right_sticky$func$rtl/fp16_add.sv:47$2.$result[13:0]$25
+    47/53: $1\shift_right_sticky$func$rtl/fp16_add.sv:47$2.sticky[0:0]$26
+    48/53: $1\small_sig[10:0]
+    49/53: $1\large_sig[10:0]
+    50/53: $1\small_exp[4:0]
+    51/53: $1\large_exp[4:0]
+    52/53: $1\small_sign[0:0]
+    53/53: $1\large_sign[0:0]
+
+7.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.\update_ready_o [1]' from process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:42$908'.
+No latch inferred for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.\add_lhs_o [63:32]' from process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:42$908'.
+No latch inferred for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.\add_rhs_o [63:32]' from process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:42$908'.
+No latch inferred for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.\protocol_error_o [1]' from process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:42$908'.
+No latch inferred for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$mem2reg_rd$\g_accumulator_bank[1].entry_key_q$rtl/bank_local_reduction_buffer.sv:59$828_DATA' from process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:42$908'.
+No latch inferred for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$mem2reg_rd$\g_accumulator_bank[1].entry_key_q$rtl/bank_local_reduction_buffer.sv:59$828_ADDR' from process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:42$908'.
+No latch inferred for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$mem2reg_rd$\g_accumulator_bank[1].entry_data_q$rtl/bank_local_reduction_buffer.sv:52$827_DATA' from process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:42$908'.
+No latch inferred for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$mem2reg_rd$\g_accumulator_bank[1].entry_data_q$rtl/bank_local_reduction_buffer.sv:52$827_ADDR' from process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:42$908'.
+No latch inferred for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$mem2reg_rd$\g_accumulator_bank[1].entry_key_q$rtl/bank_local_reduction_buffer.sv:47$826_DATA' from process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:42$908'.
+No latch inferred for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$mem2reg_rd$\g_accumulator_bank[1].entry_key_q$rtl/bank_local_reduction_buffer.sv:47$826_ADDR' from process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:42$908'.
+No latch inferred for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.\update_ready_o [0]' from process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:42$831'.
+No latch inferred for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.\add_lhs_o [31:0]' from process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:42$831'.
+No latch inferred for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.\add_rhs_o [31:0]' from process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:42$831'.
+No latch inferred for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.\protocol_error_o [0]' from process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:42$831'.
+No latch inferred for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$mem2reg_rd$\g_accumulator_bank[0].entry_key_q$rtl/bank_local_reduction_buffer.sv:59$823_DATA' from process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:42$831'.
+No latch inferred for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$mem2reg_rd$\g_accumulator_bank[0].entry_key_q$rtl/bank_local_reduction_buffer.sv:59$823_ADDR' from process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:42$831'.
+No latch inferred for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$mem2reg_rd$\g_accumulator_bank[0].entry_data_q$rtl/bank_local_reduction_buffer.sv:52$822_DATA' from process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:42$831'.
+No latch inferred for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$mem2reg_rd$\g_accumulator_bank[0].entry_data_q$rtl/bank_local_reduction_buffer.sv:52$822_ADDR' from process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:42$831'.
+No latch inferred for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$mem2reg_rd$\g_accumulator_bank[0].entry_key_q$rtl/bank_local_reduction_buffer.sv:47$821_DATA' from process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:42$831'.
+No latch inferred for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$mem2reg_rd$\g_accumulator_bank[0].entry_key_q$rtl/bank_local_reduction_buffer.sv:47$821_ADDR' from process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:42$831'.
+No latch inferred for signal `\fp16_add.\result_o' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\lhs_sign' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\rhs_sign' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\large_sign' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\small_sign' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\result_sign' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\round_up' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\lhs_exp' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\rhs_exp' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\large_exp' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\small_exp' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\lhs_frac' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\rhs_frac' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\lhs_sig' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\rhs_sig' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\large_sig' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\small_sig' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\large_ext' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\small_ext' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\magnitude_ext' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\add_ext' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\rounded_sig' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\result_exp' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\shift_amount' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\normalize_step' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\shift_right_sticky$func$rtl/fp16_add.sv:47$2.$result' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\shift_right_sticky$func$rtl/fp16_add.sv:47$2.value' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\shift_right_sticky$func$rtl/fp16_add.sv:47$2.amount' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\shift_right_sticky$func$rtl/fp16_add.sv:47$2.sticky' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+
+7.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.\g_accumulator_bank[1].entry_valid_q' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$939'.
+  created $adff cell `$procdff$1559' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.\g_accumulator_bank[1].final_valid_q' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$939'.
+  created $adff cell `$procdff$1564' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.\g_accumulator_bank[1].final_key_q' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$939'.
+  created $dff cell `$procdff$1571' with positive edge clock.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.\g_accumulator_bank[1].final_data_q' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$939'.
+  created $dff cell `$procdff$1578' with positive edge clock.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.\g_accumulator_bank[1].entry_key_q[0]' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$939'.
+  created $dff cell `$procdff$1585' with positive edge clock.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.\g_accumulator_bank[1].entry_key_q[1]' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$939'.
+  created $dff cell `$procdff$1592' with positive edge clock.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.\g_accumulator_bank[1].entry_data_q[0]' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$939'.
+  created $dff cell `$procdff$1599' with positive edge clock.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.\g_accumulator_bank[1].entry_data_q[1]' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$939'.
+  created $dff cell `$procdff$1606' with positive edge clock.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$mem2reg_wr$\g_accumulator_bank[1].entry_data_q$rtl/bank_local_reduction_buffer.sv:78$830_DATA' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$939'.
+  created $adff cell `$procdff$1611' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$mem2reg_wr$\g_accumulator_bank[1].entry_data_q$rtl/bank_local_reduction_buffer.sv:78$830_ADDR' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$939'.
+  created $adff cell `$procdff$1616' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$mem2reg_wr$\g_accumulator_bank[1].entry_key_q$rtl/bank_local_reduction_buffer.sv:77$829_DATA' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$939'.
+  created $adff cell `$procdff$1621' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$mem2reg_wr$\g_accumulator_bank[1].entry_key_q$rtl/bank_local_reduction_buffer.sv:77$829_ADDR' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$939'.
+  created $adff cell `$procdff$1626' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$bitselwrite$pos$rtl/bank_local_reduction_buffer.sv:76$820' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$939'.
+  created $adff cell `$procdff$1631' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$bitselwrite$pos$rtl/bank_local_reduction_buffer.sv:74$819' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$939'.
+  created $adff cell `$procdff$1636' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$lookahead\g_accumulator_bank[1].entry_valid_q$938' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$939'.
+  created $adff cell `$procdff$1641' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.\g_accumulator_bank[0].entry_valid_q' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$862'.
+  created $adff cell `$procdff$1646' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.\g_accumulator_bank[0].final_valid_q' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$862'.
+  created $adff cell `$procdff$1651' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.\g_accumulator_bank[0].final_key_q' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$862'.
+  created $dff cell `$procdff$1658' with positive edge clock.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.\g_accumulator_bank[0].final_data_q' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$862'.
+  created $dff cell `$procdff$1665' with positive edge clock.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.\g_accumulator_bank[0].entry_key_q[0]' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$862'.
+  created $dff cell `$procdff$1672' with positive edge clock.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.\g_accumulator_bank[0].entry_key_q[1]' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$862'.
+  created $dff cell `$procdff$1679' with positive edge clock.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.\g_accumulator_bank[0].entry_data_q[0]' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$862'.
+  created $dff cell `$procdff$1686' with positive edge clock.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.\g_accumulator_bank[0].entry_data_q[1]' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$862'.
+  created $dff cell `$procdff$1693' with positive edge clock.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$lookahead\g_accumulator_bank[0].entry_valid_q$861' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$862'.
+  created $adff cell `$procdff$1698' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$mem2reg_wr$\g_accumulator_bank[0].entry_data_q$rtl/bank_local_reduction_buffer.sv:78$825_DATA' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$862'.
+  created $adff cell `$procdff$1703' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$mem2reg_wr$\g_accumulator_bank[0].entry_data_q$rtl/bank_local_reduction_buffer.sv:78$825_ADDR' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$862'.
+  created $adff cell `$procdff$1708' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$mem2reg_wr$\g_accumulator_bank[0].entry_key_q$rtl/bank_local_reduction_buffer.sv:77$824_DATA' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$862'.
+  created $adff cell `$procdff$1713' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$mem2reg_wr$\g_accumulator_bank[0].entry_key_q$rtl/bank_local_reduction_buffer.sv:77$824_ADDR' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$862'.
+  created $adff cell `$procdff$1718' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$bitselwrite$pos$rtl/bank_local_reduction_buffer.sv:76$818' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$862'.
+  created $adff cell `$procdff$1723' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$bitselwrite$pos$rtl/bank_local_reduction_buffer.sv:74$817' using process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$862'.
+  created $adff cell `$procdff$1728' with positive edge clock and positive level reset.
+
+7.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+7.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 5 empty switches in `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$939'.
+Removing empty process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$939'.
+Found and cleaned up 3 empty switches in `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:42$908'.
+Removing empty process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:42$908'.
+Found and cleaned up 5 empty switches in `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$862'.
+Removing empty process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:61$862'.
+Found and cleaned up 3 empty switches in `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:42$831'.
+Removing empty process `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$proc$rtl/bank_local_reduction_buffer.sv:42$831'.
+Found and cleaned up 26 empty switches in `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+Removing empty process `fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+Cleaned up 42 empty switches.
+
+7.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+<suppressed ~74 debug messages>
+Optimizing module bank_local_fp16_reduction.
+Optimizing module fp16_add.
+<suppressed ~29 debug messages>
+
+7.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+Optimizing module bank_local_fp16_reduction.
+Optimizing module fp16_add.
+
+7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+Finding unused cells or wires in module \bank_local_fp16_reduction..
+Finding unused cells or wires in module \fp16_add..
+Removed 91 unused cells and 538 unused wires.
+<suppressed ~95 debug messages>
+
+7.5. Executing CHECK pass (checking for obvious problems).
+Checking module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer...
+Checking module bank_local_fp16_reduction...
+Checking module fp16_add...
+Found and reported 0 problems.
+
+7.6. Executing OPT pass (performing simple optimizations).
+
+7.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+Optimizing module bank_local_fp16_reduction.
+Optimizing module fp16_add.
+
+7.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer'.
+<suppressed ~78 debug messages>
+Finding identical cells in module `\bank_local_fp16_reduction'.
+Finding identical cells in module `\fp16_add'.
+<suppressed ~30 debug messages>
+Removed a total of 36 cells.
+
+7.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$1115.
+    dead port 2/2 on $mux $procmux$989.
+Running muxtree optimizer on module \bank_local_fp16_reduction..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+      Replacing known input bits on port A of cell $procmux$1325: $add$rtl/fp16_add.sv:69$110_Y -> { 1'0 $add$rtl/fp16_add.sv:69$110_Y [10:0] }
+      Replacing known input bits on port B of cell $procmux$1325: { 1'0 $add$rtl/fp16_add.sv:69$110_Y [11:1] } -> { 2'01 $add$rtl/fp16_add.sv:69$110_Y [10:1] }
+      Replacing known input bits on port B of cell $procmux$1485: $add$rtl/fp16_add.sv:52$38_Y [14:2] -> { 1'1 $add$rtl/fp16_add.sv:52$38_Y [13:2] }
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$1241.
+    dead port 1/2 on $mux $procmux$1244.
+    dead port 1/2 on $mux $procmux$1247.
+    dead port 1/2 on $mux $procmux$1250.
+    dead port 1/2 on $mux $procmux$1253.
+    dead port 1/2 on $mux $procmux$1256.
+    dead port 1/2 on $mux $procmux$1262.
+    dead port 1/2 on $mux $procmux$1265.
+    dead port 1/2 on $mux $procmux$1268.
+    dead port 1/2 on $mux $procmux$1271.
+    dead port 1/2 on $mux $procmux$1274.
+    dead port 1/2 on $mux $procmux$1280.
+    dead port 1/2 on $mux $procmux$1283.
+    dead port 1/2 on $mux $procmux$1286.
+    dead port 1/2 on $mux $procmux$1289.
+    dead port 1/2 on $mux $procmux$1295.
+    dead port 1/2 on $mux $procmux$1298.
+    dead port 1/2 on $mux $procmux$1301.
+    dead port 1/2 on $mux $procmux$1307.
+    dead port 1/2 on $mux $procmux$1310.
+    dead port 1/2 on $mux $procmux$1316.
+    dead port 1/2 on $mux $procmux$1331.
+    dead port 1/2 on $mux $procmux$1337.
+    dead port 2/2 on $mux $procmux$1487.
+    dead port 2/2 on $mux $procmux$1493.
+    dead port 2/2 on $mux $procmux$1499.
+    dead port 1/2 on $mux $procmux$1517.
+    dead port 1/2 on $mux $procmux$1523.
+Removed 30 multiplexer ports.
+<suppressed ~66 debug messages>
+
+7.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+  Optimizing cells in module \bank_local_fp16_reduction.
+  Optimizing cells in module \fp16_add.
+    New input vector for $reduce_or cell $reduce_or$rtl/fp16_add.sv:10$30: \small_sig
+  Optimizing cells in module \fp16_add.
+Performed a total of 1 changes.
+
+7.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer'.
+<suppressed ~24 debug messages>
+Finding identical cells in module `\bank_local_fp16_reduction'.
+Finding identical cells in module `\fp16_add'.
+<suppressed ~12 debug messages>
+Removed a total of 12 cells.
+
+7.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+7.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+Finding unused cells or wires in module \bank_local_fp16_reduction..
+Finding unused cells or wires in module \fp16_add..
+Removed 0 unused cells and 78 unused wires.
+<suppressed ~2 debug messages>
+
+7.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+Optimizing module bank_local_fp16_reduction.
+Optimizing module fp16_add.
+
+7.6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+7.6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \bank_local_fp16_reduction..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~62 debug messages>
+
+7.6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+  Optimizing cells in module \bank_local_fp16_reduction.
+  Optimizing cells in module \fp16_add.
+Performed a total of 0 changes.
+
+7.6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer'.
+Finding identical cells in module `\bank_local_fp16_reduction'.
+Finding identical cells in module `\fp16_add'.
+Removed a total of 0 cells.
+
+7.6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+7.6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+Finding unused cells or wires in module \bank_local_fp16_reduction..
+Finding unused cells or wires in module \fp16_add..
+
+7.6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+Optimizing module bank_local_fp16_reduction.
+Optimizing module fp16_add.
+
+7.6.16. Finished OPT passes. (There is nothing left to do.)
+
+7.7. Executing FSM pass (extract and optimize FSM).
+
+7.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+7.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+7.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+7.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+Finding unused cells or wires in module \bank_local_fp16_reduction..
+Finding unused cells or wires in module \fp16_add..
+
+7.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+7.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+7.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+7.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+7.8. Executing OPT pass (performing simple optimizations).
+
+7.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+Optimizing module bank_local_fp16_reduction.
+Optimizing module fp16_add.
+
+7.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer'.
+Finding identical cells in module `\bank_local_fp16_reduction'.
+Finding identical cells in module `\fp16_add'.
+Removed a total of 0 cells.
+
+7.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \bank_local_fp16_reduction..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~62 debug messages>
+
+7.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+  Optimizing cells in module \bank_local_fp16_reduction.
+  Optimizing cells in module \fp16_add.
+Performed a total of 0 changes.
+
+7.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer'.
+Finding identical cells in module `\bank_local_fp16_reduction'.
+Finding identical cells in module `\fp16_add'.
+Removed a total of 0 cells.
+
+7.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$1693 ($dff) from module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer (D = \add_result_i [31:0], Q = \g_accumulator_bank[0].entry_data_q[1]).
+Adding EN signal on $procdff$1686 ($dff) from module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer (D = \add_result_i [31:0], Q = \g_accumulator_bank[0].entry_data_q[0]).
+Adding EN signal on $procdff$1679 ($dff) from module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer (D = \update_key_i [63:0], Q = \g_accumulator_bank[0].entry_key_q[1]).
+Adding EN signal on $procdff$1672 ($dff) from module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer (D = \update_key_i [63:0], Q = \g_accumulator_bank[0].entry_key_q[0]).
+Adding EN signal on $procdff$1665 ($dff) from module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer (D = \add_result_i [31:0], Q = \g_accumulator_bank[0].final_data_q).
+Adding EN signal on $procdff$1658 ($dff) from module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer (D = \update_key_i [63:0], Q = \g_accumulator_bank[0].final_key_q).
+Adding EN signal on $procdff$1646 ($adff) from module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer (D = $3$lookahead\g_accumulator_bank[0].entry_valid_q$861[1:0]$887, Q = \g_accumulator_bank[0].entry_valid_q).
+Adding EN signal on $procdff$1606 ($dff) from module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer (D = \add_result_i [63:32], Q = \g_accumulator_bank[1].entry_data_q[1]).
+Adding EN signal on $procdff$1599 ($dff) from module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer (D = \add_result_i [63:32], Q = \g_accumulator_bank[1].entry_data_q[0]).
+Adding EN signal on $procdff$1592 ($dff) from module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer (D = \update_key_i [127:64], Q = \g_accumulator_bank[1].entry_key_q[1]).
+Adding EN signal on $procdff$1585 ($dff) from module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer (D = \update_key_i [127:64], Q = \g_accumulator_bank[1].entry_key_q[0]).
+Adding EN signal on $procdff$1578 ($dff) from module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer (D = \add_result_i [63:32], Q = \g_accumulator_bank[1].final_data_q).
+Adding EN signal on $procdff$1571 ($dff) from module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer (D = \update_key_i [127:64], Q = \g_accumulator_bank[1].final_key_q).
+Adding EN signal on $procdff$1559 ($adff) from module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer (D = $3$lookahead\g_accumulator_bank[1].entry_valid_q$938[1:0]$970, Q = \g_accumulator_bank[1].entry_valid_q).
+
+7.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+Finding unused cells or wires in module \bank_local_fp16_reduction..
+Finding unused cells or wires in module \fp16_add..
+Removed 46 unused cells and 46 unused wires.
+<suppressed ~47 debug messages>
+
+7.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+Optimizing module bank_local_fp16_reduction.
+Optimizing module fp16_add.
+
+7.8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+7.8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \bank_local_fp16_reduction..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~50 debug messages>
+
+7.8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+  Optimizing cells in module \bank_local_fp16_reduction.
+  Optimizing cells in module \fp16_add.
+Performed a total of 0 changes.
+
+7.8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer'.
+<suppressed ~48 debug messages>
+Finding identical cells in module `\bank_local_fp16_reduction'.
+Finding identical cells in module `\fp16_add'.
+Removed a total of 16 cells.
+
+7.8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+7.8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+Finding unused cells or wires in module \bank_local_fp16_reduction..
+Finding unused cells or wires in module \fp16_add..
+Removed 0 unused cells and 16 unused wires.
+<suppressed ~1 debug messages>
+
+7.8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+Optimizing module bank_local_fp16_reduction.
+Optimizing module fp16_add.
+
+7.8.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+7.8.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \bank_local_fp16_reduction..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~50 debug messages>
+
+7.8.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+  Optimizing cells in module \bank_local_fp16_reduction.
+  Optimizing cells in module \fp16_add.
+Performed a total of 0 changes.
+
+7.8.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer'.
+Finding identical cells in module `\bank_local_fp16_reduction'.
+Finding identical cells in module `\fp16_add'.
+Removed a total of 0 cells.
+
+7.8.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+7.8.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+Finding unused cells or wires in module \bank_local_fp16_reduction..
+Finding unused cells or wires in module \fp16_add..
+
+7.8.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+Optimizing module bank_local_fp16_reduction.
+Optimizing module fp16_add.
+
+7.8.23. Finished OPT passes. (There is nothing left to do.)
+
+7.9. Executing WREDUCE pass (reducing word size of cells).
+Converting cell $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$neg$rtl/bank_local_reduction_buffer.sv:0$894 ($neg) from signed to unsigned.
+Removed top 1 bits (of 2) from port A of cell $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$neg$rtl/bank_local_reduction_buffer.sv:0$894 ($neg).
+Converting cell $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$neg$rtl/bank_local_reduction_buffer.sv:0$971 ($neg) from signed to unsigned.
+Removed top 1 bits (of 2) from port A of cell $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.$neg$rtl/bank_local_reduction_buffer.sv:0$971 ($neg).
+Removed top 26 bits (of 32) from port Y of cell fp16_add.$sub$rtl/fp16_add.sv:46$23 ($sub).
+Removed top 26 bits (of 32) from port A of cell fp16_add.$le$rtl/fp16_add.sv:9$24 ($le).
+Removed top 31 bits (of 32) from port B of cell fp16_add.$le$rtl/fp16_add.sv:9$24 ($le).
+Removed top 26 bits (of 32) from port A of cell fp16_add.$ge$rtl/fp16_add.sv:10$27 ($ge).
+Removed top 27 bits (of 32) from port B of cell fp16_add.$ge$rtl/fp16_add.sv:10$27 ($ge).
+Removed top 13 bits (of 14) from port A of cell fp16_add.$shl$rtl/fp16_add.sv:12$31 ($shl).
+Removed top 1 bits (of 15) from port A of cell fp16_add.$add$rtl/fp16_add.sv:52$38 ($add).
+Removed top 1 bits (of 15) from port B of cell fp16_add.$add$rtl/fp16_add.sv:52$38 ($add).
+Removed top 26 bits (of 32) from port A of cell fp16_add.$add$rtl/fp16_add.sv:56$40 ($add).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$add$rtl/fp16_add.sv:56$40 ($add).
+Converting cell fp16_add.$add$rtl/fp16_add.sv:56$40 ($add) from signed to unsigned.
+Removed top 25 bits (of 32) from port Y of cell fp16_add.$add$rtl/fp16_add.sv:56$40 ($add).
+Removed top 1 bits (of 6) from port A of cell fp16_add.$add$rtl/fp16_add.sv:56$40 ($add).
+Removed top 1 bits (of 2) from port B of cell fp16_add.$add$rtl/fp16_add.sv:56$40 ($add).
+Removed top 1 bits (of 7) from port Y of cell fp16_add.$add$rtl/fp16_add.sv:56$40 ($add).
+Removed top 26 bits (of 32) from port A of cell fp16_add.$gt$rtl/fp16_add.sv:62$43 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$43 ($gt).
+Converting cell fp16_add.$gt$rtl/fp16_add.sv:62$43 ($gt) from signed to unsigned.
+Removed top 1 bits (of 6) from port A of cell fp16_add.$gt$rtl/fp16_add.sv:62$43 ($gt).
+Removed top 1 bits (of 2) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$43 ($gt).
+Removed top 26 bits (of 32) from port A of cell fp16_add.$sub$rtl/fp16_add.sv:64$46 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$46 ($sub).
+Converting cell fp16_add.$sub$rtl/fp16_add.sv:64$46 ($sub) from signed to unsigned.
+Removed top 25 bits (of 32) from port Y of cell fp16_add.$sub$rtl/fp16_add.sv:64$46 ($sub).
+Removed top 1 bits (of 6) from port A of cell fp16_add.$sub$rtl/fp16_add.sv:64$46 ($sub).
+Removed top 1 bits (of 2) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$46 ($sub).
+Removed top 1 bits (of 7) from port Y of cell fp16_add.$sub$rtl/fp16_add.sv:64$46 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$48 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$51 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$53 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$56 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$58 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$61 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$63 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$66 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$68 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$71 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$73 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$76 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$78 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$81 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$83 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$86 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$88 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$91 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$93 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$96 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$98 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$101 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$103 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$106 ($sub).
+Removed top 1 bits (of 12) from port A of cell fp16_add.$add$rtl/fp16_add.sv:69$110 ($add).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$add$rtl/fp16_add.sv:72$112 ($add).
+Removed top 26 bits (of 32) from port B of cell fp16_add.$ge$rtl/fp16_add.sv:85$137 ($ge).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$le$rtl/fp16_add.sv:86$138 ($le).
+Removed top 26 bits (of 32) from mux cell fp16_add.$procmux$1491 ($mux).
+Removed top 1 bits (of 12) from mux cell fp16_add.$procmux$1325 ($mux).
+Removed top 1 bits (of 16) from mux cell fp16_add.$procmux$1238 ($mux).
+Removed top 1 bits (of 16) from mux cell fp16_add.$procmux$1259 ($mux).
+Removed top 26 bits (of 32) from wire fp16_add.$2\result_exp[31:0].
+Removed top 26 bits (of 32) from wire fp16_add.$add$rtl/fp16_add.sv:56$40_Y.
+Removed top 1 bits (of 14) from wire fp16_add.$sub$rtl/fp16_add.sv:59$41_Y.
+Removed top 1 bits (of 12) from wire fp16_add.rounded_sig.
+
+7.10. Executing PEEPOPT pass (run peephole optimizers).
+
+7.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+Finding unused cells or wires in module \bank_local_fp16_reduction..
+Finding unused cells or wires in module \fp16_add..
+Removed 0 unused cells and 5 unused wires.
+<suppressed ~1 debug messages>
+
+7.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer:
+  creating $macc model for $neg$rtl/bank_local_reduction_buffer.sv:0$894 ($neg).
+  creating $macc model for $neg$rtl/bank_local_reduction_buffer.sv:0$971 ($neg).
+  creating $alu model for $macc $neg$rtl/bank_local_reduction_buffer.sv:0$971.
+  creating $alu model for $macc $neg$rtl/bank_local_reduction_buffer.sv:0$894.
+  creating $alu cell for $neg$rtl/bank_local_reduction_buffer.sv:0$894: $auto$alumacc.cc:495:replace_alu$1795
+  creating $alu cell for $neg$rtl/bank_local_reduction_buffer.sv:0$971: $auto$alumacc.cc:495:replace_alu$1798
+  created 2 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module bank_local_fp16_reduction:
+  created 0 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module fp16_add:
+  creating $macc model for $add$rtl/fp16_add.sv:52$38 ($add).
+  creating $macc model for $add$rtl/fp16_add.sv:56$40 ($add).
+  creating $macc model for $add$rtl/fp16_add.sv:69$110 ($add).
+  creating $macc model for $add$rtl/fp16_add.sv:72$112 ($add).
+  creating $macc model for $sub$rtl/fp16_add.sv:12$32 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:46$23 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:59$41 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:64$101 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:64$106 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:64$46 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:64$51 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:64$56 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:64$61 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:64$66 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:64$71 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:64$76 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:64$81 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:64$86 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:64$91 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:64$96 ($sub).
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:64$96.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:64$91.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:64$86.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:64$81.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:64$76.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:64$71.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:64$66.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:64$61.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:64$56.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:64$51.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:64$46.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:64$106.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:64$101.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:59$41.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:46$23.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:12$32.
+  creating $alu model for $macc $add$rtl/fp16_add.sv:72$112.
+  creating $alu model for $macc $add$rtl/fp16_add.sv:69$110.
+  creating $alu model for $macc $add$rtl/fp16_add.sv:56$40.
+  creating $alu model for $macc $add$rtl/fp16_add.sv:52$38.
+  creating $alu model for $ge$rtl/fp16_add.sv:10$27 ($ge): new $alu
+  creating $alu model for $ge$rtl/fp16_add.sv:85$137 ($ge): new $alu
+  creating $alu model for $gt$rtl/fp16_add.sv:38$18 ($gt): new $alu
+  creating $alu model for $gt$rtl/fp16_add.sv:62$103 ($gt): merged with $sub$rtl/fp16_add.sv:64$106.
+  creating $alu model for $gt$rtl/fp16_add.sv:62$43 ($gt): merged with $sub$rtl/fp16_add.sv:64$46.
+  creating $alu model for $gt$rtl/fp16_add.sv:62$48 ($gt): merged with $sub$rtl/fp16_add.sv:64$51.
+  creating $alu model for $gt$rtl/fp16_add.sv:62$53 ($gt): merged with $sub$rtl/fp16_add.sv:64$56.
+  creating $alu model for $gt$rtl/fp16_add.sv:62$58 ($gt): merged with $sub$rtl/fp16_add.sv:64$61.
+  creating $alu model for $gt$rtl/fp16_add.sv:62$63 ($gt): merged with $sub$rtl/fp16_add.sv:64$66.
+  creating $alu model for $gt$rtl/fp16_add.sv:62$68 ($gt): merged with $sub$rtl/fp16_add.sv:64$71.
+  creating $alu model for $gt$rtl/fp16_add.sv:62$73 ($gt): merged with $sub$rtl/fp16_add.sv:64$76.
+  creating $alu model for $gt$rtl/fp16_add.sv:62$78 ($gt): merged with $sub$rtl/fp16_add.sv:64$81.
+  creating $alu model for $gt$rtl/fp16_add.sv:62$83 ($gt): merged with $sub$rtl/fp16_add.sv:64$86.
+  creating $alu model for $gt$rtl/fp16_add.sv:62$88 ($gt): merged with $sub$rtl/fp16_add.sv:64$91.
+  creating $alu model for $gt$rtl/fp16_add.sv:62$93 ($gt): merged with $sub$rtl/fp16_add.sv:64$96.
+  creating $alu model for $gt$rtl/fp16_add.sv:62$98 ($gt): merged with $sub$rtl/fp16_add.sv:64$101.
+  creating $alu model for $le$rtl/fp16_add.sv:86$138 ($le): new $alu
+  creating $alu model for $le$rtl/fp16_add.sv:9$24 ($le): new $alu
+  creating $alu cell for $le$rtl/fp16_add.sv:9$24: $auto$alumacc.cc:495:replace_alu$1806
+  creating $alu cell for $le$rtl/fp16_add.sv:86$138: $auto$alumacc.cc:495:replace_alu$1817
+  creating $alu cell for $gt$rtl/fp16_add.sv:38$18: $auto$alumacc.cc:495:replace_alu$1828
+  creating $alu cell for $ge$rtl/fp16_add.sv:85$137: $auto$alumacc.cc:495:replace_alu$1839
+  creating $alu cell for $ge$rtl/fp16_add.sv:10$27: $auto$alumacc.cc:495:replace_alu$1854
+  creating $alu cell for $add$rtl/fp16_add.sv:52$38: $auto$alumacc.cc:495:replace_alu$1869
+  creating $alu cell for $add$rtl/fp16_add.sv:56$40: $auto$alumacc.cc:495:replace_alu$1872
+  creating $alu cell for $add$rtl/fp16_add.sv:69$110: $auto$alumacc.cc:495:replace_alu$1875
+  creating $alu cell for $add$rtl/fp16_add.sv:72$112: $auto$alumacc.cc:495:replace_alu$1878
+  creating $alu cell for $sub$rtl/fp16_add.sv:12$32: $auto$alumacc.cc:495:replace_alu$1881
+  creating $alu cell for $sub$rtl/fp16_add.sv:46$23: $auto$alumacc.cc:495:replace_alu$1884
+  creating $alu cell for $sub$rtl/fp16_add.sv:59$41: $auto$alumacc.cc:495:replace_alu$1887
+  creating $alu cell for $sub$rtl/fp16_add.sv:64$101, $gt$rtl/fp16_add.sv:62$98: $auto$alumacc.cc:495:replace_alu$1890
+  creating $alu cell for $sub$rtl/fp16_add.sv:64$106, $gt$rtl/fp16_add.sv:62$103: $auto$alumacc.cc:495:replace_alu$1903
+  creating $alu cell for $sub$rtl/fp16_add.sv:64$46, $gt$rtl/fp16_add.sv:62$43: $auto$alumacc.cc:495:replace_alu$1916
+  creating $alu cell for $sub$rtl/fp16_add.sv:64$51, $gt$rtl/fp16_add.sv:62$48: $auto$alumacc.cc:495:replace_alu$1927
+  creating $alu cell for $sub$rtl/fp16_add.sv:64$56, $gt$rtl/fp16_add.sv:62$53: $auto$alumacc.cc:495:replace_alu$1940
+  creating $alu cell for $sub$rtl/fp16_add.sv:64$61, $gt$rtl/fp16_add.sv:62$58: $auto$alumacc.cc:495:replace_alu$1953
+  creating $alu cell for $sub$rtl/fp16_add.sv:64$66, $gt$rtl/fp16_add.sv:62$63: $auto$alumacc.cc:495:replace_alu$1966
+  creating $alu cell for $sub$rtl/fp16_add.sv:64$71, $gt$rtl/fp16_add.sv:62$68: $auto$alumacc.cc:495:replace_alu$1979
+  creating $alu cell for $sub$rtl/fp16_add.sv:64$76, $gt$rtl/fp16_add.sv:62$73: $auto$alumacc.cc:495:replace_alu$1992
+  creating $alu cell for $sub$rtl/fp16_add.sv:64$81, $gt$rtl/fp16_add.sv:62$78: $auto$alumacc.cc:495:replace_alu$2005
+  creating $alu cell for $sub$rtl/fp16_add.sv:64$86, $gt$rtl/fp16_add.sv:62$83: $auto$alumacc.cc:495:replace_alu$2018
+  creating $alu cell for $sub$rtl/fp16_add.sv:64$91, $gt$rtl/fp16_add.sv:62$88: $auto$alumacc.cc:495:replace_alu$2031
+  creating $alu cell for $sub$rtl/fp16_add.sv:64$96, $gt$rtl/fp16_add.sv:62$93: $auto$alumacc.cc:495:replace_alu$2044
+  created 25 $alu and 0 $macc cells.
+
+7.13. Executing SHARE pass (SAT-based resource sharing).
+Found 2 cells in module fp16_add that may be considered for resource sharing.
+  Analyzing resource sharing options for $shr$rtl/fp16_add.sv:13$35 ($shr):
+    Found 4 activation_patterns using ctrl signal { $auto$rtlil.cc:2783:ReduceOr$1816 $auto$rtlil.cc:2783:ReduceOr$1868 $auto$rtlil.cc:2783:ReduceOr$1853 $logic_and$rtl/fp16_add.sv:86$140_Y $eq$rtl/fp16_add.sv:84$136_Y $logic_and$rtl/fp16_add.sv:81$134_Y $logic_or$rtl/fp16_add.sv:75$125_Y $eq$rtl/fp16_add.sv:76$116_Y $eq$rtl/fp16_add.sv:75$113_Y }.
+    No candidates found.
+  Analyzing resource sharing options for $shl$rtl/fp16_add.sv:12$31 ($shl):
+    Found 4 activation_patterns using ctrl signal { $auto$rtlil.cc:2783:ReduceOr$1816 $auto$rtlil.cc:2783:ReduceOr$1868 $auto$rtlil.cc:2783:ReduceOr$1853 $logic_and$rtl/fp16_add.sv:86$140_Y $eq$rtl/fp16_add.sv:84$136_Y $logic_and$rtl/fp16_add.sv:81$134_Y $logic_or$rtl/fp16_add.sv:75$125_Y $eq$rtl/fp16_add.sv:76$116_Y $eq$rtl/fp16_add.sv:75$113_Y }.
+    No candidates found.
+
+7.14. Executing OPT pass (performing simple optimizations).
+
+7.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+Optimizing module bank_local_fp16_reduction.
+Optimizing module fp16_add.
+<suppressed ~9 debug messages>
+
+7.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer'.
+Finding identical cells in module `\bank_local_fp16_reduction'.
+Finding identical cells in module `\fp16_add'.
+Removed a total of 0 cells.
+
+7.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \bank_local_fp16_reduction..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~50 debug messages>
+
+7.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+  Optimizing cells in module \bank_local_fp16_reduction.
+  Optimizing cells in module \fp16_add.
+Performed a total of 0 changes.
+
+7.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer'.
+Finding identical cells in module `\bank_local_fp16_reduction'.
+Finding identical cells in module `\fp16_add'.
+Removed a total of 0 cells.
+
+7.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+7.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+Finding unused cells or wires in module \bank_local_fp16_reduction..
+Finding unused cells or wires in module \fp16_add..
+Removed 1 unused cells and 24 unused wires.
+<suppressed ~3 debug messages>
+
+7.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+Optimizing module bank_local_fp16_reduction.
+Optimizing module fp16_add.
+
+7.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+7.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \bank_local_fp16_reduction..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~50 debug messages>
+
+7.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+  Optimizing cells in module \bank_local_fp16_reduction.
+  Optimizing cells in module \fp16_add.
+Performed a total of 0 changes.
+
+7.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer'.
+Finding identical cells in module `\bank_local_fp16_reduction'.
+Finding identical cells in module `\fp16_add'.
+Removed a total of 0 cells.
+
+7.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+7.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+Finding unused cells or wires in module \bank_local_fp16_reduction..
+Finding unused cells or wires in module \fp16_add..
+
+7.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+Optimizing module bank_local_fp16_reduction.
+Optimizing module fp16_add.
+
+7.14.16. Finished OPT passes. (There is nothing left to do.)
+
+7.15. Executing MEMORY pass.
+
+7.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+7.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+7.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+7.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+7.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+7.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+Finding unused cells or wires in module \bank_local_fp16_reduction..
+Finding unused cells or wires in module \fp16_add..
+
+7.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+7.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+7.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+Finding unused cells or wires in module \bank_local_fp16_reduction..
+Finding unused cells or wires in module \fp16_add..
+
+7.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+7.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+Finding unused cells or wires in module \bank_local_fp16_reduction..
+Finding unused cells or wires in module \fp16_add..
+
+7.17. Executing OPT pass (performing simple optimizations).
+
+7.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+<suppressed ~6 debug messages>
+Optimizing module bank_local_fp16_reduction.
+Optimizing module fp16_add.
+<suppressed ~35 debug messages>
+
+7.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer'.
+Finding identical cells in module `\bank_local_fp16_reduction'.
+Finding identical cells in module `\fp16_add'.
+Removed a total of 0 cells.
+
+7.17.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+7.17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+Finding unused cells or wires in module \bank_local_fp16_reduction..
+Finding unused cells or wires in module \fp16_add..
+Removed 0 unused cells and 27 unused wires.
+<suppressed ~1 debug messages>
+
+7.17.5. Finished fast OPT passes.
+
+7.18. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+7.19. Executing OPT pass (performing simple optimizations).
+
+7.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+Optimizing module bank_local_fp16_reduction.
+Optimizing module fp16_add.
+
+7.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer'.
+Finding identical cells in module `\bank_local_fp16_reduction'.
+Finding identical cells in module `\fp16_add'.
+Removed a total of 0 cells.
+
+7.19.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \bank_local_fp16_reduction..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~50 debug messages>
+
+7.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+  Optimizing cells in module \bank_local_fp16_reduction.
+  Optimizing cells in module \fp16_add.
+    Consolidated identical input bits for $mux cell $procmux$1238:
+      Old ports: A={ \result_exp [4:0] \rounded_sig [9:0] }, B={ 5'00000 \rounded_sig [9:0] }, Y=$7\result_o[15:0] [14:0]
+      New ports: A=\result_exp [4:0], B=5'00000, Y=$7\result_o[15:0] [14:10]
+      New connections: $7\result_o[15:0] [9:0] = \rounded_sig [9:0]
+    Consolidated identical input bits for $mux cell $procmux$1472:
+      Old ports: A={ 27'000000000000000000000000000 \large_exp }, B={ $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [4:0] }, Y=$3\result_exp[31:0]
+      New ports: A={ 1'0 \large_exp }, B={ $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [4:0] }, Y=$3\result_exp[31:0] [5:0]
+      New connections: $3\result_exp[31:0] [31:6] = { $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] }
+  Optimizing cells in module \fp16_add.
+Performed a total of 2 changes.
+
+7.19.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer'.
+Finding identical cells in module `\bank_local_fp16_reduction'.
+Finding identical cells in module `\fp16_add'.
+Removed a total of 0 cells.
+
+7.19.6. Executing OPT_SHARE pass.
+    Found cells that share an operand and can be merged by moving the $mux $procmux$1113 in front of them:
+        $or$rtl/bank_local_reduction_buffer.sv:0$900
+        $or$rtl/bank_local_reduction_buffer.sv:0$907
+
+    Found cells that share an operand and can be merged by moving the $mux $procmux$987 in front of them:
+        $or$rtl/bank_local_reduction_buffer.sv:0$977
+        $or$rtl/bank_local_reduction_buffer.sv:0$984
+
+7.19.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+7.19.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+Finding unused cells or wires in module \bank_local_fp16_reduction..
+Finding unused cells or wires in module \fp16_add..
+Removed 0 unused cells and 4 unused wires.
+<suppressed ~1 debug messages>
+
+7.19.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+<suppressed ~2 debug messages>
+Optimizing module bank_local_fp16_reduction.
+Optimizing module fp16_add.
+
+7.19.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+7.19.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \bank_local_fp16_reduction..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~50 debug messages>
+
+7.19.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+  Optimizing cells in module \bank_local_fp16_reduction.
+  Optimizing cells in module \fp16_add.
+Performed a total of 0 changes.
+
+7.19.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer'.
+Finding identical cells in module `\bank_local_fp16_reduction'.
+Finding identical cells in module `\fp16_add'.
+Removed a total of 0 cells.
+
+7.19.14. Executing OPT_SHARE pass.
+
+7.19.15. Executing OPT_DFF pass (perform DFF optimizations).
+
+7.19.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+Finding unused cells or wires in module \bank_local_fp16_reduction..
+Finding unused cells or wires in module \fp16_add..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~1 debug messages>
+
+7.19.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+Optimizing module bank_local_fp16_reduction.
+Optimizing module fp16_add.
+
+7.19.18. Rerunning OPT passes. (Maybe there is more to do..)
+
+7.19.19. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \bank_local_fp16_reduction..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~50 debug messages>
+
+7.19.20. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+  Optimizing cells in module \bank_local_fp16_reduction.
+  Optimizing cells in module \fp16_add.
+Performed a total of 0 changes.
+
+7.19.21. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer'.
+Finding identical cells in module `\bank_local_fp16_reduction'.
+Finding identical cells in module `\fp16_add'.
+Removed a total of 0 cells.
+
+7.19.22. Executing OPT_SHARE pass.
+
+7.19.23. Executing OPT_DFF pass (perform DFF optimizations).
+
+7.19.24. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+Finding unused cells or wires in module \bank_local_fp16_reduction..
+Finding unused cells or wires in module \fp16_add..
+
+7.19.25. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+Optimizing module bank_local_fp16_reduction.
+Optimizing module fp16_add.
+
+7.19.26. Finished OPT passes. (There is nothing left to do.)
+
+7.20. Executing TECHMAP pass (map to technology primitives).
+
+7.20.1. Executing Verilog-2005 frontend: /home/chandler/.local/yosys/usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/home/chandler/.local/yosys/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+7.20.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $reduce_and.
+Using template $paramod$1e402e64350f17d7d96d4d19397585e7730f3657\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $not.
+Using template $paramod$091610cd349a68bd5539cffd7126f0d76e9bca00\_90_alu for cells of type $alu.
+Using template $paramod$050f15daba5036a0512adf25d3c6631f629623f7\_90_alu for cells of type $alu.
+Using template $paramod$546f3f62de618651dd3a8b3f9e661fb34b30a603\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $reduce_or.
+Using template $paramod$719aadea7a94d31a13cd25a777432aacb0e462b5\_90_alu for cells of type $alu.
+Using template $paramod$constmap:84ecb1fe6cf6c7774af1e6015b4db447afa6c0b1$paramod$419a913ed38c2513939b18df9044de3e442bc66c\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shl.
+Using template $paramod$constmap:b99037b5251b430096ae8426664393d6ae79f5d4$paramod$10d34890fc0a590416fb0bd5f2405603d3bc2a8b\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shr.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $eq.
+Using template $paramod$5e23d2e0f07f5403e3d2c5b606bab0c16e4174c1\_90_alu for cells of type $alu.
+Using template $paramod$92a1f7a016bf58d33db5a47145e66dde1cbc3210\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $logic_and.
+Using template $paramod$332fab4e157f868977379756d21fa99887c3c6c4\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $logic_or.
+Using template $paramod$6412f7f13655de512a17af2c71a87b50b4a57324\_90_alu for cells of type $alu.
+Using template $paramod$1ed7ec530b1ba361931392f2f8504f82ccdfecaa\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $ne.
+Using extmapper simplemap for cells of type $and.
+Using template $paramod$15650b5f68527c2737f08685d9884042e045002a\_90_alu for cells of type $alu.
+Using template $paramod$6df0329addda9228fcc2546de2aaf14ad26c98e1\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001100 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000110 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001110 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000101 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000010000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $dffe.
+Using extmapper simplemap for cells of type $adffe.
+Using extmapper simplemap for cells of type $adff.
+Using template $paramod$9e8c19db10db5b8954224cafa0587db20bab09bd\_90_alu for cells of type $alu.
+Using template $paramod$constmap:3080718f4bce01ac90ad6aa7a95528797d496a22$paramod$5aa0fbdc3e385f336e95d2896ce5aed0c003c799\_90_shift_shiftx for cells of type $shift.
+Using template $paramod$constmap:10887e013c6ac5a74755f7ac430ded3f147ecbc3$paramod$1e265d9719406ee45a570be27d6567e3eeff81e5\_90_shift_shiftx for cells of type $shiftx.
+Analyzing pattern of constant bits for this cell:
+  Constant input on bit 0 of port A: 1'0
+Creating constmapped module `$paramod$constmap:b8943ead3ef5d491259808cc1c18b206138ccdbf$paramod$5aa0fbdc3e385f336e95d2896ce5aed0c003c799\_90_shift_shiftx'.
+
+7.20.73. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$constmap:b8943ead3ef5d491259808cc1c18b206138ccdbf$paramod$5aa0fbdc3e385f336e95d2896ce5aed0c003c799\_90_shift_shiftx..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$11021.
+Removed 1 multiplexer ports.
+<suppressed ~4848 debug messages>
+
+7.20.74. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$constmap:b8943ead3ef5d491259808cc1c18b206138ccdbf$paramod$5aa0fbdc3e385f336e95d2896ce5aed0c003c799\_90_shift_shiftx.
+<suppressed ~4 debug messages>
+Removed 0 unused cells and 9 unused wires.
+Using template $paramod$constmap:b8943ead3ef5d491259808cc1c18b206138ccdbf$paramod$5aa0fbdc3e385f336e95d2896ce5aed0c003c799\_90_shift_shiftx for cells of type $shift.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000010 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~159 debug messages>
+
+7.21. Executing OPT pass (performing simple optimizations).
+
+7.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+<suppressed ~40 debug messages>
+Optimizing module bank_local_fp16_reduction.
+Optimizing module fp16_add.
+<suppressed ~2525 debug messages>
+
+7.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer'.
+<suppressed ~21 debug messages>
+Finding identical cells in module `\bank_local_fp16_reduction'.
+Finding identical cells in module `\fp16_add'.
+<suppressed ~1779 debug messages>
+Removed a total of 600 cells.
+
+7.21.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+7.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+Finding unused cells or wires in module \bank_local_fp16_reduction..
+Finding unused cells or wires in module \fp16_add..
+Removed 268 unused cells and 1962 unused wires.
+<suppressed ~270 debug messages>
+
+7.21.5. Finished fast OPT passes.
+
+7.22. Executing ABC pass (technology mapping using ABC).
+
+7.22.1. Extracting gate netlist of module `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer' to `<abc-temp-dir>/input.blif'..
+Extracted 581 gates and 1111 wires to a netlist network with 529 inputs and 82 outputs.
+
+7.22.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+7.22.1.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        3
+ABC RESULTS:            ANDNOT cells:       80
+ABC RESULTS:               MUX cells:      202
+ABC RESULTS:              NAND cells:        6
+ABC RESULTS:               NOR cells:        3
+ABC RESULTS:               NOT cells:        6
+ABC RESULTS:                OR cells:      129
+ABC RESULTS:             ORNOT cells:        1
+ABC RESULTS:               XOR cells:      128
+ABC RESULTS:        internal signals:      500
+ABC RESULTS:           input signals:      529
+ABC RESULTS:          output signals:       82
+Removing temp directory.
+
+7.22.2. Extracting gate netlist of module `\bank_local_fp16_reduction' to `<abc-temp-dir>/input.blif'..
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Don't call ABC as there is nothing to map.
+Removing temp directory.
+
+7.22.3. Extracting gate netlist of module `\fp16_add' to `<abc-temp-dir>/input.blif'..
+Extracted 4245 gates and 4279 wires to a netlist network with 32 inputs and 16 outputs.
+
+7.22.3.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+7.22.3.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       78
+ABC RESULTS:            ANDNOT cells:     1197
+ABC RESULTS:               MUX cells:      692
+ABC RESULTS:              NAND cells:       48
+ABC RESULTS:               NOR cells:      201
+ABC RESULTS:               NOT cells:      207
+ABC RESULTS:                OR cells:      312
+ABC RESULTS:             ORNOT cells:      182
+ABC RESULTS:              XNOR cells:      150
+ABC RESULTS:               XOR cells:      358
+ABC RESULTS:        internal signals:     4231
+ABC RESULTS:           input signals:       32
+ABC RESULTS:          output signals:       16
+Removing temp directory.
+
+7.23. Executing OPT pass (performing simple optimizations).
+
+7.23.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer.
+<suppressed ~3 debug messages>
+Optimizing module bank_local_fp16_reduction.
+Optimizing module fp16_add.
+<suppressed ~10 debug messages>
+
+7.23.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer'.
+Finding identical cells in module `\bank_local_fp16_reduction'.
+Finding identical cells in module `\fp16_add'.
+<suppressed ~588 debug messages>
+Removed a total of 196 cells.
+
+7.23.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+7.23.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer..
+Finding unused cells or wires in module \bank_local_fp16_reduction..
+Finding unused cells or wires in module \fp16_add..
+Removed 1 unused cells and 2459 unused wires.
+<suppressed ~14 debug messages>
+
+7.23.5. Finished fast OPT passes.
+
+7.24. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `bank_local_fp16_reduction'. Setting top module to bank_local_fp16_reduction.
+
+7.24.1. Analyzing design hierarchy..
+Top module:  \bank_local_fp16_reduction
+Used module:     $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer
+Used module:     \fp16_add
+
+7.24.2. Analyzing design hierarchy..
+Top module:  \bank_local_fp16_reduction
+Used module:     $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer
+Used module:     \fp16_add
+Removed 0 unused modules.
+
+7.25. Printing statistics.
+
+=== $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer ===
+
+   Number of wires:                520
+   Number of wire bits:           1665
+   Number of public wires:          33
+   Number of public wire bits:    1176
+   Number of ports:                 17
+   Number of port bits:            594
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               1139
+     $_ANDNOT_                      80
+     $_AND_                          3
+     $_DFFE_PN0N_                    2
+     $_DFFE_PN0P_                    2
+     $_DFFE_PP_                    576
+     $_DFF_PN0_                      2
+     $_MUX_                        202
+     $_NAND_                         6
+     $_NOR_                          3
+     $_NOT_                          5
+     $_ORNOT_                        1
+     $_OR_                         129
+     $_XOR_                        128
+
+=== bank_local_fp16_reduction ===
+
+   Number of wires:                 17
+   Number of wire bits:            594
+   Number of public wires:          17
+   Number of public wire bits:     594
+   Number of ports:                 14
+   Number of port bits:            402
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  5
+     $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer      1
+     fp16_add                        4
+
+=== fp16_add ===
+
+   Number of wires:               3230
+   Number of wire bits:           3419
+   Number of public wires:          17
+   Number of public wire bits:     206
+   Number of ports:                  3
+   Number of port bits:             48
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               3229
+     $_ANDNOT_                    1085
+     $_AND_                         71
+     $_MUX_                        678
+     $_NAND_                        48
+     $_NOR_                        201
+     $_NOT_                        199
+     $_ORNOT_                      177
+     $_OR_                         284
+     $_XNOR_                       141
+     $_XOR_                        345
+
+=== design hierarchy ===
+
+   bank_local_fp16_reduction         1
+     $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer      1
+     fp16_add                        4
+
+   Number of wires:              13457
+   Number of wire bits:          15935
+   Number of public wires:         118
+   Number of public wire bits:    2594
+   Number of ports:                 43
+   Number of port bits:           1188
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:              14055
+     $_ANDNOT_                    4420
+     $_AND_                        287
+     $_DFFE_PN0N_                    2
+     $_DFFE_PN0P_                    2
+     $_DFFE_PP_                    576
+     $_DFF_PN0_                      2
+     $_MUX_                       2914
+     $_NAND_                       198
+     $_NOR_                        807
+     $_NOT_                        801
+     $_ORNOT_                      709
+     $_OR_                        1265
+     $_XNOR_                       564
+     $_XOR_                       1508
+
+7.26. Executing CHECK pass (checking for obvious problems).
+Checking module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer...
+Checking module bank_local_fp16_reduction...
+Checking module fp16_add...
+Found and reported 0 problems.
+
+8. Printing statistics.
+
+=== $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer ===
+
+   Number of wires:                520
+   Number of wire bits:           1665
+   Number of public wires:          33
+   Number of public wire bits:    1176
+   Number of ports:                 17
+   Number of port bits:            594
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               1139
+     $_ANDNOT_                      80
+     $_AND_                          3
+     $_DFFE_PN0N_                    2
+     $_DFFE_PN0P_                    2
+     $_DFFE_PP_                    576
+     $_DFF_PN0_                      2
+     $_MUX_                        202
+     $_NAND_                         6
+     $_NOR_                          3
+     $_NOT_                          5
+     $_ORNOT_                        1
+     $_OR_                         129
+     $_XOR_                        128
+
+=== bank_local_fp16_reduction ===
+
+   Number of wires:                 17
+   Number of wire bits:            594
+   Number of public wires:          17
+   Number of public wire bits:     594
+   Number of ports:                 14
+   Number of port bits:            402
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  5
+     $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer      1
+     fp16_add                        4
+
+=== fp16_add ===
+
+   Number of wires:               3230
+   Number of wire bits:           3419
+   Number of public wires:          17
+   Number of public wire bits:     206
+   Number of ports:                  3
+   Number of port bits:             48
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               3229
+     $_ANDNOT_                    1085
+     $_AND_                         71
+     $_MUX_                        678
+     $_NAND_                        48
+     $_NOR_                        201
+     $_NOT_                        199
+     $_ORNOT_                      177
+     $_OR_                         284
+     $_XNOR_                       141
+     $_XOR_                        345
+
+=== design hierarchy ===
+
+   bank_local_fp16_reduction         1
+     $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer      1
+     fp16_add                        4
+
+   Number of wires:              13457
+   Number of wire bits:          15935
+   Number of public wires:         118
+   Number of public wire bits:    2594
+   Number of ports:                 43
+   Number of port bits:           1188
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:              14055
+     $_ANDNOT_                    4420
+     $_AND_                        287
+     $_DFFE_PN0N_                    2
+     $_DFFE_PN0P_                    2
+     $_DFFE_PP_                    576
+     $_DFF_PN0_                      2
+     $_MUX_                       2914
+     $_NAND_                       198
+     $_NOR_                        807
+     $_NOT_                        801
+     $_ORNOT_                      709
+     $_OR_                        1265
+     $_XNOR_                       564
+     $_XOR_                       1508
+
+9. Executing CHECK pass (checking for obvious problems).
+Checking module $paramod$9b854ccc791377d67c384c7f3e3e7f1f00b5dc38\bank_local_reduction_buffer...
+Checking module bank_local_fp16_reduction...
+Checking module fp16_add...
+Found and reported 0 problems.
+
+Warnings: 16 unique messages, 20 total
+End of script. Logfile hash: 388d3748e3, CPU: user 0.86s system 0.04s, MEM: 45.23 MB peak
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+Time spent: 32% 1x abc (0 sec), 14% 26x opt_clean (0 sec), ...

@@ -1,0 +1,161 @@
+{
+  "status": "PASS",
+  "disclaimer": "Architectural reference thermal model; not calibrated and not signoff.",
+  "profile": "rtl_mapped",
+  "mapped_power_input": "output/rtl_to_3d_test/mapped_power.json",
+  "grid": [
+    32,
+    16,
+    21
+  ],
+  "stack_count": 1,
+  "dram_dies_per_stack": 8,
+  "input_power_W": 4.0,
+  "peak_temperature_K": 322.58181130666975,
+  "peak_delta_K": 22.58181130666975,
+  "hotspot": {
+    "layer": "dram_0",
+    "x_index": 0,
+    "y_index": 1
+  },
+  "layers": [
+    {
+      "layer": "substrate",
+      "min_K": 306.22104192427724,
+      "mean_K": 308.99301329180446,
+      "max_K": 320.4348855623355
+    },
+    {
+      "layer": "interposer",
+      "min_K": 306.49873535062363,
+      "mean_K": 309.39856360275223,
+      "max_K": 321.5223068665611
+    },
+    {
+      "layer": "logic_die",
+      "min_K": 306.4983936268753,
+      "mean_K": 309.40029302838525,
+      "max_K": 321.62596609204695
+    },
+    {
+      "layer": "bump_0",
+      "min_K": 306.4938222596553,
+      "mean_K": 309.34563589041693,
+      "max_K": 322.1397710862233
+    },
+    {
+      "layer": "dram_0",
+      "min_K": 306.48989167723926,
+      "mean_K": 309.2987061806906,
+      "max_K": 322.58181130666975
+    },
+    {
+      "layer": "bump_1",
+      "min_K": 306.4849467764637,
+      "mean_K": 309.23492055023564,
+      "max_K": 321.75375227372325
+    },
+    {
+      "layer": "dram_1",
+      "min_K": 306.4799964234207,
+      "mean_K": 309.17113491978057,
+      "max_K": 320.9267435495473
+    },
+    {
+      "layer": "bump_2",
+      "min_K": 306.4740442659472,
+      "mean_K": 309.1073492893256,
+      "max_K": 320.2480827655694
+    },
+    {
+      "layer": "dram_2",
+      "min_K": 306.4680867282424,
+      "mean_K": 309.04356365887054,
+      "max_K": 319.5700843995195
+    },
+    {
+      "layer": "bump_3",
+      "min_K": 306.46114150912865,
+      "mean_K": 308.9797780284154,
+      "max_K": 318.9887681655107
+    },
+    {
+      "layer": "dram_3",
+      "min_K": 306.45419099015027,
+      "mean_K": 308.9159923979603,
+      "max_K": 318.40789273892017
+    },
+    {
+      "layer": "bump_4",
+      "min_K": 306.4462683842123,
+      "mean_K": 308.8522067675052,
+      "max_K": 317.8933803598874
+    },
+    {
+      "layer": "dram_4",
+      "min_K": 306.4383405663274,
+      "mean_K": 308.78842113705014,
+      "max_K": 317.3791764916722
+    },
+    {
+      "layer": "bump_5",
+      "min_K": 306.4294575766343,
+      "mean_K": 308.72463550659495,
+      "max_K": 316.9127146574431
+    },
+    {
+      "layer": "dram_5",
+      "min_K": 306.420569469617,
+      "mean_K": 308.66084987613976,
+      "max_K": 316.44647860295936
+    },
+    {
+      "layer": "bump_6",
+      "min_K": 306.4107442645259,
+      "mean_K": 308.59706424568463,
+      "max_K": 316.01600304306487
+    },
+    {
+      "layer": "dram_6",
+      "min_K": 306.40091404253513,
+      "mean_K": 308.5332786152295,
+      "max_K": 315.5856990904231
+    },
+    {
+      "layer": "bump_7",
+      "min_K": 306.39016578303614,
+      "mean_K": 308.4694929847743,
+      "max_K": 315.1830997523641
+    },
+    {
+      "layer": "dram_7",
+      "min_K": 306.3794126119139,
+      "mean_K": 308.40570735431913,
+      "max_K": 314.7806350698958
+    },
+    {
+      "layer": "tim",
+      "min_K": 306.33355972016625,
+      "mean_K": 308.15468426048074,
+      "max_K": 313.2981547249914
+    },
+    {
+      "layer": "lid",
+      "min_K": 306.28388224900493,
+      "mean_K": 307.88368266874204,
+      "max_K": 311.8043350439027
+    }
+  ],
+  "external_solver_adapters": {
+    "hotspot": {
+      "url": "https://github.com/uvahotspot/HotSpot",
+      "commit": "f18831e48cef5d62580585cca0d7fab6c71bc3cc",
+      "license": "BSD-style; inspect upstream LICENSE"
+    },
+    "3d_ice": {
+      "url": "https://github.com/esl-epfl/3d-ice",
+      "commit": "4953952a1ef6d38807ff307212a6f15e5b2ef935",
+      "license": "GPL-3.0"
+    }
+  }
+}

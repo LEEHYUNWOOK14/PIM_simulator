@@ -1,0 +1,47 @@
+Note: Google Test filter = Gr00tN17NormalizationFixture.*
+[==========] Running 2 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 2 tests from Gr00tN17NormalizationFixture
+[ RUN      ] Gr00tN17NormalizationFixture.policy_layer_norm_profile_269_invocations
+>> GR00T N1.7 policy LayerNorm Bank-PIM profile
+  vlln profiled_calls=1 measured_calls=1 shape=[280,2048] eps=1e-05 affine=1 cycles_per_call=17198 projected_cycles=17198 max_abs=0.001415
+  vl_self_attention_norm1_norm3 profiled_calls=8 measured_calls=1 shape=[280,2048] eps=0.000010 affine=1 cycles_per_call=17198 projected_cycles=137584 max_abs=0.001368
+  dit_adaln_norm1 profiled_calls=128 measured_calls=1 shape=[41,1536] eps=0.000010 affine=1 cycles_per_call=4856 projected_cycles=621568 max_abs=0.001295
+  dit_norm3 profiled_calls=128 measured_calls=1 shape=[41,1536] eps=0.000010 affine=0 cycles_per_call=4856 projected_cycles=621568 max_abs=0.001242
+  dit_norm_out profiled_calls=4 measured_calls=1 shape=[41,1536] eps=0.000001 affine=1 cycles_per_call=4856 projected_cycles=19424 max_abs=0.001278
+  measured_calls=5 profiled_calls=269 projected_total_cycles=1417342
+[       OK ] Gr00tN17NormalizationFixture.policy_layer_norm_profile_269_invocations (7165 ms)
+[ RUN      ] Gr00tN17NormalizationFixture.qwen_rms_norm_profile_64_invocations
+>> GR00T N1.7 Qwen RMSNorm Bank-PIM profile
+  qwen_input_post_attention profiled_calls=32 measured_calls=1 shape=[280,2048] eps=0.000001 cycles_per_call=9735 projected_cycles=311520 max_abs=0.000938
+  qwen_query_key profiled_calls=32 measured_calls=1 shape=[8960,64] eps=0.000001 cycles_per_call=9735 projected_cycles=311520 max_abs=0.001361
+  measured_calls=2 profiled_calls=64 projected_total_cycles=623040
+[       OK ] Gr00tN17NormalizationFixture.qwen_rms_norm_profile_64_invocations (2985 ms)
+[----------] 2 tests from Gr00tN17NormalizationFixture (10151 ms total)
+
+[----------] Global test environment tear-down
+[==========] 2 tests from 1 test suite ran. (10151 ms total)
+[  PASSED  ] 2 tests.
+	Command being timed: "./sim --gtest_filter=Gr00tN17NormalizationFixture.* --gtest_color=no"
+	User time (seconds): 10.00
+	System time (seconds): 0.12
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:10.19
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 63572
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 31
+	Minor (reclaiming a frame) page faults: 20144
+	Voluntary context switches: 220
+	Involuntary context switches: 22
+	Swaps: 0
+	File system inputs: 35
+	File system outputs: 0
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

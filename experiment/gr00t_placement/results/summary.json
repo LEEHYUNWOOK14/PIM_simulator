@@ -1,0 +1,324 @@
+{
+  "candidate_count": 333,
+  "candidate_constraint_feasible_count": 293,
+  "signoff_hard_constraint_feasible_count": 0,
+  "pareto_count": 15,
+  "baseline": {
+    "kind": "center_baseline",
+    "logic_block_x_um": 0.0,
+    "logic_block_y_um": 0.0,
+    "balanced_score": 0.3789725375130252,
+    "max_temp_c_unvalidated": 35.55179977854542,
+    "mean_channel_wire_um": 1949.9999999999998,
+    "hard_constraints_satisfied": false,
+    "hard_constraint_violations": "global_rtl_timing_not_closed",
+    "assumptions_file": "assumptions.json",
+    "analysis_seed": 1701
+  },
+  "final_recommendation_status": "withheld_pending_rtl_and_model_calibration",
+  "provisional_monte_carlo_mode": {
+    "kind": "provisional_monte_carlo_mode",
+    "logic_block_x_um": 0.0,
+    "logic_block_y_um": 0.0,
+    "balanced_score": 0.3789725375130252,
+    "max_temp_c_unvalidated": 35.55179977854542,
+    "mean_channel_wire_um": 1949.9999999999998,
+    "hard_constraints_satisfied": false,
+    "hard_constraint_violations": "global_rtl_timing_not_closed",
+    "assumptions_file": "assumptions.json",
+    "analysis_seed": 1701,
+    "final_recommendation": false,
+    "reason": "RTL/PPA and thermal/package calibration are not stable",
+    "monte_carlo_mode_win_rate": 0.947,
+    "monte_carlo_mode_win_rate_ci95": [
+      0.9313250610861062,
+      0.9592536915776607
+    ],
+    "monte_carlo_top_k_rate": 0.972
+  },
+  "profile_winners": {
+    "balanced": {
+      "kind": "balanced",
+      "logic_block_x_um": 0.0,
+      "logic_block_y_um": 0.0,
+      "balanced_score": 0.3789725375130252,
+      "max_temp_c_unvalidated": 35.55179977854542,
+      "mean_channel_wire_um": 1949.9999999999998,
+      "hard_constraints_satisfied": false,
+      "hard_constraint_violations": "global_rtl_timing_not_closed",
+      "assumptions_file": "assumptions.json",
+      "analysis_seed": 1701
+    },
+    "thermal_first": {
+      "kind": "thermal_first",
+      "logic_block_x_um": 0.0,
+      "logic_block_y_um": 0.0,
+      "balanced_score": 0.3789725375130252,
+      "max_temp_c_unvalidated": 35.55179977854542,
+      "mean_channel_wire_um": 1949.9999999999998,
+      "hard_constraints_satisfied": false,
+      "hard_constraint_violations": "global_rtl_timing_not_closed",
+      "assumptions_file": "assumptions.json",
+      "analysis_seed": 1701
+    },
+    "performance_first": {
+      "kind": "performance_first",
+      "logic_block_x_um": 0.0,
+      "logic_block_y_um": 0.0,
+      "balanced_score": 0.3789725375130252,
+      "max_temp_c_unvalidated": 35.55179977854542,
+      "mean_channel_wire_um": 1949.9999999999998,
+      "hard_constraints_satisfied": false,
+      "hard_constraint_violations": "global_rtl_timing_not_closed",
+      "assumptions_file": "assumptions.json",
+      "analysis_seed": 1701
+    },
+    "cost_first": {
+      "kind": "cost_first",
+      "logic_block_x_um": 0.0,
+      "logic_block_y_um": 0.0,
+      "balanced_score": 0.3789725375130252,
+      "max_temp_c_unvalidated": 35.55179977854542,
+      "mean_channel_wire_um": 1949.9999999999998,
+      "hard_constraints_satisfied": false,
+      "hard_constraint_violations": "global_rtl_timing_not_closed",
+      "assumptions_file": "assumptions.json",
+      "analysis_seed": 1701
+    }
+  },
+  "monte_carlo_samples": 1000,
+  "weight_sweep_cases": 80,
+  "manufacturing_cost_scenarios": [
+    {
+      "scenario": "low",
+      "base_logic_die_area_mm2": 77.76,
+      "gross_dies_per_wafer_analytical": 833.4506785706209,
+      "poisson_logic_die_yield": 0.9618661261563464,
+      "good_logic_dies_per_wafer": 801.6679755391013,
+      "logic_die_cost_usd": 6.2369960539307145,
+      "package_cost_usd": 50.0,
+      "partial_logic_plus_package_cost_usd": 100.42320723916201,
+      "excludes": "HBM_DRAM_die_cost;test_cost;NRE;vendor_margin",
+      "status": "placeholder_not_vendor_quote"
+    },
+    {
+      "scenario": "base",
+      "base_logic_die_area_mm2": 96.0,
+      "gross_dies_per_wafer_analytical": 668.2933020263246,
+      "poisson_logic_die_yield": 0.8253068684916823,
+      "good_logic_dies_per_wafer": 551.547052329312,
+      "logic_die_cost_usd": 18.1308194065541,
+      "package_cost_usd": 120.0,
+      "partial_logic_plus_package_cost_usd": 161.5565139257943,
+      "excludes": "HBM_DRAM_die_cost;test_cost;NRE;vendor_margin",
+      "status": "placeholder_not_vendor_quote"
+    },
+    {
+      "scenario": "high",
+      "base_logic_die_area_mm2": 116.16,
+      "gross_dies_per_wafer_analytical": 546.6872350499557,
+      "poisson_logic_die_yield": 0.5594506269918585,
+      "good_logic_dies_per_wafer": 305.84451641714327,
+      "logic_die_cost_usd": 65.39270422204292,
+      "package_cost_usd": 300.0,
+      "partial_logic_plus_package_cost_usd": 374.7233147595559,
+      "excludes": "HBM_DRAM_die_cost;test_cost;NRE;vendor_margin",
+      "status": "placeholder_not_vendor_quote"
+    }
+  ],
+  "power_cooling_scenarios": [
+    {
+      "scenario": "low_power_strong_cooling",
+      "ambient_c": 20.0,
+      "logic_power_factor": 0.5,
+      "dram_power_factor": 0.5,
+      "vertical_conductance_factor": 2.0,
+      "winner_x_mm": 0.0,
+      "winner_y_mm": 0.0,
+      "winner_max_temp_c_unvalidated": 22.637949944636354,
+      "winner_score": 0.3321914878940352,
+      "baseline_score": 0.3321914878940352
+    },
+    {
+      "scenario": "base",
+      "ambient_c": 25.0,
+      "logic_power_factor": 1.0,
+      "dram_power_factor": 1.0,
+      "vertical_conductance_factor": 1.0,
+      "winner_x_mm": 0.0,
+      "winner_y_mm": 0.0,
+      "winner_max_temp_c_unvalidated": 35.55179977854542,
+      "winner_score": 0.3789725375130252,
+      "baseline_score": 0.3789725375130252
+    },
+    {
+      "scenario": "high_power_weak_cooling",
+      "ambient_c": 45.0,
+      "logic_power_factor": 2.0,
+      "dram_power_factor": 1.5,
+      "vertical_conductance_factor": 0.5,
+      "winner_x_mm": 0.0,
+      "winner_y_mm": 0.0,
+      "winner_max_temp_c_unvalidated": 77.0192545004137,
+      "winner_score": 0.6082467415149013,
+      "baseline_score": 0.6082467415149013
+    }
+  ],
+  "monte_carlo_top": [
+    {
+      "x_mm": 0.0,
+      "y_mm": 0.0,
+      "wins": 947,
+      "win_rate": 0.947,
+      "win_rate_ci95_low": 0.9313250610861062,
+      "win_rate_ci95_high": 0.9592536915776607,
+      "mean_rank": 1.678,
+      "top_k": 5,
+      "top_k_rate": 0.972,
+      "balanced_rank": 1
+    },
+    {
+      "x_mm": -2.0,
+      "y_mm": 0.5,
+      "wins": 22,
+      "win_rate": 0.022,
+      "win_rate_ci95_low": 0.014572598673771597,
+      "win_rate_ci95_high": 0.03308591637481774,
+      "mean_rank": 76.578,
+      "top_k": 5,
+      "top_k_rate": 0.066,
+      "balanced_rank": 96
+    },
+    {
+      "x_mm": 2.0,
+      "y_mm": 0.0,
+      "wins": 17,
+      "win_rate": 0.017,
+      "win_rate_ci95_low": 0.010640599663218203,
+      "win_rate_ci95_high": 0.027056184371235047,
+      "mean_rank": 47.112,
+      "top_k": 5,
+      "top_k_rate": 0.065,
+      "balanced_rank": 21
+    },
+    {
+      "x_mm": -2.0,
+      "y_mm": 0.0,
+      "wins": 8,
+      "win_rate": 0.008,
+      "win_rate_ci95_low": 0.004059147003819634,
+      "win_rate_ci95_high": 0.01570652120518864,
+      "mean_rank": 47.674,
+      "top_k": 5,
+      "top_k_rate": 0.065,
+      "balanced_rank": 20
+    },
+    {
+      "x_mm": 2.5,
+      "y_mm": -0.5,
+      "wins": 3,
+      "win_rate": 0.003,
+      "win_rate_ci95_low": 0.0010207654054443255,
+      "win_rate_ci95_high": 0.008783171789427854,
+      "mean_rank": 97.541,
+      "top_k": 5,
+      "top_k_rate": 0.012,
+      "balanced_rank": 108
+    },
+    {
+      "x_mm": -1.0,
+      "y_mm": 0.0,
+      "wins": 1,
+      "win_rate": 0.001,
+      "win_rate_ci95_low": 0.0001765418290572713,
+      "win_rate_ci95_high": 0.0056427029601604705,
+      "mean_rank": 18.133,
+      "top_k": 5,
+      "top_k_rate": 0.018,
+      "balanced_rank": 10
+    },
+    {
+      "x_mm": -1.0,
+      "y_mm": 0.5,
+      "wins": 1,
+      "win_rate": 0.001,
+      "win_rate_ci95_low": 0.0001765418290572713,
+      "win_rate_ci95_high": 0.0056427029601604705,
+      "mean_rank": 65.385,
+      "top_k": 5,
+      "top_k_rate": 0.006,
+      "balanced_rank": 78
+    },
+    {
+      "x_mm": 2.5,
+      "y_mm": -1.0,
+      "wins": 1,
+      "win_rate": 0.001,
+      "win_rate_ci95_low": 0.0001765418290572713,
+      "win_rate_ci95_high": 0.0056427029601604705,
+      "mean_rank": 125.815,
+      "top_k": 5,
+      "top_k_rate": 0.002,
+      "balanced_rank": 132
+    },
+    {
+      "x_mm": -0.0,
+      "y_mm": -0.1,
+      "wins": 0,
+      "win_rate": 0.0,
+      "win_rate_ci95_low": 0.0,
+      "win_rate_ci95_high": 0.003826898586390522,
+      "mean_rank": 4.544,
+      "top_k": 5,
+      "top_k_rate": 0.908,
+      "balanced_rank": 4
+    },
+    {
+      "x_mm": -0.0,
+      "y_mm": 0.1,
+      "wins": 0,
+      "win_rate": 0.0,
+      "win_rate_ci95_low": 0.0,
+      "win_rate_ci95_high": 0.003826898586390522,
+      "mean_rank": 5.252,
+      "top_k": 5,
+      "top_k_rate": 0.908,
+      "balanced_rank": 5
+    }
+  ],
+  "rank_stability_best_mean_rank": {
+    "x_mm": 0.0,
+    "y_mm": 0.0,
+    "wins": 947,
+    "win_rate": 0.947,
+    "win_rate_ci95_low": 0.9313250610861062,
+    "win_rate_ci95_high": 0.9592536915776607,
+    "mean_rank": 1.678,
+    "top_k": 5,
+    "top_k_rate": 0.972,
+    "balanced_rank": 1
+  },
+  "mean_spearman_cost_correlations": {
+    "wire": 0.9536313595846722,
+    "delay": 0.3208085155799305,
+    "thermal": 0.13445957829029756,
+    "tsv": -0.33374690603923013,
+    "congestion": -0.9523847907128818,
+    "power": 0.9523740852882723,
+    "area": 0.9523452205297117,
+    "reliability": 0.1263022514137387
+  },
+  "robustness_gate": {
+    "required_top_k_rate": 0.8,
+    "observed_top_k_rate": 0.972,
+    "required_cost_improvement_fraction": 0.01,
+    "observed_balanced_improvement_fraction": 0.0,
+    "passed": false
+  },
+  "warnings": [
+    "Temperature is from an uncalibrated compact RC model, not signoff thermal analysis.",
+    "TSV, microbump, PHY, package dimensions, and power are explicit assumptions.",
+    "The GDS is a reduced logic block and has negative setup slack at the current 10 ns constraint.",
+    "GR00T experiment uses deterministic synthetic FP16 normalization inputs, not full BF16 inference activations."
+  ]
+}

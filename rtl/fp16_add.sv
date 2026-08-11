@@ -23,7 +23,7 @@ module fp16_add (
     logic [13:0] large_ext, small_ext, magnitude_ext;
     logic [14:0] add_ext;
     logic [11:0] rounded_sig;
-    integer result_exp, shift_amount;
+    integer result_exp, shift_amount, normalize_step;
 
     always @* begin
         lhs_sign = lhs_i[15]; rhs_sign = rhs_i[15];
@@ -46,6 +46,7 @@ module fp16_add (
         shift_amount = large_exp - small_exp;
         small_ext = shift_right_sticky({small_sig, 3'b000}, shift_amount);
         result_sign = large_sign; result_exp = large_exp;
+        normalize_step = 0;
         add_ext = '0;
         if (large_sign == small_sign) begin
             add_ext = {1'b0, large_ext} + {1'b0, small_ext};
@@ -56,7 +57,7 @@ module fp16_add (
             end else magnitude_ext = add_ext[13:0];
         end else begin
             magnitude_ext = large_ext - small_ext;
-            for (integer normalize_step = 0; normalize_step < 13;
+            for (normalize_step = 0; normalize_step < 13;
                  normalize_step = normalize_step + 1)
                 if (!magnitude_ext[13] && result_exp > 1) begin
                     magnitude_ext = magnitude_ext << 1;

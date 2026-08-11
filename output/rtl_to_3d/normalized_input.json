@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "description": "Normalized RTL physical input assembled from replaceable reports.",
+  "units": {
+    "length": "um",
+    "area": "um^2",
+    "power": "W"
+  },
+  "sources": {
+    "synthesis": "C:\\Users\\Chandler\\OneDrive\\2026-\ud558\uacc4\\STOB \ubc18\ub3c4\uccb4 \uacbd\uc9c4\ub300\ud68c\\STOB_PIM2\\verification\\rtl_to_3d\\fixtures\\synthesis_area.csv",
+    "placement": "C:\\Users\\Chandler\\OneDrive\\2026-\ud558\uacc4\\STOB \ubc18\ub3c4\uccb4 \uacbd\uc9c4\ub300\ud68c\\STOB_PIM2\\verification\\rtl_to_3d\\fixtures\\placement.csv",
+    "activity": "C:\\Users\\Chandler\\OneDrive\\2026-\ud558\uacc4\\STOB \ubc18\ub3c4\uccb4 \uacbd\uc9c4\ub300\ud68c\\STOB_PIM2\\verification\\rtl_to_3d\\fixtures\\synthetic_activity.vcd",
+    "power": "C:\\Users\\Chandler\\OneDrive\\2026-\ud558\uacc4\\STOB \ubc18\ub3c4\uccb4 \uacbd\uc9c4\ub300\ud68c\\STOB_PIM2\\verification\\rtl_to_3d\\fixtures\\block_power.csv"
+  },
+  "collection_warnings": [],
+  "blocks": [
+    {
+      "instance": "top.logic_pcu",
+      "module": "logic_pcu",
+      "area_um2": 4800000.0,
+      "power": {
+        "dynamic_W": 1.8,
+        "leakage_W": 0.2
+      },
+      "activity": {
+        "format": "VCD",
+        "toggle_count": 180000.0,
+        "duration_s": 0.001
+      },
+      "placement": {
+        "x_um": 400.0,
+        "y_um": 1000.0,
+        "width_um": 2400.0,
+        "height_um": 2000.0
+      }
+    },
+    {
+      "instance": "top.logic_shared_buffer",
+      "module": "logic_shared_buffer",
+      "area_um2": 3600000.0,
+      "power": {
+        "dynamic_W": 0.72,
+        "leakage_W": 0.08
+      },
+      "activity": {
+        "format": "VCD",
+        "toggle_count": 65000.0,
+        "duration_s": 0.001
+      },
+      "placement": {
+        "x_um": 4200.0,
+        "y_um": 7200.0,
+        "width_um": 1800.0,
+        "height_um": 2000.0
+      }
+    },
+    {
+      "instance": "top.logic_die_link_arbiter",
+      "module": "logic_die_link_arbiter",
+      "area_um2": 1000000.0,
+      "power": {
+        "dynamic_W": 0.15,
+        "leakage_W": 0.05
+      },
+      "activity": {
+        "format": "VCD",
+        "toggle_count": 12000.0,
+        "duration_s": 0.001
+      },
+      "placement": {
+        "x_um": 6500.0,
+        "y_um": 1000.0,
+        "width_um": 1000.0,
+        "height_um": 1000.0
+      }
+    },
+    {
+      "instance": "top.bank_pim_core_ch0_bank0",
+      "module": "bank_pim_core",
+      "area_um2": 1500000.0,
+      "power": {
+        "dynamic_W": 0.63,
+        "leakage_W": 0.07
+      },
+      "activity": {
+        "format": "VCD",
+        "toggle_count": 82000.0,
+        "duration_s": 0.001
+      },
+      "target_hint": {
+        "stack": 0,
+        "die": 0,
+        "channel": 0,
+        "bank": 0
+      }
+    },
+    {
+      "instance": "top.bank_local_reduction_buffer_ch7_bank15",
+      "module": "bank_local_reduction_buffer",
+      "area_um2": 1500000.0,
+      "power": {
+        "dynamic_W": 0.27,
+        "leakage_W": 0.03
+      },
+      "activity": {
+        "format": "VCD",
+        "toggle_count": 34000.0,
+        "duration_s": 0.001
+      },
+      "target_hint": {
+        "stack": 0,
+        "die": 0,
+        "channel": 7,
+        "bank": 15
+      }
+    }
+  ]
+}

@@ -1,0 +1,186 @@
+{
+  "access_date": "2026-08-06",
+  "sources": [
+    {
+      "id": "S1",
+      "type": "official_github",
+      "title": "NVIDIA Isaac-GR00T source snapshot",
+      "url": "https://github.com/NVIDIA/Isaac-GR00T/tree/b9955401d50c92a29258732e3ad6ccd579f1bdc0",
+      "revision": "b9955401d50c92a29258732e3ad6ccd579f1bdc0",
+      "supports": ["N1.7 model implementation", "DiT and deployment structure"]
+    },
+    {
+      "id": "S2",
+      "type": "official_release",
+      "title": "NVIDIA Isaac-GR00T n1.7 release",
+      "url": "https://github.com/NVIDIA/Isaac-GR00T/releases/tag/n1.7-release",
+      "revision": "n1.7-release",
+      "supports": ["N1.7 release identity"]
+    },
+    {
+      "id": "S3",
+      "type": "official_model_card",
+      "title": "nvidia/GR00T-N1.7-3B config.json",
+      "url": "https://huggingface.co/nvidia/GR00T-N1.7-3B/blob/2fc962b973bccdd5d8ce4f67cc63b264d6886495/config.json",
+      "revision": "2fc962b973bccdd5d8ce4f67cc63b264d6886495",
+      "supports": ["3B checkpoint", "BF16", "action horizon 40", "DiT 32 layers", "four inference timesteps", "backbone dimension 2048"]
+    },
+    {
+      "id": "S4",
+      "type": "manufacturer_whitepaper",
+      "title": "Integrating and Operating HBM2E Memory",
+      "publisher": "Micron Technology",
+      "url": "https://assets.micron.com/adobe/assets/urn:aaid:aem:275edf31-79e3-4b6c-8bbd-a233babe9281/renditions/original/as/micron-hbm2e-memory-wp.pdf",
+      "supports": ["eight channels", "128-bit data bus per channel", "pseudo-channel organization"]
+    },
+    {
+      "id": "S5",
+      "type": "peer_reviewed_paper",
+      "title": "HotSpot: A Compact Thermal Modeling Methodology for Early-Stage VLSI Design",
+      "authors": "W. Huang et al.",
+      "venue": "IEEE Transactions on VLSI Systems 14(5)",
+      "year": 2006,
+      "doi": "10.1109/TVLSI.2006.876103",
+      "url": "https://doi.org/10.1109/TVLSI.2006.876103",
+      "supports": ["early-stage compact thermal RC modeling", "steady-state and transient temperature estimation"]
+    },
+    {
+      "id": "S6",
+      "type": "peer_reviewed_paper",
+      "title": "3D-ICE: Fast Compact Transient Thermal Modeling for 3D ICs with Inter-Tier Liquid Cooling",
+      "authors": "A. Sridhar et al.",
+      "venue": "ICCAD",
+      "year": 2010,
+      "url": "https://www.epfl.ch/labs/esl/wp-content/uploads/2018/12/3D-ICE_ICCAD2010.pdf",
+      "supports": ["compact thermal modeling for stacked 3D ICs"]
+    },
+    {
+      "id": "S7",
+      "type": "peer_reviewed_paper",
+      "title": "Thermal-Aware Floorplanning with Min-Cut Die Partition for 3D ICs",
+      "authors": "B. Jang et al.",
+      "venue": "ETRI Journal",
+      "year": 2014,
+      "doi": "10.4218/etrij.14.0113.1204",
+      "url": "https://doi.org/10.4218/etrij.14.0113.1204",
+      "supports": ["joint optimization of TSV count, peak temperature, wirelength, and area"]
+    },
+    {
+      "id": "S8",
+      "type": "official_github",
+      "title": "OpenROAD Flow Scripts",
+      "url": "https://github.com/The-OpenROAD-Project/OpenROAD-flow-scripts/tree/778c4e556a6f1d104621b92f6a851324bf34ff1a",
+      "revision": "778c4e556a6f1d104621b92f6a851324bf34ff1a",
+      "supports": ["RTL-to-GDS flow and physical implementation metrics"]
+    },
+    {
+      "id": "S9",
+      "type": "paper",
+      "title": "GR00T N1: An Open Foundation Model for Generalist Humanoid Robots",
+      "authors": "NVIDIA et al.",
+      "year": 2025,
+      "arxiv": "2503.14734",
+      "url": "https://arxiv.org/abs/2503.14734",
+      "supports": ["GR00T N1 model family and VLA purpose"]
+    },
+    {
+      "id": "S10",
+      "type": "peer_reviewed_paper",
+      "title": "Power, Performance, Area and Cost Analysis of Memory-on-Logic Face-to-Face Bonded 3D Processor Designs",
+      "authors": "A. Agnesina et al.",
+      "venue": "IEEE/ACM International Symposium on Low Power Electronics and Design (ISLPED)",
+      "year": 2021,
+      "doi": "10.1109/ISLPED52811.2021.9502475",
+      "url": "https://doi.org/10.1109/ISLPED52811.2021.9502475",
+      "supports": ["parameterized high-level PPAC cost modeling for 3D memory-on-logic designs", "separation of foundry and implementation-dependent cost parameters"]
+    },
+    {
+      "id": "L1",
+      "type": "local_experiment",
+      "title": "GR00T N1.7 normalization test implementation",
+      "path": "../STOB_PIM_pure_layornorm/src/tests/Gr00tNormalizationTestCases.cpp",
+      "revision": "ecacdb9c1d3ae1f838dbfd2f7e80fbb73c4b217d",
+      "supports": ["seven measured profiles", "333 projected calls", "FP16 simulation"]
+    },
+    {
+      "id": "L2",
+      "type": "local_tool_output",
+      "title": "OpenROAD detailed route metrics",
+      "path": "/home/chandler/orfs/flow/logs/sky130hd/stob_pim2/base/5_2_route.json",
+      "supports": ["215464 um detailed routed wirelength", "zero detailed-route DRC errors"]
+    },
+    {
+      "id": "L3",
+      "type": "local_tool_output",
+      "title": "OpenROAD global route and timing log",
+      "path": "/home/chandler/orfs/flow/logs/sky130hd/stob_pim2/base/5_1_grt.log",
+      "supports": ["334.66 um die extent", "10 ns clock constraint", "-35.650 ns clock slack"]
+    },
+    {
+      "id": "L4",
+      "type": "local_tool_output",
+      "title": "OpenROAD final report",
+      "path": "/home/chandler/orfs/flow/logs/sky130hd/stob_pim2/base/6_report.json",
+      "supports": ["VDD worst IR drop 0.0233307 V"]
+    },
+    {
+      "id": "L5",
+      "type": "local_platform_model",
+      "title": "ORFS SKY130HD RC setup",
+      "path": "/home/chandler/orfs/flow/platforms/sky130hd/setRC.tcl",
+      "revision": "778c4e556a6f1d104621b92f6a851324bf34ff1a",
+      "supports": ["LI1 and MET1-MET5 resistance and capacitance per unit length", "via resistance", "MET1 signal and MET3 clock RC selection"]
+    },
+    {
+      "id": "C1",
+      "type": "local_source_code",
+      "title": "STOB_PIM2 LogicDieScheduler resource model",
+      "path": "src/LogicDieScheduler.h",
+      "revision": "main HEAD 8534693d528742d52b9329b4a1feed3b4831dddb plus uncommitted worktree",
+      "sha256": "57bc04302132f092d27b86c7228e59d8f2e5d1ea09879d72c88e4247800b3e45",
+      "supports": ["earliest-free-lane reservation", "queue, compute, transfer and service cycle accounting", "parallel lane derivation from PCU units and blocks"]
+    },
+    {
+      "id": "A1",
+      "type": "explicit_assumption",
+      "title": "HBM package visualization geometry assumptions",
+      "path": "design/hbm2_package.json",
+      "supports": ["die dimensions", "representative TSV geometry", "placement margins"]
+    },
+    {
+      "id": "A2",
+      "type": "explicit_assumption",
+      "title": "Electrical and power exploration assumptions",
+      "path": "experiment/gr00t_placement/assumptions.json",
+      "supports": ["logic and DRAM power ranges", "switching activity", "routing corridor pitch"]
+    },
+    {
+      "id": "A3",
+      "type": "explicit_assumption",
+      "title": "Uncalibrated compact thermal model assumptions",
+      "path": "experiment/gr00t_placement/assumptions.json",
+      "supports": ["thermal conductance", "temperature limit", "TSV cooling gain"]
+    },
+    {
+      "id": "A4",
+      "type": "explicit_assumption",
+      "title": "GR00T traffic and PCU utilization exploration assumptions",
+      "path": "experiment/gr00t_placement/assumptions.json",
+      "supports": ["analytical normalization traffic estimate", "channel request-rate and bandwidth ranges", "PCU utilization range"]
+    },
+    {
+      "id": "A5",
+      "type": "explicit_assumption",
+      "title": "Package material and transient thermal exploration assumptions",
+      "path": "experiment/gr00t_placement/assumptions.json",
+      "supports": ["TIM, interposer and lid property ranges", "thermal capacitance range"]
+    },
+    {
+      "id": "A6",
+      "type": "explicit_assumption",
+      "title": "Placeholder manufacturing cost uncertainty model",
+      "path": "experiment/gr00t_placement/assumptions.json",
+      "supports": ["wafer and package cost ranges", "defect-density and assembly-yield ranges"]
+    }
+  ]
+}

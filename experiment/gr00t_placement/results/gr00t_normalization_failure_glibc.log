@@ -1,0 +1,15 @@
+Reconstructed failure record from the 2026-08-06 reproduction run.
+The original tee target was overwritten by the successful retry before preservation was added.
+
+Command:
+./sim --gtest_filter=Gr00tN17NormalizationFixture.* --gtest_color=no
+
+Observed loader error:
+./sim: /lib/x86_64-linux-gnu/libm.so.6: version `GLIBC_2.43' not found (required by ./sim)
+
+Exit status: 1
+Resolution:
+~/.local/bin/scons -c && ~/.local/bin/scons -j $(nproc)
+
+The clean WSL rebuild succeeded, and the retry passed both tests. Future runs copy the raw failed
+tee output to this path before rebuilding, so this reconstructed record can be replaced by raw output.

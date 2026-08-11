@@ -3,8 +3,8 @@ module hierarchical_reduction_path #(
     parameter int unsigned ENTRIES_PER_BANK = 16,
     parameter int unsigned KEY_WIDTH = 64,
     parameter int unsigned DATA_WIDTH = 256,
-    parameter int unsigned SLOT_WIDTH = $clog2(ENTRIES_PER_BANK),
-    parameter int unsigned INDEX_WIDTH = $clog2(BANKS)
+    parameter int unsigned SLOT_WIDTH = ENTRIES_PER_BANK > 1 ? $clog2(ENTRIES_PER_BANK) : 1,
+    parameter int unsigned INDEX_WIDTH = BANKS > 1 ? $clog2(BANKS) : 1
 ) (
     input  logic clk_i,
     input  logic rst_ni,

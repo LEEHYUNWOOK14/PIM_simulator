@@ -1,0 +1,1170 @@
+
+-- Running command `read_verilog -sv rtl/pim_command_decoder.sv rtl/fp16_add.sv rtl/fp16_mul.sv rtl/pim_vector_alu.sv rtl/pim_crf.sv rtl/dram_bank_array_model.sv rtl/bank_pim_core.sv rtl/bank_side_pim_subsystem.sv rtl/logic_die_link_arbiter.sv rtl/channel_tsv_interconnect.sv rtl/logic_epoch_barrier.sv rtl/logic_shared_buffer.sv rtl/logic_pcu.sv rtl/logic_pcu_scheduler.sv rtl/logic_command_coalescer.sv rtl/logic_operand_context_buffer.sv rtl/logic_die_pim_top.sv rtl/full_pim_system_top.sv; chparam -set CHANNELS 2 -set BANKS 4 -set PIM_BLOCKS 2 -set PCUS 2 -set ROWS 8 -set COLS 8 -set DATA_WIDTH 32 full_pim_system_top; hierarchy -check -top full_pim_system_top; check; stat' --
+
+1. Executing Verilog-2005 frontend: rtl/pim_command_decoder.sv
+Parsing SystemVerilog input from `rtl/pim_command_decoder.sv' to AST representation.
+Generating RTLIL representation for module `\pim_command_decoder'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: rtl/fp16_add.sv
+Parsing SystemVerilog input from `rtl/fp16_add.sv' to AST representation.
+Generating RTLIL representation for module `\fp16_add'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: rtl/fp16_mul.sv
+Parsing SystemVerilog input from `rtl/fp16_mul.sv' to AST representation.
+Generating RTLIL representation for module `\fp16_mul'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: rtl/pim_vector_alu.sv
+Parsing SystemVerilog input from `rtl/pim_vector_alu.sv' to AST representation.
+Generating RTLIL representation for module `\pim_vector_alu'.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: rtl/pim_crf.sv
+Parsing SystemVerilog input from `rtl/pim_crf.sv' to AST representation.
+Generating RTLIL representation for module `\pim_crf'.
+Warning: Replacing memory \memory with list of registers. See rtl/pim_crf.sv:43
+Successfully finished Verilog frontend.
+
+6. Executing Verilog-2005 frontend: rtl/dram_bank_array_model.sv
+Parsing SystemVerilog input from `rtl/dram_bank_array_model.sv' to AST representation.
+Generating RTLIL representation for module `\dram_bank_array_model'.
+Warning: Replacing memory \memory with list of registers. See rtl/dram_bank_array_model.sv:117
+Successfully finished Verilog frontend.
+
+7. Executing Verilog-2005 frontend: rtl/bank_pim_core.sv
+Parsing SystemVerilog input from `rtl/bank_pim_core.sv' to AST representation.
+Generating RTLIL representation for module `\bank_pim_core'.
+Warning: Replacing memory \grf_a with list of registers. See rtl/bank_pim_core.sv:102
+Warning: Replacing memory \grf_b with list of registers. See rtl/bank_pim_core.sv:101
+Successfully finished Verilog frontend.
+
+8. Executing Verilog-2005 frontend: rtl/bank_side_pim_subsystem.sv
+Parsing SystemVerilog input from `rtl/bank_side_pim_subsystem.sv' to AST representation.
+Generating RTLIL representation for module `\bank_side_pim_subsystem'.
+Successfully finished Verilog frontend.
+
+9. Executing Verilog-2005 frontend: rtl/logic_die_link_arbiter.sv
+Parsing SystemVerilog input from `rtl/logic_die_link_arbiter.sv' to AST representation.
+Generating RTLIL representation for module `\logic_die_link_arbiter'.
+Successfully finished Verilog frontend.
+
+10. Executing Verilog-2005 frontend: rtl/channel_tsv_interconnect.sv
+Parsing SystemVerilog input from `rtl/channel_tsv_interconnect.sv' to AST representation.
+Generating RTLIL representation for module `\channel_tsv_interconnect'.
+Successfully finished Verilog frontend.
+
+11. Executing Verilog-2005 frontend: rtl/logic_epoch_barrier.sv
+Parsing SystemVerilog input from `rtl/logic_epoch_barrier.sv' to AST representation.
+Generating RTLIL representation for module `\logic_epoch_barrier'.
+Successfully finished Verilog frontend.
+
+12. Executing Verilog-2005 frontend: rtl/logic_shared_buffer.sv
+Parsing SystemVerilog input from `rtl/logic_shared_buffer.sv' to AST representation.
+Generating RTLIL representation for module `\logic_shared_buffer'.
+Warning: Replacing memory \memory with list of registers. See rtl/logic_shared_buffer.sv:35
+Successfully finished Verilog frontend.
+
+13. Executing Verilog-2005 frontend: rtl/logic_pcu.sv
+Parsing SystemVerilog input from `rtl/logic_pcu.sv' to AST representation.
+Generating RTLIL representation for module `\logic_pcu'.
+Successfully finished Verilog frontend.
+
+14. Executing Verilog-2005 frontend: rtl/logic_pcu_scheduler.sv
+Parsing SystemVerilog input from `rtl/logic_pcu_scheduler.sv' to AST representation.
+Generating RTLIL representation for module `\logic_pcu_scheduler'.
+Successfully finished Verilog frontend.
+
+15. Executing Verilog-2005 frontend: rtl/logic_command_coalescer.sv
+Parsing SystemVerilog input from `rtl/logic_command_coalescer.sv' to AST representation.
+Generating RTLIL representation for module `\logic_command_coalescer'.
+Warning: Replacing memory \expected_q with list of registers. See rtl/logic_command_coalescer.sv:84
+Warning: Replacing memory \command_q with list of registers. See rtl/logic_command_coalescer.sv:83
+Warning: Replacing memory \signature_q with list of registers. See rtl/logic_command_coalescer.sv:82
+Warning: Replacing memory \ordinal_q with list of registers. See rtl/logic_command_coalescer.sv:81
+Warning: Replacing memory \epoch_q with list of registers. See rtl/logic_command_coalescer.sv:80
+Warning: Replacing memory \mask_q with list of registers. See rtl/logic_command_coalescer.sv:77
+Successfully finished Verilog frontend.
+
+16. Executing Verilog-2005 frontend: rtl/logic_operand_context_buffer.sv
+Parsing SystemVerilog input from `rtl/logic_operand_context_buffer.sv' to AST representation.
+Generating RTLIL representation for module `\logic_operand_context_buffer'.
+Warning: Replacing memory \accum_q with list of registers. See rtl/logic_operand_context_buffer.sv:54
+Warning: Replacing memory \src2_q with list of registers. See rtl/logic_operand_context_buffer.sv:53
+Warning: Replacing memory \src1_q with list of registers. See rtl/logic_operand_context_buffer.sv:52
+Warning: Replacing memory \src0_q with list of registers. See rtl/logic_operand_context_buffer.sv:51
+Warning: Replacing memory \precision_q with list of registers. See rtl/logic_operand_context_buffer.sv:50
+Warning: Replacing memory \tag_q with list of registers. See rtl/logic_operand_context_buffer.sv:49
+Successfully finished Verilog frontend.
+
+17. Executing Verilog-2005 frontend: rtl/logic_die_pim_top.sv
+Parsing SystemVerilog input from `rtl/logic_die_pim_top.sv' to AST representation.
+Generating RTLIL representation for module `\logic_die_pim_top'.
+Successfully finished Verilog frontend.
+
+18. Executing Verilog-2005 frontend: rtl/full_pim_system_top.sv
+Parsing SystemVerilog input from `rtl/full_pim_system_top.sv' to AST representation.
+Generating RTLIL representation for module `\full_pim_system_top'.
+Successfully finished Verilog frontend.
+Parameter \CHANNELS = 2
+Parameter \BANKS = 4
+Parameter \PIM_BLOCKS = 2
+Parameter \PCUS = 2
+Parameter \ROWS = 8
+Parameter \COLS = 8
+Parameter \DATA_WIDTH = 32
+
+19. Executing AST frontend in derive mode using pre-parsed AST for module `\full_pim_system_top'.
+Parameter \CHANNELS = 2
+Parameter \BANKS = 4
+Parameter \PIM_BLOCKS = 2
+Parameter \PCUS = 2
+Parameter \ROWS = 8
+Parameter \COLS = 8
+Parameter \DATA_WIDTH = 32
+Generating RTLIL representation for module `$paramod$2283c9fe375897d20ef2626b3ae724a7daffe375\full_pim_system_top'.
+
+20. Executing HIERARCHY pass (managing design hierarchy).
+
+20.1. Analyzing design hierarchy..
+Top module:  \full_pim_system_top
+Used module:     \logic_die_link_arbiter
+Used module:     \logic_die_pim_top
+Used module:         \logic_pcu_scheduler
+Used module:             \logic_pcu
+Used module:                 \pim_vector_alu
+Used module:                     \fp16_add
+Used module:                     \fp16_mul
+Used module:         \logic_operand_context_buffer
+Used module:         \logic_shared_buffer
+Used module:         \logic_epoch_barrier
+Used module:         \logic_command_coalescer
+Used module:     \channel_tsv_interconnect
+Used module:     \bank_side_pim_subsystem
+Used module:         \bank_pim_core
+Used module:             \pim_command_decoder
+Used module:         \pim_crf
+Used module:         \dram_bank_array_model
+Parameter \DATA_WIDTH = 256
+
+20.2. Executing AST frontend in derive mode using pre-parsed AST for module `\pim_vector_alu'.
+Parameter \DATA_WIDTH = 256
+Generating RTLIL representation for module `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000100000000'.
+Parameter \DATA_WIDTH = 256
+Parameter \KEY_WIDTH = 32
+
+20.3. Executing AST frontend in derive mode using pre-parsed AST for module `\bank_pim_core'.
+Parameter \DATA_WIDTH = 256
+Parameter \KEY_WIDTH = 32
+Generating RTLIL representation for module `$paramod$0173170335c8e8bebcbd70c23aec370f5341a683\bank_pim_core'.
+Warning: Replacing memory \grf_a with list of registers. See rtl/bank_pim_core.sv:102
+Warning: Replacing memory \grf_b with list of registers. See rtl/bank_pim_core.sv:101
+Parameter \DATA_WIDTH = 256
+Parameter \KEY_WIDTH = 32
+Found cached RTLIL representation for module `$paramod$0173170335c8e8bebcbd70c23aec370f5341a683\bank_pim_core'.
+Parameter \DATA_WIDTH = 256
+Parameter \KEY_WIDTH = 32
+Found cached RTLIL representation for module `$paramod$0173170335c8e8bebcbd70c23aec370f5341a683\bank_pim_core'.
+Parameter \DATA_WIDTH = 256
+Parameter \KEY_WIDTH = 32
+Found cached RTLIL representation for module `$paramod$0173170335c8e8bebcbd70c23aec370f5341a683\bank_pim_core'.
+Parameter \DATA_WIDTH = 256
+Parameter \KEY_WIDTH = 32
+Found cached RTLIL representation for module `$paramod$0173170335c8e8bebcbd70c23aec370f5341a683\bank_pim_core'.
+Parameter \DATA_WIDTH = 256
+Parameter \KEY_WIDTH = 32
+Found cached RTLIL representation for module `$paramod$0173170335c8e8bebcbd70c23aec370f5341a683\bank_pim_core'.
+Parameter \DATA_WIDTH = 256
+Parameter \KEY_WIDTH = 32
+Found cached RTLIL representation for module `$paramod$0173170335c8e8bebcbd70c23aec370f5341a683\bank_pim_core'.
+Parameter \DATA_WIDTH = 256
+Parameter \KEY_WIDTH = 32
+Found cached RTLIL representation for module `$paramod$0173170335c8e8bebcbd70c23aec370f5341a683\bank_pim_core'.
+Parameter \DEPTH = 32
+
+20.4. Executing AST frontend in derive mode using pre-parsed AST for module `\pim_crf'.
+Parameter \DEPTH = 32
+Generating RTLIL representation for module `$paramod\pim_crf\DEPTH=32'00000000000000000000000000100000'.
+Warning: Replacing memory \memory with list of registers. See rtl/pim_crf.sv:43
+Parameter \BANKS = 16
+Parameter \ROWS = 32
+Parameter \COLS = 8
+Parameter \DATA_WIDTH = 256
+Parameter \PIM_READ_PORTS = 16
+
+20.5. Executing AST frontend in derive mode using pre-parsed AST for module `\dram_bank_array_model'.
+Parameter \BANKS = 16
+Parameter \ROWS = 32
+Parameter \COLS = 8
+Parameter \DATA_WIDTH = 256
+Parameter \PIM_READ_PORTS = 16
+Generating RTLIL representation for module `$paramod$7f1e781518b42735fa691e74eb2e35b90a74e2e1\dram_bank_array_model'.
+Warning: Replacing memory \memory with list of registers. See rtl/dram_bank_array_model.sv:117
+Parameter \DATA_WIDTH = 256
+Found cached RTLIL representation for module `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000100000000'.
+Parameter \DATA_WIDTH = 256
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+
+20.6. Executing AST frontend in derive mode using pre-parsed AST for module `\logic_pcu'.
+Parameter \DATA_WIDTH = 256
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+Generating RTLIL representation for module `$paramod$8df5c849c2588b798e9d030949a27f4e3d201c9f\logic_pcu'.
+Parameter \DATA_WIDTH = 256
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+Found cached RTLIL representation for module `$paramod$8df5c849c2588b798e9d030949a27f4e3d201c9f\logic_pcu'.
+Parameter \DATA_WIDTH = 256
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+Found cached RTLIL representation for module `$paramod$8df5c849c2588b798e9d030949a27f4e3d201c9f\logic_pcu'.
+Parameter \DATA_WIDTH = 256
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+Found cached RTLIL representation for module `$paramod$8df5c849c2588b798e9d030949a27f4e3d201c9f\logic_pcu'.
+Parameter \DATA_WIDTH = 256
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+Found cached RTLIL representation for module `$paramod$8df5c849c2588b798e9d030949a27f4e3d201c9f\logic_pcu'.
+Parameter \DATA_WIDTH = 256
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+Found cached RTLIL representation for module `$paramod$8df5c849c2588b798e9d030949a27f4e3d201c9f\logic_pcu'.
+Parameter \DATA_WIDTH = 256
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+Found cached RTLIL representation for module `$paramod$8df5c849c2588b798e9d030949a27f4e3d201c9f\logic_pcu'.
+Parameter \DATA_WIDTH = 256
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+Found cached RTLIL representation for module `$paramod$8df5c849c2588b798e9d030949a27f4e3d201c9f\logic_pcu'.
+Parameter \DATA_WIDTH = 256
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+Found cached RTLIL representation for module `$paramod$8df5c849c2588b798e9d030949a27f4e3d201c9f\logic_pcu'.
+Parameter \DATA_WIDTH = 256
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+Found cached RTLIL representation for module `$paramod$8df5c849c2588b798e9d030949a27f4e3d201c9f\logic_pcu'.
+Parameter \DATA_WIDTH = 256
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+Found cached RTLIL representation for module `$paramod$8df5c849c2588b798e9d030949a27f4e3d201c9f\logic_pcu'.
+Parameter \DATA_WIDTH = 256
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+Found cached RTLIL representation for module `$paramod$8df5c849c2588b798e9d030949a27f4e3d201c9f\logic_pcu'.
+Parameter \DATA_WIDTH = 256
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+Found cached RTLIL representation for module `$paramod$8df5c849c2588b798e9d030949a27f4e3d201c9f\logic_pcu'.
+Parameter \DATA_WIDTH = 256
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+Found cached RTLIL representation for module `$paramod$8df5c849c2588b798e9d030949a27f4e3d201c9f\logic_pcu'.
+Parameter \DATA_WIDTH = 256
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+Found cached RTLIL representation for module `$paramod$8df5c849c2588b798e9d030949a27f4e3d201c9f\logic_pcu'.
+Parameter \DATA_WIDTH = 256
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+Found cached RTLIL representation for module `$paramod$8df5c849c2588b798e9d030949a27f4e3d201c9f\logic_pcu'.
+Parameter \PCUS = 16
+Parameter \ISSUE_PORTS = 16
+Parameter \DATA_WIDTH = 256
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+
+20.7. Executing AST frontend in derive mode using pre-parsed AST for module `\logic_pcu_scheduler'.
+Parameter \PCUS = 16
+Parameter \ISSUE_PORTS = 16
+Parameter \DATA_WIDTH = 256
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+Generating RTLIL representation for module `$paramod$c05fd37196f5969c7554a5d5b4ab7787d68e6bc5\logic_pcu_scheduler'.
+Parameter \CHANNELS = 64
+Parameter \DATA_WIDTH = 256
+Parameter \TAG_WIDTH = 64
+
+20.8. Executing AST frontend in derive mode using pre-parsed AST for module `\logic_operand_context_buffer'.
+Parameter \CHANNELS = 64
+Parameter \DATA_WIDTH = 256
+Parameter \TAG_WIDTH = 64
+Generating RTLIL representation for module `$paramod$8892d770deed9d55c2fbb9e42be648281ca47082\logic_operand_context_buffer'.
+Warning: Replacing memory \accum_q with list of registers. See rtl/logic_operand_context_buffer.sv:54
+Warning: Replacing memory \src2_q with list of registers. See rtl/logic_operand_context_buffer.sv:53
+Warning: Replacing memory \src1_q with list of registers. See rtl/logic_operand_context_buffer.sv:52
+Warning: Replacing memory \src0_q with list of registers. See rtl/logic_operand_context_buffer.sv:51
+Warning: Replacing memory \precision_q with list of registers. See rtl/logic_operand_context_buffer.sv:50
+Warning: Replacing memory \tag_q with list of registers. See rtl/logic_operand_context_buffer.sv:49
+Parameter \DATA_WIDTH = 256
+Parameter \BYTES = 65536
+
+20.9. Executing AST frontend in derive mode using pre-parsed AST for module `\logic_shared_buffer'.
+Parameter \DATA_WIDTH = 256
+Parameter \BYTES = 65536
+Generating RTLIL representation for module `$paramod$a5cdb8f15b66887d1fd8536d46a0dc5ad96ef1fa\logic_shared_buffer'.
+Warning: Replacing memory \memory with list of registers. See rtl/logic_shared_buffer.sv:35
+Parameter \CHANNELS = 64
+Parameter \EPOCH_WIDTH = 16
+
+20.10. Executing AST frontend in derive mode using pre-parsed AST for module `\logic_epoch_barrier'.
+Parameter \CHANNELS = 64
+Parameter \EPOCH_WIDTH = 16
+Generating RTLIL representation for module `$paramod$bd1b89e712fe4e650bd6086085d8ccf47060cb19\logic_epoch_barrier'.
+Parameter \CHANNELS = 64
+
+20.11. Executing AST frontend in derive mode using pre-parsed AST for module `\logic_command_coalescer'.
+Parameter \CHANNELS = 64
+Generating RTLIL representation for module `$paramod\logic_command_coalescer\CHANNELS=32'00000000000000000000000001000000'.
+Warning: Replacing memory \expected_q with list of registers. See rtl/logic_command_coalescer.sv:84
+Warning: Replacing memory \command_q with list of registers. See rtl/logic_command_coalescer.sv:83
+Warning: Replacing memory \signature_q with list of registers. See rtl/logic_command_coalescer.sv:82
+Warning: Replacing memory \ordinal_q with list of registers. See rtl/logic_command_coalescer.sv:81
+Warning: Replacing memory \epoch_q with list of registers. See rtl/logic_command_coalescer.sv:80
+Warning: Replacing memory \mask_q with list of registers. See rtl/logic_command_coalescer.sv:77
+Parameter \INPUTS = 2
+Parameter \KEY_WIDTH = 32
+Parameter \DATA_WIDTH = 32
+Parameter \INDEX_WIDTH = 1
+
+20.12. Executing AST frontend in derive mode using pre-parsed AST for module `\logic_die_link_arbiter'.
+Parameter \INPUTS = 2
+Parameter \KEY_WIDTH = 32
+Parameter \DATA_WIDTH = 32
+Parameter \INDEX_WIDTH = 1
+Generating RTLIL representation for module `$paramod$25ced63ebdd5e20177224cf05b0c7074704db774\logic_die_link_arbiter'.
+Parameter \CHANNELS = 2
+Parameter \PCUS = 2
+Parameter \DATA_WIDTH = 32
+Parameter \TAG_WIDTH = 64
+Parameter \WEIGHT_BUFFER_BYTES = 65536
+
+20.13. Executing AST frontend in derive mode using pre-parsed AST for module `\logic_die_pim_top'.
+Parameter \CHANNELS = 2
+Parameter \PCUS = 2
+Parameter \DATA_WIDTH = 32
+Parameter \TAG_WIDTH = 64
+Parameter \WEIGHT_BUFFER_BYTES = 65536
+Generating RTLIL representation for module `$paramod$e43593db113059f515c9e3741f8cd1d5014553ca\logic_die_pim_top'.
+Parameter \CHANNELS = 2
+Parameter \LANES = 2
+Parameter \DATA_WIDTH = 32
+Parameter \KEY_WIDTH = 32
+
+20.14. Executing AST frontend in derive mode using pre-parsed AST for module `\channel_tsv_interconnect'.
+Parameter \CHANNELS = 2
+Parameter \LANES = 2
+Parameter \DATA_WIDTH = 32
+Parameter \KEY_WIDTH = 32
+Generating RTLIL representation for module `$paramod$b25b56a6c9e5d1321f547b0904946b323a53a845\channel_tsv_interconnect'.
+Parameter \BANKS = 4
+Parameter \PIM_BLOCKS = 2
+Parameter \ROWS = 8
+Parameter \COLS = 8
+Parameter \DATA_WIDTH = 32
+Parameter \KEY_WIDTH = 32
+Parameter \CRF_DEPTH = 32
+
+20.15. Executing AST frontend in derive mode using pre-parsed AST for module `\bank_side_pim_subsystem'.
+Parameter \BANKS = 4
+Parameter \PIM_BLOCKS = 2
+Parameter \ROWS = 8
+Parameter \COLS = 8
+Parameter \DATA_WIDTH = 32
+Parameter \KEY_WIDTH = 32
+Parameter \CRF_DEPTH = 32
+Generating RTLIL representation for module `$paramod$8fc700b66a09b74ebe3f7bc3a5e43266b2ede644\bank_side_pim_subsystem'.
+Parameter \INPUTS = 2
+Parameter \KEY_WIDTH = 32
+Parameter \DATA_WIDTH = 32
+
+20.16. Executing AST frontend in derive mode using pre-parsed AST for module `\logic_die_link_arbiter'.
+Parameter \INPUTS = 2
+Parameter \KEY_WIDTH = 32
+Parameter \DATA_WIDTH = 32
+Generating RTLIL representation for module `$paramod$be368e01a3c89cc900f934e16c25bb89cbdbb5e0\logic_die_link_arbiter'.
+Parameter \BANKS = 4
+Parameter \PIM_BLOCKS = 2
+Parameter \ROWS = 8
+Parameter \COLS = 8
+Parameter \DATA_WIDTH = 32
+Parameter \KEY_WIDTH = 32
+Parameter \CRF_DEPTH = 32
+Found cached RTLIL representation for module `$paramod$8fc700b66a09b74ebe3f7bc3a5e43266b2ede644\bank_side_pim_subsystem'.
+Parameter \INPUTS = 2
+Parameter \KEY_WIDTH = 32
+Parameter \DATA_WIDTH = 32
+Found cached RTLIL representation for module `$paramod$be368e01a3c89cc900f934e16c25bb89cbdbb5e0\logic_die_link_arbiter'.
+
+20.17. Analyzing design hierarchy..
+Top module:  \full_pim_system_top
+Used module:     $paramod$25ced63ebdd5e20177224cf05b0c7074704db774\logic_die_link_arbiter
+Used module:     $paramod$e43593db113059f515c9e3741f8cd1d5014553ca\logic_die_pim_top
+Used module:         \logic_pcu_scheduler
+Used module:             $paramod$8df5c849c2588b798e9d030949a27f4e3d201c9f\logic_pcu
+Used module:                 \pim_vector_alu
+Used module:                     \fp16_add
+Used module:                     \fp16_mul
+Used module:         \logic_operand_context_buffer
+Used module:         \logic_shared_buffer
+Used module:         \logic_epoch_barrier
+Used module:         \logic_command_coalescer
+Used module:     $paramod$b25b56a6c9e5d1321f547b0904946b323a53a845\channel_tsv_interconnect
+Used module:     $paramod$8fc700b66a09b74ebe3f7bc3a5e43266b2ede644\bank_side_pim_subsystem
+Used module:         \bank_pim_core
+Used module:             $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000100000000
+Used module:             \pim_command_decoder
+Used module:         \pim_crf
+Used module:         \dram_bank_array_model
+Used module:     $paramod$be368e01a3c89cc900f934e16c25bb89cbdbb5e0\logic_die_link_arbiter
+Parameter \DATA_WIDTH = 256
+Found cached RTLIL representation for module `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000100000000'.
+Parameter \PCUS = 2
+Parameter \ISSUE_PORTS = 2
+Parameter \DATA_WIDTH = 32
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+
+20.18. Executing AST frontend in derive mode using pre-parsed AST for module `\logic_pcu_scheduler'.
+Parameter \PCUS = 2
+Parameter \ISSUE_PORTS = 2
+Parameter \DATA_WIDTH = 32
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+Generating RTLIL representation for module `$paramod$7ef40443afbcc578444c706d2f3a6d92491d7ebe\logic_pcu_scheduler'.
+Parameter \CHANNELS = 2
+Parameter \DATA_WIDTH = 32
+Parameter \TAG_WIDTH = 64
+
+20.19. Executing AST frontend in derive mode using pre-parsed AST for module `\logic_operand_context_buffer'.
+Parameter \CHANNELS = 2
+Parameter \DATA_WIDTH = 32
+Parameter \TAG_WIDTH = 64
+Generating RTLIL representation for module `$paramod$5eb42153514ecf08a7d794c60a7b8ddca4dff7e0\logic_operand_context_buffer'.
+Warning: Replacing memory \accum_q with list of registers. See rtl/logic_operand_context_buffer.sv:54
+Warning: Replacing memory \src2_q with list of registers. See rtl/logic_operand_context_buffer.sv:53
+Warning: Replacing memory \src1_q with list of registers. See rtl/logic_operand_context_buffer.sv:52
+Warning: Replacing memory \src0_q with list of registers. See rtl/logic_operand_context_buffer.sv:51
+Warning: Replacing memory \precision_q with list of registers. See rtl/logic_operand_context_buffer.sv:50
+Warning: Replacing memory \tag_q with list of registers. See rtl/logic_operand_context_buffer.sv:49
+Parameter \DATA_WIDTH = 32
+Parameter \BYTES = 65536
+
+20.20. Executing AST frontend in derive mode using pre-parsed AST for module `\logic_shared_buffer'.
+Parameter \DATA_WIDTH = 32
+Parameter \BYTES = 65536
+Generating RTLIL representation for module `$paramod$1d15bc0cc9e3a5aa77f5f04499f2a360a24c0e6c\logic_shared_buffer'.
+Warning: Replacing memory \memory with list of registers. See rtl/logic_shared_buffer.sv:35
+Parameter \CHANNELS = 2
+Parameter \EPOCH_WIDTH = 16
+
+20.21. Executing AST frontend in derive mode using pre-parsed AST for module `\logic_epoch_barrier'.
+Parameter \CHANNELS = 2
+Parameter \EPOCH_WIDTH = 16
+Generating RTLIL representation for module `$paramod$5637ef7a3d61a250ee5a4c068e440d2f431e5bc4\logic_epoch_barrier'.
+Parameter \CHANNELS = 2
+
+20.22. Executing AST frontend in derive mode using pre-parsed AST for module `\logic_command_coalescer'.
+Parameter \CHANNELS = 2
+Generating RTLIL representation for module `$paramod\logic_command_coalescer\CHANNELS=32'00000000000000000000000000000010'.
+Warning: Replacing memory \expected_q with list of registers. See rtl/logic_command_coalescer.sv:84
+Warning: Replacing memory \command_q with list of registers. See rtl/logic_command_coalescer.sv:83
+Warning: Replacing memory \signature_q with list of registers. See rtl/logic_command_coalescer.sv:82
+Warning: Replacing memory \ordinal_q with list of registers. See rtl/logic_command_coalescer.sv:81
+Warning: Replacing memory \epoch_q with list of registers. See rtl/logic_command_coalescer.sv:80
+Warning: Replacing memory \mask_q with list of registers. See rtl/logic_command_coalescer.sv:77
+Parameter \DATA_WIDTH = 32
+Parameter \KEY_WIDTH = 32
+
+20.23. Executing AST frontend in derive mode using pre-parsed AST for module `\bank_pim_core'.
+Parameter \DATA_WIDTH = 32
+Parameter \KEY_WIDTH = 32
+Generating RTLIL representation for module `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core'.
+Warning: Replacing memory \grf_a with list of registers. See rtl/bank_pim_core.sv:102
+Warning: Replacing memory \grf_b with list of registers. See rtl/bank_pim_core.sv:101
+Parameter \DATA_WIDTH = 32
+Parameter \KEY_WIDTH = 32
+Found cached RTLIL representation for module `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core'.
+Parameter \DEPTH = 32
+Found cached RTLIL representation for module `$paramod\pim_crf\DEPTH=32'00000000000000000000000000100000'.
+Parameter \BANKS = 4
+Parameter \ROWS = 8
+Parameter \COLS = 8
+Parameter \DATA_WIDTH = 32
+Parameter \PIM_READ_PORTS = 4
+
+20.24. Executing AST frontend in derive mode using pre-parsed AST for module `\dram_bank_array_model'.
+Parameter \BANKS = 4
+Parameter \ROWS = 8
+Parameter \COLS = 8
+Parameter \DATA_WIDTH = 32
+Parameter \PIM_READ_PORTS = 4
+Generating RTLIL representation for module `$paramod$35d0f58aa7b32333551c68c7469810d6b210e0d4\dram_bank_array_model'.
+Warning: Replacing memory \memory with list of registers. See rtl/dram_bank_array_model.sv:117
+
+20.25. Analyzing design hierarchy..
+Top module:  \full_pim_system_top
+Used module:     $paramod$25ced63ebdd5e20177224cf05b0c7074704db774\logic_die_link_arbiter
+Used module:     $paramod$e43593db113059f515c9e3741f8cd1d5014553ca\logic_die_pim_top
+Used module:         $paramod$7ef40443afbcc578444c706d2f3a6d92491d7ebe\logic_pcu_scheduler
+Used module:             \logic_pcu
+Used module:                 $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000100000000
+Used module:                     \fp16_add
+Used module:                     \fp16_mul
+Used module:         $paramod$5eb42153514ecf08a7d794c60a7b8ddca4dff7e0\logic_operand_context_buffer
+Used module:         $paramod$1d15bc0cc9e3a5aa77f5f04499f2a360a24c0e6c\logic_shared_buffer
+Used module:         $paramod$5637ef7a3d61a250ee5a4c068e440d2f431e5bc4\logic_epoch_barrier
+Used module:         $paramod\logic_command_coalescer\CHANNELS=32'00000000000000000000000000000010
+Used module:     $paramod$b25b56a6c9e5d1321f547b0904946b323a53a845\channel_tsv_interconnect
+Used module:     $paramod$8fc700b66a09b74ebe3f7bc3a5e43266b2ede644\bank_side_pim_subsystem
+Used module:         $paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core
+Used module:             \pim_vector_alu
+Used module:             \pim_command_decoder
+Used module:         $paramod\pim_crf\DEPTH=32'00000000000000000000000000100000
+Used module:         $paramod$35d0f58aa7b32333551c68c7469810d6b210e0d4\dram_bank_array_model
+Used module:     $paramod$be368e01a3c89cc900f934e16c25bb89cbdbb5e0\logic_die_link_arbiter
+Parameter \DATA_WIDTH = 32
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+
+20.26. Executing AST frontend in derive mode using pre-parsed AST for module `\logic_pcu'.
+Parameter \DATA_WIDTH = 32
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+Generating RTLIL representation for module `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu'.
+Parameter \DATA_WIDTH = 32
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+Found cached RTLIL representation for module `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu'.
+Parameter \DATA_WIDTH = 32
+
+20.27. Executing AST frontend in derive mode using pre-parsed AST for module `\pim_vector_alu'.
+Parameter \DATA_WIDTH = 32
+Generating RTLIL representation for module `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000'.
+
+20.28. Analyzing design hierarchy..
+Top module:  \full_pim_system_top
+Used module:     $paramod$25ced63ebdd5e20177224cf05b0c7074704db774\logic_die_link_arbiter
+Used module:     $paramod$e43593db113059f515c9e3741f8cd1d5014553ca\logic_die_pim_top
+Used module:         $paramod$7ef40443afbcc578444c706d2f3a6d92491d7ebe\logic_pcu_scheduler
+Used module:             $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu
+Used module:                 \pim_vector_alu
+Used module:                     \fp16_add
+Used module:                     \fp16_mul
+Used module:         $paramod$5eb42153514ecf08a7d794c60a7b8ddca4dff7e0\logic_operand_context_buffer
+Used module:         $paramod$1d15bc0cc9e3a5aa77f5f04499f2a360a24c0e6c\logic_shared_buffer
+Used module:         $paramod$5637ef7a3d61a250ee5a4c068e440d2f431e5bc4\logic_epoch_barrier
+Used module:         $paramod\logic_command_coalescer\CHANNELS=32'00000000000000000000000000000010
+Used module:     $paramod$b25b56a6c9e5d1321f547b0904946b323a53a845\channel_tsv_interconnect
+Used module:     $paramod$8fc700b66a09b74ebe3f7bc3a5e43266b2ede644\bank_side_pim_subsystem
+Used module:         $paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core
+Used module:             $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000
+Used module:             \pim_command_decoder
+Used module:         $paramod\pim_crf\DEPTH=32'00000000000000000000000000100000
+Used module:         $paramod$35d0f58aa7b32333551c68c7469810d6b210e0d4\dram_bank_array_model
+Used module:     $paramod$be368e01a3c89cc900f934e16c25bb89cbdbb5e0\logic_die_link_arbiter
+Parameter \DATA_WIDTH = 32
+Found cached RTLIL representation for module `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000'.
+
+20.29. Analyzing design hierarchy..
+Top module:  \full_pim_system_top
+Used module:     $paramod$25ced63ebdd5e20177224cf05b0c7074704db774\logic_die_link_arbiter
+Used module:     $paramod$e43593db113059f515c9e3741f8cd1d5014553ca\logic_die_pim_top
+Used module:         $paramod$7ef40443afbcc578444c706d2f3a6d92491d7ebe\logic_pcu_scheduler
+Used module:             $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu
+Used module:                 $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000
+Used module:                     \fp16_add
+Used module:                     \fp16_mul
+Used module:         $paramod$5eb42153514ecf08a7d794c60a7b8ddca4dff7e0\logic_operand_context_buffer
+Used module:         $paramod$1d15bc0cc9e3a5aa77f5f04499f2a360a24c0e6c\logic_shared_buffer
+Used module:         $paramod$5637ef7a3d61a250ee5a4c068e440d2f431e5bc4\logic_epoch_barrier
+Used module:         $paramod\logic_command_coalescer\CHANNELS=32'00000000000000000000000000000010
+Used module:     $paramod$b25b56a6c9e5d1321f547b0904946b323a53a845\channel_tsv_interconnect
+Used module:     $paramod$8fc700b66a09b74ebe3f7bc3a5e43266b2ede644\bank_side_pim_subsystem
+Used module:         $paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core
+Used module:             \pim_command_decoder
+Used module:         $paramod\pim_crf\DEPTH=32'00000000000000000000000000100000
+Used module:         $paramod$35d0f58aa7b32333551c68c7469810d6b210e0d4\dram_bank_array_model
+Used module:     $paramod$be368e01a3c89cc900f934e16c25bb89cbdbb5e0\logic_die_link_arbiter
+
+20.30. Analyzing design hierarchy..
+Top module:  \full_pim_system_top
+Used module:     $paramod$25ced63ebdd5e20177224cf05b0c7074704db774\logic_die_link_arbiter
+Used module:     $paramod$e43593db113059f515c9e3741f8cd1d5014553ca\logic_die_pim_top
+Used module:         $paramod$7ef40443afbcc578444c706d2f3a6d92491d7ebe\logic_pcu_scheduler
+Used module:             $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu
+Used module:                 $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000
+Used module:                     \fp16_add
+Used module:                     \fp16_mul
+Used module:         $paramod$5eb42153514ecf08a7d794c60a7b8ddca4dff7e0\logic_operand_context_buffer
+Used module:         $paramod$1d15bc0cc9e3a5aa77f5f04499f2a360a24c0e6c\logic_shared_buffer
+Used module:         $paramod$5637ef7a3d61a250ee5a4c068e440d2f431e5bc4\logic_epoch_barrier
+Used module:         $paramod\logic_command_coalescer\CHANNELS=32'00000000000000000000000000000010
+Used module:     $paramod$b25b56a6c9e5d1321f547b0904946b323a53a845\channel_tsv_interconnect
+Used module:     $paramod$8fc700b66a09b74ebe3f7bc3a5e43266b2ede644\bank_side_pim_subsystem
+Used module:         $paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core
+Used module:             \pim_command_decoder
+Used module:         $paramod\pim_crf\DEPTH=32'00000000000000000000000000100000
+Used module:         $paramod$35d0f58aa7b32333551c68c7469810d6b210e0d4\dram_bank_array_model
+Used module:     $paramod$be368e01a3c89cc900f934e16c25bb89cbdbb5e0\logic_die_link_arbiter
+Removing unused module `$paramod\logic_command_coalescer\CHANNELS=32'00000000000000000000000001000000'.
+Removing unused module `$paramod$bd1b89e712fe4e650bd6086085d8ccf47060cb19\logic_epoch_barrier'.
+Removing unused module `$paramod$a5cdb8f15b66887d1fd8536d46a0dc5ad96ef1fa\logic_shared_buffer'.
+Removing unused module `$paramod$8892d770deed9d55c2fbb9e42be648281ca47082\logic_operand_context_buffer'.
+Removing unused module `$paramod$c05fd37196f5969c7554a5d5b4ab7787d68e6bc5\logic_pcu_scheduler'.
+Removing unused module `$paramod$8df5c849c2588b798e9d030949a27f4e3d201c9f\logic_pcu'.
+Removing unused module `$paramod$7f1e781518b42735fa691e74eb2e35b90a74e2e1\dram_bank_array_model'.
+Removing unused module `$paramod$0173170335c8e8bebcbd70c23aec370f5341a683\bank_pim_core'.
+Removing unused module `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000100000000'.
+Removing unused module `\logic_die_pim_top'.
+Removing unused module `\logic_operand_context_buffer'.
+Removing unused module `\logic_command_coalescer'.
+Removing unused module `\logic_pcu_scheduler'.
+Removing unused module `\logic_pcu'.
+Removing unused module `\logic_shared_buffer'.
+Removing unused module `\logic_epoch_barrier'.
+Removing unused module `\channel_tsv_interconnect'.
+Removing unused module `\logic_die_link_arbiter'.
+Removing unused module `\bank_side_pim_subsystem'.
+Removing unused module `\bank_pim_core'.
+Removing unused module `\dram_bank_array_model'.
+Removing unused module `\pim_crf'.
+Removing unused module `\pim_vector_alu'.
+Removed 23 unused modules.
+
+21. Executing CHECK pass (checking for obvious problems).
+Checking module $paramod$7ef40443afbcc578444c706d2f3a6d92491d7ebe\logic_pcu_scheduler...
+Checking module full_pim_system_top...
+Checking module $paramod$be368e01a3c89cc900f934e16c25bb89cbdbb5e0\logic_die_link_arbiter...
+Checking module $paramod$8fc700b66a09b74ebe3f7bc3a5e43266b2ede644\bank_side_pim_subsystem...
+Checking module $paramod$b25b56a6c9e5d1321f547b0904946b323a53a845\channel_tsv_interconnect...
+Checking module $paramod$e43593db113059f515c9e3741f8cd1d5014553ca\logic_die_pim_top...
+Checking module $paramod$25ced63ebdd5e20177224cf05b0c7074704db774\logic_die_link_arbiter...
+Checking module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000...
+Checking module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu...
+Checking module $paramod$35d0f58aa7b32333551c68c7469810d6b210e0d4\dram_bank_array_model...
+Checking module $paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core...
+Checking module $paramod\logic_command_coalescer\CHANNELS=32'00000000000000000000000000000010...
+Checking module $paramod$5637ef7a3d61a250ee5a4c068e440d2f431e5bc4\logic_epoch_barrier...
+Checking module $paramod$1d15bc0cc9e3a5aa77f5f04499f2a360a24c0e6c\logic_shared_buffer...
+Checking module $paramod\pim_crf\DEPTH=32'00000000000000000000000000100000...
+Checking module $paramod$5eb42153514ecf08a7d794c60a7b8ddca4dff7e0\logic_operand_context_buffer...
+Checking module fp16_mul...
+Checking module fp16_add...
+Checking module pim_command_decoder...
+Found and reported 0 problems.
+
+22. Printing statistics.
+
+=== $paramod$7ef40443afbcc578444c706d2f3a6d92491d7ebe\logic_pcu_scheduler ===
+
+   Number of wires:                 22
+   Number of wire bits:            608
+   Number of public wires:          18
+   Number of public wire bits:     604
+   Number of ports:                 17
+   Number of port bits:            602
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  6
+     $logic_not                      2
+     $logic_or                       2
+     $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu      2
+
+=== full_pim_system_top ===
+
+   Number of wires:                122
+   Number of wire bits:           2015
+   Number of public wires:         102
+   Number of public wire bits:    1777
+   Number of ports:                 77
+   Number of port bits:           1261
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 27
+     $logic_and                      4
+     $logic_not                      2
+     $logic_or                       3
+     $mul                            4
+     $mux                            2
+     $paramod$25ced63ebdd5e20177224cf05b0c7074704db774\logic_die_link_arbiter      1
+     $paramod$8fc700b66a09b74ebe3f7bc3a5e43266b2ede644\bank_side_pim_subsystem      2
+     $paramod$b25b56a6c9e5d1321f547b0904946b323a53a845\channel_tsv_interconnect      1
+     $paramod$be368e01a3c89cc900f934e16c25bb89cbdbb5e0\logic_die_link_arbiter      2
+     $paramod$e43593db113059f515c9e3741f8cd1d5014553ca\logic_die_pim_top      1
+     $reduce_or                      1
+     $shiftx                         4
+
+=== $paramod$be368e01a3c89cc900f934e16c25bb89cbdbb5e0\logic_die_link_arbiter ===
+
+   Number of wires:                117
+   Number of wire bits:           1818
+   Number of public wires:          25
+   Number of public wire bits:     403
+   Number of ports:                 11
+   Number of port bits:            201
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              2
+   Number of cells:                 49
+     $add                            7
+     $and                            3
+     $eq                             1
+     $ge                             2
+     $logic_and                      6
+     $logic_not                      5
+     $mul                            4
+     $mux                            1
+     $neg                            4
+     $not                            2
+     $or                             2
+     $shift                          4
+     $shiftx                         6
+     $sub                            2
+
+=== $paramod$8fc700b66a09b74ebe3f7bc3a5e43266b2ede644\bank_side_pim_subsystem ===
+
+   Number of wires:                 61
+   Number of wire bits:            603
+   Number of public wires:          50
+   Number of public wire bits:     592
+   Number of ports:                 40
+   Number of port bits:            388
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 15
+     $eq                             4
+     $logic_and                      6
+     $paramod$35d0f58aa7b32333551c68c7469810d6b210e0d4\dram_bank_array_model      1
+     $paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core      2
+     $paramod\pim_crf\DEPTH=32'00000000000000000000000000100000      1
+     $reduce_and                     1
+
+=== $paramod$b25b56a6c9e5d1321f547b0904946b323a53a845\channel_tsv_interconnect ===
+
+   Number of wires:                290
+   Number of wire bits:           4401
+   Number of public wires:          18
+   Number of public wire bits:     405
+   Number of ports:                 11
+   Number of port bits:            268
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              2
+   Number of cells:                135
+     $add                            6
+     $and                           10
+     $eq                             2
+     $logic_and                     12
+     $logic_not                     15
+     $mod                            4
+     $mul                            8
+     $mux                            2
+     $neg                           20
+     $not                           10
+     $or                            10
+     $shift                         20
+     $shiftx                        16
+
+=== $paramod$e43593db113059f515c9e3741f8cd1d5014553ca\logic_die_pim_top ===
+
+   Number of wires:                208
+   Number of wire bits:           3279
+   Number of public wires:          85
+   Number of public wire bits:    1608
+   Number of ports:                 52
+   Number of port bits:            670
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              2
+   Number of cells:                 50
+     $and                            4
+     $eq                             1
+     $logic_and                     15
+     $logic_not                     10
+     $neg                            4
+     $not                            4
+     $or                             2
+     $paramod$1d15bc0cc9e3a5aa77f5f04499f2a360a24c0e6c\logic_shared_buffer      1
+     $paramod$5637ef7a3d61a250ee5a4c068e440d2f431e5bc4\logic_epoch_barrier      1
+     $paramod$5eb42153514ecf08a7d794c60a7b8ddca4dff7e0\logic_operand_context_buffer      1
+     $paramod$7ef40443afbcc578444c706d2f3a6d92491d7ebe\logic_pcu_scheduler      1
+     $paramod\logic_command_coalescer\CHANNELS=32'00000000000000000000000000000010      1
+     $pos                            1
+     $shift                          4
+
+=== $paramod$25ced63ebdd5e20177224cf05b0c7074704db774\logic_die_link_arbiter ===
+
+   Number of wires:                117
+   Number of wire bits:           1818
+   Number of public wires:          25
+   Number of public wire bits:     403
+   Number of ports:                 11
+   Number of port bits:            201
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              2
+   Number of cells:                 49
+     $add                            7
+     $and                            3
+     $eq                             1
+     $ge                             2
+     $logic_and                      6
+     $logic_not                      5
+     $mul                            4
+     $mux                            1
+     $neg                            4
+     $not                            2
+     $or                             2
+     $shift                          4
+     $shiftx                         6
+     $sub                            2
+
+=== $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000 ===
+
+   Number of wires:                 46
+   Number of wire bits:            914
+   Number of public wires:          10
+   Number of public wire bits:     262
+   Number of ports:                  7
+   Number of port bits:            166
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              3
+   Number of cells:                 24
+     $add                            3
+     $eq                            12
+     $mul                            3
+     $mux                            2
+     fp16_add                        2
+     fp16_mul                        2
+
+=== $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu ===
+
+   Number of wires:                 31
+   Number of wire bits:            853
+   Number of public wires:          20
+   Number of public wire bits:     527
+   Number of ports:                 15
+   Number of port bits:            300
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              1
+   Number of cells:                  5
+     $logic_and                      1
+     $logic_not                      2
+     $logic_or                       1
+     $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000      1
+
+=== $paramod$35d0f58aa7b32333551c68c7469810d6b210e0d4\dram_bank_array_model ===
+
+   Number of wires:                888
+   Number of wire bits:          23887
+   Number of public wires:         284
+   Number of public wire bits:    8640
+   Number of ports:                 20
+   Number of port bits:            254
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              2
+   Number of cells:                172
+     $add                           26
+     $and                            5
+     $eq                             7
+     $ge                             8
+     $logic_and                     23
+     $logic_not                      6
+     $mul                           35
+     $ne                             8
+     $neg                           10
+     $not                            5
+     $or                             5
+     $reduce_or                      1
+     $shift                         10
+     $shiftx                        22
+     $sub                            1
+
+=== $paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core ===
+
+   Number of wires:                304
+   Number of wire bits:           6408
+   Number of public wires:          88
+   Number of public wire bits:    1732
+   Number of ports:                 22
+   Number of port bits:            278
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              2
+   Number of cells:                 52
+     $add                           11
+     $eq                             4
+     $logic_and                      5
+     $logic_not                      3
+     $logic_or                       4
+     $mod                            6
+     $mul                            8
+     $mux                            1
+     $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000      1
+     $shiftx                         8
+     pim_command_decoder             1
+
+=== $paramod\logic_command_coalescer\CHANNELS=32'00000000000000000000000000000010 ===
+
+   Number of wires:               7250
+   Number of wire bits:          41214
+   Number of public wires:         795
+   Number of public wire bits:   13165
+   Number of ports:                 20
+   Number of port bits:            213
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              2
+   Number of cells:               2983
+     $add                          128
+     $and                          130
+     $eq                           512
+     $logic_and                    904
+     $logic_not                    516
+     $logic_or                       3
+     $mux                            5
+     $ne                             2
+     $neg                          260
+     $not                          130
+     $or                           130
+     $shift                        260
+     $shiftx                         2
+     $shl                            1
+
+=== $paramod$5637ef7a3d61a250ee5a4c068e440d2f431e5bc4\logic_epoch_barrier ===
+
+   Number of wires:                 55
+   Number of wire bits:            133
+   Number of public wires:          19
+   Number of public wire bits:      68
+   Number of ports:                 14
+   Number of port bits:             46
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              1
+   Number of cells:                 22
+     $and                            1
+     $eq                             1
+     $logic_and                      8
+     $logic_not                      4
+     $neg                            2
+     $not                            1
+     $or                             1
+     $shift                          2
+     $shiftx                         2
+
+=== $paramod$1d15bc0cc9e3a5aa77f5f04499f2a360a24c0e6c\logic_shared_buffer ===
+
+   Number of wires:              32848
+   Number of wire bits:         1050034
+   Number of public wires:       16401
+   Number of public wire bits:  524426
+   Number of ports:                 17
+   Number of port bits:            138
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              1
+   Number of cells:                  7
+     $eq                             1
+     $logic_and                      3
+     $logic_not                      2
+     $logic_or                       1
+
+=== $paramod\pim_crf\DEPTH=32'00000000000000000000000000100000 ===
+
+   Number of wires:                133
+   Number of wire bits:           2828
+   Number of public wires:          51
+   Number of public wire bits:    1162
+   Number of ports:                 13
+   Number of port bits:             83
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              5
+   Number of cells:                 22
+     $add                            2
+     $eq                             3
+     $le                             1
+     $logic_and                      5
+     $logic_not                      3
+     $logic_or                       1
+     $ne                             4
+     $sub                            3
+
+=== $paramod$5eb42153514ecf08a7d794c60a7b8ddca4dff7e0\logic_operand_context_buffer ===
+
+   Number of wires:                121
+   Number of wire bits:           2215
+   Number of public wires:          34
+   Number of public wire bits:     984
+   Number of ports:                 21
+   Number of port bits:            594
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              1
+   Number of cells:                 18
+     $and                            3
+     $logic_and                      1
+     $logic_not                      2
+     $logic_or                       1
+     $neg                            2
+     $not                            3
+     $or                             1
+     $reduce_or                      1
+     $shift                          2
+     $shiftx                         2
+
+=== fp16_mul ===
+
+   Number of wires:                167
+   Number of wire bits:           2084
+   Number of public wires:          17
+   Number of public wire bits:     191
+   Number of ports:                  3
+   Number of port bits:             48
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              1
+   Number of cells:                103
+     $add                            3
+     $eq                            17
+     $ge                             1
+     $gt                            10
+     $le                             1
+     $logic_and                     18
+     $logic_not                     10
+     $logic_or                       7
+     $lt                             1
+     $mul                            1
+     $mux                            2
+     $ne                             4
+     $pos                            2
+     $reduce_or                      1
+     $shl                           10
+     $shr                            2
+     $sub                           12
+     $xor                            1
+
+=== fp16_add ===
+
+   Number of wires:                240
+   Number of wire bits:           2572
+   Number of public wires:          31
+   Number of public wire bits:     364
+   Number of ports:                  3
+   Number of port bits:             48
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              1
+   Number of cells:                129
+     $add                            4
+     $and                            2
+     $eq                            18
+     $ge                             2
+     $gt                            14
+     $le                             2
+     $logic_and                     22
+     $logic_not                     14
+     $logic_or                       4
+     $mux                            6
+     $ne                             5
+     $or                             2
+     $reduce_or                      2
+     $shl                           14
+     $shr                            2
+     $sub                           16
+
+=== pim_command_decoder ===
+
+   Number of wires:                 64
+   Number of wire bits:            175
+   Number of public wires:          15
+   Number of public wire bits:      86
+   Number of ports:                 15
+   Number of port bits:             86
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              1
+   Number of cells:                 32
+     $eq                            15
+     $ge                             3
+     $logic_and                      3
+     $logic_or                      11
+
+=== design hierarchy ===
+
+   full_pim_system_top               1
+     $paramod$25ced63ebdd5e20177224cf05b0c7074704db774\logic_die_link_arbiter      1
+     $paramod$8fc700b66a09b74ebe3f7bc3a5e43266b2ede644\bank_side_pim_subsystem      2
+       $paramod$35d0f58aa7b32333551c68c7469810d6b210e0d4\dram_bank_array_model      1
+       $paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core      2
+         $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000      1
+           fp16_add                  2
+           fp16_mul                  2
+         pim_command_decoder         1
+       $paramod\pim_crf\DEPTH=32'00000000000000000000000000100000      1
+     $paramod$b25b56a6c9e5d1321f547b0904946b323a53a845\channel_tsv_interconnect      1
+     $paramod$be368e01a3c89cc900f934e16c25bb89cbdbb5e0\logic_die_link_arbiter      2
+     $paramod$e43593db113059f515c9e3741f8cd1d5014553ca\logic_die_pim_top      1
+       $paramod$1d15bc0cc9e3a5aa77f5f04499f2a360a24c0e6c\logic_shared_buffer      1
+       $paramod$5637ef7a3d61a250ee5a4c068e440d2f431e5bc4\logic_epoch_barrier      1
+       $paramod$5eb42153514ecf08a7d794c60a7b8ddca4dff7e0\logic_operand_context_buffer      1
+       $paramod$7ef40443afbcc578444c706d2f3a6d92491d7ebe\logic_pcu_scheduler      1
+         $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu      2
+           $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000      1
+             fp16_add                2
+             fp16_mul                2
+       $paramod\logic_command_coalescer\CHANNELS=32'00000000000000000000000000000010      1
+
+   Number of wires:              50125
+   Number of wire bits:         1253383
+   Number of public wires:       19405
+   Number of public wire bits:  581592
+   Number of ports:                700
+   Number of port bits:          10049
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:             85
+   Number of cells:               7031
+     $add                          357
+     $and                          191
+     $eq                          1116
+     $ge                            70
+     $gt                           288
+     $le                            38
+     $logic_and                   1547
+     $logic_not                    890
+     $logic_or                     206
+     $lt                            12
+     $mod                           28
+     $mul                          156
+     $mux                          124
+     $ne                           134
+     $neg                          320
+     $not                          164
+     $or                           184
+     $pos                           25
+     $reduce_and                     2
+     $reduce_or                     40
+     $shift                        320
+     $shiftx                       120
+     $shl                          289
+     $shr                           48
+     $sub                          350
+     $xor                           12
+
+Warnings: 17 unique messages, 50 total
+End of script. Logfile hash: a7ed07f63a, CPU: user 96.37s system 4.83s, MEM: 3779.67 MB peak
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+Time spent: 62% 1x hierarchy (63 sec), 27% 19x read_verilog (28 sec), ...

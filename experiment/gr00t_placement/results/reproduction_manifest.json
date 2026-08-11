@@ -1,0 +1,26 @@
+﻿{
+    "schema_version":  1,
+    "generated_at":  "2026-08-06T16:23:07.2873063+09:00",
+    "main_repo_commit":  "8534693d528742d52b9329b4a1feed3b4831dddb",
+    "main_repo_worktree_dirty":  true,
+    "logic_die_scheduler_sha256":  "57bc04302132f092d27b86c7228e59d8f2e5d1ea09879d72c88e4247800b3e45",
+    "scheduler_replay_source_sha256":  "a77b3ad86a0d4364b17c544fad990487dc3a4d0e2ad04f957192aec80865f0f8",
+    "placement_analysis_sha256":  "5479c0b9a9d8c2204650b5683e8612a8a6c39aa09e47d685b05d629c45a43ba4",
+    "assumptions_sha256":  "776d8a3861acdf3581b1584a1198a634c570aa50bc15f57e5b0dad60efeb7d0a",
+    "gr00t_repo_commit":  "ecacdb9c1d3ae1f838dbfd2f7e80fbb73c4b217d",
+    "wsl_distro":  "Ubuntu-24.04",
+    "random_seed":  1701,
+    "gr00t_test_seconds":  10.393,
+    "scheduler_replay_seconds":  1.514,
+    "placement_test_and_analysis_seconds":  14.905,
+    "total_seconds":  30.053,
+    "auto_rebuilt_for_glibc":  false,
+    "commands":  [
+                     "./sim --gtest_filter=\u0027Gr00tN17NormalizationFixture.*\u0027 --gtest_color=no",
+                     "g++ ... gr00t_scheduler_replay.cpp \u0026\u0026 /tmp/stob_gr00t_scheduler_replay ...",
+                     "python -m unittest discover -s experiment\\gr00t_placement -p test_*.py -v",
+                     "python experiment\\gr00t_placement\\analyze_placement.py",
+                     "python experiment\\gr00t_placement\\validate_artifacts.py"
+                 ],
+    "final_recommendation":  false
+}

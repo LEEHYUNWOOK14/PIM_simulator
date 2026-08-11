@@ -1,7 +1,7 @@
 module bank_local_fp16_reduction #(
     parameter int unsigned BANKS = 8, ENTRIES_PER_BANK = 16,
     parameter int unsigned KEY_WIDTH = 64, LANES = 16,
-    parameter int unsigned SLOT_WIDTH = $clog2(ENTRIES_PER_BANK),
+    parameter int unsigned SLOT_WIDTH = ENTRIES_PER_BANK > 1 ? $clog2(ENTRIES_PER_BANK) : 1,
     parameter int unsigned DATA_WIDTH = LANES * 16
 ) (
     input logic clk_i, input logic rst_ni,

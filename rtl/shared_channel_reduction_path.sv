@@ -2,8 +2,8 @@ module shared_channel_reduction_path #(
     parameter int unsigned SOURCES=8, PIPELINES=2, ENTRIES_PER_SOURCE=16,
     parameter int unsigned KEY_WIDTH=64, LANES=16,
     parameter int unsigned DATA_WIDTH=LANES*16,
-    parameter int unsigned SLOT_WIDTH=$clog2(ENTRIES_PER_SOURCE),
-    parameter int unsigned SOURCE_WIDTH=$clog2(SOURCES)
+    parameter int unsigned SLOT_WIDTH=ENTRIES_PER_SOURCE > 1 ? $clog2(ENTRIES_PER_SOURCE) : 1,
+    parameter int unsigned SOURCE_WIDTH=SOURCES > 1 ? $clog2(SOURCES) : 1
 ) (
     input logic clk_i,input logic rst_ni,
     input logic [SOURCES-1:0] source_valid_i,
@@ -35,7 +35,8 @@ module shared_channel_reduction_path #(
         .INDEX_WIDTH(SOURCE_WIDTH)
     ) channel_link(
         .clk_i,.rst_ni,.input_valid_i(final_valid),.input_ready_o(final_ready),
-        .input_key_i(final_key),.input_data_i(final_data),.output_valid_o(link_valid_o),
+        .input_key_i(final_key),.input_data_i(final_data),.input_route_i('0),
+        .output_valid_o(link_valid_o),
         .output_ready_i(link_ready_i),.output_key_o(link_key_o),
-        .output_data_o(link_data_o),.output_source_o(link_source_o));
+        .output_data_o(link_data_o),.output_source_o(link_source_o),.output_route_o());
 endmodule

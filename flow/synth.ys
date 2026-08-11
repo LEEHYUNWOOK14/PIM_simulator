@@ -1,0 +1,28 @@
+read_verilog -sv \
+    rtl/fp16_add.sv \
+    rtl/fp16_vector_add.sv \
+    rtl/bank_local_fp16_reduction.sv \
+    rtl/bank_local_reduction_buffer.sv \
+    rtl/logic_die_link_arbiter.sv \
+    rtl/logic_die_dual_link_arbiter.sv \
+    rtl/shared_channel_reduction_path.sv \
+    rtl/shared_fp16_pipeline_fabric.sv \
+    rtl/shared_fp16_reduction_cluster.sv \
+    rtl/hierarchical_reduction_path.sv \
+    rtl/logic_die_64ch_reduction_top.sv
+
+hierarchy -top logic_die_64ch_reduction_top
+proc
+opt
+fsm
+opt
+memory
+opt
+techmap
+opt
+flatten
+opt
+stat
+
+write_verilog -noattr output/output.v
+

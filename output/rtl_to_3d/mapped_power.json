@@ -1,0 +1,183 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "coordinate_system": "local die coordinates; origin at lower-left; x right; y up",
+  "units": {
+    "length": "um",
+    "area": "um^2",
+    "power": "W"
+  },
+  "architecture": {
+    "die_width_um": 8000.0,
+    "die_height_um": 12000.0,
+    "stack_count": 1,
+    "dram_dies_per_stack": 8
+  },
+  "sources": {
+    "synthesis": "C:\\Users\\Chandler\\OneDrive\\2026-\ud558\uacc4\\STOB \ubc18\ub3c4\uccb4 \uacbd\uc9c4\ub300\ud68c\\STOB_PIM2\\verification\\rtl_to_3d\\fixtures\\synthesis_area.csv",
+    "placement": "C:\\Users\\Chandler\\OneDrive\\2026-\ud558\uacc4\\STOB \ubc18\ub3c4\uccb4 \uacbd\uc9c4\ub300\ud68c\\STOB_PIM2\\verification\\rtl_to_3d\\fixtures\\placement.csv",
+    "activity": "C:\\Users\\Chandler\\OneDrive\\2026-\ud558\uacc4\\STOB \ubc18\ub3c4\uccb4 \uacbd\uc9c4\ub300\ud68c\\STOB_PIM2\\verification\\rtl_to_3d\\fixtures\\synthetic_activity.vcd",
+    "power": "C:\\Users\\Chandler\\OneDrive\\2026-\ud558\uacc4\\STOB \ubc18\ub3c4\uccb4 \uacbd\uc9c4\ub300\ud68c\\STOB_PIM2\\verification\\rtl_to_3d\\fixtures\\block_power.csv"
+  },
+  "blocks": [
+    {
+      "instance": "top.logic_pcu",
+      "module": "logic_pcu",
+      "rule_id": "logic_die",
+      "target": {
+        "stack": 0,
+        "layer": "logic",
+        "die": -1,
+        "channel": -1,
+        "bank": -1
+      },
+      "rectangle_um": {
+        "x_um": 400.0,
+        "y_um": 1000.0,
+        "width_um": 2400.0,
+        "height_um": 2000.0
+      },
+      "synthesis_area_um2": 4800000.0,
+      "mapped_area_um2": 4800000.0,
+      "dynamic_power_W": 1.8,
+      "leakage_power_W": 0.2,
+      "total_power_W": 2.0,
+      "power_density_W_mm2": 0.4166666666666667,
+      "activity": {
+        "format": "VCD",
+        "toggle_count": 180000.0,
+        "duration_s": 0.001
+      }
+    },
+    {
+      "instance": "top.logic_shared_buffer",
+      "module": "logic_shared_buffer",
+      "rule_id": "logic_die",
+      "target": {
+        "stack": 0,
+        "layer": "logic",
+        "die": -1,
+        "channel": -1,
+        "bank": -1
+      },
+      "rectangle_um": {
+        "x_um": 4200.0,
+        "y_um": 7200.0,
+        "width_um": 1800.0,
+        "height_um": 2000.0
+      },
+      "synthesis_area_um2": 3600000.0,
+      "mapped_area_um2": 3600000.0,
+      "dynamic_power_W": 0.72,
+      "leakage_power_W": 0.08,
+      "total_power_W": 0.7999999999999999,
+      "power_density_W_mm2": 0.22222222222222218,
+      "activity": {
+        "format": "VCD",
+        "toggle_count": 65000.0,
+        "duration_s": 0.001
+      }
+    },
+    {
+      "instance": "top.logic_die_link_arbiter",
+      "module": "logic_die_link_arbiter",
+      "rule_id": "logic_die",
+      "target": {
+        "stack": 0,
+        "layer": "logic",
+        "die": -1,
+        "channel": -1,
+        "bank": -1
+      },
+      "rectangle_um": {
+        "x_um": 6500.0,
+        "y_um": 1000.0,
+        "width_um": 1000.0,
+        "height_um": 1000.0
+      },
+      "synthesis_area_um2": 1000000.0,
+      "mapped_area_um2": 1000000.0,
+      "dynamic_power_W": 0.15,
+      "leakage_power_W": 0.05,
+      "total_power_W": 0.2,
+      "power_density_W_mm2": 0.2,
+      "activity": {
+        "format": "VCD",
+        "toggle_count": 12000.0,
+        "duration_s": 0.001
+      }
+    },
+    {
+      "instance": "top.bank_pim_core_ch0_bank0",
+      "module": "bank_pim_core",
+      "rule_id": "bank_side_indexed",
+      "target": {
+        "stack": 0,
+        "layer": "dram",
+        "die": 0,
+        "channel": 0,
+        "bank": 0
+      },
+      "rectangle_um": {
+        "x_um": 0.0,
+        "y_um": 0.0,
+        "width_um": 250.0,
+        "height_um": 3000.0
+      },
+      "synthesis_area_um2": 1500000.0,
+      "mapped_area_um2": 750000.0,
+      "dynamic_power_W": 0.63,
+      "leakage_power_W": 0.07,
+      "total_power_W": 0.7,
+      "power_density_W_mm2": 0.9333333333333333,
+      "activity": {
+        "format": "VCD",
+        "toggle_count": 82000.0,
+        "duration_s": 0.001
+      }
+    },
+    {
+      "instance": "top.bank_local_reduction_buffer_ch7_bank15",
+      "module": "bank_local_reduction_buffer",
+      "rule_id": "bank_side_indexed",
+      "target": {
+        "stack": 0,
+        "layer": "dram",
+        "die": 0,
+        "channel": 7,
+        "bank": 15
+      },
+      "rectangle_um": {
+        "x_um": 7750.0,
+        "y_um": 9000.0,
+        "width_um": 250.0,
+        "height_um": 3000.0
+      },
+      "synthesis_area_um2": 1500000.0,
+      "mapped_area_um2": 750000.0,
+      "dynamic_power_W": 0.27,
+      "leakage_power_W": 0.03,
+      "total_power_W": 0.30000000000000004,
+      "power_density_W_mm2": 0.4,
+      "activity": {
+        "format": "VCD",
+        "toggle_count": 34000.0,
+        "duration_s": 0.001
+      }
+    }
+  ],
+  "unmapped_blocks": [],
+  "warnings": [],
+  "checks": {
+    "unit_validation": "PASS",
+    "bounds_validation": "PASS",
+    "input_power_W": 4.0,
+    "mapped_power_W": 4.0,
+    "unmapped_power_W": 0,
+    "power_conservation_error_W": 0.0,
+    "power_conservation_tolerance_W": 1e-12,
+    "power_conservation": "PASS",
+    "unmapped_detection": "PASS"
+  },
+  "disclaimer": "Power is only as accurate as the supplied RTL activity and power reports; mapping is architectural, not thermal signoff."
+}

@@ -1,0 +1,87 @@
+{
+  "hbm2_4hi_1stack": {
+    "microbump_count_model": 3072,
+    "signal_tsv_count_model": 256,
+    "bond_interfaces": 4,
+    "interposer_area_mm2": 152.25,
+    "package_footprint_mm2": 192.0,
+    "stack_height_without_lid_mm": 0.34800000000000003,
+    "routing_demand_bit_equivalent": 1024.0,
+    "package_complexity_index": 0.725,
+    "normalized_terms": {
+      "interposer": 1.0,
+      "microbump": 0.5,
+      "tsv": 0.5,
+      "bond": 0.5,
+      "routing": 1.0
+    }
+  },
+  "hbm2_8hi_1stack": {
+    "microbump_count_model": 6144,
+    "signal_tsv_count_model": 512,
+    "bond_interfaces": 8,
+    "interposer_area_mm2": 152.25,
+    "package_footprint_mm2": 192.0,
+    "stack_height_without_lid_mm": 0.596,
+    "routing_demand_bit_equivalent": 1024.0,
+    "package_complexity_index": 1.0,
+    "normalized_terms": {
+      "interposer": 1.0,
+      "microbump": 1.0,
+      "tsv": 1.0,
+      "bond": 1.0,
+      "routing": 1.0
+    }
+  },
+  "hbm2_12hi_1stack": {
+    "microbump_count_model": 9216,
+    "signal_tsv_count_model": 768,
+    "bond_interfaces": 12,
+    "interposer_area_mm2": 152.25,
+    "package_footprint_mm2": 192.0,
+    "stack_height_without_lid_mm": 0.844,
+    "routing_demand_bit_equivalent": 1024.0,
+    "package_complexity_index": 1.2750000000000001,
+    "normalized_terms": {
+      "interposer": 1.0,
+      "microbump": 1.5,
+      "tsv": 1.5,
+      "bond": 1.5,
+      "routing": 1.0
+    }
+  },
+  "hbm2_8hi_2stack": {
+    "microbump_count_model": 12288,
+    "signal_tsv_count_model": 1024,
+    "bond_interfaces": 16,
+    "interposer_area_mm2": 304.5,
+    "package_footprint_mm2": 384.0,
+    "stack_height_without_lid_mm": 0.596,
+    "routing_demand_bit_equivalent": 2048.0,
+    "package_complexity_index": 2.0,
+    "normalized_terms": {
+      "interposer": 2.0,
+      "microbump": 2.0,
+      "tsv": 2.0,
+      "bond": 2.0,
+      "routing": 2.0
+    }
+  },
+  "hbm2_8hi_no_pim": {
+    "microbump_count_model": 6144,
+    "signal_tsv_count_model": 512,
+    "bond_interfaces": 8,
+    "interposer_area_mm2": 152.25,
+    "package_footprint_mm2": 192.0,
+    "stack_height_without_lid_mm": 0.596,
+    "routing_demand_bit_equivalent": 1024.0,
+    "package_complexity_index": 1.0,
+    "normalized_terms": {
+      "interposer": 1.0,
+      "microbump": 1.0,
+      "tsv": 1.0,
+      "bond": 1.0,
+      "routing": 1.0
+    }
+  }
+}

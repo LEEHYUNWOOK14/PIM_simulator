@@ -1,0 +1,2372 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+
+-- Running command `read_verilog -sv -I. rtl/fp16_add.sv rtl/fp16_mul.sv rtl/fp16_rsqrt_lut256.sv rtl/logic_normalization_scalar_engine.sv rtl/logic_normalization_reduction_engine.sv; hierarchy -check -top logic_normalization_reduction_engine; proc; opt; memory; opt; techmap; opt; stat' --
+
+1. Executing Verilog-2005 frontend: rtl/fp16_add.sv
+Parsing SystemVerilog input from `rtl/fp16_add.sv' to AST representation.
+Generating RTLIL representation for module `\fp16_add'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: rtl/fp16_mul.sv
+Parsing SystemVerilog input from `rtl/fp16_mul.sv' to AST representation.
+Generating RTLIL representation for module `\fp16_mul'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: rtl/fp16_rsqrt_lut256.sv
+Parsing SystemVerilog input from `rtl/fp16_rsqrt_lut256.sv' to AST representation.
+Generating RTLIL representation for module `\fp16_rsqrt_lut256'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: rtl/logic_normalization_scalar_engine.sv
+Parsing SystemVerilog input from `rtl/logic_normalization_scalar_engine.sv' to AST representation.
+Generating RTLIL representation for module `\logic_normalization_scalar_engine'.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: rtl/logic_normalization_reduction_engine.sv
+Parsing SystemVerilog input from `rtl/logic_normalization_reduction_engine.sv' to AST representation.
+Generating RTLIL representation for module `\logic_normalization_reduction_engine'.
+Successfully finished Verilog frontend.
+
+6. Executing HIERARCHY pass (managing design hierarchy).
+
+6.1. Analyzing design hierarchy..
+Top module:  \logic_normalization_reduction_engine
+Used module:     \logic_normalization_scalar_engine
+Used module:         \fp16_rsqrt_lut256
+Used module:         \fp16_add
+Used module:         \fp16_mul
+Parameter \TAG_WIDTH = 16
+
+6.2. Executing AST frontend in derive mode using pre-parsed AST for module `\logic_normalization_scalar_engine'.
+Parameter \TAG_WIDTH = 16
+Generating RTLIL representation for module `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000'.
+
+6.3. Analyzing design hierarchy..
+Top module:  \logic_normalization_reduction_engine
+Used module:     $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000
+Used module:         \fp16_rsqrt_lut256
+Used module:         \fp16_add
+Used module:         \fp16_mul
+
+6.4. Analyzing design hierarchy..
+Top module:  \logic_normalization_reduction_engine
+Used module:     $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000
+Used module:         \fp16_rsqrt_lut256
+Used module:         \fp16_add
+Used module:         \fp16_mul
+Removing unused module `\logic_normalization_scalar_engine'.
+Removed 1 unused modules.
+
+7. Executing PROC pass (convert processes to netlists).
+
+7.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+7.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 3 switch rules as full_case in process $proc$rtl/logic_normalization_reduction_engine.sv:57$420 in module logic_normalization_reduction_engine.
+Marked 2 switch rules as full_case in process $proc$rtl/logic_normalization_scalar_engine.sv:55$451 in module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.
+Removed 1 dead cases from process $proc$rtl/fp16_rsqrt_lut256.sv:73$232 in module fp16_rsqrt_lut256.
+Marked 19 switch rules as full_case in process $proc$rtl/fp16_rsqrt_lut256.sv:73$232 in module fp16_rsqrt_lut256.
+Marked 32 switch rules as full_case in process $proc$rtl/fp16_mul.sv:16$143 in module fp16_mul.
+Marked 26 switch rules as full_case in process $proc$rtl/fp16_add.sv:28$3 in module fp16_add.
+Removed a total of 1 dead cases.
+
+7.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 2 redundant assignments.
+Promoted 64 assignments to connections.
+
+7.4. Executing PROC_INIT pass (extract init attributes).
+
+7.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_ni in `\logic_normalization_reduction_engine.$proc$rtl/logic_normalization_reduction_engine.sv:57$420'.
+Found async reset \rst_ni in `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.$proc$rtl/logic_normalization_scalar_engine.sv:55$451'.
+Found async reset \rst_ni in `\fp16_rsqrt_lut256.$proc$rtl/fp16_rsqrt_lut256.sv:73$232'.
+
+7.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 1 switch.
+<suppressed ~88 debug messages>
+
+7.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\logic_normalization_reduction_engine.$proc$rtl/logic_normalization_reduction_engine.sv:57$420'.
+     1/13: $0\context_error_o[0:0]
+     2/13: $0\duplicate_error_o[0:0]
+     3/13: $0\sumsq_q[15:0]
+     4/13: $0\sum_q[15:0]
+     5/13: $0\inv_hidden_q[15:0]
+     6/13: $0\received_q[15:0]
+     7/13: $0\expected_q[15:0]
+     8/13: $0\scalar_inflight_q[0:0]
+     9/13: $0\scalar_pending_q[0:0]
+    10/13: $0\active_q[0:0]
+    11/13: $0\epsilon_q[15:0]
+    12/13: $0\tag_q[15:0]
+    13/13: $0\mode_q[0:0]
+Creating decoders for process `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.$proc$rtl/logic_normalization_scalar_engine.sv:55$451'.
+     1/15: $0\argument_q[15:0]
+     2/15: $0\variance_q[15:0]
+     3/15: $0\mean_square_q[15:0]
+     4/15: $0\mean_q[15:0]
+     5/15: $0\epsilon_q[15:0]
+     6/15: $0\tag_q[15:0]
+     7/15: $0\clamped_q[0:0]
+     8/15: $0\mode_q[0:0]
+     9/15: $0\state_q[2:0]
+    10/15: $0\variance_clamped_o[0:0]
+    11/15: $0\inv_std_o[15:0]
+    12/15: $0\mean_o[15:0]
+    13/15: $0\response_tag_o[15:0]
+    14/15: $0\response_rms_norm_o[0:0]
+    15/15: $0\response_valid_o[0:0]
+Creating decoders for process `\fp16_rsqrt_lut256.$proc$rtl/fp16_rsqrt_lut256.sv:73$232'.
+     1/97: $7\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.lut_value[15:0]$377
+     2/97: $7\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.even_exponent[7:0]$373
+     3/97: $7\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.adjusted_mantissa[11:0]$372
+     4/97: $17\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.leading_one[31:0]$368
+     5/97: $16\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.leading_one[31:0]$365
+     6/97: $15\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.leading_one[31:0]$362
+     7/97: $14\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.leading_one[31:0]$359
+     8/97: $13\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.leading_one[31:0]$356
+     9/97: $12\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.leading_one[31:0]$353
+    10/97: $11\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.leading_one[31:0]$350
+    11/97: $10\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.leading_one[31:0]$347
+    12/97: $9\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.leading_one[31:0]$344
+    13/97: $8\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.leading_one[31:0]$341
+    14/97: $7\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.unbiased_exponent[7:0]$335
+    15/97: $7\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.normalized_mantissa[10:0]$334
+    16/97: $7\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.$fordecl_block$227.bit_index[31:0]$337
+    17/97: $7\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.leading_one[31:0]$336
+    18/97: $6\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.$result[15:0]$322
+    19/97: $6\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.$fordecl_block$227.bit_index[31:0]$332
+    20/97: $6\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.leading_one[31:0]$331
+    21/97: $6\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.lut_value[15:0]$330
+    22/97: $6\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.index[7:0]$329
+    23/97: $6\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.delta[11:0]$328
+    24/97: $6\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.output_exponent[8:0]$327
+    25/97: $6\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.even_exponent[7:0]$326
+    26/97: $6\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.unbiased_exponent[7:0]$325
+    27/97: $6\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.adjusted_mantissa[11:0]$324
+    28/97: $6\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.normalized_mantissa[10:0]$323
+    29/97: $5\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.$result[15:0]$306
+    30/97: $5\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.$fordecl_block$227.bit_index[31:0]$316
+    31/97: $5\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.leading_one[31:0]$315
+    32/97: $5\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.lut_value[15:0]$314
+    33/97: $5\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.index[7:0]$313
+    34/97: $5\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.delta[11:0]$312
+    35/97: $5\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.output_exponent[8:0]$311
+    36/97: $5\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.even_exponent[7:0]$310
+    37/97: $5\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.unbiased_exponent[7:0]$309
+    38/97: $5\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.adjusted_mantissa[11:0]$308
+    39/97: $5\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.normalized_mantissa[10:0]$307
+    40/97: $4\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.$result[15:0]$294
+    41/97: $4\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.$fordecl_block$227.bit_index[31:0]$304
+    42/97: $4\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.leading_one[31:0]$303
+    43/97: $4\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.lut_value[15:0]$302
+    44/97: $4\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.index[7:0]$301
+    45/97: $4\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.delta[11:0]$300
+    46/97: $4\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.output_exponent[8:0]$299
+    47/97: $4\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.even_exponent[7:0]$298
+    48/97: $4\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.unbiased_exponent[7:0]$297
+    49/97: $4\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.adjusted_mantissa[11:0]$296
+    50/97: $4\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.normalized_mantissa[10:0]$295
+    51/97: $3\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.$fordecl_block$227.bit_index[31:0]$293
+    52/97: $3\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.leading_one[31:0]$292
+    53/97: $3\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.lut_value[15:0]$291
+    54/97: $3\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.index[7:0]$290
+    55/97: $3\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.delta[11:0]$289
+    56/97: $3\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.output_exponent[8:0]$288
+    57/97: $3\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.even_exponent[7:0]$287
+    58/97: $3\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.unbiased_exponent[7:0]$286
+    59/97: $3\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.adjusted_mantissa[11:0]$285
+    60/97: $3\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.normalized_mantissa[10:0]$284
+    61/97: $3\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.$result[15:0]$279
+    62/97: $3\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.fraction[9:0]$283
+    63/97: $3\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.exponent[4:0]$282
+    64/97: $3\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.sign[0:0]$281
+    65/97: $3\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.value[15:0]$280
+    66/97: $2\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.$fordecl_block$227.bit_index[31:0]$278
+    67/97: $2\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.leading_one[31:0]$277
+    68/97: $2\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.lut_value[15:0]$276
+    69/97: $2\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.index[7:0]$275
+    70/97: $2\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.delta[11:0]$274
+    71/97: $2\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.output_exponent[8:0]$273
+    72/97: $2\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.even_exponent[7:0]$272
+    73/97: $2\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.unbiased_exponent[7:0]$271
+    74/97: $2\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.adjusted_mantissa[11:0]$270
+    75/97: $2\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.normalized_mantissa[10:0]$269
+    76/97: $2\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.fraction[9:0]$268
+    77/97: $2\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.exponent[4:0]$267
+    78/97: $2\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.sign[0:0]$266
+    79/97: $2\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.value[15:0]$265
+    80/97: $2\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.$result[15:0]$264
+    81/97: $1\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.$fordecl_block$227.bit_index[31:0]$263
+    82/97: $1\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.leading_one[31:0]$262
+    83/97: $1\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.lut_value[15:0]$261
+    84/97: $1\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.index[7:0]$260
+    85/97: $1\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.delta[11:0]$259
+    86/97: $1\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.output_exponent[8:0]$258
+    87/97: $1\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.even_exponent[7:0]$257
+    88/97: $1\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.unbiased_exponent[7:0]$256
+    89/97: $1\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.adjusted_mantissa[11:0]$255
+    90/97: $1\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.normalized_mantissa[10:0]$254
+    91/97: $1\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.fraction[9:0]$253
+    92/97: $1\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.exponent[4:0]$252
+    93/97: $1\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.sign[0:0]$251
+    94/97: $1\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.value[15:0]$250
+    95/97: $1\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.$result[15:0]$249
+    96/97: $0\output_data_o[15:0]
+    97/97: $0\output_valid_o[0:0]
+Creating decoders for process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+     1/68: $7\result_o[15:0]
+     2/68: $8\rounded_wide[63:0]
+     3/68: $7\round_up[0:0]
+     4/68: $7\low_mask[63:0]
+     5/68: $6\result_o[15:0]
+     6/68: $6\result_exp_field[4:0]
+     7/68: $6\exponent[31:0]
+     8/68: $7\rounded_wide[63:0]
+     9/68: $6\rounded_wide[63:0]
+    10/68: $6\round_up[0:0]
+    11/68: $6\low_mask[63:0]
+    12/68: $5\result_exp_field[4:0]
+    13/68: $5\result_o[15:0]
+    14/68: $5\exponent[31:0]
+    15/68: $5\rounded_wide[63:0]
+    16/68: $5\low_mask[63:0]
+    17/68: $5\round_up[0:0]
+    18/68: $5\shift_amount[31:0]
+    19/68: $4\result_o[15:0]
+    20/68: $4\exponent[31:0]
+    21/68: $4\result_exp_field[4:0]
+    22/68: $4\low_mask[63:0]
+    23/68: $4\rounded_wide[63:0]
+    24/68: $4\shift_amount[31:0]
+    25/68: $4\round_up[0:0]
+    26/68: $3\result_o[15:0]
+    27/68: $3\exponent[31:0]
+    28/68: $3\result_exp_field[4:0]
+    29/68: $3\low_mask[63:0]
+    30/68: $3\rounded_wide[63:0]
+    31/68: $3\shift_amount[31:0]
+    32/68: $3\round_up[0:0]
+    33/68: $2\result_o[15:0]
+    34/68: $2\exponent[31:0]
+    35/68: $2\result_exp_field[4:0]
+    36/68: $2\low_mask[63:0]
+    37/68: $2\rounded_wide[63:0]
+    38/68: $2\shift_amount[31:0]
+    39/68: $2\round_up[0:0]
+    40/68: $1\result_o[15:0]
+    41/68: $1\exponent[31:0]
+    42/68: $1\result_exp_field[4:0]
+    43/68: $1\low_mask[63:0]
+    44/68: $1\rounded_wide[63:0]
+    45/68: $1\shift_amount[31:0]
+    46/68: $1\round_up[0:0]
+    47/68: $22\msb_index[31:0]
+    48/68: $21\msb_index[31:0]
+    49/68: $20\msb_index[31:0]
+    50/68: $19\msb_index[31:0]
+    51/68: $18\msb_index[31:0]
+    52/68: $17\msb_index[31:0]
+    53/68: $16\msb_index[31:0]
+    54/68: $15\msb_index[31:0]
+    55/68: $14\msb_index[31:0]
+    56/68: $13\msb_index[31:0]
+    57/68: $12\msb_index[31:0]
+    58/68: $11\msb_index[31:0]
+    59/68: $10\msb_index[31:0]
+    60/68: $9\msb_index[31:0]
+    61/68: $8\msb_index[31:0]
+    62/68: $7\msb_index[31:0]
+    63/68: $6\msb_index[31:0]
+    64/68: $5\msb_index[31:0]
+    65/68: $4\msb_index[31:0]
+    66/68: $3\msb_index[31:0]
+    67/68: $2\msb_index[31:0]
+    68/68: $1\msb_index[31:0]
+Creating decoders for process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+     1/53: $7\result_o[15:0]
+     2/53: $6\result_o[15:0]
+     3/53: $5\result_o[15:0]
+     4/53: $4\result_o[15:0]
+     5/53: $3\result_o[15:0]
+     6/53: $2\result_o[15:0]
+     7/53: $1\result_o[15:0]
+     8/53: $16\result_exp[31:0]
+     9/53: $1\rounded_sig[11:0]
+    10/53: $15\result_exp[31:0]
+    11/53: $15\magnitude_ext[13:0]
+    12/53: $14\result_exp[31:0]
+    13/53: $14\magnitude_ext[13:0]
+    14/53: $13\result_exp[31:0]
+    15/53: $13\magnitude_ext[13:0]
+    16/53: $12\result_exp[31:0]
+    17/53: $12\magnitude_ext[13:0]
+    18/53: $11\result_exp[31:0]
+    19/53: $11\magnitude_ext[13:0]
+    20/53: $10\result_exp[31:0]
+    21/53: $10\magnitude_ext[13:0]
+    22/53: $9\result_exp[31:0]
+    23/53: $9\magnitude_ext[13:0]
+    24/53: $8\result_exp[31:0]
+    25/53: $8\magnitude_ext[13:0]
+    26/53: $7\result_exp[31:0]
+    27/53: $7\magnitude_ext[13:0]
+    28/53: $6\result_exp[31:0]
+    29/53: $6\magnitude_ext[13:0]
+    30/53: $5\result_exp[31:0]
+    31/53: $5\magnitude_ext[13:0]
+    32/53: $4\result_exp[31:0]
+    33/53: $4\magnitude_ext[13:0]
+    34/53: $3\result_exp[31:0]
+    35/53: $3\magnitude_ext[13:0]
+    36/53: $2\magnitude_ext[13:0] [13:1]
+    37/53: $2\result_exp[31:0]
+    38/53: $2\magnitude_ext[13:0] [0]
+    39/53: $1\result_exp[31:0]
+    40/53: $1\magnitude_ext[13:0]
+    41/53: $1\add_ext[14:0]
+    42/53: $1\normalize_step[31:0]
+    43/53: $2\shift_right_sticky$func$rtl/fp16_add.sv:47$2.$result[13:0]$28 [13:1]
+    44/53: $2\shift_right_sticky$func$rtl/fp16_add.sv:47$2.$result[13:0]$28 [0]
+    45/53: $2\shift_right_sticky$func$rtl/fp16_add.sv:47$2.sticky[0:0]$29
+    46/53: $1\shift_right_sticky$func$rtl/fp16_add.sv:47$2.$result[13:0]$25
+    47/53: $1\shift_right_sticky$func$rtl/fp16_add.sv:47$2.sticky[0:0]$26
+    48/53: $1\small_sig[10:0]
+    49/53: $1\large_sig[10:0]
+    50/53: $1\small_exp[4:0]
+    51/53: $1\large_exp[4:0]
+    52/53: $1\small_sign[0:0]
+    53/53: $1\large_sign[0:0]
+
+7.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\fp16_mul.\result_o' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\round_up' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\lhs_exp' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\rhs_exp' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\lhs_frac' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\rhs_frac' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\lhs_sig' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\rhs_sig' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\sign' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\product' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\magnitude' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\rounded_wide' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\low_mask' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\result_exp_field' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\lhs_unbiased' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\rhs_unbiased' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\exponent' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\msb_index' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.$fordecl_block$141.bit_index' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+Latch inferred for signal `\fp16_mul.\shift_amount' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143': $auto$proc_dlatch.cc:432:proc_dlatch$2518
+No latch inferred for signal `\fp16_add.\result_o' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\lhs_sign' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\rhs_sign' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\large_sign' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\small_sign' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\result_sign' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\round_up' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\lhs_exp' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\rhs_exp' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\large_exp' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\small_exp' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\lhs_frac' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\rhs_frac' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\lhs_sig' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\rhs_sig' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\large_sig' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\small_sig' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\large_ext' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\small_ext' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\magnitude_ext' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\add_ext' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\rounded_sig' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\result_exp' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\shift_amount' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\normalize_step' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\shift_right_sticky$func$rtl/fp16_add.sv:47$2.$result' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\shift_right_sticky$func$rtl/fp16_add.sv:47$2.value' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\shift_right_sticky$func$rtl/fp16_add.sv:47$2.amount' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\shift_right_sticky$func$rtl/fp16_add.sv:47$2.sticky' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+
+7.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\logic_normalization_reduction_engine.\mode_q' using process `\logic_normalization_reduction_engine.$proc$rtl/logic_normalization_reduction_engine.sv:57$420'.
+  created $adff cell `$procdff$2523' with positive edge clock and positive level reset.
+Creating register for signal `\logic_normalization_reduction_engine.\tag_q' using process `\logic_normalization_reduction_engine.$proc$rtl/logic_normalization_reduction_engine.sv:57$420'.
+  created $adff cell `$procdff$2528' with positive edge clock and positive level reset.
+Creating register for signal `\logic_normalization_reduction_engine.\epsilon_q' using process `\logic_normalization_reduction_engine.$proc$rtl/logic_normalization_reduction_engine.sv:57$420'.
+  created $adff cell `$procdff$2533' with positive edge clock and positive level reset.
+Creating register for signal `\logic_normalization_reduction_engine.\duplicate_error_o' using process `\logic_normalization_reduction_engine.$proc$rtl/logic_normalization_reduction_engine.sv:57$420'.
+  created $adff cell `$procdff$2538' with positive edge clock and positive level reset.
+Creating register for signal `\logic_normalization_reduction_engine.\context_error_o' using process `\logic_normalization_reduction_engine.$proc$rtl/logic_normalization_reduction_engine.sv:57$420'.
+  created $adff cell `$procdff$2543' with positive edge clock and positive level reset.
+Creating register for signal `\logic_normalization_reduction_engine.\active_q' using process `\logic_normalization_reduction_engine.$proc$rtl/logic_normalization_reduction_engine.sv:57$420'.
+  created $adff cell `$procdff$2548' with positive edge clock and positive level reset.
+Creating register for signal `\logic_normalization_reduction_engine.\scalar_pending_q' using process `\logic_normalization_reduction_engine.$proc$rtl/logic_normalization_reduction_engine.sv:57$420'.
+  created $adff cell `$procdff$2553' with positive edge clock and positive level reset.
+Creating register for signal `\logic_normalization_reduction_engine.\scalar_inflight_q' using process `\logic_normalization_reduction_engine.$proc$rtl/logic_normalization_reduction_engine.sv:57$420'.
+  created $adff cell `$procdff$2558' with positive edge clock and positive level reset.
+Creating register for signal `\logic_normalization_reduction_engine.\expected_q' using process `\logic_normalization_reduction_engine.$proc$rtl/logic_normalization_reduction_engine.sv:57$420'.
+  created $adff cell `$procdff$2563' with positive edge clock and positive level reset.
+Creating register for signal `\logic_normalization_reduction_engine.\received_q' using process `\logic_normalization_reduction_engine.$proc$rtl/logic_normalization_reduction_engine.sv:57$420'.
+  created $adff cell `$procdff$2568' with positive edge clock and positive level reset.
+Creating register for signal `\logic_normalization_reduction_engine.\inv_hidden_q' using process `\logic_normalization_reduction_engine.$proc$rtl/logic_normalization_reduction_engine.sv:57$420'.
+  created $adff cell `$procdff$2573' with positive edge clock and positive level reset.
+Creating register for signal `\logic_normalization_reduction_engine.\sum_q' using process `\logic_normalization_reduction_engine.$proc$rtl/logic_normalization_reduction_engine.sv:57$420'.
+  created $adff cell `$procdff$2578' with positive edge clock and positive level reset.
+Creating register for signal `\logic_normalization_reduction_engine.\sumsq_q' using process `\logic_normalization_reduction_engine.$proc$rtl/logic_normalization_reduction_engine.sv:57$420'.
+  created $adff cell `$procdff$2583' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.\response_valid_o' using process `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.$proc$rtl/logic_normalization_scalar_engine.sv:55$451'.
+  created $adff cell `$procdff$2588' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.\response_rms_norm_o' using process `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.$proc$rtl/logic_normalization_scalar_engine.sv:55$451'.
+  created $adff cell `$procdff$2593' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.\response_tag_o' using process `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.$proc$rtl/logic_normalization_scalar_engine.sv:55$451'.
+  created $adff cell `$procdff$2598' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.\mean_o' using process `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.$proc$rtl/logic_normalization_scalar_engine.sv:55$451'.
+  created $adff cell `$procdff$2603' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.\inv_std_o' using process `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.$proc$rtl/logic_normalization_scalar_engine.sv:55$451'.
+  created $adff cell `$procdff$2608' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.\variance_clamped_o' using process `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.$proc$rtl/logic_normalization_scalar_engine.sv:55$451'.
+  created $adff cell `$procdff$2613' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.\state_q' using process `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.$proc$rtl/logic_normalization_scalar_engine.sv:55$451'.
+  created $adff cell `$procdff$2618' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.\mode_q' using process `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.$proc$rtl/logic_normalization_scalar_engine.sv:55$451'.
+  created $adff cell `$procdff$2623' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.\clamped_q' using process `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.$proc$rtl/logic_normalization_scalar_engine.sv:55$451'.
+  created $adff cell `$procdff$2628' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.\tag_q' using process `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.$proc$rtl/logic_normalization_scalar_engine.sv:55$451'.
+  created $adff cell `$procdff$2633' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.\epsilon_q' using process `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.$proc$rtl/logic_normalization_scalar_engine.sv:55$451'.
+  created $adff cell `$procdff$2638' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.\mean_q' using process `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.$proc$rtl/logic_normalization_scalar_engine.sv:55$451'.
+  created $adff cell `$procdff$2643' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.\mean_square_q' using process `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.$proc$rtl/logic_normalization_scalar_engine.sv:55$451'.
+  created $adff cell `$procdff$2648' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.\variance_q' using process `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.$proc$rtl/logic_normalization_scalar_engine.sv:55$451'.
+  created $adff cell `$procdff$2653' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.\argument_q' using process `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.$proc$rtl/logic_normalization_scalar_engine.sv:55$451'.
+  created $adff cell `$procdff$2658' with positive edge clock and positive level reset.
+Creating register for signal `\fp16_rsqrt_lut256.\output_valid_o' using process `\fp16_rsqrt_lut256.$proc$rtl/fp16_rsqrt_lut256.sv:73$232'.
+  created $adff cell `$procdff$2663' with positive edge clock and positive level reset.
+Creating register for signal `\fp16_rsqrt_lut256.\output_data_o' using process `\fp16_rsqrt_lut256.$proc$rtl/fp16_rsqrt_lut256.sv:73$232'.
+  created $adff cell `$procdff$2668' with positive edge clock and positive level reset.
+Creating register for signal `\fp16_rsqrt_lut256.\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.$result' using process `\fp16_rsqrt_lut256.$proc$rtl/fp16_rsqrt_lut256.sv:73$232'.
+  created $adff cell `$procdff$2673' with positive edge clock and positive level reset.
+Creating register for signal `\fp16_rsqrt_lut256.\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.value' using process `\fp16_rsqrt_lut256.$proc$rtl/fp16_rsqrt_lut256.sv:73$232'.
+  created $adff cell `$procdff$2678' with positive edge clock and positive level reset.
+Creating register for signal `\fp16_rsqrt_lut256.\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.sign' using process `\fp16_rsqrt_lut256.$proc$rtl/fp16_rsqrt_lut256.sv:73$232'.
+  created $adff cell `$procdff$2683' with positive edge clock and positive level reset.
+Creating register for signal `\fp16_rsqrt_lut256.\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.exponent' using process `\fp16_rsqrt_lut256.$proc$rtl/fp16_rsqrt_lut256.sv:73$232'.
+  created $adff cell `$procdff$2688' with positive edge clock and positive level reset.
+Creating register for signal `\fp16_rsqrt_lut256.\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.fraction' using process `\fp16_rsqrt_lut256.$proc$rtl/fp16_rsqrt_lut256.sv:73$232'.
+  created $adff cell `$procdff$2693' with positive edge clock and positive level reset.
+Creating register for signal `\fp16_rsqrt_lut256.\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.normalized_mantissa' using process `\fp16_rsqrt_lut256.$proc$rtl/fp16_rsqrt_lut256.sv:73$232'.
+  created $adff cell `$procdff$2698' with positive edge clock and positive level reset.
+Creating register for signal `\fp16_rsqrt_lut256.\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.adjusted_mantissa' using process `\fp16_rsqrt_lut256.$proc$rtl/fp16_rsqrt_lut256.sv:73$232'.
+  created $adff cell `$procdff$2703' with positive edge clock and positive level reset.
+Creating register for signal `\fp16_rsqrt_lut256.\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.unbiased_exponent' using process `\fp16_rsqrt_lut256.$proc$rtl/fp16_rsqrt_lut256.sv:73$232'.
+  created $adff cell `$procdff$2708' with positive edge clock and positive level reset.
+Creating register for signal `\fp16_rsqrt_lut256.\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.even_exponent' using process `\fp16_rsqrt_lut256.$proc$rtl/fp16_rsqrt_lut256.sv:73$232'.
+  created $adff cell `$procdff$2713' with positive edge clock and positive level reset.
+Creating register for signal `\fp16_rsqrt_lut256.\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.output_exponent' using process `\fp16_rsqrt_lut256.$proc$rtl/fp16_rsqrt_lut256.sv:73$232'.
+  created $adff cell `$procdff$2718' with positive edge clock and positive level reset.
+Creating register for signal `\fp16_rsqrt_lut256.\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.delta' using process `\fp16_rsqrt_lut256.$proc$rtl/fp16_rsqrt_lut256.sv:73$232'.
+  created $adff cell `$procdff$2723' with positive edge clock and positive level reset.
+Creating register for signal `\fp16_rsqrt_lut256.\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.index' using process `\fp16_rsqrt_lut256.$proc$rtl/fp16_rsqrt_lut256.sv:73$232'.
+  created $adff cell `$procdff$2728' with positive edge clock and positive level reset.
+Creating register for signal `\fp16_rsqrt_lut256.\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.lut_value' using process `\fp16_rsqrt_lut256.$proc$rtl/fp16_rsqrt_lut256.sv:73$232'.
+  created $adff cell `$procdff$2733' with positive edge clock and positive level reset.
+Creating register for signal `\fp16_rsqrt_lut256.\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.leading_one' using process `\fp16_rsqrt_lut256.$proc$rtl/fp16_rsqrt_lut256.sv:73$232'.
+  created $adff cell `$procdff$2738' with positive edge clock and positive level reset.
+Creating register for signal `\fp16_rsqrt_lut256.\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.$fordecl_block$227.bit_index' using process `\fp16_rsqrt_lut256.$proc$rtl/fp16_rsqrt_lut256.sv:73$232'.
+  created $dff cell `$procdff$2745' with positive edge clock.
+
+7.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+7.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 8 empty switches in `\logic_normalization_reduction_engine.$proc$rtl/logic_normalization_reduction_engine.sv:57$420'.
+Removing empty process `logic_normalization_reduction_engine.$proc$rtl/logic_normalization_reduction_engine.sv:57$420'.
+Found and cleaned up 5 empty switches in `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.$proc$rtl/logic_normalization_scalar_engine.sv:55$451'.
+Removing empty process `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.$proc$rtl/logic_normalization_scalar_engine.sv:55$451'.
+Found and cleaned up 18 empty switches in `\fp16_rsqrt_lut256.$proc$rtl/fp16_rsqrt_lut256.sv:73$232'.
+Removing empty process `fp16_rsqrt_lut256.$proc$rtl/fp16_rsqrt_lut256.sv:73$232'.
+Found and cleaned up 32 empty switches in `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+Removing empty process `fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+Found and cleaned up 26 empty switches in `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+Removing empty process `fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+Cleaned up 89 empty switches.
+
+7.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module logic_normalization_reduction_engine.
+<suppressed ~27 debug messages>
+Optimizing module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.
+<suppressed ~38 debug messages>
+Optimizing module fp16_rsqrt_lut256.
+<suppressed ~41 debug messages>
+Optimizing module fp16_mul.
+<suppressed ~54 debug messages>
+Optimizing module fp16_add.
+<suppressed ~29 debug messages>
+
+8. Executing OPT pass (performing simple optimizations).
+
+8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module logic_normalization_reduction_engine.
+Optimizing module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.
+Optimizing module fp16_rsqrt_lut256.
+Optimizing module fp16_mul.
+Optimizing module fp16_add.
+
+8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\logic_normalization_reduction_engine'.
+<suppressed ~51 debug messages>
+Finding identical cells in module `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000'.
+<suppressed ~114 debug messages>
+Finding identical cells in module `\fp16_rsqrt_lut256'.
+<suppressed ~66 debug messages>
+Finding identical cells in module `\fp16_mul'.
+<suppressed ~69 debug messages>
+Finding identical cells in module `\fp16_add'.
+<suppressed ~30 debug messages>
+Removed a total of 110 cells.
+
+8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \logic_normalization_reduction_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_rsqrt_lut256..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+      Replacing known input bits on port A of cell $procmux$675: $7\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.unbiased_exponent[7:0]$335 -> { $7\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.unbiased_exponent[7:0]$335 [7:1] 1'0 }
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$1519.
+    dead port 2/2 on $mux $procmux$1519.
+    dead port 1/2 on $mux $procmux$1516.
+    dead port 2/2 on $mux $procmux$1516.
+    dead port 1/2 on $mux $procmux$1513.
+    dead port 2/2 on $mux $procmux$1513.
+    dead port 1/2 on $mux $procmux$1510.
+    dead port 2/2 on $mux $procmux$1510.
+    dead port 1/2 on $mux $procmux$1507.
+    dead port 2/2 on $mux $procmux$1507.
+    dead port 1/2 on $mux $procmux$1504.
+    dead port 2/2 on $mux $procmux$1504.
+    dead port 1/2 on $mux $procmux$1501.
+    dead port 2/2 on $mux $procmux$1501.
+    dead port 1/2 on $mux $procmux$1498.
+    dead port 2/2 on $mux $procmux$1498.
+    dead port 1/2 on $mux $procmux$1495.
+    dead port 2/2 on $mux $procmux$1495.
+    dead port 1/2 on $mux $procmux$1492.
+    dead port 2/2 on $mux $procmux$1492.
+    dead port 1/2 on $mux $procmux$1489.
+    dead port 2/2 on $mux $procmux$1489.
+    dead port 1/2 on $mux $procmux$1486.
+    dead port 2/2 on $mux $procmux$1486.
+    dead port 1/2 on $mux $procmux$1483.
+    dead port 2/2 on $mux $procmux$1483.
+    dead port 1/2 on $mux $procmux$1480.
+    dead port 2/2 on $mux $procmux$1480.
+    dead port 1/2 on $mux $procmux$1474.
+    dead port 2/2 on $mux $procmux$1474.
+    dead port 1/2 on $mux $procmux$1472.
+    dead port 2/2 on $mux $procmux$1472.
+    dead port 1/2 on $mux $procmux$1468.
+    dead port 2/2 on $mux $procmux$1468.
+    dead port 1/2 on $mux $procmux$1466.
+    dead port 2/2 on $mux $procmux$1466.
+    dead port 1/2 on $mux $procmux$1462.
+    dead port 2/2 on $mux $procmux$1462.
+    dead port 1/2 on $mux $procmux$1460.
+    dead port 2/2 on $mux $procmux$1460.
+    dead port 1/2 on $mux $procmux$1456.
+    dead port 2/2 on $mux $procmux$1456.
+    dead port 1/2 on $mux $procmux$1454.
+    dead port 2/2 on $mux $procmux$1454.
+    dead port 1/2 on $mux $procmux$1450.
+    dead port 2/2 on $mux $procmux$1450.
+    dead port 1/2 on $mux $procmux$1448.
+    dead port 2/2 on $mux $procmux$1448.
+    dead port 1/2 on $mux $procmux$1444.
+    dead port 2/2 on $mux $procmux$1444.
+    dead port 1/2 on $mux $procmux$1442.
+    dead port 2/2 on $mux $procmux$1442.
+    dead port 1/2 on $mux $procmux$1438.
+    dead port 2/2 on $mux $procmux$1438.
+    dead port 1/2 on $mux $procmux$1436.
+    dead port 2/2 on $mux $procmux$1436.
+    dead port 1/2 on $mux $procmux$1432.
+    dead port 2/2 on $mux $procmux$1432.
+    dead port 1/2 on $mux $procmux$1430.
+    dead port 2/2 on $mux $procmux$1430.
+    dead port 1/2 on $mux $procmux$1426.
+    dead port 2/2 on $mux $procmux$1426.
+    dead port 1/2 on $mux $procmux$1424.
+    dead port 2/2 on $mux $procmux$1424.
+    dead port 1/2 on $mux $procmux$1420.
+    dead port 2/2 on $mux $procmux$1420.
+    dead port 1/2 on $mux $procmux$1418.
+    dead port 2/2 on $mux $procmux$1418.
+    dead port 1/2 on $mux $procmux$1414.
+    dead port 2/2 on $mux $procmux$1414.
+    dead port 1/2 on $mux $procmux$1412.
+    dead port 2/2 on $mux $procmux$1412.
+    dead port 1/2 on $mux $procmux$1408.
+    dead port 2/2 on $mux $procmux$1408.
+    dead port 1/2 on $mux $procmux$1406.
+    dead port 2/2 on $mux $procmux$1406.
+    dead port 1/2 on $mux $procmux$1402.
+    dead port 2/2 on $mux $procmux$1402.
+    dead port 1/2 on $mux $procmux$1400.
+    dead port 2/2 on $mux $procmux$1400.
+    dead port 1/2 on $mux $procmux$1396.
+    dead port 2/2 on $mux $procmux$1396.
+    dead port 1/2 on $mux $procmux$1394.
+    dead port 2/2 on $mux $procmux$1394.
+    dead port 2/2 on $mux $procmux$1390.
+    dead port 1/2 on $mux $procmux$1384.
+    dead port 2/2 on $mux $procmux$1384.
+    dead port 1/2 on $mux $procmux$1382.
+    dead port 2/2 on $mux $procmux$1382.
+    dead port 1/2 on $mux $procmux$1380.
+    dead port 2/2 on $mux $procmux$1380.
+    dead port 1/2 on $mux $procmux$1375.
+    dead port 2/2 on $mux $procmux$1375.
+    dead port 1/2 on $mux $procmux$1373.
+    dead port 2/2 on $mux $procmux$1373.
+    dead port 1/2 on $mux $procmux$1371.
+    dead port 2/2 on $mux $procmux$1371.
+    dead port 1/2 on $mux $procmux$1366.
+    dead port 2/2 on $mux $procmux$1366.
+    dead port 1/2 on $mux $procmux$1364.
+    dead port 2/2 on $mux $procmux$1364.
+    dead port 1/2 on $mux $procmux$1362.
+    dead port 2/2 on $mux $procmux$1362.
+    dead port 1/2 on $mux $procmux$1357.
+    dead port 2/2 on $mux $procmux$1357.
+    dead port 1/2 on $mux $procmux$1355.
+    dead port 2/2 on $mux $procmux$1355.
+    dead port 1/2 on $mux $procmux$1353.
+    dead port 2/2 on $mux $procmux$1353.
+    dead port 1/2 on $mux $procmux$1348.
+    dead port 2/2 on $mux $procmux$1348.
+    dead port 1/2 on $mux $procmux$1346.
+    dead port 2/2 on $mux $procmux$1346.
+    dead port 1/2 on $mux $procmux$1344.
+    dead port 2/2 on $mux $procmux$1344.
+    dead port 1/2 on $mux $procmux$1339.
+    dead port 2/2 on $mux $procmux$1339.
+    dead port 1/2 on $mux $procmux$1337.
+    dead port 2/2 on $mux $procmux$1337.
+    dead port 1/2 on $mux $procmux$1335.
+    dead port 2/2 on $mux $procmux$1335.
+    dead port 1/2 on $mux $procmux$1330.
+    dead port 2/2 on $mux $procmux$1330.
+    dead port 1/2 on $mux $procmux$1328.
+    dead port 2/2 on $mux $procmux$1328.
+    dead port 1/2 on $mux $procmux$1326.
+    dead port 2/2 on $mux $procmux$1326.
+    dead port 1/2 on $mux $procmux$1321.
+    dead port 2/2 on $mux $procmux$1321.
+    dead port 1/2 on $mux $procmux$1319.
+    dead port 2/2 on $mux $procmux$1319.
+    dead port 1/2 on $mux $procmux$1317.
+    dead port 2/2 on $mux $procmux$1317.
+    dead port 1/2 on $mux $procmux$1312.
+    dead port 2/2 on $mux $procmux$1312.
+    dead port 1/2 on $mux $procmux$1310.
+    dead port 2/2 on $mux $procmux$1310.
+    dead port 1/2 on $mux $procmux$1308.
+    dead port 2/2 on $mux $procmux$1308.
+    dead port 2/2 on $mux $procmux$1303.
+    dead port 2/2 on $mux $procmux$1301.
+    dead port 2/2 on $mux $procmux$1294.
+    dead port 2/2 on $mux $procmux$1292.
+    dead port 1/2 on $mux $procmux$1285.
+    dead port 2/2 on $mux $procmux$1285.
+    dead port 1/2 on $mux $procmux$1283.
+    dead port 2/2 on $mux $procmux$1283.
+    dead port 1/2 on $mux $procmux$1281.
+    dead port 2/2 on $mux $procmux$1281.
+    dead port 1/2 on $mux $procmux$1278.
+    dead port 2/2 on $mux $procmux$1278.
+    dead port 1/2 on $mux $procmux$1273.
+    dead port 2/2 on $mux $procmux$1273.
+    dead port 1/2 on $mux $procmux$1271.
+    dead port 2/2 on $mux $procmux$1271.
+    dead port 1/2 on $mux $procmux$1269.
+    dead port 2/2 on $mux $procmux$1269.
+    dead port 1/2 on $mux $procmux$1266.
+    dead port 2/2 on $mux $procmux$1266.
+    dead port 1/2 on $mux $procmux$1261.
+    dead port 2/2 on $mux $procmux$1261.
+    dead port 1/2 on $mux $procmux$1259.
+    dead port 2/2 on $mux $procmux$1259.
+    dead port 1/2 on $mux $procmux$1257.
+    dead port 2/2 on $mux $procmux$1257.
+    dead port 1/2 on $mux $procmux$1254.
+    dead port 2/2 on $mux $procmux$1254.
+    dead port 1/2 on $mux $procmux$1249.
+    dead port 2/2 on $mux $procmux$1249.
+    dead port 1/2 on $mux $procmux$1247.
+    dead port 2/2 on $mux $procmux$1247.
+    dead port 1/2 on $mux $procmux$1245.
+    dead port 2/2 on $mux $procmux$1245.
+    dead port 1/2 on $mux $procmux$1242.
+    dead port 2/2 on $mux $procmux$1242.
+    dead port 1/2 on $mux $procmux$1237.
+    dead port 2/2 on $mux $procmux$1237.
+    dead port 1/2 on $mux $procmux$1235.
+    dead port 2/2 on $mux $procmux$1235.
+    dead port 1/2 on $mux $procmux$1233.
+    dead port 2/2 on $mux $procmux$1233.
+    dead port 1/2 on $mux $procmux$1230.
+    dead port 2/2 on $mux $procmux$1230.
+    dead port 1/2 on $mux $procmux$1225.
+    dead port 2/2 on $mux $procmux$1225.
+    dead port 1/2 on $mux $procmux$1223.
+    dead port 2/2 on $mux $procmux$1223.
+    dead port 1/2 on $mux $procmux$1221.
+    dead port 2/2 on $mux $procmux$1221.
+    dead port 1/2 on $mux $procmux$1218.
+    dead port 2/2 on $mux $procmux$1218.
+    dead port 1/2 on $mux $procmux$1213.
+    dead port 2/2 on $mux $procmux$1213.
+    dead port 1/2 on $mux $procmux$1211.
+    dead port 2/2 on $mux $procmux$1211.
+    dead port 1/2 on $mux $procmux$1209.
+    dead port 2/2 on $mux $procmux$1209.
+    dead port 1/2 on $mux $procmux$1206.
+    dead port 2/2 on $mux $procmux$1206.
+    dead port 1/2 on $mux $procmux$1201.
+    dead port 2/2 on $mux $procmux$1201.
+    dead port 1/2 on $mux $procmux$1199.
+    dead port 2/2 on $mux $procmux$1199.
+    dead port 1/2 on $mux $procmux$1197.
+    dead port 2/2 on $mux $procmux$1197.
+    dead port 1/2 on $mux $procmux$1194.
+    dead port 2/2 on $mux $procmux$1194.
+    dead port 1/2 on $mux $procmux$1189.
+    dead port 2/2 on $mux $procmux$1189.
+    dead port 1/2 on $mux $procmux$1187.
+    dead port 2/2 on $mux $procmux$1187.
+    dead port 1/2 on $mux $procmux$1185.
+    dead port 2/2 on $mux $procmux$1185.
+    dead port 1/2 on $mux $procmux$1182.
+    dead port 2/2 on $mux $procmux$1182.
+    dead port 2/2 on $mux $procmux$1177.
+    dead port 2/2 on $mux $procmux$1175.
+    dead port 1/2 on $mux $procmux$1173.
+    dead port 2/2 on $mux $procmux$1165.
+    dead port 2/2 on $mux $procmux$1163.
+    dead port 1/2 on $mux $procmux$1161.
+    dead port 1/2 on $mux $procmux$1153.
+    dead port 2/2 on $mux $procmux$1153.
+    dead port 1/2 on $mux $procmux$1151.
+    dead port 2/2 on $mux $procmux$1151.
+    dead port 1/2 on $mux $procmux$1149.
+    dead port 2/2 on $mux $procmux$1149.
+    dead port 1/2 on $mux $procmux$1146.
+    dead port 2/2 on $mux $procmux$1146.
+    dead port 1/2 on $mux $procmux$1143.
+    dead port 2/2 on $mux $procmux$1143.
+    dead port 1/2 on $mux $procmux$1138.
+    dead port 2/2 on $mux $procmux$1138.
+    dead port 1/2 on $mux $procmux$1136.
+    dead port 2/2 on $mux $procmux$1136.
+    dead port 1/2 on $mux $procmux$1134.
+    dead port 2/2 on $mux $procmux$1134.
+    dead port 1/2 on $mux $procmux$1131.
+    dead port 2/2 on $mux $procmux$1131.
+    dead port 1/2 on $mux $procmux$1128.
+    dead port 2/2 on $mux $procmux$1128.
+    dead port 1/2 on $mux $procmux$1123.
+    dead port 2/2 on $mux $procmux$1123.
+    dead port 1/2 on $mux $procmux$1121.
+    dead port 2/2 on $mux $procmux$1121.
+    dead port 1/2 on $mux $procmux$1119.
+    dead port 2/2 on $mux $procmux$1119.
+    dead port 1/2 on $mux $procmux$1116.
+    dead port 2/2 on $mux $procmux$1116.
+    dead port 1/2 on $mux $procmux$1113.
+    dead port 2/2 on $mux $procmux$1113.
+    dead port 1/2 on $mux $procmux$1108.
+    dead port 2/2 on $mux $procmux$1108.
+    dead port 1/2 on $mux $procmux$1106.
+    dead port 2/2 on $mux $procmux$1106.
+    dead port 1/2 on $mux $procmux$1104.
+    dead port 2/2 on $mux $procmux$1104.
+    dead port 1/2 on $mux $procmux$1101.
+    dead port 2/2 on $mux $procmux$1101.
+    dead port 1/2 on $mux $procmux$1098.
+    dead port 2/2 on $mux $procmux$1098.
+    dead port 1/2 on $mux $procmux$1093.
+    dead port 2/2 on $mux $procmux$1093.
+    dead port 1/2 on $mux $procmux$1091.
+    dead port 2/2 on $mux $procmux$1091.
+    dead port 1/2 on $mux $procmux$1089.
+    dead port 2/2 on $mux $procmux$1089.
+    dead port 1/2 on $mux $procmux$1086.
+    dead port 2/2 on $mux $procmux$1086.
+    dead port 1/2 on $mux $procmux$1083.
+    dead port 2/2 on $mux $procmux$1083.
+    dead port 1/2 on $mux $procmux$1078.
+    dead port 2/2 on $mux $procmux$1078.
+    dead port 1/2 on $mux $procmux$1076.
+    dead port 2/2 on $mux $procmux$1076.
+    dead port 1/2 on $mux $procmux$1074.
+    dead port 2/2 on $mux $procmux$1074.
+    dead port 1/2 on $mux $procmux$1071.
+    dead port 2/2 on $mux $procmux$1071.
+    dead port 1/2 on $mux $procmux$1068.
+    dead port 2/2 on $mux $procmux$1068.
+    dead port 1/2 on $mux $procmux$1063.
+    dead port 2/2 on $mux $procmux$1063.
+    dead port 1/2 on $mux $procmux$1061.
+    dead port 2/2 on $mux $procmux$1061.
+    dead port 1/2 on $mux $procmux$1059.
+    dead port 2/2 on $mux $procmux$1059.
+    dead port 1/2 on $mux $procmux$1056.
+    dead port 2/2 on $mux $procmux$1056.
+    dead port 1/2 on $mux $procmux$1053.
+    dead port 2/2 on $mux $procmux$1053.
+    dead port 1/2 on $mux $procmux$1048.
+    dead port 2/2 on $mux $procmux$1048.
+    dead port 1/2 on $mux $procmux$1046.
+    dead port 2/2 on $mux $procmux$1046.
+    dead port 1/2 on $mux $procmux$1044.
+    dead port 2/2 on $mux $procmux$1044.
+    dead port 1/2 on $mux $procmux$1041.
+    dead port 2/2 on $mux $procmux$1041.
+    dead port 1/2 on $mux $procmux$1038.
+    dead port 2/2 on $mux $procmux$1038.
+    dead port 1/2 on $mux $procmux$1033.
+    dead port 2/2 on $mux $procmux$1033.
+    dead port 1/2 on $mux $procmux$1031.
+    dead port 2/2 on $mux $procmux$1031.
+    dead port 1/2 on $mux $procmux$1029.
+    dead port 2/2 on $mux $procmux$1029.
+    dead port 1/2 on $mux $procmux$1026.
+    dead port 2/2 on $mux $procmux$1026.
+    dead port 1/2 on $mux $procmux$1023.
+    dead port 2/2 on $mux $procmux$1023.
+    dead port 2/2 on $mux $procmux$1018.
+    dead port 2/2 on $mux $procmux$1016.
+    dead port 1/2 on $mux $procmux$1014.
+    dead port 1/2 on $mux $procmux$1011.
+    dead port 2/2 on $mux $procmux$1003.
+    dead port 2/2 on $mux $procmux$1001.
+    dead port 1/2 on $mux $procmux$999.
+    dead port 1/2 on $mux $procmux$996.
+    dead port 1/2 on $mux $procmux$988.
+    dead port 2/2 on $mux $procmux$988.
+    dead port 1/2 on $mux $procmux$986.
+    dead port 2/2 on $mux $procmux$986.
+    dead port 1/2 on $mux $procmux$984.
+    dead port 2/2 on $mux $procmux$984.
+    dead port 1/2 on $mux $procmux$981.
+    dead port 2/2 on $mux $procmux$981.
+    dead port 1/2 on $mux $procmux$978.
+    dead port 2/2 on $mux $procmux$978.
+    dead port 1/2 on $mux $procmux$975.
+    dead port 2/2 on $mux $procmux$975.
+    dead port 2/2 on $mux $procmux$970.
+    dead port 2/2 on $mux $procmux$968.
+    dead port 1/2 on $mux $procmux$966.
+    dead port 1/2 on $mux $procmux$963.
+    dead port 1/2 on $mux $procmux$960.
+    dead port 2/2 on $mux $procmux$952.
+    dead port 2/2 on $mux $procmux$950.
+    dead port 1/2 on $mux $procmux$948.
+    dead port 1/2 on $mux $procmux$945.
+    dead port 1/2 on $mux $procmux$942.
+Running muxtree optimizer on module \fp16_mul..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$2041.
+    dead port 2/2 on $mux $procmux$2041.
+    dead port 1/2 on $mux $procmux$2035.
+    dead port 2/2 on $mux $procmux$2035.
+    dead port 1/2 on $mux $procmux$2032.
+    dead port 2/2 on $mux $procmux$2032.
+    dead port 1/2 on $mux $procmux$2029.
+    dead port 2/2 on $mux $procmux$2029.
+    dead port 1/2 on $mux $procmux$2026.
+    dead port 2/2 on $mux $procmux$2026.
+    dead port 1/2 on $mux $procmux$2020.
+    dead port 2/2 on $mux $procmux$2020.
+    dead port 1/2 on $mux $procmux$2017.
+    dead port 2/2 on $mux $procmux$2017.
+    dead port 1/2 on $mux $procmux$2008.
+    dead port 2/2 on $mux $procmux$2008.
+    dead port 1/2 on $mux $procmux$2005.
+    dead port 2/2 on $mux $procmux$2005.
+    dead port 1/2 on $mux $procmux$2002.
+    dead port 2/2 on $mux $procmux$2002.
+    dead port 1/2 on $mux $procmux$1999.
+    dead port 2/2 on $mux $procmux$1999.
+    dead port 1/2 on $mux $procmux$1996.
+    dead port 2/2 on $mux $procmux$1996.
+    dead port 1/2 on $mux $procmux$1993.
+    dead port 2/2 on $mux $procmux$1993.
+    dead port 1/2 on $mux $procmux$1990.
+    dead port 2/2 on $mux $procmux$1990.
+    dead port 1/2 on $mux $procmux$1987.
+    dead port 2/2 on $mux $procmux$1987.
+    dead port 1/2 on $mux $procmux$1984.
+    dead port 1/2 on $mux $procmux$1978.
+    dead port 2/2 on $mux $procmux$1978.
+    dead port 1/2 on $mux $procmux$1975.
+    dead port 2/2 on $mux $procmux$1975.
+    dead port 1/2 on $mux $procmux$1972.
+    dead port 2/2 on $mux $procmux$1972.
+    dead port 1/2 on $mux $procmux$1960.
+    dead port 2/2 on $mux $procmux$1960.
+    dead port 1/2 on $mux $procmux$1957.
+    dead port 2/2 on $mux $procmux$1957.
+    dead port 1/2 on $mux $procmux$1954.
+    dead port 2/2 on $mux $procmux$1954.
+    dead port 1/2 on $mux $procmux$1951.
+    dead port 2/2 on $mux $procmux$1951.
+    dead port 1/2 on $mux $procmux$1948.
+    dead port 2/2 on $mux $procmux$1948.
+    dead port 1/2 on $mux $procmux$1945.
+    dead port 2/2 on $mux $procmux$1945.
+    dead port 1/2 on $mux $procmux$1942.
+    dead port 2/2 on $mux $procmux$1942.
+    dead port 1/2 on $mux $procmux$1939.
+    dead port 2/2 on $mux $procmux$1939.
+    dead port 1/2 on $mux $procmux$1936.
+    dead port 2/2 on $mux $procmux$1936.
+    dead port 1/2 on $mux $procmux$1933.
+    dead port 2/2 on $mux $procmux$1933.
+    dead port 1/2 on $mux $procmux$1930.
+    dead port 2/2 on $mux $procmux$1930.
+    dead port 1/2 on $mux $procmux$1927.
+    dead port 2/2 on $mux $procmux$1927.
+    dead port 1/2 on $mux $procmux$1924.
+    dead port 1/2 on $mux $procmux$1921.
+    dead port 1/2 on $mux $procmux$1915.
+    dead port 2/2 on $mux $procmux$1915.
+    dead port 1/2 on $mux $procmux$1912.
+    dead port 2/2 on $mux $procmux$1912.
+    dead port 1/2 on $mux $procmux$1909.
+    dead port 2/2 on $mux $procmux$1909.
+    dead port 1/2 on $mux $procmux$1906.
+    dead port 2/2 on $mux $procmux$1906.
+    dead port 1/2 on $mux $procmux$1891.
+    dead port 2/2 on $mux $procmux$1891.
+    dead port 1/2 on $mux $procmux$1888.
+    dead port 2/2 on $mux $procmux$1888.
+    dead port 1/2 on $mux $procmux$1885.
+    dead port 2/2 on $mux $procmux$1885.
+    dead port 1/2 on $mux $procmux$1882.
+    dead port 2/2 on $mux $procmux$1882.
+    dead port 1/2 on $mux $procmux$1879.
+    dead port 2/2 on $mux $procmux$1879.
+    dead port 1/2 on $mux $procmux$1876.
+    dead port 2/2 on $mux $procmux$1876.
+    dead port 1/2 on $mux $procmux$1873.
+    dead port 2/2 on $mux $procmux$1873.
+    dead port 1/2 on $mux $procmux$1870.
+    dead port 2/2 on $mux $procmux$1870.
+    dead port 1/2 on $mux $procmux$1867.
+    dead port 2/2 on $mux $procmux$1867.
+    dead port 1/2 on $mux $procmux$1864.
+    dead port 2/2 on $mux $procmux$1864.
+    dead port 1/2 on $mux $procmux$1861.
+    dead port 2/2 on $mux $procmux$1861.
+    dead port 1/2 on $mux $procmux$1858.
+    dead port 2/2 on $mux $procmux$1858.
+    dead port 1/2 on $mux $procmux$1855.
+    dead port 2/2 on $mux $procmux$1855.
+    dead port 1/2 on $mux $procmux$1852.
+    dead port 2/2 on $mux $procmux$1852.
+    dead port 1/2 on $mux $procmux$1849.
+    dead port 2/2 on $mux $procmux$1849.
+    dead port 1/2 on $mux $procmux$1846.
+    dead port 2/2 on $mux $procmux$1846.
+    dead port 1/2 on $mux $procmux$1843.
+    dead port 1/2 on $mux $procmux$1840.
+    dead port 1/2 on $mux $procmux$1837.
+    dead port 1/2 on $mux $procmux$1816.
+    dead port 2/2 on $mux $procmux$1816.
+    dead port 1/2 on $mux $procmux$1813.
+    dead port 2/2 on $mux $procmux$1813.
+    dead port 1/2 on $mux $procmux$1810.
+    dead port 2/2 on $mux $procmux$1810.
+    dead port 1/2 on $mux $procmux$1807.
+    dead port 2/2 on $mux $procmux$1807.
+    dead port 1/2 on $mux $procmux$1804.
+    dead port 2/2 on $mux $procmux$1804.
+    dead port 1/2 on $mux $procmux$1801.
+    dead port 2/2 on $mux $procmux$1801.
+    dead port 1/2 on $mux $procmux$1798.
+    dead port 2/2 on $mux $procmux$1798.
+    dead port 1/2 on $mux $procmux$1795.
+    dead port 2/2 on $mux $procmux$1795.
+    dead port 1/2 on $mux $procmux$1792.
+    dead port 2/2 on $mux $procmux$1792.
+    dead port 1/2 on $mux $procmux$1789.
+    dead port 2/2 on $mux $procmux$1789.
+    dead port 1/2 on $mux $procmux$1786.
+    dead port 2/2 on $mux $procmux$1786.
+    dead port 1/2 on $mux $procmux$1783.
+    dead port 2/2 on $mux $procmux$1783.
+    dead port 1/2 on $mux $procmux$1780.
+    dead port 2/2 on $mux $procmux$1780.
+    dead port 1/2 on $mux $procmux$1777.
+    dead port 2/2 on $mux $procmux$1777.
+    dead port 1/2 on $mux $procmux$1774.
+    dead port 2/2 on $mux $procmux$1774.
+    dead port 1/2 on $mux $procmux$1771.
+    dead port 2/2 on $mux $procmux$1771.
+    dead port 1/2 on $mux $procmux$1768.
+    dead port 2/2 on $mux $procmux$1768.
+    dead port 1/2 on $mux $procmux$1765.
+    dead port 2/2 on $mux $procmux$1765.
+    dead port 1/2 on $mux $procmux$1762.
+    dead port 2/2 on $mux $procmux$1762.
+    dead port 1/2 on $mux $procmux$1759.
+    dead port 2/2 on $mux $procmux$1759.
+    dead port 1/2 on $mux $procmux$1756.
+    dead port 1/2 on $mux $procmux$1753.
+    dead port 1/2 on $mux $procmux$1750.
+    dead port 1/2 on $mux $procmux$1747.
+    dead port 1/2 on $mux $procmux$1741.
+    dead port 2/2 on $mux $procmux$1741.
+    dead port 1/2 on $mux $procmux$1738.
+    dead port 2/2 on $mux $procmux$1738.
+    dead port 1/2 on $mux $procmux$1735.
+    dead port 2/2 on $mux $procmux$1735.
+    dead port 1/2 on $mux $procmux$1732.
+    dead port 2/2 on $mux $procmux$1732.
+    dead port 1/2 on $mux $procmux$1729.
+    dead port 2/2 on $mux $procmux$1729.
+    dead port 1/2 on $mux $procmux$1726.
+    dead port 2/2 on $mux $procmux$1726.
+    dead port 1/2 on $mux $procmux$1723.
+    dead port 2/2 on $mux $procmux$1723.
+    dead port 1/2 on $mux $procmux$1720.
+    dead port 2/2 on $mux $procmux$1720.
+    dead port 1/2 on $mux $procmux$1717.
+    dead port 2/2 on $mux $procmux$1717.
+    dead port 1/2 on $mux $procmux$1714.
+    dead port 2/2 on $mux $procmux$1714.
+    dead port 1/2 on $mux $procmux$1712.
+    dead port 2/2 on $mux $procmux$1712.
+    dead port 1/2 on $mux $procmux$1708.
+    dead port 2/2 on $mux $procmux$1708.
+    dead port 1/2 on $mux $procmux$1705.
+    dead port 2/2 on $mux $procmux$1705.
+    dead port 1/2 on $mux $procmux$1702.
+    dead port 2/2 on $mux $procmux$1702.
+    dead port 1/2 on $mux $procmux$1699.
+    dead port 2/2 on $mux $procmux$1699.
+    dead port 1/2 on $mux $procmux$1696.
+    dead port 2/2 on $mux $procmux$1696.
+    dead port 1/2 on $mux $procmux$1694.
+    dead port 2/2 on $mux $procmux$1694.
+    dead port 1/2 on $mux $procmux$1672.
+    dead port 1/2 on $mux $procmux$1669.
+    dead port 1/2 on $mux $procmux$1666.
+    dead port 1/2 on $mux $procmux$1663.
+    dead port 2/2 on $mux $procmux$1660.
+    dead port 1/2 on $mux $procmux$1636.
+    dead port 2/2 on $mux $procmux$1636.
+    dead port 1/2 on $mux $procmux$1633.
+    dead port 2/2 on $mux $procmux$1633.
+    dead port 1/2 on $mux $procmux$1630.
+    dead port 2/2 on $mux $procmux$1630.
+    dead port 1/2 on $mux $procmux$1627.
+    dead port 2/2 on $mux $procmux$1627.
+    dead port 1/2 on $mux $procmux$1624.
+    dead port 2/2 on $mux $procmux$1624.
+    dead port 1/2 on $mux $procmux$1622.
+    dead port 2/2 on $mux $procmux$1622.
+    dead port 1/2 on $mux $procmux$1618.
+    dead port 1/2 on $mux $procmux$1615.
+    dead port 1/2 on $mux $procmux$1612.
+    dead port 1/2 on $mux $procmux$1609.
+    dead port 2/2 on $mux $procmux$1606.
+    dead port 1/2 on $mux $procmux$1600.
+    dead port 2/2 on $mux $procmux$1600.
+    dead port 1/2 on $mux $procmux$1597.
+    dead port 2/2 on $mux $procmux$1597.
+    dead port 1/2 on $mux $procmux$1594.
+    dead port 2/2 on $mux $procmux$1594.
+    dead port 1/2 on $mux $procmux$1591.
+    dead port 2/2 on $mux $procmux$1591.
+    dead port 1/2 on $mux $procmux$1588.
+    dead port 2/2 on $mux $procmux$1588.
+    dead port 1/2 on $mux $procmux$1585.
+    dead port 2/2 on $mux $procmux$1585.
+    dead port 1/2 on $mux $procmux$1582.
+    dead port 2/2 on $mux $procmux$1582.
+    dead port 1/2 on $mux $procmux$1579.
+    dead port 2/2 on $mux $procmux$1579.
+    dead port 1/2 on $mux $procmux$1576.
+    dead port 2/2 on $mux $procmux$1576.
+    dead port 1/2 on $mux $procmux$1573.
+    dead port 2/2 on $mux $procmux$1573.
+    dead port 1/2 on $mux $procmux$1570.
+    dead port 2/2 on $mux $procmux$1570.
+    dead port 1/2 on $mux $procmux$1567.
+    dead port 2/2 on $mux $procmux$1567.
+    dead port 1/2 on $mux $procmux$1546.
+    dead port 1/2 on $mux $procmux$1543.
+    dead port 1/2 on $mux $procmux$1540.
+    dead port 1/2 on $mux $procmux$1537.
+    dead port 1/2 on $mux $procmux$1534.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+      Replacing known input bits on port A of cell $procmux$2196: $add$rtl/fp16_add.sv:69$110_Y -> { 1'0 $add$rtl/fp16_add.sv:69$110_Y [10:0] }
+      Replacing known input bits on port B of cell $procmux$2196: $shr$rtl/fp16_add.sv:71$111_Y -> { $shr$rtl/fp16_add.sv:71$111_Y [11] 1'1 $shr$rtl/fp16_add.sv:71$111_Y [9:0] }
+      Replacing known input bits on port B of cell $procmux$2356: $add$rtl/fp16_add.sv:52$38_Y [14:2] -> { 1'1 $add$rtl/fp16_add.sv:52$38_Y [13:2] }
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$2208.
+    dead port 1/2 on $mux $procmux$2202.
+    dead port 1/2 on $mux $procmux$2187.
+    dead port 1/2 on $mux $procmux$2181.
+    dead port 1/2 on $mux $procmux$2178.
+    dead port 1/2 on $mux $procmux$2172.
+    dead port 1/2 on $mux $procmux$2169.
+    dead port 1/2 on $mux $procmux$2166.
+    dead port 1/2 on $mux $procmux$2160.
+    dead port 1/2 on $mux $procmux$2157.
+    dead port 1/2 on $mux $procmux$2154.
+    dead port 1/2 on $mux $procmux$2151.
+    dead port 1/2 on $mux $procmux$2145.
+    dead port 1/2 on $mux $procmux$2142.
+    dead port 1/2 on $mux $procmux$2139.
+    dead port 1/2 on $mux $procmux$2136.
+    dead port 1/2 on $mux $procmux$2133.
+    dead port 1/2 on $mux $procmux$2127.
+    dead port 1/2 on $mux $procmux$2124.
+    dead port 1/2 on $mux $procmux$2121.
+    dead port 1/2 on $mux $procmux$2118.
+    dead port 1/2 on $mux $procmux$2115.
+    dead port 1/2 on $mux $procmux$2112.
+    dead port 1/2 on $mux $procmux$2382.
+    dead port 2/2 on $mux $procmux$2382.
+    dead port 1/2 on $mux $procmux$2379.
+    dead port 2/2 on $mux $procmux$2379.
+    dead port 1/2 on $mux $procmux$2388.
+    dead port 1/2 on $mux $procmux$2394.
+    dead port 1/2 on $mux $procmux$2397.
+    dead port 2/2 on $mux $procmux$2397.
+    dead port 1/2 on $mux $procmux$2400.
+    dead port 2/2 on $mux $procmux$2400.
+    dead port 1/2 on $mux $procmux$2406.
+    dead port 2/2 on $mux $procmux$2406.
+    dead port 2/2 on $mux $procmux$2370.
+    dead port 2/2 on $mux $procmux$2364.
+    dead port 2/2 on $mux $procmux$2358.
+Removed 614 multiplexer ports.
+<suppressed ~97 debug messages>
+
+8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \logic_normalization_reduction_engine.
+  Optimizing cells in module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.
+  Optimizing cells in module \fp16_rsqrt_lut256.
+  Optimizing cells in module \fp16_mul.
+  Optimizing cells in module \fp16_add.
+    New input vector for $reduce_or cell $reduce_or$rtl/fp16_add.sv:10$30: $procmux$2409_Y
+  Optimizing cells in module \fp16_add.
+Performed a total of 1 changes.
+
+8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\logic_normalization_reduction_engine'.
+Finding identical cells in module `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000'.
+Finding identical cells in module `\fp16_rsqrt_lut256'.
+Finding identical cells in module `\fp16_mul'.
+Finding identical cells in module `\fp16_add'.
+<suppressed ~12 debug messages>
+Removed a total of 4 cells.
+
+8.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$2578 ($adff) from module logic_normalization_reduction_engine (D = $procmux$493_Y, Q = \sum_q).
+Adding EN signal on $procdff$2573 ($adff) from module logic_normalization_reduction_engine (D = \begin_inv_hidden_i, Q = \inv_hidden_q).
+Adding EN signal on $procdff$2558 ($adff) from module logic_normalization_reduction_engine (D = $procmux$514_Y, Q = \scalar_inflight_q).
+Adding EN signal on $procdff$2553 ($adff) from module logic_normalization_reduction_engine (D = $procmux$520_Y, Q = \scalar_pending_q).
+Adding EN signal on $procdff$2583 ($adff) from module logic_normalization_reduction_engine (D = $procmux$486_Y, Q = \sumsq_q).
+Adding EN signal on $procdff$2523 ($adff) from module logic_normalization_reduction_engine (D = \begin_rms_norm_i, Q = \mode_q).
+Adding EN signal on $procdff$2563 ($adff) from module logic_normalization_reduction_engine (D = \begin_expected_mask_i, Q = \expected_q).
+Adding EN signal on $procdff$2528 ($adff) from module logic_normalization_reduction_engine (D = \begin_tag_i, Q = \tag_q).
+Adding EN signal on $procdff$2568 ($adff) from module logic_normalization_reduction_engine (D = $procmux$505_Y, Q = \received_q).
+Adding EN signal on $procdff$2533 ($adff) from module logic_normalization_reduction_engine (D = \begin_epsilon_i, Q = \epsilon_q).
+Adding EN signal on $procdff$2643 ($adff) from module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000 (D = $ternary$rtl/logic_normalization_scalar_engine.sv:79$455_Y, Q = \mean_q).
+Adding EN signal on $procdff$2633 ($adff) from module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000 (D = \request_tag_i, Q = \tag_q).
+Adding EN signal on $procdff$2658 ($adff) from module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000 (D = \epsilon_result, Q = \argument_q).
+Adding EN signal on $procdff$2613 ($adff) from module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000 (D = \clamped_q, Q = \variance_clamped_o).
+Adding EN signal on $procdff$2628 ($adff) from module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000 (D = $procmux$597_Y, Q = \clamped_q).
+Adding EN signal on $procdff$2593 ($adff) from module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000 (D = \mode_q, Q = \response_rms_norm_o).
+Adding EN signal on $procdff$2648 ($adff) from module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000 (D = \input_mean_square, Q = \mean_square_q).
+Adding EN signal on $procdff$2618 ($adff) from module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000 (D = $procmux$614_Y, Q = \state_q).
+Adding EN signal on $procdff$2598 ($adff) from module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000 (D = \tag_q, Q = \response_tag_o).
+Adding EN signal on $procdff$2653 ($adff) from module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000 (D = $ternary$rtl/logic_normalization_scalar_engine.sv:85$456_Y, Q = \variance_q).
+Adding EN signal on $procdff$2603 ($adff) from module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000 (D = \mean_q, Q = \mean_o).
+Adding EN signal on $procdff$2638 ($adff) from module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000 (D = \epsilon_i, Q = \epsilon_q).
+Adding EN signal on $procdff$2623 ($adff) from module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000 (D = \rms_norm_i, Q = \mode_q).
+Adding EN signal on $procdff$2608 ($adff) from module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000 (D = \rsqrt_output_data, Q = \inv_std_o).
+Adding EN signal on $procdff$2745 ($dff) from module fp16_rsqrt_lut256 (D = $3\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.$fordecl_block$227.bit_index[31:0]$293, Q = \approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.$fordecl_block$227.bit_index).
+Adding EN signal on $procdff$2668 ($adff) from module fp16_rsqrt_lut256 (D = $4\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$229.$result[15:0]$294, Q = \output_data_o).
+Adding EN signal on $procdff$2663 ($adff) from module fp16_rsqrt_lut256 (D = \input_valid_i, Q = \output_valid_o).
+Setting constant 1-bit at position 0 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 1 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 2 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 3 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 4 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 5 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 6 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 7 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 8 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 9 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 10 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 11 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 12 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 13 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 14 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 15 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 16 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 17 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 18 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 19 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 20 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 21 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 22 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 23 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 24 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 25 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 26 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 27 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 28 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 29 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 30 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 31 on $procdff$2738 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 0 on $procdff$2683 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 0 on $procdff$2733 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 1 on $procdff$2733 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 2 on $procdff$2733 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 3 on $procdff$2733 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 4 on $procdff$2733 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 5 on $procdff$2733 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 6 on $procdff$2733 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 7 on $procdff$2733 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 8 on $procdff$2733 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 9 on $procdff$2733 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 10 on $procdff$2733 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 11 on $procdff$2733 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 12 on $procdff$2733 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 13 on $procdff$2733 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 14 on $procdff$2733 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 15 on $procdff$2733 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 0 on $procdff$2708 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 1 on $procdff$2708 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 2 on $procdff$2708 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 3 on $procdff$2708 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 4 on $procdff$2708 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 5 on $procdff$2708 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 6 on $procdff$2708 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 7 on $procdff$2708 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 0 on $procdff$2723 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 1 on $procdff$2723 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 2 on $procdff$2723 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 3 on $procdff$2723 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 4 on $procdff$2723 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 5 on $procdff$2723 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 6 on $procdff$2723 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 7 on $procdff$2723 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 8 on $procdff$2723 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 9 on $procdff$2723 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 10 on $procdff$2723 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 11 on $procdff$2723 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 0 on $procdff$2688 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 1 on $procdff$2688 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 2 on $procdff$2688 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 3 on $procdff$2688 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 4 on $procdff$2688 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 0 on $procdff$2698 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 1 on $procdff$2698 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 2 on $procdff$2698 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 3 on $procdff$2698 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 4 on $procdff$2698 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 5 on $procdff$2698 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 6 on $procdff$2698 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 7 on $procdff$2698 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 8 on $procdff$2698 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 9 on $procdff$2698 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 10 on $procdff$2698 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 0 on $procdff$2693 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 1 on $procdff$2693 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 2 on $procdff$2693 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 3 on $procdff$2693 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 4 on $procdff$2693 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 5 on $procdff$2693 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 6 on $procdff$2693 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 7 on $procdff$2693 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 8 on $procdff$2693 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 9 on $procdff$2693 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 0 on $procdff$2718 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 1 on $procdff$2718 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 2 on $procdff$2718 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 3 on $procdff$2718 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 4 on $procdff$2718 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 5 on $procdff$2718 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 6 on $procdff$2718 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 7 on $procdff$2718 ($adff) from module fp16_rsqrt_lut256.
+Setting constant 1-bit at position 8 on $procdff$2718 ($adff) from module fp16_rsqrt_lut256.
+
+8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \logic_normalization_reduction_engine..
+Finding unused cells or wires in module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_rsqrt_lut256..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \fp16_add..
+Removed 68 unused cells and 1616 unused wires.
+<suppressed ~81 debug messages>
+
+8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.
+<suppressed ~1 debug messages>
+Optimizing module fp16_add.
+Optimizing module fp16_mul.
+Optimizing module fp16_rsqrt_lut256.
+Optimizing module logic_normalization_reduction_engine.
+<suppressed ~5 debug messages>
+
+8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_mul..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_rsqrt_lut256..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \logic_normalization_reduction_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~76 debug messages>
+
+8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \fp16_mul.
+  Optimizing cells in module \fp16_rsqrt_lut256.
+  Optimizing cells in module \logic_normalization_reduction_engine.
+Performed a total of 0 changes.
+
+8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000'.
+<suppressed ~27 debug messages>
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_mul'.
+Finding identical cells in module `\fp16_rsqrt_lut256'.
+Finding identical cells in module `\logic_normalization_reduction_engine'.
+<suppressed ~54 debug messages>
+Removed a total of 27 cells.
+
+8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \fp16_rsqrt_lut256..
+Finding unused cells or wires in module \logic_normalization_reduction_engine..
+Removed 0 unused cells and 27 unused wires.
+<suppressed ~2 debug messages>
+
+8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.
+Optimizing module fp16_add.
+Optimizing module fp16_mul.
+Optimizing module fp16_rsqrt_lut256.
+Optimizing module logic_normalization_reduction_engine.
+
+8.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_mul..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_rsqrt_lut256..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \logic_normalization_reduction_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~77 debug messages>
+
+8.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \fp16_mul.
+  Optimizing cells in module \fp16_rsqrt_lut256.
+  Optimizing cells in module \logic_normalization_reduction_engine.
+Performed a total of 0 changes.
+
+8.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_mul'.
+Finding identical cells in module `\fp16_rsqrt_lut256'.
+Finding identical cells in module `\logic_normalization_reduction_engine'.
+Removed a total of 0 cells.
+
+8.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \fp16_rsqrt_lut256..
+Finding unused cells or wires in module \logic_normalization_reduction_engine..
+
+8.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.
+Optimizing module fp16_add.
+Optimizing module fp16_mul.
+Optimizing module fp16_rsqrt_lut256.
+Optimizing module logic_normalization_reduction_engine.
+
+8.23. Finished OPT passes. (There is nothing left to do.)
+
+9. Executing MEMORY pass.
+
+9.1. Executing OPT_MEM pass (optimize memories).
+fp16_rsqrt_lut256.$auto$proc_rom.cc:155:do_switch$463: removing const-0 lane 10
+fp16_rsqrt_lut256.$auto$proc_rom.cc:155:do_switch$463: removing const-1 lane 11
+fp16_rsqrt_lut256.$auto$proc_rom.cc:155:do_switch$463: removing const-1 lane 12
+fp16_rsqrt_lut256.$auto$proc_rom.cc:155:do_switch$463: removing const-1 lane 13
+fp16_rsqrt_lut256.$auto$proc_rom.cc:155:do_switch$463: removing const-0 lane 14
+fp16_rsqrt_lut256.$auto$proc_rom.cc:155:do_switch$463: removing const-0 lane 15
+Performed a total of 1 transformations.
+
+9.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+9.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+9.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+9.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+Checking read port `$auto$proc_rom.cc:155:do_switch$463'[0] in module `\fp16_rsqrt_lut256': FF found, but with a mux select that doesn't seem to correspond to transparency logic.
+Checking read port address `$auto$proc_rom.cc:155:do_switch$463'[0] in module `\fp16_rsqrt_lut256': no address FF found.
+
+9.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \fp16_rsqrt_lut256..
+Finding unused cells or wires in module \logic_normalization_reduction_engine..
+
+9.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+9.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+9.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \fp16_rsqrt_lut256..
+Finding unused cells or wires in module \logic_normalization_reduction_engine..
+
+9.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+9.11. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+Mapping memory $auto$proc_rom.cc:155:do_switch$463 in module \fp16_rsqrt_lut256:
+  created 256 $dff cells and 0 static cells of width 10.
+  read interface: 0 $dff and 255 $mux cells.
+  write interface: 0 write mux blocks.
+
+10. Executing OPT pass (performing simple optimizations).
+
+10.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.
+Optimizing module fp16_add.
+Optimizing module fp16_mul.
+Optimizing module fp16_rsqrt_lut256.
+Optimizing module logic_normalization_reduction_engine.
+
+10.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_mul'.
+Finding identical cells in module `\fp16_rsqrt_lut256'.
+Finding identical cells in module `\logic_normalization_reduction_engine'.
+Removed a total of 0 cells.
+
+10.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_mul..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_rsqrt_lut256..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \logic_normalization_reduction_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~77 debug messages>
+
+10.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \fp16_mul.
+  Optimizing cells in module \fp16_rsqrt_lut256.
+  Optimizing cells in module \logic_normalization_reduction_engine.
+Performed a total of 0 changes.
+
+10.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_mul'.
+Finding identical cells in module `\fp16_rsqrt_lut256'.
+Finding identical cells in module `\logic_normalization_reduction_engine'.
+Removed a total of 0 cells.
+
+10.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+10.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \fp16_rsqrt_lut256..
+Finding unused cells or wires in module \logic_normalization_reduction_engine..
+Removed 0 unused cells and 256 unused wires.
+<suppressed ~1 debug messages>
+
+10.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.
+Optimizing module fp16_add.
+Optimizing module fp16_mul.
+Optimizing module fp16_rsqrt_lut256.
+Optimizing module logic_normalization_reduction_engine.
+
+10.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+10.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_mul..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_rsqrt_lut256..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \logic_normalization_reduction_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~77 debug messages>
+
+10.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \fp16_mul.
+  Optimizing cells in module \fp16_rsqrt_lut256.
+  Optimizing cells in module \logic_normalization_reduction_engine.
+Performed a total of 0 changes.
+
+10.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_mul'.
+Finding identical cells in module `\fp16_rsqrt_lut256'.
+Finding identical cells in module `\logic_normalization_reduction_engine'.
+Removed a total of 0 cells.
+
+10.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+10.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \fp16_rsqrt_lut256..
+Finding unused cells or wires in module \logic_normalization_reduction_engine..
+
+10.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.
+Optimizing module fp16_add.
+Optimizing module fp16_mul.
+Optimizing module fp16_rsqrt_lut256.
+Optimizing module logic_normalization_reduction_engine.
+
+10.16. Finished OPT passes. (There is nothing left to do.)
+
+11. Executing TECHMAP pass (map to technology primitives).
+
+11.1. Executing Verilog-2005 frontend: /home/chandler/.local/yosys/usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/home/chandler/.local/yosys/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+11.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $adffe.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $mux.
+Using template $paramod$constmap:ec4749bf5e3cb5fc6dcc1709dca265baaef21fb0$paramod$b1f8e9a58fee383a65180922397f7058048191fe\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shl.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $eq.
+Using template $paramod$constmap:446553370afc6c2aa6cc0b8f657b7f64b237ff7c$paramod$962bb79c2a50a422516483c1c9c06046761917ac\_90_shift_shiftx for cells of type $shiftx.
+Using extmapper simplemap for cells of type $ne.
+Using extmapper simplemap for cells of type $reduce_and.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $adff.
+Using extmapper simplemap for cells of type $logic_or.
+Running "alumacc" on wrapper $extern:wrap:$sub:A_SIGNED=1:A_WIDTH=8:B_SIGNED=1:B_WIDTH=8:Y_WIDTH=8:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:A_SIGNED=1:A_WIDTH=8:B_SIGNED=1:B_WIDTH=8:Y_WIDTH=8:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:A_SIGNED=1:A_WIDTH=8:B_SIGNED=1:B_WIDTH=8:Y_WIDTH=8:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$lt:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$lt:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$lt:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $paramod$constmap:c594f40a2bce2acff1b7fca1643e146f5615a115$paramod$9dde649ff560b28dd961974225eea1bc02b72047\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shl.
+Running "alumacc" on wrapper $extern:wrap:$sub:A_SIGNED=1:A_WIDTH=8:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:A_SIGNED=1:A_WIDTH=8:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:A_SIGNED=1:A_WIDTH=8:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=12:B_SIGNED=0:B_WIDTH=12:Y_WIDTH=12:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=12:B_SIGNED=0:B_WIDTH=12:Y_WIDTH=12:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=12:B_SIGNED=0:B_WIDTH=12:Y_WIDTH=12:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $paramod$dc6f880019a6bd7fa92cb40fac86c31d8bbc92e4\_90_div for cells of type $div.
+Running "alumacc" on wrapper $extern:wrap:$sub:A_SIGNED=1:A_WIDTH=9:B_SIGNED=1:B_WIDTH=9:Y_WIDTH=9:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:A_SIGNED=1:A_WIDTH=9:B_SIGNED=1:B_WIDTH=9:Y_WIDTH=9:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:A_SIGNED=1:A_WIDTH=9:B_SIGNED=1:B_WIDTH=9:Y_WIDTH=9:394426c56d1a028ba8fdd5469b163e04011def47.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod$2653f68ddb8eab7b1907b4a20767b72a824a7a36\_90_alu for cells of type $alu.
+Using template $paramod$08c2d337fba0d8fba53e35b89be96dd105931d9e\_90_alu for cells of type $alu.
+Using template $paramod$ee3d784672cdb1cb32d9a801a3af776716f16b74\_90_alu for cells of type $alu.
+Using template $paramod$dc6f880019a6bd7fa92cb40fac86c31d8bbc92e4\$__div_mod_trunc for cells of type $__div_mod_trunc.
+Using template $paramod$8fdcfe020be5e507ba05385ffd706e02b549d39d\_90_alu for cells of type $alu.
+Using template $paramod$a7ecfa730f7b429cdd2d19291637694b0937162d\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $and.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001000 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001100 for cells of type $lcu.
+Running "alumacc" on wrapper $extern:wrap:$neg:Y_WIDTH=32:A_WIDTH=32:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$neg:Y_WIDTH=32:A_WIDTH=32:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$neg:Y_WIDTH=32:A_WIDTH=32:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $paramod\$__div_mod_u\WIDTH=32'00000000000000000000000000100000 for cells of type $__div_mod_u.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001001 for cells of type $lcu.
+Using template $paramod$c6baa65225090ac0a120feab1b920965244aa496\_90_alu for cells of type $alu.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=32:B_WIDTH=32:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=32:B_WIDTH=32:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=32:B_WIDTH=32:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=32:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=32:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=32:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=33:B_WIDTH=33:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=33:B_WIDTH=33:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=33:B_WIDTH=33:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=33:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=33:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=33:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=34:B_WIDTH=34:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=34:B_WIDTH=34:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=34:B_WIDTH=34:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=34:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=34:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=34:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=35:B_WIDTH=35:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=35:B_WIDTH=35:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=35:B_WIDTH=35:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=35:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=35:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=35:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=36:B_WIDTH=36:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=36:B_WIDTH=36:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=36:B_WIDTH=36:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=36:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=36:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=36:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=37:B_WIDTH=37:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=37:B_WIDTH=37:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=37:B_WIDTH=37:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=37:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=37:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=37:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=38:B_WIDTH=38:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=38:B_WIDTH=38:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=38:B_WIDTH=38:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=38:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=38:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=38:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=39:B_WIDTH=39:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=39:B_WIDTH=39:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=39:B_WIDTH=39:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=39:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=39:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=39:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=40:B_WIDTH=40:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=40:B_WIDTH=40:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=40:B_WIDTH=40:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=40:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=40:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=40:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=41:B_WIDTH=41:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=41:B_WIDTH=41:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=41:B_WIDTH=41:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=41:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=41:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=41:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=42:B_WIDTH=42:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=42:B_WIDTH=42:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=42:B_WIDTH=42:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=42:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=42:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=42:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=43:B_WIDTH=43:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=43:B_WIDTH=43:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=43:B_WIDTH=43:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=43:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=43:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=43:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=44:B_WIDTH=44:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=44:B_WIDTH=44:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=44:B_WIDTH=44:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=44:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=44:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=44:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=45:B_WIDTH=45:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=45:B_WIDTH=45:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=45:B_WIDTH=45:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=45:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=45:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=45:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=46:B_WIDTH=46:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=46:B_WIDTH=46:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=46:B_WIDTH=46:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=46:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=46:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=46:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=47:B_WIDTH=47:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=47:B_WIDTH=47:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=47:B_WIDTH=47:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=47:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=47:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=47:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=48:B_WIDTH=48:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=48:B_WIDTH=48:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=48:B_WIDTH=48:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=48:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=48:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=48:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=49:B_WIDTH=49:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=49:B_WIDTH=49:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=49:B_WIDTH=49:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=49:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=49:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=49:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=50:B_WIDTH=50:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=50:B_WIDTH=50:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=50:B_WIDTH=50:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=50:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=50:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=50:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=51:B_WIDTH=51:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=51:B_WIDTH=51:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=51:B_WIDTH=51:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=51:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=51:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=51:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=52:B_WIDTH=52:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=52:B_WIDTH=52:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=52:B_WIDTH=52:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=52:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=52:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=52:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=53:B_WIDTH=53:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=53:B_WIDTH=53:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=53:B_WIDTH=53:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=53:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=53:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=53:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=54:B_WIDTH=54:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=54:B_WIDTH=54:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=54:B_WIDTH=54:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=54:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=54:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=54:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=55:B_WIDTH=55:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=55:B_WIDTH=55:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=55:B_WIDTH=55:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=55:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=55:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=55:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=56:B_WIDTH=56:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=56:B_WIDTH=56:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=56:B_WIDTH=56:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=56:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=56:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=56:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=57:B_WIDTH=57:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=57:B_WIDTH=57:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=57:B_WIDTH=57:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=57:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=57:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=57:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=58:B_WIDTH=58:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=58:B_WIDTH=58:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=58:B_WIDTH=58:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=58:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=58:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=58:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=59:B_WIDTH=59:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=59:B_WIDTH=59:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=59:B_WIDTH=59:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=59:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=59:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=59:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=60:B_WIDTH=60:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=60:B_WIDTH=60:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=60:B_WIDTH=60:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=60:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=60:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=60:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=61:B_WIDTH=61:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=61:B_WIDTH=61:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=61:B_WIDTH=61:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=61:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=61:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=61:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=62:B_WIDTH=62:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=62:B_WIDTH=62:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=62:B_WIDTH=62:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=62:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=62:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=62:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=63:B_WIDTH=63:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=63:B_WIDTH=63:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=63:B_WIDTH=63:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=63:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=63:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=63:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $paramod$fbc7873bff55778c0b3173955b7e4bce1d9d6834\_90_alu for cells of type $alu.
+Using template $paramod$789c344356a154d2afc7b832b41d1067dbc946ba\_90_alu for cells of type $alu.
+Using template $paramod$e39069e3f4ee35c1eea86993bd74689959babaab\_90_alu for cells of type $alu.
+Using template $paramod$d7aca3dc44b07ff19908fb1a3b606577588c15f1\_90_alu for cells of type $alu.
+Using template $paramod$f9e3a3c4b84f99cb56fad07743ec44ad55b11c8b\_90_alu for cells of type $alu.
+Using template $paramod$dd5ba471f7dcf35707f23b88cfd15b9582f97277\_90_alu for cells of type $alu.
+Using template $paramod$b7531bc0616f8d4cdd8159edd2237c9ddbb2ce01\_90_alu for cells of type $alu.
+Using template $paramod$ff8ba121d2f8e85b775c9f35ef677a1a276e7e1b\_90_alu for cells of type $alu.
+Using template $paramod$9a66d4bebbc4fab84566caffef9f094a1a467389\_90_alu for cells of type $alu.
+Using template $paramod$57bc309a5d8a948cec8981d26d896ee1cbf54d58\_90_alu for cells of type $alu.
+Using template $paramod$f94cfdb8ad389f4fc4515bcb65bccd7e2d189e95\_90_alu for cells of type $alu.
+Using template $paramod$2a25669ccd39fe7c0fbfb2a4d17416fc78667f00\_90_alu for cells of type $alu.
+Using template $paramod$d9397dfdf5f7cf5715aebc9527845402880218a0\_90_alu for cells of type $alu.
+Using template $paramod$acc477ace2583cc2ee0cf651c72a385d2bbbe9f1\_90_alu for cells of type $alu.
+Using template $paramod$415abdcadc251df4f0f033b62b8f3296b8461b4e\_90_alu for cells of type $alu.
+Using template $paramod$6573c1c269218f299badf6e04ca86aa37fdb352c\_90_alu for cells of type $alu.
+Using template $paramod$6a21b72c9c0b32e81b169c7e08a4d8b9c462448f\_90_alu for cells of type $alu.
+Using template $paramod$324e0706ebb77f1915b22f4a136962ec3fd1d7ff\_90_alu for cells of type $alu.
+Using template $paramod$461fc931d630cb01bec1fea87f37fbcc53f6f6a4\_90_alu for cells of type $alu.
+Using template $paramod$fe074227b1c5fbaa1ea56076182c29dbcf3a782a\_90_alu for cells of type $alu.
+Using template $paramod$85502450775e62e9c6a2fe29020b3433d4335647\_90_alu for cells of type $alu.
+Using template $paramod$e32c921f95fe0e2350204f4ecefc9e296355521b\_90_alu for cells of type $alu.
+Using template $paramod$05d913fba320393c7e943e625bef3af776153b60\_90_alu for cells of type $alu.
+Using template $paramod$8e07e2c0a3efc148d2f3714f3901076678774ed1\_90_alu for cells of type $alu.
+Using template $paramod$5b7e592b3c2951af6800b7fd597f66a79b72b91c\_90_alu for cells of type $alu.
+Using template $paramod$90182783100594e2dd636a282c4723cfc9adaedd\_90_alu for cells of type $alu.
+Using template $paramod$851c5c9b30913ea2deae68e3ca9e9c4e649723bc\_90_alu for cells of type $alu.
+Using template $paramod$1445aacdb5f2a1ef9fedf1373097ffa45438211d\_90_alu for cells of type $alu.
+Using template $paramod$7add42b712fe5bbbba521e93062103d6bf78a453\_90_alu for cells of type $alu.
+Using template $paramod$b6f86f6a0c43c26b22ee55f51e05d5951f0e6562\_90_alu for cells of type $alu.
+Using template $paramod$044fdceace8c449ec99f900b42120ac005ff4065\_90_alu for cells of type $alu.
+Using template $paramod$b6b58933bcf3c8b9e3e5de18c2637bd0e12c7c47\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100001 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100010 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100011 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100100 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100101 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100110 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100111 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000101000 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000101001 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000101010 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000101011 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000101100 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000101101 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000101110 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000101111 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000110000 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000110001 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000110010 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000110011 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000110100 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000110101 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000110110 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000110111 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000111000 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000111001 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000111010 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000111011 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000111100 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000111101 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000111110 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000111111 for cells of type $lcu.
+Running "alumacc" on wrapper $extern:wrap:$mul:A_SIGNED=0:A_WIDTH=11:B_SIGNED=0:B_WIDTH=11:Y_WIDTH=22:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$mul:A_SIGNED=0:A_WIDTH=11:B_SIGNED=0:B_WIDTH=11:Y_WIDTH=22:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$mul:A_SIGNED=0:A_WIDTH=11:B_SIGNED=0:B_WIDTH=11:Y_WIDTH=22:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=5:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=5:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=5:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$add:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$gt:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$gt:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$gt:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $paramod$constmap:53ee095996d0c6f4ac3fd5001b136d5e1c026e8f$paramod$f65eafa5dd6b7187cb333238e30c5a01d76aa221\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shr.
+Using template $paramod$constmap:07ce017e42f9b3ec61265190f5db4857479fd78f$paramod$ba4683647da2a9c1dc978a7570c9df540bdc26c1\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shl.
+Running "alumacc" on wrapper $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=64:B_SIGNED=0:B_WIDTH=1:Y_WIDTH=64:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=64:B_SIGNED=0:B_WIDTH=1:Y_WIDTH=64:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=64:B_SIGNED=0:B_WIDTH=1:Y_WIDTH=64:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $paramod$constmap:89710097e0162faa1c5399b4835bd704c30f89ef$paramod$96a1f97fa9eb3187f2c43482242c53202d0445c9\_90_shift_shiftx for cells of type $shiftx.
+Running "alumacc" on wrapper $extern:wrap:$add:A_SIGNED=0:A_WIDTH=64:B_SIGNED=0:B_WIDTH=1:Y_WIDTH=64:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:A_SIGNED=0:A_WIDTH=64:B_SIGNED=0:B_WIDTH=1:Y_WIDTH=64:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:A_SIGNED=0:A_WIDTH=64:B_SIGNED=0:B_WIDTH=1:Y_WIDTH=64:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$neg:A_SIGNED=0:A_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$neg:A_SIGNED=0:A_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$neg:A_SIGNED=0:A_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Analyzing pattern of constant bits for this cell:
+  Constant input on bit 22 of port A: 1'0
+  Constant input on bit 23 of port A: 1'0
+  Constant input on bit 24 of port A: 1'0
+  Constant input on bit 25 of port A: 1'0
+  Constant input on bit 26 of port A: 1'0
+  Constant input on bit 27 of port A: 1'0
+  Constant input on bit 28 of port A: 1'0
+  Constant input on bit 29 of port A: 1'0
+  Constant input on bit 30 of port A: 1'0
+  Constant input on bit 31 of port A: 1'0
+  Constant input on bit 32 of port A: 1'0
+  Constant input on bit 33 of port A: 1'0
+  Constant input on bit 34 of port A: 1'0
+  Constant input on bit 35 of port A: 1'0
+  Constant input on bit 36 of port A: 1'0
+  Constant input on bit 37 of port A: 1'0
+  Constant input on bit 38 of port A: 1'0
+  Constant input on bit 39 of port A: 1'0
+  Constant input on bit 40 of port A: 1'0
+  Constant input on bit 41 of port A: 1'0
+  Constant input on bit 42 of port A: 1'0
+  Constant input on bit 43 of port A: 1'0
+  Constant input on bit 44 of port A: 1'0
+  Constant input on bit 45 of port A: 1'0
+  Constant input on bit 46 of port A: 1'0
+  Constant input on bit 47 of port A: 1'0
+  Constant input on bit 48 of port A: 1'0
+  Constant input on bit 49 of port A: 1'0
+  Constant input on bit 50 of port A: 1'0
+  Constant input on bit 51 of port A: 1'0
+  Constant input on bit 52 of port A: 1'0
+  Constant input on bit 53 of port A: 1'0
+  Constant input on bit 54 of port A: 1'0
+  Constant input on bit 55 of port A: 1'0
+  Constant input on bit 56 of port A: 1'0
+  Constant input on bit 57 of port A: 1'0
+  Constant input on bit 58 of port A: 1'0
+  Constant input on bit 59 of port A: 1'0
+  Constant input on bit 60 of port A: 1'0
+  Constant input on bit 61 of port A: 1'0
+  Constant input on bit 62 of port A: 1'0
+  Constant input on bit 63 of port A: 1'0
+Creating constmapped module `$paramod$constmap:53ee095996d0c6f4ac3fd5001b136d5e1c026e8f$paramod$ba4683647da2a9c1dc978a7570c9df540bdc26c1\_90_shift_ops_shr_shl_sshl_sshr'.
+
+11.413. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$constmap:53ee095996d0c6f4ac3fd5001b136d5e1c026e8f$paramod$ba4683647da2a9c1dc978a7570c9df540bdc26c1\_90_shift_ops_shr_shl_sshl_sshr..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~28016 debug messages>
+
+11.414. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$constmap:53ee095996d0c6f4ac3fd5001b136d5e1c026e8f$paramod$ba4683647da2a9c1dc978a7570c9df540bdc26c1\_90_shift_ops_shr_shl_sshl_sshr.
+<suppressed ~643 debug messages>
+Removed 0 unused cells and 11 unused wires.
+Using template $paramod$constmap:53ee095996d0c6f4ac3fd5001b136d5e1c026e8f$paramod$ba4683647da2a9c1dc978a7570c9df540bdc26c1\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shl.
+Running "alumacc" on wrapper $extern:wrap:$ge:A_SIGNED=0:A_WIDTH=64:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:A_SIGNED=0:A_WIDTH=64:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:A_SIGNED=0:A_WIDTH=64:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$neg:A_SIGNED=1:A_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$neg:A_SIGNED=1:A_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$neg:A_SIGNED=1:A_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using extmapper maccmap for cells of type $macc_v2.
+  add { \lhs_sig [10] \lhs_i [9:0] } * { \rhs_sig [10] \rhs_i [9:0] } (11x11 bits, unsigned)
+Using template $paramod$b0777dc865134c8525a4aa84de8cfa938974cad1\_90_alu for cells of type $alu.
+Using template $paramod$54969db7f41ab9ffc93887c2d8e2d7f68e10b42f\_90_alu for cells of type $alu.
+Using template $paramod$cc80a4e89b0341cb117f5d28b0e7244620640141\_90_alu for cells of type $alu.
+Using template $paramod$425066d11b1a6f068ec157e714ae99280dc1b91b\_90_alu for cells of type $alu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000010110 for cells of type $fa.
+Using template $paramod$e161c1674351796cd6dd381e70ff05458bfe7755\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000001000000 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000010110 for cells of type $lcu.
+Running "alumacc" on wrapper $extern:wrap:$gt:A_SIGNED=0:A_WIDTH=16:B_SIGNED=0:B_WIDTH=16:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$gt:A_SIGNED=0:A_WIDTH=16:B_SIGNED=0:B_WIDTH=16:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$gt:A_SIGNED=0:A_WIDTH=16:B_SIGNED=0:B_WIDTH=16:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=5:B_SIGNED=0:B_WIDTH=5:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=5:B_SIGNED=0:B_WIDTH=5:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=5:B_SIGNED=0:B_WIDTH=5:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$le:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$le:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$le:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $paramod$constmap:00b624ee35087875db724a0f6654fc741103ec82$paramod$1be94b27a187453affd7cf6c50c402a7a1607665\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shl.
+Running "alumacc" on wrapper $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=14:B_SIGNED=0:B_WIDTH=1:Y_WIDTH=14:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=14:B_SIGNED=0:B_WIDTH=1:Y_WIDTH=14:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=14:B_SIGNED=0:B_WIDTH=1:Y_WIDTH=14:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $paramod$constmap:71f23406aeeb064ff6658d2cf7d5cd0c73287106$paramod$10d34890fc0a590416fb0bd5f2405603d3bc2a8b\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shr.
+Running "alumacc" on wrapper $extern:wrap:$add:A_SIGNED=0:A_WIDTH=15:B_SIGNED=0:B_WIDTH=15:Y_WIDTH=15:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:A_SIGNED=0:A_WIDTH=15:B_SIGNED=0:B_WIDTH=15:Y_WIDTH=15:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:A_SIGNED=0:A_WIDTH=15:B_SIGNED=0:B_WIDTH=15:Y_WIDTH=15:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=14:B_SIGNED=0:B_WIDTH=14:Y_WIDTH=14:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=14:B_SIGNED=0:B_WIDTH=14:Y_WIDTH=14:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=14:B_SIGNED=0:B_WIDTH=14:Y_WIDTH=14:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$add:A_SIGNED=0:A_WIDTH=12:B_SIGNED=0:B_WIDTH=1:Y_WIDTH=12:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:A_SIGNED=0:A_WIDTH=12:B_SIGNED=0:B_WIDTH=1:Y_WIDTH=12:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:A_SIGNED=0:A_WIDTH=12:B_SIGNED=0:B_WIDTH=1:Y_WIDTH=12:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $paramod$6df0329addda9228fcc2546de2aaf14ad26c98e1\_90_alu for cells of type $alu.
+Using template $paramod$3949ff0a43b1bf95139ffc95c5c6cede92f07247\_90_alu for cells of type $alu.
+Using template $paramod$1ed7ec530b1ba361931392f2f8504f82ccdfecaa\_90_alu for cells of type $alu.
+Using template $paramod$67e8f4b8dba01cd3d8fc718acd02276257d102de\_90_alu for cells of type $alu.
+Using template $paramod$091610cd349a68bd5539cffd7126f0d76e9bca00\_90_alu for cells of type $alu.
+Using template $paramod$8f780356cb6cdb52f6a744190131b65634639c4e\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000010000 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001110 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001111 for cells of type $lcu.
+Using template $paramod$c5c783b17ab1d780abfad8cfe6563a0a7b47a3b0\_90_pmux for cells of type $pmux.
+Using template $paramod$56f7ce6d87f8add68ca646dc02d7695a3189f8e5\_90_pmux for cells of type $pmux.
+No more expansions possible.
+<suppressed ~12214 debug messages>
+
+12. Executing OPT pass (performing simple optimizations).
+
+12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.
+<suppressed ~63 debug messages>
+Optimizing module fp16_add.
+<suppressed ~6313 debug messages>
+Optimizing module fp16_mul.
+<suppressed ~8573 debug messages>
+Optimizing module fp16_rsqrt_lut256.
+<suppressed ~33156 debug messages>
+Optimizing module logic_normalization_reduction_engine.
+<suppressed ~29 debug messages>
+
+12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000'.
+<suppressed ~48 debug messages>
+Finding identical cells in module `\fp16_add'.
+<suppressed ~10167 debug messages>
+Finding identical cells in module `\fp16_mul'.
+<suppressed ~5127 debug messages>
+Finding identical cells in module `\fp16_rsqrt_lut256'.
+<suppressed ~27288 debug messages>
+Finding identical cells in module `\logic_normalization_reduction_engine'.
+<suppressed ~93 debug messages>
+Removed a total of 14241 cells.
+
+12.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_mul..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_rsqrt_lut256..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \logic_normalization_reduction_engine..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+12.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \fp16_mul.
+  Optimizing cells in module \fp16_rsqrt_lut256.
+  Optimizing cells in module \logic_normalization_reduction_engine.
+Performed a total of 0 changes.
+
+12.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_mul'.
+Finding identical cells in module `\fp16_rsqrt_lut256'.
+Finding identical cells in module `\logic_normalization_reduction_engine'.
+Removed a total of 0 cells.
+
+12.6. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$9795 ($_DFFE_PN0P_) from module fp16_rsqrt_lut256.
+
+12.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \fp16_rsqrt_lut256..
+Finding unused cells or wires in module \logic_normalization_reduction_engine..
+Removed 4740 unused cells and 27545 unused wires.
+<suppressed ~4745 debug messages>
+
+12.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.
+Optimizing module fp16_add.
+<suppressed ~31 debug messages>
+Optimizing module fp16_mul.
+<suppressed ~49 debug messages>
+Optimizing module fp16_rsqrt_lut256.
+<suppressed ~130 debug messages>
+Optimizing module logic_normalization_reduction_engine.
+
+12.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+12.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_mul..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_rsqrt_lut256..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \logic_normalization_reduction_engine..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+12.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \fp16_mul.
+  Optimizing cells in module \fp16_rsqrt_lut256.
+  Optimizing cells in module \logic_normalization_reduction_engine.
+Performed a total of 0 changes.
+
+12.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000'.
+Finding identical cells in module `\fp16_add'.
+<suppressed ~411 debug messages>
+Finding identical cells in module `\fp16_mul'.
+<suppressed ~33 debug messages>
+Finding identical cells in module `\fp16_rsqrt_lut256'.
+<suppressed ~417 debug messages>
+Finding identical cells in module `\logic_normalization_reduction_engine'.
+Removed a total of 287 cells.
+
+12.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \fp16_rsqrt_lut256..
+Finding unused cells or wires in module \logic_normalization_reduction_engine..
+Removed 0 unused cells and 224 unused wires.
+<suppressed ~3 debug messages>
+
+12.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.
+Optimizing module fp16_add.
+Optimizing module fp16_mul.
+Optimizing module fp16_rsqrt_lut256.
+<suppressed ~5 debug messages>
+Optimizing module logic_normalization_reduction_engine.
+
+12.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+12.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_mul..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp16_rsqrt_lut256..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \logic_normalization_reduction_engine..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+12.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \fp16_mul.
+  Optimizing cells in module \fp16_rsqrt_lut256.
+  Optimizing cells in module \logic_normalization_reduction_engine.
+Performed a total of 0 changes.
+
+12.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_mul'.
+Finding identical cells in module `\fp16_rsqrt_lut256'.
+Finding identical cells in module `\logic_normalization_reduction_engine'.
+Removed a total of 0 cells.
+
+12.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \fp16_rsqrt_lut256..
+Finding unused cells or wires in module \logic_normalization_reduction_engine..
+
+12.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000.
+Optimizing module fp16_add.
+Optimizing module fp16_mul.
+Optimizing module fp16_rsqrt_lut256.
+Optimizing module logic_normalization_reduction_engine.
+
+12.23. Finished OPT passes. (There is nothing left to do.)
+
+13. Printing statistics.
+
+=== $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000 ===
+
+   Number of wires:                 92
+   Number of wire bits:            508
+   Number of public wires:          38
+   Number of public wire bits:     370
+   Number of ports:                 17
+   Number of port bits:            137
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                287
+     $_AND_                         18
+     $_DFFE_PN0N_                   32
+     $_DFFE_PN0P_                  119
+     $_DFF_PN0_                      1
+     $_MUX_                         60
+     $_NOT_                         11
+     $_OR_                          40
+     fp16_add                        2
+     fp16_mul                        3
+     fp16_rsqrt_lut256               1
+
+=== fp16_add ===
+
+   Number of wires:               1571
+   Number of wire bits:           5957
+   Number of public wires:          28
+   Number of public wire bits:     303
+   Number of ports:                  3
+   Number of port bits:             48
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               4664
+     $_AND_                       1338
+     $_MUX_                       1464
+     $_NOT_                        476
+     $_OR_                         863
+     $_XOR_                        523
+
+=== fp16_mul ===
+
+   Number of wires:               1268
+   Number of wire bits:          14188
+   Number of public wires:          15
+   Number of public wire bits:     283
+   Number of ports:                  3
+   Number of port bits:             48
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               5626
+     $_AND_                       1464
+     $_MUX_                       2431
+     $_NOT_                        357
+     $_OR_                         750
+     $_XOR_                        624
+
+=== fp16_rsqrt_lut256 ===
+
+   Number of wires:               1021
+   Number of wire bits:           7862
+   Number of public wires:          21
+   Number of public wire bits:     186
+   Number of ports:                  8
+   Number of port bits:             38
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               2885
+     $_AND_                        715
+     $_DFFE_PN0P_                   16
+     $_MUX_                       1121
+     $_NOT_                        270
+     $_OR_                         506
+     $_XOR_                        257
+
+=== logic_normalization_reduction_engine ===
+
+   Number of wires:                111
+   Number of wire bits:            706
+   Number of public wires:          39
+   Number of public wire bits:     342
+   Number of ports:                 24
+   Number of port bits:            177
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                367
+     $_AND_                         14
+     $_DFFE_PN0P_                  115
+     $_DFF_PN0_                      3
+     $_MUX_                        121
+     $_NOT_                         11
+     $_OR_                          68
+     $_XOR_                         32
+     $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000      1
+     fp16_add                        2
+
+=== design hierarchy ===
+
+   logic_normalization_reduction_engine      1
+     $paramod\logic_normalization_scalar_engine\TAG_WIDTH=32'00000000000000000000000000010000      1
+       fp16_add                      2
+       fp16_mul                      3
+       fp16_rsqrt_lut256             1
+     fp16_add                        2
+
+   Number of wires:              11312
+   Number of wire bits:          75468
+   Number of public wires:         255
+   Number of public wire bits:    2959
+   Number of ports:                 70
+   Number of port bits:            688
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:              39064
+     $_AND_                      10491
+     $_DFFE_PN0N_                   32
+     $_DFFE_PN0P_                  250
+     $_DFF_PN0_                      4
+     $_MUX_                      14451
+     $_NOT_                       3267
+     $_OR_                        6316
+     $_XOR_                       4253
+
+End of script. Logfile hash: c10e1b4989, CPU: user 6.10s system 0.29s, MEM: 217.66 MB peak
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+Time spent: 28% 109x opt_expr (1 sec), 22% 1x techmap (1 sec), ...

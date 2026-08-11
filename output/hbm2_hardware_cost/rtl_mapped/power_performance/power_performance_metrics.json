@@ -1,0 +1,72 @@
+{
+  "hbm2_4hi_1stack": {
+    "capacity_GB": 4.0,
+    "required_capacity_GB": 8.0,
+    "capacity_feasible": false,
+    "theoretical_bandwidth_GBs": 307.2,
+    "achieved_bandwidth_GBs": 215.04,
+    "bandwidth_utilization": 0.7,
+    "normalized_useful_performance": 387.072,
+    "estimated_power_W": 3.4499999999999997,
+    "energy_per_GB_work_J": 0.008913070436507936,
+    "io_energy_per_transferred_bit_pJ": 2.0054408482142856,
+    "pim_speedup_assumption": 1.8,
+    "power_evidence": "architectural/synthetic unless replaced by activity or measurement"
+  },
+  "hbm2_8hi_1stack": {
+    "capacity_GB": 8.0,
+    "required_capacity_GB": 8.0,
+    "capacity_feasible": true,
+    "theoretical_bandwidth_GBs": 307.2,
+    "achieved_bandwidth_GBs": 215.04,
+    "bandwidth_utilization": 0.7,
+    "normalized_useful_performance": 387.072,
+    "estimated_power_W": 4.6,
+    "energy_per_GB_work_J": 0.011884093915343914,
+    "io_energy_per_transferred_bit_pJ": 2.6739211309523805,
+    "pim_speedup_assumption": 1.8,
+    "power_evidence": "architectural/synthetic unless replaced by activity or measurement"
+  },
+  "hbm2_12hi_1stack": {
+    "capacity_GB": 12.0,
+    "required_capacity_GB": 8.0,
+    "capacity_feasible": true,
+    "theoretical_bandwidth_GBs": 307.2,
+    "achieved_bandwidth_GBs": 215.04,
+    "bandwidth_utilization": 0.7,
+    "normalized_useful_performance": 387.072,
+    "estimated_power_W": 5.75,
+    "energy_per_GB_work_J": 0.014855117394179895,
+    "io_energy_per_transferred_bit_pJ": 3.3424014136904763,
+    "pim_speedup_assumption": 1.8,
+    "power_evidence": "architectural/synthetic unless replaced by activity or measurement"
+  },
+  "hbm2_8hi_2stack": {
+    "capacity_GB": 16.0,
+    "required_capacity_GB": 8.0,
+    "capacity_feasible": true,
+    "theoretical_bandwidth_GBs": 614.4,
+    "achieved_bandwidth_GBs": 430.08,
+    "bandwidth_utilization": 0.7,
+    "normalized_useful_performance": 774.144,
+    "estimated_power_W": 9.2,
+    "energy_per_GB_work_J": 0.011884093915343914,
+    "io_energy_per_transferred_bit_pJ": 2.6739211309523805,
+    "pim_speedup_assumption": 1.8,
+    "power_evidence": "architectural/synthetic unless replaced by activity or measurement"
+  },
+  "hbm2_8hi_no_pim": {
+    "capacity_GB": 8.0,
+    "required_capacity_GB": 8.0,
+    "capacity_feasible": true,
+    "theoretical_bandwidth_GBs": 307.2,
+    "achieved_bandwidth_GBs": 215.04,
+    "bandwidth_utilization": 0.7,
+    "normalized_useful_performance": 215.04,
+    "estimated_power_W": 4.0,
+    "energy_per_GB_work_J": 0.018601190476190476,
+    "io_energy_per_transferred_bit_pJ": 2.3251488095238098,
+    "pim_speedup_assumption": 1.0,
+    "power_evidence": "architectural/synthetic unless replaced by activity or measurement"
+  }
+}

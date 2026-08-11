@@ -2,6 +2,16 @@
 
 ## 프로젝트 소개
 
+### HBM2 PIM 아키텍처 시각화
+
+진행 중인 RTL 수정과 독립적으로, 출처 추적 가능한 HBM2 8Hi 아키텍처 모델을 생성하고 검증할 수 있다.
+
+```powershell
+.\tools\generate_hbm2_architecture.ps1
+```
+
+결과는 `output/hbm2_arch/`에 분리된다. 출처, 검증, KLayout/OpenSCAD 사용법과 non-signoff 한계는 `design/hbm2_architecture_model.md`를 참고한다.
+
 이 프로젝트는 **STOB리그 반도체 분야 6번 문제(PIM)**를 해결하기 위해 개발한 HBM2 기반 프로세서-인-메모리(PIM) 시뮬레이터다.
 
 PIM은 메모리 내부 또는 메모리 가까이에 연산 기능을 배치해 메모리와 프로세서 사이의 데이터 이동을 줄이는 기술이다. 이 저장소는 DRAMSim2를 기반으로 메모리 시스템과 PIM 블록을 통합하고, PIM 연산의 실행 사이클·메모리 트래픽·지연시간·대역폭·전력을 시뮬레이션한다.
@@ -126,3 +136,8 @@ PIM 기능에는 `ADDRESS_MAPPING_SCHEME=Scheme8`을 권장한다. `PIM_PRECISIO
 이 프로젝트는 [DRAMSim2](https://github.com/umd-memsys/DRAMSim2)를 기반으로 확장되었다. 자세한 라이선스 조건은 `LICENSE-PIMSimulator`와 `LICENSE-DRAMSIM2`를 확인한다.
 
 
+# HBM2 thermal analysis
+
+The RTL-independent HBM2 PIM power-to-temperature workflow is documented in [docs/HBM2_THERMAL_ANALYSIS.md](docs/HBM2_THERMAL_ANALYSIS.md).
+
+The source-traceable area/package/yield/power-performance cost workflow is documented in [hardware_cost/README.md](hardware_cost/README.md).

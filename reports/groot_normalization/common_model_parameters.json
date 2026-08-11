@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "created_date": "2026-08-11",
+  "workload_manifest": "gr00t_normalization_profile_manifest.csv",
+  "evidence_classes": [
+    "MEASURED",
+    "RTL_MEASURED",
+    "DERIVED",
+    "ASSUMED",
+    "UNVERIFIED"
+  ],
+  "datatype": {
+    "simulator": "FP16",
+    "official_model": "BF16",
+    "tensor_bytes_per_element": 2,
+    "statistic_format": "FP32",
+    "statistic_bytes": 4,
+    "status": "DERIVED"
+  },
+  "sweeps": {
+    "hidden_sizes": [64, 256, 512, 1024, 1536, 2048, 4096, 8192],
+    "bank_counts": [2, 4, 8, 16],
+    "bank_pcu_counts": [1, 2, 4, 8, 16],
+    "logic_pcu_counts": [1, 2, 4, 8, 16],
+    "clock_mhz": [100, 250, 500, 1000],
+    "offload_one_way_latency_ns": [250, 500, 1000, 2500, 5000, 10000],
+    "offload_bandwidth_gbps": [16, 32, 64, 128, 256, 512],
+    "ondie_one_way_latency_ns": [10, 25, 50, 100, 250],
+    "ondie_bandwidth_gbps": [128, 256, 512, 1024, 2048],
+    "rsqrt_latency_cycles": [2, 4, 8, 16, 32, 64],
+    "rsqrt_initiation_interval_cycles": [1, 2, 4, 8, 16, 32, 64]
+  },
+  "reference_point": {
+    "clock_mhz": 100,
+    "clock_status": "ASSUMED_FROM_10NS_PHYSICAL_CONSTRAINT_NOT_TIMING_CLOSED",
+    "banks": 16,
+    "bank_pcus": 8,
+    "logic_pcus": 16,
+    "offload_one_way_latency_ns": 2500,
+    "offload_bandwidth_gbps": 64,
+    "ondie_one_way_latency_ns": 50,
+    "ondie_bandwidth_gbps": 1024,
+    "gpu_kernel_launch_ns": 5000,
+    "gpu_hbm_bandwidth_gbytes_per_s": 1000,
+    "gpu_normalization_rows_per_ns": 32,
+    "vector_lanes_per_pcu": 16,
+    "layernorm_finalize_cycles_per_row": 4,
+    "rmsnorm_finalize_cycles_per_row": 4,
+    "rsqrt_latency_cycles": 1,
+    "rsqrt_initiation_interval_cycles": 1,
+    "parameter_status": "MIXED_RTL_MEASURED_AND_ASSUMED"
+  },
+  "rtl_measurements": {
+    "rsqrt_latency_cycles": {"value": 1, "status": "RTL_MEASURED", "source": "05_phase5_rsqrt_rtl_primitive_report.md"},
+    "rsqrt_initiation_interval_cycles": {"value": 1, "status": "RTL_MEASURED", "source": "05_phase5_rsqrt_rtl_primitive_report.md"},
+    "scalar_engine_total_cycles_per_row": {"value": 5, "status": "RTL_MEASURED", "source": "06_phase5_normalization_scalar_engine_report.md"},
+    "logic_normalization_engine_generic_cells": {"value": 39064, "status": "RTL_MEASURED_GENERIC_SYNTHESIS", "source": "07_phase5_hierarchical_reduction_engine_report.md"},
+    "logic_normalization_engine_array": {
+      "engines": [1, 2, 4, 8, 16],
+      "generic_cells": [27525, 55050, 110100, 220200, 440400],
+      "partial_pairs_per_cycle_per_engine": 1,
+      "scalar_finalize_rsqrt_cycles_per_row": 5,
+      "status": "RTL_MEASURED_GENERIC_SYNTHESIS",
+      "source": "17_phase5_logic_engine_replication_report.md"
+    },
+    "bank_local_scalar_reducer_generic_cells_per_bank": {"value": 15307, "status": "RTL_MEASURED_GENERIC_SYNTHESIS", "source": "09_phase5_bank_local_reduce_apply_report.md"},
+    "bank_local_scalar_reducer_elements_per_cycle_per_bank": {"value": 1, "status": "RTL_MEASURED_FROM_INTERFACE", "source": "rtl/bank_normalization_local_reducer.sv"},
+    "bank_vector_reducer_sweep": {
+      "lanes": [1, 2, 4, 8, 16],
+      "generic_cells_per_bank": [10787, 21330, 42389, 84501, 168725],
+      "generic_logic_path_length": [334, 566, 798, 1030, 1262],
+      "status": "RTL_MEASURED_GENERIC_SYNTHESIS",
+      "source": "14_phase5_bank_vector_reducer_tradeoff_report.md"
+    },
+    "bank_pipelined_vector_reducer_sweep": {
+      "lanes": [2, 4, 8, 16],
+      "generic_cells_per_bank": [21363, 42461, 84727, 169209],
+      "generic_logic_path_length": [333, 333, 333, 333],
+      "latency_from_last_vector_cycles": [2, 3, 4, 5],
+      "vector_initiation_interval_cycles": 1,
+      "status": "RTL_MEASURED_GENERIC_SYNTHESIS",
+      "source": "15_phase5_pipelined_bank_vector_reducer_report.md"
+    },
+    "bank_multirow_vector_reducer_4lane": {
+      "result_fifo_depths_synthesized": [4, 8, 16],
+      "generic_cells_per_bank": [43008, 43634, 44834],
+      "generic_logic_path_length": [333, 333, 333],
+      "row_initiation_interval_for_one_vector_rows": 1,
+      "selected_fifo_depth": 4,
+      "selected_generic_cells_per_bank": 43008,
+      "status": "RTL_MEASURED_GENERIC_SYNTHESIS",
+      "source": "16_phase5_multirow_overlap_reducer_report.md"
+    },
+    "shared_pair_reducer_16bank_generic_cells": {"value": 112525, "status": "RTL_MEASURED_GENERIC_SYNTHESIS_NOT_RAW_REDUCER", "source": "11_phase5_shared_reducer_microprogram_tradeoff_report.md"},
+    "bank_pcu_affine_rmsnorm_commands_per_vector": {"value": 2, "status": "RTL_MEASURED", "source": "12_phase5_bank_pcu_normalization_microprogram_report.md"},
+    "bank_pcu_affine_layernorm_commands_per_vector": {"value": 4, "status": "RTL_MEASURED", "source": "12_phase5_bank_pcu_normalization_microprogram_report.md"}
+  },
+  "system_simulation": {
+    "channels": 8,
+    "request_rates_per_second_per_channel": {"low": 500, "base": 2500, "high": 10000},
+    "resource_capacity": {"bank": 8, "logic": 16, "gpu": 1, "offload_link": 1, "ondie_link": 1},
+    "status": "ASSUMED_ARRIVAL_AND_RESOURCE_CAPACITY_WITH_RTL_STAGE_LATENCIES"
+  },
+  "local_gpu_environment": {
+    "nvidia_smi_available": false,
+    "pytorch_version": "2.8.0+cpu",
+    "torch_cuda_available": false,
+    "status": "MEASURED_2026_08_11",
+    "gpu_baseline_allowed": false
+  },
+  "unknown_until_measured": {
+    "gpu_normalization_latency_ns": null,
+    "gpu_energy_nj": null,
+    "logic_rsqrt_area_um2": null,
+    "logic_rsqrt_power_mw": null,
+    "bf16_conversion_cycles": null,
+    "bf16_conversion_energy_nj": null,
+    "bank_apply_cycles_per_element": null,
+    "logic_apply_cycles_per_element": null
+  }
+}

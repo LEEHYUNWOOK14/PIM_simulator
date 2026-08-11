@@ -1,0 +1,15 @@
+id,severity,title,status
+AUD-001,HIGH,FP16 multiplier mismatch,RESOLVED_VERIFIED
+AUD-002,HIGH,DRAM stalled response overwrite,RESOLVED_VERIFIED
+AUD-003,HIGH,Bank operand valid ignored,RESOLVED_VERIFIED
+AUD-004,HIGH,Finite CRF JUMP loops forever,RESOLVED_VERIFIED
+AUD-005,HIGH,Illegal CRF deadlock masks error,RESOLVED_VERIFIED
+AUD-006,HIGH,Epoch barrier does not gate dispatch,RESOLVED_VERIFIED
+AUD-007,HIGH,Channel derived from tag low bits,RESOLVED_VERIFIED
+AUD-008,CRITICAL,Reduction accumulator result route absent from Full-PIM top,RESOLVED_VERIFIED
+AUD-009,HIGH,GDS top differs from audited Full-PIM top,RESOLVED_VERIFIED_INTEGRATION_GDS
+AUD-010,MEDIUM,NOP AUTO FILL CRF repeat semantics missing,RESOLVED_VERIFIED
+AUD-011,MEDIUM,Parameter one creates zero-width ports,RESOLVED_VERIFIED
+AUD-012,MEDIUM,Placement route not latched with transaction,RESOLVED_VERIFIED
+AUD-013,MEDIUM,DRAM timing model incomplete,RESOLVED_VERIFIED
+AUD-014,LOW,Architecture documentation encoding damage,RESOLVED_VERIFIED

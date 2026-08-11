@@ -1,0 +1,58 @@
+{
+  "ambient_temperature_K": {
+    "value": 300.0,
+    "unit": "K",
+    "classification": "project_config",
+    "source": "nominal architectural boundary",
+    "confidence": "medium",
+    "uncertainty": {
+      "min": 293.15,
+      "max": 318.15
+    }
+  },
+  "initial_temperature_K": {
+    "value": 300.0,
+    "unit": "K",
+    "classification": "project_config",
+    "source": "equal to nominal ambient",
+    "confidence": "medium"
+  },
+  "top": {
+    "type": "convection",
+    "h_W_m2K": {
+      "value": 5000.0,
+      "unit": "W/(m^2*K)",
+      "classification": "estimated",
+      "source": "effective lid/heatsink boundary for sensitivity study",
+      "confidence": "low",
+      "uncertainty": {
+        "min": 1000.0,
+        "max": 15000.0
+      }
+    }
+  },
+  "bottom": {
+    "type": "convection",
+    "h_W_m2K": {
+      "value": 250.0,
+      "unit": "W/(m^2*K)",
+      "classification": "estimated",
+      "source": "package-to-board effective boundary",
+      "confidence": "low",
+      "uncertainty": {
+        "min": 50.0,
+        "max": 1000.0
+      }
+    }
+  },
+  "side": {
+    "type": "adiabatic"
+  },
+  "profiles": [
+    "top_convection",
+    "top_fixed_temperature",
+    "bottom_fixed_temperature",
+    "lid_heatsink_equivalent",
+    "adiabatic_sidewall"
+  ]
+}

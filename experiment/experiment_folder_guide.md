@@ -8,6 +8,7 @@
 - [run_first_experiments.sh](./run_first_experiments.sh)
 - [run_routing_checks.sh](./run_routing_checks.sh)
 - [run_routing_checks.md](./run_routing_checks.md)
+- [gr00t_placement/README.md](./gr00t_placement/README.md)
 
 ## 왜 스크립트가 필요한가
 

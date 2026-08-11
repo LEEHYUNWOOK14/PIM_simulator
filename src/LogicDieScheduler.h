@@ -453,6 +453,69 @@ class LogicDieScheduler
         return mask;
     }
 
+    void submitCentralRequest(uint64_t streamId)
+    {
+        centralRequests_.insert(streamId);
+    }
+
+    uint64_t buildCentralGrants(uint64_t currentCycle, uint64_t queueDepth,
+                                uint64_t streamCount)
+    {
+        while (!waitingReservationStarts_.empty() &&
+               waitingReservationStarts_.top() <= currentCycle)
+            waitingReservationStarts_.pop();
+
+        centralGrants_.clear();
+        if (centralRequests_.empty() || queueDepth == 0 || streamCount == 0)
+        {
+            centralRequests_.clear();
+            return 0;
+        }
+
+        const uint64_t occupied = waitingReservationStarts_.size();
+        const uint64_t available = occupied < queueDepth ? queueDepth - occupied : 0;
+        if (available == 0)
+        {
+            centralRequests_.clear();
+            return 0;
+        }
+
+        std::vector<uint64_t> orderedRequests(centralRequests_.begin(),
+                                              centralRequests_.end());
+        std::sort(orderedRequests.begin(), orderedRequests.end());
+        auto start = std::lower_bound(orderedRequests.begin(), orderedRequests.end(),
+                                      centralRoundRobinCursor_);
+        const size_t startIndex = start == orderedRequests.end()
+                                      ? 0
+                                      : static_cast<size_t>(start - orderedRequests.begin());
+        const uint64_t grantCount =
+            std::min<uint64_t>(available, orderedRequests.size());
+        uint64_t lastGranted = 0;
+        for (uint64_t offset = 0; offset < grantCount; offset++)
+        {
+            lastGranted = orderedRequests[(startIndex + offset) % orderedRequests.size()];
+            centralGrants_.insert(lastGranted);
+        }
+        centralRoundRobinCursor_ = (lastGranted + 1) % streamCount;
+        centralRequests_.clear();
+        centralGrantBuilds_++;
+        centralGrantedRequests_ += grantCount;
+        return grantCount;
+    }
+
+    bool hasCentralGrant(uint64_t streamId) const
+    {
+        return centralGrants_.find(streamId) != centralGrants_.end();
+    }
+
+    bool consumeCentralGrant(uint64_t streamId)
+    {
+        return centralGrants_.erase(streamId) != 0;
+    }
+
+    uint64_t getCentralGrantBuilds() const { return centralGrantBuilds_; }
+    uint64_t getCentralGrantedRequests() const { return centralGrantedRequests_; }
+
   private:
     uint64_t busyUntil_;
     uint64_t commandCount_;
@@ -501,6 +564,11 @@ class LogicDieScheduler
     std::vector<LogicDieReservationEvent> reservationEvents_;
     std::priority_queue<uint64_t, std::vector<uint64_t>, std::greater<uint64_t>>
         waitingReservationStarts_;
+    std::unordered_set<uint64_t> centralRequests_;
+    std::unordered_set<uint64_t> centralGrants_;
+    uint64_t centralRoundRobinCursor_ = 0;
+    uint64_t centralGrantBuilds_ = 0;
+    uint64_t centralGrantedRequests_ = 0;
 
     bool currentReadyMaskComplete() const
     {

@@ -1,0 +1,25 @@
+{
+  "model": "nvidia/GR00T-N1.7-3B",
+  "checkpoint_revision": "2fc962b973bccdd5d8ce4f67cc63b264d6886495",
+  "scope": "seven unique LayerNorm/RMSNorm profiles projected to 333 calls",
+  "full_model_inference": false,
+  "dtype_official": "bfloat16",
+  "dtype_simulated": "float16",
+  "projected_cycles": 2040382,
+  "minimum_input_plus_output_bytes": 232939520,
+  "minimum_arithmetic_intensity_ops_per_byte": null,
+  "projected_runtime_at_constraint_s": 0.02040382,
+  "minimum_aggregate_bandwidth_gbps": 11.416466132322281,
+  "limitations": [
+    "Excludes affine parameters, reductions, intermediates, cache effects and protocol traffic.",
+    "Uses deterministic synthetic FP16 tensors, not pretrained BF16 activation traces.",
+    "Does not measure channel request rate or PCU utilization; those remain assumptions."
+  ],
+  "source_ids": [
+    "S1",
+    "S2",
+    "S3",
+    "L1",
+    "A4"
+  ]
+}

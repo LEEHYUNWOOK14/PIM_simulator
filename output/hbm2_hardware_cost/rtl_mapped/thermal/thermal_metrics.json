@@ -1,0 +1,67 @@
+{
+  "hbm2_4hi_1stack": {
+    "ambient_temperature_K": 300.0,
+    "predicted_peak_temperature_K": 316.0683701079022,
+    "peak_temperature_rise_K": 16.06837010790219,
+    "temperature_limit_K": 358.15,
+    "thermal_headroom_K": 42.081629892097794,
+    "equivalent_stack_thermal_resistance_K_W": 4.657498582000636,
+    "required_cooling_conductance_W_K": 0.05932932072227001,
+    "thermal_burden_ratio": 0.27632622713503346,
+    "thermal_feasible": true,
+    "reference_solver": "output/hbm2_thermal/reference/summary.json",
+    "evidence": "derived from the uncalibrated architectural thermal reference model"
+  },
+  "hbm2_8hi_1stack": {
+    "ambient_temperature_K": 300.0,
+    "predicted_peak_temperature_K": 325.96908300267023,
+    "peak_temperature_rise_K": 25.96908300267021,
+    "temperature_limit_K": 358.15,
+    "thermal_headroom_K": 32.180916997329746,
+    "equivalent_stack_thermal_resistance_K_W": 5.645452826667437,
+    "required_cooling_conductance_W_K": 0.07910576096302668,
+    "thermal_burden_ratio": 0.4465878418343976,
+    "thermal_feasible": true,
+    "reference_solver": "output/hbm2_thermal/reference/summary.json",
+    "evidence": "derived from the uncalibrated architectural thermal reference model"
+  },
+  "hbm2_12hi_1stack": {
+    "ambient_temperature_K": 300.0,
+    "predicted_peak_temperature_K": 338.14209066017185,
+    "peak_temperature_rise_K": 38.14209066017186,
+    "temperature_limit_K": 358.15,
+    "thermal_headroom_K": 20.00790933982813,
+    "equivalent_stack_thermal_resistance_K_W": 6.633407071334236,
+    "required_cooling_conductance_W_K": 0.09888220120378335,
+    "thermal_burden_ratio": 0.6559258926942713,
+    "thermal_feasible": true,
+    "reference_solver": "output/hbm2_thermal/reference/summary.json",
+    "evidence": "derived from the uncalibrated architectural thermal reference model"
+  },
+  "hbm2_8hi_2stack": {
+    "ambient_temperature_K": 300.0,
+    "predicted_peak_temperature_K": 351.9381660053404,
+    "peak_temperature_rise_K": 51.93816600534042,
+    "temperature_limit_K": 358.15,
+    "thermal_headroom_K": 6.211833994659571,
+    "equivalent_stack_thermal_resistance_K_W": 5.645452826667437,
+    "required_cooling_conductance_W_K": 0.15821152192605337,
+    "thermal_burden_ratio": 0.8931756836687952,
+    "thermal_feasible": true,
+    "reference_solver": "output/hbm2_thermal/reference/summary.json",
+    "evidence": "derived from the uncalibrated architectural thermal reference model"
+  },
+  "hbm2_8hi_no_pim": {
+    "ambient_temperature_K": 300.0,
+    "predicted_peak_temperature_K": 322.58181130666975,
+    "peak_temperature_rise_K": 22.58181130666975,
+    "temperature_limit_K": 358.15,
+    "thermal_headroom_K": 35.56818869333023,
+    "equivalent_stack_thermal_resistance_K_W": 5.645452826667437,
+    "required_cooling_conductance_W_K": 0.06878761822871886,
+    "thermal_burden_ratio": 0.38833725376904144,
+    "thermal_feasible": true,
+    "reference_solver": "output/hbm2_thermal/reference/summary.json",
+    "evidence": "derived from the uncalibrated architectural thermal reference model"
+  }
+}

@@ -3,7 +3,7 @@ module logic_die_dual_link_arbiter #(
     parameter int unsigned OUTPUTS = 2,
     parameter int unsigned KEY_WIDTH = 64,
     parameter int unsigned DATA_WIDTH = 256,
-    parameter int unsigned INDEX_WIDTH = $clog2(INPUTS)
+    parameter int unsigned INDEX_WIDTH = INPUTS > 1 ? $clog2(INPUTS) : 1
 ) (
     input  logic clk_i,
     input  logic rst_ni,

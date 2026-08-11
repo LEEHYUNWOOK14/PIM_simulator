@@ -3,7 +3,7 @@ module shared_fp16_pipeline_fabric #(
     parameter int unsigned PIPELINES = 1,
     parameter int unsigned LANES = 16,
     parameter int unsigned DATA_WIDTH = LANES * 16,
-    parameter int unsigned SOURCE_WIDTH = $clog2(SOURCES)
+    parameter int unsigned SOURCE_WIDTH = SOURCES > 1 ? $clog2(SOURCES) : 1
 ) (
     input  logic clk_i,
     input  logic rst_ni,

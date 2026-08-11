@@ -3,377 +3,562 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>계층형 HBM2-PIM RTL 2D 구조</title>
+  <title>Logic-die RTL 구조 시각화</title>
   <style>
     :root {
-      --ink: #17212b;
-      --muted: #5c6874;
-      --line: #bcc7d0;
-      --paper: #fff;
-      --soft: #f3f6f7;
-      --bank: #dcebf5;
-      --bank-line: #33759a;
-      --logic: #dff0e7;
-      --logic-line: #287a51;
-      --link: #fff0c8;
-      --link-line: #a87500;
-      --rtl: #e9e1f2;
-      --rtl-line: #72509a;
-      --pending: #f7e1df;
-      --pending-line: #aa4f46;
-      --navy: #16324f;
-      --max: 1240px;
+      --bg: #0f1720;
+      --panel: #152130;
+      --panel-2: #101a27;
+      --text: #e7eef6;
+      --muted: #95a7ba;
+      --line: #2a3a4d;
+      --bank: #d7ecf7;
+      --bank-line: #3f7ea6;
+      --logic: #daf0e2;
+      --logic-line: #2f8459;
+      --pipe: #f4e6c3;
+      --pipe-line: #b18316;
+      --fp16: #eadcf8;
+      --fp16-line: #7b58a6;
+      --warn: #f6d9d5;
+      --warn-line: #b45b51;
+      --max: 1280px;
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      color: var(--ink);
-      background: var(--paper);
+      background:
+        radial-gradient(circle at top left, rgba(91, 140, 255, .14), transparent 28%),
+        radial-gradient(circle at top right, rgba(82, 196, 140, .12), transparent 24%),
+        var(--bg);
+      color: var(--text);
       font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", Arial, sans-serif;
-      line-height: 1.65;
+      line-height: 1.55;
       letter-spacing: 0;
     }
     nav {
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 10;
       display: flex;
-      gap: 20px;
+      gap: 18px;
       overflow-x: auto;
-      padding: 12px max(24px, calc((100% - var(--max)) / 2));
-      border-bottom: 1px solid var(--line);
-      background: rgba(255,255,255,.96);
+      padding: 12px max(20px, calc((100% - var(--max)) / 2));
+      background: rgba(10, 16, 24, .92);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(10px);
       white-space: nowrap;
     }
-    nav a { color: var(--muted); font-size: 14px; text-decoration: none; }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
     header {
-      min-height: 430px;
-      color: white;
-      background: var(--navy);
-      border-bottom: 8px solid #278c91;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background:
+        linear-gradient(135deg, rgba(15, 23, 32, .92), rgba(20, 32, 45, .94)),
+        var(--bg);
     }
     .hero {
       max-width: var(--max);
-      margin: auto;
-      padding: 76px 24px 54px;
+      margin: 0 auto;
+      padding: 76px 24px 52px;
     }
-    .eyebrow { color: #8ed9dd; font-weight: 800; }
-    h1 { max-width: 850px; margin: 12px 0 20px; font-size: 48px; line-height: 1.18; }
-    .hero p { max-width: 850px; margin: 0; color: #dbe7ef; font-size: 19px; }
-    .legend { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 36px; }
-    .legend span { display: flex; align-items: center; gap: 8px; font-size: 14px; }
-    .swatch { width: 18px; height: 18px; border: 2px solid; }
-    section { border-bottom: 1px solid var(--line); }
-    section:nth-of-type(even) { background: var(--soft); }
-    .inner { max-width: var(--max); margin: auto; padding: 64px 24px; }
-    h2 { margin: 0 0 12px; color: var(--navy); font-size: 32px; line-height: 1.3; }
-    h3 { margin: 28px 0 8px; color: var(--navy); font-size: 21px; }
-    h4 { margin: 0 0 6px; font-size: 16px; }
-    .lead { max-width: 900px; color: var(--muted); font-size: 18px; }
+    .eyebrow {
+      display: inline-block;
+      padding: 5px 10px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 999px;
+      color: #95e0d0;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .01em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 14px 0 16px;
+      max-width: 900px;
+      font-size: 54px;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+    .hero p {
+      margin: 0;
+      max-width: 920px;
+      color: #cad8e6;
+      font-size: 18px;
+    }
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      font-size: 13px;
+    }
+    .swatch {
+      width: 14px;
+      height: 14px;
+      border: 2px solid;
+      border-radius: 3px;
+      flex: 0 0 auto;
+    }
+    main { padding-bottom: 56px; }
+    section { border-bottom: 1px solid rgba(255,255,255,.08); }
+    section:nth-child(even) { background: rgba(255,255,255,.02); }
+    .inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 30px;
+      line-height: 1.2;
+    }
+    .lead {
+      margin: 0;
+      max-width: 980px;
+      color: var(--muted);
+      font-size: 17px;
+    }
     .diagram {
-      margin-top: 32px;
-      padding: 28px;
+      margin-top: 26px;
+      padding: 22px;
       border: 1px solid var(--line);
-      background: white;
+      border-radius: 16px;
+      background: rgba(10, 16, 24, .65);
       overflow-x: auto;
     }
-    .node {
-      min-width: 120px;
-      padding: 12px;
-      border: 2px solid;
-      background: white;
-      text-align: center;
+    .frame {
+      min-width: 1000px;
+      display: grid;
+      gap: 12px;
     }
-    .node small { display: block; margin-top: 4px; color: var(--muted); }
+    .row {
+      display: grid;
+      align-items: center;
+      gap: 12px;
+    }
+    .node {
+      padding: 12px 14px;
+      border: 2px solid;
+      border-radius: 12px;
+      text-align: center;
+      color: #13202b;
+      background: #fff;
+      font-weight: 700;
+    }
+    .node small {
+      display: block;
+      margin-top: 4px;
+      color: #546577;
+      font-weight: 600;
+    }
     .bank { border-color: var(--bank-line); background: var(--bank); }
     .logic { border-color: var(--logic-line); background: var(--logic); }
-    .link { border-color: var(--link-line); background: var(--link); }
-    .rtl { border-color: var(--rtl-line); background: var(--rtl); }
-    .pending { border-color: var(--pending-line); background: var(--pending); border-style: dashed; }
-    .arrow { color: #536472; font-size: 25px; font-weight: 800; text-align: center; }
-    .overview {
-      min-width: 900px;
+    .pipe { border-color: var(--pipe-line); background: var(--pipe); }
+    .fp16 { border-color: var(--fp16-line); background: var(--fp16); }
+    .warn { border-color: var(--warn-line); background: var(--warn); }
+    .arrow {
+      color: #b8c7d8;
+      font-size: 24px;
+      font-weight: 800;
+      text-align: center;
+      user-select: none;
+    }
+    .grid-3 {
       display: grid;
-      grid-template-columns: 1fr 52px 1.2fr 52px 1.05fr;
+      grid-template-columns: 1fr 52px 1.2fr 52px 1fr;
+      align-items: center;
+      gap: 10px;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: 1.05fr 52px 1.2fr 52px 1fr 52px 0.95fr;
       align-items: center;
       gap: 10px;
     }
     .stack { display: grid; gap: 8px; }
-    .dram-die {
-      padding: 10px 14px;
+    .bank-stack { display: grid; gap: 8px; }
+    .bank-die {
+      padding: 10px 12px;
       border: 2px solid var(--bank-line);
-      background: var(--bank);
+      border-radius: 12px;
+      background: rgba(215, 236, 247, .96);
+      color: #13202b;
       text-align: center;
-      font-weight: 750;
+      font-weight: 700;
     }
-    .logic-die {
+    .logic-core {
       padding: 18px;
-      border: 3px solid var(--logic-line);
-      background: var(--logic);
+      border: 2px solid var(--logic-line);
+      border-radius: 16px;
+      background: rgba(218, 240, 226, .96);
+      color: #13202b;
     }
-    .logic-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 12px; }
-    .channel-map {
-      min-width: 1030px;
+    .logic-core h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      color: #154b31;
+    }
+    .logic-grid {
       display: grid;
-      grid-template-columns: 2fr 56px 1.1fr 56px 1.2fr;
-      align-items: center;
-      gap: 12px;
-    }
-    .channels { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-    .channel {
-      padding: 12px 8px;
-      border: 2px solid var(--bank-line);
-      background: var(--bank);
-      text-align: center;
-      font-weight: 750;
-    }
-    .ellipsis { color: var(--muted); font-weight: 800; }
-    .dual { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .channel-detail {
-      min-width: 960px;
-      display: grid;
-      grid-template-columns: 1.1fr 46px 1.15fr 46px 1.2fr 46px .9fr;
-      align-items: center;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
     }
-    .sources { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
-    .source { padding: 8px; border: 1px solid var(--bank-line); background: #edf6fb; text-align: center; }
-    .pipeline-box { border: 3px solid var(--logic-line); background: var(--logic); padding: 14px; }
-    .pipeline { display: grid; grid-template-columns: 1fr 34px 1fr 34px 1fr; align-items: center; }
-    .mini-arrow { text-align: center; font-weight: 800; color: #536472; }
-    .lane-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .status-table { width: 100%; margin-top: 26px; border-collapse: collapse; background: white; }
-    th, td { padding: 13px 12px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
-    th { background: #e8edf0; color: var(--navy); }
+    .subgrid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .channel-box, .source-box, .lane-box, .pipeline-box {
+      padding: 12px 10px;
+      border-radius: 12px;
+      text-align: center;
+      color: #13202b;
+      font-weight: 700;
+    }
+    .channel-box, .source-box { border: 2px solid var(--bank-line); background: rgba(215,236,247,.96); }
+    .lane-box { border: 2px solid var(--fp16-line); background: rgba(234,220,248,.96); }
+    .pipeline-box { border: 2px solid var(--pipe-line); background: rgba(244,230,195,.96); }
+    .callout {
+      margin-top: 22px;
+      padding: 16px 18px;
+      border-left: 5px solid var(--logic-line);
+      border-radius: 0 12px 12px 0;
+      background: rgba(47, 132, 89, .12);
+      color: #deefe5;
+    }
+    .note {
+      color: var(--muted);
+      margin-top: 16px;
+      font-size: 14px;
+    }
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 860px;
+      background: rgba(10, 16, 24, .72);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 12px 12px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      color: #dce8f4;
+      background: rgba(255,255,255,.04);
+      font-size: 14px;
+    }
+    td { color: #d9e4ef; }
     .num { text-align: right; font-variant-numeric: tabular-nums; }
-    .badge { display: inline-block; padding: 2px 7px; border: 1px solid; font-size: 12px; font-weight: 800; }
-    .done { color: #1f6d47; background: #e1f1e8; }
-    .next { color: #8a5e00; background: #fff1c9; }
-    .todo { color: #9b4038; background: #f8e1df; }
-    .callout { margin-top: 24px; padding: 18px 20px; border-left: 5px solid var(--logic-line); background: #edf7f1; }
-    .warning { border-left-color: var(--pending-line); background: #fbefed; }
-    .flow-list { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 28px; border: 1px solid var(--line); }
-    .flow-step { position: relative; min-height: 150px; padding: 22px; border-right: 1px solid var(--line); background: white; }
-    .flow-step:last-child { border-right: 0; }
-    .flow-step strong { display: block; margin-bottom: 8px; color: var(--navy); }
-    .flow-step::after { content: "→"; position: absolute; right: -13px; top: 48px; z-index: 2; font-size: 24px; color: var(--logic-line); }
-    .flow-step:last-child::after { content: ""; }
-    code { padding: 2px 5px; background: #edf0f2; font-family: Consolas, monospace; }
-    footer { padding: 34px 24px; color: #dbe7ef; background: var(--navy); text-align: center; }
-    @media (max-width: 760px) {
+    .foot {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 28px 24px 44px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .mini-title {
+      margin: 0 0 14px;
+      color: #dce8f4;
+      font-size: 18px;
+    }
+    @media (max-width: 800px) {
       h1 { font-size: 36px; }
-      .inner { padding: 46px 18px; }
+      .inner, .hero { padding-left: 18px; padding-right: 18px; }
       .diagram { padding: 16px; }
-      .flow-list { grid-template-columns: 1fr; }
-      .flow-step { min-height: 0; border-right: 0; border-bottom: 1px solid var(--line); }
-      .flow-step::after { content: "↓"; right: 20px; top: auto; bottom: -18px; }
-      table { min-width: 720px; }
-      .table-wrap { overflow-x: auto; }
+      .frame { min-width: 900px; }
     }
     @media print {
       nav { display: none; }
-      header { min-height: 0; }
-      section { break-inside: avoid; }
+      body { background: #fff; color: #111; }
+      header, section { break-inside: avoid; }
+      .diagram, table { background: #fff; }
     }
   </style>
 </head>
 <body>
-  <nav aria-label="문서 목차">
-    <a href="#position">배치</a>
-    <a href="#global">64채널 구조</a>
-    <a href="#channel">채널 내부</a>
-    <a href="#operation">연산 분담</a>
-    <a href="#verification">검증 결과</a>
-    <a href="#remaining">남은 작업</a>
+  <nav aria-label="섹션">
+    <a href="#overview">개요</a>
+    <a href="#topology">64채널 토폴로지</a>
+    <a href="#hierarchy">계층 경로</a>
+    <a href="#shared">공유 FP16</a>
+    <a href="#notes">변경 포인트</a>
   </nav>
 
   <header>
     <div class="hero">
-      <div class="eyebrow">STOB Hierarchical HBM2-PIM</div>
-      <h1>Logic-die PIM RTL<br>2D 아키텍처 지도</h1>
-      <p>기존 bank-side PCU를 유지하면서, 여러 bank와 channel의 결과를 모으는 공유 연산 계층을 HBM base logic die에 추가한 구조입니다. 단순히 PCU를 더한 것이 아니라 데이터 이동, 공유 파이프라인, 중재와 backpressure를 함께 설계합니다.</p>
-      <div class="legend" aria-label="색상 범례">
-        <span><i class="swatch bank" aria-hidden="true"></i>기존 Bank-side 영역</span>
-        <span><i class="swatch logic" aria-hidden="true"></i>추가한 Logic-die 영역</span>
-        <span><i class="swatch link" aria-hidden="true"></i>공유 링크·중재기</span>
-        <span><i class="swatch pending" aria-hidden="true"></i>향후 통합 영역</span>
+      <span class="eyebrow">RTL Architecture Map</span>
+      <h1>Logic-die RTL 구조 시각화</h1>
+      <p>
+        지금까지 바뀐 로직다이 RTL을 기준으로, 64채널 HBM PIM에서 bank-local reduction,
+        채널별 link arbitration, shared FP16 pipeline, 그리고 최상위 dual-link aggregation이
+        어떻게 겹쳐지는지 한 장으로 볼 수 있게 정리했습니다.
+      </p>
+      <div class="legend">
+        <span class="chip"><i class="swatch bank" aria-hidden="true"></i>Bank-side reduction / source</span>
+        <span class="chip"><i class="swatch logic" aria-hidden="true"></i>Logic-die control / aggregation</span>
+        <span class="chip"><i class="swatch pipe" aria-hidden="true"></i>Shared FP16 pipeline</span>
+        <span class="chip"><i class="swatch fp16" aria-hidden="true"></i>FP16 datapath</span>
+        <span class="chip"><i class="swatch warn" aria-hidden="true"></i>Future integration point</span>
       </div>
     </div>
   </header>
 
   <main>
-    <section id="position">
+    <section id="overview">
       <div class="inner">
-        <h2>1. Logic die는 어디에 놓였는가</h2>
-        <p class="lead">DRAM bank 옆의 local PCU는 그대로 둡니다. 새 global PCU, scheduler, accumulator와 공유 buffer는 적층 DRAM 아래의 base logic die에 놓는 것으로 모델링했습니다.</p>
+        <h2>1. 전체 구조</h2>
+        <p class="lead">
+          `logic_die_64ch_reduction_top.sv`를 중심으로 보면, 각 채널은 8개의 PIM block을 가지고
+          bank-local reduction buffer에서 partial sum을 모은 뒤 channel arbiter를 거쳐
+          base logic die의 dual-link arbiter로 올라갑니다.
+        </p>
         <div class="diagram">
-          <div class="overview">
-            <div class="stack">
-              <div class="dram-die">DRAM Die 4 · Bank + Local PCU</div>
-              <div class="dram-die">DRAM Die 3 · Bank + Local PCU</div>
-              <div class="dram-die">DRAM Die 2 · Bank + Local PCU</div>
-              <div class="dram-die">DRAM Die 1 · Bank + Local PCU</div>
-            </div>
-            <div class="arrow">↓</div>
-            <div class="logic-die">
-              <h3 style="margin-top:0">Base Logic Die</h3>
-              <div class="logic-grid">
-                <div class="node logic">Global PCU</div>
-                <div class="node logic">FP16 Accumulator</div>
-                <div class="node link">Global Scheduler</div>
-                <div class="node link">Shared Buffer</div>
+          <div class="frame">
+            <div class="grid-3">
+              <div class="stack">
+                <div class="bank-die">DRAM Channel Cluster 0</div>
+                <div class="bank-die">DRAM Channel Cluster 1</div>
+                <div class="bank-die">DRAM Channel Cluster 2</div>
+                <div class="bank-die">DRAM Channel Cluster 63</div>
               </div>
-            </div>
-            <div class="arrow">↔</div>
-            <div class="node pending"><strong>완성형 HBM Controller</strong><small>Command grant · TSV · 물리 배선은 후속 통합</small></div>
-          </div>
-        </div>
-        <div class="callout"><strong>핵심:</strong> local PCU를 없애는 구조가 아닙니다. 가까이서 끝낼 계산은 bank에 남기고, 여러 bank·channel을 연결해야 하는 계산만 logic die가 담당합니다.</div>
-      </div>
-    </section>
-
-    <section id="global">
-      <div class="inner">
-        <h2>2. 64채널 전체 RTL 구조</h2>
-        <p class="lead">각 channel은 8개 PIM source를 하나로 모으고, base logic die는 64개 channel 결과를 두 개의 256-bit lane으로 배출합니다.</p>
-        <div class="diagram">
-          <div class="channel-map">
-            <div class="channels">
-              <div class="channel">CH 0<br>8 Sources</div>
-              <div class="channel">CH 1<br>8 Sources</div>
-              <div class="channel">CH 2<br>8 Sources</div>
-              <div class="channel">CH 3<br>8 Sources</div>
-              <div class="channel ellipsis">···</div>
-              <div class="channel">CH 61<br>8 Sources</div>
-              <div class="channel">CH 62<br>8 Sources</div>
-              <div class="channel">CH 63<br>8 Sources</div>
-            </div>
-            <div class="arrow">→</div>
-            <div class="node link"><strong>64 × Local Arbiter</strong><small>각 channel에서 8→1</small></div>
-            <div class="arrow">→</div>
-            <div>
-              <div class="node logic"><strong>Global 64→2 Arbiter</strong><small>Base logic die 공유 중재</small></div>
-              <div class="dual" style="margin-top:10px">
-                <div class="node rtl">Lane 0<br>256 bit</div>
-                <div class="node rtl">Lane 1<br>256 bit</div>
+              <div class="arrow">→</div>
+              <div class="logic-core">
+                <h3>Base Logic Die</h3>
+                <div class="logic-grid">
+                  <div class="node logic">Global scheduler<small>mode / grant / ready</small></div>
+                  <div class="node logic">Output retirement<small>final valid / sink</small></div>
+                  <div class="node pipe">Shared weight / command path<small>fill, drain, barrier</small></div>
+                  <div class="node fp16">FP16 accumulation<small>lane-based add</small></div>
+                </div>
+              </div>
+              <div class="arrow">→</div>
+              <div class="node warn">
+                <strong>System controller</strong>
+                <small>HBM command issue / stall / epoch tracking</small>
               </div>
             </div>
           </div>
         </div>
-        <div class="callout"><strong>최대 데이터 폭:</strong> 256 bit × 2 lane = 512 bit = <strong>64 B/cycle</strong>. 실제 MobileNetV4 trace에서도 8,192 burst가 4,096개의 full dual-lane cycle로 배출됐습니다.</div>
+        <div class="callout">
+          핵심 변화는 bank 안에서만 끝나던 누산을 넘어서, logic die가 결과 수집과 배출,
+          멀티채널 조정, FP16 공유 파이프라인까지 맡도록 구조가 커졌다는 점입니다.
+        </div>
       </div>
     </section>
 
-    <section id="channel">
+    <section id="topology">
       <div class="inner">
-        <h2>3. 한 채널 내부 확대</h2>
-        <p class="lead">연산기를 source마다 복제하지 않고, 8개 source가 제한된 수의 16-lane FP16 pipeline을 공유합니다.</p>
+        <h2>2. 64채널 계층 토폴로지</h2>
+        <p class="lead">
+          각 채널은 8개의 PIM block을 모아 local arbiter로 정리하고, 그 결과가 다시
+          global dual-link arbiter로 합쳐집니다.
+        </p>
         <div class="diagram">
-          <div class="channel-detail">
-            <div class="sources">
-              <div class="source">Source 0 FIFO</div><div class="source">Source 1 FIFO</div>
-              <div class="source">Source 2 FIFO</div><div class="source">Source 3 FIFO</div>
-              <div class="source">Source 4 FIFO</div><div class="source">Source 5 FIFO</div>
-              <div class="source">Source 6 FIFO</div><div class="source">Source 7 FIFO</div>
-            </div>
-            <div class="arrow">→</div>
-            <div class="node link"><strong>Round-robin Scheduler</strong><small>공정한 source 선택<br>valid / ready</small></div>
-            <div class="arrow">→</div>
-            <div class="pipeline-box">
-              <h4>Shared FP16 Pipeline × 2</h4>
-              <div class="pipeline">
-                <div class="node rtl">Operand<br>16×FP16</div>
-                <div class="mini-arrow">→</div>
-                <div class="node logic">Vector ADD<br>256 bit</div>
-                <div class="mini-arrow">→</div>
-                <div class="node rtl">Result<br>16×FP16</div>
+          <div class="frame">
+            <div class="grid-4">
+              <div class="subgrid">
+                <div class="channel-box">CH 0<br>8 blocks</div>
+                <div class="channel-box">CH 1<br>8 blocks</div>
+                <div class="channel-box">CH 2<br>8 blocks</div>
+                <div class="channel-box">CH 3<br>8 blocks</div>
+                <div class="channel-box">CH 60<br>8 blocks</div>
+                <div class="channel-box">CH 61<br>8 blocks</div>
+                <div class="channel-box">CH 62<br>8 blocks</div>
+                <div class="channel-box">CH 63<br>8 blocks</div>
+              </div>
+              <div class="arrow">→</div>
+              <div class="node bank">
+                <strong>64x Local Arbiter</strong>
+                <small>channel 내부 block final 정리</small>
+              </div>
+              <div class="arrow">→</div>
+              <div class="node logic">
+                <strong>Global 64x Arbiter</strong>
+                <small>logic-die 상위 합류</small>
+              </div>
+              <div class="arrow">→</div>
+              <div class="lane-box">
+                Lane 0 / Lane 1
+                <small>2x 256-bit output</small>
               </div>
             </div>
-            <div class="arrow">→</div>
-            <div class="node logic"><strong>Source별 Final Slot</strong><small>마지막 tap까지 결과 유지</small></div>
-            <div class="arrow">→</div>
-            <div class="node link"><strong>8→1 Link Arbiter</strong><small>32 B/cycle</small></div>
           </div>
         </div>
-        <div class="table-wrap">
-          <table class="status-table">
-            <thead><tr><th>Pipeline 수</th><th>장점</th><th>단점</th><th>현재 판단</th></tr></thead>
-            <tbody>
-              <tr><td class="num">1</td><td>가장 작은 합성 규모</td><td>Source FIFO 대기 증가</td><td>최소 면적 비교점</td></tr>
-              <tr><td class="num">2</td><td>2×32 B로 64 B/cycle 링크 충족</td><td>Pipeline 1보다 자원 증가</td><td><span class="badge done">우선 후보</span></td></tr>
-              <tr><td class="num">4</td><td>내부 scheduler 대기 감소</td><td>최종 완료 시간 이득 없이 면적 증가</td><td>현재 후보 제외</td></tr>
-            </tbody>
-          </table>
-        </div>
+        <p class="note">
+          이 레이어는 `logic_die_link_arbiter.sv`와 `logic_die_dual_link_arbiter.sv`의
+          실제 연결 구조를 그대로 따라갑니다.
+        </p>
       </div>
     </section>
 
-    <section id="operation">
+    <section id="hierarchy">
       <div class="inner">
-        <h2>4. 연산은 어떻게 나누는가</h2>
-        <div class="flow-list">
-          <div class="flow-step"><strong>① Bank-side MUL</strong>각 bank가 가까운 입력과 3×3 depthwise weight를 곱합니다.</div>
-          <div class="flow-step"><strong>② Bank-local Reduction</strong>9개 tap을 bank 근처에서 먼저 합쳐 불필요한 중간 이동을 줄입니다.</div>
-          <div class="flow-step"><strong>③ Logic-die Aggregation</strong>여러 source·channel의 결과를 공유 FP16 pipeline과 scheduler로 모읍니다.</div>
-          <div class="flow-step"><strong>④ Pointwise / Global 연산</strong>여러 bank를 연결하는 GEMV·MAC과 최종 tensor 조립을 담당합니다.</div>
-        </div>
-        <div class="callout"><strong>전송량 변화:</strong> Depthwise 부분합을 모두 보내던 방식보다 bank-local 9-tap aggregation은 bank→logic 전송량을 <strong>2,359,296 B에서 262,144 B</strong>로 줄였습니다. 약 88.89% 감소입니다.</div>
-      </div>
-    </section>
-
-    <section id="verification">
-      <div class="inner">
-        <h2>5. RTL에서 실제로 검증한 범위</h2>
-        <p class="lead">기능 PASS와 물리 설계 완료는 서로 다른 의미입니다. 아래 표는 현재 RTL 근거가 있는 범위를 구분합니다.</p>
-        <div class="table-wrap">
-          <table class="status-table">
-            <thead><tr><th>검증 대상</th><th class="num">규모</th><th>결과</th><th>의미</th></tr></thead>
-            <tbody>
-              <tr><td>FP16 ADD random vector</td><td class="num">4,096</td><td><span class="badge done">PASS</span></td><td>C++ half 기준과 bit 일치</td></tr>
-              <tr><td>실제 MobileNetV4 부분합</td><td class="num">24,576</td><td><span class="badge done">PASS</span></td><td>실제 arrival·tap 순서 재생</td></tr>
-              <tr><td>Logic-die 최종 burst</td><td class="num">8,192</td><td><span class="badge done">PASS</span></td><td>미완료 reduction 0</td></tr>
-              <tr><td>최종 FP16 lane 값</td><td class="num">131,072</td><td><span class="badge done">PASS</span></td><td>C++ 결과와 bit 단위 일치</td></tr>
-              <tr><td>64 B/cycle dual link</td><td class="num">4,096 cycles</td><td><span class="badge done">PASS</span></td><td>Partial output cycle 0</td></tr>
-              <tr><td>Generic Yosys 합성</td><td class="num">Pipeline 1·2·4</td><td><span class="badge next">상대 비교</span></td><td>ASIC 면적·GHz·전력 수치는 아님</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <section id="remaining">
-      <div class="inner">
-        <h2>6. 아직 남은 RTL 통합</h2>
-        <p class="lead">현재 RTL은 계층형 depthwise reduction과 공유 링크를 실제 데이터로 검증한 단계입니다. 완성형 logic die라고 부르려면 아래 경로가 더 필요합니다.</p>
+        <h2>3. 계층 reduction path</h2>
+        <p class="lead">
+          `hierarchical_reduction_path.sv`는 8-bank reduction buffer와 dual-link arbiter를
+          하나의 계층 경로로 묶은 top-level 래퍼입니다.
+        </p>
         <div class="diagram">
-          <div class="overview">
-            <div class="node pending"><strong>Pointwise MAC Array</strong><small>Expand·Project 전체 payload</small></div>
-            <div class="arrow">→</div>
-            <div class="node pending"><strong>Central Credit / Grant</strong><small>64채널 동시 승인과 hard queue cap</small></div>
-            <div class="arrow">→</div>
-            <div class="node pending"><strong>Full UIB RTL Top</strong><small>Expand → Depthwise → Project 연속 실행</small></div>
+          <div class="frame">
+            <div class="grid-3">
+              <div class="stack">
+                <div class="bank-die">Bank 0 ~ 7</div>
+                <div class="bank-die">Slot / key / partial</div>
+                <div class="bank-die">First / last / valid</div>
+              </div>
+              <div class="arrow">→</div>
+              <div class="logic-core">
+                <h3>Bank-local reduction buffer</h3>
+                <div class="logic-grid">
+                  <div class="node bank">Per-bank accumulator<small>16 entries/bank</small></div>
+                  <div class="node bank">Protocol checks<small>slot, key, ordering</small></div>
+                  <div class="node fp16">Add inputs<small>lhs / rhs lanes</small></div>
+                  <div class="node fp16">Final emit<small>valid / ready</small></div>
+                </div>
+              </div>
+              <div class="arrow">→</div>
+              <div class="node pipe">
+                <strong>Dual-link arbiter</strong>
+                <small>64B/cycle logical output path</small>
+              </div>
+            </div>
           </div>
         </div>
+        <div class="callout">
+          여기서 중요한 점은 reduction buffer가 단순 합산기가 아니라,
+          bank별 상태와 마지막 partial의 종료 조건까지 관리하는 컨트롤 블록으로 바뀌었다는 점입니다.
+        </div>
+      </div>
+    </section>
+
+    <section id="shared">
+      <div class="inner">
+        <h2>4. 공유 FP16 pipeline</h2>
+        <p class="lead">
+          `shared_fp16_reduction_cluster.sv`와 `shared_fp16_pipeline_fabric.sv`는
+          여러 source가 하나의 FP16 pipeline을 공유하도록 만든 구조입니다.
+        </p>
+        <div class="diagram">
+          <div class="frame">
+            <div class="grid-3">
+              <div class="subgrid">
+                <div class="source-box">Source 0</div>
+                <div class="source-box">Source 1</div>
+                <div class="source-box">Source 2</div>
+                <div class="source-box">Source 7</div>
+              </div>
+              <div class="arrow">→</div>
+              <div class="node pipe">
+                <strong>Shared FP16 pipeline fabric</strong>
+                <small>round-robin grant / lane mux</small>
+              </div>
+              <div class="arrow">→</div>
+              <div class="lane-box">
+                1 / 2 / 4 pipeline modes
+                <small>service cycles scale with throughput</small>
+              </div>
+            </div>
+            <div class="grid-3" style="margin-top:12px;">
+              <div class="node bank">
+                <strong>Source entry buffer</strong>
+                <small>key / slot / partial residency</small>
+              </div>
+              <div class="arrow">→</div>
+              <div class="node fp16">
+                <strong>FP16 adder lanes</strong>
+                <small>internal or external datapath</small>
+              </div>
+              <div class="arrow">→</div>
+              <div class="node logic">
+                <strong>Final writeback</strong>
+                <small>ready / valid / backpressure</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="note">
+          이 블록은 독립적인 shared pipeline 실험과 실제 64채널 trace replay 검증의 중심입니다.
+        </div>
+      </div>
+    </section>
+
+    <section id="notes">
+      <div class="inner">
+        <h2>5. 변경 포인트 요약</h2>
         <div class="table-wrap">
-          <table class="status-table">
-            <thead><tr><th>남은 항목</th><th>필요한 이유</th><th>현재 상태</th></tr></thead>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 22%">파일</th>
+                <th>역할</th>
+                <th style="width: 22%">시각화에서의 위치</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr><td>Pointwise FP16 payload RTL</td><td>현재 scheduler trace뿐 아니라 실제 MAC 결과까지 검증</td><td><span class="badge todo">미완성</span></td></tr>
-              <tr><td>중앙 queue credit grant</td><td>64 controller의 동시 승인 경쟁 없이 queue depth를 보장</td><td><span class="badge next">설계 중</span></td></tr>
-              <tr><td>전체 HBM controller 연결</td><td>실제 command, data, barrier와 logic die를 한 top으로 결합</td><td><span class="badge todo">미완성</span></td></tr>
-              <tr><td>공정 library 합성</td><td>면적·주파수·전력 후보를 C++ 파라미터에 반영</td><td><span class="badge todo">미수행</span></td></tr>
-              <tr><td>TSV·배선·열 검토</td><td>64 B/cycle 연결의 물리 실현 가능성 확인</td><td><span class="badge todo">연구 판단 필요</span></td></tr>
+              <tr>
+                <td><code>rtl/bank_local_reduction_buffer.sv</code></td>
+                <td>bank별 partial accumulation, slot/key 관리, final emit</td>
+                <td>채널 내부 bank-local 블록</td>
+              </tr>
+              <tr>
+                <td><code>rtl/logic_die_link_arbiter.sv</code></td>
+                <td>bank final들을 channel 단위로 묶음</td>
+                <td>채널별 local arbiter</td>
+              </tr>
+              <tr>
+                <td><code>rtl/logic_die_dual_link_arbiter.sv</code></td>
+                <td>64채널 결과를 2-lane으로 내보냄</td>
+                <td>global dual-link layer</td>
+              </tr>
+              <tr>
+                <td><code>rtl/logic_die_64ch_reduction_top.sv</code></td>
+                <td>전체 64채널 계층 연결 및 internal FP16 선택</td>
+                <td>최상위 통합 top</td>
+              </tr>
+              <tr>
+                <td><code>rtl/shared_fp16_pipeline_fabric.sv</code></td>
+                <td>공유 FP16 pipeline arbitration</td>
+                <td>shared compute block</td>
+              </tr>
+              <tr>
+                <td><code>rtl/shared_fp16_reduction_cluster.sv</code></td>
+                <td>source buffer + shared pipeline + final queue</td>
+                <td>shared FP16 cluster</td>
+              </tr>
             </tbody>
           </table>
         </div>
-        <div class="callout warning"><strong>현재 결론:</strong> RTL에서 검증된 것은 512-source의 bank-local 부분합을 제한된 공유 FP16 pipeline으로 누산하고 64 B/cycle로 배출하는 경로입니다. 전체 MobileNetV4 UIB를 하나의 RTL top에서 실행한 단계는 아직 아닙니다.</div>
       </div>
     </section>
   </main>
 
-  <footer>
-    STOB Hierarchical HBM2-PIM · RTL Architecture Visualization · 2026-08-05
-  </footer>
+  <div class="foot">
+    생성 파일: <code>experiment/rtl_architecture_2d_visualization.html</code><br>
+    기준 RTL: <code>rtl/logic_die_64ch_reduction_top.sv</code>, <code>rtl/hierarchical_reduction_path.sv</code>, <code>rtl/shared_fp16_reduction_cluster.sv</code>
+  </div>
 </body>
 </html>

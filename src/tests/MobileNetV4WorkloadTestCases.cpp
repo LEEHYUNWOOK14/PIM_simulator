@@ -352,6 +352,49 @@ TEST(LogicDieSchedulerTest, FinitePcuQueueLeavesDistributedAdmissionHeadroom)
     EXPECT_TRUE(scheduler.canAccept(99, {}, 4, 64, 64));
 }
 
+TEST(LogicDieSchedulerTest, CentralGrantNeverExceedsAvailableQueueCredits)
+{
+    LogicDieScheduler scheduler;
+    for (uint64_t stream = 0; stream < 8; stream++)
+        scheduler.submitCentralRequest(stream);
+
+    EXPECT_EQ(scheduler.buildCentralGrants(0, 3, 8), 3u);
+    uint64_t granted = 0;
+    for (uint64_t stream = 0; stream < 8; stream++)
+        granted += scheduler.hasCentralGrant(stream) ? 1 : 0;
+    EXPECT_EQ(granted, 3u);
+}
+
+TEST(LogicDieSchedulerTest, CentralGrantRoundRobinMovesPastPreviousWinners)
+{
+    LogicDieScheduler scheduler;
+    for (uint64_t stream = 0; stream < 4; stream++)
+        scheduler.submitCentralRequest(stream);
+    ASSERT_EQ(scheduler.buildCentralGrants(0, 2, 4), 2u);
+    EXPECT_TRUE(scheduler.hasCentralGrant(0));
+    EXPECT_TRUE(scheduler.hasCentralGrant(1));
+
+    for (uint64_t stream = 0; stream < 4; stream++)
+        scheduler.submitCentralRequest(stream);
+    ASSERT_EQ(scheduler.buildCentralGrants(1, 2, 4), 2u);
+    EXPECT_TRUE(scheduler.hasCentralGrant(2));
+    EXPECT_TRUE(scheduler.hasCentralGrant(3));
+}
+
+TEST(LogicDieSchedulerTest, CentralGrantReturnsCreditAtServiceStart)
+{
+    LogicDieScheduler scheduler;
+    for (uint64_t request = 0; request < 4; request++)
+        scheduler.reserve(0, 8, 16, 2, 64, sizeof(BurstType), request, 0, false);
+
+    scheduler.submitCentralRequest(0);
+    EXPECT_EQ(scheduler.buildCentralGrants(0, 2, 1), 0u);
+    scheduler.submitCentralRequest(0);
+    EXPECT_EQ(scheduler.buildCentralGrants(4, 2, 1), 1u);
+    EXPECT_TRUE(scheduler.consumeCentralGrant(0));
+    EXPECT_FALSE(scheduler.consumeCentralGrant(0));
+}
+
 TEST(LogicDieSchedulerTest, FullQueueAcceptsExistingMaskAndRejectsNewMask)
 {
     LogicDieScheduler scheduler;

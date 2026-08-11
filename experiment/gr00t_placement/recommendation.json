@@ -1,0 +1,39 @@
+{
+  "date": "2026-08-06",
+  "status": "withheld_pending_rtl_and_model_calibration",
+  "final_recommendation": false,
+  "authoritative_summary": "results/summary.json",
+  "provisional_coordinate_only": {
+    "kind": "provisional_monte_carlo_mode",
+    "logic_block_x_um": 0.0,
+    "logic_block_y_um": 0.0,
+    "balanced_score": 0.3789725375130252,
+    "max_temp_c_unvalidated": 35.55179977854542,
+    "mean_channel_wire_um": 1949.9999999999998,
+    "hard_constraints_satisfied": false,
+    "hard_constraint_violations": "global_rtl_timing_not_closed",
+    "assumptions_file": "assumptions.json",
+    "analysis_seed": 1701,
+    "final_recommendation": false,
+    "reason": "RTL/PPA and thermal/package calibration are not stable",
+    "monte_carlo_mode_win_rate": 0.947,
+    "monte_carlo_mode_win_rate_ci95": [
+      0.9313250610861062,
+      0.9592536915776607
+    ],
+    "monte_carlo_top_k_rate": 0.972
+  },
+  "signoff_hard_constraint_feasible_count": 0,
+  "robustness_gate": {
+    "required_top_k_rate": 0.8,
+    "observed_top_k_rate": 0.972,
+    "required_cost_improvement_fraction": 0.01,
+    "observed_balanced_improvement_fraction": 0.0,
+    "passed": false
+  },
+  "reason": [
+    "Global RTL timing is not closed.",
+    "The balanced optimum does not improve on the center baseline.",
+    "Package, power and thermal inputs are not calibrated."
+  ]
+}

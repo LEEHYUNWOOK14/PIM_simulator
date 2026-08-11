@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GR00T RMSNorm 프로파일 분석 보고서</title>
+<style>
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.65;color:#202124;max-width:1100px;margin:0 auto;padding:32px;background:#f7f8fa}
+main{background:#fff;padding:34px 42px;border-radius:14px;box-shadow:0 2px 14px #0001}
+h1{line-height:1.25} h2{margin-top:2.2em;border-bottom:2px solid #e6e9ef;padding-bottom:6px}
+table{border-collapse:collapse;width:100%;margin:14px 0 22px}th,td{border:1px solid #d9dee7;padding:9px 11px;vertical-align:top}th{background:#eef2f7;text-align:left}
+code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}pre{background:#f1f3f5;padding:16px;overflow:auto;border-radius:8px}
+.verdict{background:#e9f7ef;border-left:6px solid #16a34a;padding:14px 18px}.warn{background:#fff7e6;border-left:6px solid #d97706;padding:14px 18px}
+.small{color:#64748b;font-size:.9em}.source{font-size:.93em;word-break:break-word}a{color:#075985}
+</style>
+</head>
+<body><main>
+<h1>GR00T RMSNorm 프로파일이 표준 연산인가, 튜닝 연산인가?</h1>
+<p class="small">작성일: 2026-08-11 · 대상: STOB_PIM2 및 STOB_PIM_pure_layornorm · 목적: 범용 PIM 아키텍처 평가에 사용된 RMSNorm 프로파일의 성격 판정</p>
+<div class="verdict"><strong>핵심 결론</strong><br>
+현재 GR00T RMSNorm 프로파일은 <strong>수식과 알고리즘이 튜닝된 RMSNorm이 아니라 표준 RMSNorm</strong>이다. 다만 GR00T의 실제 구조에서 유도한 shape·epsilon·affine 여부·호출 횟수를 사용해 <strong>워크로드 수준으로 특화된 프로파일</strong>이며, 시뮬레이터에서는 표준 RMSNorm 전체가 아니라 element-wise MUL 단계만 PIM에서 실행한다. reduction, mean-square, rsqrt, scale 생성은 host에서 수행되고 그 시간은 측정 cycle에 포함되지 않는다.</div>
+
+<h2>1. 기존 RMSNorm의 정의</h2>
+<p>RMSNorm은 평균을 빼지 않고 입력 벡터의 root mean square로 정규화한다. 한 row의 hidden dimension을 <code>d</code>라 하면 다음과 같다.</p>
+<pre>rms(x) = sqrt((1/d) * SUM_i x_i^2 + epsilon)
+y_i = x_i / rms(x) * w_i</pre>
+<p><code>w</code>는 학습된 affine weight다. 핵심 순서는 <strong>SUMSQ reduction → 평균 제곱 → epsilon → reciprocal square root → element-wise multiply</strong>이며 평균 제거가 없다는 점이다. 이 정의는 RMSNorm 원 논문과 PyTorch 공식 문서에 근거한다 [W1][W2].</p>
+
+<h2>2. 현재 GR00T RMSNorm 구현</h2>
+<pre>입력 x, weight gamma 생성
+  -> Bank-PIM MUL: x^2
+  -> host: row별 SUMSQ / hidden_size
+  -> host: 1 / sqrt(mean_square + epsilon)
+  -> host: scale = gamma * inv_rms
+  -> Bank-PIM MUL: x * scale
+  -> 출력</pre>
+<p>로컬 <code>runRmsNorm()</code>은 첫 번째 PIM 연산으로 입력 자기 자신을 곱하고, 두 번째 PIM 연산으로 입력과 host가 만든 scale을 곱한다 [L1]. 따라서 <code>x^2</code>와 <code>x*gamma*inv_rms</code>의 element-wise 부분은 표준 RMSNorm과 일치한다.</p>
+
+<h2>3. 순정 연산인가, 튜닝 연산인가?</h2>
+<table><thead><tr><th>항목</th><th>현재 GR00T 프로파일</th><th>판정</th></tr></thead><tbody>
+<tr><td>정규화 수식</td><td><code>x / sqrt(mean(x^2)+epsilon) * gamma</code></td><td><strong>표준 RMSNorm</strong></td></tr>
+<tr><td>평균 제거</td><td>없음</td><td>표준 RMSNorm과 동일</td></tr>
+<tr><td>epsilon</td><td><code>1e-6</code></td><td>보편적 표준값이 아니라 Qwen3-VL/GR00T workload 설정값</td></tr>
+<tr><td>affine weight</td><td>gamma 적용, beta 없음</td><td>표준적인 RMSNorm 형태</td></tr>
+<tr><td>연산 배치</td><td>square와 final multiply만 Bank-PIM, reduction/rsqrt는 host</td><td><strong>시스템 실행 분할 튜닝</strong></td></tr>
+<tr><td>입력 데이터</td><td>deterministic synthetic FP16</td><td>실제 checkpoint activation 아님</td></tr>
+<tr><td>shape와 호출 횟수</td><td>GR00T/Qwen3-VL 구조에서 도출</td><td><strong>워크로드 특화 프로파일</strong></td></tr>
+<tr><td>산출 cycle</td><td>element-wise PIM 중심; host reduction/rsqrt 제외</td><td>전체 RMSNorm latency가 아님</td></tr>
+</tbody></table>
+<div class="warn"><strong>논문에서 “GR00T RMSNorm을 가속했다”고만 쓰면 부정확하다.</strong><br>
+정확한 표현은 “GR00T-derived RMSNorm workload의 Bank-PIM element-wise phases를 평가했다” 또는 “host reduction/rsqrt를 제외한 PIM portion을 평가했다”이다. 전체 정규화 latency를 주장하려면 reduction·rsqrt·동기화·traffic을 포함해야 한다.</div>
+
+<h2>3-1. epsilon의 의미와 결정 방식</h2>
+<p><code>epsilon</code>은 RMSNorm 수식에 반드시 들어가는 안정화 항이지만, 모든 RMSNorm 구현이 동일한 숫자를 사용하는 것은 아니다. 현재 GR00T 프로파일의 <code>1e-6</code>은 “RMSNorm의 보편적 표준값”이 아니라 Qwen3-VL 경로의 모델 설정값이다. 따라서 <strong>GR00T 재현 실험에서는 1e-6을 유지</strong>하고, 범용 아키텍처 실험에서는 1e-6·1e-5·dtype-dependent default를 sensitivity 대상으로 비교해야 한다.</p>
+<p>하드웨어가 epsilon을 runtime input으로 받는 구조는 연구자가 매번 결과에 맞춰 epsilon을 조정한다는 뜻이 아니다. 모델 설정 또는 소프트웨어 컨트롤러가 정한 epsilon을 normalization request에 넣어 하드웨어로 전달한다는 뜻이다. 현재 RTL 인터페이스에는 <code>normalization_epsilon_i</code> 입력이 있다 [L3].</p>
+<pre>모델 config / 소프트웨어 컨트롤러
+        |
+        +-- epsilon = 1e-6 (GR00T/Qwen3-VL)
+        +-- epsilon = 다른 모델의 설정값
+        |
+        +-- normalization_epsilon_i
+                |
+          RMSNorm hardware</pre>
+<p>따라서 연구자가 새 epsilon 결정 알고리즘을 만들 필요는 없다. 연구자가 해야 할 일은 모델별 epsilon을 정확히 전달하고, 여러 epsilon에서 정확도·수치 안정성·cycle·area/power sensitivity를 검증하는 것이다. epsilon을 출력이 맞을 때까지 임의로 조정하는 방식은 재현 가능한 실험이 아니며 보고서에서 피해야 한다.</p>
+
+<h2>4. GR00T에서 프로파일링한 RMSNorm 구조</h2>
+<p>로컬 분석은 GR00T N1.7의 Qwen3-VL text 경로를 대상으로 한다. decoder layer마다 다음 네 종류를 계산 대상으로 잡았다 [L2][W3].</p>
+<table><thead><tr><th>구성</th><th>shape</th><th>epsilon</th><th>호출 수</th><th>축</th></tr></thead><tbody>
+<tr><td>input RMSNorm</td><td>[280, 2048]</td><td>1e-6</td><td>32</td><td>hidden 2048</td></tr>
+<tr><td>post-attention RMSNorm</td><td>[280, 2048]</td><td>1e-6</td><td>32</td><td>hidden 2048</td></tr>
+<tr><td>query RMSNorm</td><td>[8960, 64]</td><td>1e-6</td><td>32</td><td>head dim 64</td></tr>
+<tr><td>key RMSNorm</td><td>[8960, 64]</td><td>1e-6</td><td>32</td><td>head dim 64</td></tr>
+</tbody></table>
+<p>총 64회는 16개 decoder layer × 4개 RMSNorm으로 계산됐다. Q/K의 <code>[8960,64]</code>는 <code>280 × 32 heads</code>를 row 방향으로 펼친 것이다. 로컬 기록은 초기 32회 추정에서 Q/K RMSNorm을 누락한 것을 공식 Transformers 구현 확인 후 64회로 수정했다고 명시한다 [L2].</p>
+
+<h2>5. GR00T RMSNorm 정규화 데이터패스</h2>
+<pre>각 row x[0:d-1]
+       |
+       +-- Bank-PCU: x_i * x_i --+
+                                  |
+                    row SUMSQ reduction (현재 프로파일은 host)
+                                  |
+                    mean_square = SUMSQ / d
+                                  |
+                    a = mean_square + epsilon
+                                  |
+                    inv_rms = rsqrt(a) = 1 / sqrt(a)
+                                  |
+       +-- scale_i = gamma_i * inv_rms (현재 host 생성)
+       |
+       +-- Bank-PCU: y_i = x_i * scale_i
+                                  |
+                           normalized output y</pre>
+<p>현재 STOB_PIM2 RTL에는 이 분석을 확장한 normalization sideband가 별도로 존재한다. bank partial SUM/SUMSQ를 logic die로 보내고, logic die에서 global accumulation·LayerNorm/RMSNorm finalize·LUT256 RSQRT를 수행한 뒤 inv-RMS 또는 inv-std를 broadcast하는 방향이다 [L3]. 그러나 저장소 문서도 이 sideband와 전체 normalization 완료를 동일시하지 말라고 명시하므로, 기존 GR00T 프로파일과 RTL 확장 결과는 분리해야 한다.</p>
+
+<h2>6. 현재 프로파일 수치의 해석</h2>
+<table><thead><tr><th>항목</th><th>결과</th><th>해석</th></tr></thead><tbody>
+<tr><td>unique RMSNorm profile 실행</td><td>2개</td><td>[280,2048], [8960,64]</td></tr>
+<tr><td>모델 호출 수 투영</td><td>64회</td><td>동일 shape/config cycle을 호출 수에 곱한 projected total</td></tr>
+<tr><td>RMSNorm projected cycle</td><td>623,040 cycles</td><td>Bank-PIM 단계 중심; host reduction/rsqrt 제외</td></tr>
+<tr><td>[280,2048]</td><td>32 × 9,735 = 311,520</td><td>input/post-attention 합산</td></tr>
+<tr><td>[8960,64]</td><td>32 × 9,735 = 311,520</td><td>query/key 합산</td></tr>
+<tr><td>FP32 기준 max absolute error</td><td>0.001361</td><td>synthetic FP16 input 및 staged FP16 arithmetic 기준</td></tr>
+</tbody></table>
+<p>623,040은 GR00T 전체 inference의 RMSNorm 총 latency가 아니다. 2개의 unique shape를 한 번씩 실행한 Bank-PIM cycle을 공식 호출 횟수에 외삽한 값이며, host 단계와 실제 pretrained activation은 포함하지 않는다 [L2][L4].</p>
+
+<h2>7. 범용 아키텍처 평가 권고</h2>
+<ol>
+<li><strong>명칭을 분리한다.</strong> “GR00T-derived RMSNorm element-wise profile”과 “general RMSNorm latency”를 구분한다.</li>
+<li><strong>shape sweep을 추가한다.</strong> hidden size 64, 128, 256, 512, 1024, 2048, 4096, 8192와 여러 row 수를 사용한다.</li>
+<li><strong>full path를 포함한다.</strong> Bank partial SUMSQ → cross-bank reduction → divide → epsilon → rsqrt → broadcast → final multiply의 cycle·traffic·queue delay를 breakdown한다.</li>
+<li><strong>dtype를 분리한다.</strong> GR00T checkpoint의 BF16 경로와 현재 FP16 simulator 경로를 같은 결과로 합치지 않는다.</li>
+<li><strong>입력을 보강한다.</strong> synthetic input 외에 실제 checkpoint activation 또는 공개 가능한 representative activation 통계를 사용한다.</li>
+<li><strong>RSQRT를 명시한다.</strong> RTL의 LUT256은 정확한 software rsqrt가 아니라 근사 하드웨어 후보이므로 정확도·면적·latency trade-off를 별도 보고한다.</li>
+</ol>
+
+<h2>8. 최종 판정</h2>
+<p><strong>연산 정의:</strong> GR00T 프로파일은 순정 표준 RMSNorm이다. 평균을 빼지 않고 mean-square 기반 inverse RMS를 곱하며 학습 weight를 적용한다.</p>
+<p><strong>워크로드:</strong> GR00T N1.7/Qwen3-VL의 shape, epsilon, affine, layer 수와 호출 수에 맞춘 특화 프로파일이다.</p>
+<p><strong>하드웨어:</strong> 순정 RMSNorm 전체가 아니라 square와 final scale multiply를 Bank-PIM으로 보내고 reduction/rsqrt를 host로 남긴 분할 실행 모델이다. 범용 아키텍처의 최종 근거로 사용하려면 full-path normalization 모델을 추가해야 한다.</p>
+
+<h2>출처와 재현 경로</h2>
+<h3>외부 출처</h3>
+<ol class="source">
+<li id="W1"><strong>RMSNorm 원 논문:</strong> Zhang &amp; Sennrich, “Root Mean Square Layer Normalization,” arXiv:1910.07467. <a href="https://arxiv.org/abs/1910.07467">원문</a></li>
+<li id="W2"><strong>PyTorch RMSNorm API:</strong> <a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.RMSNorm.html">공식 문서</a>. RMS 기반 정규화와 epsilon API 기준.</li>
+<li id="W3"><strong>Qwen3-VL 구현:</strong> Hugging Face Transformers v4.57.1, <a href="https://github.com/huggingface/transformers/blob/v4.57.1/src/transformers/models/qwen3_vl/modeling_qwen3_vl.py">modeling_qwen3_vl.py</a>. input/post-attention 및 Q/K RMSNorm 경로.</li>
+<li id="W4"><strong>GR00T 공식 소스:</strong> NVIDIA Isaac-GR00T snapshot commit <code>b9955401d50c92a29258732e3ad6ccd579f1bdc0</code>, <a href="https://github.com/NVIDIA/Isaac-GR00T/tree/b9955401d50c92a29258732e3ad6ccd579f1bdc0">공식 GitHub snapshot</a>.</li>
+</ol>
+<h3>저장소 내부 출처</h3>
+<ol class="source">
+<li id="L1"><strong>실행 코드:</strong> <code>../STOB_PIM_pure_layornorm/src/tests/Gr00tNormalizationTestCases.cpp</code>. <code>kRmsNormProfiles</code>와 <code>runRmsNorm()</code>이 synthetic FP16, Bank-PIM MUL, host reduction/rsqrt를 정의한다.</li>
+<li id="L2"><strong>프로파일 작업 로그:</strong> <code>../STOB_PIM_pure_layornorm/docs/worklogs/004_gr00t_n1d7_layernorm_rmsnorm_simulation.md</code>. 64회, shape·epsilon·호출 수·제외 범위·결과의 근거.</li>
+<li id="L3"><strong>현재 RTL 설명:</strong> <code>rtl/README.md</code>, “GR00T normalization sideband”. Logic-die accumulation, RMSNorm finalize, LUT256 RSQRT, broadcast 구조의 근거.</li>
+<li id="L4"><strong>결과 보고서:</strong> <code>../STOB_PIM_pure_layornorm/docs/reports/004_gr00t_n1d7_layernorm_rmsnorm_report.md</code>. 623,040 projected cycles 및 오차 결과의 근거.</li>
+</ol>
+<p class="small">접근일: 2026-08-11. 외부 소스는 고정 URL/버전을 사용했고, 로컬 소스와 작업 로그를 우선 근거로 삼았다. 확인되지 않은 full pretrained activation, GPU kernel time, host reduction time은 추정하지 않았다.</p>
+</main></body></html>

@@ -1,0 +1,33 @@
+from gds3xtrude.include import layer
+
+# Synthetic GDS layers emitted by tools/generate_output_gds.py.
+bank = layer(1, 0)
+logic = layer(2, 0)
+pipeline = layer(3, 0)
+fp16 = layer(4, 0)
+via = layer(5, 0)
+power = layer(6, 0)
+misc = layer(7, 0)
+
+bank.color = [0.25, 0.45, 0.85]
+logic.color = [0.35, 0.70, 0.45]
+pipeline.color = [0.90, 0.45, 0.20]
+fp16.color = [0.85, 0.25, 0.35]
+via.color = [0.75, 0.75, 0.75]
+power.color = [0.95, 0.75, 0.15]
+misc.color = [0.55, 0.35, 0.75]
+
+# Each tuple adds a vertical thickness in nanometres. Repeating via between
+# routing planes makes the generated OpenSCAD model visibly interconnected.
+layerstack = [
+    (120, bank),
+    (80, logic),
+    (100, via),
+    (80, pipeline),
+    (100, via),
+    (80, fp16),
+    (100, via),
+    (80, power),
+    (60, misc),
+]
+

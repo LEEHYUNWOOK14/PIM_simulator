@@ -1,0 +1,669 @@
+{
+  "disclaimer": "HBM2 PIM architectural visualization - not signoff layout",
+  "parameters": {
+    "physical_channels_per_stack": {
+      "value": 8,
+      "unit": "channels/stack",
+      "source_type": "standard",
+      "source_repository_or_document": "JEDEC JESD235 family",
+      "source_file_line_or_section": "HBM2 stack/channel organization",
+      "upstream_commit_hash": null,
+      "confidence": "high",
+      "classification": "standard"
+    },
+    "channel_width_bits": {
+      "value": 128,
+      "unit": "bit/channel",
+      "source_type": "standard",
+      "source_repository_or_document": "JEDEC JESD235 family",
+      "source_file_line_or_section": "HBM2 channel interface",
+      "upstream_commit_hash": null,
+      "confidence": "high",
+      "classification": "standard"
+    },
+    "stack_interface_width_bits": {
+      "value": 1024,
+      "unit": "bit/stack",
+      "source_type": "derived",
+      "source_repository_or_document": "JEDEC JESD235 family",
+      "source_file_line_or_section": "physical_channels_per_stack * channel_width_bits",
+      "upstream_commit_hash": null,
+      "confidence": "high",
+      "classification": "standard"
+    },
+    "dram_dies_per_stack": {
+      "value": 8,
+      "unit": "dies/stack",
+      "source_type": "configuration",
+      "source_repository_or_document": "local model configuration",
+      "source_file_line_or_section": "design/hbm2_architecture.json",
+      "upstream_commit_hash": null,
+      "confidence": "high",
+      "classification": "project_config"
+    },
+    "pseudo_channel_mode": {
+      "value": false,
+      "unit": "boolean",
+      "source_type": "configuration",
+      "source_repository_or_document": "local model configuration",
+      "source_file_line_or_section": "design/hbm2_architecture.json",
+      "upstream_commit_hash": null,
+      "confidence": "high",
+      "classification": "project_config"
+    },
+    "logical_channels": {
+      "value": 64,
+      "unit": "logical partitions",
+      "source_type": "configuration",
+      "source_repository_or_document": "local simulator configuration",
+      "source_file_line_or_section": "design/hbm2_architecture.json logical_channel_mapping",
+      "upstream_commit_hash": null,
+      "confidence": "high",
+      "classification": "project_config"
+    },
+    "bank_groups": {
+      "value": 4,
+      "unit": "count",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "SAITPublic/PIMSimulator",
+      "source_file_line_or_section": "ini/HBM2_samsung_2M_16B_x64.ini:1",
+      "upstream_commit_hash": "3703d1f19c8f027360cc33a3243eb271e3bb6898",
+      "confidence": "high",
+      "classification": "project_config"
+    },
+    "banks": {
+      "value": 16,
+      "unit": "count",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "SAITPublic/PIMSimulator",
+      "source_file_line_or_section": "ini/HBM2_samsung_2M_16B_x64.ini:2",
+      "upstream_commit_hash": "3703d1f19c8f027360cc33a3243eb271e3bb6898",
+      "confidence": "high",
+      "classification": "project_config"
+    },
+    "rows": {
+      "value": 16384,
+      "unit": "count",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "SAITPublic/PIMSimulator",
+      "source_file_line_or_section": "ini/HBM2_samsung_2M_16B_x64.ini:4",
+      "upstream_commit_hash": "3703d1f19c8f027360cc33a3243eb271e3bb6898",
+      "confidence": "high",
+      "classification": "project_config"
+    },
+    "columns": {
+      "value": 128,
+      "unit": "count",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "SAITPublic/PIMSimulator",
+      "source_file_line_or_section": "ini/HBM2_samsung_2M_16B_x64.ini:3",
+      "upstream_commit_hash": "3703d1f19c8f027360cc33a3243eb271e3bb6898",
+      "confidence": "high",
+      "classification": "project_config"
+    },
+    "pim_blocks": {
+      "value": 8,
+      "unit": "count",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "SAITPublic/PIMSimulator",
+      "source_file_line_or_section": "ini/HBM2_samsung_2M_16B_x64.ini:5",
+      "upstream_commit_hash": "3703d1f19c8f027360cc33a3243eb271e3bb6898",
+      "confidence": "high",
+      "classification": "project_config"
+    },
+    "device_width": {
+      "value": 64,
+      "unit": "count",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "SAITPublic/PIMSimulator",
+      "source_file_line_or_section": "ini/HBM2_samsung_2M_16B_x64.ini:6",
+      "upstream_commit_hash": "3703d1f19c8f027360cc33a3243eb271e3bb6898",
+      "confidence": "high",
+      "classification": "project_config"
+    },
+    "burst_length": {
+      "value": 4,
+      "unit": "count",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "SAITPublic/PIMSimulator",
+      "source_file_line_or_section": "ini/HBM2_samsung_2M_16B_x64.ini:7",
+      "upstream_commit_hash": "3703d1f19c8f027360cc33a3243eb271e3bb6898",
+      "confidence": "high",
+      "classification": "project_config"
+    },
+    "tRCDRD": {
+      "value": 14,
+      "unit": "cycles",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "SAITPublic/PIMSimulator",
+      "source_file_line_or_section": "ini/HBM2_samsung_2M_16B_x64.ini:13",
+      "upstream_commit_hash": "3703d1f19c8f027360cc33a3243eb271e3bb6898",
+      "confidence": "high",
+      "classification": "project_config"
+    },
+    "tRCDWR": {
+      "value": 10,
+      "unit": "cycles",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "SAITPublic/PIMSimulator",
+      "source_file_line_or_section": "ini/HBM2_samsung_2M_16B_x64.ini:14",
+      "upstream_commit_hash": "3703d1f19c8f027360cc33a3243eb271e3bb6898",
+      "confidence": "high",
+      "classification": "project_config"
+    },
+    "tRAS": {
+      "value": 33,
+      "unit": "cycles",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "SAITPublic/PIMSimulator",
+      "source_file_line_or_section": "ini/HBM2_samsung_2M_16B_x64.ini:15",
+      "upstream_commit_hash": "3703d1f19c8f027360cc33a3243eb271e3bb6898",
+      "confidence": "high",
+      "classification": "project_config"
+    },
+    "tRP": {
+      "value": 14,
+      "unit": "cycles",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "SAITPublic/PIMSimulator",
+      "source_file_line_or_section": "ini/HBM2_samsung_2M_16B_x64.ini:19",
+      "upstream_commit_hash": "3703d1f19c8f027360cc33a3243eb271e3bb6898",
+      "confidence": "high",
+      "classification": "project_config"
+    },
+    "tRC": {
+      "value": 47,
+      "unit": "cycles",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "SAITPublic/PIMSimulator",
+      "source_file_line_or_section": "ini/HBM2_samsung_2M_16B_x64.ini:18",
+      "upstream_commit_hash": "3703d1f19c8f027360cc33a3243eb271e3bb6898",
+      "confidence": "high",
+      "classification": "project_config"
+    },
+    "tRFC": {
+      "value": 350,
+      "unit": "cycles",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "SAITPublic/PIMSimulator",
+      "source_file_line_or_section": "ini/HBM2_samsung_2M_16B_x64.ini:30",
+      "upstream_commit_hash": "3703d1f19c8f027360cc33a3243eb271e3bb6898",
+      "confidence": "high",
+      "classification": "project_config"
+    },
+    "tREFI": {
+      "value": 3900,
+      "unit": "cycles",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "SAITPublic/PIMSimulator",
+      "source_file_line_or_section": "ini/HBM2_samsung_2M_16B_x64.ini:28",
+      "upstream_commit_hash": "3703d1f19c8f027360cc33a3243eb271e3bb6898",
+      "confidence": "high",
+      "classification": "project_config"
+    },
+    "tREFISB": {
+      "value": 121,
+      "unit": "cycles",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "SAITPublic/PIMSimulator",
+      "source_file_line_or_section": "ini/HBM2_samsung_2M_16B_x64.ini:29",
+      "upstream_commit_hash": "3703d1f19c8f027360cc33a3243eb271e3bb6898",
+      "confidence": "high",
+      "classification": "project_config"
+    },
+    "system_num_chans": {
+      "value": 64,
+      "unit": "logical channels",
+      "source_type": "project_config",
+      "source_repository_or_document": "STOB PIMSimulator working tree",
+      "source_file_line_or_section": "system_hbm_64ch.ini:5",
+      "upstream_commit_hash": null,
+      "confidence": "high",
+      "classification": "project_config"
+    },
+    "dramsim3.bankgroups": {
+      "value": 4,
+      "unit": "reference value",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "umd-memsys/DRAMsim3",
+      "source_file_line_or_section": "configs/HBM2_8Gb_x128.ini [dram_structure] bankgroups",
+      "upstream_commit_hash": "29817593b3389f1337235d63cac515024ab8fd6e",
+      "confidence": "high",
+      "classification": "open_source_model"
+    },
+    "dramsim3.banks_per_group": {
+      "value": 4,
+      "unit": "reference value",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "umd-memsys/DRAMsim3",
+      "source_file_line_or_section": "configs/HBM2_8Gb_x128.ini [dram_structure] banks_per_group",
+      "upstream_commit_hash": "29817593b3389f1337235d63cac515024ab8fd6e",
+      "confidence": "high",
+      "classification": "open_source_model"
+    },
+    "dramsim3.rows": {
+      "value": 32768,
+      "unit": "reference value",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "umd-memsys/DRAMsim3",
+      "source_file_line_or_section": "configs/HBM2_8Gb_x128.ini [dram_structure] rows",
+      "upstream_commit_hash": "29817593b3389f1337235d63cac515024ab8fd6e",
+      "confidence": "high",
+      "classification": "open_source_model"
+    },
+    "dramsim3.columns": {
+      "value": 64,
+      "unit": "reference value",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "umd-memsys/DRAMsim3",
+      "source_file_line_or_section": "configs/HBM2_8Gb_x128.ini [dram_structure] columns",
+      "upstream_commit_hash": "29817593b3389f1337235d63cac515024ab8fd6e",
+      "confidence": "high",
+      "classification": "open_source_model"
+    },
+    "dramsim3.device_width": {
+      "value": 128,
+      "unit": "reference value",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "umd-memsys/DRAMsim3",
+      "source_file_line_or_section": "configs/HBM2_8Gb_x128.ini [dram_structure] device_width",
+      "upstream_commit_hash": "29817593b3389f1337235d63cac515024ab8fd6e",
+      "confidence": "high",
+      "classification": "open_source_model"
+    },
+    "dramsim3.BL": {
+      "value": 4,
+      "unit": "reference value",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "umd-memsys/DRAMsim3",
+      "source_file_line_or_section": "configs/HBM2_8Gb_x128.ini [dram_structure] BL",
+      "upstream_commit_hash": "29817593b3389f1337235d63cac515024ab8fd6e",
+      "confidence": "high",
+      "classification": "open_source_model"
+    },
+    "dramsim3.num_dies": {
+      "value": 4,
+      "unit": "reference value",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "umd-memsys/DRAMsim3",
+      "source_file_line_or_section": "configs/HBM2_8Gb_x128.ini [dram_structure] num_dies",
+      "upstream_commit_hash": "29817593b3389f1337235d63cac515024ab8fd6e",
+      "confidence": "high",
+      "classification": "open_source_model"
+    },
+    "dramsim3.channels": {
+      "value": 8,
+      "unit": "reference value",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "umd-memsys/DRAMsim3",
+      "source_file_line_or_section": "configs/HBM2_8Gb_x128.ini [system] channels",
+      "upstream_commit_hash": "29817593b3389f1337235d63cac515024ab8fd6e",
+      "confidence": "high",
+      "classification": "open_source_model"
+    },
+    "dramsim3.bus_width": {
+      "value": 128,
+      "unit": "reference value",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "umd-memsys/DRAMsim3",
+      "source_file_line_or_section": "configs/HBM2_8Gb_x128.ini [system] bus_width",
+      "upstream_commit_hash": "29817593b3389f1337235d63cac515024ab8fd6e",
+      "confidence": "high",
+      "classification": "open_source_model"
+    },
+    "dramsim3.address_mapping": {
+      "value": "rorabgbachco",
+      "unit": "reference value",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "umd-memsys/DRAMsim3",
+      "source_file_line_or_section": "configs/HBM2_8Gb_x128.ini [system] address_mapping",
+      "upstream_commit_hash": "29817593b3389f1337235d63cac515024ab8fd6e",
+      "confidence": "high",
+      "classification": "open_source_model"
+    },
+    "dramsim3.tRCDRD": {
+      "value": 14,
+      "unit": "reference value",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "umd-memsys/DRAMsim3",
+      "source_file_line_or_section": "configs/HBM2_8Gb_x128.ini [timing] tRCDRD",
+      "upstream_commit_hash": "29817593b3389f1337235d63cac515024ab8fd6e",
+      "confidence": "high",
+      "classification": "open_source_model"
+    },
+    "dramsim3.tRCDWR": {
+      "value": 14,
+      "unit": "reference value",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "umd-memsys/DRAMsim3",
+      "source_file_line_or_section": "configs/HBM2_8Gb_x128.ini [timing] tRCDWR",
+      "upstream_commit_hash": "29817593b3389f1337235d63cac515024ab8fd6e",
+      "confidence": "high",
+      "classification": "open_source_model"
+    },
+    "dramsim3.tRP": {
+      "value": 14,
+      "unit": "reference value",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "umd-memsys/DRAMsim3",
+      "source_file_line_or_section": "configs/HBM2_8Gb_x128.ini [timing] tRP",
+      "upstream_commit_hash": "29817593b3389f1337235d63cac515024ab8fd6e",
+      "confidence": "high",
+      "classification": "open_source_model"
+    },
+    "dramsim3.tRAS": {
+      "value": 34,
+      "unit": "reference value",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "umd-memsys/DRAMsim3",
+      "source_file_line_or_section": "configs/HBM2_8Gb_x128.ini [timing] tRAS",
+      "upstream_commit_hash": "29817593b3389f1337235d63cac515024ab8fd6e",
+      "confidence": "high",
+      "classification": "open_source_model"
+    },
+    "dramsim3.tRFC": {
+      "value": 260,
+      "unit": "reference value",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "umd-memsys/DRAMsim3",
+      "source_file_line_or_section": "configs/HBM2_8Gb_x128.ini [timing] tRFC",
+      "upstream_commit_hash": "29817593b3389f1337235d63cac515024ab8fd6e",
+      "confidence": "high",
+      "classification": "open_source_model"
+    },
+    "dramsim3.tREFI": {
+      "value": 3900,
+      "unit": "reference value",
+      "source_type": "open_source_model",
+      "source_repository_or_document": "umd-memsys/DRAMsim3",
+      "source_file_line_or_section": "configs/HBM2_8Gb_x128.ini [timing] tREFI",
+      "upstream_commit_hash": "29817593b3389f1337235d63cac515024ab8fd6e",
+      "confidence": "high",
+      "classification": "open_source_model"
+    },
+    "rtl.bank_local_fp16_reduction": {
+      "value": {
+        "BANKS": "8",
+        "KEY_WIDTH": "64",
+        "SLOT_WIDTH": "$clog2(ENTRIES_PER_BANK",
+        "DATA_WIDTH": "LANES * 16"
+      },
+      "unit": "SystemVerilog parameter expressions",
+      "source_type": "rtl_derived",
+      "source_repository_or_document": "STOB PIM2 working tree",
+      "source_file_line_or_section": "rtl/bank_local_fp16_reduction.sv",
+      "upstream_commit_hash": null,
+      "confidence": "medium",
+      "classification": "rtl_derived"
+    },
+    "rtl.bank_local_reduction_buffer": {
+      "value": {
+        "BANKS": "8",
+        "ENTRIES_PER_BANK": "16",
+        "KEY_WIDTH": "64",
+        "DATA_WIDTH": "256",
+        "SLOT_WIDTH": "$clog2(ENTRIES_PER_BANK"
+      },
+      "unit": "SystemVerilog parameter expressions",
+      "source_type": "rtl_derived",
+      "source_repository_or_document": "STOB PIM2 working tree",
+      "source_file_line_or_section": "rtl/bank_local_reduction_buffer.sv",
+      "upstream_commit_hash": null,
+      "confidence": "medium",
+      "classification": "rtl_derived"
+    },
+    "rtl.hierarchical_reduction_path": {
+      "value": {
+        "BANKS": "8",
+        "ENTRIES_PER_BANK": "16",
+        "KEY_WIDTH": "64",
+        "DATA_WIDTH": "256",
+        "SLOT_WIDTH": "$clog2(ENTRIES_PER_BANK",
+        "INDEX_WIDTH": "$clog2(BANKS"
+      },
+      "unit": "SystemVerilog parameter expressions",
+      "source_type": "rtl_derived",
+      "source_repository_or_document": "STOB PIM2 working tree",
+      "source_file_line_or_section": "rtl/hierarchical_reduction_path.sv",
+      "upstream_commit_hash": null,
+      "confidence": "medium",
+      "classification": "rtl_derived"
+    },
+    "rtl.logic_die_64ch_reduction_top": {
+      "value": {
+        "CHANNELS": "64",
+        "PIM_BLOCKS": "8",
+        "ENTRIES_PER_BANK": "16",
+        "KEY_WIDTH": "64",
+        "DATA_WIDTH": "256",
+        "SLOT_WIDTH": "$clog2(ENTRIES_PER_BANK",
+        "CHANNEL_WIDTH": "$clog2(CHANNELS",
+        "USE_INTERNAL_FP16": "1'b0",
+        "FP16_LANES": "DATA_WIDTH / 16"
+      },
+      "unit": "SystemVerilog parameter expressions",
+      "source_type": "rtl_derived",
+      "source_repository_or_document": "STOB PIM2 working tree",
+      "source_file_line_or_section": "rtl/logic_die_64ch_reduction_top.sv",
+      "upstream_commit_hash": null,
+      "confidence": "medium",
+      "classification": "rtl_derived"
+    },
+    "rtl.logic_die_dual_link_arbiter": {
+      "value": {
+        "INPUTS": "8",
+        "OUTPUTS": "2",
+        "KEY_WIDTH": "64",
+        "DATA_WIDTH": "256",
+        "INDEX_WIDTH": "$clog2(INPUTS"
+      },
+      "unit": "SystemVerilog parameter expressions",
+      "source_type": "rtl_derived",
+      "source_repository_or_document": "STOB PIM2 working tree",
+      "source_file_line_or_section": "rtl/logic_die_dual_link_arbiter.sv",
+      "upstream_commit_hash": null,
+      "confidence": "medium",
+      "classification": "rtl_derived"
+    },
+    "rtl.logic_die_link_arbiter": {
+      "value": {
+        "INPUTS": "8",
+        "KEY_WIDTH": "64",
+        "DATA_WIDTH": "256",
+        "INDEX_WIDTH": "$clog2(INPUTS"
+      },
+      "unit": "SystemVerilog parameter expressions",
+      "source_type": "rtl_derived",
+      "source_repository_or_document": "STOB PIM2 working tree",
+      "source_file_line_or_section": "rtl/logic_die_link_arbiter.sv",
+      "upstream_commit_hash": null,
+      "confidence": "medium",
+      "classification": "rtl_derived"
+    },
+    "rtl.shared_fp16_pipeline_fabric": {
+      "value": {
+        "SOURCES": "8",
+        "PIPELINES": "1",
+        "LANES": "16",
+        "DATA_WIDTH": "LANES * 16",
+        "SOURCE_WIDTH": "$clog2(SOURCES"
+      },
+      "unit": "SystemVerilog parameter expressions",
+      "source_type": "rtl_derived",
+      "source_repository_or_document": "STOB PIM2 working tree",
+      "source_file_line_or_section": "rtl/shared_fp16_pipeline_fabric.sv",
+      "upstream_commit_hash": null,
+      "confidence": "medium",
+      "classification": "rtl_derived"
+    },
+    "rtl.shared_fp16_reduction_cluster": {
+      "value": {
+        "SOURCES": "8",
+        "PIPELINES": "1",
+        "ENTRIES_PER_SOURCE": "16",
+        "KEY_WIDTH": "64",
+        "LANES": "16",
+        "DATA_WIDTH": "LANES * 16",
+        "SLOT_WIDTH": "$clog2(ENTRIES_PER_SOURCE",
+        "SOURCE_WIDTH": "$clog2(SOURCES"
+      },
+      "unit": "SystemVerilog parameter expressions",
+      "source_type": "rtl_derived",
+      "source_repository_or_document": "STOB PIM2 working tree",
+      "source_file_line_or_section": "rtl/shared_fp16_reduction_cluster.sv",
+      "upstream_commit_hash": null,
+      "confidence": "medium",
+      "classification": "rtl_derived"
+    },
+    "geometry.package_width": {
+      "value": 12000,
+      "unit": "um",
+      "source_type": "configuration",
+      "source_repository_or_document": "local architectural visualization",
+      "source_file_line_or_section": "design/hbm2_architecture.json geometry_um.package_width",
+      "upstream_commit_hash": null,
+      "confidence": "low",
+      "classification": "illustrative"
+    },
+    "geometry.package_height": {
+      "value": 16000,
+      "unit": "um",
+      "source_type": "configuration",
+      "source_repository_or_document": "local architectural visualization",
+      "source_file_line_or_section": "design/hbm2_architecture.json geometry_um.package_height",
+      "upstream_commit_hash": null,
+      "confidence": "low",
+      "classification": "illustrative"
+    },
+    "geometry.interposer_width": {
+      "value": 10500,
+      "unit": "um",
+      "source_type": "configuration",
+      "source_repository_or_document": "local architectural visualization",
+      "source_file_line_or_section": "design/hbm2_architecture.json geometry_um.interposer_width",
+      "upstream_commit_hash": null,
+      "confidence": "low",
+      "classification": "illustrative"
+    },
+    "geometry.interposer_height": {
+      "value": 14500,
+      "unit": "um",
+      "source_type": "configuration",
+      "source_repository_or_document": "local architectural visualization",
+      "source_file_line_or_section": "design/hbm2_architecture.json geometry_um.interposer_height",
+      "upstream_commit_hash": null,
+      "confidence": "low",
+      "classification": "illustrative"
+    },
+    "geometry.die_width": {
+      "value": 8000,
+      "unit": "um",
+      "source_type": "configuration",
+      "source_repository_or_document": "local architectural visualization",
+      "source_file_line_or_section": "design/hbm2_architecture.json geometry_um.die_width",
+      "upstream_commit_hash": null,
+      "confidence": "low",
+      "classification": "illustrative"
+    },
+    "geometry.die_height": {
+      "value": 12000,
+      "unit": "um",
+      "source_type": "configuration",
+      "source_repository_or_document": "local architectural visualization",
+      "source_file_line_or_section": "design/hbm2_architecture.json geometry_um.die_height",
+      "upstream_commit_hash": null,
+      "confidence": "low",
+      "classification": "illustrative"
+    },
+    "geometry.logic_die_thickness": {
+      "value": 100,
+      "unit": "um",
+      "source_type": "configuration",
+      "source_repository_or_document": "local architectural visualization",
+      "source_file_line_or_section": "design/hbm2_architecture.json geometry_um.logic_die_thickness",
+      "upstream_commit_hash": null,
+      "confidence": "medium",
+      "classification": "estimated"
+    },
+    "geometry.dram_die_thickness": {
+      "value": 50,
+      "unit": "um",
+      "source_type": "configuration",
+      "source_repository_or_document": "local architectural visualization",
+      "source_file_line_or_section": "design/hbm2_architecture.json geometry_um.dram_die_thickness",
+      "upstream_commit_hash": null,
+      "confidence": "medium",
+      "classification": "estimated"
+    },
+    "geometry.die_gap": {
+      "value": 12,
+      "unit": "um",
+      "source_type": "configuration",
+      "source_repository_or_document": "local architectural visualization",
+      "source_file_line_or_section": "design/hbm2_architecture.json geometry_um.die_gap",
+      "upstream_commit_hash": null,
+      "confidence": "low",
+      "classification": "illustrative"
+    },
+    "geometry.interposer_thickness": {
+      "value": 100,
+      "unit": "um",
+      "source_type": "configuration",
+      "source_repository_or_document": "local architectural visualization",
+      "source_file_line_or_section": "design/hbm2_architecture.json geometry_um.interposer_thickness",
+      "upstream_commit_hash": null,
+      "confidence": "low",
+      "classification": "illustrative"
+    },
+    "geometry.substrate_thickness": {
+      "value": 180,
+      "unit": "um",
+      "source_type": "configuration",
+      "source_repository_or_document": "local architectural visualization",
+      "source_file_line_or_section": "design/hbm2_architecture.json geometry_um.substrate_thickness",
+      "upstream_commit_hash": null,
+      "confidence": "low",
+      "classification": "illustrative"
+    },
+    "geometry.tsv_size": {
+      "value": 28,
+      "unit": "um",
+      "source_type": "configuration",
+      "source_repository_or_document": "local architectural visualization",
+      "source_file_line_or_section": "design/hbm2_architecture.json geometry_um.tsv_size",
+      "upstream_commit_hash": null,
+      "confidence": "low",
+      "classification": "illustrative"
+    },
+    "geometry.microbump_size": {
+      "value": 22,
+      "unit": "um",
+      "source_type": "configuration",
+      "source_repository_or_document": "local architectural visualization",
+      "source_file_line_or_section": "design/hbm2_architecture.json geometry_um.microbump_size",
+      "upstream_commit_hash": null,
+      "confidence": "low",
+      "classification": "illustrative"
+    },
+    "geometry.visual_scale_xy": {
+      "value": 0.01,
+      "unit": "scale",
+      "source_type": "configuration",
+      "source_repository_or_document": "local architectural visualization",
+      "source_file_line_or_section": "design/hbm2_architecture.json geometry_um.visual_scale_xy",
+      "upstream_commit_hash": null,
+      "confidence": "low",
+      "classification": "illustrative"
+    },
+    "geometry.visual_scale_z": {
+      "value": 0.05,
+      "unit": "scale",
+      "source_type": "configuration",
+      "source_repository_or_document": "local architectural visualization",
+      "source_file_line_or_section": "design/hbm2_architecture.json geometry_um.visual_scale_z",
+      "upstream_commit_hash": null,
+      "confidence": "low",
+      "classification": "illustrative"
+    }
+  }
+}

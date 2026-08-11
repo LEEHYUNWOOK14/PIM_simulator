@@ -140,6 +140,36 @@ Low-watermark hard-cap의 14x14x96 full UIB는 C++ polling 비용이 매우 커 
 | Low-watermark miniature UIB 정확도·진행성 | PASS |
 | Low-watermark full UIB end-to-end cycle | 미완료 |
 
+### 7.1 2026-08-06 재현 확인
+
+현재 바이너리에서 아래 두 종류의 실행을 다시 확인했다.
+
+```bash
+./sim --gtest_filter='LogicDieSchedulerTest.FinitePcuQueue*:MobileNetV4WorkloadTest.MiniatureUibRunsEndToEnd'
+bash experiment/run_hard_pcu_queue_smoke.sh
+```
+
+- finite PCU queue 단위 테스트 2개: PASS
+- 기본 설정의 miniature UIB: PASS, `total_cycle[38664]`, 실제 실행 약 15초
+- `32 PCU + queue depth 64` miniature UIB: 60초 제한 안에 완료되지 않음
+
+두 번째 실행은 오답이나 deadlock이 확인된 것이 아니라, 제한 시간 안에 완료 결과를 얻지 못한
+상태다. 따라서 과거 로그의 `total_cycle[55472]`는 기능 경로가 한 번 완료된 증거로는 사용할 수
+있지만, 현재 구현의 실행 효율이 충분하다는 증거로 사용하면 안 된다.
+
+### 7.2 느려지는 직접 원인
+
+64채널에서 queue depth도 64이면 현재 식의 low watermark는 1이다.
+
+```text
+low_watermark = 64 - 64 + 1 = 1
+```
+
+공유 scheduler에 아직 시작하지 않은 reservation이 하나만 있어도 이후 채널의 요청이 거절된다.
+각 채널 controller는 다음 cycle에도 command queue를 다시 탐색하고 같은 승인 조건을 검사한다.
+이 때문에 계산량 자체보다 `거절 -> 재탐색 -> 재검사`가 반복되는 비용이 커진다. 이 방식은 queue
+초과를 보수적으로 막는 임시 안전장치이며, 64채널을 동시에 효율적으로 승인하는 최종 구조가 아니다.
+
 ## 8. 다음 구현
 
 64 controller가 매 cycle 같은 queue를 polling하는 구조를 중앙 grant vector로 바꿔야 한다.
@@ -151,6 +181,18 @@ Low-watermark hard-cap의 14x14x96 full UIB는 C++ polling 비용이 매우 커 
 5. Full UIB에서 waiting peak ≤64, 출력 18,816개, end-to-end cycle을 다시 검증한다.
 
 RTL에서도 같은 `request_valid[63:0]`, `grant[63:0]`, `queue_credits` 인터페이스를 사용해야 한다.
+
+중앙 승인 구현은 다음 불변조건을 함께 만족해야 한다.
+
+1. 한 cycle의 64개 요청을 모은 뒤 다음 cycle의 grant vector를 한 번만 계산한다.
+2. `pop`에 성공한 grant만 queue credit을 차감하며, 단순 probe는 credit을 소비하지 않는다.
+3. service 시작 시 정확히 한 credit을 반환한다.
+4. grant를 받지 못한 요청은 원래 channel command queue에 남아 순서가 보존된다.
+5. `waiting reservations <= LOGIC_PCU_QUEUE_DEPTH`를 매 cycle 검증한다.
+6. round-robin 시작점을 이동해 특정 channel의 starvation을 막는다.
+
+즉 다음 단계의 핵심은 queue 깊이를 더 키우는 것이 아니라, 분산 polling을 중앙 request/grant로
+바꾸는 것이다.
 
 ## 9. 파일
 
