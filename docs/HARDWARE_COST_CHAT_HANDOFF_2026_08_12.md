@@ -1,8 +1,11 @@
 # HBM2 PIM 하드웨어 비용 분석 채팅 인수인계 보고서
 
-작성일: 2026-08-12  
-저장소: `LEEHYUNWOOK14/PIM_simulator`  
-작업 브랜치: `PIM_Simulator`  
+작성일: 2026-08-12
+
+저장소: `LEEHYUNWOOK14/PIM_simulator`
+
+작업 브랜치: `PIM_Simulator`
+
 이 문서의 범위: **하드웨어 비용·전력·열·물리 구현 분석만 포함**
 
 ## 1. 새 채팅에서 유지해야 할 작업 경계
