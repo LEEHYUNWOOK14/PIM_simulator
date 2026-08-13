@@ -92,6 +92,7 @@ def main() -> int:
     )
     place_odb_sha = placement["artifacts"]["placed_odb"]["sha256"]
     place_sdc_sha = placement["artifacts"]["placed_sdc"]["sha256"]
+    placement_gate_pass = placement.get("gate_pass") is True
     input_hashes_match = (
         log_value(log, "WBQ_ROUTE_PLACE_ODB_SHA256") == place_odb_sha
         and log_value(log, "WBQ_ROUTE_PLACE_SDC_SHA256") == place_sdc_sha
@@ -101,7 +102,7 @@ def main() -> int:
     total_overflow_tracks = int(summary.get("total_overflow_tracks", -1))
     all_skips_allowed = all(item["allowlisted"] for item in skipped)
 
-    if not clean or not same_definition or not input_hashes_match or residual is None:
+    if not clean or not same_definition or not placement_gate_pass or not input_hashes_match or residual is None:
         verdict = "INVALID_RUN"
     elif residual == 0 and overflow_edges == 0 and all_skips_allowed:
         verdict = "PASS_PF4"
@@ -128,6 +129,7 @@ def main() -> int:
         "variant": "wbq_v4_control",
         "verdict": verdict,
         "same_metric_definition": same_definition,
+        "placement_gate_pass": placement_gate_pass,
         "placement_input_hashes_match": input_hashes_match,
         "clean_completion": clean,
         "historical_v4": {
@@ -171,7 +173,7 @@ def main() -> int:
     background = "#e7f6ed" if verdict == "PASS_PF4" else ("#fff0df" if verdict == "IMPROVED_NOT_CLOSED" else "#fdecec")
     report = f"""<!doctype html><html lang=\"ko\"><head><meta charset=\"utf-8\"><title>WBQ global route 비교</title>
 <style>body{{font-family:system-ui,sans-serif;max-width:1080px;margin:32px auto;color:#182235}}h1,h2{{color:#173f6b}}table{{border-collapse:collapse;width:100%}}th,td{{padding:10px;border-bottom:1px solid #ddd;text-align:right}}th:first-child,td:first-child{{text-align:left}}.verdict{{padding:16px;background:{background};border-left:6px solid {color}}}code{{word-break:break-all}}</style></head><body>
-<h1>Phase 4 — wbq global route와 historical V4 비교</h1><div class=\"verdict\"><strong>{esc(verdict)}</strong><br>동일 metric 정의: {esc(same_definition)} / 입력 hash 일치: {esc(input_hashes_match)}</div>
+<h1>Phase 4 — wbq global route와 historical V4 비교</h1><div class=\"verdict\"><strong>{esc(verdict)}</strong><br>동일 metric 정의: {esc(same_definition)} / placement gate: {esc(placement_gate_pass)} / 입력 hash 일치: {esc(input_hashes_match)}</div>
 <h2>동일 정의 정량 비교</h2><table><tr><th>Metric</th><th>Historical V4</th><th>Current wbq</th><th>Delta</th></tr>
 <tr><td>Distributed met5 landing pads</td><td>{baseline_bump_count}</td><td>{current_bump_count if current_bump_count is not None else 'unknown'}</td><td>{esc(None if current_bump_count is None or baseline_bump_count is None else current_bump_count - baseline_bump_count)}</td></tr>
 <tr><td>CuGR residual congestion</td><td>{payload['historical_v4']['residual_congestion']:,}</td><td>{residual if residual is not None else 'unknown'}</td><td>{esc(payload['delta_vs_v4']['residual'])}</td></tr>
