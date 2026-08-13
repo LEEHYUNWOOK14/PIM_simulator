@@ -6,7 +6,7 @@ import argparse
 import json
 from pathlib import Path
 
-import klayout.db as kdb
+from klayout_python import kdb
 
 from merge_final_rtl_gds import ROOT, absolute, sha256, used_layers
 

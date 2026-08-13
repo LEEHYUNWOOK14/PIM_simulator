@@ -12,13 +12,24 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import gdstk
-import klayout.db as kdb
+from klayout_python import kdb
 import numpy as np
 from shapely.geometry import Point, Polygon
 
 
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def package_version(name: str) -> str:
+    if name == "klayout":
+        version = getattr(kdb, "__version__", None)
+        if version:
+            return str(version)
+    try:
+        return importlib.metadata.version(name)
+    except importlib.metadata.PackageNotFoundError:
+        return "UNKNOWN"
 
 
 def recursive_shape_count(cell: kdb.Cell, layer_index: int) -> int:
@@ -92,7 +103,7 @@ def main() -> int:
     report = {
         "status": "PASS", "generated_at": datetime.now(timezone.utc).isoformat(),
         "host": platform.platform(), "python": platform.python_version(),
-        "versions": {name: importlib.metadata.version(name) for name in
+        "versions": {name: package_version(name) for name in
                      ("klayout", "gdstk", "numpy", "shapely", "jsonschema", "PyYAML", "Pillow")},
         "smoke": {
             "operation": "separate GDS read -> 90-degree rotation + translation -> hierarchy-preserving merge",

@@ -2,18 +2,14 @@ from __future__ import annotations
 
 import json
 import math
-import os
 import sys
 import tempfile
 import unittest
 from pathlib import Path
 
-LOCAL_SITE = Path(os.environ["LOCALAPPDATA"]) / "STOB_EDA/gds-merge/venv/Lib/site-packages"
-if LOCAL_SITE.is_dir(): sys.path.insert(0, str(LOCAL_SITE))
-import klayout.db as kdb
-
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools"))
+from klayout_python import kdb  # noqa: E402
 from merge_final_rtl_gds import MergeError, ORIENTATIONS, apply_matrix, merge  # noqa: E402
 
 

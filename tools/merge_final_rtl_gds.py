@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Any
 
 import jsonschema
-import klayout.db as kdb
+from klayout_python import kdb
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA = ROOT / "design/floorplan/final_gds_merge_recipe.schema.json"
