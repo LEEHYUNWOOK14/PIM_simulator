@@ -92,10 +92,12 @@ def main() -> int:
     )
     place_odb_sha = placement["artifacts"]["placed_odb"]["sha256"]
     place_sdc_sha = placement["artifacts"]["placed_sdc"]["sha256"]
+    place_manifest_sha = sha256(PLACE_MANIFEST)
     placement_gate_pass = placement.get("gate_pass") is True
     input_hashes_match = (
         log_value(log, "WBQ_ROUTE_PLACE_ODB_SHA256") == place_odb_sha
         and log_value(log, "WBQ_ROUTE_PLACE_SDC_SHA256") == place_sdc_sha
+        and log_value(log, "WBQ_ROUTE_PLACE_MANIFEST_SHA256") == place_manifest_sha
     )
     entries = int(summary.get("entries", -1))
     overflow_edges = int(summary.get("overflow_edges", -1))
@@ -124,7 +126,10 @@ def main() -> int:
         "schema_version": 1,
         "captured_at_utc": datetime.now(timezone.utc).isoformat(),
         "classification": "routed_research_artifact" if clean else "unknown",
-        "git_sha": subprocess.check_output(["git", "-C", str(ROOT), "rev-parse", "HEAD"], text=True).strip(),
+        "route_run_git_sha": log_value(log, "WBQ_ROUTE_GIT_SHA"),
+        "evidence_git_parent_sha": subprocess.check_output(
+            ["git", "-C", str(ROOT), "rev-parse", "HEAD"], text=True
+        ).strip(),
         "top": "logic_die_normalization_hbm_top",
         "variant": "wbq_v4_control",
         "verdict": verdict,

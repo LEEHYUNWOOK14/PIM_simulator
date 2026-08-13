@@ -12,6 +12,7 @@ routed_odb="$output_root/logic_die_normalization_hbm_top_wbq_v4_control_global_r
 routed_sdc="$output_root/logic_die_normalization_hbm_top_wbq_v4_control_global_route.sdc"
 place_odb="$result_dir/3_place.odb"
 place_sdc="$result_dir/3_place.sdc"
+place_manifest="$root/reports/final_integrated_gds_execution/wbq_placement_manifest.json"
 tcl="$root/verification/groot_normalization/normalization_hbm_wbq_v4_control_route.tcl"
 
 if pgrep -f '[o]penroad.*normalization_hbm_wbq_v4_control_route\.tcl' >/dev/null; then
@@ -20,6 +21,36 @@ if pgrep -f '[o]penroad.*normalization_hbm_wbq_v4_control_route\.tcl' >/dev/null
 fi
 test -s "$place_odb"
 test -s "$place_sdc"
+test -s "$place_manifest"
+
+# Refuse an expensive route unless the independently reopened legal placement
+# manifest describes these exact checkpoint bytes.
+python3 - "$place_manifest" "$place_odb" "$place_sdc" <<'PY'
+import hashlib
+import json
+import sys
+from pathlib import Path
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(8 * 1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+manifest_path, odb_path, sdc_path = map(Path, sys.argv[1:])
+manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+if manifest.get("gate_pass") is not True:
+    raise SystemExit("wbq placement manifest gate_pass is not true")
+for name, path in (("placed_odb", odb_path), ("placed_sdc", sdc_path)):
+    expected = manifest.get("artifacts", {}).get(name, {}).get("sha256")
+    actual = sha256(path)
+    if expected != actual:
+        raise SystemExit(f"wbq placement {name} hash mismatch: {actual} != {expected}")
+print("WBQ_ROUTE_PLACEMENT_PREFLIGHT PASS")
+PY
 
 export WBQ_PLATFORM_ROOT="$orfs_flow/platforms/sky130hd"
 export WBQ_PLACE_ODB="$place_odb"
@@ -30,6 +61,7 @@ export WBQ_ROUTE_OUTPUT_ROOT="$output_root"
   echo "WBQ_ROUTE_GIT_SHA=$(git -C "$root" rev-parse HEAD)"
   echo "WBQ_ROUTE_PLACE_ODB_SHA256=$(sha256sum "$place_odb" | awk '{print $1}')"
   echo "WBQ_ROUTE_PLACE_SDC_SHA256=$(sha256sum "$place_sdc" | awk '{print $1}')"
+  echo "WBQ_ROUTE_PLACE_MANIFEST_SHA256=$(sha256sum "$place_manifest" | awk '{print $1}')"
   echo "WBQ_ROUTE_TCL_SHA256=$(sha256sum "$tcl" | awk '{print $1}')"
   echo "WBQ_ROUTE_PIN_MODEL=DISTRIBUTED_INTERNAL_MET5_20UM_LANDING_PAD"
   echo "WBQ_ROUTE_SIGNAL_LAYERS=met1-met5"
