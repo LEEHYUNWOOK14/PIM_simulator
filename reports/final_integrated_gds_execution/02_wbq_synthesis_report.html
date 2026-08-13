@@ -1,0 +1,15 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>WBQ Sky130 합성 보고서</title>
+<style>body{font-family:system-ui,sans-serif;max-width:1050px;margin:32px auto;color:#182235}h1,h2{color:#173f6b}table{border-collapse:collapse;width:100%}th,td{padding:10px;border-bottom:1px solid #ddd;text-align:left}th{background:#eef3f8}.pass{padding:16px;background:#e7f6ed;border-left:6px solid #168154}code{word-break:break-all}</style></head><body>
+<h1>Phase 2 — wbq Sky130HD Technology Mapping</h1><div class="pass"><strong>PASS</strong><br>Git <code>afd1c89b07ab1c9f55cc3ce74f123513797a62b1</code></div>
+<h2>필수 게이트</h2><table>
+<tr><th>Top</th><td>logic_die_normalization_hbm_top</td></tr><tr><th>Variant</th><td>wbq</td></tr>
+<tr><th>Yosys check</th><td>0 problems</td></tr>
+<tr><th>Unmapped internal primitive</th><td>0</td></tr><tr><th>의도하지 않은 latch</th><td>0</td></tr></table>
+<h2>정량 결과</h2><table><tr><th>Mapped cells</th><td>3,337,343</td></tr>
+<tr><th>Mapped area</th><td>26,980,850.5248 µm²</td></tr><tr><th>Sequential area</th><td>8,004,476.9280 µm² (29.67%)</td></tr>
+<tr><th>Wall time</th><td>1:51.46</td></tr><tr><th>Peak RSS</th><td>2385.8 MiB</td></tr>
+<tr><th>Warnings</th><td>171 unique / 203 total; 상세 분류는 raw log 참조</td></tr></table>
+<h2>재현 명령</h2><pre>MAPPING_VARIANT=wbq bash verification/groot_normalization/run_normalization_hbm_top_sky130_mapping.sh
+python3 tools/collect_wbq_synthesis_evidence.py</pre>
+<p><strong>Claim boundary:</strong> 공개 Sky130HD library의 technology-mapped 연구 결과다. Placement, routing, timing closure 또는 제조 공정 signoff를 증명하지 않는다. RESEARCH ARTIFACT — NOT FOR FABRICATION.</p>
+</body></html>

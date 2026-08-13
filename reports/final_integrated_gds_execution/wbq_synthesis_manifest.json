@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "captured_at_utc": "2026-08-13T13:53:20.605098+00:00",
+  "classification": "synthesized",
+  "git_sha": "afd1c89b07ab1c9f55cc3ce74f123513797a62b1",
+  "top": "logic_die_normalization_hbm_top",
+  "variant": "wbq",
+  "yosys_version": "Yosys 0.68+ (git sha1 a5af9d690, Release, GNU /usr/bin/c++ 13.3.0) [github.com/The-OpenROAD-Project/yosys at HEAD]",
+  "check_zero": true,
+  "unmapped_internal_primitive_count": 0,
+  "unmapped_internal_primitives": [],
+  "latch_count": 0,
+  "mapped_cell_count_including_submodules": 3337343,
+  "mapped_area_um2": 26980850.524799,
+  "sequential_area_um2": 8004476.928,
+  "sequential_area_percent": 29.67,
+  "elapsed_wall": "1:51.46",
+  "maximum_rss_kbytes": 2443108,
+  "warning_unique_count": 171,
+  "warning_total_count": 203,
+  "artifacts": {
+    "reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_wbq_sky130_yosys.log": "787dc7ed0095d945494e9f35d8c42bc6004c754a5e4f93e825d931c175ca8398",
+    "reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_wbq_mapping_driver.log": "4ef19d5c1fc86b401fc2aeddfa1003684c9503d7e86fdbf9d456a45a53f84513",
+    "reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_wbq_sky130.v": "c8e1c10295a10de9599eb9424807ba3c8ea60cb3d8fd9a0982025b06300fab40"
+  },
+  "gate_pass": true
+}
