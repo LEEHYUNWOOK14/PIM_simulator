@@ -1,19 +1,19 @@
 {
   "schema_version": 1,
-  "captured_at_utc": "2026-08-13T13:42:24.275524+00:00",
+  "captured_at_utc": "2026-08-13T13:47:49.529209+00:00",
   "classification": "measured",
   "host": {
     "platform": "Linux-6.17.0-1022-gcp-x86_64-with-glibc2.39",
     "kernel": "6.17.0-1022-gcp",
     "cpu_count": 16,
-    "memory": "total        used        free      shared  buff/cache   available\nMem:           125Gi       9.3Gi        93Gi       1.1Mi        24Gi       116Gi\nSwap:             0B          0B          0B",
-    "disk": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/root       193G   25G  169G  13% /",
+    "memory": "total        used        free      shared  buff/cache   available\nMem:           125Gi       5.6Gi        96Gi       1.1Mi        24Gi       120Gi\nSwap:             0B          0B          0B",
+    "disk": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/root       193G   25G  168G  13% /",
     "swap": ""
   },
   "git": {
     "repository": "/home/forstobpim/PIM_simulator",
     "branch": "PIM_Simulator",
-    "sha": "1d7c869f6c6f413098740ad6dcf8dafb9c7e5afb",
+    "sha": "03fc788b7c20aef32fef9c8dfc7f5a14adbff75d",
     "dirty": true,
     "orfs_sha": "56496f3980fb6e9e58f10c8aea4a98949c0fe5f2",
     "openroad_sha": "ab6fd26351dc449e69059684dc6aa9ae9046eb36"
@@ -24,7 +24,7 @@
     "SKY130HD_PLATFORM": "/home/forstobpim/OpenROAD-flow-scripts/flow/platforms/sky130hd",
     "SKY130HD_LIBERTY": "/home/forstobpim/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib",
     "OPENROAD_EXE": "/home/forstobpim/OpenROAD-flow-scripts/tools/install/OpenROAD/bin/openroad",
-    "YOSYS_EXE": "/usr/bin/yosys",
+    "YOSYS_EXE": "/home/forstobpim/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys",
     "PHYSICAL_REPORT_ROOT": "/home/forstobpim/PIM_simulator/reports/groot_normalization/physical_feasibility"
   },
   "hashes": {
@@ -38,7 +38,7 @@
     "scons": "SCons by Steven Knight et al.:",
     "iverilog": "Icarus Verilog version 12.0 (stable) ()",
     "verilator": "Verilator 5.020 2024-01-01 rev (Debian 5.020-1)",
-    "yosys": "Yosys 0.33 (git sha1 2584903a060)",
+    "yosys": "Yosys 0.68+ (git sha1 a5af9d690, Release, GNU /usr/bin/c++ 13.3.0) [github.com/The-OpenROAD-Project/yosys at HEAD]",
     "openroad": "26Q3-1080-gab6fd26351",
     "klayout": "KLayout 0.30.7"
   },

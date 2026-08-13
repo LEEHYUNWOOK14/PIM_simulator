@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.."&&pwd)";cd "$root"
-yosys="/home/chandler/.local/oss-cad-suite/bin/yosys"
-if [[ ! -x "$yosys" ]];then yosys="${HOME}/.local/yosys/usr/bin/yosys";fi
+source "$root/verification/groot_normalization/eda_environment.sh"
+yosys="$yosys_exe"
 results="reports/groot_normalization/results/structural_audit";mkdir -p "$results"
 common="rtl/fp16_add.sv rtl/fp16_mul.sv rtl/bf16_add.sv rtl/bf16_mul.sv rtl/fp16_rsqrt_lut256.sv rtl/bf16_rsqrt_lut256.sv rtl/bank_normalization_local_reducer.sv rtl/bank_normalization_apply.sv rtl/bank_normalization_vector_reducer.sv rtl/bank_normalization_pipelined_vector_reducer.sv rtl/logic_normalization_scalar_engine.sv rtl/logic_normalization_reduction_engine.sv rtl/hierarchical_normalization_datapath.sv"
 
