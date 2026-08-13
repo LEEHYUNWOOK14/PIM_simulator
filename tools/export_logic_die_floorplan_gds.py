@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -146,7 +147,8 @@ def export(manifest_path: str, output_dir: str, thermal_field: str | None = None
         thermal_range_K = [low, high]
     gds_path = output / "logic_die_floorplan.gds"
     lyp_path = output / "logic_die_floorplan.lyp"
-    library.write_gds(gds_path)
+    # Fixed stream timestamps make clean regeneration byte-for-byte stable.
+    library.write_gds(gds_path, timestamp=datetime(1970, 1, 1))
     write_lyp(lyp_path)
     die = manifest["die"]
     expected_bbox_um = [
@@ -161,6 +163,7 @@ def export(manifest_path: str, output_dir: str, thermal_field: str | None = None
         "geometry": {
             "expected_top_bbox_um": expected_bbox_um,
             "bbox_source": "manifest.die",
+            "gds_timestamp_utc": "1970-01-01T00:00:00Z",
         },
         "counts": {"blocks": len(manifest["blocks"]), "tsv_bundles": len(manifest["tsv_bundles"]), "tsv_shapes": tsv_shapes, "micro_bump_bundles": len(manifest["micro_bump_bundles"]), "micro_bump_shapes": bump_shapes, "reserved_regions": len(manifest["reserved_regions"]), "routing_corridors": len(manifest["routing_corridors"]), "thermal_bins": thermal_bins},
         "layer_map": {"die": 100, "blocks": 110, "tsv_signal_classes": SIGNAL_LAYERS, "tsv_keepout": 130, "micro_bump_signal_classes": BUMPLAYERS, "reserved_regions": REGION_LAYERS, "connectivity": 170, "labels": 199, "thermal_bins_low_to_high": THERMAL_LAYERS},

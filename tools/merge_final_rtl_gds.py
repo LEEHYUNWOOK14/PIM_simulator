@@ -292,7 +292,10 @@ def merge(recipe_path: str | Path, force: bool = False) -> dict[str, Any]:
     output_gds.parent.mkdir(parents=True, exist_ok=True); report_path.parent.mkdir(parents=True, exist_ok=True)
     temp_gds = output_gds.with_name(output_gds.stem + ".tmp" + output_gds.suffix)
     if temp_gds.exists(): temp_gds.unlink()
-    target.write(str(temp_gds)); temp_gds.replace(output_gds)
+    save_options = kdb.SaveLayoutOptions()
+    save_options.set_format_from_filename(str(temp_gds))
+    save_options.gds2_write_timestamps = False
+    target.write(str(temp_gds), save_options); temp_gds.replace(output_gds)
     write_lyp(output_lyp, overlay_lyp, recipe["layer_mapping"]["rules"])
 
     checked = kdb.Layout(); checked.read(str(output_gds)); checked_top = checked.cell(recipe["output"]["top_cell"])
@@ -325,7 +328,7 @@ def merge(recipe_path: str | Path, force: bool = False) -> dict[str, Any]:
             "overlay": {"path": str(overlay_path), "sha256": sha256(overlay_path), "dbu_um": overlay.dbu, "top": recipe["inputs"]["overlay"]["top_cell"], "layers": {f"{a}/{b}": n for (a,b),n in sorted(overlay_layers.items())}},
             "manifest": {"path": str(manifest_path), "sha256": sha256(manifest_path)}
         },
-        "normalization": {"output_dbu_um": dbu, "method": "KLayout copy_tree cross-layout DBU conversion; references do not repeat the DBU ratio", "orientation": recipe["placement"]["orientation"], "physical_scale": recipe["placement"]["physical_scale"], "translation_um": [tx,ty], "rtl_reference_magnification": rtl_mag, "overlay_reference_magnification": overlay_mag},
+        "normalization": {"output_dbu_um": dbu, "method": "KLayout copy_tree cross-layout DBU conversion; references do not repeat the DBU ratio", "orientation": recipe["placement"]["orientation"], "physical_scale": recipe["placement"]["physical_scale"], "translation_um": [tx,ty], "rtl_reference_magnification": rtl_mag, "overlay_reference_magnification": overlay_mag, "gds_timestamps_written": False},
         "anchors": anchors, "minimum_anchor_count": minimum_anchors, "max_anchor_residual_um": max((a["residual_um"] for a in anchors), default=None),
         "layer_mapping": {"rules": recipe["layer_mapping"]["rules"], "rtl_layers_after": {f"{a}/{b}": n for (a,b),n in sorted(rtl_after.items())}, "overlay_collisions": [f"{a}/{b}" for a,b in collisions]},
         "cell_namespace": {"rtl": rtl_names, "overlay": overlay_names, "output_top": checked_top.name,

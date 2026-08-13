@@ -144,10 +144,13 @@ class FinalGdsMergeTests(unittest.TestCase):
         with self.assertRaisesRegex(MergeError, "non-unit"):
             merge(path)
         path, _ = self.recipe()
-        merge(path)
+        first = merge(path)
         with self.assertRaisesRegex(MergeError, "output exists"):
             merge(path)
-        self.assertEqual(merge(path, force=True)["status"], "PASS")
+        regenerated = merge(path, force=True)
+        self.assertEqual(regenerated["status"], "PASS")
+        self.assertEqual(regenerated["output"]["gds_sha256"], first["output"]["gds_sha256"])
+        self.assertFalse(regenerated["normalization"]["gds_timestamps_written"])
 
     def test_unsafe_namespace_prefixes_are_rejected(self) -> None:
         path, data = self.recipe()
