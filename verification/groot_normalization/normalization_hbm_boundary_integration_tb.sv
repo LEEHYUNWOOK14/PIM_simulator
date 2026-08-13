@@ -33,10 +33,13 @@ module normalization_hbm_boundary_integration_tb #(
     logic [BANKS-1:0] replay_valid, replay_ready, replay_last;
     logic [BANKS-1:0][15:0] replay_tag;
     logic [BANKS*LANES-1:0][15:0] replay_x, replay_gamma, replay_beta;
+    logic [BANKS-1:0] pcu_writeback_valid, pcu_writeback_ready, pcu_writeback_last;
+    logic [BANKS-1:0][15:0] pcu_writeback_tag;
+    logic [BANKS*LANES-1:0][15:0] pcu_writeback_data;
     logic [BANKS-1:0] writeback_valid, writeback_ready, writeback_last;
     logic [BANKS-1:0][15:0] writeback_tag;
     logic [BANKS*LANES-1:0][15:0] writeback_data;
-    logic protocol_error_pcu, protocol_error_adapter;
+    logic protocol_error_pcu, protocol_error_adapter, protocol_error_slice;
     logic adapter_done;
 
     logic cmd_valid, cmd_ready;
@@ -76,9 +79,9 @@ module normalization_hbm_boundary_integration_tb #(
         .replay_valid_i(replay_valid), .replay_ready_o(replay_ready),
         .replay_tag_i(replay_tag), .replay_x_i(replay_x),
         .replay_gamma_i(replay_gamma), .replay_beta_i(replay_beta),
-        .replay_last_i(replay_last), .writeback_valid_o(writeback_valid),
-        .writeback_ready_i(writeback_ready), .writeback_tag_o(writeback_tag),
-        .writeback_data_o(writeback_data), .writeback_last_o(writeback_last),
+        .replay_last_i(replay_last), .writeback_valid_o(pcu_writeback_valid),
+        .writeback_ready_i(pcu_writeback_ready), .writeback_tag_o(pcu_writeback_tag),
+        .writeback_data_o(pcu_writeback_data), .writeback_last_o(pcu_writeback_last),
         .bank_activation_read_bytes_o(), .bank_affine_read_bytes_o(),
         .bank_writeback_bytes_o(), .bank_to_logic_partial_bytes_o(),
         .logic_to_bank_scalar_bytes_o(), .external_control_bytes_o(),
@@ -86,6 +89,20 @@ module normalization_hbm_boundary_integration_tb #(
         .scheduler_writeback_grants_o(), .scheduler_read_conflict_cycles_o(),
         .scheduler_bank_skew_cycles_o(), .context_occupancy_o(),
         .protocol_error_o(protocol_error_pcu)
+    );
+
+    normalization_writeback_quad_slice #(
+        .BANKS(BANKS), .QUADS(4), .LANES(LANES)
+    ) u_writeback_slice (
+        .clk_i(clk), .rst_ni(rst_n),
+        .source_valid_i(pcu_writeback_valid),
+        .source_ready_o(pcu_writeback_ready),
+        .source_tag_i(pcu_writeback_tag),
+        .source_data_i(pcu_writeback_data),
+        .source_last_i(pcu_writeback_last),
+        .sink_valid_o(writeback_valid), .sink_ready_i(writeback_ready),
+        .sink_tag_o(writeback_tag), .sink_data_o(writeback_data),
+        .sink_last_o(writeback_last), .protocol_error_o(protocol_error_slice)
     );
 
     normalization_hbm_boundary_adapter #(
@@ -171,8 +188,9 @@ module normalization_hbm_boundary_integration_tb #(
         wait (adapter_done);
         @(negedge clk);
 
-        if (protocol_error_pcu || protocol_error_adapter)
-            $fatal(1, "protocol error pcu=%b adapter=%b", protocol_error_pcu, protocol_error_adapter);
+        if (protocol_error_pcu || protocol_error_adapter || protocol_error_slice)
+            $fatal(1, "protocol error pcu=%b adapter=%b slice=%b",
+                protocol_error_pcu, protocol_error_adapter, protocol_error_slice);
         if (act_count != BANKS || pre_count != BANKS)
             $fatal(1, "ACT/PRE count mismatch act=%0d pre=%0d", act_count, pre_count);
         if (read_count != BANKS*(2*X_WORDS+VECTORS))

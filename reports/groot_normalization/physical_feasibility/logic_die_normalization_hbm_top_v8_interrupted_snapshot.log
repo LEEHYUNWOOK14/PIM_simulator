@@ -1,0 +1,56 @@
+2026-08-13T20:28:12+09:00
+    PID    PPID     ELAPSED   RSS    VSZ CMD
+    585     556       04:11 13021004 13481476 /home/chandler/.local/stob-eda/openroad/bin/openroad -exit -no_init -threads 1 -no_splash /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/verification/groot_normalization/normalization_hbm_v8_routability_place.tcl
+--- V8 LOG TAIL BEFORE TERMINATION ---
+PF_V8_SOURCE_DB_SHA256=478d633c3b8a15010f21f4175b246884d5e2f7427ac046cf06268efce6186869
+PF_V8_SOURCE_SDC_SHA256=91fce8d56e7c36bd34b09dd664ec0b804254e0caef2296fd21f1da905d15fc94
+PF_V8_PLACEMENT_MODEL=UNCONSTRAINED_ROUTABILITY_DRIVEN
+PF_V8_TARGET_DENSITY=0.42
+PF_V8_PIN_MODEL=DISTRIBUTED_INTERNAL_MET5_20UM_LANDING_PAD
+PF_V8_RANDOM_SEED=42
+V8_BUMP_PIN_COUNT 565
+V8_PLACE_STAGE routability_global_placement
+[INFO GPL-0001] ---- Initialize GPL Main Data Structures
+[INFO GPL-0002] DBU: 1000
+[INFO GPL-0003] SiteSize: (  0.460  2.720 ) um
+[INFO GPL-0004] CoreBBox: ( 10.120 10.880 ) ( 9019.680 9019.520 ) um
+[INFO GPL-0016] Core area:                  81163882.598 um^2
+[INFO GPL-0036] Movable instances area:     29078389.731 um^2
+[INFO GPL-0037] Total instances area:       30430141.168 um^2
+[INFO GPL-0035] Pin density area adjust:    2730345.434 um^2
+[INFO GPL-0032] ---- Initialize Region: Top-level
+[INFO GPL-0006] Number of instances:           4844139
+[INFO GPL-0007] Movable instances:             3763775
+[INFO GPL-0008] Fixed instances:               1080364
+[INFO GPL-0009] Dummy instances:                     0
+[INFO GPL-0010] Number of nets:                3764154
+[INFO GPL-0011] Number of pins:               12600429
+[INFO GPL-0012] Die BBox:       (  0.000  0.000 ) ( 9029.900 9029.900 ) um
+[INFO GPL-0013] Placement BBox: ( 10.120 10.880 ) ( 9019.680 9019.520 ) um
+[INFO GPL-0014] Region name: top-level.
+[INFO GPL-0015] Region area:                81163882.598 um^2
+[INFO GPL-0017] Fixed instances area:       1351751.437 um^2
+[INFO GPL-0018] Movable instances area:     31808735.165 um^2
+[INFO GPL-0019] Utilization:                    39.855 %
+[INFO GPL-0020] Standard cells area:        31808735.165 um^2
+[INFO GPL-0021] Large instances area:            0.000 um^2
+[INFO GPL-0005] ---- Execute Conjugate Gradient Initial Placement.
+[INFO GPL-0051] Source of initial instance position counters:
+	Odb location = 0	Core center = 3763775	Region center = 0
+[INFO GPL-0033] ---- Initialize Nesterov Region: Top-level
+[INFO GPL-0023] Placement target density:       0.4200
+[INFO GPL-0024] Movable insts average area:      8.451 um^2
+[INFO GPL-0025] Ideal bin area:                 20.122 um^2
+[INFO GPL-0026] Ideal bin count:               4033567
+[INFO GPL-0027] Total bin area:             81163882.598 um^2
+[INFO GPL-0028] Bin count (X, Y):        1024 ,   1024
+[INFO GPL-0029] Bin size (W * H):       8.798 *  8.797 um
+[INFO GPL-0030] Number of bins:                1048576
+[INFO GPL-0084] ---- Execute Nesterov Global Placement.
+[INFO GPL-0031] HPWL: Half-Perimeter Wirelength
+Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
+---------------------------------------------------------------
+        0 |   0.9998 |  6.710689e+06 |   +0.00% |  1.30e-17 |      
+       10 |   0.9998 |  5.629767e+06 |  -16.11% |  2.11e-17 |      
+       20 |   0.9998 |  5.530180e+06 |   -1.77% |  3.44e-17 |      
+       30 |   0.9998 |  5.482893e+06 |   -0.86% |  5.61e-17 |      

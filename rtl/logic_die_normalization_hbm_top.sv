@@ -58,13 +58,16 @@ module logic_die_normalization_hbm_top #(
     logic [BANKS-1:0] replay_valid, replay_ready, replay_last;
     logic [BANKS-1:0][TAG_WIDTH-1:0] replay_tag;
     logic [BANKS*LANES-1:0][15:0] replay_x, replay_gamma, replay_beta;
+    logic [BANKS-1:0] pcu_writeback_valid, pcu_writeback_ready, pcu_writeback_last;
+    logic [BANKS-1:0][TAG_WIDTH-1:0] pcu_writeback_tag;
+    logic [BANKS*LANES-1:0][15:0] pcu_writeback_data;
     logic [BANKS-1:0] writeback_valid, writeback_ready, writeback_last;
     logic [BANKS-1:0][TAG_WIDTH-1:0] writeback_tag;
     logic [BANKS*LANES-1:0][15:0] writeback_data;
-    logic pcu_error, adapter_error;
+    logic pcu_error, adapter_error, writeback_slice_error;
 
     assign job_ready_o = pcu_job_ready && adapter_start_ready;
-    assign protocol_error_o = pcu_error || adapter_error;
+    assign protocol_error_o = pcu_error || adapter_error || writeback_slice_error;
 
     logic_die_normalization_pcu_top #(
         .BANKS(BANKS), .LANES(LANES), .SCALAR_ENGINES(SCALAR_ENGINES),
@@ -89,9 +92,9 @@ module logic_die_normalization_hbm_top #(
         .replay_valid_i(replay_valid), .replay_ready_o(replay_ready),
         .replay_tag_i(replay_tag), .replay_x_i(replay_x),
         .replay_gamma_i(replay_gamma), .replay_beta_i(replay_beta),
-        .replay_last_i(replay_last), .writeback_valid_o(writeback_valid),
-        .writeback_ready_i(writeback_ready), .writeback_tag_o(writeback_tag),
-        .writeback_data_o(writeback_data), .writeback_last_o(writeback_last),
+        .replay_last_i(replay_last), .writeback_valid_o(pcu_writeback_valid),
+        .writeback_ready_i(pcu_writeback_ready), .writeback_tag_o(pcu_writeback_tag),
+        .writeback_data_o(pcu_writeback_data), .writeback_last_o(pcu_writeback_last),
         .bank_activation_read_bytes_o(), .bank_affine_read_bytes_o(),
         .bank_writeback_bytes_o(), .bank_to_logic_partial_bytes_o(),
         .logic_to_bank_scalar_bytes_o(), .external_control_bytes_o(),
@@ -99,6 +102,22 @@ module logic_die_normalization_hbm_top #(
         .scheduler_writeback_grants_o(), .scheduler_read_conflict_cycles_o(),
         .scheduler_bank_skew_cycles_o(), .context_occupancy_o(),
         .protocol_error_o(pcu_error)
+    );
+
+    // The dominant post-placement hotspot was the direct 16-bank writeback
+    // bus.  Split its storage into four bank-local elastic payload slices.
+    normalization_writeback_quad_slice #(
+        .BANKS(BANKS), .QUADS(4), .LANES(LANES), .TAG_WIDTH(TAG_WIDTH)
+    ) u_writeback_slice (
+        .clk_i(clk_i), .rst_ni(rst_ni),
+        .source_valid_i(pcu_writeback_valid),
+        .source_ready_o(pcu_writeback_ready),
+        .source_tag_i(pcu_writeback_tag),
+        .source_data_i(pcu_writeback_data),
+        .source_last_i(pcu_writeback_last),
+        .sink_valid_o(writeback_valid), .sink_ready_i(writeback_ready),
+        .sink_tag_o(writeback_tag), .sink_data_o(writeback_data),
+        .sink_last_o(writeback_last), .protocol_error_o(writeback_slice_error)
     );
 
     normalization_hbm_boundary_adapter #(

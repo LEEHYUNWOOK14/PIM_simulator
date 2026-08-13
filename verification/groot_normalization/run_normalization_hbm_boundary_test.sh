@@ -10,6 +10,7 @@ src=(
   rtl/mixed_precision_bank_apply_pipe.sv rtl/mixed_precision_row_context_table.sv
   rtl/mixed_precision_multirow_datapath.sv rtl/normalization_bank_scheduler.sv
   rtl/logic_die_normalization_pcu_top.sv rtl/normalization_hbm_boundary_adapter.sv
+  rtl/normalization_writeback_quad_slice.sv
   rtl/dram_bank_array_model.sv
   verification/groot_normalization/normalization_hbm_boundary_integration_tb.sv
 )

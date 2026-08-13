@@ -8,8 +8,10 @@ yosys=/home/chandler/.local/oss-cad-suite/bin/yosys
 results=reports/groot_normalization/physical_feasibility
 mkdir -p "$results"
 top=logic_die_normalization_hbm_top
-netlist="$results/${top}_sky130.v"
-log="$results/${top}_sky130_yosys.log"
+variant="${MAPPING_VARIANT:-}"
+suffix="${variant:+_${variant}}"
+netlist="$results/${top}${suffix}_sky130.v"
+log="$results/${top}${suffix}_sky130_yosys.log"
 src=(
   rtl/bf16_to_fp32.sv rtl/fp32_to_bf16_rne.sv rtl/fp32_add.sv rtl/fp32_mul.sv
   rtl/fp32_add_pipe4.sv rtl/fp32_mul_pipe4.sv rtl/bf16_rsqrt_lut256.sv
@@ -18,6 +20,7 @@ src=(
   rtl/mixed_precision_bank_apply_pipe.sv rtl/mixed_precision_row_context_table.sv
   rtl/mixed_precision_multirow_datapath.sv rtl/normalization_bank_scheduler.sv
   rtl/logic_die_normalization_pcu_top.sv rtl/normalization_hbm_boundary_adapter.sv
+  rtl/normalization_writeback_quad_slice.sv
   rtl/logic_die_normalization_hbm_top.sv
 )
 
