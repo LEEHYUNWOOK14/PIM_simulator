@@ -42,6 +42,7 @@ bin
 # Local editor and Python caches
 .vscode/
 .clangd
+.venv/
 **/__pycache__/
 *.pyc
 
@@ -71,4 +72,3 @@ b1_logic_die_experiment/artifacts/
 # Local scratch files
 test_file.txt
 yosys_top.log
-
