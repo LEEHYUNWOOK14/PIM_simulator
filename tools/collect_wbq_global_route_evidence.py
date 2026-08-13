@@ -69,6 +69,10 @@ def main() -> int:
     sources = parse_kv(SOURCES)
     residuals = re.findall(r"Iterative RRR finished with congestion remaining \((\d+)\)", log)
     residual = int(residuals[-1]) if residuals else (0 if "WBQ_V4_CONTROL_ROUTE_PASS" in log else None)
+    baseline_bump_match = re.search(r"^(\d+) distributed internal met5 20um landing pads$", baseline["pin_model"])
+    baseline_bump_count = int(baseline_bump_match.group(1)) if baseline_bump_match else None
+    current_bump_count_match = re.findall(r"^WBQ_V4_CONTROL_BUMP_PIN_COUNT (\d+)$", log, flags=re.MULTILINE)
+    current_bump_count = int(current_bump_count_match[-1]) if current_bump_count_match else None
     skipped = [
         {"net": net, "terminals": int(terminals), "allowlisted": net == "clk_i"}
         for net, terminals in re.findall(r"Skipping net (\S+) with (\d+) terminals", log)
@@ -82,6 +86,8 @@ def main() -> int:
             log_value(log, "WBQ_ROUTE_CONGESTION_ITERATIONS") == "1",
             log_value(log, "WBQ_ROUTE_GLOBAL_ROUTER") == "CUGR",
             log_value(log, "WBQ_ROUTE_SKIP_LARGE_FANOUT_NETS") == "5000",
+            baseline_bump_count is not None,
+            current_bump_count == baseline_bump_count,
         ]
     )
     place_odb_sha = placement["artifacts"]["placed_odb"]["sha256"]
@@ -125,12 +131,14 @@ def main() -> int:
         "placement_input_hashes_match": input_hashes_match,
         "clean_completion": clean,
         "historical_v4": {
+            "distributed_bump_pin_count": baseline_bump_count,
             "residual_congestion": int(baseline["remaining_congestion"]),
             "report_entries": int(baseline["report_entries"]),
             "overflow_edges": int(baseline["report_overflow_edges"]),
             "total_overflow_tracks": int(baseline["report_total_overflow_tracks"]),
         },
         "current_wbq": {
+            "distributed_bump_pin_count": current_bump_count,
             "residual_congestion": residual,
             "report_entries": entries,
             "overflow_edges": overflow_edges,
@@ -165,6 +173,7 @@ def main() -> int:
 <style>body{{font-family:system-ui,sans-serif;max-width:1080px;margin:32px auto;color:#182235}}h1,h2{{color:#173f6b}}table{{border-collapse:collapse;width:100%}}th,td{{padding:10px;border-bottom:1px solid #ddd;text-align:right}}th:first-child,td:first-child{{text-align:left}}.verdict{{padding:16px;background:{background};border-left:6px solid {color}}}code{{word-break:break-all}}</style></head><body>
 <h1>Phase 4 — wbq global route와 historical V4 비교</h1><div class=\"verdict\"><strong>{esc(verdict)}</strong><br>동일 metric 정의: {esc(same_definition)} / 입력 hash 일치: {esc(input_hashes_match)}</div>
 <h2>동일 정의 정량 비교</h2><table><tr><th>Metric</th><th>Historical V4</th><th>Current wbq</th><th>Delta</th></tr>
+<tr><td>Distributed met5 landing pads</td><td>{baseline_bump_count}</td><td>{current_bump_count if current_bump_count is not None else 'unknown'}</td><td>{esc(None if current_bump_count is None or baseline_bump_count is None else current_bump_count - baseline_bump_count)}</td></tr>
 <tr><td>CuGR residual congestion</td><td>{payload['historical_v4']['residual_congestion']:,}</td><td>{residual if residual is not None else 'unknown'}</td><td>{esc(payload['delta_vs_v4']['residual'])}</td></tr>
 <tr><td>Detailed report entries</td><td>{payload['historical_v4']['report_entries']:,}</td><td>{entries:,}</td><td>{payload['delta_vs_v4']['report_entries']:+,}</td></tr>
 <tr><td>Overflow edges</td><td>{payload['historical_v4']['overflow_edges']:,}</td><td>{overflow_edges:,}</td><td>{payload['delta_vs_v4']['overflow_edges']:+,}</td></tr></table>
