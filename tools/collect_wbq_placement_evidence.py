@@ -91,12 +91,22 @@ def main() -> int:
     overall_elapsed = one(r"Elapsed \(wall clock\) time .*?: (.+)$", run, last=True)
     overall_rss = one(r"Maximum resident set size \(kbytes\): (\d+)", run, int, last=True)
     violations = one(r"^WBQ_PLACE_AUDIT_VIOLATIONS (\d+)$", audit, int)
+    audit_top = one(r"^WBQ_PLACE_AUDIT_TOP (\S+)$", audit)
+    audit_hashes_match = (
+        kv(audit, "WBQ_PLACE_AUDIT_ODB_SHA256") == actual_hashes["placed_odb"]
+        and kv(audit, "WBQ_PLACE_AUDIT_SDC_SHA256") == actual_hashes["placed_sdc"]
+    )
     placement_complete = (
         kv(run, "WBQ_PLACE_EXIT_CODE") == "0"
         and "NORMALIZATION_HBM_WBQ_PLACE PASS" in run
         and "Placement Analysis" in dp
     )
-    audit_complete = "WBQ_PLACE_AUDIT_PASS" in audit and violations == 0
+    audit_complete = (
+        "WBQ_PLACE_AUDIT_PASS" in audit
+        and violations == 0
+        and audit_top == "logic_die_normalization_hbm_top"
+        and audit_hashes_match
+    )
     hashes_match = all(launch_hashes[name] == actual_hashes[name] for name in launch_hashes)
 
     payload = {
@@ -141,6 +151,8 @@ def main() -> int:
         },
         "placement_complete": placement_complete,
         "independent_reopen_and_legality_pass": audit_complete,
+        "independent_audit_top": audit_top,
+        "independent_audit_hashes_match_current": audit_hashes_match,
         "launch_input_hashes_match_current": hashes_match,
         "launch_hashes": launch_hashes,
         "artifacts": {
@@ -193,7 +205,7 @@ def main() -> int:
 <h2>게이트</h2><table>
 <tr><th>latest wbq input hash</th><td>{esc(hashes_match)}</td></tr>
 <tr><th>terminal completion</th><td>{esc(placement_complete)}</td></tr>
-<tr><th>독립 ODB 재개방</th><td>{esc(audit_complete)}</td></tr>
+<tr><th>독립 ODB 재개방</th><td>{esc(audit_complete)}</td></tr><tr><th>audit top / current ODB·SDC hash</th><td>{esc(audit_top)} / {esc(audit_hashes_match)}</td></tr>
 <tr><th>legalization violations</th><td>{esc(violations)}</td></tr></table>
 <h2>물리·자원 결과</h2><table>
 <tr><th>Die BBox</th><td>{esc(payload['die_bbox_um'])} µm</td></tr><tr><th>Core BBox</th><td>{esc(payload['core_bbox_um'])} µm</td></tr>
