@@ -1,0 +1,47 @@
+{
+  "status": "PROVISIONAL_ONLY",
+  "basis": {
+    "model": "nvidia/GR00T-N1.7-3B",
+    "profile_calls": 333,
+    "activation": "synthetic_deterministic_fp16",
+    "official_dtype": "BF16",
+    "actual_pretrained_activation_trace": false
+  },
+  "working_point": {
+    "lane_count": 4,
+    "reducer": "pipelined_tree",
+    "scalar_engines": 8,
+    "pcu_count": 8,
+    "fifo_depth": 8,
+    "context_entries": 16,
+    "buffer_bytes": 65536,
+    "expected_reducer_stages": 2,
+    "expected_ii_cycles": 1
+  },
+  "evidence_classes": {
+    "lane_core_synthesis": "MEASURED_RTL_SYNTHESIS",
+    "lane_core_sky130": "MEASURED_PRELAYOUT_STA_FOR_2_AND_4_LANES",
+    "scalar_pcu_fifo_context_buffer": "ASSUMED_OR_MODELED",
+    "latency_bandwidth_utilization": "MODELED_MIXED_WITH_SYNTHETIC_REPLAY",
+    "power_energy": "UNAVAILABLE"
+  },
+  "timing": {
+    "target_mhz": 100,
+    "measured_fp16_4lane_critical_path_ns": 20.28,
+    "measured_bf16_4lane_critical_path_ns": 21.48,
+    "timing_closed": false,
+    "candidate_fix": "two_stage_fp16_bf16_adder_with_explicit_ii2_accumulator_feedback"
+  },
+  "promotion_gates": [
+    "pretrained BF16 activation and raw command/address/timestamp trace",
+    "full reducer timing-candidate integration and Sky130 STA",
+    "activity-annotated VCD or SAIF power estimate",
+    "trace replay with measured bank/channel mapping"
+  ],
+  "do_not_claim": [
+    "final GR00T architecture selection",
+    "100MHz timing closure",
+    "full-chip or HBM2 PHY signoff",
+    "measured power or energy"
+  ]
+}

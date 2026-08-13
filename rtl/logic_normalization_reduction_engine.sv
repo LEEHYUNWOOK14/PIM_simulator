@@ -1,6 +1,7 @@
 module logic_normalization_reduction_engine #(
     parameter int unsigned BANKS = 16,
     parameter int unsigned TAG_WIDTH = 16,
+    parameter int unsigned DATA_FORMAT = 0, // 0=FP16, 1=BF16
     parameter int unsigned BANK_WIDTH = BANKS > 1 ? $clog2(BANKS) : 1
 ) (
     input  logic                   clk_i,
@@ -35,8 +36,15 @@ module logic_normalization_reduction_engine #(
     logic [15:0] sum_next, sumsq_next;
     logic scalar_request_ready;
 
-    fp16_add u_sum_add(.lhs_i(sum_q),.rhs_i(partial_sum_i),.result_o(sum_next));
-    fp16_add u_sumsq_add(.lhs_i(sumsq_q),.rhs_i(partial_sumsq_i),.result_o(sumsq_next));
+    generate
+      if(DATA_FORMAT==0)begin:g_fp16
+        fp16_add u_sum_add(.lhs_i(sum_q),.rhs_i(partial_sum_i),.result_o(sum_next));
+        fp16_add u_sumsq_add(.lhs_i(sumsq_q),.rhs_i(partial_sumsq_i),.result_o(sumsq_next));
+      end else begin:g_bf16
+        bf16_add u_sum_add(.lhs_i(sum_q),.rhs_i(partial_sum_i),.result_o(sum_next));
+        bf16_add u_sumsq_add(.lhs_i(sumsq_q),.rhs_i(partial_sumsq_i),.result_o(sumsq_next));
+      end
+    endgenerate
     assign received_next = received_q |
         ({{(BANKS-1){1'b0}},1'b1} << partial_bank_i);
 
@@ -44,7 +52,7 @@ module logic_normalization_reduction_engine #(
     assign partial_ready_o = active_q && partial_tag_i == tag_q &&
                              expected_q[partial_bank_i] && !received_q[partial_bank_i];
 
-    logic_normalization_scalar_engine #(.TAG_WIDTH(TAG_WIDTH)) u_scalar(
+    logic_normalization_scalar_engine #(.TAG_WIDTH(TAG_WIDTH),.DATA_FORMAT(DATA_FORMAT)) u_scalar(
         .clk_i,.rst_ni,.request_valid_i(scalar_pending_q),
         .request_ready_o(scalar_request_ready),.rms_norm_i(mode_q),
         .request_tag_i(tag_q),.sum_i(sum_q),.sumsq_i(sumsq_q),
@@ -111,4 +119,8 @@ module logic_normalization_reduction_engine #(
                 scalar_inflight_q <= 1'b0;
         end
     end
+
+`ifndef SYNTHESIS
+    initial if(DATA_FORMAT>1)$fatal(1,"DATA_FORMAT must be 0 (FP16) or 1 (BF16)");
+`endif
 endmodule

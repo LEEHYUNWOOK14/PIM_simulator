@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GR00T 정규화 PCU RTL 구조 최적화 아이디어와 수행 과정</title>
+  <style>
+    :root{
+      --ink:#172033;--muted:#647084;--line:#d9e1eb;--paper:#fff;--bg:#eef3f8;
+      --navy:#173b67;--blue:#2868b2;--blue2:#6fa8dc;--cyan:#edf7ff;
+      --green:#16713a;--green-bg:#eaf7ee;--amber:#8c6200;--amber-bg:#fff7df;
+      --red:#b42318;--red-bg:#fff0ee;--gray:#f6f8fb;--purple:#7252a3;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI","Noto Sans KR",Arial,sans-serif;line-height:1.62}
+    main{max-width:1220px;margin:0 auto;background:var(--paper);min-height:100vh;padding:48px 58px 72px;box-shadow:0 0 34px rgba(25,50,80,.1)}
+    h1{margin:0;color:var(--navy);font-size:36px;line-height:1.2;letter-spacing:-.8px}
+    h2{margin:44px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--navy);color:var(--navy);font-size:25px}
+    h3{margin:26px 0 9px;color:#244f80;font-size:19px}
+    p{margin:8px 0 14px}
+    a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+    code{padding:2px 5px;border-radius:4px;background:#edf3f8;color:#153d68}
+    .subtitle{margin-top:8px;color:var(--muted);font-size:17px}
+    .meta{margin-top:16px;color:var(--muted);font-size:13px}
+    .toc{margin:26px 0;padding:16px 20px;border:1px solid var(--line);border-radius:10px;background:var(--gray)}
+    .toc a{display:inline-block;margin:3px 18px 3px 0}
+    .verdict{margin:26px 0;border-left:8px solid var(--green);border-radius:8px;background:var(--green-bg);padding:20px 24px}
+    .verdict strong{display:block;color:var(--green);font-size:25px;margin-bottom:5px}
+    .scope{margin:17px 0;padding:14px 17px;border:1px solid #ead38c;border-radius:8px;background:var(--amber-bg)}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:18px 0 24px}
+    .card{border:1px solid var(--line);border-radius:10px;background:#fff;padding:16px}
+    .card .label{color:var(--muted);font-size:12px}.card .value{margin:3px 0;color:var(--navy);font-size:25px;font-weight:750}.card .detail{font-size:13px;color:#4d596d}
+    .good .value{color:var(--green)}.warn .value{color:var(--amber)}
+    table{width:100%;border-collapse:collapse;margin:14px 0 23px;font-size:14px}
+    th{padding:10px 11px;border:1px solid var(--navy);background:var(--navy);color:#fff;text-align:left}
+    td{padding:9px 11px;border:1px solid var(--line);vertical-align:top}tbody tr:nth-child(even){background:#fafbfd}
+    .num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+    .status{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
+    .pass{color:var(--green);background:var(--green-bg)}.reject{color:var(--red);background:var(--red-bg)}.keep{color:var(--blue);background:var(--cyan)}
+    .flow{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;align-items:stretch;margin:20px 0}
+    .flow .step{position:relative;padding:14px 10px;border:1px solid #b9c9da;border-radius:9px;background:#f7faff;text-align:center;font-size:13px}
+    .flow .step:not(:last-child)::after{content:"›";position:absolute;right:-8px;top:34%;z-index:2;color:var(--blue);font-size:24px;font-weight:bold}
+    .step b{display:block;color:var(--navy);margin-bottom:4px}
+    .idea{margin:18px 0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+    .idea-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 17px;background:#eef3f8;color:var(--navy);font-weight:750}
+    .idea-body{padding:14px 18px 17px}.idea-body ul{margin:7px 0 5px 21px;padding:0}.idea-body li{margin:5px 0}
+    .bars{margin:18px 0}.bar-row{display:grid;grid-template-columns:120px 1fr 110px;gap:10px;align-items:center;margin:10px 0}.track{height:22px;border-radius:5px;background:#e8edf3;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--blue2));border-radius:5px}.fill.green{background:linear-gradient(90deg,#178044,#69b987)}.fill.gray{background:#9aa7b7}.bar-value{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+    .arch{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:center;margin:18px 0;padding:19px;border:1px solid var(--line);border-radius:10px;background:#fbfcfe}
+    .arch-box{height:100%;padding:14px;border:1px solid #b9c9da;border-radius:8px;background:#fff;text-align:center}.arch-box b{display:block;color:var(--navy);margin-bottom:5px}.arrow{color:var(--blue);font-size:25px;font-weight:bold}
+    .note{margin:16px 0;padding:14px 17px;border:1px solid #b8daf5;border-radius:8px;background:var(--cyan)}
+    .warning{margin:16px 0;padding:14px 17px;border:1px solid #e4c875;border-radius:8px;background:var(--amber-bg)}
+    .success{margin:16px 0;padding:14px 17px;border:1px solid #b5ddc1;border-radius:8px;background:var(--green-bg)}
+    .small{font-size:12px;color:var(--muted)}
+    .check td:first-child{width:27%;font-weight:650}
+    footer{margin-top:46px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+    @media(max-width:900px){main{padding:28px 20px}.grid{grid-template-columns:1fr 1fr}.flow{grid-template-columns:1fr}.flow .step::after{display:none}.arch{grid-template-columns:1fr}.arrow{transform:rotate(90deg);text-align:center}}
+    @media(max-width:560px){.grid{grid-template-columns:1fr}.bar-row{grid-template-columns:90px 1fr}.bar-value{grid-column:2}.idea-head{align-items:flex-start;flex-direction:column}}
+    @media print{body{background:#fff}main{max-width:none;box-shadow:none;padding:20px}.idea,.card,table{break-inside:avoid}a{color:inherit}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>GR00T 정규화 PCU<br>RTL 구조 최적화 아이디어와 수행 과정</h1>
+    <div class="subtitle">무엇을 바꿨고, 왜 바꿨으며, 어떤 후보를 측정 후 버렸는가</div>
+    <div class="meta">작성일 2026-08-12 · 대상: STOB_PIM2 logic-die normalization PCU · 근거: GR00T normalization workload, BF16 traces, RTL regression, transaction-level cycle model</div>
+  </header>
+
+  <div class="verdict">
+    <strong>결론: 현재 정의된 범위의 RTL 구조 최적화는 완료됐다.</strong>
+    최종 구조는 <b>8-lane · 4 scalar engines · split-R/W · top context 8 · local reduction context 2 · apply FIFO 16</b>이다. 기능·정확도·실제 trace cycle·구조 비용을 함께 비교했고, 최종 freeze regression과 12개 요구사항 감사가 모두 PASS했다.
+  </div>
+
+  <div class="scope"><b>완료 범위:</b> GR00T 정규화 전용 RTL, 공정 독립 구조 비용, bank 내부 traffic과 외부 I/O 절감, cycle 성능. <b>포함하지 않은 범위:</b> 특정 공정의 면적·주파수·전력 signoff, 실제 HBM controller의 command/credit adapter, floorplan/GDS. 따라서 “논리 구조 확정”이지 “칩 제품 전체 완성”이라는 뜻은 아니다.</div>
+
+  <nav class="toc">
+    <a href="#goal">1. 최적화 목표</a><a href="#process">2. 수행 과정</a><a href="#ideas">3. 핵심 아이디어</a>
+    <a href="#experiments">4. 비교 실험</a><a href="#result">5. 최종 구조</a><a href="#proof">6. 검증</a><a href="#remaining">7. 남은 범위</a>
+  </nav>
+
+  <div class="grid">
+    <div class="card good"><div class="label">최종 lane</div><div class="value">8 lanes</div><div class="detail">bank word 공급률 50% 하한 충족</div></div>
+    <div class="card good"><div class="label">4-lane 대비 실제 trace</div><div class="value">1.94×</div><div class="detail">2063 → 1065 cycles</div></div>
+    <div class="card good"><div class="label">context 최적화</div><div class="value">−5.4%</div><div class="detail">9532 → 9017 cycles</div></div>
+    <div class="card good"><div class="label">정확도</div><div class="value">0 mismatch</div><div class="detail">Layer/RMS/Ada mixed golden</div></div>
+  </div>
+
+  <section id="goal">
+    <h2>1. 무엇을 최적화하려 했는가</h2>
+    <p>처음에는 정규화 연산 자체의 산술 처리량만 빠르게 만드는 문제가 중심이었다. 그러나 프로젝트 목적을 다시 명확히 하면서 목표가 다음과 같이 바뀌었다.</p>
+    <div class="arch">
+      <div class="arch-box"><b>여러 bank</b>activation과 affine 데이터 보유<br>local reduction 수행</div>
+      <div class="arrow">→</div>
+      <div class="arch-box"><b>Logic-die PCU</b>cross-bank reduction<br>rsqrt·복합 정규화 수행</div>
+      <div class="arrow">→</div>
+      <div class="arch-box"><b>Bank write-back</b>결과를 memory 내부에 유지<br>외부 tensor round-trip 제거</div>
+    </div>
+    <p>즉 최종 목적 함수는 “가장 작은 회로”나 “연산기 하나의 최고 속도”가 아니었다. <b>외부 memory I/O를 줄이는 목적을 유지하면서, 실제 GR00T 정규화 traffic을 감당하는 최소 비용 구조</b>를 찾는 것이었다.</p>
+    <table>
+      <thead><tr><th>평가 축</th><th>최적화 질문</th><th>사용한 기준</th></tr></thead>
+      <tbody>
+        <tr><td>정확도</td><td>mixed precision이 GR00T 정규화 결과를 보존하는가?</td><td>PyTorch/FP32 reference와 lane-specific golden 비교</td></tr>
+        <tr><td>처리량</td><td>PCU가 bank 공급률을 지나치게 제한하지 않는가?</td><td>256-bit bank word 중 최소 128 bit/cycle</td></tr>
+        <tr><td>구조 비용</td><td>lane, context, FIFO, counter를 얼마나 줄일 수 있는가?</td><td>연산기 수·state bit·generic structural proxy</td></tr>
+        <tr><td>traffic</td><td>activation/output이 외부 memory interface를 왕복하는가?</td><td>외부와 bank-array 내부 byte를 분리 계수</td></tr>
+        <tr><td>견고성</td><td>충돌·backpressure·reset에서도 transaction이 보존되는가?</td><td>stress RTL regression</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="process">
+    <h2>2. 최적화 수행 과정</h2>
+    <div class="flow">
+      <div class="step"><b>① Workload 확보</b>GR00T norm shape·호출 수·BF16 trace</div>
+      <div class="step"><b>② Baseline RTL</b>FP32 reduce/scalar/apply, BF16 I/O</div>
+      <div class="step"><b>③ Parameter DSE</b>4/8/16 lanes, engine/context/FIFO</div>
+      <div class="step"><b>④ Bank 현실화</b>shared read + split write scheduler</div>
+      <div class="step"><b>⑤ RMS/Ada 확장</b>128/2048 대표 vectors</div>
+      <div class="step"><b>⑥ 최적화 sweep</b>채택/기각을 RTL cycle로 판정</div>
+      <div class="step"><b>⑦ Freeze gate</b>stress·model·lint·synthesis</div>
+    </div>
+
+    <h3>2.1 GR00T workload를 먼저 고정</h3>
+    <p>GR00T 전체 inference를 PCU에서 실행하지 않았다. 프로젝트 대상은 정규화이므로 실제 모델 코드와 inventory에서 LayerNorm·RMSNorm·AdaLayerNorm의 shape와 호출 분포를 추출하고, action-head에는 실제 BF16 activation trace를 사용했다.</p>
+    <ul>
+      <li>LayerNorm/AdaLayerNorm: action-head 1536·2048-wide 실제 BF16 trace</li>
+      <li>RMSNorm: GR00T inventory에서 확인한 128·2048-wide shape에 대한 대표 BF16 vectors</li>
+      <li>모든 경우: bank mapping → reduction → scalar/rsqrt → replay/apply → write-back 전체 경로 검증</li>
+    </ul>
+
+    <h3>2.2 산술 정확도를 먼저 잠금</h3>
+    <p>입출력과 저장은 BF16으로 유지하되, 오차가 누적되는 reduction·variance·rsqrt Newton iteration·affine 연산은 FP32로 수행하고 마지막에 BF16 RNE로 좁혔다. 정확도가 고정된 뒤에만 lane과 buffer 구조를 바꿨기 때문에, 성능 개선이 산술 근사 악화에서 온 것이 아니다.</p>
+
+    <h3>2.3 분석 모델과 RTL을 반복 교정</h3>
+    <p>cycle model에는 bank read/write 정책, global reducer single-in-flight, RMS/Layer scalar latency, context depth, replay handoff를 반영했다. 대표 5개 RTL 측정과 오차가 ±3% 이내가 되도록 검증 gate를 만들고 자동 단위 시험으로 고정했다.</p>
+  </section>
+
+  <section id="ideas">
+    <h2>3. 최적화에 사용한 핵심 아이디어</h2>
+
+    <div class="idea">
+      <div class="idea-head"><span>아이디어 A — memory traffic의 경계를 분리해 계산</span><span class="status pass">채택</span></div>
+      <div class="idea-body">
+        <p>bank 내부에서 activation을 두 번 읽는 것은 비용이지만, 외부 GPU/HBM interface로 tensor 전체를 왕복하는 것과 같지 않다. 따라서 external bytes, bank-array read/write bytes, bank↔logic statistic bytes를 별도로 계수했다.</p>
+        <ul><li>PCU resident-affine 조건에서 외부 I/O 감소율: 약 99.99%</li><li>이 분리 덕분에 “회로가 늘어도 외부 I/O를 줄이는가”라는 프로젝트 목적을 올바르게 평가할 수 있었다.</li></ul>
+      </div>
+    </div>
+
+    <div class="idea">
+      <div class="idea-head"><span>아이디어 B — 실제 bank bandwidth를 반영한 split-R/W scheduler</span><span class="status pass">채택</span></div>
+      <div class="idea-body">
+        <p>기존 독립 ready/valid 포트는 reduction과 replay가 같은 bank를 동시에 읽을 수 있다고 낙관했다. 최종 RTL에서는 두 read가 하나의 slot을 공유하고, write-back은 별도 backpressured path로 배출하게 했다.</p>
+        <ul><li>reduction/replay: fair round-robin</li><li>write-back: read와 동시 진행하여 output FIFO를 우선 drain</li><li>16-bank lockstep: partial bank valid는 먼저 소비하지 않음</li><li>age counter와 optional single-shared mode로 starvation 방지</li></ul>
+      </div>
+    </div>
+
+    <div class="idea">
+      <div class="idea-head"><span>아이디어 C — bank 공급률 하한으로 lane 수 선택</span><span class="status pass">8-lane 채택</span></div>
+      <div class="idea-body">
+        <p>“4-lane이 싸다”와 “16-lane이 빠르다” 사이를 감으로 선택하지 않았다. 256-bit bank word에서 최소 한 개의 128-bit slice를 매 active bank cycle에 처리한다는 50% 하한을 정의했다.</p>
+        <table>
+          <thead><tr><th>후보</th><th class="num">bank당 폭</th><th class="num">공급률</th><th>판정</th></tr></thead>
+          <tbody><tr><td>4-lane</td><td class="num">64 bit</td><td class="num">25%</td><td><span class="status reject">하한 FAIL</span></td></tr><tr><td>8-lane</td><td class="num">128 bit</td><td class="num">50%</td><td><span class="status pass">최소 PASS</span></td></tr><tr><td>16-lane</td><td class="num">256 bit</td><td class="num">100%</td><td><span class="status reject">비용 과다</span></td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="idea">
+      <div class="idea-head"><span>아이디어 D — multi-row overlap과 bounded look-ahead</span><span class="status pass">채택</span></div>
+      <div class="idea-body">
+        <p>row n+1 reduction, row n scalar, row n−1 apply/write-back을 겹치되 reduction이 너무 앞서가 replay를 굶기지 않도록 top context를 8개로 제한했다. context 감소가 단순 비용 절감뿐 아니라 scheduling throttle로 작동했다.</p>
+        <ul><li>280×2048: 9532 → 9017 cycles</li><li>41×1536: 1120 → 1065 cycles</li><li>context comparator/mux fan-in과 state도 함께 감소</li></ul>
+      </div>
+    </div>
+
+    <div class="idea">
+      <div class="idea-head"><span>아이디어 E — 병목이 아닌 자원은 늘리지 않음</span><span class="status pass">비용 억제</span></div>
+      <div class="idea-body">
+        <p>local reducer context 2→4, scalar engine 추가, FIFO 축소/증설 등을 각각 실제 RTL로 측정했다. “더 병렬이면 더 빠르다”는 가정을 사용하지 않고 cycle 개선이 없는 자원 증가는 기각했다.</p>
+      </div>
+    </div>
+
+    <div class="idea">
+      <div class="idea-head"><span>아이디어 F — control/state 비용과 조합 loop 정리</span><span class="status pass">채택</span></div>
+      <div class="idea-body">
+        <ul><li>traffic counter 내부 폭 64→32 bit: 6개 counter에서 192 state bits 절감</li><li>scalar request-ready ↔ response-ready 조합 되먹임 제거: Verilator <code>UNOPTFLAT</code> 1→0</li><li>외부 counter interface는 64-bit zero extension으로 호환 유지</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="experiments">
+    <h2>4. 후보를 어떻게 비교하고 버렸는가</h2>
+
+    <h3>4.1 Lane 성능과 비용</h3>
+    <div class="bars">
+      <div class="bar-row"><b>4-lane</b><div class="track"><div class="fill gray" style="width:100%"></div></div><div class="bar-value">2063 cycles</div></div>
+      <div class="bar-row"><b>8-lane</b><div class="track"><div class="fill green" style="width:51.62%"></div></div><div class="bar-value">1065 cycles</div></div>
+    </div>
+    <p class="small">실제 action_dit_norm_out, 41×1536, context 8, FIFO 16 기준. 두 후보 모두 mixed golden mismatch 0.</p>
+
+    <table>
+      <thead><tr><th>후보</th><th class="num">split-R/W weighted cycles</th><th class="num">구조 비용 proxy</th><th>결론</th></tr></thead>
+      <tbody>
+        <tr><td>4-lane</td><td class="num">683,989</td><td class="num">847.875</td><td>가장 작지만 공급률 하한 미달</td></tr>
+        <tr><td>8-lane</td><td class="num">358,483</td><td class="num">1,503.875</td><td><span class="status pass">최종 선택</span></td></tr>
+        <tr><td>16-lane</td><td class="num">248,055</td><td class="num">2,815.875</td><td>8-lane 대비 비용 1.87배, width 128 utilization 50%</td></tr>
+      </tbody>
+    </table>
+
+    <h3>4.2 Buffer와 arbitration sweep</h3>
+    <table>
+      <thead><tr><th>검토 아이디어</th><th>측정 결과</th><th>판정과 이유</th></tr></thead>
+      <tbody>
+        <tr><td>top context 16→8</td><td>9532→9017, 1120→1065 cycles</td><td><span class="status pass">채택</span> 상태와 cycle 동시 개선</td></tr>
+        <tr><td>local reduction context 2→4</td><td>RMS 128/2048 모두 200/196 cycles로 동일</td><td><span class="status reject">기각</span> state만 증가</td></tr>
+        <tr><td>apply FIFO 16→8</td><td>1065→1095 cycles, 2.8% 악화</td><td><span class="status reject">기각</span> pipeline/backpressure 흡수 부족</td></tr>
+        <tr><td>replay 고정 우선</td><td>1120→1180 cycles로 악화</td><td><span class="status reject">기각</span> reduction burst를 과도하게 방해</td></tr>
+        <tr><td>fair round-robin</td><td>split mode read 최대 대기 1/1 cycles</td><td><span class="status pass">채택</span> 처리량과 공정성 균형</td></tr>
+        <tr><td>lane clock/valid mask 추가</td><td>target widths 128/1536/2048은 8-lane에 정확히 나눠짐</td><td><span class="status reject">미추가</span> 유휴 lane 없이 control만 증가</td></tr>
+        <tr><td>context table 병합</td><td>scalar table과 write-back table의 lifetime이 다름</td><td><span class="status reject">기각</span> 조기 free 위험</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note"><b>핵심 교훈:</b> 이번 최적화의 가장 큰 아이디어는 연산기를 무조건 더 추가하는 것이 아니었다. 실제 bank traffic과 row lifetime을 반영해 <b>병렬도는 필요한 만큼만 두고, context가 만드는 queueing과 arbitration을 조절</b>한 것이 cycle과 비용을 함께 개선했다.</div>
+  </section>
+
+  <section id="result">
+    <h2>5. 최종 확정한 RTL 구조</h2>
+    <table>
+      <thead><tr><th>구성 요소</th><th>최종 설정</th><th>확정 이유</th></tr></thead>
+      <tbody>
+        <tr><td>Vector datapath</td><td><b>8 lanes / bank</b></td><td>128-bit/cycle 공급률 하한을 만족하는 최소 후보</td></tr>
+        <tr><td>Bank scheduler</td><td><b>split-R/W</b></td><td>read bandwidth를 현실화하면서 write-back drain 보장</td></tr>
+        <tr><td>Read arbitration</td><td><b>round-robin</b></td><td>고정 우선보다 실제 trace가 빠르고 starvation 없음</td></tr>
+        <tr><td>Scalar array</td><td><b>4 engines</b></td><td>현재 global reducer 공급률에서 충분</td></tr>
+        <tr><td>Top contexts</td><td><b>8</b></td><td>16 대비 state 축소와 4.9~5.4% cycle 개선</td></tr>
+        <tr><td>Local reducer contexts</td><td><b>2</b></td><td>4개 증설 이득 없음</td></tr>
+        <tr><td>Apply FIFO</td><td><b>16</b></td><td>8개는 backpressure 상황에서 성능 저하</td></tr>
+        <tr><td>Counter state</td><td><b>32 bit internal</b></td><td>현재 workload 범위 충족, 외부 64-bit 호환 유지</td></tr>
+        <tr><td>Numerical format</td><td><b>BF16 I/O, FP32 internal, BF16 RNE</b></td><td>정확도와 저장/traffic 비용의 균형</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="proof">
+    <h2>6. 최적화 완료를 뒷받침하는 검증</h2>
+    <table class="check">
+      <thead><tr><th>Freeze gate</th><th>결과</th><th>직접 증거</th></tr></thead>
+      <tbody>
+        <tr><td>LayerNorm</td><td><span class="status pass">PASS</span></td><td>4/8-lane action trace mixed mismatch 0</td></tr>
+        <tr><td>RMSNorm 128/2048</td><td><span class="status pass">PASS</span></td><td>FP32 reference와 BF16 bit mismatch 0; 200/196 cycles</td></tr>
+        <tr><td>AdaLayerNorm affine</td><td><span class="status pass">PASS</span></td><td>row별 gamma/beta 8×128 mismatch 0; 224 cycles</td></tr>
+        <tr><td>RMS mean 생략</td><td><span class="status pass">PASS</span></td><td>mean = <code>0x00000000</code>, RMS scalar 51 cycles</td></tr>
+        <tr><td>128-wide utilization</td><td><span class="status pass">100%</span></td><td>16 banks × 8 lanes = 128 elements, padding 없음</td></tr>
+        <tr><td>Random backpressure</td><td><span class="status pass">PASS</span></td><td>scheduler 128 random cycles + random write-back stall</td></tr>
+        <tr><td>Bank skew/conflict</td><td><span class="status pass">PASS</span></td><td>53 conflict, 9 skew, partial transaction issue 0</td></tr>
+        <tr><td>Context full/tag wrap</td><td><span class="status pass">PASS</span></td><td><code>fffe, ffff, 0000, 0001</code> 및 full backpressure</td></tr>
+        <tr><td>Transaction 중 reset</td><td><span class="status pass">PASS</span></td><td>context/pipeline/counter clear 후 정상 재실행</td></tr>
+        <tr><td>Cycle model</td><td><span class="status pass">PASS</span></td><td>대표 5 cases, 최대 절대 오차 3%</td></tr>
+        <tr><td>Lint</td><td><span class="status pass">PASS</span></td><td>Verilator exit 0, UNOPTFLAT 0</td></tr>
+        <tr><td>Generic synthesis</td><td><span class="status pass">PASS</span></td><td>Yosys check: 0 problems, hierarchy elaboration 성공</td></tr>
+      </tbody>
+    </table>
+
+    <div class="success"><b>최종 자동 검증:</b> <code>LOGIC_DIE_PCU_FREEZE_REGRESSION PASS</code> 및 <code>LOGIC_DIE_PCU_FREEZE_AUDIT PASS requirements=12 configuration=8lane_split_rw_c8_fifo16</code>.</div>
+  </section>
+
+  <section id="remaining">
+    <h2>7. 무엇이 끝났고 무엇이 남았는가</h2>
+    <table>
+      <thead><tr><th>구분</th><th>상태</th><th>설명</th></tr></thead>
+      <tbody>
+        <tr><td>GR00T 정규화 RTL 구조 최적화</td><td><span class="status pass">완료</span></td><td>lane, scheduler, context, FIFO, scalar, counter 구조 확정</td></tr>
+        <tr><td>기능·정확도·stress freeze</td><td><span class="status pass">완료</span></td><td>전체 정의 gate 통과</td></tr>
+        <tr><td>실제 memory controller adapter</td><td><span class="status keep">선택 후속</span></td><td>구체적인 HBM command/credit 규격이 정해질 때 boundary adapter 추가</td></tr>
+        <tr><td>공정 기반 PPA/STA</td><td><span class="status keep">범위 밖</span></td><td>이번 목표에서 명시적으로 제외</td></tr>
+        <tr><td>Clock-gating/power intent</td><td><span class="status keep">선택 후속</span></td><td>전력 목표가 추가될 때 library-specific 작업 수행</td></tr>
+      </tbody>
+    </table>
+    <div class="warning"><b>냉정한 해석:</b> 현재 RTL을 다시 처음부터 설계할 이유는 없다. 다만 실제 memory controller가 split read/write를 제공하지 않고 완전 single-port라면 scheduler parameter와 시스템 cycle 판정을 다시 해야 한다. 산술 datapath와 8-lane 선택까지 모두 폐기하는 상황은 아니다.</div>
+  </section>
+
+  <section>
+    <h2>8. 재현 및 관련 문서</h2>
+    <p>전체 검증은 다음 명령으로 재현한다.</p>
+    <div class="note"><code>bash verification/groot_normalization/run_logic_die_pcu_freeze_regression.sh</code></div>
+    <ul>
+      <li><a href="01_final_rtl_freeze_report.md">최종 RTL 동결 보고서</a></li>
+      <li><a href="freeze_regression.log">전체 freeze regression 로그</a></li>
+      <li><a href="yosys_generic_synthesis.log">Yosys generic synthesis 로그</a></li>
+      <li><a href="freeze_status.json">Machine-readable freeze 상태</a></li>
+      <li><a href="../results/logic_die_pcu_system_scheduler/system_decision.json">Lane 및 시스템 결정 JSON</a></li>
+      <li><a href="../results/logic_die_pcu_system_scheduler/lane_system_dse.csv">4/8/16-lane DSE 결과</a></li>
+    </ul>
+  </section>
+
+  <footer>
+    이 문서는 공정 수치가 아닌 현재 저장소의 RTL·trace·cycle model·generic synthesis 결과를 근거로 작성했다. 수치는 2026-08-12 freeze regression 기준이다.
+  </footer>
+</main>
+</body>
+</html>

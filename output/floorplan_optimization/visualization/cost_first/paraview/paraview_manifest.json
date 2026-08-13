@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "manifest": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2\\output\\floorplan_optimization\\exploration\\candidates\\cost_first.json",
+  "thermal_field": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2\\output\\floorplan_optimization\\thermal\\cost_first\\temperature_field.npz",
+  "temperature_range_K": [
+    306.5845217253348,
+    312.24608935630533
+  ],
+  "files": [
+    {
+      "path": "output/floorplan_optimization/visualization/cost_first/paraview/stack_temperature_physical_z.vtu",
+      "points": 13046,
+      "cells": 11080,
+      "z_scale": 1.0
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/cost_first/paraview/stack_temperature_z20_exaggerated.vtu",
+      "points": 13046,
+      "cells": 11080,
+      "z_scale": 20.0
+    }
+  ],
+  "object_type": {
+    "0": "thermal grid cell",
+    "1": "conceptual logic block overlay",
+    "2": "TSV centerline; use Tube filter with diameter_um"
+  },
+  "signal_class": {
+    "data": 0,
+    "command_address": 1,
+    "clock": 2,
+    "power": 3,
+    "ground": 4,
+    "spare": 5,
+    "unknown": 6
+  },
+  "coordinate_units": "um",
+  "classification": "modeled/illustrative",
+  "gpu_note": "ParaView rendering may use RTX GPU; export and thermal solve are CPU operations",
+  "signoff": false
+}

@@ -1,0 +1,490 @@
+{
+  "schema_version": 2,
+  "evidence_contract": {
+    "contract_version": 2,
+    "status": "PROVISIONAL",
+    "claim_boundary": "Synthetic candidate comparison fixture; not silicon or signoff evidence.",
+    "candidate_parameters": {
+      "lanes": null,
+      "bank_port_mode": null,
+      "scheduler_policy": null,
+      "context_depth": null
+    },
+    "toolchain": {
+      "capture_tool": "hardware_cost_adapter_contract.py",
+      "capture_tool_version": "1",
+      "synthesis_tool": "synthetic-area-fixture",
+      "synthesis_tool_version": "1",
+      "physical_tool": null,
+      "physical_tool_version": null,
+      "power_tool": "synthetic-power-fixture",
+      "power_tool_version": "1",
+      "thermal_tool": "synthetic-thermal-fixture",
+      "thermal_tool_version": "1"
+    },
+    "operating_point": {
+      "pdk": null,
+      "library": null,
+      "process_corner": null,
+      "voltage_V": null,
+      "temperature_C": 26.85,
+      "clock_constraint_ns": 10.0,
+      "workload_trace_id": "fixture:synthetic_balanced"
+    }
+  },
+  "revision": {
+    "id": "synthetic_balanced",
+    "label": "Synthetic balanced candidate",
+    "git_commit": "14dd245dbfc8d53177f73526ade4f0b72d2b7f6b",
+    "working_tree_dirty": true,
+    "captured_at": "2026-08-12T12:01:00+09:00"
+  },
+  "parameter_status": {
+    "final_architecture_parameters_selected": false,
+    "reason": "Candidate comparison only; architecture selection remains external."
+  },
+  "calibration": {
+    "synthesis": "synthesis_generic",
+    "physical": "synthetic",
+    "power": "synthetic",
+    "thermal": "synthetic_architectural",
+    "timing": "synthetic",
+    "workload": "workload_model"
+  },
+  "observations": [
+    {
+      "name": "synthetic_balanced_primary",
+      "precision": "BF16",
+      "category": "normalization_rounding",
+      "generic_cells": 105000,
+      "generic_topological_path_length": 610,
+      "technology_mapped_area_um2": null,
+      "critical_path_ns": null,
+      "slack_ns": null,
+      "calibration": "synthesis_generic",
+      "claim_class": "assumed",
+      "evidence": "output/hardware_cost_adapter_v2/adapters/synthetic_balanced/area.json",
+      "upstream_evidence": {
+        "adapter_sources": [
+          {
+            "path": "hardware_cost/regression/synthetic_candidate_definitions.json",
+            "sha256": "25788f3a97948467c0b0cacc4786f60b2a9fc2dd0ee590c317e3aa1c1821b820",
+            "bytes": 2365
+          }
+        ]
+      },
+      "warning": "Synthetic/generic observations are proxies unless technology calibration is explicitly declared."
+    }
+  ],
+  "block_metrics": [
+    {
+      "instance": "top.bf16_fp16",
+      "module": "synthetic_bf16_fp16",
+      "category": "bf16_fp16",
+      "target": {
+        "stack": 0,
+        "layer": "logic",
+        "die": -1,
+        "channel": -1,
+        "bank": -1
+      },
+      "mapped_area_um2": 3200000.0,
+      "dynamic_power_W": 1.2707199999999998,
+      "leakage_power_W": 0.17328,
+      "total_power_W": 1.444,
+      "power_density_W_mm2": 0.45125000000000004,
+      "calibration": "synthetic",
+      "claim_class": "assumed"
+    },
+    {
+      "instance": "top.normalization_rounding",
+      "module": "synthetic_normalization_rounding",
+      "category": "normalization_rounding",
+      "target": {
+        "stack": 0,
+        "layer": "logic",
+        "die": -1,
+        "channel": -1,
+        "bank": -1
+      },
+      "mapped_area_um2": 2400000.0,
+      "dynamic_power_W": 0.73568,
+      "leakage_power_W": 0.10031999999999999,
+      "total_power_W": 0.836,
+      "power_density_W_mm2": 0.34833333333333333,
+      "calibration": "synthetic",
+      "claim_class": "assumed"
+    },
+    {
+      "instance": "top.accumulator_reduction",
+      "module": "synthetic_accumulator_reduction",
+      "category": "accumulator_reduction",
+      "target": {
+        "stack": 0,
+        "layer": "logic",
+        "die": -1,
+        "channel": -1,
+        "bank": -1
+      },
+      "mapped_area_um2": 1800000.0,
+      "dynamic_power_W": 0.60192,
+      "leakage_power_W": 0.08207999999999999,
+      "total_power_W": 0.6839999999999999,
+      "power_density_W_mm2": 0.38,
+      "calibration": "synthetic",
+      "claim_class": "assumed"
+    },
+    {
+      "instance": "top.buffer_register",
+      "module": "synthetic_buffer_register",
+      "category": "buffer_register",
+      "target": {
+        "stack": 0,
+        "layer": "logic",
+        "die": -1,
+        "channel": -1,
+        "bank": -1
+      },
+      "mapped_area_um2": 1600000.0,
+      "dynamic_power_W": 0.40127999999999997,
+      "leakage_power_W": 0.05471999999999999,
+      "total_power_W": 0.45599999999999996,
+      "power_density_W_mm2": 0.285,
+      "calibration": "synthetic",
+      "claim_class": "assumed"
+    },
+    {
+      "instance": "top.control_routing",
+      "module": "synthetic_control_routing",
+      "category": "control_routing",
+      "target": {
+        "stack": 0,
+        "layer": "logic",
+        "die": -1,
+        "channel": -1,
+        "bank": -1
+      },
+      "mapped_area_um2": 1000000.0,
+      "dynamic_power_W": 0.33440000000000003,
+      "leakage_power_W": 0.0456,
+      "total_power_W": 0.38,
+      "power_density_W_mm2": 0.38,
+      "calibration": "synthetic",
+      "claim_class": "assumed"
+    }
+  ],
+  "physical_totals": {
+    "primary_observation": "synthetic_balanced_primary",
+    "generic_cells": 105000,
+    "technology_mapped_area_um2": null,
+    "mapped_floorplan_area_um2": 10000000.0,
+    "dynamic_power_W": 3.344,
+    "leakage_power_W": 0.45599999999999996,
+    "total_power_W": 3.8,
+    "critical_path_ns": 9.0,
+    "slack_ns": 1.0,
+    "note": "Assembled from five independently validated adapters."
+  },
+  "physical_feasibility": {
+    "schema_version": 1,
+    "status": "PENDING",
+    "rtl_freeze_allowed": false,
+    "production_signoff": "NOT_TARGETED",
+    "claim_boundary": "No physical-feasibility claim is available for this revision.",
+    "calibration": "unavailable",
+    "toolchain": {
+      "pdk": null,
+      "library": null,
+      "process_corner": null,
+      "voltage_V": null,
+      "temperature_C": null,
+      "yosys": null,
+      "openroad": null
+    },
+    "gates": {
+      "PF-0": {
+        "status": "PENDING",
+        "criterion": "RTL feasibility evidence is required.",
+        "evidence": [],
+        "blockers": [
+          "Synthetic adapter candidate has no physical-feasibility evidence."
+        ]
+      },
+      "PF-1": {
+        "status": "PENDING",
+        "criterion": "Standalone adapter technology mapping is required.",
+        "evidence": [],
+        "blockers": [
+          "Synthetic adapter candidate has no physical-feasibility evidence."
+        ]
+      },
+      "PF-2": {
+        "status": "PENDING",
+        "criterion": "Integrated PCU plus adapter mapping and STA are required.",
+        "evidence": [],
+        "blockers": [
+          "Synthetic adapter candidate has no physical-feasibility evidence."
+        ]
+      },
+      "PF-3": {
+        "status": "PENDING",
+        "criterion": "Coarse legal placement is required.",
+        "evidence": [],
+        "blockers": [
+          "Synthetic adapter candidate has no physical-feasibility evidence."
+        ]
+      },
+      "PF-4": {
+        "status": "PENDING",
+        "criterion": "Global routing and congestion evidence are required.",
+        "evidence": [],
+        "blockers": [
+          "Synthetic adapter candidate has no physical-feasibility evidence."
+        ]
+      }
+    },
+    "adapter_mapping": {
+      "top": null,
+      "completed": false,
+      "mapped_cells": null,
+      "mapped_area_um2": null,
+      "sequential_area_um2": null,
+      "unmapped_cells": null,
+      "blackboxes": null,
+      "inferred_latches": null,
+      "combinational_loops": null,
+      "clock_period_ns": null,
+      "critical_path_ns": null,
+      "worst_slack_ns": null,
+      "timing_target_met": null,
+      "reference_clock_period_ns": null,
+      "reference_timing_target_met": null,
+      "unconstrained_path_count": null,
+      "critical_startpoint": null,
+      "critical_endpoint": null
+    },
+    "integrated_mapping": {
+      "top": null,
+      "completed": false,
+      "mapped_cells": null,
+      "mapped_area_um2": null,
+      "sequential_area_um2": null,
+      "unmapped_cells": null,
+      "blackboxes": null,
+      "inferred_latches": null,
+      "combinational_loops": null,
+      "clock_period_ns": null,
+      "critical_path_ns": null,
+      "worst_slack_ns": null,
+      "timing_target_met": null,
+      "reference_clock_period_ns": null,
+      "reference_timing_target_met": null,
+      "unconstrained_path_count": null,
+      "critical_startpoint": null,
+      "critical_endpoint": null
+    },
+    "placement": {
+      "completed": false,
+      "core_area_um2": null,
+      "movable_area_um2": null,
+      "fixed_area_um2": null,
+      "utilization_pct": null,
+      "initial_violations": null,
+      "final_violations": null,
+      "average_displacement_um": null,
+      "max_displacement_um": null
+    },
+    "global_routing": {
+      "completed": false,
+      "overflow_count": null,
+      "congestion_report_available": false,
+      "guide_available": false,
+      "max_observed_fanout": null,
+      "high_fanout_nets": []
+    },
+    "wide_interface": {
+      "adapter_port_bits": null,
+      "largest_interface_bits": null,
+      "largest_interface_name": null,
+      "critical_cone_cell_count": null,
+      "risk": "UNAVAILABLE"
+    },
+    "buffer_implementation": {
+      "logical_bits": null,
+      "storage_kind": null,
+      "memory_macro_inferred": null,
+      "top_sequential_cells": null,
+      "mapped_area_um2": null,
+      "integrated_area_share_pct": null,
+      "risk": "UNAVAILABLE"
+    },
+    "logic_die_budget": {
+      "assumed_usable_area_um2": null,
+      "mapped_area_um2": null,
+      "mapped_utilization_pct": null,
+      "placed_core_area_um2": null,
+      "placed_footprint_utilization_pct": null,
+      "within_budget": null
+    },
+    "evidence": [],
+    "blockers": [
+      "Synthetic adapter candidate has no physical-feasibility evidence."
+    ],
+    "notes": []
+  },
+  "thermal": {
+    "peak_temperature_K": 322.0,
+    "peak_delta_K": 22.0,
+    "hotspot": {
+      "layer": "logic",
+      "x_index": 2,
+      "y_index": 1
+    },
+    "calibration": "synthetic_architectural",
+    "claim_class": "modeled"
+  },
+  "workload": {
+    "status": "available",
+    "name": "synthetic_normalization",
+    "precision": "BF16",
+    "operation_count": 1000000,
+    "latency_cycles": 55556,
+    "clock_period_ns": 10.0,
+    "throughput_ops_s": 1800000000.0,
+    "energy_per_op_J": null,
+    "calibration": "workload_model",
+    "claim_class": "modeled",
+    "note": "Energy/op is emitted only with activity-based or stronger power."
+  },
+  "categories": {
+    "bf16_fp16": {
+      "mapped_area_um2": 3200000.0,
+      "dynamic_power_W": 1.2707199999999998,
+      "leakage_power_W": 0.17328,
+      "total_power_W": 1.444,
+      "blocks": [
+        "top.bf16_fp16"
+      ],
+      "synthesis_observations": [],
+      "power_density_W_mm2": 0.45125000000000004,
+      "physical_data_available": true,
+      "physical_calibration": "synthetic",
+      "power_calibration": "synthetic"
+    },
+    "normalization_rounding": {
+      "mapped_area_um2": 2400000.0,
+      "dynamic_power_W": 0.73568,
+      "leakage_power_W": 0.10031999999999999,
+      "total_power_W": 0.836,
+      "blocks": [
+        "top.normalization_rounding"
+      ],
+      "synthesis_observations": [
+        {
+          "name": "synthetic_balanced_primary",
+          "precision": "BF16",
+          "generic_cells": 105000,
+          "generic_topological_path_length": 610,
+          "calibration": "synthesis_generic"
+        }
+      ],
+      "power_density_W_mm2": 0.34833333333333333,
+      "physical_data_available": true,
+      "physical_calibration": "synthetic",
+      "power_calibration": "synthetic"
+    },
+    "accumulator_reduction": {
+      "mapped_area_um2": 1800000.0,
+      "dynamic_power_W": 0.60192,
+      "leakage_power_W": 0.08207999999999999,
+      "total_power_W": 0.6839999999999999,
+      "blocks": [
+        "top.accumulator_reduction"
+      ],
+      "synthesis_observations": [],
+      "power_density_W_mm2": 0.38,
+      "physical_data_available": true,
+      "physical_calibration": "synthetic",
+      "power_calibration": "synthetic"
+    },
+    "buffer_register": {
+      "mapped_area_um2": 1600000.0,
+      "dynamic_power_W": 0.40127999999999997,
+      "leakage_power_W": 0.05471999999999999,
+      "total_power_W": 0.45599999999999996,
+      "blocks": [
+        "top.buffer_register"
+      ],
+      "synthesis_observations": [],
+      "power_density_W_mm2": 0.285,
+      "physical_data_available": true,
+      "physical_calibration": "synthetic",
+      "power_calibration": "synthetic"
+    },
+    "control_routing": {
+      "mapped_area_um2": 1000000.0,
+      "dynamic_power_W": 0.33440000000000003,
+      "leakage_power_W": 0.0456,
+      "total_power_W": 0.38,
+      "blocks": [
+        "top.control_routing"
+      ],
+      "synthesis_observations": [],
+      "power_density_W_mm2": 0.38,
+      "physical_data_available": true,
+      "physical_calibration": "synthetic",
+      "power_calibration": "synthetic"
+    }
+  },
+  "source_files": [
+    {
+      "role": "adapter:area",
+      "path": "output/hardware_cost_adapter_v2/adapters/synthetic_balanced/area.json",
+      "sha256": "b4a8f77135382aa017b578ca96233eaa9a03b3ee3138b44a83f42a866f71caae",
+      "bytes": 2214,
+      "claim_class": "assumed",
+      "tool": "synthetic-area-fixture",
+      "tool_version": "1"
+    },
+    {
+      "role": "adapter:timing",
+      "path": "output/hardware_cost_adapter_v2/adapters/synthetic_balanced/timing.json",
+      "sha256": "7b6e1bd974566b7c4e72b56c2736d93e138df9c6674e485d023aedb677bb0c34",
+      "bytes": 1116,
+      "claim_class": "assumed",
+      "tool": "synthetic-timing-fixture",
+      "tool_version": "1"
+    },
+    {
+      "role": "adapter:power",
+      "path": "output/hardware_cost_adapter_v2/adapters/synthetic_balanced/power.json",
+      "sha256": "a599ae633622bb06fbecce30ee826b0f29049834069c46b3914fc65f82e66864",
+      "bytes": 4607,
+      "claim_class": "assumed",
+      "tool": "synthetic-power-fixture",
+      "tool_version": "1"
+    },
+    {
+      "role": "adapter:workload",
+      "path": "output/hardware_cost_adapter_v2/adapters/synthetic_balanced/workload.json",
+      "sha256": "4e5f3a5fde4fb565df903cb640d2ce8c3aee3704b9203056eac06c2bc923aaa4",
+      "bytes": 1271,
+      "claim_class": "modeled",
+      "tool": "synthetic-workload-fixture",
+      "tool_version": "1"
+    },
+    {
+      "role": "adapter:thermal",
+      "path": "output/hardware_cost_adapter_v2/adapters/synthetic_balanced/thermal.json",
+      "sha256": "6bd0cbf8190ec9da2d3b06e2d1cd28facfe6cdfb71ef114bd15fcc21c001ab50",
+      "bytes": 1233,
+      "claim_class": "modeled",
+      "tool": "synthetic-thermal-fixture",
+      "tool_version": "1"
+    }
+  ],
+  "notes": [
+    "Five-axis common adapter contract bundle.",
+    "Synthetic fixtures validate plumbing and comparison behavior only."
+  ]
+}

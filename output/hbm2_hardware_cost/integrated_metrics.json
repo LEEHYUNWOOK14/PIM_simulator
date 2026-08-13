@@ -218,7 +218,7 @@
         "package_footprint_mm2": 192.0,
         "stack_height_without_lid_mm": 0.844,
         "routing_demand_bit_equivalent": 1024.0,
-        "package_complexity_index": 1.2750000000000001,
+        "package_complexity_index": 1.275,
         "normalized_terms": {
           "interposer": 1.0,
           "microbump": 1.5,
@@ -268,7 +268,7 @@
       "integration": {
         "indices": {
           "area": 1.441988950276243,
-          "package": 1.2750000000000001,
+          "package": 1.275,
           "yield": 1.4888949075646285,
           "energy": 1.2500000000000002,
           "thermal": 1.46875
@@ -477,9 +477,10 @@
     {
       "scenario": "hbm2_4hi_1stack",
       "p05": 1.4413874905241968,
-      "p50": 1.5829500186428498,
+      "p50": 1.58295001864285,
       "p95": 1.769086999690303,
       "best_rank_probability": 0.0,
+      "no_feasible_probability": 0.0,
       "samples": 2000
     },
     {
@@ -488,22 +489,25 @@
       "p50": 1.0,
       "p95": 1.0,
       "best_rank_probability": 0.561,
+      "no_feasible_probability": 0.0,
       "samples": 2000
     },
     {
       "scenario": "hbm2_12hi_1stack",
       "p05": 0.62059973734796,
       "p50": 0.6918069237379679,
-      "p95": 0.7588892795043177,
+      "p95": 0.7588892795043178,
       "best_rank_probability": 0.0,
+      "no_feasible_probability": 0.0,
       "samples": 2000
     },
     {
       "scenario": "hbm2_8hi_2stack",
       "p05": 0.7816718662963362,
-      "p50": 0.9626269147978861,
+      "p50": 0.962626914797886,
       "p95": 1.1733855650724303,
       "best_rank_probability": 0.4,
+      "no_feasible_probability": 0.0,
       "samples": 2000
     },
     {
@@ -512,6 +516,7 @@
       "p50": 0.571176238936531,
       "p95": 1.0117441752519263,
       "best_rank_probability": 0.039,
+      "no_feasible_probability": 0.0,
       "samples": 2000
     }
   ]

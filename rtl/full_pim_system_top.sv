@@ -9,6 +9,11 @@ module full_pim_system_top #(
     parameter int unsigned KEY_WIDTH = 32,
     parameter int unsigned TAG_WIDTH = 64,
     parameter int unsigned CRF_DEPTH = 32,
+    parameter int unsigned NORMALIZATION_DATA_FORMAT = 0,
+    // Compile-time architecture switches used for apples-to-apples PPA studies.
+    // Disabled blocks keep the top-level interface but present an idle interface.
+    parameter bit ENABLE_LOGIC_DIE_PCU = 1'b1,
+    parameter bit ENABLE_NORMALIZATION_ENGINE = 1'b1,
     parameter int unsigned CHANNEL_WIDTH = CHANNELS > 1 ? $clog2(CHANNELS) : 1,
     parameter int unsigned BANK_WIDTH = BANKS > 1 ? $clog2(BANKS) : 1,
     parameter int unsigned ROW_WIDTH = ROWS > 1 ? $clog2(ROWS) : 1,
@@ -177,9 +182,11 @@ module full_pim_system_top #(
             .output_ready_i(channel_result_ready[channel]),.output_key_o(channel_result_key[channel]),
             .output_data_o(channel_result_data[channel]),.output_source_o(),
             .output_route_o(channel_result_to_logic[channel]));
-        assign logic_path_valid[channel] = channel_result_valid[channel] && channel_result_to_logic[channel];
-        assign direct_path_valid[channel] = channel_result_valid[channel] && !channel_result_to_logic[channel];
-        assign channel_result_ready[channel] = channel_result_to_logic[channel] ?
+        assign logic_path_valid[channel] = ENABLE_LOGIC_DIE_PCU &&
+                                           channel_result_valid[channel] && channel_result_to_logic[channel];
+        assign direct_path_valid[channel] = channel_result_valid[channel] &&
+                                            (!ENABLE_LOGIC_DIE_PCU || !channel_result_to_logic[channel]);
+        assign channel_result_ready[channel] = (ENABLE_LOGIC_DIE_PCU && channel_result_to_logic[channel]) ?
                                                logic_path_ready[channel] : direct_path_ready[channel];
     end endgenerate
 
@@ -192,6 +199,7 @@ module full_pim_system_top #(
         .output_key_o(logic_operand_key),.output_data_o(logic_operand_src0),
         .output_source_o(logic_operand_channel),.output_route_o());
 
+    generate if (ENABLE_LOGIC_DIE_PCU) begin:g_logic_die_enabled
     logic_die_pim_top #(.CHANNELS(CHANNELS),.PCUS(PCUS),.DATA_WIDTH(DATA_WIDTH),
         .TAG_WIDTH(TAG_WIDTH),.WEIGHT_BUFFER_BYTES(WEIGHT_BUFFER_BYTES)) u_logic_die(
         .clk_i,.rst_ni,.operand_valid_i(logic_operand_valid),.operand_ready_o(logic_operand_ready),
@@ -221,6 +229,32 @@ module full_pim_system_top #(
         .reduction_context_error_o(reduction_context),
         .coalescer_duplicate_error_o(coal_dup),.coalescer_context_error_o(coal_context),
         .operand_context_error_o(operand_context),.coalescer_occupancy_o(unused_occupancy));
+    end else begin:g_logic_die_disabled
+        assign logic_operand_ready = 1'b0;
+        assign logic_command_ready_o = 1'b0;
+        assign epoch_begin_ready_o = 1'b0;
+        assign epoch_release_valid_o = 1'b0;
+        assign epoch_release_id_o = '0;
+        assign epoch_active_o = 1'b0;
+        assign weight_write_ready_o = 1'b0;
+        assign weight_read_ready_o = 1'b0;
+        assign weight_response_valid_o = 1'b0;
+        assign weight_response_data_o = '0;
+        assign weight_context_valid_o = 1'b0;
+        assign logic_result_valid_o = '0;
+        assign logic_result_tag_o = '0;
+        assign logic_result_data_o = '0;
+        assign reduced_valid = 1'b0;
+        assign reduced_tag = '0;
+        assign reduced_data = '0;
+        assign reduced_destination_bank = 1'b0;
+        assign reduction_dup = 1'b0;
+        assign reduction_context = 1'b0;
+        assign coal_dup = 1'b0;
+        assign coal_context = 1'b0;
+        assign operand_context = 1'b0;
+        assign unused_occupancy = '0;
+    end endgenerate
 
     channel_tsv_interconnect #(.CHANNELS(CHANNELS),.LANES(2),.DATA_WIDTH(DATA_WIDTH),
         .KEY_WIDTH(KEY_WIDTH)) u_direct_tsv(
@@ -238,7 +272,9 @@ module full_pim_system_top #(
         .bank_data_o(logic_bank_result_data_o),.host_valid_o(logic_host_result_valid_o),
         .host_ready_i(logic_host_result_ready_i),.host_key_o(logic_host_result_tag_o),
         .host_data_o(logic_host_result_data_o));
-    logic_normalization_reduction_engine #(.BANKS(BANKS),.TAG_WIDTH(TAG_WIDTH))
+    generate if (ENABLE_NORMALIZATION_ENGINE) begin:g_normalization_enabled
+    logic_normalization_reduction_engine #(.BANKS(BANKS),.TAG_WIDTH(TAG_WIDTH),
+        .DATA_FORMAT(NORMALIZATION_DATA_FORMAT))
         u_normalization_engine(
         .clk_i,.rst_ni,.begin_valid_i(normalization_begin_valid_i),
         .begin_ready_o(normalization_begin_ready_o),
@@ -262,7 +298,23 @@ module full_pim_system_top #(
         .response_variance_clamped_o(normalization_variance_clamped_o),
         .duplicate_error_o(normalization_duplicate_error),
         .context_error_o(normalization_context_error));
+    end else begin:g_normalization_disabled
+        assign normalization_begin_ready_o = 1'b0;
+        assign normalization_partial_ready_o = 1'b0;
+        assign normalization_broadcast_valid_o = 1'b0;
+        assign normalization_broadcast_rms_norm_o = 1'b0;
+        assign normalization_broadcast_tag_o = '0;
+        assign normalization_broadcast_mean_o = '0;
+        assign normalization_broadcast_inv_std_o = '0;
+        assign normalization_variance_clamped_o = 1'b0;
+        assign normalization_duplicate_error = 1'b0;
+        assign normalization_context_error = 1'b0;
+    end endgenerate
     assign protocol_error_o = |block_command_error || coal_dup || coal_context || operand_context ||
                               reduction_dup || reduction_context || normalization_duplicate_error ||
                               normalization_context_error;
+`ifndef SYNTHESIS
+    initial if(NORMALIZATION_DATA_FORMAT>1)
+        $fatal(1,"NORMALIZATION_DATA_FORMAT must be 0 (FP16) or 1 (BF16)");
+`endif
 endmodule

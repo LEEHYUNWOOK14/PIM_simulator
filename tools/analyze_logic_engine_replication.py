@@ -20,7 +20,9 @@ def main():
     bank_cells=p['rtl_measurements']['bank_multirow_vector_reducer_4lane']['selected_generic_cells_per_bank']*int(base['banks'])
     rows=[]
     for engines,cells in zip(a['engines'],a['generic_cells']):
-        ref=dict(base,logic_pcus=engines)
+        # The bare array exposes one partial stream per engine. This sweep is the
+        # parallel-input upper bound; the shared dispatcher is reported separately.
+        ref=dict(base,logic_pcus=engines,logic_partial_input_ports=engines)
         logic_ms=sum(float(model_profile(x,'logic_only',ref)['projected_latency_ns']) for x in profiles)/1e6
         hier_ms=hierarchy_ms(profiles,ref)
         rows.append({'logic_engines':engines,'logic_engine_array_generic_cells':cells,

@@ -1,0 +1,98 @@
+{
+  "candidate": "C10_FP32_BALANCED_NR2_FUSED",
+  "finite_cases": [
+    {
+      "case": "all_zero",
+      "samples": 64,
+      "bit_mismatches": 0,
+      "bit_exact_rate": 1.0,
+      "max_abs": 0.0,
+      "mean_abs": 0.0,
+      "rmse": 0.0,
+      "nonfinite": 0,
+      "variance_clamp_expected": true,
+      "result": "PASS"
+    },
+    {
+      "case": "constant_1p25",
+      "samples": 64,
+      "bit_mismatches": 0,
+      "bit_exact_rate": 1.0,
+      "max_abs": 0.0,
+      "mean_abs": 0.0,
+      "rmse": 0.0,
+      "nonfinite": 0,
+      "variance_clamp_expected": true,
+      "result": "PASS"
+    },
+    {
+      "case": "small_variance",
+      "samples": 64,
+      "bit_mismatches": 0,
+      "bit_exact_rate": 1.0,
+      "max_abs": 0.0,
+      "mean_abs": 0.0,
+      "rmse": 0.0,
+      "nonfinite": 0,
+      "variance_clamp_expected": false,
+      "result": "PASS"
+    },
+    {
+      "case": "large_offset",
+      "samples": 64,
+      "bit_mismatches": 0,
+      "bit_exact_rate": 1.0,
+      "max_abs": 0.0,
+      "mean_abs": 0.0,
+      "rmse": 0.0,
+      "nonfinite": 0,
+      "variance_clamp_expected": false,
+      "result": "PASS"
+    },
+    {
+      "case": "mixed_magnitude",
+      "samples": 64,
+      "bit_mismatches": 0,
+      "bit_exact_rate": 1.0,
+      "max_abs": 0.0,
+      "mean_abs": 0.0,
+      "rmse": 0.0,
+      "nonfinite": 0,
+      "variance_clamp_expected": false,
+      "result": "PASS"
+    },
+    {
+      "case": "subnormal_input",
+      "samples": 64,
+      "bit_mismatches": 0,
+      "bit_exact_rate": 1.0,
+      "max_abs": 0.0,
+      "mean_abs": 0.0,
+      "rmse": 0.0,
+      "nonfinite": 0,
+      "variance_clamp_expected": true,
+      "result": "PASS"
+    }
+  ],
+  "special_value_policy": [
+    {
+      "case": "contains_nan",
+      "input": "one qNaN",
+      "expected_policy": "canonical NaN output row",
+      "rtl_primitive_support": "fp32 add/mul canonicalize NaN"
+    },
+    {
+      "case": "contains_pos_inf",
+      "input": "one +Inf",
+      "expected_policy": "canonical NaN output row",
+      "rtl_primitive_support": "Inf-Inf and 0*Inf canonicalize NaN"
+    },
+    {
+      "case": "contains_neg_inf",
+      "input": "one -Inf",
+      "expected_policy": "canonical NaN output row",
+      "rtl_primitive_support": "Inf-Inf and 0*Inf canonicalize NaN"
+    }
+  ],
+  "overall_finite_result": "PASS"
+}

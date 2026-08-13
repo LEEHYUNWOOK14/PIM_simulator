@@ -5,20 +5,30 @@
       "name": "baseline exists",
       "pass": true,
       "detail": [
+        "physical_feasibility_2026_08_12",
         "provisional_baseline_2026_08_11"
       ]
     },
     {
       "name": "revision ids unique",
       "pass": true,
-      "detail": 1
+      "detail": 2
     },
     {
       "name": "architecture remains provisional",
       "pass": true,
       "detail": [
+        "physical_feasibility_2026_08_12",
         "provisional_baseline_2026_08_11"
       ]
+    },
+    {
+      "name": "Evidence Contract v2 schema and calibration invariants",
+      "pass": true,
+      "detail": {
+        "physical_feasibility_2026_08_12": [],
+        "provisional_baseline_2026_08_11": []
+      }
     },
     {
       "name": "all cost categories present",
@@ -35,6 +45,7 @@
       "name": "category power conservation",
       "pass": true,
       "detail": [
+        0.0,
         0.0
       ]
     },
@@ -42,13 +53,14 @@
       "name": "block power conservation",
       "pass": true,
       "detail": [
+        0.0,
         0.0
       ]
     },
     {
-      "name": "source hashes recorded",
+      "name": "source hashes and claim classes recorded",
       "pass": true,
-      "detail": "sha256 and byte count"
+      "detail": "sha256, byte count, and claim class"
     },
     {
       "name": "metric values finite or null",
@@ -65,6 +77,7 @@
         "paper_regression_report.md",
         "paper_revision_overview.png",
         "paper_category_power.png",
+        "paper_timing_throughput.png",
         "regression_summary.json"
       ]
     },
@@ -72,8 +85,14 @@
       "name": "paper table covers every revision",
       "pass": true,
       "detail": [
-        "provisional_baseline_2026_08_11"
+        "provisional_baseline_2026_08_11",
+        "physical_feasibility_2026_08_12"
       ]
+    },
+    {
+      "name": "paper table exposes calibration levels",
+      "pass": true,
+      "detail": "five adapter axes"
     },
     {
       "name": "baseline deltas are zero",
@@ -81,9 +100,11 @@
       "detail": {
         "revision": "provisional_baseline_2026_08_11",
         "label": "Temporary RTL plus synthetic physical baseline",
-        "git_commit": "3beb9c33a4c172be3b0546aeb8af799dc6d42048",
+        "git_commit": "14dd245dbfc8d53177f73526ade4f0b72d2b7f6b",
         "dirty": "True",
         "parameter_status": "PROVISIONAL",
+        "physical_feasibility_status": "PENDING",
+        "rtl_freeze_allowed": "False",
         "fp16_generic_cells": "129805",
         "bf16_generic_cells": "104699",
         "mapped_area_um2": "10900000.0",
@@ -91,21 +112,41 @@
         "critical_path_ns": "",
         "slack_ns": "",
         "dynamic_power_W": "3.57",
-        "leakage_power_W": "0.43000000000000005",
+        "leakage_power_W": "0.43",
         "total_power_W": "4.0",
         "energy_per_op_J": "",
         "throughput_ops_s": "",
-        "peak_temperature_K": "322.58181130666975",
+        "peak_temperature_K": "322.58181130667003",
         "hotspot_layer": "dram_0",
         "hotspot_x": "0",
         "hotspot_y": "1",
+        "physical_calibration": "synthetic",
+        "timing_calibration": "not_available",
+        "power_calibration": "synthetic",
+        "thermal_calibration": "synthetic_architectural",
+        "workload_calibration": "pending",
         "area_vs_baseline_pct": "0.0",
+        "area_vs_baseline_policy": "quantitative",
         "power_vs_baseline_pct": "0.0",
+        "power_vs_baseline_policy": "quantitative",
         "peak_delta_vs_baseline_K": "0.0",
+        "peak_vs_baseline_policy": "quantitative",
         "energy_vs_baseline_pct": "",
+        "energy_vs_baseline_policy": "unavailable",
+        "critical_path_vs_baseline_pct": "",
+        "critical_path_vs_baseline_policy": "unavailable",
+        "throughput_vs_baseline_pct": "",
+        "throughput_vs_baseline_policy": "unavailable",
         "area_vs_previous_pct": "",
+        "area_vs_previous_policy": "unavailable",
         "power_vs_previous_pct": "",
-        "peak_delta_vs_previous_K": ""
+        "power_vs_previous_policy": "unavailable",
+        "peak_delta_vs_previous_K": "",
+        "peak_vs_previous_policy": "unavailable",
+        "critical_path_vs_previous_pct": "",
+        "critical_path_vs_previous_policy": "unavailable",
+        "throughput_vs_previous_pct": "",
+        "throughput_vs_previous_policy": "unavailable"
       }
     }
   ],

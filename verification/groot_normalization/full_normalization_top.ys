@@ -1,5 +1,6 @@
 read_verilog -sv -I. \
   rtl/pim_command_decoder.sv rtl/fp16_add.sv rtl/fp16_mul.sv \
+  rtl/bf16_add.sv rtl/bf16_mul.sv rtl/bf16_rsqrt_lut256.sv \
   rtl/fp16_vector_add.sv rtl/pim_vector_alu.sv rtl/pim_crf.sv \
   rtl/dram_bank_array_model.sv rtl/bank_pim_core.sv rtl/bank_side_pim_subsystem.sv \
   rtl/logic_die_link_arbiter.sv rtl/channel_tsv_interconnect.sv \

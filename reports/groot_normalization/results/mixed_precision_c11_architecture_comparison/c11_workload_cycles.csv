@@ -1,0 +1,7 @@
+profile_id,shape,rows,hidden_size,invocations,elementwise_affine,tensor_bytes_per_call,affine_bytes_per_call,partial_stat_bytes_per_call,scalar_broadcast_bytes_per_call,vectors_per_bank,reduction_packets_per_call,bank_pcu_vectors_per_call,partial_stat_transactions_per_call,scalar_broadcast_transactions_per_call,mapping_roundtrip_mismatches,source_classification,c11_cycles_per_row,c11_cycles_per_call
+action_vlln,1x280x2048,280,2048,1,True,1146880,8192,17920,17920,32,143360,35840,4480,4480,0,PRETRAINED_ACTION_HEAD_SYNTHETIC_BOUNDARY_INPUT,175,49001
+action_vl_self_attention_norm1,1x280x2048,280,2048,4,True,1146880,8192,17920,17920,32,143360,35840,4480,4480,0,PRETRAINED_ACTION_HEAD_SYNTHETIC_BOUNDARY_INPUT,175,49001
+action_vl_self_attention_norm3,1x280x2048,280,2048,4,True,1146880,8192,17920,17920,32,143360,35840,4480,4480,0,PRETRAINED_ACTION_HEAD_SYNTHETIC_BOUNDARY_INPUT,175,49001
+action_dit_adaln_norm1,1x41x1536,41,1536,128,False,125952,0,2624,2624,24,15744,3936,656,656,0,PRETRAINED_ACTION_HEAD_SYNTHETIC_BOUNDARY_INPUT,159,6520
+action_dit_norm3,1x41x1536,41,1536,128,False,125952,0,2624,2624,24,15744,3936,656,656,0,PRETRAINED_ACTION_HEAD_SYNTHETIC_BOUNDARY_INPUT,159,6520
+action_dit_norm_out,1x41x1536,41,1536,4,False,125952,0,2624,2624,24,15744,3936,656,656,0,PRETRAINED_ACTION_HEAD_SYNTHETIC_BOUNDARY_INPUT,159,6520

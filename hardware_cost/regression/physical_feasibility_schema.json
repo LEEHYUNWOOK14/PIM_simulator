@@ -1,0 +1,240 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stob-pim.local/schemas/physical-feasibility-gate-v1.json",
+  "title": "Lightweight Physical Feasibility Gate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "status", "rtl_freeze_allowed", "production_signoff", "status_matrix", "claim_boundary", "calibration", "claim_class", "toolchain", "revision_coherence", "gates", "adapter_mapping", "integrated_mapping", "placement", "global_routing", "structural", "fanout", "wide_interface", "buffer_implementation", "logic_die_budget", "evidence", "blockers", "risks", "notes"],
+  "$defs": {
+    "status": {"enum": ["PASS", "FAIL", "PENDING", "UNAVAILABLE", "NOT_TARGETED"]},
+    "numberOrNull": {"type": ["number", "null"]},
+    "nonnegativeOrNull": {"type": ["number", "null"], "minimum": 0},
+    "integerOrNull": {"type": ["integer", "null"], "minimum": 0},
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "criterion", "evidence", "blockers"],
+      "properties": {
+        "status": {"$ref": "#/$defs/status"},
+        "criterion": {"type": "string", "minLength": 1},
+        "evidence": {"type": "array", "items": {"type": "string"}},
+        "blockers": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "mapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "calibration", "top", "completed", "mapped_cells", "mapped_area_um2", "sequential_area_um2", "unmapped_cells", "blackboxes", "inferred_latches", "combinational_loops", "clock_period_ns", "critical_path_ns", "worst_slack_ns", "timing_target_met", "reference_clock_period_ns", "reference_timing_target_met", "unconstrained_path_count", "critical_startpoint", "critical_endpoint"],
+      "properties": {
+        "status": {"$ref": "#/$defs/status"},
+        "calibration": {"enum": ["unavailable", "technology_mapped", "placed", "global_routed"]},
+        "top": {"type": ["string", "null"]},
+        "completed": {"type": "boolean"},
+        "mapped_cells": {"$ref": "#/$defs/integerOrNull"},
+        "mapped_area_um2": {"$ref": "#/$defs/nonnegativeOrNull"},
+        "sequential_area_um2": {"$ref": "#/$defs/nonnegativeOrNull"},
+        "unmapped_cells": {"$ref": "#/$defs/integerOrNull"},
+        "blackboxes": {"$ref": "#/$defs/integerOrNull"},
+        "inferred_latches": {"$ref": "#/$defs/integerOrNull"},
+        "combinational_loops": {"$ref": "#/$defs/integerOrNull"},
+        "clock_period_ns": {"$ref": "#/$defs/nonnegativeOrNull"},
+        "critical_path_ns": {"$ref": "#/$defs/nonnegativeOrNull"},
+        "worst_slack_ns": {"$ref": "#/$defs/numberOrNull"},
+        "timing_target_met": {"type": ["boolean", "null"]},
+        "reference_clock_period_ns": {"$ref": "#/$defs/nonnegativeOrNull"},
+        "reference_timing_target_met": {"type": ["boolean", "null"]},
+        "unconstrained_path_count": {"$ref": "#/$defs/integerOrNull"},
+        "critical_startpoint": {"type": ["string", "null"]},
+        "critical_endpoint": {"type": ["string", "null"]}
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "path", "sha256", "bytes", "claim_class"],
+      "properties": {
+        "role": {"type": "string", "minLength": 1},
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "bytes": {"type": ["integer", "null"], "minimum": 1},
+        "claim_class": {"enum": ["measured", "derived", "modeled", "assumed"]}
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {"const": 1},
+    "status": {"$ref": "#/$defs/status"},
+    "rtl_freeze_allowed": {"type": "boolean"},
+    "production_signoff": {"const": "NOT_TARGETED"},
+    "status_matrix": {
+      "type": "object", "additionalProperties": false,
+      "required": ["RTL_FEASIBILITY", "LOGICAL_SYNTHESIS", "ADAPTER_TECH_MAPPING", "INTEGRATED_TECH_MAPPING", "COARSE_PLACEMENT", "GLOBAL_ROUTING", "PHYSICAL_FEASIBILITY", "PRODUCTION_SIGNOFF"],
+      "properties": {
+        "RTL_FEASIBILITY": {"$ref": "#/$defs/status"}, "LOGICAL_SYNTHESIS": {"$ref": "#/$defs/status"},
+        "ADAPTER_TECH_MAPPING": {"$ref": "#/$defs/status"}, "INTEGRATED_TECH_MAPPING": {"$ref": "#/$defs/status"},
+        "COARSE_PLACEMENT": {"$ref": "#/$defs/status"}, "GLOBAL_ROUTING": {"$ref": "#/$defs/status"},
+        "PHYSICAL_FEASIBILITY": {"$ref": "#/$defs/status"}, "PRODUCTION_SIGNOFF": {"$ref": "#/$defs/status"}
+      }
+    },
+    "claim_boundary": {"type": "string", "minLength": 1},
+    "calibration": {"enum": ["unavailable", "technology_mapped", "placed", "global_routed"]},
+    "claim_class": {"enum": ["measured", "derived", "modeled", "assumed"]},
+    "toolchain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pdk", "library", "process_corner", "voltage_V", "temperature_C", "yosys", "openroad"],
+      "properties": {
+        "pdk": {"type": ["string", "null"]}, "library": {"type": ["string", "null"]},
+        "process_corner": {"type": ["string", "null"]}, "voltage_V": {"$ref": "#/$defs/nonnegativeOrNull"},
+        "temperature_C": {"$ref": "#/$defs/numberOrNull"}, "yosys": {"type": ["string", "null"]},
+        "openroad": {"type": ["string", "null"]}
+      }
+    },
+    "revision_coherence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "integrated_netlist_sha256", "integrated_sta_matches_netlist", "placement_log_sha256", "placement_newer_than_mapping", "postrepair_fanout_matches_placement", "global_route_matches_placement", "global_route_newer_than_mapping", "stale_evidence"],
+      "properties": {
+        "status": {"$ref": "#/$defs/status"},
+        "integrated_netlist_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "integrated_sta_matches_netlist": {"type": ["boolean", "null"]},
+        "placement_log_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "placement_newer_than_mapping": {"type": ["boolean", "null"]},
+        "postrepair_fanout_matches_placement": {"type": ["boolean", "null"]},
+        "global_route_matches_placement": {"type": ["boolean", "null"]},
+        "global_route_newer_than_mapping": {"type": ["boolean", "null"]},
+        "stale_evidence": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "gates": {
+      "type": "object", "additionalProperties": false,
+      "required": ["PF-0", "PF-1", "PF-2", "PF-3", "PF-4"],
+      "properties": {"PF-0": {"$ref": "#/$defs/gate"}, "PF-1": {"$ref": "#/$defs/gate"}, "PF-2": {"$ref": "#/$defs/gate"}, "PF-3": {"$ref": "#/$defs/gate"}, "PF-4": {"$ref": "#/$defs/gate"}}
+    },
+    "adapter_mapping": {"$ref": "#/$defs/mapping"},
+    "integrated_mapping": {"$ref": "#/$defs/mapping"},
+    "placement": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "calibration", "completed", "core_area_um2", "movable_area_um2", "fixed_area_um2", "utilization_pct", "initial_violations", "final_violations", "average_displacement_um", "max_displacement_um"],
+      "properties": {
+        "status": {"$ref": "#/$defs/status"}, "calibration": {"enum": ["unavailable", "placed"]},
+        "completed": {"type": "boolean"}, "core_area_um2": {"$ref": "#/$defs/nonnegativeOrNull"},
+        "movable_area_um2": {"$ref": "#/$defs/nonnegativeOrNull"}, "fixed_area_um2": {"$ref": "#/$defs/nonnegativeOrNull"},
+        "utilization_pct": {"$ref": "#/$defs/nonnegativeOrNull"}, "initial_violations": {"$ref": "#/$defs/integerOrNull"},
+        "final_violations": {"$ref": "#/$defs/integerOrNull"}, "average_displacement_um": {"$ref": "#/$defs/nonnegativeOrNull"},
+        "max_displacement_um": {"$ref": "#/$defs/nonnegativeOrNull"}
+      }
+    },
+    "global_routing": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "calibration", "route_revision", "pin_model", "signal_layers", "congestion_iterations", "global_router", "openroad_exit_code", "execution_clean", "prior_route_comparison", "completed", "overflow_count", "max_layer_usage_pct", "congestion_violation_count", "max_local_overuse", "congestion_remaining", "routed_nets", "severe_congestion", "congestion_report_available", "guide_available", "fanout_skip_threshold", "skipped_large_fanout_nets", "all_skipped_nets_allowlisted", "max_observed_fanout", "high_fanout_nets", "congestion_hotspots"],
+      "properties": {
+        "status": {"$ref": "#/$defs/status"}, "calibration": {"enum": ["unavailable", "placed", "global_routed"]},
+        "route_revision": {"type": ["string", "null"]},
+        "pin_model": {"type": ["string", "null"]},
+        "signal_layers": {"type": ["string", "null"]},
+        "congestion_iterations": {"$ref": "#/$defs/integerOrNull"},
+        "global_router": {"type": ["string", "null"]},
+        "openroad_exit_code": {"$ref": "#/$defs/integerOrNull"},
+        "execution_clean": {"type": ["boolean", "null"]},
+        "prior_route_comparison": {
+          "type": "object", "additionalProperties": false,
+          "required": ["revision", "congestion_remaining", "congestion_violation_count", "residual_reduction_pct"],
+          "properties": {
+            "revision": {"type": ["string", "null"]},
+            "congestion_remaining": {"$ref": "#/$defs/integerOrNull"},
+            "congestion_violation_count": {"$ref": "#/$defs/integerOrNull"},
+            "residual_reduction_pct": {"$ref": "#/$defs/nonnegativeOrNull"}
+          }
+        },
+        "completed": {"type": "boolean"}, "overflow_count": {"$ref": "#/$defs/integerOrNull"},
+        "max_layer_usage_pct": {"$ref": "#/$defs/nonnegativeOrNull"},
+        "congestion_violation_count": {"$ref": "#/$defs/integerOrNull"},
+        "max_local_overuse": {"$ref": "#/$defs/integerOrNull"},
+        "congestion_remaining": {"$ref": "#/$defs/integerOrNull"},
+        "routed_nets": {"$ref": "#/$defs/integerOrNull"},
+        "severe_congestion": {"type": ["boolean", "null"]},
+        "congestion_report_available": {"type": "boolean"}, "guide_available": {"type": "boolean"},
+        "fanout_skip_threshold": {"$ref": "#/$defs/integerOrNull"},
+        "skipped_large_fanout_nets": {"type": "array", "items": {"type": "object", "required": ["net", "fanout", "allowlisted"], "properties": {"net": {"type": "string"}, "fanout": {"type": "integer", "minimum": 1}, "allowlisted": {"type": "boolean"}}}},
+        "all_skipped_nets_allowlisted": {"type": ["boolean", "null"]},
+        "max_observed_fanout": {"$ref": "#/$defs/integerOrNull"},
+        "high_fanout_nets": {"type": "array", "items": {"type": "object", "required": ["net", "fanout"], "properties": {"net": {"type": "string"}, "fanout": {"type": "integer", "minimum": 1}}}},
+        "congestion_hotspots": {
+          "type": "object", "additionalProperties": false,
+          "required": ["analysis_scope", "captured_violation_blocks", "direction_block_counts", "layer_block_counts", "category_block_counts", "top_bank_source_mentions", "top_500um_tiles"],
+          "properties": {
+            "analysis_scope": {"const": "captured_congestion_report"},
+            "captured_violation_blocks": {"type": "integer", "minimum": 0},
+            "direction_block_counts": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+            "layer_block_counts": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+            "category_block_counts": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+            "top_bank_source_mentions": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["bank", "source_net_mentions"], "properties": {"bank": {"type": "integer", "minimum": 0}, "source_net_mentions": {"type": "integer", "minimum": 1}}}},
+            "top_500um_tiles": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["x_min_um", "y_min_um", "violation_blocks"], "properties": {"x_min_um": {"type": "integer", "minimum": 0}, "y_min_um": {"type": "integer", "minimum": 0}, "violation_blocks": {"type": "integer", "minimum": 1}}}}
+          }
+        }
+      }
+    },
+    "structural": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "unmapped_cells", "unresolved_blackboxes", "unintended_latches", "combinational_loops", "unconstrained_paths"],
+      "properties": {
+        "status": {"$ref": "#/$defs/status"}, "unmapped_cells": {"$ref": "#/$defs/integerOrNull"},
+        "unresolved_blackboxes": {"$ref": "#/$defs/integerOrNull"}, "unintended_latches": {"$ref": "#/$defs/integerOrNull"},
+        "combinational_loops": {"$ref": "#/$defs/integerOrNull"}, "unconstrained_paths": {"$ref": "#/$defs/integerOrNull"}
+      }
+    },
+    "fanout": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "max_fanout", "max_fanout_net", "source_stage", "repair_area_increase_pct", "repair_resized_instances", "repair_inserted_buffers", "repair_repaired_nets", "remaining_slew_violations", "remaining_fanout_violations", "remaining_capacitance_violations"],
+      "properties": {
+        "status": {"$ref": "#/$defs/status"}, "max_fanout": {"$ref": "#/$defs/integerOrNull"},
+        "max_fanout_net": {"type": ["string", "null"]}, "source_stage": {"type": ["string", "null"]},
+        "repair_area_increase_pct": {"$ref": "#/$defs/nonnegativeOrNull"},
+        "repair_resized_instances": {"$ref": "#/$defs/integerOrNull"},
+        "repair_inserted_buffers": {"$ref": "#/$defs/integerOrNull"},
+        "repair_repaired_nets": {"$ref": "#/$defs/integerOrNull"},
+        "remaining_slew_violations": {"$ref": "#/$defs/integerOrNull"},
+        "remaining_fanout_violations": {"$ref": "#/$defs/integerOrNull"},
+        "remaining_capacitance_violations": {"$ref": "#/$defs/integerOrNull"}
+      }
+    },
+    "wide_interface": {
+      "type": "object", "additionalProperties": false,
+      "required": ["adapter_port_bits", "generic_wire_bits", "generic_wire_bits_is_direct_congestion_metric", "largest_interface_bits", "largest_interface_name", "maximum_fanin", "critical_cone_cell_count", "logic_depth", "critical_path_cell_sequence", "risk"],
+      "properties": {
+        "adapter_port_bits": {"$ref": "#/$defs/integerOrNull"},
+        "generic_wire_bits": {"$ref": "#/$defs/integerOrNull"},
+        "generic_wire_bits_is_direct_congestion_metric": {"const": false},
+        "largest_interface_bits": {"$ref": "#/$defs/integerOrNull"},
+        "largest_interface_name": {"type": ["string", "null"]}, "maximum_fanin": {"$ref": "#/$defs/integerOrNull"},
+        "critical_cone_cell_count": {"$ref": "#/$defs/integerOrNull"}, "logic_depth": {"$ref": "#/$defs/integerOrNull"},
+        "critical_path_cell_sequence": {"type": "array", "items": {"type": "string"}},
+        "risk": {"enum": ["LOW", "MEDIUM", "HIGH", "UNAVAILABLE"]}
+      }
+    },
+    "buffer_implementation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["logical_bits", "implementation_type", "memory_macro_inferred", "mapped_register_count", "top_sequential_cells", "mapped_area_um2", "share_of_adapter_area_pct", "share_of_integrated_area_pct", "risk"],
+      "properties": {
+        "logical_bits": {"$ref": "#/$defs/integerOrNull"}, "implementation_type": {"type": ["string", "null"]},
+        "memory_macro_inferred": {"type": ["boolean", "null"]}, "mapped_register_count": {"$ref": "#/$defs/integerOrNull"},
+        "top_sequential_cells": {"$ref": "#/$defs/integerOrNull"}, "mapped_area_um2": {"$ref": "#/$defs/nonnegativeOrNull"},
+        "share_of_adapter_area_pct": {"$ref": "#/$defs/nonnegativeOrNull"}, "share_of_integrated_area_pct": {"$ref": "#/$defs/nonnegativeOrNull"},
+        "risk": {"enum": ["LOW", "MEDIUM", "HIGH", "UNAVAILABLE"]}
+      }
+    },
+    "logic_die_budget": {
+      "type": "object", "additionalProperties": false,
+      "required": ["assumed_usable_area_um2", "mapped_area_um2", "mapped_utilization_pct", "placed_core_area_um2", "placed_footprint_utilization_pct", "within_budget"],
+      "properties": {
+        "assumed_usable_area_um2": {"$ref": "#/$defs/nonnegativeOrNull"}, "mapped_area_um2": {"$ref": "#/$defs/nonnegativeOrNull"},
+        "mapped_utilization_pct": {"$ref": "#/$defs/nonnegativeOrNull"}, "placed_core_area_um2": {"$ref": "#/$defs/nonnegativeOrNull"},
+        "placed_footprint_utilization_pct": {"$ref": "#/$defs/nonnegativeOrNull"}, "within_budget": {"type": ["boolean", "null"]}
+      }
+    },
+    "evidence": {"type": "array", "items": {"$ref": "#/$defs/source"}},
+    "blockers": {"type": "array", "items": {"type": "string"}},
+    "risks": {"type": "array", "items": {"type": "string"}},
+    "notes": {"type": "array", "items": {"type": "string"}}
+  }
+}

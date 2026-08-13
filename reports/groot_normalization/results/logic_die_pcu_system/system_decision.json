@@ -1,0 +1,107 @@
+{
+  "objective": "logic-die PCU completes cross-bank normalization while minimizing external memory I/O",
+  "evidence_class": "ACTUAL_ACTION_HEAD_TRACE_PLUS_TRANSACTION_LEVEL_MODEL_PLUS_EXISTING_RTL_ACCURACY",
+  "trace_scope": "PRETRAINED_ACTION_HEAD_SYNTHETIC_BOUNDARY_INPUT_NOT_FULL_GROOT_INFERENCE",
+  "traffic": {
+    "invocations": 269,
+    "tensor_bytes": 43069440,
+    "affine_bytes": 73728,
+    "row_invocations": 13180,
+    "gpu_external_bytes": 86212608,
+    "bank_only_external_bytes": 3374080,
+    "pcu_external_bytes_resident": 8608,
+    "pcu_external_bytes_cold_affine": 82336,
+    "bank_array_reduction_read_bytes": 43069440,
+    "bank_array_replay_read_bytes": 43069440,
+    "bank_array_affine_read_bytes": 86138880,
+    "bank_array_writeback_bytes": 43069440,
+    "bank_to_logic_partial_bytes": 1687040,
+    "logic_to_bank_scalar_bytes": 1687040,
+    "external_reduction_fraction_resident": 0.9999001538150893,
+    "external_reduction_fraction_cold_affine": 0.9990449656736982
+  },
+  "cycle_model": {
+    "banks": 16,
+    "contexts": 16,
+    "scalar_engines": 4,
+    "global_reducer_latency": 16,
+    "scalar_service_cycles": 60,
+    "apply_pipeline_latency": 12,
+    "bank_port_modes": [
+      "single_shared",
+      "split_rw",
+      "independent_pcu_ports"
+    ],
+    "clock_or_process_assumption": "NONE; output is cycles and transaction counts"
+  },
+  "candidate_decision": {
+    "recommended_knee_lanes": 8,
+    "pareto_frontier_lanes": [
+      4,
+      8,
+      16
+    ],
+    "freeze_status": "PROVISIONAL_UNTIL_TOP_RTL_TRACE_REPLAY",
+    "selection_rule": "external-I/O gate first; then shared-bank-port cycles versus process-independent hardware cost"
+  },
+  "lane_dse": [
+    {
+      "lanes": 4,
+      "scalar_engines": 4,
+      "single_shared_weighted_cycles": 1010525,
+      "split_rw_weighted_cycles": 676188,
+      "independent_pcu_ports_weighted_cycles": 371253,
+      "split_rw_speedup_vs_lane4": 1.0,
+      "single_shared_speedup_vs_lane4": 1.0,
+      "fp32_adders": 372,
+      "fp32_multipliers": 208,
+      "rsqrt_units": 4,
+      "estimated_state_bits": 29440,
+      "relative_cost_units": 848.75,
+      "external_bytes_saved": 86204000,
+      "external_bytes_saved_per_cost_unit": 101565.83210603829,
+      "trace_accuracy_evidence": "EXISTING_FULL_RTL_MODEL_BIT_EXACT_6_OF_6"
+    },
+    {
+      "lanes": 8,
+      "scalar_engines": 4,
+      "single_shared_weighted_cycles": 506594,
+      "split_rw_weighted_cycles": 339708,
+      "independent_pcu_ports_weighted_cycles": 231756,
+      "split_rw_speedup_vs_lane4": 1.9904977215726447,
+      "single_shared_speedup_vs_lane4": 1.9947433250295108,
+      "fp32_adders": 628,
+      "fp32_multipliers": 400,
+      "rsqrt_units": 4,
+      "estimated_state_bits": 45824,
+      "relative_cost_units": 1504.75,
+      "external_bytes_saved": 86204000,
+      "external_bytes_saved_per_cost_unit": 57287.92158165808,
+      "trace_accuracy_evidence": "EXISTING_FULL_RTL_MODEL_BIT_EXACT_6_OF_6"
+    },
+    {
+      "lanes": 16,
+      "scalar_engines": 4,
+      "single_shared_weighted_cycles": 256583,
+      "split_rw_weighted_cycles": 228408,
+      "independent_pcu_ports_weighted_cycles": 226599,
+      "split_rw_speedup_vs_lane4": 2.960439214038037,
+      "single_shared_speedup_vs_lane4": 3.9383942038248834,
+      "fp32_adders": 1140,
+      "fp32_multipliers": 784,
+      "rsqrt_units": 4,
+      "estimated_state_bits": 78592,
+      "relative_cost_units": 2816.75,
+      "external_bytes_saved": 86204000,
+      "external_bytes_saved_per_cost_unit": 30604.064968492057,
+      "trace_accuracy_evidence": "EXISTING_FULL_RTL_MODEL_BIT_EXACT_6_OF_6"
+    }
+  ],
+  "gates": {
+    "numerical_accuracy": "PASS_FROM_EXISTING_6_PROFILE_FULL_RTL_REPLAY",
+    "external_io_reduction_resident": 0.9999001538150893,
+    "external_io_reduction_cold_affine": 0.9990449656736982,
+    "top_rtl_replay_writeback": "IMPLEMENTED_INTERFACE_REQUIRES_TRACE_REPLAY_VERIFICATION",
+    "process_signoff": "OUT_OF_SCOPE"
+  }
+}

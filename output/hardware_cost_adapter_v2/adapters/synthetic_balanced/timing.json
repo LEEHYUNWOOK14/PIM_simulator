@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "adapter_contract_version": 1,
+  "status": "PASS",
+  "candidate": {
+    "id": "synthetic_balanced",
+    "label": "Synthetic balanced candidate",
+    "parameters": {
+      "lanes": null,
+      "bank_port_mode": null,
+      "scheduler_policy": null,
+      "context_depth": null
+    }
+  },
+  "claim_class": "assumed",
+  "operating_point": {
+    "pdk": null,
+    "library": null,
+    "process_corner": null,
+    "voltage_V": null,
+    "temperature_C": 26.85,
+    "clock_constraint_ns": 10.0,
+    "workload_trace_id": "fixture:synthetic_balanced"
+  },
+  "source_evidence": [
+    {
+      "path": "hardware_cost/regression/synthetic_candidate_definitions.json",
+      "sha256": "25788f3a97948467c0b0cacc4786f60b2a9fc2dd0ee590c317e3aa1c1821b820",
+      "bytes": 2365
+    }
+  ],
+  "notes": [
+    "Deterministic synthetic fixture; not physical evidence."
+  ],
+  "axis": "timing",
+  "calibration": "synthetic",
+  "tool": {
+    "name": "synthetic-timing-fixture",
+    "version": "1"
+  },
+  "metrics": {
+    "critical_path_ns": 9.0,
+    "slack_ns": 1.0
+  }
+}

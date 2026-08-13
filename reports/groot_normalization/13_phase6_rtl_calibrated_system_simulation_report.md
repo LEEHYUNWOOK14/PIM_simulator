@@ -11,7 +11,7 @@
 | LUT256 RSQRT latency | 1 | cycle | RTL_MEASURED |
 | LUT256 RSQRT II | 1 | cycle | RTL_MEASURED |
 | scalar finalize+RSQRT | 5 | cycle/row | RTL_MEASURED |
-| Logic normalization engine array | 440,400 | 16-engine Yosys generic cells | RTL_MEASURED_GENERIC_SYNTHESIS |
+| Logic normalization shared dispatcher | 445,337 | 16-engine, 1-port Yosys generic cells | RTL_MEASURED_GENERIC_SYNTHESIS |
 | Bank local scalar reducer | 1 | element/cycle/bank | RTL_MEASURED_FROM_INTERFACE |
 | Bank local scalar reducer | 15,307 | Yosys generic cells/bank | RTL_MEASURED_GENERIC_SYNTHESIS |
 | affine RMSNorm apply | 2 | Bank-PCU arithmetic commands/vector | RTL_MEASURED |
@@ -38,10 +38,10 @@ resource별 finite capacity와 availability를 추적해 queue delay와 utilizat
 |---|---:|---:|---:|---|---:|
 | GPU full | 4,925.6 us | 14,608.0 us | 4,815.2 us | offload link 99.23% | 미측정 |
 | Bank-only | 487.1 us | 2,770.2 us | 298.2 us | Bank 34.96% | 244,912 cells |
-| Logic-only | 579.8 us | 3,930.4 us | 521.2 us | on-die link 9.15% | 440,400 cells 하한 |
-| Hierarchical | 496.7 us | 2,979.4 us | 313.3 us | Bank 34.24% | 685,312 cells |
+| Logic-only | 416.9 us | 2,404.6 us | 367.7 us | on-die link | 445,337 cells 하한 |
+| Hierarchical | 2,668.3 us | 24,679.3 us | 2,345.8 us | shared partial input | 690,249 cells |
 
-base 가정에서는 Bank-only가 가장 낮고 Hierarchical이 약 9.6 us 뒤따른다. GPU full은 GPU 계산기가 아니라 offload link가 99% 이상 사용되어 queue가 지배한다. Bank-only와 Hierarchical에서는 현재 1 element/cycle/bank local reducer가 주요 비용이다. Logic engine은 16개 복제 면적과 실제 bank-partial 직렬 수신 비용을 함께 반영했다.
+base 가정에서는 Logic-only가 가장 낮고 Bank-only가 뒤따른다. Hierarchical은 shared partial input 1-port가 queue와 service를 지배해 2.67 ms까지 증가한다. GPU full은 offload link가 99% 이상 사용되어 queue가 지배한다.
 
 ## Arrival-rate sensitivity
 
@@ -49,9 +49,9 @@ base 가정에서는 Bank-only가 가장 낮고 Hierarchical이 약 9.6 us 뒤�
 
 | scenario | channel request rate | winner | winner mean latency |
 |---|---:|---|---:|
-| low | 500 requests/s | Logic-only | 58.6 us |
-| base | 2,500 requests/s | Bank-only | 487.1 us |
-| high | 10,000 requests/s | Hierarchical | 1,953.0 us |
+| low | 500 requests/s | Logic-only | 49.2 us |
+| base | 2,500 requests/s | Logic-only | 416.9 us |
+| high | 10,000 requests/s | Bank-only | 2,203.0 us |
 
 낮은 부하에서는 Logic-only의 짧은 단일 요청 service time이 유리하지만, 부하가 증가하면 full-tensor on-die 이동 queue 때문에 hierarchical이 역전한다. 이는 “Logic-PCU가 항상 최선”이 아니라 traffic과 동시성 조건에 따라 배치가 달라진다는 증거다.
 
@@ -61,18 +61,18 @@ RTL calibration 후 333회 projected 합계:
 
 | 구조 | projected normalization latency | 분류 |
 |---|---:|---|
-| Logic-only | 19.507 ms | mixed measured/assumed analytical |
-| Hierarchical | 61.087 ms | mixed measured/assumed analytical |
+| Logic-only | 16.397 ms | mixed measured/assumed analytical lower bound |
+| Hierarchical | 107.395 ms | mixed measured/assumed analytical |
 | Bank-only/GPU partial | 62.909 ms | mixed measured/assumed analytical |
 | GPU full | 36.773 ms | assumed GPU roofline |
 
-offload sweep 252점에서는 GPU full 179점, hierarchical 73점이 우승했고 Bank-only는 0점이다. 즉 현재 scalar Bank reducer 처리율과 직렬 partial 수신을 적용하면 Logic/Hierarchical의 이점이 줄어든다. system simulation과 analytical 합계의 순위가 다른 것은 queue/resource concurrency가 system simulation에만 들어가기 때문이다.
+offload sweep 252점에서는 GPU full 186점, Bank-only 42점, Hierarchical 24점이 우승했다. 현재 shared partial port에서는 Hierarchical의 이점이 크게 줄어든다. system simulation과 analytical 합계의 순위가 다른 것은 queue/resource concurrency가 system simulation에만 들어가기 때문이다.
 
 ## 제한 사항
 
 - GPU latency, bandwidth 효율 및 kernel launch는 가정이며 GPU 실측이 아니다.
 - 실제 GR00T activation 대신 deterministic synthetic FP16 profile을 사용한다. 공식 dtype BF16과 다르다.
-- Bank-only/Hierarchical area proxy는 15,307-cell scalar reducer를 16 bank에 선형 복제하고, Hierarchical/Logic-only에는 16-engine array 440,400 cells를 반영한다. Logic-only에는 raw tensor reducer와 apply datapath가 없어 여전히 하한이다.
+- Bank-only/Hierarchical area proxy는 15,307-cell scalar reducer를 16 bank에 선형 복제하고, Hierarchical/Logic-only에는 16-engine shared dispatcher 445,337 cells를 반영한다. Logic-only에는 raw tensor reducer와 apply datapath가 없어 여전히 하한이다.
 - generic cell 수는 technology-mapped area가 아니며 서로 다른 top의 단순 합이다.
 - power/energy는 근거가 없어 null을 유지한다.
 - trace는 profile별 invocation을 묶은 고정 순서이며 실제 GR00T runtime timestamp가 아니다.

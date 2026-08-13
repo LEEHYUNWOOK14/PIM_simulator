@@ -117,9 +117,9 @@ def simulate(case: str, scenario: str, rate: float, profiles, params: dict) -> t
     rtl = params["rtl_measurements"]
     bank_reducer_area = (rtl["bank_local_scalar_reducer_generic_cells_per_bank"]["value"] *
                          int(ref["banks"]))
-    logic_array = rtl["logic_normalization_engine_array"]
+    logic_array = rtl["logic_normalization_dispatcher"]
     logic_count = int(ref["logic_pcus"])
-    logic_array_area = dict(zip(logic_array["engines"], logic_array["generic_cells"]))[logic_count]
+    logic_array_area = dict(zip(logic_array["engines"], logic_array["generic_cells_with_dispatcher"]))[logic_count]
     area = {
         "gpu_full": None,
         "bank_only": bank_reducer_area,

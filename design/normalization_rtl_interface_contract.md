@@ -25,8 +25,11 @@ or offload policy.
 ## Numeric formats
 
 `DATA_FORMAT=0` means IEEE binary16 (FP16). `DATA_FORMAT=1` means BF16. The
-selection is compile-time in the bank local reducer and bank apply block, so a
-16-bit BF16 payload cannot silently enter FP16 arithmetic in those blocks.
+selection is compile-time in bank scalar/vector reducers, bank apply, logic
+scalar/reduction engines, and the hierarchical datapath. The full system exposes
+the equivalent `NORMALIZATION_DATA_FORMAT` parameter. A context cannot switch
+format at run time, so a 16-bit BF16 payload cannot silently select FP16
+arithmetic inside a configured build.
 
 Both arithmetic paths use round-to-nearest, ties-to-even and preserve signed
 zero, subnormal, infinity, and canonical quiet-NaN behaviour. The BF16 primitive
@@ -46,11 +49,19 @@ Approximate stages:
 - End-to-end normalization comparisons must use a tolerance because reduction,
   variance, reciprocal square root, and affine steps round independently.
 
+Accuracy gates are format-specific: scalar LUT256 maximum relative error must
+remain at or below 1% for both FP16 and BF16, while normalization output maximum
+absolute error must remain at or below 0.025 against the canonical FP32 model.
+Observed baseline maxima and candidate-specific limits are recorded in
+`reports/groot_normalization/04_phase4_rsqrt_accuracy_report.md`; bit-exact RTL
+stages are not evaluated with these looser tolerances.
+
 ## Explicit limits
 
-- BF16 currently covers arithmetic primitives, bank local reduction, and bank
-  apply. The logic scalar engine, RSQRT RTL, vector reducers, and hierarchical
-  top remain FP16-only. BF16 full-top support is therefore not claimed.
+- BF16 covers arithmetic primitives, local/vector reduction, scalar finalize,
+  LUT256 RSQRT, affine apply, reduction engine, hierarchical datapath, and the
+  normalization path selected in `full_pim_system_top`. The full system uses a
+  compile-time format rather than mixed FP16/BF16 contexts.
 - FP16 and BF16 operations are not fused FMA operations.
 - NaN payload propagation is not preserved; invalid/NaN operations return the
   canonical quiet NaN (`0x7e00` FP16, `0x7fc0` BF16).

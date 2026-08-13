@@ -1,0 +1,12 @@
+requirement,status,evidence,classification,remaining_gap
+GR00T model/revision/input conditions,PARTIAL,"experiment/gr00t_placement/README.md; assumptions.json; gr00t_normalization_reproduction.log",DERIVED_AND_MEASURED,"full end-to-end inference profiler absent"
+execution failures and reproducibility,PARTIAL,"gr00t_normalization_failure_glibc.log; gr00t_normalization_reproduction.log",MEASURED,"normalization random seed not independently recorded"
+normalization call/shape/vector distribution,PASS_LIMITED,"gr00t_normalization_profile_manifest.csv; workload_characteristics.csv/json",DERIVED_FROM_PINNED_SOURCE,"profiles are not dynamic activation trace"
+dtype and numerical reference,PASS,"foundation_regression_results.csv; fp_bf16_add_pipe2_tb.sv",MEASURED_RTL,"official BF16 activation tensors absent"
+queue/channel/burst behavior,PARTIAL,"gr00t_scheduler_replay_base_trace.csv; workload_characteristics.json",MEASURED_SYNTHETIC_REPLAY,"raw GR00T address/timestamp trace absent"
+latency/throughput/utilization/bandwidth DSE,PASS_AS_MODEL,"architecture_dse.csv; 03_phase3_cycle_traffic_break_even_report.md",MODELED_MIXED_EVIDENCE,"physical bandwidth and E2E latency uncalibrated"
+1/2/4/8/16 lane and reducer comparison,PASS,"normalization_synthesis_metrics.csv; bank_vector_reducer_tradeoff.csv",RTL_SYNTHESIS_MEASURED,"8/16 lane Sky130 mapped STA not available"
+timing critical path and pipeline candidate,PARTIAL,"normalization_sky130_metrics.csv; fp16_add_pipe2.sv; bf16_add_pipe2.sv; normalization_accumulator_pipe2.sv",STA_MEASURED_PLUS_RTL_CANDIDATE,"full reducer integration and post-change STA open"
+functional/reset/backpressure/full PIM regression,PASS,"foundation_regression_results.csv; rtl/run_full_pim_tests.sh output; structural_audit logs",MEASURED,"new timing candidate is not selected full-system path"
+power/energy,OPEN,"no representative VCD/SAIF",UNAVAILABLE,"activity-annotated power run required"
+final architecture selection,PROVISIONAL,"28_gr00t_workload_audit_and_provisional_architecture.md",PROVISIONAL_RECOMMENDATION,"actual GR00T activation/transaction coverage incomplete"

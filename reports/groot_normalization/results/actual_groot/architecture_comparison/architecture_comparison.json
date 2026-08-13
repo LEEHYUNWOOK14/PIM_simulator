@@ -1,0 +1,111 @@
+{
+  "scope": "captured pretrained GR00T action-head normalization only; synthetic boundary input; not full GR00T inference",
+  "parameters": {
+    "evidence_class": "MIXED_MEASURED_DERIVED_MODELED_ASSUMED",
+    "tensor_dtype": "BF16",
+    "bytes_per_element": 2,
+    "banks": 16,
+    "reducer_lanes_per_bank": 4,
+    "bank_pcu_vector_elements": 16,
+    "scalar_engines": 8,
+    "reference_clock_mhz": 40,
+    "reference_clock_status": "MODELED_SAFE_TARGET_FROM_EXISTING_SKY130_STA; NOT A NEW TIMING-CLOSED RESULT",
+    "reducer_pipeline_cycles": 3,
+    "scalar_pipeline_cycles": 5,
+    "layernorm_commands_per_bank_vector": 4,
+    "replay_cycles_per_bank_vector": 1,
+    "writeback_cycles_per_bank_vector": 1,
+    "mode_sync_cycles_per_call": 8,
+    "partial_bytes_per_bank_row": 4,
+    "scalar_return_bytes_per_bank_row": 4,
+    "ondie_one_way_latency_ns": 50,
+    "ondie_bandwidth_gbytes_per_s": 128,
+    "offload_one_way_latency_ns": 2500,
+    "offload_bandwidth_gbytes_per_s": 8,
+    "gpu_scalar_batch_latency_ns": 5000,
+    "logic_pcus": 16,
+    "logic_vector_lanes": 16,
+    "logic_commands_per_vector": 4,
+    "traffic_definition": "logical payload bytes; not measured DRAM/HBM transactions",
+    "energy_status": "UNAVAILABLE_NO_ACTIVITY_CALIBRATED_POWER_MODEL"
+  },
+  "gpu_measurement": {
+    "device": "NVIDIA GeForce RTX 4060",
+    "torch_version": "2.9.0+cu128",
+    "cuda_runtime": "12.8",
+    "timing_method": "CUDA events around repeated torch.nn.functional.layer_norm calls; median of repeats",
+    "total_projected_serial_latency_us": 3121.2077312469482
+  },
+  "comparison": [
+    {
+      "architecture": "GPU",
+      "latency_us": 3121.2077312469482,
+      "memory_array_bytes": 86212608,
+      "cross_domain_bytes": 0,
+      "traffic_total_bytes": 86212608,
+      "latency_evidence": "MEASURED_CUDA_EVENTS_PROJECTED_BY_CAPTURED_CALL_COUNT",
+      "accuracy": "PYTORCH_GOLDEN",
+      "implementation": "AVAILABLE",
+      "speedup_vs_gpu": 1.0,
+      "traffic_ratio_vs_gpu": 1.0,
+      "energy": "UNAVAILABLE_NO_ACTIVITY_CALIBRATED_POWER_MODEL"
+    },
+    {
+      "architecture": "Bank-only PIM",
+      "latency_us": 24085.355,
+      "memory_array_bytes": 129282048,
+      "cross_domain_bytes": 1687040,
+      "traffic_total_bytes": 130969088,
+      "latency_evidence": "MODELED_RTL_CYCLES_PLUS_ASSUMED_OFFLOAD",
+      "accuracy": "UNVERIFIED",
+      "implementation": "PARTIAL",
+      "speedup_vs_gpu": 0.12958944268195127,
+      "traffic_ratio_vs_gpu": 1.5191407734701634,
+      "energy": "UNAVAILABLE_NO_ACTIVITY_CALIBRATED_POWER_MODEL"
+    },
+    {
+      "architecture": "Logic-only PIM",
+      "latency_us": 11349.736,
+      "memory_array_bytes": 86212608,
+      "cross_domain_bytes": 86212608,
+      "traffic_total_bytes": 172425216,
+      "latency_evidence": "MODELED_VECTOR_THROUGHPUT_AND_ONDIE_LINK",
+      "accuracy": "UNVERIFIED",
+      "implementation": "MODEL_ONLY",
+      "speedup_vs_gpu": 0.2750026724187195,
+      "traffic_ratio_vs_gpu": 2.0,
+      "energy": "UNAVAILABLE_NO_ACTIVITY_CALIBRATED_POWER_MODEL"
+    },
+    {
+      "architecture": "Hierarchical PIM",
+      "latency_us": 21224.555,
+      "memory_array_bytes": 129282048,
+      "cross_domain_bytes": 1687040,
+      "traffic_total_bytes": 130969088,
+      "latency_evidence": "MODELED_FROM_RTL_STAGE_COUNTS_WITH_EXPLICIT_REPLAY_WRITEBACK",
+      "accuracy": "FAIL_1_OF_6_PROFILES_PASS",
+      "implementation": "REPLAY_WRITEBACK_NOT_PRODUCTION",
+      "speedup_vs_gpu": 0.14705645094782663,
+      "traffic_ratio_vs_gpu": 1.5191407734701634,
+      "energy": "UNAVAILABLE_NO_ACTIVITY_CALIBRATED_POWER_MODEL"
+    }
+  ],
+  "decision_gate": {
+    "decision": "NO-GO",
+    "mandatory_reasons": [
+      "Current hierarchical BF16 RTL failed the pre-existing accuracy criterion on 5 of 6 representative profiles.",
+      "At the 40 MHz modeled safe target, hierarchical latency is slower than measured RTX 4060 BF16 LayerNorm.",
+      "Production replay/write-back RTL is absent; its modeled cost is already included and does not reverse the result.",
+      "No comparable activity-calibrated energy or physical area result exists to justify expansion on another axis."
+    ],
+    "modeled_latency_break_even_clock_mhz": 275.0223534734994,
+    "break_even_clock_timing_status": "UNVERIFIED_AND_ABOVE_CURRENT_SKY130_TIMING_EVIDENCE",
+    "accuracy_requirement": "Must pass max_abs <= 0.025 on all representative profiles before production expansion.",
+    "reconsideration_conditions": [
+      "Widen accumulation/scalar/apply precision and pass the accuracy gate.",
+      "Timing-close the integrated datapath at or above the modeled latency break-even frequency.",
+      "Measure replay/writeback latency and energy with production RTL and representative activity.",
+      "Obtain full GR00T inference trace if gated backbone access and >=16 GB GPU become available."
+    ]
+  }
+}

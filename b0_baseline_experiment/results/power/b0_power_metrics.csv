@@ -1,0 +1,8 @@
+metric,value,unit,evidence
+workload_id,B0_TWO_FP16_VECTOR_ADD_ROUTE0_ROUTE1,string,MEASURED_GATE_VCD
+simulated_operations,2,vector_add,MEASURED_TESTBENCH
+simulation_duration,885,ns,MEASURED_GATE_VCD
+annotated_pin_activities,101486,pins,MEASURED_OPENROAD
+openroad_exit_code,0,count,MEASURED_TOOL_EXIT
+postroute_average_power,1.076294389e-02,W,MEASURED_OPENROAD_GATE_VCD
+energy_per_vector_add,4.762603,nJ,DERIVED_POWER_X_DURATION_DIV_OPS

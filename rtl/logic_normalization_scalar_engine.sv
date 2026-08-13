@@ -1,5 +1,6 @@
 module logic_normalization_scalar_engine #(
-    parameter int unsigned TAG_WIDTH = 16
+    parameter int unsigned TAG_WIDTH = 16,
+    parameter int unsigned DATA_FORMAT = 0 // 0=FP16, 1=BF16
 ) (
     input  logic                 clk_i,
     input  logic                 rst_ni,
@@ -29,25 +30,41 @@ module logic_normalization_scalar_engine #(
     logic rsqrt_input_valid, rsqrt_input_ready, rsqrt_output_valid, rsqrt_output_ready;
     logic [15:0] rsqrt_output_data;
 
-    fp16_mul u_mean_mul(.lhs_i(sum_i),.rhs_i(inv_hidden_i),.result_o(input_mean));
-    fp16_mul u_mean_square_mul(.lhs_i(sumsq_i),.rhs_i(inv_hidden_i),
-                               .result_o(input_mean_square));
-    fp16_mul u_square_mean(.lhs_i(mean_q),.rhs_i(mean_q),.result_o(mean_squared));
+    generate
+      if(DATA_FORMAT==0)begin:g_fp16_math
+        fp16_mul u_mean_mul(.lhs_i(sum_i),.rhs_i(inv_hidden_i),.result_o(input_mean));
+        fp16_mul u_mean_square_mul(.lhs_i(sumsq_i),.rhs_i(inv_hidden_i),.result_o(input_mean_square));
+        fp16_mul u_square_mean(.lhs_i(mean_q),.rhs_i(mean_q),.result_o(mean_squared));
+        fp16_add u_variance_sub(.lhs_i(mean_square_q),.rhs_i(negative_mean_squared),.result_o(variance_raw));
+        fp16_add u_epsilon_add(.lhs_i(variance_q),.rhs_i(epsilon_q),.result_o(epsilon_result));
+      end else begin:g_bf16_math
+        bf16_mul u_mean_mul(.lhs_i(sum_i),.rhs_i(inv_hidden_i),.result_o(input_mean));
+        bf16_mul u_mean_square_mul(.lhs_i(sumsq_i),.rhs_i(inv_hidden_i),.result_o(input_mean_square));
+        bf16_mul u_square_mean(.lhs_i(mean_q),.rhs_i(mean_q),.result_o(mean_squared));
+        bf16_add u_variance_sub(.lhs_i(mean_square_q),.rhs_i(negative_mean_squared),.result_o(variance_raw));
+        bf16_add u_epsilon_add(.lhs_i(variance_q),.rhs_i(epsilon_q),.result_o(epsilon_result));
+      end
+    endgenerate
     assign negative_mean_squared = {~mean_squared[15],mean_squared[14:0]};
-    fp16_add u_variance_sub(.lhs_i(mean_square_q),.rhs_i(negative_mean_squared),
-                            .result_o(variance_raw));
     assign variance_nonnegative = !mode_q && variance_raw[15] && |variance_raw[14:0] ?
                                   16'h0000 : variance_raw;
-    fp16_add u_epsilon_add(.lhs_i(variance_q),.rhs_i(epsilon_q),.result_o(epsilon_result));
 
     assign rsqrt_input_valid = state_q == RSQRT_SEND;
     assign rsqrt_output_ready = state_q == RSQRT_WAIT &&
                                 (!response_valid_o || response_ready_i);
-    fp16_rsqrt_lut256 u_rsqrt(
-        .clk_i,.rst_ni,.input_valid_i(rsqrt_input_valid),
-        .input_ready_o(rsqrt_input_ready),.input_data_i(argument_q),
-        .output_valid_o(rsqrt_output_valid),.output_ready_i(rsqrt_output_ready),
-        .output_data_o(rsqrt_output_data));
+    generate
+      if(DATA_FORMAT==0)begin:g_fp16_rsqrt
+        fp16_rsqrt_lut256 u_rsqrt(.clk_i,.rst_ni,.input_valid_i(rsqrt_input_valid),
+          .input_ready_o(rsqrt_input_ready),.input_data_i(argument_q),
+          .output_valid_o(rsqrt_output_valid),.output_ready_i(rsqrt_output_ready),
+          .output_data_o(rsqrt_output_data));
+      end else begin:g_bf16_rsqrt
+        bf16_rsqrt_lut256 u_rsqrt(.clk_i,.rst_ni,.input_valid_i(rsqrt_input_valid),
+          .input_ready_o(rsqrt_input_ready),.input_data_i(argument_q),
+          .output_valid_o(rsqrt_output_valid),.output_ready_i(rsqrt_output_ready),
+          .output_data_o(rsqrt_output_data));
+      end
+    endgenerate
 
     assign request_ready_o = state_q == IDLE &&
                              (!response_valid_o || response_ready_i);
@@ -104,4 +121,8 @@ module logic_normalization_scalar_engine #(
             endcase
         end
     end
+
+`ifndef SYNTHESIS
+    initial if(DATA_FORMAT>1)$fatal(1,"DATA_FORMAT must be 0 (FP16) or 1 (BF16)");
+`endif
 endmodule

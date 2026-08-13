@@ -1,0 +1,6 @@
+test,status,mismatches,protocol_errors,deadlocks,backpressure_checked,evidence
+exact_plan_contract_probe,EXPECTED_FAIL,0,0,0,0,logs/b1_contract_probe.log
+hierarchical_bank_logic_e2e,PASS,0,0,0,1,logs/b1_functional.log
+bank_logic_regression,PASS,0,0,0,1,logs/b1_functional.log
+result_router_formal,PASS,0,0,0,1,logs/b1_functional.log
+normalization_off_idle,PASS,0,0,0,0,logs/b1_functional.log

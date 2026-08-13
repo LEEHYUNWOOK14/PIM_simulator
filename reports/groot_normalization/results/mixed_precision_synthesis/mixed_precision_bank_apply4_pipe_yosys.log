@@ -1,0 +1,2986 @@
+
+-- Running command `read_verilog -sv -I. rtl/bf16_to_fp32.sv rtl/fp32_to_bf16_rne.sv rtl/fp32_add.sv rtl/fp32_mul.sv rtl/fp32_add_pipe4.sv rtl/fp32_mul_pipe4.sv rtl/bf16_rsqrt_lut256.sv rtl/mixed_precision_bank_reducer4.sv rtl/mixed_precision_bank_reducer4_interleaved.sv rtl/mixed_precision_global_reducer16.sv rtl/mixed_precision_global_reducer16_pipe.sv rtl/mixed_precision_scalar_nr2.sv rtl/mixed_precision_bank_apply4.sv rtl/mixed_precision_bank_apply4_pipe.sv rtl/mixed_precision_normalization_datapath.sv; hierarchy -check -top mixed_precision_bank_apply4_pipe; synth -top mixed_precision_bank_apply4_pipe; check -assert; stat; flatten; opt; ltp -noff' --
+
+1. Executing Verilog-2005 frontend: rtl/bf16_to_fp32.sv
+Parsing SystemVerilog input from `rtl/bf16_to_fp32.sv' to AST representation.
+Generating RTLIL representation for module `\bf16_to_fp32'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: rtl/fp32_to_bf16_rne.sv
+Parsing SystemVerilog input from `rtl/fp32_to_bf16_rne.sv' to AST representation.
+Generating RTLIL representation for module `\fp32_to_bf16_rne'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: rtl/fp32_add.sv
+Parsing SystemVerilog input from `rtl/fp32_add.sv' to AST representation.
+Generating RTLIL representation for module `\fp32_add'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: rtl/fp32_mul.sv
+Parsing SystemVerilog input from `rtl/fp32_mul.sv' to AST representation.
+Generating RTLIL representation for module `\fp32_mul'.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: rtl/fp32_add_pipe4.sv
+Parsing SystemVerilog input from `rtl/fp32_add_pipe4.sv' to AST representation.
+Generating RTLIL representation for module `\fp32_add_pipe4'.
+Successfully finished Verilog frontend.
+
+6. Executing Verilog-2005 frontend: rtl/fp32_mul_pipe4.sv
+Parsing SystemVerilog input from `rtl/fp32_mul_pipe4.sv' to AST representation.
+Generating RTLIL representation for module `\fp32_mul_pipe4'.
+Successfully finished Verilog frontend.
+
+7. Executing Verilog-2005 frontend: rtl/bf16_rsqrt_lut256.sv
+Parsing SystemVerilog input from `rtl/bf16_rsqrt_lut256.sv' to AST representation.
+Generating RTLIL representation for module `\bf16_rsqrt_lut256'.
+Successfully finished Verilog frontend.
+
+8. Executing Verilog-2005 frontend: rtl/mixed_precision_bank_reducer4.sv
+Parsing SystemVerilog input from `rtl/mixed_precision_bank_reducer4.sv' to AST representation.
+Generating RTLIL representation for module `\mixed_precision_bank_reducer4'.
+Successfully finished Verilog frontend.
+
+9. Executing Verilog-2005 frontend: rtl/mixed_precision_bank_reducer4_interleaved.sv
+Parsing SystemVerilog input from `rtl/mixed_precision_bank_reducer4_interleaved.sv' to AST representation.
+Generating RTLIL representation for module `\mixed_precision_bank_reducer4_interleaved'.
+Warning: Replacing memory \acc_slot_q with list of registers. See rtl/mixed_precision_bank_reducer4_interleaved.sv:47
+Warning: Replacing memory \slot_delay_q with list of registers. See rtl/mixed_precision_bank_reducer4_interleaved.sv:47
+Successfully finished Verilog frontend.
+
+10. Executing Verilog-2005 frontend: rtl/mixed_precision_global_reducer16.sv
+Parsing SystemVerilog input from `rtl/mixed_precision_global_reducer16.sv' to AST representation.
+Generating RTLIL representation for module `\mixed_precision_global_reducer16'.
+Successfully finished Verilog frontend.
+
+11. Executing Verilog-2005 frontend: rtl/mixed_precision_global_reducer16_pipe.sv
+Parsing SystemVerilog input from `rtl/mixed_precision_global_reducer16_pipe.sv' to AST representation.
+Generating RTLIL representation for module `\mixed_precision_global_reducer16_pipe'.
+Successfully finished Verilog frontend.
+
+12. Executing Verilog-2005 frontend: rtl/mixed_precision_scalar_nr2.sv
+Parsing SystemVerilog input from `rtl/mixed_precision_scalar_nr2.sv' to AST representation.
+Generating RTLIL representation for module `\mixed_precision_scalar_nr2'.
+Successfully finished Verilog frontend.
+
+13. Executing Verilog-2005 frontend: rtl/mixed_precision_bank_apply4.sv
+Parsing SystemVerilog input from `rtl/mixed_precision_bank_apply4.sv' to AST representation.
+Generating RTLIL representation for module `\mixed_precision_bank_apply4'.
+Successfully finished Verilog frontend.
+
+14. Executing Verilog-2005 frontend: rtl/mixed_precision_bank_apply4_pipe.sv
+Parsing SystemVerilog input from `rtl/mixed_precision_bank_apply4_pipe.sv' to AST representation.
+Generating RTLIL representation for module `\mixed_precision_bank_apply4_pipe'.
+Successfully finished Verilog frontend.
+
+15. Executing Verilog-2005 frontend: rtl/mixed_precision_normalization_datapath.sv
+Parsing SystemVerilog input from `rtl/mixed_precision_normalization_datapath.sv' to AST representation.
+Generating RTLIL representation for module `\mixed_precision_normalization_datapath'.
+Successfully finished Verilog frontend.
+
+16. Executing HIERARCHY pass (managing design hierarchy).
+
+16.1. Analyzing design hierarchy..
+Top module:  \mixed_precision_bank_apply4_pipe
+Used module:     \fp32_to_bf16_rne
+Used module:     \fp32_add_pipe4
+Used module:     \fp32_mul_pipe4
+Used module:     \bf16_to_fp32
+
+16.2. Analyzing design hierarchy..
+Top module:  \mixed_precision_bank_apply4_pipe
+Used module:     \fp32_to_bf16_rne
+Used module:     \fp32_add_pipe4
+Used module:     \fp32_mul_pipe4
+Used module:     \bf16_to_fp32
+Removing unused module `\mixed_precision_normalization_datapath'.
+Removing unused module `\mixed_precision_bank_apply4'.
+Removing unused module `\mixed_precision_scalar_nr2'.
+Removing unused module `\mixed_precision_global_reducer16_pipe'.
+Removing unused module `\mixed_precision_global_reducer16'.
+Removing unused module `\mixed_precision_bank_reducer4_interleaved'.
+Removing unused module `\mixed_precision_bank_reducer4'.
+Removing unused module `\bf16_rsqrt_lut256'.
+Removing unused module `\fp32_mul'.
+Removing unused module `\fp32_add'.
+Removed 10 unused modules.
+
+17. Executing SYNTH pass.
+
+17.1. Executing HIERARCHY pass (managing design hierarchy).
+
+17.1.1. Analyzing design hierarchy..
+Top module:  \mixed_precision_bank_apply4_pipe
+Used module:     \fp32_to_bf16_rne
+Used module:     \fp32_add_pipe4
+Used module:     \fp32_mul_pipe4
+Used module:     \bf16_to_fp32
+
+17.1.2. Analyzing design hierarchy..
+Top module:  \mixed_precision_bank_apply4_pipe
+Used module:     \fp32_to_bf16_rne
+Used module:     \fp32_add_pipe4
+Used module:     \fp32_mul_pipe4
+Used module:     \bf16_to_fp32
+Removed 0 unused modules.
+
+17.2. Executing PROC pass (convert processes to netlists).
+
+17.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+17.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$rtl/fp32_add_pipe4.sv:60$507 in module fp32_add_pipe4.
+Marked 7 switch rules as full_case in process $proc$rtl/fp32_add_pipe4.sv:49$494 in module fp32_add_pipe4.
+Marked 29 switch rules as full_case in process $proc$rtl/fp32_add_pipe4.sv:44$375 in module fp32_add_pipe4.
+Marked 2 switch rules as full_case in process $proc$rtl/fp32_add_pipe4.sv:37$369 in module fp32_add_pipe4.
+Marked 4 switch rules as full_case in process $proc$rtl/fp32_add_pipe4.sv:24$304 in module fp32_add_pipe4.
+Marked 2 switch rules as full_case in process $proc$rtl/mixed_precision_bank_apply4_pipe.sv:50$919 in module mixed_precision_bank_apply4_pipe.
+Marked 1 switch rules as full_case in process $proc$rtl/fp32_mul_pipe4.sv:75$573 in module fp32_mul_pipe4.
+Marked 6 switch rules as full_case in process $proc$rtl/fp32_mul_pipe4.sv:63$567 in module fp32_mul_pipe4.
+Marked 4 switch rules as full_case in process $proc$rtl/fp32_mul_pipe4.sv:46$543 in module fp32_mul_pipe4.
+Marked 48 switch rules as full_case in process $proc$rtl/fp32_mul_pipe4.sv:35$541 in module fp32_mul_pipe4.
+Marked 3 switch rules as full_case in process $proc$rtl/fp32_to_bf16_rne.sv:9$1 in module fp32_to_bf16_rne.
+Removed a total of 0 dead cases.
+
+17.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 1 redundant assignment.
+Promoted 72 assignments to connections.
+
+17.2.4. Executing PROC_INIT pass (extract init attributes).
+
+17.2.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_ni in `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+Found async reset \rst_ni in `\mixed_precision_bank_apply4_pipe.$proc$rtl/mixed_precision_bank_apply4_pipe.sv:50$919'.
+Found async reset \rst_ni in `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+
+17.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~109 debug messages>
+
+17.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+     1/26: $0\valid_q[2:0] [2]
+     2/26: $0\valid_q[2:0] [1]
+     3/26: $0\valid_q[2:0] [0]
+     4/26: $0\invalid2_q[0:0]
+     5/26: $0\inf2_q[0:0]
+     6/26: $0\nan2_q[0:0]
+     7/26: $0\sign2_q[0:0]
+     8/26: $0\exp2_q[8:0]
+     9/26: $0\mag2_q[26:0]
+    10/26: $0\zeros1_q[0:0]
+    11/26: $0\invalid1_q[0:0]
+    12/26: $0\inf1_q[0:0]
+    13/26: $0\nan1_q[0:0]
+    14/26: $0\sign1_q[0:0]
+    15/26: $0\exp1_q[8:0]
+    16/26: $0\mag1_q[26:0]
+    17/26: $0\zeros0_q[0:0]
+    18/26: $0\invalid0_q[0:0]
+    19/26: $0\inf0_q[0:0]
+    20/26: $0\nan0_q[0:0]
+    21/26: $0\ssign_q[0:0]
+    22/26: $0\lsign_q[0:0]
+    23/26: $0\small_q[26:0]
+    24/26: $0\large_q[26:0]
+    25/26: $0\le_q[7:0]
+    26/26: $0\zeros2_q[0:0]
+Creating decoders for process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:49$494'.
+     1/8: $6\result3_d[31:0]
+     2/8: $5\result3_d[31:0]
+     3/8: $4\result3_d[31:0]
+     4/8: $3\result3_d[31:0]
+     5/8: $2\result3_d[31:0]
+     6/8: $1\result3_d[31:0]
+     7/8: $1\packed_exp_d[8:0]
+     8/8: $1\rounded3_d[24:0]
+Creating decoders for process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:44$375'.
+     1/56: $2\norm_shift_d[31:0]
+     2/56: $1\norm_shift_d[31:0]
+     3/56: $27\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$487
+     4/56: $27\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$486
+     5/56: $26\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$483
+     6/56: $26\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$482
+     7/56: $25\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$479
+     8/56: $25\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$478
+     9/56: $24\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$475
+    10/56: $24\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$474
+    11/56: $23\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$471
+    12/56: $23\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$470
+    13/56: $22\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$467
+    14/56: $22\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$466
+    15/56: $21\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$463
+    16/56: $21\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$462
+    17/56: $20\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$459
+    18/56: $20\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$458
+    19/56: $19\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$455
+    20/56: $19\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$454
+    21/56: $18\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$451
+    22/56: $18\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$450
+    23/56: $17\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$447
+    24/56: $17\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$446
+    25/56: $16\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$443
+    26/56: $16\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$442
+    27/56: $15\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$439
+    28/56: $15\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$438
+    29/56: $14\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$435
+    30/56: $14\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$434
+    31/56: $13\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$431
+    32/56: $13\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$430
+    33/56: $12\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$427
+    34/56: $12\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$426
+    35/56: $11\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$423
+    36/56: $11\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$422
+    37/56: $10\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$419
+    38/56: $10\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$418
+    39/56: $9\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$415
+    40/56: $9\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$414
+    41/56: $8\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$411
+    42/56: $8\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$410
+    43/56: $7\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$407
+    44/56: $7\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$406
+    45/56: $6\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$403
+    46/56: $6\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$402
+    47/56: $5\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$399
+    48/56: $5\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$398
+    49/56: $4\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$395
+    50/56: $4\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$394
+    51/56: $3\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$391
+    52/56: $3\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$390
+    53/56: $2\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$387
+    54/56: $2\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$386
+    55/56: $1\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$383
+    56/56: $1\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$382
+Creating decoders for process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:37$369'.
+     1/6: $2\mag1_d[26:0] [26:1]
+     2/6: $2\exp1_d[8:0]
+     3/6: $2\mag1_d[26:0] [0]
+     4/6: $1\exp1_d[8:0]
+     5/6: $1\mag1_d[26:0]
+     6/6: $1\add1_d[27:0]
+Creating decoders for process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+     1/12: $2\lsign_d[0:0]
+     2/12: $2\shift_right_sticky$func$rtl/fp32_add_pipe4.sv:28$302.$result[26:0]$329 [26:1]
+     3/12: $2\shift_right_sticky$func$rtl/fp32_add_pipe4.sv:28$302.$result[26:0]$329 [0]
+     4/12: $2\shift_right_sticky$func$rtl/fp32_add_pipe4.sv:28$302.sticky[0:0]$330
+     5/12: $1\shift_right_sticky$func$rtl/fp32_add_pipe4.sv:28$302.$result[26:0]$326
+     6/12: $1\shift_right_sticky$func$rtl/fp32_add_pipe4.sv:28$302.sticky[0:0]$327
+     7/12: $1\ssign_d[0:0]
+     8/12: $1\lsign_d[0:0]
+     9/12: $1\ss_d[23:0]
+    10/12: $1\ls_d[23:0]
+    11/12: $1\se_d[7:0]
+    12/12: $1\le_d[7:0]
+Creating decoders for process `\mixed_precision_bank_apply4_pipe.$proc$rtl/mixed_precision_bank_apply4_pipe.sv:50$919'.
+     1/92: $2$fordecl_block$909.stage[31:0]$929
+     2/92: $0\meta_beta_q[1535:0] [1535:1408]
+     3/92: $0\meta_beta_q[1535:0] [1407:1280]
+     4/92: $0\meta_gamma_q[1535:0] [1407:1280]
+     5/92: $0\meta_inv_q[383:0] [351:320]
+     6/92: $0\meta_tag_q[191:0] [175:160]
+     7/92: $0\meta_mode_q[11:0] [10]
+     8/92: $0\meta_last_q[11:0] [10]
+     9/92: $0\meta_valid_q[11:0] [10]
+    10/92: $0\meta_beta_q[1535:0] [1279:1152]
+    11/92: $0\meta_gamma_q[1535:0] [1279:1152]
+    12/92: $0\meta_inv_q[383:0] [319:288]
+    13/92: $0\meta_tag_q[191:0] [159:144]
+    14/92: $0\meta_mode_q[11:0] [9]
+    15/92: $0\meta_last_q[11:0] [9]
+    16/92: $0\meta_valid_q[11:0] [9]
+    17/92: $0\meta_beta_q[1535:0] [1151:1024]
+    18/92: $0\meta_gamma_q[1535:0] [1151:1024]
+    19/92: $0\meta_inv_q[383:0] [287:256]
+    20/92: $0\meta_tag_q[191:0] [143:128]
+    21/92: $0\meta_mode_q[11:0] [8]
+    22/92: $0\meta_last_q[11:0] [8]
+    23/92: $0\meta_valid_q[11:0] [8]
+    24/92: $0\meta_beta_q[1535:0] [1023:896]
+    25/92: $0\meta_gamma_q[1535:0] [1023:896]
+    26/92: $0\meta_inv_q[383:0] [255:224]
+    27/92: $0\meta_tag_q[191:0] [127:112]
+    28/92: $0\meta_mode_q[11:0] [7]
+    29/92: $0\meta_last_q[11:0] [7]
+    30/92: $0\meta_valid_q[11:0] [7]
+    31/92: $0\meta_beta_q[1535:0] [895:768]
+    32/92: $0\meta_gamma_q[1535:0] [895:768]
+    33/92: $0\meta_inv_q[383:0] [223:192]
+    34/92: $0\meta_tag_q[191:0] [111:96]
+    35/92: $0\meta_mode_q[11:0] [6]
+    36/92: $0\meta_last_q[11:0] [6]
+    37/92: $0\meta_valid_q[11:0] [6]
+    38/92: $0\meta_beta_q[1535:0] [767:640]
+    39/92: $0\meta_gamma_q[1535:0] [767:640]
+    40/92: $0\meta_inv_q[383:0] [191:160]
+    41/92: $0\meta_tag_q[191:0] [95:80]
+    42/92: $0\meta_mode_q[11:0] [5]
+    43/92: $0\meta_last_q[11:0] [5]
+    44/92: $0\meta_valid_q[11:0] [5]
+    45/92: $0\meta_beta_q[1535:0] [639:512]
+    46/92: $0\meta_gamma_q[1535:0] [639:512]
+    47/92: $0\meta_inv_q[383:0] [159:128]
+    48/92: $0\meta_tag_q[191:0] [79:64]
+    49/92: $0\meta_mode_q[11:0] [4]
+    50/92: $0\meta_last_q[11:0] [4]
+    51/92: $0\meta_valid_q[11:0] [4]
+    52/92: $0\meta_beta_q[1535:0] [511:384]
+    53/92: $0\meta_gamma_q[1535:0] [511:384]
+    54/92: $0\meta_inv_q[383:0] [127:96]
+    55/92: $0\meta_tag_q[191:0] [63:48]
+    56/92: $0\meta_mode_q[11:0] [3]
+    57/92: $0\meta_last_q[11:0] [3]
+    58/92: $0\meta_valid_q[11:0] [3]
+    59/92: $0\meta_beta_q[1535:0] [383:256]
+    60/92: $0\meta_gamma_q[1535:0] [383:256]
+    61/92: $0\meta_inv_q[383:0] [95:64]
+    62/92: $0\meta_tag_q[191:0] [47:32]
+    63/92: $0\meta_mode_q[11:0] [2]
+    64/92: $0\meta_last_q[11:0] [2]
+    65/92: $0\meta_valid_q[11:0] [2]
+    66/92: $0\meta_beta_q[1535:0] [255:128]
+    67/92: $0\meta_gamma_q[1535:0] [255:128]
+    68/92: $0\meta_inv_q[383:0] [63:32]
+    69/92: $0\meta_tag_q[191:0] [31:16]
+    70/92: $0\meta_mode_q[11:0] [1]
+    71/92: $0\meta_last_q[11:0] [1]
+    72/92: $0\meta_valid_q[11:0] [1]
+    73/92: $0\meta_beta_q[1535:0] [127:0]
+    74/92: $0\meta_gamma_q[1535:0] [127:0]
+    75/92: $0\meta_inv_q[383:0] [31:0]
+    76/92: $0\meta_tag_q[191:0] [15:0]
+    77/92: $0\meta_mode_q[11:0] [0]
+    78/92: $0\meta_last_q[11:0] [0]
+    79/92: $0\meta_valid_q[11:0] [0]
+    80/92: $0\context_error_o[0:0]
+    81/92: $0\meta_last_q[11:0] [11]
+    82/92: $0\meta_valid_q[11:0] [11]
+    83/92: $0\meta_gamma_q[1535:0] [1535:1408]
+    84/92: $0\meta_inv_q[383:0] [383:352]
+    85/92: $0\meta_tag_q[191:0] [191:176]
+    86/92: $0\meta_mode_q[11:0] [11]
+    87/92: $1$fordecl_block$909.stage[31:0]$922
+    88/92: $0\inv_q[31:0]
+    89/92: $0\active_q[0:0]
+    90/92: $0\mean_q[31:0]
+    91/92: $0\mode_q[0:0]
+    92/92: $0\tag_q[15:0]
+Creating decoders for process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+     1/27: $0\valid_q[2:0] [2]
+     2/27: $0\valid_q[2:0] [1]
+     3/27: $0\valid_q[2:0] [0]
+     4/27: $0\exponent2_q[10:0]
+     5/27: $0\normal2_q[0:0]
+     6/27: $0\zero2_q[0:0]
+     7/27: $0\msb1_q[5:0]
+     8/27: $0\exponent1_q[10:0]
+     9/27: $0\base_exp1_q[10:0]
+    10/27: $0\product1_q[47:0]
+    11/27: $0\zero1_q[0:0]
+    12/27: $0\base_exp0_q[10:0]
+    13/27: $0\product0_q[47:0]
+    14/27: $0\zero0_q[0:0]
+    15/27: $0\sign0_q[0:0]
+    16/27: $0\invalid2_q[0:0]
+    17/27: $0\inf2_q[0:0]
+    18/27: $0\nan2_q[0:0]
+    19/27: $0\sign2_q[0:0]
+    20/27: $0\invalid1_q[0:0]
+    21/27: $0\inf1_q[0:0]
+    22/27: $0\nan1_q[0:0]
+    23/27: $0\sign1_q[0:0]
+    24/27: $0\invalid0_q[0:0]
+    25/27: $0\inf0_q[0:0]
+    26/27: $0\nan0_q[0:0]
+    27/27: $0\rounded2_q[127:0]
+Creating decoders for process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:63$567'.
+     1/6: $6\result3_d[31:0]
+     2/6: $5\result3_d[31:0]
+     3/6: $4\result3_d[31:0]
+     4/6: $3\result3_d[31:0]
+     5/6: $2\result3_d[31:0]
+     6/6: $1\result3_d[31:0]
+Creating decoders for process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:46$543'.
+     1/9: $1\exponent2_d[10:0]
+     2/9: $3\rounded2_d[127:0]
+     3/9: $2\rounded2_d[127:0]
+     4/9: $2\round_up2_d[0:0]
+     5/9: $2\low_mask2_d[127:0]
+     6/9: $1\rounded2_d[127:0]
+     7/9: $1\round_up2_d[0:0]
+     8/9: $1\low_mask2_d[127:0]
+     9/9: $1\shift2_d[31:0]
+Creating decoders for process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:35$541'.
+     1/48: $48\msb1_d[5:0]
+     2/48: $47\msb1_d[5:0]
+     3/48: $46\msb1_d[5:0]
+     4/48: $45\msb1_d[5:0]
+     5/48: $44\msb1_d[5:0]
+     6/48: $43\msb1_d[5:0]
+     7/48: $42\msb1_d[5:0]
+     8/48: $41\msb1_d[5:0]
+     9/48: $40\msb1_d[5:0]
+    10/48: $39\msb1_d[5:0]
+    11/48: $38\msb1_d[5:0]
+    12/48: $37\msb1_d[5:0]
+    13/48: $36\msb1_d[5:0]
+    14/48: $35\msb1_d[5:0]
+    15/48: $34\msb1_d[5:0]
+    16/48: $33\msb1_d[5:0]
+    17/48: $32\msb1_d[5:0]
+    18/48: $31\msb1_d[5:0]
+    19/48: $30\msb1_d[5:0]
+    20/48: $29\msb1_d[5:0]
+    21/48: $28\msb1_d[5:0]
+    22/48: $27\msb1_d[5:0]
+    23/48: $26\msb1_d[5:0]
+    24/48: $25\msb1_d[5:0]
+    25/48: $24\msb1_d[5:0]
+    26/48: $23\msb1_d[5:0]
+    27/48: $22\msb1_d[5:0]
+    28/48: $21\msb1_d[5:0]
+    29/48: $20\msb1_d[5:0]
+    30/48: $19\msb1_d[5:0]
+    31/48: $18\msb1_d[5:0]
+    32/48: $17\msb1_d[5:0]
+    33/48: $16\msb1_d[5:0]
+    34/48: $15\msb1_d[5:0]
+    35/48: $14\msb1_d[5:0]
+    36/48: $13\msb1_d[5:0]
+    37/48: $12\msb1_d[5:0]
+    38/48: $11\msb1_d[5:0]
+    39/48: $10\msb1_d[5:0]
+    40/48: $9\msb1_d[5:0]
+    41/48: $8\msb1_d[5:0]
+    42/48: $7\msb1_d[5:0]
+    43/48: $6\msb1_d[5:0]
+    44/48: $5\msb1_d[5:0]
+    45/48: $4\msb1_d[5:0]
+    46/48: $3\msb1_d[5:0]
+    47/48: $2\msb1_d[5:0]
+    48/48: $1\msb1_d[5:0]
+Creating decoders for process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:17$510'.
+Creating decoders for process `\fp32_to_bf16_rne.$proc$rtl/fp32_to_bf16_rne.sv:9$1'.
+     1/3: $3\bf16_o[15:0]
+     2/3: $2\bf16_o[15:0]
+     3/3: $1\bf16_o[15:0]
+
+17.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\fp32_add_pipe4.\round3_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:49$494'.
+No latch inferred for signal `\fp32_add_pipe4.\rounded3_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:49$494'.
+No latch inferred for signal `\fp32_add_pipe4.\packed_exp_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:49$494'.
+No latch inferred for signal `\fp32_add_pipe4.\result3_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:49$494'.
+No latch inferred for signal `\fp32_add_pipe4.\lz2_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:44$375'.
+No latch inferred for signal `\fp32_add_pipe4.\norm_shift_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:44$375'.
+No latch inferred for signal `\fp32_add_pipe4.\mag2_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:44$375'.
+No latch inferred for signal `\fp32_add_pipe4.\exp2_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:44$375'.
+No latch inferred for signal `\fp32_add_pipe4.\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:44$375'.
+No latch inferred for signal `\fp32_add_pipe4.\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.value' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:44$375'.
+No latch inferred for signal `\fp32_add_pipe4.\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.i' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:44$375'.
+No latch inferred for signal `\fp32_add_pipe4.\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:44$375'.
+No latch inferred for signal `\fp32_add_pipe4.\add1_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:37$369'.
+No latch inferred for signal `\fp32_add_pipe4.\mag1_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:37$369'.
+No latch inferred for signal `\fp32_add_pipe4.\exp1_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:37$369'.
+No latch inferred for signal `\fp32_add_pipe4.\sign1_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:37$369'.
+No latch inferred for signal `\fp32_add_pipe4.\le_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\se_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\ls_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\ss_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\large_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\small_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\lsign_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\ssign_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\nan_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\inf_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\invalid_inf_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\zeros_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\shift_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\lexp' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\rexp' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\lfrac' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\rfrac' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\lsig' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\rsig' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\shift_right_sticky$func$rtl/fp32_add_pipe4.sv:28$302.$result' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\shift_right_sticky$func$rtl/fp32_add_pipe4.sv:28$302.value' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\shift_right_sticky$func$rtl/fp32_add_pipe4.sv:28$302.amount' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\shift_right_sticky$func$rtl/fp32_add_pipe4.sv:28$302.sticky' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_mul_pipe4.\result3_d' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:63$567'.
+No latch inferred for signal `\fp32_mul_pipe4.\packed_exp3_d' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:63$567'.
+No latch inferred for signal `\fp32_mul_pipe4.\normal2_d' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:46$543'.
+No latch inferred for signal `\fp32_mul_pipe4.\exponent2_d' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:46$543'.
+No latch inferred for signal `\fp32_mul_pipe4.\magnitude2_d' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:46$543'.
+No latch inferred for signal `\fp32_mul_pipe4.\rounded2_d' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:46$543'.
+No latch inferred for signal `\fp32_mul_pipe4.\low_mask2_d' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:46$543'.
+No latch inferred for signal `\fp32_mul_pipe4.\round_up2_d' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:46$543'.
+No latch inferred for signal `\fp32_mul_pipe4.\shift2_d' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:46$543'.
+No latch inferred for signal `\fp32_mul_pipe4.\exponent1_d' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:35$541'.
+No latch inferred for signal `\fp32_mul_pipe4.\msb1_d' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:35$541'.
+No latch inferred for signal `\fp32_mul_pipe4.\scan_i' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:35$541'.
+No latch inferred for signal `\fp32_mul_pipe4.\sign0_d' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:17$510'.
+No latch inferred for signal `\fp32_mul_pipe4.\nan0_d' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:17$510'.
+No latch inferred for signal `\fp32_mul_pipe4.\inf0_d' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:17$510'.
+No latch inferred for signal `\fp32_mul_pipe4.\zero0_d' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:17$510'.
+No latch inferred for signal `\fp32_mul_pipe4.\invalid0_d' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:17$510'.
+No latch inferred for signal `\fp32_mul_pipe4.\lhs_exp_d' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:17$510'.
+No latch inferred for signal `\fp32_mul_pipe4.\rhs_exp_d' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:17$510'.
+No latch inferred for signal `\fp32_mul_pipe4.\lhs_frac_d' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:17$510'.
+No latch inferred for signal `\fp32_mul_pipe4.\rhs_frac_d' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:17$510'.
+No latch inferred for signal `\fp32_mul_pipe4.\lhs_sig_d' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:17$510'.
+No latch inferred for signal `\fp32_mul_pipe4.\rhs_sig_d' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:17$510'.
+No latch inferred for signal `\fp32_mul_pipe4.\product0_d' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:17$510'.
+No latch inferred for signal `\fp32_mul_pipe4.\lhs_unbiased_d' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:17$510'.
+No latch inferred for signal `\fp32_mul_pipe4.\rhs_unbiased_d' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:17$510'.
+No latch inferred for signal `\fp32_mul_pipe4.\base_exp0_d' from process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:17$510'.
+No latch inferred for signal `\fp32_to_bf16_rne.\bf16_o' from process `\fp32_to_bf16_rne.$proc$rtl/fp32_to_bf16_rne.sv:9$1'.
+No latch inferred for signal `\fp32_to_bf16_rne.\upper' from process `\fp32_to_bf16_rne.$proc$rtl/fp32_to_bf16_rne.sv:9$1'.
+No latch inferred for signal `\fp32_to_bf16_rne.\lower' from process `\fp32_to_bf16_rne.$proc$rtl/fp32_to_bf16_rne.sv:9$1'.
+No latch inferred for signal `\fp32_to_bf16_rne.\round_up' from process `\fp32_to_bf16_rne.$proc$rtl/fp32_to_bf16_rne.sv:9$1'.
+No latch inferred for signal `\fp32_to_bf16_rne.\rounded' from process `\fp32_to_bf16_rne.$proc$rtl/fp32_to_bf16_rne.sv:9$1'.
+
+17.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\fp32_add_pipe4.\valid_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1938' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\le_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1943' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\large_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1948' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\small_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1953' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\lsign_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1958' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\ssign_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1963' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\nan0_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1968' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\inf0_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1973' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\invalid0_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1978' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\zeros0_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1983' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\mag1_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1988' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\exp1_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1993' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\sign1_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1998' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\nan1_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$2003' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\inf1_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$2008' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\invalid1_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$2013' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\zeros1_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$2018' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\mag2_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$2023' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\exp2_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$2028' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\sign2_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$2033' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\nan2_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$2038' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\inf2_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$2043' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\invalid2_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$2048' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\zeros2_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$2053' with positive edge clock and positive level reset.
+Creating register for signal `\mixed_precision_bank_apply4_pipe.\tag_q' using process `\mixed_precision_bank_apply4_pipe.$proc$rtl/mixed_precision_bank_apply4_pipe.sv:50$919'.
+  created $adff cell `$procdff$2058' with positive edge clock and positive level reset.
+Creating register for signal `\mixed_precision_bank_apply4_pipe.\mode_q' using process `\mixed_precision_bank_apply4_pipe.$proc$rtl/mixed_precision_bank_apply4_pipe.sv:50$919'.
+  created $adff cell `$procdff$2063' with positive edge clock and positive level reset.
+Creating register for signal `\mixed_precision_bank_apply4_pipe.\mean_q' using process `\mixed_precision_bank_apply4_pipe.$proc$rtl/mixed_precision_bank_apply4_pipe.sv:50$919'.
+  created $adff cell `$procdff$2068' with positive edge clock and positive level reset.
+Creating register for signal `\mixed_precision_bank_apply4_pipe.\context_error_o' using process `\mixed_precision_bank_apply4_pipe.$proc$rtl/mixed_precision_bank_apply4_pipe.sv:50$919'.
+  created $adff cell `$procdff$2073' with positive edge clock and positive level reset.
+Creating register for signal `\mixed_precision_bank_apply4_pipe.\active_q' using process `\mixed_precision_bank_apply4_pipe.$proc$rtl/mixed_precision_bank_apply4_pipe.sv:50$919'.
+  created $adff cell `$procdff$2078' with positive edge clock and positive level reset.
+Creating register for signal `\mixed_precision_bank_apply4_pipe.\inv_q' using process `\mixed_precision_bank_apply4_pipe.$proc$rtl/mixed_precision_bank_apply4_pipe.sv:50$919'.
+  created $adff cell `$procdff$2083' with positive edge clock and positive level reset.
+Creating register for signal `\mixed_precision_bank_apply4_pipe.\meta_valid_q' using process `\mixed_precision_bank_apply4_pipe.$proc$rtl/mixed_precision_bank_apply4_pipe.sv:50$919'.
+  created $adff cell `$procdff$2088' with positive edge clock and positive level reset.
+Creating register for signal `\mixed_precision_bank_apply4_pipe.\meta_last_q' using process `\mixed_precision_bank_apply4_pipe.$proc$rtl/mixed_precision_bank_apply4_pipe.sv:50$919'.
+  created $adff cell `$procdff$2093' with positive edge clock and positive level reset.
+Creating register for signal `\mixed_precision_bank_apply4_pipe.\meta_mode_q' using process `\mixed_precision_bank_apply4_pipe.$proc$rtl/mixed_precision_bank_apply4_pipe.sv:50$919'.
+  created $adff cell `$procdff$2098' with positive edge clock and positive level reset.
+Creating register for signal `\mixed_precision_bank_apply4_pipe.\meta_tag_q' using process `\mixed_precision_bank_apply4_pipe.$proc$rtl/mixed_precision_bank_apply4_pipe.sv:50$919'.
+  created $adff cell `$procdff$2103' with positive edge clock and positive level reset.
+Creating register for signal `\mixed_precision_bank_apply4_pipe.\meta_inv_q' using process `\mixed_precision_bank_apply4_pipe.$proc$rtl/mixed_precision_bank_apply4_pipe.sv:50$919'.
+  created $adff cell `$procdff$2108' with positive edge clock and positive level reset.
+Creating register for signal `\mixed_precision_bank_apply4_pipe.\meta_gamma_q' using process `\mixed_precision_bank_apply4_pipe.$proc$rtl/mixed_precision_bank_apply4_pipe.sv:50$919'.
+  created $adff cell `$procdff$2113' with positive edge clock and positive level reset.
+Creating register for signal `\mixed_precision_bank_apply4_pipe.\meta_beta_q' using process `\mixed_precision_bank_apply4_pipe.$proc$rtl/mixed_precision_bank_apply4_pipe.sv:50$919'.
+  created $adff cell `$procdff$2118' with positive edge clock and positive level reset.
+Creating register for signal `\mixed_precision_bank_apply4_pipe.$fordecl_block$909.stage' using process `\mixed_precision_bank_apply4_pipe.$proc$rtl/mixed_precision_bank_apply4_pipe.sv:50$919'.
+  created $dff cell `$procdff$2125' with positive edge clock.
+Creating register for signal `\fp32_mul_pipe4.\valid_q' using process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+  created $adff cell `$procdff$2130' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_mul_pipe4.\nan0_q' using process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+  created $adff cell `$procdff$2135' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_mul_pipe4.\inf0_q' using process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+  created $adff cell `$procdff$2140' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_mul_pipe4.\invalid0_q' using process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+  created $adff cell `$procdff$2145' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_mul_pipe4.\sign1_q' using process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+  created $adff cell `$procdff$2150' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_mul_pipe4.\nan1_q' using process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+  created $adff cell `$procdff$2155' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_mul_pipe4.\inf1_q' using process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+  created $adff cell `$procdff$2160' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_mul_pipe4.\invalid1_q' using process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+  created $adff cell `$procdff$2165' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_mul_pipe4.\sign2_q' using process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+  created $adff cell `$procdff$2170' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_mul_pipe4.\nan2_q' using process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+  created $adff cell `$procdff$2175' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_mul_pipe4.\inf2_q' using process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+  created $adff cell `$procdff$2180' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_mul_pipe4.\invalid2_q' using process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+  created $adff cell `$procdff$2185' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_mul_pipe4.\sign0_q' using process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+  created $adff cell `$procdff$2190' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_mul_pipe4.\zero0_q' using process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+  created $adff cell `$procdff$2195' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_mul_pipe4.\product0_q' using process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+  created $adff cell `$procdff$2200' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_mul_pipe4.\base_exp0_q' using process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+  created $adff cell `$procdff$2205' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_mul_pipe4.\zero1_q' using process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+  created $adff cell `$procdff$2210' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_mul_pipe4.\product1_q' using process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+  created $adff cell `$procdff$2215' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_mul_pipe4.\base_exp1_q' using process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+  created $adff cell `$procdff$2220' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_mul_pipe4.\exponent1_q' using process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+  created $adff cell `$procdff$2225' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_mul_pipe4.\msb1_q' using process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+  created $adff cell `$procdff$2230' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_mul_pipe4.\zero2_q' using process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+  created $adff cell `$procdff$2235' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_mul_pipe4.\normal2_q' using process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+  created $adff cell `$procdff$2240' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_mul_pipe4.\exponent2_q' using process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+  created $adff cell `$procdff$2245' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_mul_pipe4.\rounded2_q' using process `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+  created $adff cell `$procdff$2250' with positive edge clock and positive level reset.
+
+17.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+17.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 1 empty switch in `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+Removing empty process `fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+Found and cleaned up 7 empty switches in `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:49$494'.
+Removing empty process `fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:49$494'.
+Found and cleaned up 29 empty switches in `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:44$375'.
+Removing empty process `fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:44$375'.
+Found and cleaned up 2 empty switches in `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:37$369'.
+Removing empty process `fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:37$369'.
+Found and cleaned up 4 empty switches in `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+Removing empty process `fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+Found and cleaned up 4 empty switches in `\mixed_precision_bank_apply4_pipe.$proc$rtl/mixed_precision_bank_apply4_pipe.sv:50$919'.
+Removing empty process `mixed_precision_bank_apply4_pipe.$proc$rtl/mixed_precision_bank_apply4_pipe.sv:50$919'.
+Found and cleaned up 1 empty switch in `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+Removing empty process `fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:75$573'.
+Found and cleaned up 6 empty switches in `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:63$567'.
+Removing empty process `fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:63$567'.
+Found and cleaned up 4 empty switches in `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:46$543'.
+Removing empty process `fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:46$543'.
+Found and cleaned up 48 empty switches in `\fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:35$541'.
+Removing empty process `fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:35$541'.
+Removing empty process `fp32_mul_pipe4.$proc$rtl/fp32_mul_pipe4.sv:17$510'.
+Found and cleaned up 3 empty switches in `\fp32_to_bf16_rne.$proc$rtl/fp32_to_bf16_rne.sv:9$1'.
+Removing empty process `fp32_to_bf16_rne.$proc$rtl/fp32_to_bf16_rne.sv:9$1'.
+Cleaned up 109 empty switches.
+
+17.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp32_add_pipe4.
+<suppressed ~70 debug messages>
+Optimizing module mixed_precision_bank_apply4_pipe.
+<suppressed ~28 debug messages>
+Optimizing module fp32_mul_pipe4.
+<suppressed ~61 debug messages>
+Optimizing module fp32_to_bf16_rne.
+Optimizing module bf16_to_fp32.
+
+17.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp32_add_pipe4.
+Optimizing module mixed_precision_bank_apply4_pipe.
+Optimizing module fp32_mul_pipe4.
+Optimizing module fp32_to_bf16_rne.
+Optimizing module bf16_to_fp32.
+
+17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp32_add_pipe4..
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+Finding unused cells or wires in module \fp32_mul_pipe4..
+Finding unused cells or wires in module \fp32_to_bf16_rne..
+Finding unused cells or wires in module \bf16_to_fp32..
+Removed 93 unused cells and 900 unused wires.
+<suppressed ~101 debug messages>
+
+17.5. Executing CHECK pass (checking for obvious problems).
+Checking module bf16_to_fp32...
+Checking module fp32_add_pipe4...
+Checking module fp32_mul_pipe4...
+Checking module fp32_to_bf16_rne...
+Checking module mixed_precision_bank_apply4_pipe...
+Found and reported 0 problems.
+
+17.6. Executing OPT pass (performing simple optimizations).
+
+17.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module bf16_to_fp32.
+Optimizing module fp32_add_pipe4.
+Optimizing module fp32_mul_pipe4.
+Optimizing module fp32_to_bf16_rne.
+Optimizing module mixed_precision_bank_apply4_pipe.
+
+17.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\bf16_to_fp32'.
+Finding identical cells in module `\fp32_add_pipe4'.
+<suppressed ~48 debug messages>
+Finding identical cells in module `\fp32_mul_pipe4'.
+<suppressed ~15 debug messages>
+Finding identical cells in module `\fp32_to_bf16_rne'.
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+<suppressed ~15 debug messages>
+Removed a total of 26 cells.
+
+17.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \bf16_to_fp32..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp32_add_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+      Replacing known input bits on port B of cell $procmux$1281: $add$rtl/fp32_add_pipe4.sv:39$371_Y [27:2] -> { 1'1 $add$rtl/fp32_add_pipe4.sv:39$371_Y [26:2] }
+      Replacing known input bits on port A of cell $procmux$1109: $add$rtl/fp32_add_pipe4.sv:50$498_Y -> { 1'0 $add$rtl/fp32_add_pipe4.sv:50$498_Y [23:0] }
+      Replacing known input bits on port B of cell $procmux$1109: { 1'0 $add$rtl/fp32_add_pipe4.sv:50$498_Y [24:1] } -> { 2'01 $add$rtl/fp32_add_pipe4.sv:50$498_Y [23:1] }
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$1046.
+    dead port 1/2 on $mux $procmux$1049.
+    dead port 1/2 on $mux $procmux$1052.
+    dead port 1/2 on $mux $procmux$1055.
+    dead port 1/2 on $mux $procmux$1058.
+    dead port 1/2 on $mux $procmux$1064.
+    dead port 1/2 on $mux $procmux$1067.
+    dead port 1/2 on $mux $procmux$1070.
+    dead port 1/2 on $mux $procmux$1073.
+    dead port 1/2 on $mux $procmux$1079.
+    dead port 1/2 on $mux $procmux$1082.
+    dead port 1/2 on $mux $procmux$1085.
+    dead port 1/2 on $mux $procmux$1091.
+    dead port 1/2 on $mux $procmux$1094.
+    dead port 1/2 on $mux $procmux$1100.
+    dead port 2/2 on $mux $procmux$1283.
+    dead port 2/2 on $mux $procmux$1289.
+    dead port 2/2 on $mux $procmux$1295.
+    dead port 1/2 on $mux $procmux$1313.
+    dead port 1/2 on $mux $procmux$1319.
+Running muxtree optimizer on module \fp32_mul_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$1681.
+    dead port 1/2 on $mux $procmux$1684.
+    dead port 1/2 on $mux $procmux$1687.
+    dead port 1/2 on $mux $procmux$1690.
+    dead port 1/2 on $mux $procmux$1693.
+    dead port 1/2 on $mux $procmux$1699.
+    dead port 1/2 on $mux $procmux$1702.
+    dead port 1/2 on $mux $procmux$1705.
+    dead port 1/2 on $mux $procmux$1708.
+    dead port 1/2 on $mux $procmux$1714.
+    dead port 1/2 on $mux $procmux$1717.
+    dead port 1/2 on $mux $procmux$1720.
+    dead port 1/2 on $mux $procmux$1726.
+    dead port 1/2 on $mux $procmux$1729.
+    dead port 1/2 on $mux $procmux$1735.
+    dead port 1/2 on $mux $procmux$1750.
+Running muxtree optimizer on module \fp32_to_bf16_rne..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$1923.
+    dead port 2/2 on $mux $procmux$1929.
+Running muxtree optimizer on module \mixed_precision_bank_apply4_pipe..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 38 multiplexer ports.
+<suppressed ~180 debug messages>
+
+17.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \bf16_to_fp32.
+  Optimizing cells in module \fp32_add_pipe4.
+    New input vector for $reduce_or cell $reduce_or$rtl/fp32_add_pipe4.sv:12$331: \ss_d
+  Optimizing cells in module \fp32_add_pipe4.
+  Optimizing cells in module \fp32_mul_pipe4.
+  Optimizing cells in module \fp32_to_bf16_rne.
+  Optimizing cells in module \mixed_precision_bank_apply4_pipe.
+Performed a total of 1 changes.
+
+17.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\bf16_to_fp32'.
+Finding identical cells in module `\fp32_add_pipe4'.
+<suppressed ~12 debug messages>
+Finding identical cells in module `\fp32_mul_pipe4'.
+Finding identical cells in module `\fp32_to_bf16_rne'.
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+Removed a total of 4 cells.
+
+17.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+17.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \bf16_to_fp32..
+Finding unused cells or wires in module \fp32_add_pipe4..
+Finding unused cells or wires in module \fp32_mul_pipe4..
+Finding unused cells or wires in module \fp32_to_bf16_rne..
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+Removed 0 unused cells and 68 unused wires.
+<suppressed ~4 debug messages>
+
+17.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module bf16_to_fp32.
+Optimizing module fp32_add_pipe4.
+Optimizing module fp32_mul_pipe4.
+Optimizing module fp32_to_bf16_rne.
+Optimizing module mixed_precision_bank_apply4_pipe.
+
+17.6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+17.6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \bf16_to_fp32..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp32_add_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp32_mul_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp32_to_bf16_rne..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \mixed_precision_bank_apply4_pipe..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~180 debug messages>
+
+17.6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \bf16_to_fp32.
+  Optimizing cells in module \fp32_add_pipe4.
+  Optimizing cells in module \fp32_mul_pipe4.
+  Optimizing cells in module \fp32_to_bf16_rne.
+  Optimizing cells in module \mixed_precision_bank_apply4_pipe.
+Performed a total of 0 changes.
+
+17.6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\bf16_to_fp32'.
+Finding identical cells in module `\fp32_add_pipe4'.
+Finding identical cells in module `\fp32_mul_pipe4'.
+Finding identical cells in module `\fp32_to_bf16_rne'.
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+Removed a total of 0 cells.
+
+17.6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+17.6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \bf16_to_fp32..
+Finding unused cells or wires in module \fp32_add_pipe4..
+Finding unused cells or wires in module \fp32_mul_pipe4..
+Finding unused cells or wires in module \fp32_to_bf16_rne..
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+
+17.6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module bf16_to_fp32.
+Optimizing module fp32_add_pipe4.
+Optimizing module fp32_mul_pipe4.
+Optimizing module fp32_to_bf16_rne.
+Optimizing module mixed_precision_bank_apply4_pipe.
+
+17.6.16. Finished OPT passes. (There is nothing left to do.)
+
+17.7. Executing FSM pass (extract and optimize FSM).
+
+17.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+Not marking fp32_mul_pipe4.msb1_q as FSM state register:
+    Users of register don't seem to benefit from recoding.
+
+17.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+17.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+17.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \bf16_to_fp32..
+Finding unused cells or wires in module \fp32_add_pipe4..
+Finding unused cells or wires in module \fp32_mul_pipe4..
+Finding unused cells or wires in module \fp32_to_bf16_rne..
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+
+17.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+17.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+17.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+17.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+17.8. Executing OPT pass (performing simple optimizations).
+
+17.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module bf16_to_fp32.
+Optimizing module fp32_add_pipe4.
+Optimizing module fp32_mul_pipe4.
+Optimizing module fp32_to_bf16_rne.
+Optimizing module mixed_precision_bank_apply4_pipe.
+
+17.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\bf16_to_fp32'.
+Finding identical cells in module `\fp32_add_pipe4'.
+Finding identical cells in module `\fp32_mul_pipe4'.
+Finding identical cells in module `\fp32_to_bf16_rne'.
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+Removed a total of 0 cells.
+
+17.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \bf16_to_fp32..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp32_add_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp32_mul_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp32_to_bf16_rne..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \mixed_precision_bank_apply4_pipe..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~180 debug messages>
+
+17.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \bf16_to_fp32.
+  Optimizing cells in module \fp32_add_pipe4.
+  Optimizing cells in module \fp32_mul_pipe4.
+  Optimizing cells in module \fp32_to_bf16_rne.
+  Optimizing cells in module \mixed_precision_bank_apply4_pipe.
+Performed a total of 0 changes.
+
+17.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\bf16_to_fp32'.
+Finding identical cells in module `\fp32_add_pipe4'.
+Finding identical cells in module `\fp32_mul_pipe4'.
+Finding identical cells in module `\fp32_to_bf16_rne'.
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+Removed a total of 0 cells.
+
+17.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$2053 ($adff) from module fp32_add_pipe4 (D = \zeros1_q, Q = \zeros2_q).
+Adding EN signal on $procdff$2048 ($adff) from module fp32_add_pipe4 (D = \invalid1_q, Q = \invalid2_q).
+Adding EN signal on $procdff$2043 ($adff) from module fp32_add_pipe4 (D = \inf1_q, Q = \inf2_q).
+Adding EN signal on $procdff$2038 ($adff) from module fp32_add_pipe4 (D = \nan1_q, Q = \nan2_q).
+Adding EN signal on $procdff$2033 ($adff) from module fp32_add_pipe4 (D = \sign1_q, Q = \sign2_q).
+Adding EN signal on $procdff$2028 ($adff) from module fp32_add_pipe4 (D = \exp2_d, Q = \exp2_q).
+Adding EN signal on $procdff$2023 ($adff) from module fp32_add_pipe4 (D = \mag2_d, Q = \mag2_q).
+Adding EN signal on $procdff$2018 ($adff) from module fp32_add_pipe4 (D = \zeros0_q, Q = \zeros1_q).
+Adding EN signal on $procdff$2013 ($adff) from module fp32_add_pipe4 (D = \invalid0_q, Q = \invalid1_q).
+Adding EN signal on $procdff$2008 ($adff) from module fp32_add_pipe4 (D = \inf0_q, Q = \inf1_q).
+Adding EN signal on $procdff$2003 ($adff) from module fp32_add_pipe4 (D = \nan0_q, Q = \nan1_q).
+Adding EN signal on $procdff$1998 ($adff) from module fp32_add_pipe4 (D = \lsign_q, Q = \sign1_q).
+Adding EN signal on $procdff$1993 ($adff) from module fp32_add_pipe4 (D = \exp1_d, Q = \exp1_q).
+Adding EN signal on $procdff$1988 ($adff) from module fp32_add_pipe4 (D = \mag1_d, Q = \mag1_q).
+Adding EN signal on $procdff$1983 ($adff) from module fp32_add_pipe4 (D = \zeros_d, Q = \zeros0_q).
+Adding EN signal on $procdff$1978 ($adff) from module fp32_add_pipe4 (D = \invalid_inf_d, Q = \invalid0_q).
+Adding EN signal on $procdff$1973 ($adff) from module fp32_add_pipe4 (D = \inf_d, Q = \inf0_q).
+Adding EN signal on $procdff$1968 ($adff) from module fp32_add_pipe4 (D = \nan_d, Q = \nan0_q).
+Adding EN signal on $procdff$1963 ($adff) from module fp32_add_pipe4 (D = \ssign_d, Q = \ssign_q).
+Adding EN signal on $procdff$1958 ($adff) from module fp32_add_pipe4 (D = \lsign_d, Q = \lsign_q).
+Adding EN signal on $procdff$1953 ($adff) from module fp32_add_pipe4 (D = \small_d, Q = \small_q).
+Adding EN signal on $procdff$1948 ($adff) from module fp32_add_pipe4 (D = { \ls_d 3'000 }, Q = \large_q).
+Adding EN signal on $procdff$1943 ($adff) from module fp32_add_pipe4 (D = \le_d, Q = \le_q).
+Adding EN signal on $procdff$1938 ($adff) from module fp32_add_pipe4 (D = { \valid_q [1:0] \valid_i }, Q = \valid_q).
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$2272 ($adffe) from module fp32_add_pipe4.
+Setting constant 0-bit at position 1 on $auto$ff.cc:266:slice$2272 ($adffe) from module fp32_add_pipe4.
+Setting constant 0-bit at position 2 on $auto$ff.cc:266:slice$2272 ($adffe) from module fp32_add_pipe4.
+Adding EN signal on $procdff$2250 ($adff) from module fp32_mul_pipe4 (D = \rounded2_d, Q = \rounded2_q).
+Adding EN signal on $procdff$2245 ($adff) from module fp32_mul_pipe4 (D = \exponent2_d, Q = \exponent2_q).
+Adding EN signal on $procdff$2240 ($adff) from module fp32_mul_pipe4 (D = \normal2_d, Q = \normal2_q).
+Adding EN signal on $procdff$2235 ($adff) from module fp32_mul_pipe4 (D = \zero1_q, Q = \zero2_q).
+Adding EN signal on $procdff$2230 ($adff) from module fp32_mul_pipe4 (D = \msb1_d, Q = \msb1_q).
+Adding EN signal on $procdff$2225 ($adff) from module fp32_mul_pipe4 (D = \exponent1_d, Q = \exponent1_q).
+Adding EN signal on $procdff$2220 ($adff) from module fp32_mul_pipe4 (D = \base_exp0_q, Q = \base_exp1_q).
+Adding EN signal on $procdff$2215 ($adff) from module fp32_mul_pipe4 (D = \product0_q, Q = \product1_q).
+Adding EN signal on $procdff$2210 ($adff) from module fp32_mul_pipe4 (D = \zero0_q, Q = \zero1_q).
+Adding EN signal on $procdff$2205 ($adff) from module fp32_mul_pipe4 (D = \base_exp0_d, Q = \base_exp0_q).
+Adding EN signal on $procdff$2200 ($adff) from module fp32_mul_pipe4 (D = \product0_d, Q = \product0_q).
+Adding EN signal on $procdff$2195 ($adff) from module fp32_mul_pipe4 (D = \zero0_d, Q = \zero0_q).
+Adding EN signal on $procdff$2190 ($adff) from module fp32_mul_pipe4 (D = \sign0_d, Q = \sign0_q).
+Adding EN signal on $procdff$2185 ($adff) from module fp32_mul_pipe4 (D = \invalid1_q, Q = \invalid2_q).
+Adding EN signal on $procdff$2180 ($adff) from module fp32_mul_pipe4 (D = \inf1_q, Q = \inf2_q).
+Adding EN signal on $procdff$2175 ($adff) from module fp32_mul_pipe4 (D = \nan1_q, Q = \nan2_q).
+Adding EN signal on $procdff$2170 ($adff) from module fp32_mul_pipe4 (D = \sign1_q, Q = \sign2_q).
+Adding EN signal on $procdff$2165 ($adff) from module fp32_mul_pipe4 (D = \invalid0_q, Q = \invalid1_q).
+Adding EN signal on $procdff$2160 ($adff) from module fp32_mul_pipe4 (D = \inf0_q, Q = \inf1_q).
+Adding EN signal on $procdff$2155 ($adff) from module fp32_mul_pipe4 (D = \nan0_q, Q = \nan1_q).
+Adding EN signal on $procdff$2150 ($adff) from module fp32_mul_pipe4 (D = \sign0_q, Q = \sign1_q).
+Adding EN signal on $procdff$2145 ($adff) from module fp32_mul_pipe4 (D = \invalid0_d, Q = \invalid0_q).
+Adding EN signal on $procdff$2140 ($adff) from module fp32_mul_pipe4 (D = \inf0_d, Q = \inf0_q).
+Adding EN signal on $procdff$2135 ($adff) from module fp32_mul_pipe4 (D = \nan0_d, Q = \nan0_q).
+Adding EN signal on $procdff$2130 ($adff) from module fp32_mul_pipe4 (D = { \valid_q [1:0] \valid_i }, Q = \valid_q).
+Adding EN signal on $procdff$2118 ($adff) from module mixed_precision_bank_apply4_pipe (D = { \meta_beta_q [1407:0] \beta32 }, Q = \meta_beta_q).
+Adding EN signal on $procdff$2113 ($adff) from module mixed_precision_bank_apply4_pipe (D = { \meta_gamma_q [1407:0] \gamma32 }, Q = \meta_gamma_q).
+Adding EN signal on $procdff$2108 ($adff) from module mixed_precision_bank_apply4_pipe (D = { \meta_inv_q [351:0] \inv_q }, Q = \meta_inv_q).
+Adding EN signal on $procdff$2103 ($adff) from module mixed_precision_bank_apply4_pipe (D = { \meta_tag_q [175:0] \vector_tag_i }, Q = \meta_tag_q).
+Adding EN signal on $procdff$2098 ($adff) from module mixed_precision_bank_apply4_pipe (D = { \meta_mode_q [10:0] \mode_q }, Q = \meta_mode_q).
+Adding EN signal on $procdff$2093 ($adff) from module mixed_precision_bank_apply4_pipe (D = { \meta_last_q [10:0] $logic_and$rtl/mixed_precision_bank_apply4_pipe.sv:59$930_Y }, Q = \meta_last_q).
+Adding EN signal on $procdff$2083 ($adff) from module mixed_precision_bank_apply4_pipe (D = \config_inv_std_i, Q = \inv_q).
+Adding EN signal on $procdff$2068 ($adff) from module mixed_precision_bank_apply4_pipe (D = $ternary$rtl/mixed_precision_bank_apply4_pipe.sv:56$924_Y, Q = \mean_q).
+Adding EN signal on $procdff$2063 ($adff) from module mixed_precision_bank_apply4_pipe (D = \config_rms_norm_i, Q = \mode_q).
+Adding EN signal on $procdff$2058 ($adff) from module mixed_precision_bank_apply4_pipe (D = \config_tag_i, Q = \tag_q).
+
+17.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \bf16_to_fp32..
+Finding unused cells or wires in module \fp32_add_pipe4..
+Finding unused cells or wires in module \fp32_mul_pipe4..
+Finding unused cells or wires in module \fp32_to_bf16_rne..
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+Removed 129 unused cells and 59 unused wires.
+<suppressed ~132 debug messages>
+
+17.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module bf16_to_fp32.
+Optimizing module fp32_add_pipe4.
+Optimizing module fp32_mul_pipe4.
+Optimizing module fp32_to_bf16_rne.
+Optimizing module mixed_precision_bank_apply4_pipe.
+
+17.8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+17.8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \bf16_to_fp32..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp32_add_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp32_mul_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp32_to_bf16_rne..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \mixed_precision_bank_apply4_pipe..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~60 debug messages>
+
+17.8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \bf16_to_fp32.
+  Optimizing cells in module \fp32_add_pipe4.
+  Optimizing cells in module \fp32_mul_pipe4.
+  Optimizing cells in module \fp32_to_bf16_rne.
+  Optimizing cells in module \mixed_precision_bank_apply4_pipe.
+Performed a total of 0 changes.
+
+17.8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\bf16_to_fp32'.
+Finding identical cells in module `\fp32_add_pipe4'.
+Finding identical cells in module `\fp32_mul_pipe4'.
+Finding identical cells in module `\fp32_to_bf16_rne'.
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+Removed a total of 0 cells.
+
+17.8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+17.8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \bf16_to_fp32..
+Finding unused cells or wires in module \fp32_add_pipe4..
+Finding unused cells or wires in module \fp32_mul_pipe4..
+Finding unused cells or wires in module \fp32_to_bf16_rne..
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+
+17.8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module bf16_to_fp32.
+Optimizing module fp32_add_pipe4.
+Optimizing module fp32_mul_pipe4.
+Optimizing module fp32_to_bf16_rne.
+Optimizing module mixed_precision_bank_apply4_pipe.
+
+17.8.16. Finished OPT passes. (There is nothing left to do.)
+
+17.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 1 bits (of 25) from mux cell fp32_add_pipe4.$procmux$1109 ($mux).
+Removed top 1 bits (of 32) from mux cell fp32_add_pipe4.$procmux$1043 ($mux).
+Removed top 23 bits (of 32) from port Y of cell fp32_add_pipe4.$sub$rtl/fp32_add_pipe4.sv:28$324 ($sub).
+Removed top 23 bits (of 32) from port A of cell fp32_add_pipe4.$le$rtl/fp32_add_pipe4.sv:11$325 ($le).
+Removed top 31 bits (of 32) from port B of cell fp32_add_pipe4.$le$rtl/fp32_add_pipe4.sv:11$325 ($le).
+Removed top 23 bits (of 32) from port A of cell fp32_add_pipe4.$ge$rtl/fp32_add_pipe4.sv:12$328 ($ge).
+Removed top 26 bits (of 32) from port B of cell fp32_add_pipe4.$ge$rtl/fp32_add_pipe4.sv:12$328 ($ge).
+Removed top 26 bits (of 27) from port A of cell fp32_add_pipe4.$shl$rtl/fp32_add_pipe4.sv:13$332 ($shl).
+Removed top 1 bits (of 28) from port A of cell fp32_add_pipe4.$add$rtl/fp32_add_pipe4.sv:39$371 ($add).
+Removed top 1 bits (of 28) from port B of cell fp32_add_pipe4.$add$rtl/fp32_add_pipe4.sv:39$371 ($add).
+Removed top 1 bits (of 9) from port A of cell fp32_add_pipe4.$add$rtl/fp32_add_pipe4.sv:39$373 ($add).
+Removed top 31 bits (of 32) from port B of cell fp32_add_pipe4.$sub$rtl/fp32_add_pipe4.sv:45$488 ($sub).
+Removed top 22 bits (of 32) from port Y of cell fp32_add_pipe4.$sub$rtl/fp32_add_pipe4.sv:45$488 ($sub).
+Removed top 27 bits (of 32) from port A of cell fp32_add_pipe4.$gt$rtl/fp32_add_pipe4.sv:45$489 ($gt).
+Removed top 31 bits (of 32) from port B of cell fp32_add_pipe4.$lt$rtl/fp32_add_pipe4.sv:45$491 ($lt).
+Removed top 23 bits (of 32) from port Y of cell fp32_add_pipe4.$sub$rtl/fp32_add_pipe4.sv:46$493 ($sub).
+Removed top 23 bits (of 32) from port B of cell fp32_add_pipe4.$sub$rtl/fp32_add_pipe4.sv:46$493 ($sub).
+Removed top 1 bits (of 25) from port A of cell fp32_add_pipe4.$add$rtl/fp32_add_pipe4.sv:50$498 ($add).
+Removed top 24 bits (of 32) from port B of cell fp32_add_pipe4.$ge$rtl/fp32_add_pipe4.sv:57$503 ($ge).
+Removed top 31 bits (of 32) from port B of cell fp32_add_pipe4.$le$rtl/fp32_add_pipe4.sv:58$504 ($le).
+Removed top 1 bits (of 32) from mux cell fp32_add_pipe4.$procmux$1061 ($mux).
+Removed top 1 bits (of 25) from wire fp32_add_pipe4.rounded3_d.
+Removed top 8 bits (of 32) from mux cell fp32_mul_pipe4.$procmux$1678 ($mux).
+Removed top 25 bits (of 32) from port B of cell fp32_mul_pipe4.$sub$rtl/fp32_mul_pipe4.sv:21$516 ($sub).
+Removed top 23 bits (of 32) from port Y of cell fp32_mul_pipe4.$sub$rtl/fp32_mul_pipe4.sv:21$516 ($sub).
+Removed top 25 bits (of 32) from port B of cell fp32_mul_pipe4.$sub$rtl/fp32_mul_pipe4.sv:22$519 ($sub).
+Removed top 23 bits (of 32) from port Y of cell fp32_mul_pipe4.$sub$rtl/fp32_mul_pipe4.sv:22$519 ($sub).
+Removed top 25 bits (of 32) from port B of cell fp32_mul_pipe4.$sub$rtl/fp32_mul_pipe4.sv:23$522 ($sub).
+Removed top 21 bits (of 32) from port Y of cell fp32_mul_pipe4.$sub$rtl/fp32_mul_pipe4.sv:23$522 ($sub).
+Removed top 21 bits (of 32) from port A of cell fp32_mul_pipe4.$sub$rtl/fp32_mul_pipe4.sv:23$522 ($sub).
+Removed top 4 bits (of 11) from port B of cell fp32_mul_pipe4.$add$rtl/fp32_mul_pipe4.sv:38$542 ($add).
+Removed top 21 bits (of 32) from port A of cell fp32_mul_pipe4.$ge$rtl/fp32_mul_pipe4.sv:48$544 ($ge).
+Removed top 24 bits (of 32) from port B of cell fp32_mul_pipe4.$ge$rtl/fp32_mul_pipe4.sv:48$544 ($ge).
+Removed top 25 bits (of 32) from port A of cell fp32_mul_pipe4.$sub$rtl/fp32_mul_pipe4.sv:49$545 ($sub).
+Removed top 26 bits (of 32) from port B of cell fp32_mul_pipe4.$sub$rtl/fp32_mul_pipe4.sv:49$545 ($sub).
+Converting cell fp32_mul_pipe4.$sub$rtl/fp32_mul_pipe4.sv:49$545 ($sub) from signed to unsigned.
+Removed top 24 bits (of 32) from port Y of cell fp32_mul_pipe4.$sub$rtl/fp32_mul_pipe4.sv:49$545 ($sub).
+Removed top 1 bits (of 7) from port A of cell fp32_mul_pipe4.$sub$rtl/fp32_mul_pipe4.sv:49$545 ($sub).
+Removed top 1 bits (of 6) from port B of cell fp32_mul_pipe4.$sub$rtl/fp32_mul_pipe4.sv:49$545 ($sub).
+Removed top 1 bits (of 8) from port Y of cell fp32_mul_pipe4.$sub$rtl/fp32_mul_pipe4.sv:49$545 ($sub).
+Converting cell fp32_mul_pipe4.$add$rtl/fp32_mul_pipe4.sv:50$546 ($add) from unsigned to signed.
+Removed top 21 bits (of 32) from port A of cell fp32_mul_pipe4.$add$rtl/fp32_mul_pipe4.sv:50$546 ($add).
+Removed top 23 bits (of 32) from port B of cell fp32_mul_pipe4.$add$rtl/fp32_mul_pipe4.sv:50$546 ($add).
+Removed top 20 bits (of 32) from port Y of cell fp32_mul_pipe4.$add$rtl/fp32_mul_pipe4.sv:50$546 ($add).
+Removed top 20 bits (of 32) from port A of cell fp32_mul_pipe4.$neg$rtl/fp32_mul_pipe4.sv:50$547 ($neg).
+Removed top 23 bits (of 32) from port B of cell fp32_mul_pipe4.$ge$rtl/fp32_mul_pipe4.sv:51$548 ($ge).
+Removed top 31 bits (of 32) from port B of cell fp32_mul_pipe4.$gt$rtl/fp32_mul_pipe4.sv:52$549 ($gt).
+Removed top 80 bits (of 128) from port A of cell fp32_mul_pipe4.$shr$rtl/fp32_mul_pipe4.sv:53$550 ($shr).
+Removed top 30 bits (of 32) from port B of cell fp32_mul_pipe4.$sub$rtl/fp32_mul_pipe4.sv:54$551 ($sub).
+Removed top 127 bits (of 128) from port A of cell fp32_mul_pipe4.$shl$rtl/fp32_mul_pipe4.sv:54$552 ($shl).
+Removed top 80 bits (of 128) from port A of cell fp32_mul_pipe4.$and$rtl/fp32_mul_pipe4.sv:55$556 ($and).
+Removed top 80 bits (of 128) from port A of cell fp32_mul_pipe4.$shl$rtl/fp32_mul_pipe4.sv:57$562 ($shl).
+Removed top 103 bits (of 128) from port B of cell fp32_mul_pipe4.$ge$rtl/fp32_mul_pipe4.sv:58$563 ($ge).
+Converting cell fp32_mul_pipe4.$add$rtl/fp32_mul_pipe4.sv:64$568 ($add) from unsigned to signed.
+Removed top 21 bits (of 32) from port A of cell fp32_mul_pipe4.$add$rtl/fp32_mul_pipe4.sv:64$568 ($add).
+Removed top 24 bits (of 32) from port B of cell fp32_mul_pipe4.$add$rtl/fp32_mul_pipe4.sv:64$568 ($add).
+Removed top 24 bits (of 32) from port Y of cell fp32_mul_pipe4.$add$rtl/fp32_mul_pipe4.sv:64$568 ($add).
+Removed top 3 bits (of 11) from port A of cell fp32_mul_pipe4.$add$rtl/fp32_mul_pipe4.sv:64$568 ($add).
+Removed top 21 bits (of 32) from port A of cell fp32_mul_pipe4.$ge$rtl/fp32_mul_pipe4.sv:68$570 ($ge).
+Removed top 23 bits (of 32) from port B of cell fp32_mul_pipe4.$ge$rtl/fp32_mul_pipe4.sv:68$570 ($ge).
+Removed top 104 bits (of 128) from port B of cell fp32_mul_pipe4.$ge$rtl/fp32_mul_pipe4.sv:70$572 ($ge).
+Removed top 5 bits (of 6) from mux cell fp32_mul_pipe4.$procmux$1915 ($mux).
+Removed top 4 bits (of 6) from mux cell fp32_mul_pipe4.$procmux$1912 ($mux).
+Removed top 4 bits (of 6) from mux cell fp32_mul_pipe4.$procmux$1909 ($mux).
+Removed top 3 bits (of 6) from mux cell fp32_mul_pipe4.$procmux$1906 ($mux).
+Removed top 3 bits (of 6) from mux cell fp32_mul_pipe4.$procmux$1903 ($mux).
+Removed top 3 bits (of 6) from mux cell fp32_mul_pipe4.$procmux$1900 ($mux).
+Removed top 3 bits (of 6) from mux cell fp32_mul_pipe4.$procmux$1897 ($mux).
+Removed top 1 bits (of 32) from mux cell fp32_mul_pipe4.$procmux$1696 ($mux).
+Removed top 21 bits (of 32) from port Y of cell fp32_mul_pipe4.$add$rtl/fp32_mul_pipe4.sv:23$521 ($add).
+Removed top 21 bits (of 32) from port A of cell fp32_mul_pipe4.$add$rtl/fp32_mul_pipe4.sv:23$521 ($add).
+Removed top 21 bits (of 32) from port B of cell fp32_mul_pipe4.$add$rtl/fp32_mul_pipe4.sv:23$521 ($add).
+Removed top 1 bits (of 32) from mux cell fp32_mul_pipe4.$procmux$1711 ($mux).
+Removed top 21 bits (of 32) from mux cell fp32_mul_pipe4.$ternary$rtl/fp32_mul_pipe4.sv:21$517 ($mux).
+Removed top 21 bits (of 32) from mux cell fp32_mul_pipe4.$ternary$rtl/fp32_mul_pipe4.sv:22$520 ($mux).
+Removed top 1 bits (of 32) from mux cell fp32_mul_pipe4.$procmux$1723 ($mux).
+Removed top 1 bits (of 32) from mux cell fp32_mul_pipe4.$procmux$1732 ($mux).
+Removed top 5 bits (of 6) from wire fp32_mul_pipe4.$2\msb1_d[5:0].
+Removed top 4 bits (of 6) from wire fp32_mul_pipe4.$3\msb1_d[5:0].
+Removed top 4 bits (of 6) from wire fp32_mul_pipe4.$4\msb1_d[5:0].
+Removed top 3 bits (of 6) from wire fp32_mul_pipe4.$6\msb1_d[5:0].
+Removed top 3 bits (of 6) from wire fp32_mul_pipe4.$7\msb1_d[5:0].
+Removed top 21 bits (of 32) from wire fp32_mul_pipe4.$add$rtl/fp32_mul_pipe4.sv:23$521_Y.
+Removed top 21 bits (of 32) from wire fp32_mul_pipe4.lhs_unbiased_d.
+Removed top 21 bits (of 32) from wire fp32_mul_pipe4.rhs_unbiased_d.
+Removed top 1 bits (of 17) from port A of cell fp32_to_bf16_rne.$add$rtl/fp32_to_bf16_rne.sv:14$6 ($add).
+Removed top 128 bits (of 1536) from FF cell mixed_precision_bank_apply4_pipe.$auto$ff.cc:266:slice$2301 ($adffe).
+Removed top 128 bits (of 1536) from FF cell mixed_precision_bank_apply4_pipe.$auto$ff.cc:266:slice$2302 ($adffe).
+Removed top 32 bits (of 384) from FF cell mixed_precision_bank_apply4_pipe.$auto$ff.cc:266:slice$2303 ($adffe).
+Removed top 1 bits (of 12) from FF cell mixed_precision_bank_apply4_pipe.$auto$ff.cc:266:slice$2305 ($adffe).
+Removed top 128 bits (of 1408) from FF cell mixed_precision_bank_apply4_pipe.$auto$ff.cc:266:slice$2301 ($adffe).
+Removed top 128 bits (of 1408) from FF cell mixed_precision_bank_apply4_pipe.$auto$ff.cc:266:slice$2302 ($adffe).
+Removed top 32 bits (of 352) from FF cell mixed_precision_bank_apply4_pipe.$auto$ff.cc:266:slice$2303 ($adffe).
+Removed top 1 bits (of 11) from FF cell mixed_precision_bank_apply4_pipe.$auto$ff.cc:266:slice$2305 ($adffe).
+Removed top 128 bits (of 1280) from FF cell mixed_precision_bank_apply4_pipe.$auto$ff.cc:266:slice$2301 ($adffe).
+Removed top 128 bits (of 1280) from FF cell mixed_precision_bank_apply4_pipe.$auto$ff.cc:266:slice$2302 ($adffe).
+Removed top 32 bits (of 320) from FF cell mixed_precision_bank_apply4_pipe.$auto$ff.cc:266:slice$2303 ($adffe).
+Removed top 1 bits (of 10) from FF cell mixed_precision_bank_apply4_pipe.$auto$ff.cc:266:slice$2305 ($adffe).
+Removed top 128 bits (of 1152) from FF cell mixed_precision_bank_apply4_pipe.$auto$ff.cc:266:slice$2302 ($adffe).
+Removed top 32 bits (of 288) from FF cell mixed_precision_bank_apply4_pipe.$auto$ff.cc:266:slice$2303 ($adffe).
+Removed top 128 bits (of 1024) from FF cell mixed_precision_bank_apply4_pipe.$auto$ff.cc:266:slice$2302 ($adffe).
+Removed top 32 bits (of 256) from FF cell mixed_precision_bank_apply4_pipe.$auto$ff.cc:266:slice$2303 ($adffe).
+Removed top 128 bits (of 896) from FF cell mixed_precision_bank_apply4_pipe.$auto$ff.cc:266:slice$2302 ($adffe).
+Removed top 32 bits (of 224) from FF cell mixed_precision_bank_apply4_pipe.$auto$ff.cc:266:slice$2303 ($adffe).
+Removed top 32 bits (of 192) from FF cell mixed_precision_bank_apply4_pipe.$auto$ff.cc:266:slice$2303 ($adffe).
+Removed top 32 bits (of 160) from FF cell mixed_precision_bank_apply4_pipe.$auto$ff.cc:266:slice$2303 ($adffe).
+Removed top 32 bits (of 128) from FF cell mixed_precision_bank_apply4_pipe.$auto$ff.cc:266:slice$2303 ($adffe).
+Removed top 384 bits (of 1536) from wire mixed_precision_bank_apply4_pipe.meta_beta_q.
+Removed top 858 bits (of 1536) from wire mixed_precision_bank_apply4_pipe.meta_gamma_q.
+
+17.10. Executing PEEPOPT pass (run peephole optimizers).
+
+17.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \bf16_to_fp32..
+Finding unused cells or wires in module \fp32_add_pipe4..
+Finding unused cells or wires in module \fp32_mul_pipe4..
+Finding unused cells or wires in module \fp32_to_bf16_rne..
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+Removed 0 unused cells and 13 unused wires.
+<suppressed ~3 debug messages>
+
+17.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module bf16_to_fp32:
+  created 0 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module fp32_add_pipe4:
+  creating $macc model for $add$rtl/fp32_add_pipe4.sv:39$371 ($add).
+  creating $macc model for $add$rtl/fp32_add_pipe4.sv:39$373 ($add).
+  creating $macc model for $add$rtl/fp32_add_pipe4.sv:50$498 ($add).
+  creating $macc model for $add$rtl/fp32_add_pipe4.sv:51$500 ($add).
+  creating $macc model for $sub$rtl/fp32_add_pipe4.sv:13$333 ($sub).
+  creating $macc model for $sub$rtl/fp32_add_pipe4.sv:28$324 ($sub).
+  creating $macc model for $sub$rtl/fp32_add_pipe4.sv:40$374 ($sub).
+  creating $macc model for $sub$rtl/fp32_add_pipe4.sv:45$488 ($sub).
+  creating $macc model for $sub$rtl/fp32_add_pipe4.sv:46$493 ($sub).
+  creating $alu model for $macc $sub$rtl/fp32_add_pipe4.sv:46$493.
+  creating $alu model for $macc $sub$rtl/fp32_add_pipe4.sv:45$488.
+  creating $alu model for $macc $sub$rtl/fp32_add_pipe4.sv:40$374.
+  creating $alu model for $macc $sub$rtl/fp32_add_pipe4.sv:28$324.
+  creating $alu model for $macc $sub$rtl/fp32_add_pipe4.sv:13$333.
+  creating $alu model for $macc $add$rtl/fp32_add_pipe4.sv:51$500.
+  creating $alu model for $macc $add$rtl/fp32_add_pipe4.sv:50$498.
+  creating $alu model for $macc $add$rtl/fp32_add_pipe4.sv:39$373.
+  creating $alu model for $macc $add$rtl/fp32_add_pipe4.sv:39$371.
+  creating $alu model for $ge$rtl/fp32_add_pipe4.sv:12$328 ($ge): new $alu
+  creating $alu model for $ge$rtl/fp32_add_pipe4.sv:57$503 ($ge): new $alu
+  creating $alu model for $gt$rtl/fp32_add_pipe4.sv:27$319 ($gt): new $alu
+  creating $alu model for $gt$rtl/fp32_add_pipe4.sv:45$489 ($gt): new $alu
+  creating $alu model for $le$rtl/fp32_add_pipe4.sv:11$325 ($le): new $alu
+  creating $alu model for $le$rtl/fp32_add_pipe4.sv:58$504 ($le): new $alu
+  creating $alu model for $lt$rtl/fp32_add_pipe4.sv:45$491 ($lt): new $alu
+  creating $alu cell for $lt$rtl/fp32_add_pipe4.sv:45$491: $auto$alumacc.cc:495:replace_alu$2329
+  creating $alu cell for $le$rtl/fp32_add_pipe4.sv:58$504: $auto$alumacc.cc:495:replace_alu$2336
+  creating $alu cell for $le$rtl/fp32_add_pipe4.sv:11$325: $auto$alumacc.cc:495:replace_alu$2345
+  creating $alu cell for $gt$rtl/fp32_add_pipe4.sv:45$489: $auto$alumacc.cc:495:replace_alu$2356
+  creating $alu cell for $gt$rtl/fp32_add_pipe4.sv:27$319: $auto$alumacc.cc:495:replace_alu$2367
+  creating $alu cell for $ge$rtl/fp32_add_pipe4.sv:57$503: $auto$alumacc.cc:495:replace_alu$2378
+  creating $alu cell for $ge$rtl/fp32_add_pipe4.sv:12$328: $auto$alumacc.cc:495:replace_alu$2391
+  creating $alu cell for $add$rtl/fp32_add_pipe4.sv:39$371: $auto$alumacc.cc:495:replace_alu$2406
+  creating $alu cell for $add$rtl/fp32_add_pipe4.sv:39$373: $auto$alumacc.cc:495:replace_alu$2409
+  creating $alu cell for $add$rtl/fp32_add_pipe4.sv:50$498: $auto$alumacc.cc:495:replace_alu$2412
+  creating $alu cell for $add$rtl/fp32_add_pipe4.sv:51$500: $auto$alumacc.cc:495:replace_alu$2415
+  creating $alu cell for $sub$rtl/fp32_add_pipe4.sv:13$333: $auto$alumacc.cc:495:replace_alu$2418
+  creating $alu cell for $sub$rtl/fp32_add_pipe4.sv:28$324: $auto$alumacc.cc:495:replace_alu$2421
+  creating $alu cell for $sub$rtl/fp32_add_pipe4.sv:40$374: $auto$alumacc.cc:495:replace_alu$2424
+  creating $alu cell for $sub$rtl/fp32_add_pipe4.sv:45$488: $auto$alumacc.cc:495:replace_alu$2427
+  creating $alu cell for $sub$rtl/fp32_add_pipe4.sv:46$493: $auto$alumacc.cc:495:replace_alu$2430
+  created 16 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module fp32_mul_pipe4:
+  creating $macc model for $add$rtl/fp32_mul_pipe4.sv:23$521 ($add).
+  creating $macc model for $add$rtl/fp32_mul_pipe4.sv:38$542 ($add).
+  creating $macc model for $add$rtl/fp32_mul_pipe4.sv:50$546 ($add).
+  creating $macc model for $add$rtl/fp32_mul_pipe4.sv:56$560 ($add).
+  creating $macc model for $add$rtl/fp32_mul_pipe4.sv:58$566 ($add).
+  creating $macc model for $add$rtl/fp32_mul_pipe4.sv:64$568 ($add).
+  creating $macc model for $mul$rtl/fp32_mul_pipe4.sv:20$513 ($mul).
+  creating $macc model for $neg$rtl/fp32_mul_pipe4.sv:50$547 ($neg).
+  creating $macc model for $neg$rtl/fp32_mul_pipe4.sv:57$561 ($neg).
+  creating $macc model for $sub$rtl/fp32_mul_pipe4.sv:21$516 ($sub).
+  creating $macc model for $sub$rtl/fp32_mul_pipe4.sv:22$519 ($sub).
+  creating $macc model for $sub$rtl/fp32_mul_pipe4.sv:23$522 ($sub).
+  creating $macc model for $sub$rtl/fp32_mul_pipe4.sv:49$545 ($sub).
+  creating $macc model for $sub$rtl/fp32_mul_pipe4.sv:54$551 ($sub).
+  creating $macc model for $sub$rtl/fp32_mul_pipe4.sv:54$553 ($sub).
+  merging $macc model for $add$rtl/fp32_mul_pipe4.sv:23$521 into $sub$rtl/fp32_mul_pipe4.sv:23$522.
+  merging $macc model for $add$rtl/fp32_mul_pipe4.sv:50$546 into $neg$rtl/fp32_mul_pipe4.sv:50$547.
+  creating $alu model for $macc $sub$rtl/fp32_mul_pipe4.sv:49$545.
+  creating $alu model for $macc $sub$rtl/fp32_mul_pipe4.sv:22$519.
+  creating $alu model for $macc $sub$rtl/fp32_mul_pipe4.sv:21$516.
+  creating $alu model for $macc $neg$rtl/fp32_mul_pipe4.sv:57$561.
+  creating $alu model for $macc $add$rtl/fp32_mul_pipe4.sv:64$568.
+  creating $alu model for $macc $add$rtl/fp32_mul_pipe4.sv:58$566.
+  creating $alu model for $macc $add$rtl/fp32_mul_pipe4.sv:56$560.
+  creating $alu model for $macc $sub$rtl/fp32_mul_pipe4.sv:54$553.
+  creating $alu model for $macc $add$rtl/fp32_mul_pipe4.sv:38$542.
+  creating $alu model for $macc $sub$rtl/fp32_mul_pipe4.sv:54$551.
+  creating $macc cell for $mul$rtl/fp32_mul_pipe4.sv:20$513: $auto$alumacc.cc:365:replace_macc$2433
+  creating $macc cell for $sub$rtl/fp32_mul_pipe4.sv:23$522: $auto$alumacc.cc:365:replace_macc$2434
+  creating $macc cell for $neg$rtl/fp32_mul_pipe4.sv:50$547: $auto$alumacc.cc:365:replace_macc$2435
+  creating $alu model for $ge$rtl/fp32_mul_pipe4.sv:48$544 ($ge): new $alu
+  creating $alu model for $ge$rtl/fp32_mul_pipe4.sv:51$548 ($ge): new $alu
+  creating $alu model for $ge$rtl/fp32_mul_pipe4.sv:58$563 ($ge): new $alu
+  creating $alu model for $ge$rtl/fp32_mul_pipe4.sv:68$570 ($ge): new $alu
+  creating $alu model for $ge$rtl/fp32_mul_pipe4.sv:70$572 ($ge): new $alu
+  creating $alu model for $gt$rtl/fp32_mul_pipe4.sv:52$549 ($gt): new $alu
+  creating $alu cell for $gt$rtl/fp32_mul_pipe4.sv:52$549: $auto$alumacc.cc:495:replace_alu$2442
+  creating $alu cell for $ge$rtl/fp32_mul_pipe4.sv:70$572: $auto$alumacc.cc:495:replace_alu$2455
+  creating $alu cell for $ge$rtl/fp32_mul_pipe4.sv:68$570: $auto$alumacc.cc:495:replace_alu$2468
+  creating $alu cell for $ge$rtl/fp32_mul_pipe4.sv:58$563: $auto$alumacc.cc:495:replace_alu$2483
+  creating $alu cell for $ge$rtl/fp32_mul_pipe4.sv:51$548: $auto$alumacc.cc:495:replace_alu$2496
+  creating $alu cell for $ge$rtl/fp32_mul_pipe4.sv:48$544: $auto$alumacc.cc:495:replace_alu$2511
+  creating $alu cell for $sub$rtl/fp32_mul_pipe4.sv:54$551: $auto$alumacc.cc:495:replace_alu$2526
+  creating $alu cell for $add$rtl/fp32_mul_pipe4.sv:38$542: $auto$alumacc.cc:495:replace_alu$2529
+  creating $alu cell for $sub$rtl/fp32_mul_pipe4.sv:54$553: $auto$alumacc.cc:495:replace_alu$2532
+  creating $alu cell for $add$rtl/fp32_mul_pipe4.sv:56$560: $auto$alumacc.cc:495:replace_alu$2535
+  creating $alu cell for $add$rtl/fp32_mul_pipe4.sv:58$566: $auto$alumacc.cc:495:replace_alu$2538
+  creating $alu cell for $add$rtl/fp32_mul_pipe4.sv:64$568: $auto$alumacc.cc:495:replace_alu$2541
+  creating $alu cell for $neg$rtl/fp32_mul_pipe4.sv:57$561: $auto$alumacc.cc:495:replace_alu$2544
+  creating $alu cell for $sub$rtl/fp32_mul_pipe4.sv:21$516: $auto$alumacc.cc:495:replace_alu$2547
+  creating $alu cell for $sub$rtl/fp32_mul_pipe4.sv:22$519: $auto$alumacc.cc:495:replace_alu$2550
+  creating $alu cell for $sub$rtl/fp32_mul_pipe4.sv:49$545: $auto$alumacc.cc:495:replace_alu$2553
+  created 16 $alu and 3 $macc cells.
+Extracting $alu and $macc cells in module fp32_to_bf16_rne:
+  creating $macc model for $add$rtl/fp32_to_bf16_rne.sv:14$6 ($add).
+  creating $alu model for $macc $add$rtl/fp32_to_bf16_rne.sv:14$6.
+  creating $alu model for $gt$rtl/fp32_to_bf16_rne.sv:12$2 ($gt): new $alu
+  creating $alu model for $eq$rtl/fp32_to_bf16_rne.sv:13$3 ($eq): merged with $gt$rtl/fp32_to_bf16_rne.sv:12$2.
+  creating $alu cell for $gt$rtl/fp32_to_bf16_rne.sv:12$2, $eq$rtl/fp32_to_bf16_rne.sv:13$3: $auto$alumacc.cc:495:replace_alu$2557
+  creating $alu cell for $add$rtl/fp32_to_bf16_rne.sv:14$6: $auto$alumacc.cc:495:replace_alu$2568
+  created 2 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module mixed_precision_bank_apply4_pipe:
+  created 0 $alu and 0 $macc cells.
+
+17.13. Executing SHARE pass (SAT-based resource sharing).
+Found 2 cells in module fp32_add_pipe4 that may be considered for resource sharing.
+  Analyzing resource sharing options for $shr$rtl/fp32_add_pipe4.sv:13$336 ($shr):
+    Found 1 activation_patterns using ctrl signal { $auto$rtlil.cc:2783:ReduceOr$2355 $auto$rtlil.cc:2783:ReduceOr$2405 }.
+    No candidates found.
+  Analyzing resource sharing options for $shl$rtl/fp32_add_pipe4.sv:13$332 ($shl):
+    Found 1 activation_patterns using ctrl signal { $auto$rtlil.cc:2783:ReduceOr$2355 $auto$rtlil.cc:2783:ReduceOr$2405 }.
+    No candidates found.
+Found 3 cells in module fp32_mul_pipe4 that may be considered for resource sharing.
+  Analyzing resource sharing options for $shr$rtl/fp32_mul_pipe4.sv:53$550 ($shr):
+    Found 1 activation_patterns using ctrl signal { $auto$rtlil.cc:2779:Not$2454 $auto$rtlil.cc:2783:ReduceOr$2510 }.
+    No candidates found.
+  Analyzing resource sharing options for $shl$rtl/fp32_mul_pipe4.sv:57$562 ($shl):
+    Found 1 activation_patterns using ctrl signal { $auto$rtlil.cc:2779:Not$2454 $auto$rtlil.cc:2783:ReduceOr$2510 }.
+    No candidates found.
+  Analyzing resource sharing options for $shl$rtl/fp32_mul_pipe4.sv:54$552 ($shl):
+    Found 1 activation_patterns using ctrl signal { $auto$rtlil.cc:2779:Not$2454 $auto$rtlil.cc:2783:ReduceOr$2510 }.
+    No candidates found.
+
+17.14. Executing OPT pass (performing simple optimizations).
+
+17.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module bf16_to_fp32.
+Optimizing module fp32_add_pipe4.
+<suppressed ~13 debug messages>
+Optimizing module fp32_mul_pipe4.
+<suppressed ~4 debug messages>
+Optimizing module fp32_to_bf16_rne.
+Optimizing module mixed_precision_bank_apply4_pipe.
+
+17.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\bf16_to_fp32'.
+Finding identical cells in module `\fp32_add_pipe4'.
+Finding identical cells in module `\fp32_mul_pipe4'.
+Finding identical cells in module `\fp32_to_bf16_rne'.
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+Removed a total of 0 cells.
+
+17.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \bf16_to_fp32..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp32_add_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp32_mul_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp32_to_bf16_rne..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \mixed_precision_bank_apply4_pipe..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~60 debug messages>
+
+17.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \bf16_to_fp32.
+  Optimizing cells in module \fp32_add_pipe4.
+  Optimizing cells in module \fp32_mul_pipe4.
+  Optimizing cells in module \fp32_to_bf16_rne.
+  Optimizing cells in module \mixed_precision_bank_apply4_pipe.
+Performed a total of 0 changes.
+
+17.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\bf16_to_fp32'.
+Finding identical cells in module `\fp32_add_pipe4'.
+Finding identical cells in module `\fp32_mul_pipe4'.
+Finding identical cells in module `\fp32_to_bf16_rne'.
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+Removed a total of 0 cells.
+
+17.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+17.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \bf16_to_fp32..
+Finding unused cells or wires in module \fp32_add_pipe4..
+Finding unused cells or wires in module \fp32_mul_pipe4..
+Finding unused cells or wires in module \fp32_to_bf16_rne..
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+Removed 6 unused cells and 36 unused wires.
+<suppressed ~12 debug messages>
+
+17.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module bf16_to_fp32.
+Optimizing module fp32_add_pipe4.
+Optimizing module fp32_mul_pipe4.
+Optimizing module fp32_to_bf16_rne.
+Optimizing module mixed_precision_bank_apply4_pipe.
+
+17.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+17.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \bf16_to_fp32..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp32_add_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+      Replacing known input bits on port A of cell $procmux$1112: $1\norm_shift_d[31:0] -> { 1'0 $1\norm_shift_d[31:0] [30:0] }
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp32_mul_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp32_to_bf16_rne..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \mixed_precision_bank_apply4_pipe..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~60 debug messages>
+
+17.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \bf16_to_fp32.
+  Optimizing cells in module \fp32_add_pipe4.
+  Optimizing cells in module \fp32_mul_pipe4.
+  Optimizing cells in module \fp32_to_bf16_rne.
+  Optimizing cells in module \mixed_precision_bank_apply4_pipe.
+Performed a total of 0 changes.
+
+17.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\bf16_to_fp32'.
+Finding identical cells in module `\fp32_add_pipe4'.
+Finding identical cells in module `\fp32_mul_pipe4'.
+Finding identical cells in module `\fp32_to_bf16_rne'.
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+Removed a total of 0 cells.
+
+17.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+17.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \bf16_to_fp32..
+Finding unused cells or wires in module \fp32_add_pipe4..
+Finding unused cells or wires in module \fp32_mul_pipe4..
+Finding unused cells or wires in module \fp32_to_bf16_rne..
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+
+17.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module bf16_to_fp32.
+Optimizing module fp32_add_pipe4.
+Optimizing module fp32_mul_pipe4.
+Optimizing module fp32_to_bf16_rne.
+Optimizing module mixed_precision_bank_apply4_pipe.
+
+17.14.16. Finished OPT passes. (There is nothing left to do.)
+
+17.15. Executing MEMORY pass.
+
+17.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+17.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+17.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+17.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+17.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+17.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \bf16_to_fp32..
+Finding unused cells or wires in module \fp32_add_pipe4..
+Finding unused cells or wires in module \fp32_mul_pipe4..
+Finding unused cells or wires in module \fp32_to_bf16_rne..
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+
+17.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+17.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+17.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \bf16_to_fp32..
+Finding unused cells or wires in module \fp32_add_pipe4..
+Finding unused cells or wires in module \fp32_mul_pipe4..
+Finding unused cells or wires in module \fp32_to_bf16_rne..
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+
+17.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+17.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \bf16_to_fp32..
+Finding unused cells or wires in module \fp32_add_pipe4..
+Finding unused cells or wires in module \fp32_mul_pipe4..
+Finding unused cells or wires in module \fp32_to_bf16_rne..
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+
+17.17. Executing OPT pass (performing simple optimizations).
+
+17.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module bf16_to_fp32.
+Optimizing module fp32_add_pipe4.
+<suppressed ~36 debug messages>
+Optimizing module fp32_mul_pipe4.
+<suppressed ~15 debug messages>
+Optimizing module fp32_to_bf16_rne.
+<suppressed ~1 debug messages>
+Optimizing module mixed_precision_bank_apply4_pipe.
+<suppressed ~64 debug messages>
+
+17.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\bf16_to_fp32'.
+Finding identical cells in module `\fp32_add_pipe4'.
+Finding identical cells in module `\fp32_mul_pipe4'.
+Finding identical cells in module `\fp32_to_bf16_rne'.
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+Removed a total of 0 cells.
+
+17.17.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+17.17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \bf16_to_fp32..
+Finding unused cells or wires in module \fp32_add_pipe4..
+Finding unused cells or wires in module \fp32_mul_pipe4..
+Finding unused cells or wires in module \fp32_to_bf16_rne..
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+Removed 0 unused cells and 84 unused wires.
+<suppressed ~4 debug messages>
+
+17.17.5. Finished fast OPT passes.
+
+17.18. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+17.19. Executing OPT pass (performing simple optimizations).
+
+17.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module bf16_to_fp32.
+Optimizing module fp32_add_pipe4.
+Optimizing module fp32_mul_pipe4.
+Optimizing module fp32_to_bf16_rne.
+Optimizing module mixed_precision_bank_apply4_pipe.
+
+17.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\bf16_to_fp32'.
+Finding identical cells in module `\fp32_add_pipe4'.
+Finding identical cells in module `\fp32_mul_pipe4'.
+Finding identical cells in module `\fp32_to_bf16_rne'.
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+Removed a total of 0 cells.
+
+17.19.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \bf16_to_fp32..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp32_add_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp32_mul_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp32_to_bf16_rne..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \mixed_precision_bank_apply4_pipe..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~32 debug messages>
+
+17.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \bf16_to_fp32.
+  Optimizing cells in module \fp32_add_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1043:
+      Old ports: A={ \packed_exp_d [7:0] \rounded3_d [22:0] }, B={ 8'00000000 \rounded3_d [22:0] }, Y=$6\result3_d[31:0] [30:0]
+      New ports: A=\packed_exp_d [7:0], B=8'00000000, Y=$6\result3_d[31:0] [30:23]
+      New connections: $6\result3_d[31:0] [22:0] = \rounded3_d [22:0]
+    Consolidated identical input bits for $mux cell $procmux$1112:
+      Old ports: A={ 1'0 $1\norm_shift_d[31:0] [30:0] }, B=0, Y=\norm_shift_d
+      New ports: A=$1\norm_shift_d[31:0] [30:0], B=31'0000000000000000000000000000000, Y=\norm_shift_d [30:0]
+      New connections: \norm_shift_d [31] = 1'0
+    Consolidated identical input bits for $mux cell $procmux$1115:
+      Old ports: A={ $sub$rtl/fp32_add_pipe4.sv:45$488_Y [31] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [31] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [31] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [31] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [31] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [31] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [31] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [31] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [31] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [31] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [31] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [31] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [31] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [31] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [31] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [31] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [31] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [31] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [31] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [31] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [31] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [31] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [31] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [8:0] }, B={ 27'000000000000000000000000000 \lz2_d }, Y=$1\norm_shift_d[31:0]
+      New ports: A={ $sub$rtl/fp32_add_pipe4.sv:45$488_Y [31] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [8:0] }, B={ 5'00000 \lz2_d }, Y=$1\norm_shift_d[31:0] [9:0]
+      New connections: $1\norm_shift_d[31:0] [31:10] = { $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] }
+    Consolidated identical input bits for $mux cell $procmux$1277:
+      Old ports: A=5'11011, B=5'00000, Y=$1\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$382
+      New ports: A=1'1, B=1'0, Y=$1\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$382 [0]
+      New connections: $1\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$382 [4:1] = { $1\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$382 [0] $1\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$382 [0] 1'0 $1\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$382 [0] }
+  Optimizing cells in module \fp32_add_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1112:
+      Old ports: A=$1\norm_shift_d[31:0] [30:0], B=31'0000000000000000000000000000000, Y=\norm_shift_d [30:0]
+      New ports: A=$1\norm_shift_d[31:0] [9:0], B=10'0000000000, Y=\norm_shift_d [9:0]
+      New connections: \norm_shift_d [30:10] = { \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] }
+    Consolidated identical input bits for $mux cell $procmux$1271:
+      Old ports: A=$1\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$382, B=5'00001, Y=$2\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$386
+      New ports: A={ $1\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$382 [0] $1\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$382 [0] }, B=2'01, Y=$2\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$386 [1:0]
+      New connections: $2\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$386 [4:2] = { $2\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$386 [1] $2\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$386 [1] 1'0 }
+  Optimizing cells in module \fp32_add_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1265:
+      Old ports: A=$2\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$386, B=5'00010, Y=$3\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$390
+      New ports: A={ $2\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$386 [1] $2\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$386 [1:0] }, B=3'010, Y={ $3\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$390 [3] $3\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$390 [1:0] }
+      New connections: { $3\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$390 [4] $3\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$390 [2] } = { $3\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$390 [3] 1'0 }
+  Optimizing cells in module \fp32_add_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1259:
+      Old ports: A=$3\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$390, B=5'00011, Y=$4\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$394
+      New ports: A={ $3\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$390 [3] $3\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$390 [1:0] }, B=3'011, Y={ $4\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$394 [3] $4\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$394 [1:0] }
+      New connections: { $4\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$394 [4] $4\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$394 [2] } = { $4\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$394 [3] 1'0 }
+  Optimizing cells in module \fp32_add_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1253:
+      Old ports: A=$4\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$394, B=5'00100, Y=$5\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$398
+      New ports: A={ $4\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$394 [3] 1'0 $4\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$394 [1:0] }, B=4'0100, Y=$5\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$398 [3:0]
+      New connections: $5\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$398 [4] = $5\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$398 [3]
+  Optimizing cells in module \fp32_add_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1247:
+      Old ports: A=$5\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$398, B=5'00101, Y=$6\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$402
+      New ports: A=$5\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$398 [3:0], B=4'0101, Y=$6\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$402 [3:0]
+      New connections: $6\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$402 [4] = $6\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$402 [3]
+  Optimizing cells in module \fp32_add_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1241:
+      Old ports: A=$6\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$402, B=5'00110, Y=$7\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$406
+      New ports: A=$6\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$402 [3:0], B=4'0110, Y=$7\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$406 [3:0]
+      New connections: $7\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$406 [4] = $7\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$406 [3]
+  Optimizing cells in module \fp32_add_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1235:
+      Old ports: A=$7\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$406, B=5'00111, Y=$8\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$410
+      New ports: A=$7\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$406 [3:0], B=4'0111, Y=$8\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$410 [3:0]
+      New connections: $8\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$410 [4] = $8\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$410 [3]
+  Optimizing cells in module \fp32_add_pipe4.
+  Optimizing cells in module \fp32_mul_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1894:
+      Old ports: A={ 3'000 $8\msb1_d[5:0] [2:0] }, B=6'001000, Y=$9\msb1_d[5:0]
+      New ports: A={ 1'0 $8\msb1_d[5:0] [2:0] }, B=4'1000, Y=$9\msb1_d[5:0] [3:0]
+      New connections: $9\msb1_d[5:0] [5:4] = 2'00
+    Consolidated identical input bits for $mux cell $ternary$rtl/fp32_mul_pipe4.sv:21$517:
+      Old ports: A={ $sub$rtl/fp32_mul_pipe4.sv:21$516_Y [31] $sub$rtl/fp32_mul_pipe4.sv:21$516_Y [31] $sub$rtl/fp32_mul_pipe4.sv:21$516_Y [31] $sub$rtl/fp32_mul_pipe4.sv:21$516_Y [7:0] }, B=11'11110000010, Y=\lhs_unbiased_d
+      New ports: A={ $sub$rtl/fp32_mul_pipe4.sv:21$516_Y [31] $sub$rtl/fp32_mul_pipe4.sv:21$516_Y [7:0] }, B=9'110000010, Y=\lhs_unbiased_d [8:0]
+      New connections: \lhs_unbiased_d [10:9] = { \lhs_unbiased_d [8] \lhs_unbiased_d [8] }
+    Consolidated identical input bits for $mux cell $ternary$rtl/fp32_mul_pipe4.sv:22$520:
+      Old ports: A={ $sub$rtl/fp32_mul_pipe4.sv:22$519_Y [31] $sub$rtl/fp32_mul_pipe4.sv:22$519_Y [31] $sub$rtl/fp32_mul_pipe4.sv:22$519_Y [31] $sub$rtl/fp32_mul_pipe4.sv:22$519_Y [7:0] }, B=11'11110000010, Y=\rhs_unbiased_d
+      New ports: A={ $sub$rtl/fp32_mul_pipe4.sv:22$519_Y [31] $sub$rtl/fp32_mul_pipe4.sv:22$519_Y [7:0] }, B=9'110000010, Y=\rhs_unbiased_d [8:0]
+      New connections: \rhs_unbiased_d [10:9] = { \rhs_unbiased_d [8] \rhs_unbiased_d [8] }
+  Optimizing cells in module \fp32_mul_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1891:
+      Old ports: A=$9\msb1_d[5:0], B=6'001001, Y=$10\msb1_d[5:0]
+      New ports: A=$9\msb1_d[5:0] [3:0], B=4'1001, Y=$10\msb1_d[5:0] [3:0]
+      New connections: $10\msb1_d[5:0] [5:4] = 2'00
+  Optimizing cells in module \fp32_mul_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1888:
+      Old ports: A=$10\msb1_d[5:0], B=6'001010, Y=$11\msb1_d[5:0]
+      New ports: A=$10\msb1_d[5:0] [3:0], B=4'1010, Y=$11\msb1_d[5:0] [3:0]
+      New connections: $11\msb1_d[5:0] [5:4] = 2'00
+  Optimizing cells in module \fp32_mul_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1885:
+      Old ports: A=$11\msb1_d[5:0], B=6'001011, Y=$12\msb1_d[5:0]
+      New ports: A=$11\msb1_d[5:0] [3:0], B=4'1011, Y=$12\msb1_d[5:0] [3:0]
+      New connections: $12\msb1_d[5:0] [5:4] = 2'00
+  Optimizing cells in module \fp32_mul_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1882:
+      Old ports: A=$12\msb1_d[5:0], B=6'001100, Y=$13\msb1_d[5:0]
+      New ports: A=$12\msb1_d[5:0] [3:0], B=4'1100, Y=$13\msb1_d[5:0] [3:0]
+      New connections: $13\msb1_d[5:0] [5:4] = 2'00
+  Optimizing cells in module \fp32_mul_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1879:
+      Old ports: A=$13\msb1_d[5:0], B=6'001101, Y=$14\msb1_d[5:0]
+      New ports: A=$13\msb1_d[5:0] [3:0], B=4'1101, Y=$14\msb1_d[5:0] [3:0]
+      New connections: $14\msb1_d[5:0] [5:4] = 2'00
+  Optimizing cells in module \fp32_mul_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1876:
+      Old ports: A=$14\msb1_d[5:0], B=6'001110, Y=$15\msb1_d[5:0]
+      New ports: A=$14\msb1_d[5:0] [3:0], B=4'1110, Y=$15\msb1_d[5:0] [3:0]
+      New connections: $15\msb1_d[5:0] [5:4] = 2'00
+  Optimizing cells in module \fp32_mul_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1873:
+      Old ports: A=$15\msb1_d[5:0], B=6'001111, Y=$16\msb1_d[5:0]
+      New ports: A=$15\msb1_d[5:0] [3:0], B=4'1111, Y=$16\msb1_d[5:0] [3:0]
+      New connections: $16\msb1_d[5:0] [5:4] = 2'00
+  Optimizing cells in module \fp32_mul_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1870:
+      Old ports: A=$16\msb1_d[5:0], B=6'010000, Y=$17\msb1_d[5:0]
+      New ports: A={ 1'0 $16\msb1_d[5:0] [3:0] }, B=5'10000, Y=$17\msb1_d[5:0] [4:0]
+      New connections: $17\msb1_d[5:0] [5] = 1'0
+  Optimizing cells in module \fp32_mul_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1867:
+      Old ports: A=$17\msb1_d[5:0], B=6'010001, Y=$18\msb1_d[5:0]
+      New ports: A=$17\msb1_d[5:0] [4:0], B=5'10001, Y=$18\msb1_d[5:0] [4:0]
+      New connections: $18\msb1_d[5:0] [5] = 1'0
+  Optimizing cells in module \fp32_mul_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1864:
+      Old ports: A=$18\msb1_d[5:0], B=6'010010, Y=$19\msb1_d[5:0]
+      New ports: A=$18\msb1_d[5:0] [4:0], B=5'10010, Y=$19\msb1_d[5:0] [4:0]
+      New connections: $19\msb1_d[5:0] [5] = 1'0
+  Optimizing cells in module \fp32_mul_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1861:
+      Old ports: A=$19\msb1_d[5:0], B=6'010011, Y=$20\msb1_d[5:0]
+      New ports: A=$19\msb1_d[5:0] [4:0], B=5'10011, Y=$20\msb1_d[5:0] [4:0]
+      New connections: $20\msb1_d[5:0] [5] = 1'0
+  Optimizing cells in module \fp32_mul_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1858:
+      Old ports: A=$20\msb1_d[5:0], B=6'010100, Y=$21\msb1_d[5:0]
+      New ports: A=$20\msb1_d[5:0] [4:0], B=5'10100, Y=$21\msb1_d[5:0] [4:0]
+      New connections: $21\msb1_d[5:0] [5] = 1'0
+  Optimizing cells in module \fp32_mul_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1855:
+      Old ports: A=$21\msb1_d[5:0], B=6'010101, Y=$22\msb1_d[5:0]
+      New ports: A=$21\msb1_d[5:0] [4:0], B=5'10101, Y=$22\msb1_d[5:0] [4:0]
+      New connections: $22\msb1_d[5:0] [5] = 1'0
+  Optimizing cells in module \fp32_mul_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1852:
+      Old ports: A=$22\msb1_d[5:0], B=6'010110, Y=$23\msb1_d[5:0]
+      New ports: A=$22\msb1_d[5:0] [4:0], B=5'10110, Y=$23\msb1_d[5:0] [4:0]
+      New connections: $23\msb1_d[5:0] [5] = 1'0
+  Optimizing cells in module \fp32_mul_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1849:
+      Old ports: A=$23\msb1_d[5:0], B=6'010111, Y=$24\msb1_d[5:0]
+      New ports: A=$23\msb1_d[5:0] [4:0], B=5'10111, Y=$24\msb1_d[5:0] [4:0]
+      New connections: $24\msb1_d[5:0] [5] = 1'0
+  Optimizing cells in module \fp32_mul_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1846:
+      Old ports: A=$24\msb1_d[5:0], B=6'011000, Y=$25\msb1_d[5:0]
+      New ports: A=$24\msb1_d[5:0] [4:0], B=5'11000, Y=$25\msb1_d[5:0] [4:0]
+      New connections: $25\msb1_d[5:0] [5] = 1'0
+  Optimizing cells in module \fp32_mul_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1843:
+      Old ports: A=$25\msb1_d[5:0], B=6'011001, Y=$26\msb1_d[5:0]
+      New ports: A=$25\msb1_d[5:0] [4:0], B=5'11001, Y=$26\msb1_d[5:0] [4:0]
+      New connections: $26\msb1_d[5:0] [5] = 1'0
+  Optimizing cells in module \fp32_mul_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1840:
+      Old ports: A=$26\msb1_d[5:0], B=6'011010, Y=$27\msb1_d[5:0]
+      New ports: A=$26\msb1_d[5:0] [4:0], B=5'11010, Y=$27\msb1_d[5:0] [4:0]
+      New connections: $27\msb1_d[5:0] [5] = 1'0
+  Optimizing cells in module \fp32_mul_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1837:
+      Old ports: A=$27\msb1_d[5:0], B=6'011011, Y=$28\msb1_d[5:0]
+      New ports: A=$27\msb1_d[5:0] [4:0], B=5'11011, Y=$28\msb1_d[5:0] [4:0]
+      New connections: $28\msb1_d[5:0] [5] = 1'0
+  Optimizing cells in module \fp32_mul_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1834:
+      Old ports: A=$28\msb1_d[5:0], B=6'011100, Y=$29\msb1_d[5:0]
+      New ports: A=$28\msb1_d[5:0] [4:0], B=5'11100, Y=$29\msb1_d[5:0] [4:0]
+      New connections: $29\msb1_d[5:0] [5] = 1'0
+  Optimizing cells in module \fp32_mul_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1831:
+      Old ports: A=$29\msb1_d[5:0], B=6'011101, Y=$30\msb1_d[5:0]
+      New ports: A=$29\msb1_d[5:0] [4:0], B=5'11101, Y=$30\msb1_d[5:0] [4:0]
+      New connections: $30\msb1_d[5:0] [5] = 1'0
+  Optimizing cells in module \fp32_mul_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1828:
+      Old ports: A=$30\msb1_d[5:0], B=6'011110, Y=$31\msb1_d[5:0]
+      New ports: A=$30\msb1_d[5:0] [4:0], B=5'11110, Y=$31\msb1_d[5:0] [4:0]
+      New connections: $31\msb1_d[5:0] [5] = 1'0
+  Optimizing cells in module \fp32_mul_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1825:
+      Old ports: A=$31\msb1_d[5:0], B=6'011111, Y=$32\msb1_d[5:0]
+      New ports: A=$31\msb1_d[5:0] [4:0], B=5'11111, Y=$32\msb1_d[5:0] [4:0]
+      New connections: $32\msb1_d[5:0] [5] = 1'0
+  Optimizing cells in module \fp32_mul_pipe4.
+  Optimizing cells in module \fp32_to_bf16_rne.
+    Consolidated identical input bits for $mux cell $procmux$1927:
+      Old ports: A={ \fp32_i [31] 15'111111110000000 }, B=16'0111111111000000, Y=$2\bf16_o[15:0]
+      New ports: A={ \fp32_i [31] 1'0 }, B=2'01, Y={ $2\bf16_o[15:0] [15] $2\bf16_o[15:0] [6] }
+      New connections: { $2\bf16_o[15:0] [14:7] $2\bf16_o[15:0] [5:0] } = 14'11111111000000
+  Optimizing cells in module \fp32_to_bf16_rne.
+  Optimizing cells in module \mixed_precision_bank_apply4_pipe.
+Performed a total of 39 changes.
+
+17.19.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\bf16_to_fp32'.
+Finding identical cells in module `\fp32_add_pipe4'.
+Finding identical cells in module `\fp32_mul_pipe4'.
+Finding identical cells in module `\fp32_to_bf16_rne'.
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+Removed a total of 0 cells.
+
+17.19.6. Executing OPT_SHARE pass.
+
+17.19.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+17.19.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \bf16_to_fp32..
+Finding unused cells or wires in module \fp32_add_pipe4..
+Finding unused cells or wires in module \fp32_mul_pipe4..
+Finding unused cells or wires in module \fp32_to_bf16_rne..
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+
+17.19.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module bf16_to_fp32.
+Optimizing module fp32_add_pipe4.
+<suppressed ~1 debug messages>
+Optimizing module fp32_mul_pipe4.
+Optimizing module fp32_to_bf16_rne.
+Optimizing module mixed_precision_bank_apply4_pipe.
+
+17.19.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+17.19.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \bf16_to_fp32..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp32_add_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+      Replacing known input bits on port A of cell $procmux$1112: { $1\norm_shift_d[31:0] [31] $1\norm_shift_d[31:0] [8:0] } -> { 1'0 $1\norm_shift_d[31:0] [8:0] }
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp32_mul_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp32_to_bf16_rne..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \mixed_precision_bank_apply4_pipe..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~32 debug messages>
+
+17.19.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \bf16_to_fp32.
+  Optimizing cells in module \fp32_add_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1112:
+      Old ports: A={ 1'0 $1\norm_shift_d[31:0] [8:0] }, B=10'0000000000, Y={ \norm_shift_d [30] \norm_shift_d [8:0] }
+      New ports: A=$1\norm_shift_d[31:0] [8:0], B=9'000000000, Y=\norm_shift_d [8:0]
+      New connections: \norm_shift_d [30] = 1'0
+  Optimizing cells in module \fp32_add_pipe4.
+  Optimizing cells in module \fp32_mul_pipe4.
+  Optimizing cells in module \fp32_to_bf16_rne.
+  Optimizing cells in module \mixed_precision_bank_apply4_pipe.
+Performed a total of 1 changes.
+
+17.19.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\bf16_to_fp32'.
+Finding identical cells in module `\fp32_add_pipe4'.
+Finding identical cells in module `\fp32_mul_pipe4'.
+Finding identical cells in module `\fp32_to_bf16_rne'.
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+Removed a total of 0 cells.
+
+17.19.14. Executing OPT_SHARE pass.
+
+17.19.15. Executing OPT_DFF pass (perform DFF optimizations).
+
+17.19.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \bf16_to_fp32..
+Finding unused cells or wires in module \fp32_add_pipe4..
+Finding unused cells or wires in module \fp32_mul_pipe4..
+Finding unused cells or wires in module \fp32_to_bf16_rne..
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+
+17.19.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module bf16_to_fp32.
+Optimizing module fp32_add_pipe4.
+Optimizing module fp32_mul_pipe4.
+Optimizing module fp32_to_bf16_rne.
+Optimizing module mixed_precision_bank_apply4_pipe.
+
+17.19.18. Rerunning OPT passes. (Maybe there is more to do..)
+
+17.19.19. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \bf16_to_fp32..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp32_add_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp32_mul_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp32_to_bf16_rne..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \mixed_precision_bank_apply4_pipe..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~32 debug messages>
+
+17.19.20. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \bf16_to_fp32.
+  Optimizing cells in module \fp32_add_pipe4.
+  Optimizing cells in module \fp32_mul_pipe4.
+  Optimizing cells in module \fp32_to_bf16_rne.
+  Optimizing cells in module \mixed_precision_bank_apply4_pipe.
+Performed a total of 0 changes.
+
+17.19.21. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\bf16_to_fp32'.
+Finding identical cells in module `\fp32_add_pipe4'.
+Finding identical cells in module `\fp32_mul_pipe4'.
+Finding identical cells in module `\fp32_to_bf16_rne'.
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+Removed a total of 0 cells.
+
+17.19.22. Executing OPT_SHARE pass.
+
+17.19.23. Executing OPT_DFF pass (perform DFF optimizations).
+
+17.19.24. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \bf16_to_fp32..
+Finding unused cells or wires in module \fp32_add_pipe4..
+Finding unused cells or wires in module \fp32_mul_pipe4..
+Finding unused cells or wires in module \fp32_to_bf16_rne..
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+
+17.19.25. Executing OPT_EXPR pass (perform const folding).
+Optimizing module bf16_to_fp32.
+Optimizing module fp32_add_pipe4.
+Optimizing module fp32_mul_pipe4.
+Optimizing module fp32_to_bf16_rne.
+Optimizing module mixed_precision_bank_apply4_pipe.
+
+17.19.26. Finished OPT passes. (There is nothing left to do.)
+
+17.20. Executing TECHMAP pass (map to technology primitives).
+
+17.20.1. Executing Verilog-2005 frontend: /home/chandler/.local/yosys/usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/home/chandler/.local/yosys/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+17.20.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $adffe.
+Using extmapper simplemap for cells of type $adff.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $logic_or.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $ne.
+Using extmapper simplemap for cells of type $not.
+Using template $paramod$f30f8fc2e30bd83d28cb1ad43b9d9ec083109075\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $reduce_or.
+Using template $paramod$fc972a7a46956c1788f3cb5257b53c8f1df2d0cc\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $reduce_and.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $and.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000010001 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000001 for cells of type $lcu.
+Using extmapper maccmap for cells of type $macc_v2.
+  add { \lhs_sig_d [23] \lhs_i [22:0] } * { \rhs_sig_d [23] \rhs_i [22:0] } (24x24 bits, unsigned)
+Using extmapper simplemap for cells of type $reduce_bool.
+  add { \lhs_unbiased_d [10] \lhs_unbiased_d [10] \lhs_unbiased_d [10] \lhs_unbiased_d [7:0] } (11 bits, signed)
+  add { \rhs_unbiased_d [10] \rhs_unbiased_d [10] \rhs_unbiased_d [10] \rhs_unbiased_d [7:0] } (11 bits, signed)
+  add 11'11111010010 (11 bits, unsigned)
+Using template $paramod$7d345e38ed17d1b9b7ad574498fe053cc5e778a7\_90_alu for cells of type $alu.
+Using template $paramod$fd686afb999c4136eb83fcb456f758924578074d\_90_alu for cells of type $alu.
+  sub \base_exp1_q (11 bits, signed)
+  add 32'11111111111111111111111101101011 (32 bits, unsigned)
+Using template $paramod$050f15daba5036a0512adf25d3c6631f629623f7\_90_alu for cells of type $alu.
+Using template $paramod$constmap:a9dc5027c4ae08c8c308181005e1d842f3bb08f2$paramod$506728be27b17cf84830d0c29bd9b5a8031852be\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shl.
+Using template $paramod$e26d116fb6e49e9fa71e2c64a3b20d24d7f283ce\_90_alu for cells of type $alu.
+Using template $paramod$486d4246188ac94b4244861112f8beffcfe3130f\_90_alu for cells of type $alu.
+Using template $paramod$3e7722abe950e04e12cedc7f7cd260127415126a\_90_alu for cells of type $alu.
+Using template $paramod$constmap:d90154e95b755f1cae9f0be78fcddcf2b08a4f8f$paramod$8bfcd9b01472435c243f7394772a1d3bbf787759\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shr.
+Using template $paramod$b65f7117d30caee249d1fb0e6a77d563ff429205\_90_alu for cells of type $alu.
+Using template $paramod$2fff7390d0c2bf21f9d4a24170e0e0160f5d0249\_90_alu for cells of type $alu.
+Using template $paramod$constmap:6039f161a1d67346475e21b7eb9561817b0209f7$paramod$a931737973063d92b37d1be3a891970e3bc94d97\_90_shift_shiftx for cells of type $shiftx.
+Using template $paramod$2f5fb04daf2da94d981bf9455fa4454c6ec8b705\_90_alu for cells of type $alu.
+Using template $paramod$c6baa65225090ac0a120feab1b920965244aa496\_90_alu for cells of type $alu.
+Using template $paramod$constmap:d90154e95b755f1cae9f0be78fcddcf2b08a4f8f$paramod$b75f1a4efb43e3427ffff3051f0fd9c104726ccb\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shl.
+Using template $paramod$2fbcb34684f6679eb93572499327a47617602411\_90_alu for cells of type $alu.
+Using template $paramod$08c2d337fba0d8fba53e35b89be96dd105931d9e\_90_alu for cells of type $alu.
+Using template $paramod$db292a57f5fa7061d10e7d3c328a8b8f0fb72da6\_90_alu for cells of type $alu.
+Using template $paramod$26bc1555e7e0f98bd36dce43959f94aabea489fb\_90_alu for cells of type $alu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000110000 for cells of type $fa.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000101111 for cells of type $fa.
+Using template $paramod$88aad6f8473fb7e4e5fbfb8335ddebad03429eaa\_90_alu for cells of type $alu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000001011 for cells of type $fa.
+Using template $paramod$ec32b97001540459632a2df9accd677d3703ea0f\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001001 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000111 for cells of type $lcu.
+Using template $paramod$fbc7873bff55778c0b3173955b7e4bce1d9d6834\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000010000000 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001010 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000001101001 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001011 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000011001 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001000 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000001101000 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000100 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000110000 for cells of type $lcu.
+Using template $paramod$cd54e322aa4265ca236096fe4bb634aaec4e39b4\_90_alu for cells of type $alu.
+Using template $paramod$f02bbbf710bba6238f4bdfa41b3051acfe2064a8\_90_alu for cells of type $alu.
+Using template $paramod$8d7f98f10ed0231647041eea72c2a8a293a33560\_90_alu for cells of type $alu.
+Using template $paramod$b0777dc865134c8525a4aa84de8cfa938974cad1\_90_alu for cells of type $alu.
+Using template $paramod$a7a1d5fc4563c49b9a54941942b1beedd64a98db\_90_alu for cells of type $alu.
+Using template $paramod$4ccbe221165818e15f326ddee3d1183c7924e12f\_90_alu for cells of type $alu.
+Using template $paramod$constmap:7ae316908087d300eb1dd22a5a8f3162d6a9f4ab$paramod$9584a26118f4bcb3033fe760387b4d0b650980eb\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shl.
+Using template $paramod$constmap:6357d5059a8cf5c2b1ba7eac00d493372ba09e05$paramod$d137e9f8c3237dc45a2f1807aeb7665ead8d1066\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shr.
+Using template $paramod$a2af9b43308e3114c3b5dd3f4dc3329b2387395d\_90_alu for cells of type $alu.
+Using template $paramod$f137a8bfbd1456d75171dc760be33d0c1f0b83ab\_90_alu for cells of type $alu.
+Using template $paramod$d2fa05d38998afabc6d4f34471305d0af4b8b2df\_90_alu for cells of type $alu.
+Using template $paramod$6f67705c43e5e94c02b6ebb52209ce5aa5ade4c1\_90_alu for cells of type $alu.
+Using template $paramod$constmap:1fd18985401ee182fcd961e00f945f66a5d5723a$paramod$aa7405bf140bd41bfb0f52f8d4fd2da4fcb6d0f9\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shl.
+Using template $paramod$53700bbee849b2010ad0b60a61ccd204a10e24ca\_90_alu for cells of type $alu.
+Using template $paramod$d90c3448203144d55644b597072d6cf1b3e54430\_90_alu for cells of type $alu.
+Using template $paramod$6f66f151d8048a3ab1c70205796615a945055b0d\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000011011 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~15829 debug messages>
+
+17.21. Executing OPT pass (performing simple optimizations).
+
+17.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module bf16_to_fp32.
+Optimizing module fp32_add_pipe4.
+<suppressed ~1035 debug messages>
+Optimizing module fp32_mul_pipe4.
+<suppressed ~7881 debug messages>
+Optimizing module fp32_to_bf16_rne.
+<suppressed ~127 debug messages>
+Optimizing module mixed_precision_bank_apply4_pipe.
+
+17.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\bf16_to_fp32'.
+Finding identical cells in module `\fp32_add_pipe4'.
+<suppressed ~462 debug messages>
+Finding identical cells in module `\fp32_mul_pipe4'.
+<suppressed ~3993 debug messages>
+Finding identical cells in module `\fp32_to_bf16_rne'.
+<suppressed ~27 debug messages>
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+<suppressed ~93 debug messages>
+Removed a total of 1525 cells.
+
+17.21.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+17.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \bf16_to_fp32..
+Finding unused cells or wires in module \fp32_add_pipe4..
+Finding unused cells or wires in module \fp32_mul_pipe4..
+Finding unused cells or wires in module \fp32_to_bf16_rne..
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+Removed 3525 unused cells and 3558 unused wires.
+<suppressed ~3529 debug messages>
+
+17.21.5. Finished fast OPT passes.
+
+17.22. Executing ABC pass (technology mapping using ABC).
+
+17.22.1. Extracting gate netlist of module `\bf16_to_fp32' to `<abc-temp-dir>/input.blif'..
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Don't call ABC as there is nothing to map.
+Removing temp directory.
+
+17.22.2. Extracting gate netlist of module `\fp32_add_pipe4' to `<abc-temp-dir>/input.blif'..
+Extracted 2425 gates and 2629 wires to a netlist network with 202 inputs and 169 outputs.
+
+17.22.2.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+17.22.2.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       46
+ABC RESULTS:            ANDNOT cells:      531
+ABC RESULTS:               MUX cells:      402
+ABC RESULTS:              NAND cells:       72
+ABC RESULTS:               NOR cells:      149
+ABC RESULTS:               NOT cells:       78
+ABC RESULTS:                OR cells:      583
+ABC RESULTS:             ORNOT cells:      131
+ABC RESULTS:              XNOR cells:       65
+ABC RESULTS:               XOR cells:      176
+ABC RESULTS:        internal signals:     2258
+ABC RESULTS:           input signals:      202
+ABC RESULTS:          output signals:      169
+Removing temp directory.
+
+17.22.3. Extracting gate netlist of module `\fp32_mul_pipe4' to `<abc-temp-dir>/input.blif'..
+Replacing 50 occurrences of constant undef bits with constant zero bits
+Extracted 8168 gates and 8514 wires to a netlist network with 343 inputs and 253 outputs.
+
+17.22.3.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+17.22.3.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:      591
+ABC RESULTS:            ANDNOT cells:     1831
+ABC RESULTS:               MUX cells:      831
+ABC RESULTS:              NAND cells:      238
+ABC RESULTS:               NOR cells:      564
+ABC RESULTS:               NOT cells:      156
+ABC RESULTS:                OR cells:     1731
+ABC RESULTS:             ORNOT cells:      299
+ABC RESULTS:              XNOR cells:      574
+ABC RESULTS:               XOR cells:      832
+ABC RESULTS:        internal signals:     7918
+ABC RESULTS:           input signals:      343
+ABC RESULTS:          output signals:      253
+Removing temp directory.
+
+17.22.4. Extracting gate netlist of module `\fp32_to_bf16_rne' to `<abc-temp-dir>/input.blif'..
+Extracted 148 gates and 182 wires to a netlist network with 32 inputs and 16 outputs.
+
+17.22.4.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+17.22.4.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        3
+ABC RESULTS:            ANDNOT cells:       18
+ABC RESULTS:               MUX cells:        4
+ABC RESULTS:              NAND cells:        8
+ABC RESULTS:               NOR cells:        1
+ABC RESULTS:               NOT cells:        3
+ABC RESULTS:                OR cells:       55
+ABC RESULTS:             ORNOT cells:        5
+ABC RESULTS:              XNOR cells:        4
+ABC RESULTS:               XOR cells:       12
+ABC RESULTS:        internal signals:      134
+ABC RESULTS:           input signals:       32
+ABC RESULTS:          output signals:       16
+Removing temp directory.
+
+17.22.5. Extracting gate netlist of module `\mixed_precision_bank_apply4_pipe' to `<abc-temp-dir>/input.blif'..
+Extracted 207 gates and 409 wires to a netlist network with 201 inputs and 169 outputs.
+
+17.22.5.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+17.22.5.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        3
+ABC RESULTS:            ANDNOT cells:      165
+ABC RESULTS:               MUX cells:        1
+ABC RESULTS:               NOT cells:        5
+ABC RESULTS:                OR cells:       17
+ABC RESULTS:               XOR cells:       16
+ABC RESULTS:        internal signals:       39
+ABC RESULTS:           input signals:      201
+ABC RESULTS:          output signals:      169
+Removing temp directory.
+
+17.23. Executing OPT pass (performing simple optimizations).
+
+17.23.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module bf16_to_fp32.
+Optimizing module fp32_add_pipe4.
+<suppressed ~28 debug messages>
+Optimizing module fp32_mul_pipe4.
+<suppressed ~335 debug messages>
+Optimizing module fp32_to_bf16_rne.
+Optimizing module mixed_precision_bank_apply4_pipe.
+<suppressed ~2229 debug messages>
+
+17.23.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\bf16_to_fp32'.
+Finding identical cells in module `\fp32_add_pipe4'.
+<suppressed ~72 debug messages>
+Finding identical cells in module `\fp32_mul_pipe4'.
+<suppressed ~423 debug messages>
+Finding identical cells in module `\fp32_to_bf16_rne'.
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+Removed a total of 165 cells.
+
+17.23.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+17.23.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \bf16_to_fp32..
+Finding unused cells or wires in module \fp32_add_pipe4..
+Finding unused cells or wires in module \fp32_mul_pipe4..
+Finding unused cells or wires in module \fp32_to_bf16_rne..
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+Removed 0 unused cells and 3624 unused wires.
+<suppressed ~13 debug messages>
+
+17.23.5. Finished fast OPT passes.
+
+17.24. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `mixed_precision_bank_apply4_pipe'. Setting top module to mixed_precision_bank_apply4_pipe.
+
+17.24.1. Analyzing design hierarchy..
+Top module:  \mixed_precision_bank_apply4_pipe
+Used module:     \bf16_to_fp32
+Used module:     \fp32_add_pipe4
+Used module:     \fp32_to_bf16_rne
+Used module:     \fp32_mul_pipe4
+
+17.24.2. Analyzing design hierarchy..
+Top module:  \mixed_precision_bank_apply4_pipe
+Used module:     \bf16_to_fp32
+Used module:     \fp32_add_pipe4
+Used module:     \fp32_to_bf16_rne
+Used module:     \fp32_mul_pipe4
+Removed 0 unused modules.
+
+17.25. Printing statistics.
+
+=== bf16_to_fp32 ===
+
+   Number of wires:                  2
+   Number of wire bits:             48
+   Number of public wires:           2
+   Number of public wire bits:      48
+   Number of ports:                  2
+   Number of port bits:             48
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  0
+
+=== fp32_add_pipe4 ===
+
+   Number of wires:               2102
+   Number of wire bits:           2785
+   Number of public wires:          62
+   Number of public wire bits:     745
+   Number of ports:                  8
+   Number of port bits:            101
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               2359
+     $_ANDNOT_                     531
+     $_AND_                         45
+     $_DFFE_PN0P_                  150
+     $_MUX_                        402
+     $_NAND_                        72
+     $_NOR_                        146
+     $_NOT_                         78
+     $_ORNOT_                      121
+     $_OR_                         581
+     $_XNOR_                        65
+     $_XOR_                        168
+
+=== fp32_mul_pipe4 ===
+
+   Number of wires:               7310
+   Number of wire bits:           8224
+   Number of public wires:          57
+   Number of public wire bits:     971
+   Number of ports:                  8
+   Number of port bits:            101
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               7799
+     $_ANDNOT_                    1817
+     $_AND_                        589
+     $_DFFE_PN0P_                  293
+     $_MUX_                        826
+     $_NAND_                       237
+     $_NOR_                        484
+     $_NOT_                        156
+     $_ORNOT_                      269
+     $_OR_                        1725
+     $_XNOR_                       573
+     $_XOR_                        830
+
+=== fp32_to_bf16_rne ===
+
+   Number of wires:                101
+   Number of wire bits:            177
+   Number of public wires:           4
+   Number of public wire bits:      80
+   Number of ports:                  2
+   Number of port bits:             48
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                113
+     $_ANDNOT_                      18
+     $_AND_                          3
+     $_MUX_                          4
+     $_NAND_                         8
+     $_NOR_                          1
+     $_NOT_                          3
+     $_ORNOT_                        5
+     $_OR_                          55
+     $_XNOR_                         4
+     $_XOR_                         12
+
+=== mixed_precision_bank_apply4_pipe ===
+
+   Number of wires:                249
+   Number of wire bits:           5545
+   Number of public wires:          45
+   Number of public wire bits:    3806
+   Number of ports:                 21
+   Number of port bits:            380
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               2551
+     $_ANDNOT_                     165
+     $_AND_                          3
+     $_DFFE_PN0N_                 2229
+     $_DFFE_PN0P_                   81
+     $_DFF_PN0_                      2
+     $_MUX_                          1
+     $_NOT_                          5
+     $_OR_                          17
+     $_XOR_                         16
+     bf16_to_fp32                   12
+     fp32_add_pipe4                  8
+     fp32_mul_pipe4                  8
+     fp32_to_bf16_rne                4
+
+=== design hierarchy ===
+
+   mixed_precision_bank_apply4_pipe      1
+     bf16_to_fp32                   12
+     fp32_add_pipe4                  8
+     fp32_mul_pipe4                  8
+     fp32_to_bf16_rne                4
+
+   Number of wires:              75973
+   Number of wire bits:          94901
+   Number of public wires:        1037
+   Number of public wire bits:   18430
+   Number of ports:                181
+   Number of port bits:           2764
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:              84235
+     $_ANDNOT_                   19021
+     $_AND_                       5087
+     $_DFFE_PN0N_                 2229
+     $_DFFE_PN0P_                 3625
+     $_DFF_PN0_                      2
+     $_MUX_                       9841
+     $_NAND_                      2504
+     $_NOR_                       5044
+     $_NOT_                       1889
+     $_ORNOT_                     3140
+     $_OR_                       18685
+     $_XNOR_                      5120
+     $_XOR_                       8048
+
+17.26. Executing CHECK pass (checking for obvious problems).
+Checking module bf16_to_fp32...
+Checking module fp32_add_pipe4...
+Checking module fp32_mul_pipe4...
+Checking module fp32_to_bf16_rne...
+Checking module mixed_precision_bank_apply4_pipe...
+Found and reported 0 problems.
+
+18. Executing CHECK pass (checking for obvious problems).
+Checking module bf16_to_fp32...
+Checking module fp32_add_pipe4...
+Checking module fp32_mul_pipe4...
+Checking module fp32_to_bf16_rne...
+Checking module mixed_precision_bank_apply4_pipe...
+Found and reported 0 problems.
+
+19. Printing statistics.
+
+=== bf16_to_fp32 ===
+
+   Number of wires:                  2
+   Number of wire bits:             48
+   Number of public wires:           2
+   Number of public wire bits:      48
+   Number of ports:                  2
+   Number of port bits:             48
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  0
+
+=== fp32_add_pipe4 ===
+
+   Number of wires:               2102
+   Number of wire bits:           2785
+   Number of public wires:          62
+   Number of public wire bits:     745
+   Number of ports:                  8
+   Number of port bits:            101
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               2359
+     $_ANDNOT_                     531
+     $_AND_                         45
+     $_DFFE_PN0P_                  150
+     $_MUX_                        402
+     $_NAND_                        72
+     $_NOR_                        146
+     $_NOT_                         78
+     $_ORNOT_                      121
+     $_OR_                         581
+     $_XNOR_                        65
+     $_XOR_                        168
+
+=== fp32_mul_pipe4 ===
+
+   Number of wires:               7310
+   Number of wire bits:           8224
+   Number of public wires:          57
+   Number of public wire bits:     971
+   Number of ports:                  8
+   Number of port bits:            101
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               7799
+     $_ANDNOT_                    1817
+     $_AND_                        589
+     $_DFFE_PN0P_                  293
+     $_MUX_                        826
+     $_NAND_                       237
+     $_NOR_                        484
+     $_NOT_                        156
+     $_ORNOT_                      269
+     $_OR_                        1725
+     $_XNOR_                       573
+     $_XOR_                        830
+
+=== fp32_to_bf16_rne ===
+
+   Number of wires:                101
+   Number of wire bits:            177
+   Number of public wires:           4
+   Number of public wire bits:      80
+   Number of ports:                  2
+   Number of port bits:             48
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                113
+     $_ANDNOT_                      18
+     $_AND_                          3
+     $_MUX_                          4
+     $_NAND_                         8
+     $_NOR_                          1
+     $_NOT_                          3
+     $_ORNOT_                        5
+     $_OR_                          55
+     $_XNOR_                         4
+     $_XOR_                         12
+
+=== mixed_precision_bank_apply4_pipe ===
+
+   Number of wires:                249
+   Number of wire bits:           5545
+   Number of public wires:          45
+   Number of public wire bits:    3806
+   Number of ports:                 21
+   Number of port bits:            380
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               2551
+     $_ANDNOT_                     165
+     $_AND_                          3
+     $_DFFE_PN0N_                 2229
+     $_DFFE_PN0P_                   81
+     $_DFF_PN0_                      2
+     $_MUX_                          1
+     $_NOT_                          5
+     $_OR_                          17
+     $_XOR_                         16
+     bf16_to_fp32                   12
+     fp32_add_pipe4                  8
+     fp32_mul_pipe4                  8
+     fp32_to_bf16_rne                4
+
+=== design hierarchy ===
+
+   mixed_precision_bank_apply4_pipe      1
+     bf16_to_fp32                   12
+     fp32_add_pipe4                  8
+     fp32_mul_pipe4                  8
+     fp32_to_bf16_rne                4
+
+   Number of wires:              75973
+   Number of wire bits:          94901
+   Number of public wires:        1037
+   Number of public wire bits:   18430
+   Number of ports:                181
+   Number of port bits:           2764
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:              84235
+     $_ANDNOT_                   19021
+     $_AND_                       5087
+     $_DFFE_PN0N_                 2229
+     $_DFFE_PN0P_                 3625
+     $_DFF_PN0_                      2
+     $_MUX_                       9841
+     $_NAND_                      2504
+     $_NOR_                       5044
+     $_NOT_                       1889
+     $_ORNOT_                     3140
+     $_OR_                       18685
+     $_XNOR_                      5120
+     $_XOR_                       8048
+
+20. Executing FLATTEN pass (flatten design).
+Deleting now unused module bf16_to_fp32.
+Deleting now unused module fp32_add_pipe4.
+Deleting now unused module fp32_mul_pipe4.
+Deleting now unused module fp32_to_bf16_rne.
+<suppressed ~32 debug messages>
+
+21. Executing OPT pass (performing simple optimizations).
+
+21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_bank_apply4_pipe.
+<suppressed ~3688 debug messages>
+
+21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+<suppressed ~15357 debug messages>
+Removed a total of 5119 cells.
+
+21.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mixed_precision_bank_apply4_pipe..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+21.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mixed_precision_bank_apply4_pipe.
+Performed a total of 0 changes.
+
+21.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+Removed a total of 0 cells.
+
+21.6. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$2819 ($_DFFE_PN0N_) from module mixed_precision_bank_apply4_pipe.
+
+21.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+Removed 1 unused cells and 4343 unused wires.
+<suppressed ~2 debug messages>
+
+21.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_bank_apply4_pipe.
+<suppressed ~6 debug messages>
+
+21.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+21.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mixed_precision_bank_apply4_pipe..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+21.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mixed_precision_bank_apply4_pipe.
+Performed a total of 0 changes.
+
+21.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+Removed a total of 0 cells.
+
+21.13. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$2947 ($_DFFE_PN0N_) from module mixed_precision_bank_apply4_pipe.
+
+21.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+Removed 0 unused cells and 23 unused wires.
+<suppressed ~18 debug messages>
+
+21.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_bank_apply4_pipe.
+
+21.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+21.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mixed_precision_bank_apply4_pipe..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+21.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mixed_precision_bank_apply4_pipe.
+Performed a total of 0 changes.
+
+21.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+Removed a total of 0 cells.
+
+21.20. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$3075 ($_DFFE_PN0N_) from module mixed_precision_bank_apply4_pipe.
+
+21.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+
+21.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_bank_apply4_pipe.
+
+21.23. Rerunning OPT passes. (Maybe there is more to do..)
+
+21.24. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mixed_precision_bank_apply4_pipe..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+21.25. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mixed_precision_bank_apply4_pipe.
+Performed a total of 0 changes.
+
+21.26. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+Removed a total of 0 cells.
+
+21.27. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$3203 ($_DFFE_PN0N_) from module mixed_precision_bank_apply4_pipe.
+
+21.28. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+
+21.29. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_bank_apply4_pipe.
+
+21.30. Rerunning OPT passes. (Maybe there is more to do..)
+
+21.31. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mixed_precision_bank_apply4_pipe..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+21.32. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mixed_precision_bank_apply4_pipe.
+Performed a total of 0 changes.
+
+21.33. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+Removed a total of 0 cells.
+
+21.34. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$3331 ($_DFFE_PN0N_) from module mixed_precision_bank_apply4_pipe.
+
+21.35. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+
+21.36. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_bank_apply4_pipe.
+
+21.37. Rerunning OPT passes. (Maybe there is more to do..)
+
+21.38. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mixed_precision_bank_apply4_pipe..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+21.39. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mixed_precision_bank_apply4_pipe.
+Performed a total of 0 changes.
+
+21.40. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+Removed a total of 0 cells.
+
+21.41. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$3459 ($_DFFE_PN0N_) from module mixed_precision_bank_apply4_pipe.
+
+21.42. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+
+21.43. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_bank_apply4_pipe.
+<suppressed ~1108 debug messages>
+
+21.44. Rerunning OPT passes. (Maybe there is more to do..)
+
+21.45. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mixed_precision_bank_apply4_pipe..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+21.46. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mixed_precision_bank_apply4_pipe.
+Performed a total of 0 changes.
+
+21.47. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+<suppressed ~6354 debug messages>
+Removed a total of 2118 cells.
+
+21.48. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$3587 ($_DFFE_PN0N_) from module mixed_precision_bank_apply4_pipe.
+
+21.49. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+Removed 0 unused cells and 3145 unused wires.
+<suppressed ~1 debug messages>
+
+21.50. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_bank_apply4_pipe.
+<suppressed ~12 debug messages>
+
+21.51. Rerunning OPT passes. (Maybe there is more to do..)
+
+21.52. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mixed_precision_bank_apply4_pipe..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+21.53. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mixed_precision_bank_apply4_pipe.
+Performed a total of 0 changes.
+
+21.54. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+Removed a total of 0 cells.
+
+21.55. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$3715 ($_DFFE_PN0N_) from module mixed_precision_bank_apply4_pipe.
+
+21.56. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+Removed 0 unused cells and 12 unused wires.
+<suppressed ~1 debug messages>
+
+21.57. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_bank_apply4_pipe.
+<suppressed ~45 debug messages>
+
+21.58. Rerunning OPT passes. (Maybe there is more to do..)
+
+21.59. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mixed_precision_bank_apply4_pipe..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+21.60. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mixed_precision_bank_apply4_pipe.
+Performed a total of 0 changes.
+
+21.61. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+Removed a total of 0 cells.
+
+21.62. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$3843 ($_DFFE_PN0N_) from module mixed_precision_bank_apply4_pipe.
+
+21.63. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+Removed 0 unused cells and 45 unused wires.
+<suppressed ~1 debug messages>
+
+21.64. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_bank_apply4_pipe.
+
+21.65. Rerunning OPT passes. (Maybe there is more to do..)
+
+21.66. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mixed_precision_bank_apply4_pipe..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+21.67. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mixed_precision_bank_apply4_pipe.
+Performed a total of 0 changes.
+
+21.68. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mixed_precision_bank_apply4_pipe'.
+Removed a total of 0 cells.
+
+21.69. Executing OPT_DFF pass (perform DFF optimizations).
+
+21.70. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_bank_apply4_pipe..
+
+21.71. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_bank_apply4_pipe.
+
+21.72. Finished OPT passes. (There is nothing left to do.)
+
+22. Executing LTP pass (find longest path).
+
+Longest topological path in mixed_precision_bank_apply4_pipe (length=76):
+    0: \g_lane[3].u_scale.rounded2_q [26]
+    1: $flatten\g_lane[3].u_scale.$abc$43485$new_n4276 (via $flatten\g_lane[3].u_scale.$abc$43485$auto$blifparse.cc:396:parse_blif$47164)
+    2: $flatten\g_lane[3].u_scale.$abc$43485$new_n4279 (via $flatten\g_lane[3].u_scale.$abc$43485$auto$blifparse.cc:396:parse_blif$47167)
+    3: $flatten\g_lane[3].u_scale.$abc$43485$new_n4280 (via $flatten\g_lane[3].u_scale.$abc$43485$auto$blifparse.cc:396:parse_blif$47168)
+    4: $flatten\g_lane[3].u_scale.$abc$43485$new_n4281 (via $flatten\g_lane[3].u_scale.$abc$43485$auto$blifparse.cc:396:parse_blif$47169)
+    5: $flatten\g_lane[3].u_scale.$abc$43485$new_n4282 (via $flatten\g_lane[3].u_scale.$abc$43485$auto$blifparse.cc:396:parse_blif$47170)
+    6: $flatten\g_lane[3].u_scale.$abc$43485$new_n4283 (via $flatten\g_lane[3].u_scale.$abc$43485$auto$blifparse.cc:396:parse_blif$47171)
+    7: $flatten\g_lane[3].u_scale.$abc$43485$new_n4284 (via $flatten\g_lane[3].u_scale.$abc$43485$auto$blifparse.cc:396:parse_blif$47172)
+    8: $flatten\g_lane[3].u_scale.$abc$43485$new_n4285 (via $flatten\g_lane[3].u_scale.$abc$43485$auto$blifparse.cc:396:parse_blif$47173)
+    9: $flatten\g_lane[3].u_scale.$abc$43485$new_n4286 (via $flatten\g_lane[3].u_scale.$abc$43485$auto$blifparse.cc:396:parse_blif$47174)
+   10: $flatten\g_lane[3].u_scale.$abc$43485$new_n4287 (via $flatten\g_lane[3].u_scale.$abc$43485$auto$blifparse.cc:396:parse_blif$47175)
+   11: $flatten\g_lane[3].u_scale.$abc$43485$new_n4288 (via $flatten\g_lane[3].u_scale.$abc$43485$auto$blifparse.cc:396:parse_blif$47176)
+   12: $flatten\g_lane[3].u_scale.$abc$43485$new_n4289 (via $flatten\g_lane[3].u_scale.$abc$43485$auto$blifparse.cc:396:parse_blif$47177)
+   13: $flatten\g_lane[3].u_scale.$abc$43485$new_n4290 (via $flatten\g_lane[3].u_scale.$abc$43485$auto$blifparse.cc:396:parse_blif$47178)
+   14: $flatten\g_lane[3].u_scale.$abc$43485$new_n4291 (via $flatten\g_lane[3].u_scale.$abc$43485$auto$blifparse.cc:396:parse_blif$47179)
+   15: $flatten\g_lane[3].u_scale.$abc$43485$new_n4292 (via $flatten\g_lane[3].u_scale.$abc$43485$auto$blifparse.cc:396:parse_blif$47180)
+   16: $flatten\g_lane[3].u_scale.$abc$43485$new_n4293 (via $flatten\g_lane[3].u_scale.$abc$43485$auto$blifparse.cc:396:parse_blif$47181)
+   17: $flatten\g_lane[3].u_scale.$abc$43485$new_n4294 (via $flatten\g_lane[3].u_scale.$abc$43485$auto$blifparse.cc:396:parse_blif$47182)
+   18: $flatten\g_lane[3].u_scale.$abc$43485$new_n4455 (via $flatten\g_lane[3].u_scale.$abc$43485$auto$blifparse.cc:396:parse_blif$47342)
+   19: $flatten\g_lane[3].u_scale.$abc$43485$new_n4456 (via $flatten\g_lane[3].u_scale.$abc$43485$auto$blifparse.cc:396:parse_blif$47343)
+   20: $flatten\g_lane[3].u_scale.$abc$43485$new_n4457 (via $flatten\g_lane[3].u_scale.$abc$43485$auto$blifparse.cc:396:parse_blif$47344)
+   21: $flatten\g_lane[3].u_scale.$abc$43485$new_n4458 (via $flatten\g_lane[3].u_scale.$abc$43485$auto$blifparse.cc:396:parse_blif$47345)
+   22: \g_lane[3].u_scale.result_o [23] (via $flatten\g_lane[3].u_scale.$abc$43485$auto$blifparse.cc:396:parse_blif$47346)
+   23: $flatten\g_lane[3].u_shift.$abc$41251$new_n666 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$41546)
+   24: $flatten\g_lane[3].u_shift.$abc$41251$new_n668 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$41548)
+   25: $flatten\g_lane[3].u_shift.$abc$41251$new_n672 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$41552)
+   26: $flatten\g_lane[3].u_shift.$abc$41251$new_n1077 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$41957)
+   27: $flatten\g_lane[3].u_shift.$abc$41251$new_n1080 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$41960)
+   28: $flatten\g_lane[3].u_shift.$abc$41251$new_n1082 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$41962)
+   29: $flatten\g_lane[3].u_shift.$abc$41251$new_n1083 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$41963)
+   30: $flatten\g_lane[3].u_shift.$abc$41251$new_n1084 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$41964)
+   31: $flatten\g_lane[3].u_shift.$abc$41251$new_n1085 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$41965)
+   32: $flatten\g_lane[3].u_shift.$abc$41251$new_n1086 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$41966)
+   33: $flatten\g_lane[3].u_shift.$abc$41251$new_n1087 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$41967)
+   34: $flatten\g_lane[3].u_shift.$abc$41251$new_n1126 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42006)
+   35: $flatten\g_lane[3].u_shift.$abc$41251$new_n1205 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42085)
+   36: $flatten\g_lane[3].u_shift.$abc$41251$new_n1212 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42092)
+   37: $flatten\g_lane[3].u_shift.$abc$41251$new_n1296 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42176)
+   38: $flatten\g_lane[3].u_shift.$abc$41251$new_n1297 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42177)
+   39: $flatten\g_lane[3].u_shift.$abc$41251$new_n1298 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42178)
+   40: $flatten\g_lane[3].u_shift.$abc$41251$new_n1299 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42179)
+   41: $flatten\g_lane[3].u_shift.$abc$41251$new_n1300 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42180)
+   42: $flatten\g_lane[3].u_shift.$abc$41251$new_n1301 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42181)
+   43: $flatten\g_lane[3].u_shift.$abc$41251$new_n1307 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42187)
+   44: $flatten\g_lane[3].u_shift.$abc$41251$new_n1308 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42188)
+   45: $flatten\g_lane[3].u_shift.$abc$41251$new_n1310 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42190)
+   46: $flatten\g_lane[3].u_shift.$abc$41251$new_n1311 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42191)
+   47: $flatten\g_lane[3].u_shift.$abc$41251$new_n1312 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42192)
+   48: $flatten\g_lane[3].u_shift.$abc$41251$new_n1313 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42193)
+   49: $flatten\g_lane[3].u_shift.$abc$41251$new_n1314 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42194)
+   50: $flatten\g_lane[3].u_shift.$abc$41251$new_n1435 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42315)
+   51: $flatten\g_lane[3].u_shift.$abc$41251$new_n1447 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42327)
+   52: $flatten\g_lane[3].u_shift.$abc$41251$new_n1448 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42328)
+   53: $flatten\g_lane[3].u_shift.$abc$41251$new_n1449 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42329)
+   54: $flatten\g_lane[3].u_shift.$abc$41251$new_n1450 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42330)
+   55: $flatten\g_lane[3].u_shift.$abc$41251$new_n1451 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42331)
+   56: $flatten\g_lane[3].u_shift.$abc$41251$new_n1452 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42332)
+   57: $flatten\g_lane[3].u_shift.$abc$41251$new_n1462 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42342)
+   58: $flatten\g_lane[3].u_shift.$abc$41251$new_n1463 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42343)
+   59: $flatten\g_lane[3].u_shift.$abc$41251$new_n1501 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42381)
+   60: $flatten\g_lane[3].u_shift.$abc$41251$new_n1502 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42382)
+   61: $flatten\g_lane[3].u_shift.$abc$41251$new_n1576 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42456)
+   62: $flatten\g_lane[3].u_shift.$abc$41251$new_n1577 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42457)
+   63: $flatten\g_lane[3].u_shift.$abc$41251$new_n1610 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42490)
+   64: $flatten\g_lane[3].u_shift.$abc$41251$new_n1611 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42491)
+   65: $flatten\g_lane[3].u_shift.$abc$41251$new_n1624 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42504)
+   66: $flatten\g_lane[3].u_shift.$abc$41251$new_n1625 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42505)
+   67: $flatten\g_lane[3].u_shift.$abc$41251$new_n1632 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42512)
+   68: $flatten\g_lane[3].u_shift.$abc$41251$new_n1633 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42513)
+   69: $flatten\g_lane[3].u_shift.$abc$41251$new_n1634 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42514)
+   70: $flatten\g_lane[3].u_shift.$abc$41251$new_n1650 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42530)
+   71: $flatten\g_lane[3].u_shift.$abc$41251$new_n1666 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42546)
+   72: $flatten\g_lane[3].u_shift.$abc$41251$new_n1667 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42547)
+   73: $flatten\g_lane[3].u_shift.$abc$41251$new_n1668 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42548)
+   74: $flatten\g_lane[3].u_shift.$abc$41251$new_n1669 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42549)
+   75: $flatten\g_lane[3].u_shift.$abc$41251$new_n1710 (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42590)
+   76: \g_lane[3].u_shift.small_d [0] (via $flatten\g_lane[3].u_shift.$abc$41251$auto$blifparse.cc:396:parse_blif$42598)
+   ff: \g_lane[3].u_shift.small_q [0] (via $flatten\g_lane[3].u_shift.$auto$ff.cc:266:slice$37697)
+
+Warnings: 2 unique messages, 2 total
+End of script. Logfile hash: ecd1d29454, CPU: user 20.98s system 0.22s, MEM: 228.22 MB peak
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+Time spent: 28% 43x opt_clean (6 sec), 26% 73x opt_expr (5 sec), ...

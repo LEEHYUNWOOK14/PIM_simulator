@@ -1,0 +1,3875 @@
+{
+  "schema_version": "1.0",
+  "manifest_id": "manual_baseline_cand_deb1a75ad74b",
+  "coordinate_system": {
+    "origin": "logic_die_lower_left",
+    "positive_x": "right",
+    "positive_y": "up",
+    "length_unit": "um",
+    "bundle_anchor": "lower_left_element_center"
+  },
+  "die": {
+    "x_um": 0.0,
+    "y_um": 0.0,
+    "width_um": 8000.0,
+    "height_um": 12000.0
+  },
+  "evidence_snapshot": {
+    "git_commit": "eb03227e05575d37e8046418c4302963acff567b",
+    "working_tree_dirty": true,
+    "captured_at": "2026-08-11T14:59:19.162391+00:00",
+    "source_manifest_hashes": {
+      "design/hbm2_architecture.json": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+      "design/hbm2_package.json": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6"
+    }
+  },
+  "external_endpoints": [
+    "package.interposer",
+    "host",
+    "vdd",
+    "vss",
+    "dram.channel[0]",
+    "dram.channel[1]",
+    "dram.channel[2]",
+    "dram.channel[3]",
+    "dram.channel[4]",
+    "dram.channel[5]",
+    "dram.channel[6]",
+    "dram.channel[7]"
+  ],
+  "blocks": [
+    {
+      "instance": "top.logic_die_64ch_reduction_top",
+      "module": "logic_die_64ch_reduction_top",
+      "role": "cross-channel reduction",
+      "x_um": 675.0,
+      "y_um": 1100.0,
+      "width_um": 650.0,
+      "height_um": 4000.0,
+      "orientation": "N",
+      "area_source": "illustrative_adapter_tile",
+      "placement_source": "deterministic_floorplan_candidate_generator",
+      "status": "provisional",
+      "dynamic_W": 0.49500000000000005,
+      "leakage_W": 0.05500000000000001,
+      "power_source": "estimated_4W_logic_die_allocation_for_relative_candidate_comparison",
+      "clock_domain": "clk_i",
+      "voltage_domain": "logic_vdd_unspecified",
+      "traffic_endpoints": [
+        "dram.channel[0]",
+        "dram.channel[1]",
+        "dram.channel[2]",
+        "dram.channel[3]",
+        "dram.channel[4]",
+        "dram.channel[5]",
+        "dram.channel[6]",
+        "dram.channel[7]"
+      ],
+      "timing_criticality": 0.9,
+      "movable": true,
+      "halo_um": 25.0,
+      "allowed_region": {
+        "x_um": 250.0,
+        "y_um": 800.0,
+        "width_um": 7500.0,
+        "height_um": 10950.0
+      },
+      "classification": "modeled",
+      "confidence": "low",
+      "provenance": {
+        "source_id": "floorplan_adapter",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Adapted without changing RTL."
+      }
+    },
+    {
+      "instance": "top.bank_local_reduction_buffer",
+      "module": "bank_local_reduction_buffer",
+      "role": "bank reduction buffering",
+      "x_um": 1675.0,
+      "y_um": 1100.0,
+      "width_um": 650.0,
+      "height_um": 4000.0,
+      "orientation": "N",
+      "area_source": "illustrative_adapter_tile",
+      "placement_source": "deterministic_floorplan_candidate_generator",
+      "status": "provisional",
+      "dynamic_W": 0.225,
+      "leakage_W": 0.025,
+      "power_source": "estimated_4W_logic_die_allocation_for_relative_candidate_comparison",
+      "clock_domain": "clk_i",
+      "voltage_domain": "logic_vdd_unspecified",
+      "traffic_endpoints": [
+        "dram.channel[4]",
+        "dram.channel[5]",
+        "dram.channel[6]",
+        "dram.channel[7]"
+      ],
+      "timing_criticality": 0.45,
+      "movable": true,
+      "halo_um": 25.0,
+      "allowed_region": {
+        "x_um": 250.0,
+        "y_um": 800.0,
+        "width_um": 7500.0,
+        "height_um": 10950.0
+      },
+      "classification": "modeled",
+      "confidence": "low",
+      "provenance": {
+        "source_id": "floorplan_adapter",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Adapted without changing RTL."
+      }
+    },
+    {
+      "instance": "top.bank_local_fp16_reduction",
+      "module": "bank_local_fp16_reduction",
+      "role": "bank reduction arithmetic",
+      "x_um": 2675.0,
+      "y_um": 1100.0,
+      "width_um": 650.0,
+      "height_um": 4000.0,
+      "orientation": "N",
+      "area_source": "illustrative_adapter_tile",
+      "placement_source": "deterministic_floorplan_candidate_generator",
+      "status": "provisional",
+      "dynamic_W": 0.405,
+      "leakage_W": 0.045000000000000005,
+      "power_source": "estimated_4W_logic_die_allocation_for_relative_candidate_comparison",
+      "clock_domain": "clk_i",
+      "voltage_domain": "logic_vdd_unspecified",
+      "traffic_endpoints": [
+        "dram.channel[0]",
+        "dram.channel[1]",
+        "dram.channel[2]",
+        "dram.channel[3]"
+      ],
+      "timing_criticality": 0.75,
+      "movable": true,
+      "halo_um": 25.0,
+      "allowed_region": {
+        "x_um": 250.0,
+        "y_um": 800.0,
+        "width_um": 7500.0,
+        "height_um": 10950.0
+      },
+      "classification": "modeled",
+      "confidence": "low",
+      "provenance": {
+        "source_id": "floorplan_adapter",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Adapted without changing RTL."
+      }
+    },
+    {
+      "instance": "top.hierarchical_reduction_path",
+      "module": "hierarchical_reduction_path",
+      "role": "hierarchical reduction",
+      "x_um": 4675.0,
+      "y_um": 1100.0,
+      "width_um": 650.0,
+      "height_um": 4000.0,
+      "orientation": "N",
+      "area_source": "illustrative_adapter_tile",
+      "placement_source": "deterministic_floorplan_candidate_generator",
+      "status": "provisional",
+      "dynamic_W": 0.49500000000000005,
+      "leakage_W": 0.05500000000000001,
+      "power_source": "estimated_4W_logic_die_allocation_for_relative_candidate_comparison",
+      "clock_domain": "clk_i",
+      "voltage_domain": "logic_vdd_unspecified",
+      "traffic_endpoints": [
+        "dram.channel[0]",
+        "dram.channel[1]",
+        "dram.channel[2]",
+        "dram.channel[3]",
+        "dram.channel[4]",
+        "dram.channel[5]",
+        "dram.channel[6]",
+        "dram.channel[7]"
+      ],
+      "timing_criticality": 0.95,
+      "movable": true,
+      "halo_um": 25.0,
+      "allowed_region": {
+        "x_um": 250.0,
+        "y_um": 800.0,
+        "width_um": 7500.0,
+        "height_um": 10950.0
+      },
+      "classification": "modeled",
+      "confidence": "low",
+      "provenance": {
+        "source_id": "floorplan_adapter",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Adapted without changing RTL."
+      }
+    },
+    {
+      "instance": "top.logic_die_link_arbiter",
+      "module": "logic_die_link_arbiter",
+      "role": "TSV link arbitration",
+      "x_um": 675.0,
+      "y_um": 6500.0,
+      "width_um": 650.0,
+      "height_um": 4000.0,
+      "orientation": "N",
+      "area_source": "illustrative_adapter_tile",
+      "placement_source": "deterministic_floorplan_candidate_generator",
+      "status": "provisional",
+      "dynamic_W": 0.18000000000000002,
+      "leakage_W": 0.020000000000000004,
+      "power_source": "estimated_4W_logic_die_allocation_for_relative_candidate_comparison",
+      "clock_domain": "clk_i",
+      "voltage_domain": "logic_vdd_unspecified",
+      "traffic_endpoints": [
+        "dram.channel[0]",
+        "dram.channel[1]",
+        "dram.channel[2]",
+        "dram.channel[3]",
+        "dram.channel[4]",
+        "dram.channel[5]",
+        "dram.channel[6]",
+        "dram.channel[7]"
+      ],
+      "timing_criticality": 0.7,
+      "movable": true,
+      "halo_um": 25.0,
+      "allowed_region": {
+        "x_um": 250.0,
+        "y_um": 800.0,
+        "width_um": 7500.0,
+        "height_um": 10950.0
+      },
+      "classification": "modeled",
+      "confidence": "low",
+      "provenance": {
+        "source_id": "floorplan_adapter",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Adapted without changing RTL."
+      }
+    },
+    {
+      "instance": "top.logic_die_dual_link_arbiter",
+      "module": "logic_die_dual_link_arbiter",
+      "role": "dual-link arbitration",
+      "x_um": 1675.0,
+      "y_um": 6500.0,
+      "width_um": 650.0,
+      "height_um": 4000.0,
+      "orientation": "N",
+      "area_source": "illustrative_adapter_tile",
+      "placement_source": "deterministic_floorplan_candidate_generator",
+      "status": "provisional",
+      "dynamic_W": 0.18000000000000002,
+      "leakage_W": 0.020000000000000004,
+      "power_source": "estimated_4W_logic_die_allocation_for_relative_candidate_comparison",
+      "clock_domain": "clk_i",
+      "voltage_domain": "logic_vdd_unspecified",
+      "traffic_endpoints": [
+        "dram.channel[0]",
+        "dram.channel[1]",
+        "dram.channel[2]",
+        "dram.channel[3]",
+        "dram.channel[4]",
+        "dram.channel[5]",
+        "dram.channel[6]",
+        "dram.channel[7]"
+      ],
+      "timing_criticality": 0.7,
+      "movable": true,
+      "halo_um": 25.0,
+      "allowed_region": {
+        "x_um": 250.0,
+        "y_um": 800.0,
+        "width_um": 7500.0,
+        "height_um": 10950.0
+      },
+      "classification": "modeled",
+      "confidence": "low",
+      "provenance": {
+        "source_id": "floorplan_adapter",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Adapted without changing RTL."
+      }
+    },
+    {
+      "instance": "top.shared_fp16_pipeline_fabric",
+      "module": "shared_fp16_pipeline_fabric",
+      "role": "shared arithmetic fabric",
+      "x_um": 2675.0,
+      "y_um": 6500.0,
+      "width_um": 650.0,
+      "height_um": 4000.0,
+      "orientation": "N",
+      "area_source": "illustrative_adapter_tile",
+      "placement_source": "deterministic_floorplan_candidate_generator",
+      "status": "provisional",
+      "dynamic_W": 0.9,
+      "leakage_W": 0.1,
+      "power_source": "estimated_4W_logic_die_allocation_for_relative_candidate_comparison",
+      "clock_domain": "clk_i",
+      "voltage_domain": "logic_vdd_unspecified",
+      "traffic_endpoints": [
+        "dram.channel[0]",
+        "dram.channel[1]",
+        "dram.channel[2]",
+        "dram.channel[3]",
+        "dram.channel[4]",
+        "dram.channel[5]",
+        "dram.channel[6]",
+        "dram.channel[7]"
+      ],
+      "timing_criticality": 1.0,
+      "movable": true,
+      "halo_um": 25.0,
+      "allowed_region": {
+        "x_um": 250.0,
+        "y_um": 800.0,
+        "width_um": 7500.0,
+        "height_um": 10950.0
+      },
+      "classification": "modeled",
+      "confidence": "low",
+      "provenance": {
+        "source_id": "floorplan_adapter",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Adapted without changing RTL."
+      }
+    },
+    {
+      "instance": "top.shared_fp16_reduction_cluster",
+      "module": "shared_fp16_reduction_cluster",
+      "role": "shared reduction cluster",
+      "x_um": 4675.0,
+      "y_um": 6500.0,
+      "width_um": 650.0,
+      "height_um": 4000.0,
+      "orientation": "N",
+      "area_source": "illustrative_adapter_tile",
+      "placement_source": "deterministic_floorplan_candidate_generator",
+      "status": "provisional",
+      "dynamic_W": 0.7200000000000001,
+      "leakage_W": 0.08000000000000002,
+      "power_source": "estimated_4W_logic_die_allocation_for_relative_candidate_comparison",
+      "clock_domain": "clk_i",
+      "voltage_domain": "logic_vdd_unspecified",
+      "traffic_endpoints": [
+        "dram.channel[0]",
+        "dram.channel[1]",
+        "dram.channel[2]",
+        "dram.channel[3]",
+        "dram.channel[4]",
+        "dram.channel[5]",
+        "dram.channel[6]",
+        "dram.channel[7]"
+      ],
+      "timing_criticality": 0.9,
+      "movable": true,
+      "halo_um": 25.0,
+      "allowed_region": {
+        "x_um": 250.0,
+        "y_um": 800.0,
+        "width_um": 7500.0,
+        "height_um": 10950.0
+      },
+      "classification": "modeled",
+      "confidence": "low",
+      "provenance": {
+        "source_id": "floorplan_adapter",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Adapted without changing RTL."
+      }
+    }
+  ],
+  "tsv_bundles": [
+    {
+      "bundle_id": "TSV_CH0_DATA",
+      "kind": "tsv",
+      "source": "dram.channel[0]",
+      "destinations": [
+        "MBUMP_CH0_DATA"
+      ],
+      "signal_class": "data",
+      "x_um": 425.0,
+      "y_um": 1000.0,
+      "rows": 8,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 128,
+      "direction": "bidirectional",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH0_CA",
+      "kind": "tsv",
+      "source": "dram.channel[0]",
+      "destinations": [
+        "MBUMP_CH0_CA"
+      ],
+      "signal_class": "command_address",
+      "x_um": 425.0,
+      "y_um": 2300.0,
+      "rows": 2,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 32,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH0_CLK",
+      "kind": "tsv",
+      "source": "dram.channel[0]",
+      "destinations": [
+        "MBUMP_CH0_CLK"
+      ],
+      "signal_class": "clock",
+      "x_um": 425.0,
+      "y_um": 2700.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 2,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH0_POWER",
+      "kind": "tsv",
+      "source": "dram.channel[0]",
+      "destinations": [
+        "MBUMP_CH0_POWER"
+      ],
+      "signal_class": "power",
+      "x_um": 425.0,
+      "y_um": 3000.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH0_GROUND",
+      "kind": "tsv",
+      "source": "dram.channel[0]",
+      "destinations": [
+        "MBUMP_CH0_GROUND"
+      ],
+      "signal_class": "ground",
+      "x_um": 425.0,
+      "y_um": 3800.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH0_SPARE",
+      "kind": "tsv",
+      "source": "dram.channel[0]",
+      "destinations": [
+        "MBUMP_CH0_SPARE"
+      ],
+      "signal_class": "spare",
+      "x_um": 425.0,
+      "y_um": 4600.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 2,
+      "bandwidth_bits": 0,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH1_DATA",
+      "kind": "tsv",
+      "source": "dram.channel[1]",
+      "destinations": [
+        "MBUMP_CH1_DATA"
+      ],
+      "signal_class": "data",
+      "x_um": 1425.0,
+      "y_um": 1000.0,
+      "rows": 8,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 128,
+      "direction": "bidirectional",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH1_CA",
+      "kind": "tsv",
+      "source": "dram.channel[1]",
+      "destinations": [
+        "MBUMP_CH1_CA"
+      ],
+      "signal_class": "command_address",
+      "x_um": 1425.0,
+      "y_um": 2300.0,
+      "rows": 2,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 32,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH1_CLK",
+      "kind": "tsv",
+      "source": "dram.channel[1]",
+      "destinations": [
+        "MBUMP_CH1_CLK"
+      ],
+      "signal_class": "clock",
+      "x_um": 1425.0,
+      "y_um": 2700.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 2,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH1_POWER",
+      "kind": "tsv",
+      "source": "dram.channel[1]",
+      "destinations": [
+        "MBUMP_CH1_POWER"
+      ],
+      "signal_class": "power",
+      "x_um": 1425.0,
+      "y_um": 3000.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH1_GROUND",
+      "kind": "tsv",
+      "source": "dram.channel[1]",
+      "destinations": [
+        "MBUMP_CH1_GROUND"
+      ],
+      "signal_class": "ground",
+      "x_um": 1425.0,
+      "y_um": 3800.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH1_SPARE",
+      "kind": "tsv",
+      "source": "dram.channel[1]",
+      "destinations": [
+        "MBUMP_CH1_SPARE"
+      ],
+      "signal_class": "spare",
+      "x_um": 1425.0,
+      "y_um": 4600.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 2,
+      "bandwidth_bits": 0,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH2_DATA",
+      "kind": "tsv",
+      "source": "dram.channel[2]",
+      "destinations": [
+        "MBUMP_CH2_DATA"
+      ],
+      "signal_class": "data",
+      "x_um": 2425.0,
+      "y_um": 1000.0,
+      "rows": 8,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 128,
+      "direction": "bidirectional",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH2_CA",
+      "kind": "tsv",
+      "source": "dram.channel[2]",
+      "destinations": [
+        "MBUMP_CH2_CA"
+      ],
+      "signal_class": "command_address",
+      "x_um": 2425.0,
+      "y_um": 2300.0,
+      "rows": 2,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 32,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH2_CLK",
+      "kind": "tsv",
+      "source": "dram.channel[2]",
+      "destinations": [
+        "MBUMP_CH2_CLK"
+      ],
+      "signal_class": "clock",
+      "x_um": 2425.0,
+      "y_um": 2700.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 2,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH2_POWER",
+      "kind": "tsv",
+      "source": "dram.channel[2]",
+      "destinations": [
+        "MBUMP_CH2_POWER"
+      ],
+      "signal_class": "power",
+      "x_um": 2425.0,
+      "y_um": 3000.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH2_GROUND",
+      "kind": "tsv",
+      "source": "dram.channel[2]",
+      "destinations": [
+        "MBUMP_CH2_GROUND"
+      ],
+      "signal_class": "ground",
+      "x_um": 2425.0,
+      "y_um": 3800.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH2_SPARE",
+      "kind": "tsv",
+      "source": "dram.channel[2]",
+      "destinations": [
+        "MBUMP_CH2_SPARE"
+      ],
+      "signal_class": "spare",
+      "x_um": 2425.0,
+      "y_um": 4600.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 2,
+      "bandwidth_bits": 0,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH3_DATA",
+      "kind": "tsv",
+      "source": "dram.channel[3]",
+      "destinations": [
+        "MBUMP_CH3_DATA"
+      ],
+      "signal_class": "data",
+      "x_um": 3425.0,
+      "y_um": 1000.0,
+      "rows": 8,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 128,
+      "direction": "bidirectional",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH3_CA",
+      "kind": "tsv",
+      "source": "dram.channel[3]",
+      "destinations": [
+        "MBUMP_CH3_CA"
+      ],
+      "signal_class": "command_address",
+      "x_um": 3425.0,
+      "y_um": 2300.0,
+      "rows": 2,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 32,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH3_CLK",
+      "kind": "tsv",
+      "source": "dram.channel[3]",
+      "destinations": [
+        "MBUMP_CH3_CLK"
+      ],
+      "signal_class": "clock",
+      "x_um": 3425.0,
+      "y_um": 2700.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 2,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH3_POWER",
+      "kind": "tsv",
+      "source": "dram.channel[3]",
+      "destinations": [
+        "MBUMP_CH3_POWER"
+      ],
+      "signal_class": "power",
+      "x_um": 3425.0,
+      "y_um": 3000.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH3_GROUND",
+      "kind": "tsv",
+      "source": "dram.channel[3]",
+      "destinations": [
+        "MBUMP_CH3_GROUND"
+      ],
+      "signal_class": "ground",
+      "x_um": 3425.0,
+      "y_um": 3800.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH3_SPARE",
+      "kind": "tsv",
+      "source": "dram.channel[3]",
+      "destinations": [
+        "MBUMP_CH3_SPARE"
+      ],
+      "signal_class": "spare",
+      "x_um": 3425.0,
+      "y_um": 4600.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 2,
+      "bandwidth_bits": 0,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH4_DATA",
+      "kind": "tsv",
+      "source": "dram.channel[4]",
+      "destinations": [
+        "MBUMP_CH4_DATA"
+      ],
+      "signal_class": "data",
+      "x_um": 4425.0,
+      "y_um": 1000.0,
+      "rows": 8,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 128,
+      "direction": "bidirectional",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH4_CA",
+      "kind": "tsv",
+      "source": "dram.channel[4]",
+      "destinations": [
+        "MBUMP_CH4_CA"
+      ],
+      "signal_class": "command_address",
+      "x_um": 4425.0,
+      "y_um": 2300.0,
+      "rows": 2,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 32,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH4_CLK",
+      "kind": "tsv",
+      "source": "dram.channel[4]",
+      "destinations": [
+        "MBUMP_CH4_CLK"
+      ],
+      "signal_class": "clock",
+      "x_um": 4425.0,
+      "y_um": 2700.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 2,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH4_POWER",
+      "kind": "tsv",
+      "source": "dram.channel[4]",
+      "destinations": [
+        "MBUMP_CH4_POWER"
+      ],
+      "signal_class": "power",
+      "x_um": 4425.0,
+      "y_um": 3000.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH4_GROUND",
+      "kind": "tsv",
+      "source": "dram.channel[4]",
+      "destinations": [
+        "MBUMP_CH4_GROUND"
+      ],
+      "signal_class": "ground",
+      "x_um": 4425.0,
+      "y_um": 3800.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH4_SPARE",
+      "kind": "tsv",
+      "source": "dram.channel[4]",
+      "destinations": [
+        "MBUMP_CH4_SPARE"
+      ],
+      "signal_class": "spare",
+      "x_um": 4425.0,
+      "y_um": 4600.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 2,
+      "bandwidth_bits": 0,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH5_DATA",
+      "kind": "tsv",
+      "source": "dram.channel[5]",
+      "destinations": [
+        "MBUMP_CH5_DATA"
+      ],
+      "signal_class": "data",
+      "x_um": 5425.0,
+      "y_um": 1000.0,
+      "rows": 8,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 128,
+      "direction": "bidirectional",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH5_CA",
+      "kind": "tsv",
+      "source": "dram.channel[5]",
+      "destinations": [
+        "MBUMP_CH5_CA"
+      ],
+      "signal_class": "command_address",
+      "x_um": 5425.0,
+      "y_um": 2300.0,
+      "rows": 2,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 32,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH5_CLK",
+      "kind": "tsv",
+      "source": "dram.channel[5]",
+      "destinations": [
+        "MBUMP_CH5_CLK"
+      ],
+      "signal_class": "clock",
+      "x_um": 5425.0,
+      "y_um": 2700.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 2,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH5_POWER",
+      "kind": "tsv",
+      "source": "dram.channel[5]",
+      "destinations": [
+        "MBUMP_CH5_POWER"
+      ],
+      "signal_class": "power",
+      "x_um": 5425.0,
+      "y_um": 3000.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH5_GROUND",
+      "kind": "tsv",
+      "source": "dram.channel[5]",
+      "destinations": [
+        "MBUMP_CH5_GROUND"
+      ],
+      "signal_class": "ground",
+      "x_um": 5425.0,
+      "y_um": 3800.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH5_SPARE",
+      "kind": "tsv",
+      "source": "dram.channel[5]",
+      "destinations": [
+        "MBUMP_CH5_SPARE"
+      ],
+      "signal_class": "spare",
+      "x_um": 5425.0,
+      "y_um": 4600.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 2,
+      "bandwidth_bits": 0,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH6_DATA",
+      "kind": "tsv",
+      "source": "dram.channel[6]",
+      "destinations": [
+        "MBUMP_CH6_DATA"
+      ],
+      "signal_class": "data",
+      "x_um": 6425.0,
+      "y_um": 1000.0,
+      "rows": 8,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 128,
+      "direction": "bidirectional",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH6_CA",
+      "kind": "tsv",
+      "source": "dram.channel[6]",
+      "destinations": [
+        "MBUMP_CH6_CA"
+      ],
+      "signal_class": "command_address",
+      "x_um": 6425.0,
+      "y_um": 2300.0,
+      "rows": 2,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 32,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH6_CLK",
+      "kind": "tsv",
+      "source": "dram.channel[6]",
+      "destinations": [
+        "MBUMP_CH6_CLK"
+      ],
+      "signal_class": "clock",
+      "x_um": 6425.0,
+      "y_um": 2700.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 2,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH6_POWER",
+      "kind": "tsv",
+      "source": "dram.channel[6]",
+      "destinations": [
+        "MBUMP_CH6_POWER"
+      ],
+      "signal_class": "power",
+      "x_um": 6425.0,
+      "y_um": 3000.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH6_GROUND",
+      "kind": "tsv",
+      "source": "dram.channel[6]",
+      "destinations": [
+        "MBUMP_CH6_GROUND"
+      ],
+      "signal_class": "ground",
+      "x_um": 6425.0,
+      "y_um": 3800.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH6_SPARE",
+      "kind": "tsv",
+      "source": "dram.channel[6]",
+      "destinations": [
+        "MBUMP_CH6_SPARE"
+      ],
+      "signal_class": "spare",
+      "x_um": 6425.0,
+      "y_um": 4600.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 2,
+      "bandwidth_bits": 0,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH7_DATA",
+      "kind": "tsv",
+      "source": "dram.channel[7]",
+      "destinations": [
+        "MBUMP_CH7_DATA"
+      ],
+      "signal_class": "data",
+      "x_um": 7425.0,
+      "y_um": 1000.0,
+      "rows": 8,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 128,
+      "direction": "bidirectional",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH7_CA",
+      "kind": "tsv",
+      "source": "dram.channel[7]",
+      "destinations": [
+        "MBUMP_CH7_CA"
+      ],
+      "signal_class": "command_address",
+      "x_um": 7425.0,
+      "y_um": 2300.0,
+      "rows": 2,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 32,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH7_CLK",
+      "kind": "tsv",
+      "source": "dram.channel[7]",
+      "destinations": [
+        "MBUMP_CH7_CLK"
+      ],
+      "signal_class": "clock",
+      "x_um": 7425.0,
+      "y_um": 2700.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 2,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH7_POWER",
+      "kind": "tsv",
+      "source": "dram.channel[7]",
+      "destinations": [
+        "MBUMP_CH7_POWER"
+      ],
+      "signal_class": "power",
+      "x_um": 7425.0,
+      "y_um": 3000.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH7_GROUND",
+      "kind": "tsv",
+      "source": "dram.channel[7]",
+      "destinations": [
+        "MBUMP_CH7_GROUND"
+      ],
+      "signal_class": "ground",
+      "x_um": 7425.0,
+      "y_um": 3800.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    },
+    {
+      "bundle_id": "TSV_CH7_SPARE",
+      "kind": "tsv",
+      "source": "dram.channel[7]",
+      "destinations": [
+        "MBUMP_CH7_SPARE"
+      ],
+      "signal_class": "spare",
+      "x_um": 7425.0,
+      "y_um": 4600.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 2,
+      "bandwidth_bits": 0,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 28.0,
+      "keepout_um": 50.0,
+      "geometry_source": "design/hbm2_architecture.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 35.0,
+        "max": 80.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_tsv_bundle_assumption",
+        "source_path": "design/hbm2_architecture.json",
+        "source_hash_sha256": "2A5E5B2676E57A28E21365BBDEEBE7CC60A1A5558727D2FAC1E9AC2F89B507F7",
+        "description": "Signal-class-visible TSV bundle derived from the old channel representative."
+      }
+    }
+  ],
+  "micro_bump_bundles": [
+    {
+      "bundle_id": "MBUMP_CH0_DATA",
+      "kind": "micro_bump",
+      "source": "TSV_CH0_DATA",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "data",
+      "x_um": 425.0,
+      "y_um": 1000.0,
+      "rows": 8,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 128,
+      "direction": "bidirectional",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH0_CA",
+      "kind": "micro_bump",
+      "source": "TSV_CH0_CA",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "command_address",
+      "x_um": 425.0,
+      "y_um": 2300.0,
+      "rows": 2,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 32,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH0_CLK",
+      "kind": "micro_bump",
+      "source": "TSV_CH0_CLK",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "clock",
+      "x_um": 425.0,
+      "y_um": 2700.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 2,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH0_POWER",
+      "kind": "micro_bump",
+      "source": "TSV_CH0_POWER",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "power",
+      "x_um": 425.0,
+      "y_um": 3000.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH0_GROUND",
+      "kind": "micro_bump",
+      "source": "TSV_CH0_GROUND",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "ground",
+      "x_um": 425.0,
+      "y_um": 3800.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH0_SPARE",
+      "kind": "micro_bump",
+      "source": "TSV_CH0_SPARE",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "spare",
+      "x_um": 425.0,
+      "y_um": 4600.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 2,
+      "bandwidth_bits": 0,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH1_DATA",
+      "kind": "micro_bump",
+      "source": "TSV_CH1_DATA",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "data",
+      "x_um": 1425.0,
+      "y_um": 1000.0,
+      "rows": 8,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 128,
+      "direction": "bidirectional",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH1_CA",
+      "kind": "micro_bump",
+      "source": "TSV_CH1_CA",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "command_address",
+      "x_um": 1425.0,
+      "y_um": 2300.0,
+      "rows": 2,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 32,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH1_CLK",
+      "kind": "micro_bump",
+      "source": "TSV_CH1_CLK",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "clock",
+      "x_um": 1425.0,
+      "y_um": 2700.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 2,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH1_POWER",
+      "kind": "micro_bump",
+      "source": "TSV_CH1_POWER",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "power",
+      "x_um": 1425.0,
+      "y_um": 3000.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH1_GROUND",
+      "kind": "micro_bump",
+      "source": "TSV_CH1_GROUND",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "ground",
+      "x_um": 1425.0,
+      "y_um": 3800.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH1_SPARE",
+      "kind": "micro_bump",
+      "source": "TSV_CH1_SPARE",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "spare",
+      "x_um": 1425.0,
+      "y_um": 4600.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 2,
+      "bandwidth_bits": 0,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH2_DATA",
+      "kind": "micro_bump",
+      "source": "TSV_CH2_DATA",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "data",
+      "x_um": 2425.0,
+      "y_um": 1000.0,
+      "rows": 8,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 128,
+      "direction": "bidirectional",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH2_CA",
+      "kind": "micro_bump",
+      "source": "TSV_CH2_CA",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "command_address",
+      "x_um": 2425.0,
+      "y_um": 2300.0,
+      "rows": 2,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 32,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH2_CLK",
+      "kind": "micro_bump",
+      "source": "TSV_CH2_CLK",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "clock",
+      "x_um": 2425.0,
+      "y_um": 2700.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 2,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH2_POWER",
+      "kind": "micro_bump",
+      "source": "TSV_CH2_POWER",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "power",
+      "x_um": 2425.0,
+      "y_um": 3000.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH2_GROUND",
+      "kind": "micro_bump",
+      "source": "TSV_CH2_GROUND",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "ground",
+      "x_um": 2425.0,
+      "y_um": 3800.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH2_SPARE",
+      "kind": "micro_bump",
+      "source": "TSV_CH2_SPARE",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "spare",
+      "x_um": 2425.0,
+      "y_um": 4600.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 2,
+      "bandwidth_bits": 0,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH3_DATA",
+      "kind": "micro_bump",
+      "source": "TSV_CH3_DATA",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "data",
+      "x_um": 3425.0,
+      "y_um": 1000.0,
+      "rows": 8,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 128,
+      "direction": "bidirectional",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH3_CA",
+      "kind": "micro_bump",
+      "source": "TSV_CH3_CA",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "command_address",
+      "x_um": 3425.0,
+      "y_um": 2300.0,
+      "rows": 2,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 32,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH3_CLK",
+      "kind": "micro_bump",
+      "source": "TSV_CH3_CLK",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "clock",
+      "x_um": 3425.0,
+      "y_um": 2700.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 2,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH3_POWER",
+      "kind": "micro_bump",
+      "source": "TSV_CH3_POWER",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "power",
+      "x_um": 3425.0,
+      "y_um": 3000.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH3_GROUND",
+      "kind": "micro_bump",
+      "source": "TSV_CH3_GROUND",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "ground",
+      "x_um": 3425.0,
+      "y_um": 3800.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH3_SPARE",
+      "kind": "micro_bump",
+      "source": "TSV_CH3_SPARE",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "spare",
+      "x_um": 3425.0,
+      "y_um": 4600.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 2,
+      "bandwidth_bits": 0,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH4_DATA",
+      "kind": "micro_bump",
+      "source": "TSV_CH4_DATA",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "data",
+      "x_um": 4425.0,
+      "y_um": 1000.0,
+      "rows": 8,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 128,
+      "direction": "bidirectional",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH4_CA",
+      "kind": "micro_bump",
+      "source": "TSV_CH4_CA",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "command_address",
+      "x_um": 4425.0,
+      "y_um": 2300.0,
+      "rows": 2,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 32,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH4_CLK",
+      "kind": "micro_bump",
+      "source": "TSV_CH4_CLK",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "clock",
+      "x_um": 4425.0,
+      "y_um": 2700.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 2,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH4_POWER",
+      "kind": "micro_bump",
+      "source": "TSV_CH4_POWER",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "power",
+      "x_um": 4425.0,
+      "y_um": 3000.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH4_GROUND",
+      "kind": "micro_bump",
+      "source": "TSV_CH4_GROUND",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "ground",
+      "x_um": 4425.0,
+      "y_um": 3800.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH4_SPARE",
+      "kind": "micro_bump",
+      "source": "TSV_CH4_SPARE",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "spare",
+      "x_um": 4425.0,
+      "y_um": 4600.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 2,
+      "bandwidth_bits": 0,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH5_DATA",
+      "kind": "micro_bump",
+      "source": "TSV_CH5_DATA",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "data",
+      "x_um": 5425.0,
+      "y_um": 1000.0,
+      "rows": 8,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 128,
+      "direction": "bidirectional",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH5_CA",
+      "kind": "micro_bump",
+      "source": "TSV_CH5_CA",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "command_address",
+      "x_um": 5425.0,
+      "y_um": 2300.0,
+      "rows": 2,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 32,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH5_CLK",
+      "kind": "micro_bump",
+      "source": "TSV_CH5_CLK",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "clock",
+      "x_um": 5425.0,
+      "y_um": 2700.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 2,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH5_POWER",
+      "kind": "micro_bump",
+      "source": "TSV_CH5_POWER",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "power",
+      "x_um": 5425.0,
+      "y_um": 3000.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH5_GROUND",
+      "kind": "micro_bump",
+      "source": "TSV_CH5_GROUND",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "ground",
+      "x_um": 5425.0,
+      "y_um": 3800.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH5_SPARE",
+      "kind": "micro_bump",
+      "source": "TSV_CH5_SPARE",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "spare",
+      "x_um": 5425.0,
+      "y_um": 4600.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 2,
+      "bandwidth_bits": 0,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH6_DATA",
+      "kind": "micro_bump",
+      "source": "TSV_CH6_DATA",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "data",
+      "x_um": 6425.0,
+      "y_um": 1000.0,
+      "rows": 8,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 128,
+      "direction": "bidirectional",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH6_CA",
+      "kind": "micro_bump",
+      "source": "TSV_CH6_CA",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "command_address",
+      "x_um": 6425.0,
+      "y_um": 2300.0,
+      "rows": 2,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 32,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH6_CLK",
+      "kind": "micro_bump",
+      "source": "TSV_CH6_CLK",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "clock",
+      "x_um": 6425.0,
+      "y_um": 2700.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 2,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH6_POWER",
+      "kind": "micro_bump",
+      "source": "TSV_CH6_POWER",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "power",
+      "x_um": 6425.0,
+      "y_um": 3000.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH6_GROUND",
+      "kind": "micro_bump",
+      "source": "TSV_CH6_GROUND",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "ground",
+      "x_um": 6425.0,
+      "y_um": 3800.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH6_SPARE",
+      "kind": "micro_bump",
+      "source": "TSV_CH6_SPARE",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "spare",
+      "x_um": 6425.0,
+      "y_um": 4600.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 2,
+      "bandwidth_bits": 0,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH7_DATA",
+      "kind": "micro_bump",
+      "source": "TSV_CH7_DATA",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "data",
+      "x_um": 7425.0,
+      "y_um": 1000.0,
+      "rows": 8,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 128,
+      "direction": "bidirectional",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH7_CA",
+      "kind": "micro_bump",
+      "source": "TSV_CH7_CA",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "command_address",
+      "x_um": 7425.0,
+      "y_um": 2300.0,
+      "rows": 2,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 32,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH7_CLK",
+      "kind": "micro_bump",
+      "source": "TSV_CH7_CLK",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "clock",
+      "x_um": 7425.0,
+      "y_um": 2700.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": 2,
+      "direction": "down",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH7_POWER",
+      "kind": "micro_bump",
+      "source": "TSV_CH7_POWER",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "power",
+      "x_um": 7425.0,
+      "y_um": 3000.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH7_GROUND",
+      "kind": "micro_bump",
+      "source": "TSV_CH7_GROUND",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "ground",
+      "x_um": 7425.0,
+      "y_um": 3800.0,
+      "rows": 4,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 0,
+      "bandwidth_bits": null,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    },
+    {
+      "bundle_id": "MBUMP_CH7_SPARE",
+      "kind": "micro_bump",
+      "source": "TSV_CH7_SPARE",
+      "destinations": [
+        "top.logic_die_link_arbiter"
+      ],
+      "signal_class": "spare",
+      "x_um": 7425.0,
+      "y_um": 4600.0,
+      "rows": 1,
+      "columns": 2,
+      "pitch_um": 150.0,
+      "redundancy_count": 2,
+      "bandwidth_bits": 0,
+      "direction": "not_applicable",
+      "connectivity_source": "channel/class-level illustrative mapping; no public bit-level pin map",
+      "classification": "illustrative",
+      "confidence": "low",
+      "diameter_um": 22.0,
+      "keepout_um": 15.0,
+      "geometry_source": "design/hbm2_package.json",
+      "uncertainty": {
+        "distribution": "uniform",
+        "min": 15.0,
+        "max": 35.0
+      },
+      "provenance": {
+        "source_id": "detailed_hbm2_microbump_bundle_assumption",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Micro-bump bundle paired one-to-one with its TSV bundle."
+      }
+    }
+  ],
+  "reserved_regions": [
+    {
+      "region_id": "PHY_SOUTH",
+      "role": "phy",
+      "x_um": 250.0,
+      "y_um": 0.0,
+      "width_um": 7500.0,
+      "height_um": 800.0,
+      "blocks_prohibited": true,
+      "classification": "estimated",
+      "confidence": "low",
+      "provenance": {
+        "source_id": "floorplan_reserved_region_assumptions",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Research-only reserved-region assumptions."
+      }
+    },
+    {
+      "region_id": "PDN_WEST",
+      "role": "pdn",
+      "x_um": 0.0,
+      "y_um": 0.0,
+      "width_um": 250.0,
+      "height_um": 12000.0,
+      "blocks_prohibited": true,
+      "classification": "illustrative",
+      "confidence": "low",
+      "provenance": {
+        "source_id": "floorplan_reserved_region_assumptions",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Research-only reserved-region assumptions."
+      }
+    },
+    {
+      "region_id": "PDN_EAST",
+      "role": "pdn",
+      "x_um": 7750.0,
+      "y_um": 0.0,
+      "width_um": 250.0,
+      "height_um": 12000.0,
+      "blocks_prohibited": true,
+      "classification": "illustrative",
+      "confidence": "low",
+      "provenance": {
+        "source_id": "floorplan_reserved_region_assumptions",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Research-only reserved-region assumptions."
+      }
+    },
+    {
+      "region_id": "CLOCK_SPINE",
+      "role": "clock",
+      "x_um": 3900.0,
+      "y_um": 800.0,
+      "width_um": 200.0,
+      "height_um": 11200.0,
+      "blocks_prohibited": true,
+      "classification": "illustrative",
+      "confidence": "low",
+      "provenance": {
+        "source_id": "floorplan_reserved_region_assumptions",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Research-only reserved-region assumptions."
+      }
+    }
+  ],
+  "routing_corridors": [
+    {
+      "region_id": "TSV_CORRIDOR_CH0",
+      "role": "routing",
+      "x_um": 425.0,
+      "y_um": 800.0,
+      "width_um": 150.0,
+      "height_um": 11200.0,
+      "blocks_prohibited": false,
+      "classification": "illustrative",
+      "confidence": "low",
+      "provenance": {
+        "source_id": "floorplan_reserved_region_assumptions",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Research-only reserved-region assumptions."
+      }
+    },
+    {
+      "region_id": "TSV_CORRIDOR_CH1",
+      "role": "routing",
+      "x_um": 1425.0,
+      "y_um": 800.0,
+      "width_um": 150.0,
+      "height_um": 11200.0,
+      "blocks_prohibited": false,
+      "classification": "illustrative",
+      "confidence": "low",
+      "provenance": {
+        "source_id": "floorplan_reserved_region_assumptions",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Research-only reserved-region assumptions."
+      }
+    },
+    {
+      "region_id": "TSV_CORRIDOR_CH2",
+      "role": "routing",
+      "x_um": 2425.0,
+      "y_um": 800.0,
+      "width_um": 150.0,
+      "height_um": 11200.0,
+      "blocks_prohibited": false,
+      "classification": "illustrative",
+      "confidence": "low",
+      "provenance": {
+        "source_id": "floorplan_reserved_region_assumptions",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Research-only reserved-region assumptions."
+      }
+    },
+    {
+      "region_id": "TSV_CORRIDOR_CH3",
+      "role": "routing",
+      "x_um": 3425.0,
+      "y_um": 800.0,
+      "width_um": 150.0,
+      "height_um": 11200.0,
+      "blocks_prohibited": false,
+      "classification": "illustrative",
+      "confidence": "low",
+      "provenance": {
+        "source_id": "floorplan_reserved_region_assumptions",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Research-only reserved-region assumptions."
+      }
+    },
+    {
+      "region_id": "TSV_CORRIDOR_CH4",
+      "role": "routing",
+      "x_um": 4425.0,
+      "y_um": 800.0,
+      "width_um": 150.0,
+      "height_um": 11200.0,
+      "blocks_prohibited": false,
+      "classification": "illustrative",
+      "confidence": "low",
+      "provenance": {
+        "source_id": "floorplan_reserved_region_assumptions",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Research-only reserved-region assumptions."
+      }
+    },
+    {
+      "region_id": "TSV_CORRIDOR_CH5",
+      "role": "routing",
+      "x_um": 5425.0,
+      "y_um": 800.0,
+      "width_um": 150.0,
+      "height_um": 11200.0,
+      "blocks_prohibited": false,
+      "classification": "illustrative",
+      "confidence": "low",
+      "provenance": {
+        "source_id": "floorplan_reserved_region_assumptions",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Research-only reserved-region assumptions."
+      }
+    },
+    {
+      "region_id": "TSV_CORRIDOR_CH6",
+      "role": "routing",
+      "x_um": 6425.0,
+      "y_um": 800.0,
+      "width_um": 150.0,
+      "height_um": 11200.0,
+      "blocks_prohibited": false,
+      "classification": "illustrative",
+      "confidence": "low",
+      "provenance": {
+        "source_id": "floorplan_reserved_region_assumptions",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Research-only reserved-region assumptions."
+      }
+    },
+    {
+      "region_id": "TSV_CORRIDOR_CH7",
+      "role": "routing",
+      "x_um": 7425.0,
+      "y_um": 800.0,
+      "width_um": 150.0,
+      "height_um": 11200.0,
+      "blocks_prohibited": false,
+      "classification": "illustrative",
+      "confidence": "low",
+      "provenance": {
+        "source_id": "floorplan_reserved_region_assumptions",
+        "source_path": "design/hbm2_package.json",
+        "source_hash_sha256": "D803B2BE498A3A4BE8917C5A67AF3563AE9FD417F04FAAC03A72C52D7362C8A6",
+        "description": "Research-only reserved-region assumptions."
+      }
+    }
+  ],
+  "legacy_compatibility": {
+    "logic_block_x_um": 0.0,
+    "logic_block_y_um": 0.0,
+    "source": "design/hbm2_package.json"
+  }
+}

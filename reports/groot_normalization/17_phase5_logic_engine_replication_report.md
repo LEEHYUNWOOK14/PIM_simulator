@@ -2,7 +2,7 @@
 
 ## 판정
 
-**PASS WITH ARCHITECTURE LIMIT** — 4개 Logic normalization engine이 서로 다른 row를 완전 병렬 처리하는 RTL 테스트를 통과했고, 1/2/4/8/16-engine array가 모두 strict synthesis 문제 0건으로 합성됐다.
+**PASS WITH ARCHITECTURE LIMIT** — 4개 Logic normalization engine이 서로 다른 row를 완전 병렬 처리하는 RTL 테스트를 통과했고, 1/2/4/8/16-engine array가 모두 strict synthesis 문제 0건으로 합성됐다. 이 결과는 engine마다 독립 partial 입력 port가 있는 상한 구조다. 단일 shared-port dispatcher 결과는 `18_phase5_logic_dispatcher_report.md`를 우선한다.
 
 그러나 현재 `full_pim_system_top`에는 normalization engine이 한 개뿐이며, array wrapper에는 row dispatcher와 shared partial interconnect가 없다. 16-engine 결과는 복제 가능한 계산 블록의 면적/처리량 상한이지 production top 통합 완료 증거가 아니다.
 
@@ -56,13 +56,13 @@ per-row engine service ≈ active_banks + scalar_finalize_rsqrt
 
 | Logic engines | Logic cells | Hierarchical cells proxy | Hierarchical latency | Logic-only latency | GPU full assumed |
 |---:|---:|---:|---:|---:|---:|
-| 1 | 27,525 | 715,653 | 94.575 ms | 280.054 ms | 36.773 ms |
-| 2 | 55,050 | 743,178 | 62.172 ms | 141.108 ms | 36.773 ms |
-| 4 | 110,100 | 798,228 | 45.970 ms | 71.635 ms | 36.773 ms |
-| 8 | 220,200 | 908,328 | 37.869 ms | 36.898 ms | 36.773 ms |
-| 16 | 440,400 | 1,128,528 | 33.796 ms | 19.507 ms | 36.773 ms |
+| 1 | 27,525 | 715,653 | 94.575 ms | 230.636 ms | 36.773 ms |
+| 2 | 55,050 | 743,178 | 62.151 ms | 116.378 ms | 36.773 ms |
+| 4 | 110,100 | 798,228 | 45.939 ms | 59.249 ms | 36.773 ms |
+| 8 | 220,200 | 908,328 | 37.833 ms | 30.684 ms | 36.773 ms |
+| 16 | 440,400 | 1,128,528 | 33.775 ms | 16.397 ms | 36.773 ms |
 
-현재 가정에서 Hierarchical이 GPU full보다 빨라지는 첫 측정 구성은 16 engines다. 8-engine은 GPU full보다 약 1.097 ms 느리다. 즉 Logic-PCU RSQRT 하나를 추가하는 수준이 아니라, row 병렬성을 위해 normalization engine을 대량 복제해야 우위가 생긴다.
+engine마다 독립 partial 입력을 둔 상한 가정에서 Hierarchical이 GPU full보다 빨라지는 첫 구성은 16 engines다. 8-engine은 GPU full보다 약 1.061 ms 느리다. shared-port dispatcher에서는 engine 수만 늘려도 이 처리량이 나오지 않는다.
 
 ## 해석
 

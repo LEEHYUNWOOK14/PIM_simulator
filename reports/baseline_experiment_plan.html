@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hierarchical HBM2-PIM 전체 베이스라인 실험 계획표</title>
+<style>
+:root{
+  --ink:#18202b;--muted:#64748b;--line:#d8e0ea;--paper:#fff;--bg:#eef2f6;
+  --navy:#12355b;--blue:#2563eb;--green:#16803c;--amber:#b45f06;--red:#b42318;
+  --blue-bg:#eff6ff;--green-bg:#ecfdf3;--amber-bg:#fff8e8;--red-bg:#fff1f0;--gray-bg:#f6f8fa;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR",sans-serif;line-height:1.58}
+main{max-width:1440px;margin:24px auto;padding:32px 38px 56px;background:var(--paper);box-shadow:0 8px 28px #14213d18;border-radius:14px}
+h1{margin:0;color:var(--navy);font-size:2rem;line-height:1.25}
+h2{margin:2.3rem 0 .8rem;padding-bottom:.42rem;border-bottom:2px solid var(--line);color:var(--navy);font-size:1.35rem}
+h3{margin:1.5rem 0 .5rem;color:#27496d;font-size:1.08rem}
+p{margin:.5rem 0 1rem}.subtitle{color:var(--muted);margin-top:.45rem}.small{font-size:.88rem;color:var(--muted)}
+.hero{padding:24px 28px;border:1px solid #bed2e8;border-left:7px solid var(--blue);background:linear-gradient(135deg,#f7fbff,#eef6ff);border-radius:10px}
+.hero strong{color:var(--navy)}
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:18px 0}
+.card{border:1px solid var(--line);border-radius:10px;padding:15px;background:#fff}.card .k{color:var(--muted);font-size:.82rem}.card .v{font-size:1.3rem;font-weight:750;color:var(--navy);margin-top:3px}
+.callout{padding:13px 16px;border-radius:8px;margin:14px 0}.info{background:var(--blue-bg);border-left:5px solid var(--blue)}
+.ok{background:var(--green-bg);border-left:5px solid var(--green)}.warn{background:var(--amber-bg);border-left:5px solid var(--amber)}
+.danger{background:var(--red-bg);border-left:5px solid var(--red)}
+.table-wrap{overflow-x:auto;margin:12px 0 22px}
+table{width:100%;border-collapse:collapse;font-size:.91rem;min-width:850px}
+th,td{border:1px solid var(--line);padding:9px 10px;vertical-align:top}th{background:#eaf0f6;color:#17324f;text-align:left;white-space:nowrap}
+tbody tr:nth-child(even){background:#fafbfd}.num{text-align:right;font-variant-numeric:tabular-nums}.center{text-align:center}
+.status{display:inline-block;padding:2px 8px;border-radius:999px;font-size:.78rem;font-weight:750;white-space:nowrap}
+.done{color:#116932;background:#dcfce7}.next{color:#1d4ed8;background:#dbeafe}.todo{color:#755006;background:#fef3c7}.blocked{color:#991b1b;background:#fee2e2}
+code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}code{background:#eef2f7;padding:1px 4px;border-radius:4px}
+pre{background:#111827;color:#e5edf7;padding:15px 17px;border-radius:8px;overflow:auto;line-height:1.45}
+.flow{display:grid;grid-template-columns:repeat(7,minmax(120px,1fr));gap:8px;align-items:stretch;margin:16px 0 24px}
+.flow div{padding:11px 9px;border:1px solid #c7d5e5;border-radius:8px;background:#f8fbff;text-align:center;font-size:.86rem;position:relative}
+.flow div:not(:last-child)::after{content:"→";position:absolute;right:-9px;top:34%;z-index:2;color:var(--blue);font-weight:800;background:#fff;border-radius:50%}
+.checklist{list-style:none;padding:0;margin:8px 0}.checklist li{margin:6px 0;padding-left:25px;position:relative}.checklist li::before{content:"□";position:absolute;left:2px;color:var(--blue);font-weight:800}
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}.legend span{font-size:.82rem}
+.nowrap{white-space:nowrap}.page-break{break-before:page}
+footer{margin-top:36px;padding-top:15px;border-top:1px solid var(--line);color:var(--muted);font-size:.84rem}
+@media(max-width:1050px){main{margin:0;border-radius:0;padding:24px 18px}.cards{grid-template-columns:repeat(2,1fr)}.flow{grid-template-columns:1fr}.flow div:not(:last-child)::after{content:"↓";right:auto;left:49%;top:auto;bottom:-15px}}
+@media print{body{background:#fff}main{max-width:none;margin:0;padding:12mm;box-shadow:none}.hero,.card,.callout,table{break-inside:avoid}a{color:inherit;text-decoration:none}.page-break{break-before:page}}
+</style>
+</head>
+<body><main>
+<header class="hero">
+  <h1>Hierarchical HBM2-PIM 전체 베이스라인 실험 계획표</h1>
+  <p class="subtitle">Bank-side PCU 기준선과 Logic-die PCU·Normalization RTL 제안 구조의 기능, PPA, 트래픽, 성능 및 에너지를 동일 조건에서 비교하기 위한 실행 계획</p>
+  <p><strong>핵심 원칙:</strong> B0/B1/B2에서 바꾸는 것은 architecture feature뿐이다. RTL 규모, 공정·라이브러리, clock constraint, physical 설정, workload, precision 및 측정 경계는 동일하게 고정한다.</p>
+</header>
+
+<div class="cards">
+  <div class="card"><div class="k">비교 RTL</div><div class="v">B0 / B1 / B2</div></div>
+  <div class="card"><div class="k">공통 기술</div><div class="v">Sky130 HD</div></div>
+  <div class="card"><div class="k">목표 Clock</div><div class="v">10 ns</div></div>
+  <div class="card"><div class="k">현재 단계</div><div class="v">RTL 합성 완료</div></div>
+</div>
+
+<div class="legend">
+  <span class="status done">완료</span><span class="status next">다음 실행</span><span class="status todo">예정</span><span class="status blocked">외부 측정 필요</span>
+</div>
+
+<div class="info callout"><strong>독립 실행 계획서:</strong> <a href="baseline_b0_bank_only_experiment_plan.html">B0 Bank-only 계획서</a> · <a href="baseline_b1_logic_die_experiment_plan.html">B1 Logic-die 계획서</a>. 이후 각 case의 실험을 수행할 때 해당 파일의 Gate 상태, 결과값, artifact 및 Progress Log를 함께 갱신한다.</div>
+
+<h2>1. 비교 대상과 주장 범위</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>ID</th><th>구조 정의</th><th>Logic-die PCU</th><th>Normalization engine</th><th>비교 목적</th><th>현재 한계</th></tr></thead>
+<tbody>
+<tr><td><strong>B0</strong></td><td>Bank-side PCU 기준선. Logic 경로 요청도 direct TSV 경로로 bypass</td><td class="center">OFF</td><td class="center">OFF</td><td>기존 Bank-side HBM2-PIM에 대응하는 RTL 비용 기준</td><td>삼성 상용 HBM2-PIM 실리콘 수치가 아니라 본 프로젝트의 구현 기준선</td></tr>
+<tr><td><strong>B1</strong></td><td>B0 + Logic-die PCU, scheduler, shared buffer, reduction 및 result routing</td><td class="center">ON</td><td class="center">OFF</td><td>Logic-die hierarchy 자체의 추가 비용 분리</td><td>Normalization 전용 global finalize/RSQRT 제외</td></tr>
+<tr><td><strong>B2</strong></td><td>B1 + Logic normalization reduction, finalize, RSQRT 및 broadcast sideband</td><td class="center">ON</td><td class="center">ON</td><td>현재 제안 RTL의 normalization 추가 비용 분리</td><td>Bank partial 자동 생성과 최종 <code>NORM_APPLY</code> 전체 경로는 별도 E2E gate로 검증</td></tr>
+</tbody></table></div>
+
+<div class="info callout"><strong>필수 해석:</strong> <code>B1 − B0</code>는 Logic-die hierarchy overhead, <code>B2 − B1</code>는 현재 normalization engine overhead, <code>B2 − B0</code>는 제안 구조 전체 RTL overhead다.</div>
+
+<h2>2. 공통 실험 조건 — Freeze Sheet</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>분류</th><th>고정값</th><th>적용 범위</th><th>변경 시 조치</th></tr></thead>
+<tbody>
+<tr><td>Top</td><td><code>full_pim_system_top</code></td><td>B0/B1/B2 공통</td><td>모든 case를 같은 commit에서 재실행</td></tr>
+<tr><td>축소 physical configuration</td><td><code>CHANNELS=1, BANKS=1, PIM_BLOCKS=1, PCUS=1, ROWS=1, COLS=1</code></td><td>Yosys/OpenROAD 1차 비교</td><td>전체 수치로 외삽하지 않고 scale sweep을 별도 표로 분리</td></tr>
+<tr><td>Datapath</td><td><code>DATA_WIDTH=16</code>, 기본 FP16</td><td>1차 PPA</td><td>BF16은 별도 precision sweep으로 실행</td></tr>
+<tr><td>Storage</td><td><code>CRF_DEPTH=2, WEIGHT_BUFFER_BYTES=16</code></td><td>축소 physical 비교</td><td>실사용량 sweep과 혼합하지 않음</td></tr>
+<tr><td>Architecture switches</td><td>B0 <code>0/0</code>, B1 <code>1/0</code>, B2 <code>1/1</code></td><td>Logic PCU / Normalization enable</td><td>그 외 parameter 변경 금지</td></tr>
+<tr><td>Technology</td><td><code>sky130hd</code>, 동일 Liberty/LEF</td><td>technology-mapped PPA</td><td>라이브러리 hash와 버전 기록</td></tr>
+<tr><td>Clock</td><td>period 10.0 ns, uncertainty 0.2 ns</td><td>STA/OpenROAD</td><td>5/10/20 ns sweep은 별도 sensitivity 표</td></tr>
+<tr><td>Physical</td><td>core utilization 30%, aspect ratio 1.0, margin 2, place density 0.35</td><td>floorplan/placement</td><td>동일 seed/threads까지 manifest에 기록</td></tr>
+<tr><td>Tools</td><td>동일 Yosys, OpenROAD, ORFS, KLayout</td><td>모든 physical case</td><td>버전이 바뀌면 세 case 모두 재실행</td></tr>
+<tr><td>Workload</td><td>동일 GR00T-derived LayerNorm/RMSNorm profile, 동일 호출 수</td><td>cycle/traffic/energy</td><td>실제 trace와 synthetic trace를 분리 표기</td></tr>
+<tr><td>Evidence label</td><td><code>MEASURED / DERIVED / MODELED / ASSUMED / UNVERIFIED</code></td><td>모든 결과 열</td><td>근거 없는 값을 0으로 채우지 않음</td></tr>
+</tbody></table></div>
+
+<h2>3. 전체 실행 흐름</h2>
+<div class="flow">
+  <div><strong>E0</strong><br>조건·소스 Freeze</div><div><strong>E1</strong><br>기능/구조 검증</div><div><strong>E2</strong><br>Yosys 합성</div><div><strong>E3</strong><br>Sky130 mapping·STA</div><div><strong>E4</strong><br>OpenROAD physical</div><div><strong>E5</strong><br>Activity power</div><div><strong>E6–E8</strong><br>Workload·통합 결론</div>
+</div>
+
+<h2>4. 전체 베이스라인 실험 계획표</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>ID</th><th>실험</th><th>Case</th><th>핵심 입력</th><th>수집 지표</th><th>통과 기준</th><th>주요 산출물</th><th>상태</th></tr></thead>
+<tbody>
+<tr><td>E0-1</td><td>RTL·tool manifest 동결</td><td>공통</td><td>Git commit/dirty state, source hash, tool/library version</td><td>재현성 ID</td><td>모든 결과가 동일 manifest 참조</td><td><code>experiment_manifest.json</code></td><td><span class="status next">다음 실행</span></td></tr>
+<tr><td>E0-2</td><td>Parameter 동일성 검사</td><td>B0/B1/B2</td><td>Freeze Sheet</td><td>case별 parameter diff</td><td>enable 2개 외 차이 0건</td><td><code>configuration.txt</code></td><td><span class="status done">완료</span></td></tr>
+<tr><td>E1-1</td><td>Elaboration/hierarchy check</td><td>B0/B1/B2</td><td>동일 source list</td><td>missing/duplicate module, latch/error</td><td>Yosys <code>hierarchy -check</code> PASS</td><td>case별 log</td><td><span class="status done">완료</span></td></tr>
+<tr><td>E1-2</td><td>Feature isolation 검사</td><td>B0/B1/B2</td><td>합성 netlist</td><td>Logic/normalization module 존재 여부, SHA-256</td><td>B0/B1/B2 netlist 상이, 의도한 module만 포함</td><td><code>B0.v/B1.v/B2.v</code></td><td><span class="status done">완료</span></td></tr>
+<tr><td>E1-3</td><td>공통 Bank-side regression</td><td>B0/B1/B2</td><td>동일 Bank-PIM 명령·operand</td><td>result mismatch, deadlock, protocol error</td><td>모든 case 0 mismatch, timeout 없음</td><td>JUnit/CSV test report</td><td><span class="status todo">예정</span></td></tr>
+<tr><td>E1-4</td><td>Logic/normalization 기능 regression</td><td>B1/B2</td><td>reduction, RSQRT, broadcast vectors</td><td>FP16/BF16 오차, tag/order, backpressure</td><td>정의한 tolerance 및 protocol invariant 만족</td><td>vector/result manifest</td><td><span class="status todo">예정</span></td></tr>
+<tr><td>E1-5</td><td>Full normalization E2E gate</td><td>B2</td><td>raw bank vector→partial→global→scalar→apply</td><td>출력 오차, 전체 cycle, traffic</td><td>host 계산 없는 의도 경로와 reference 일치</td><td>E2E trace/report</td><td><span class="status todo">예정</span></td></tr>
+
+<tr><td>E2-1</td><td>Generic Yosys synthesis</td><td>B0/B1/B2</td><td>1ch/1bank/1PCU 고정</td><td>total/combinational/sequential cell count</td><td>세 case 완료, log에 ERROR 없음</td><td><code>synthesis_summary.csv</code></td><td><span class="status done">완료</span></td></tr>
+<tr><td>E2-2</td><td>Hierarchy별 구조 비용</td><td>B0/B1/B2</td><td><code>stat -top</code>, hierarchy 보존 run</td><td>Bank, Logic, normalization block별 cell</td><td>총합 보존 및 delta 분해 가능</td><td><code>hierarchical_cells.csv</code></td><td><span class="status next">다음 실행</span></td></tr>
+<tr><td>E2-3</td><td>규모 sensitivity</td><td>B0/B1/B2</td><td>bank/channel/PCU 동일 sweep</td><td>cell scaling, synthesis memory/time</td><td>최소 1/2/4 또는 feasible range 확보</td><td><code>scale_sweep.csv</code></td><td><span class="status todo">예정</span></td></tr>
+
+<tr><td>E3-1</td><td>Sky130 technology mapping</td><td>B0/B1/B2</td><td>동일 Liberty, 10 ns SDC</td><td>mapped area, cell count/type, sequential area</td><td>unmapped cell 0 또는 명시적 예외</td><td>mapped netlist, area report</td><td><span class="status next">다음 실행</span></td></tr>
+<tr><td>E3-2</td><td>Pre-layout STA</td><td>B0/B1/B2</td><td>mapped netlist, common SDC</td><td>critical path, WNS, TNS, violating endpoints</td><td>동일 corner 분석 완료; closure 여부 별도 표기</td><td>timing reports</td><td><span class="status next">다음 실행</span></td></tr>
+<tr><td>E3-3</td><td>Clock sensitivity</td><td>B0/B1/B2</td><td>5/10/20 ns</td><td>area/timing tradeoff, Fmax proxy</td><td>각 constraint 동일 flow로 완료</td><td><code>clock_sweep.csv</code></td><td><span class="status todo">예정</span></td></tr>
+
+<tr><td>E4-1</td><td>동일 floorplan 생성</td><td>B0/B1/B2</td><td>utilization/aspect/margin 고정</td><td>die/core area, utilization</td><td>세 case floorplan 성공</td><td>floorplan DEF/PNG</td><td><span class="status todo">예정</span></td></tr>
+<tr><td>E4-2</td><td>Global placement</td><td>B0/B1/B2</td><td>동일 place density/seed</td><td>placed area, wirelength, congestion, overflow</td><td>placement legal; 실패도 feasibility 결과로 기록</td><td>placed DEF, metrics JSON</td><td><span class="status todo">예정</span></td></tr>
+<tr><td>E4-3</td><td>CTS 및 post-CTS STA</td><td>B0/B1/B2</td><td>동일 CTS 옵션</td><td>clock skew, insertion delay, WNS/TNS</td><td>세 case 동일 단계 도달</td><td>CTS/timing report</td><td><span class="status todo">예정</span></td></tr>
+<tr><td>E4-4</td><td>Global/detailed routing</td><td>B0/B1/B2</td><td>동일 layer/iteration 옵션</td><td>wirelength, via, DRC, antenna, routed timing</td><td>비교 가능 단계 동일; signoff 여부 명시</td><td>routed DEF/GDS</td><td><span class="status todo">예정</span></td></tr>
+<tr><td>E4-5</td><td>Physical 결과 감사</td><td>B0/B1/B2</td><td>DEF/GDS/report</td><td>top/bbox, report completeness, hashes</td><td>artifact와 metric provenance 일치</td><td>physical manifest</td><td><span class="status todo">예정</span></td></tr>
+
+<tr><td>E5-1</td><td>공통 stimulus/VCD 생성</td><td>B0/B1/B2</td><td>동일 operation count와 input distribution</td><td>toggle coverage, simulated cycles</td><td>각 active block activity 확보</td><td>VCD/SAIF + trace ID</td><td><span class="status todo">예정</span></td></tr>
+<tr><td>E5-2</td><td>Power estimation</td><td>B0/B1/B2</td><td>mapped/routed netlist, parasitic, VCD/SAIF</td><td>dynamic, leakage, total, block power</td><td>power tool/library/corner 명시, 합계 보존</td><td><code>power.csv</code></td><td><span class="status todo">예정</span></td></tr>
+<tr><td>E5-3</td><td>Energy/work 계산</td><td>B0/B1/B2</td><td>power × measured workload time</td><td>J/call, J/row, J/element</td><td>동일 normalization work 단위</td><td><code>energy_per_work.csv</code></td><td><span class="status todo">예정</span></td></tr>
+
+<tr><td>E6-1</td><td>Cycle-accurate kernel 비교</td><td>GPU/Bank-only/Logic-only/Hierarchical</td><td>동일 profile·precision·bank mapping</td><td>phase별 cycle, latency, throughput</td><td>전체 비용 경계 포함; proxy는 별도 표기</td><td>architecture comparison CSV</td><td><span class="status todo">예정</span></td></tr>
+<tr><td>E6-2</td><td>Traffic accounting</td><td>4 architecture cases</td><td>burst/padding/protocol 포함 모델</td><td>tensor, bank partial, scalar return, TSV, off-chip bytes</td><td>logical byte와 transaction byte 구분</td><td><code>traffic_breakdown.csv</code></td><td><span class="status todo">예정</span></td></tr>
+<tr><td>E6-3</td><td>Break-even/sensitivity</td><td>4 architecture cases</td><td>bandwidth, latency, banks, PCUs, RSQRT II</td><td>winner, speedup, crossover point</td><td>가정 범위와 winner 안정성 제시</td><td>sweep CSV/heatmap</td><td><span class="status todo">예정</span></td></tr>
+<tr><td>E6-4</td><td>실제 GPU baseline</td><td>GPU</td><td>동일 tensor/precision/model profile</td><td>kernel/E2E latency, energy, traffic proxy</td><td>warm-up·반복·환경 공개</td><td>GPU benchmark report</td><td><span class="status blocked">외부 측정 필요</span></td></tr>
+
+<tr><td>E7-1</td><td>정확도/수치 안정성</td><td>B2</td><td>actual/synthetic GR00T trace</td><td>max/mean error, NaN/Inf, clamp count</td><td>FP32 reference 대비 tolerance 만족</td><td>accuracy CSV</td><td><span class="status todo">예정</span></td></tr>
+<tr><td>E7-2</td><td>Precision sensitivity</td><td>B2</td><td>FP16/BF16 및 mixed precision</td><td>accuracy, cell area, cycle, energy</td><td>정확도–PPA Pareto 제시</td><td>precision tradeoff table</td><td><span class="status todo">예정</span></td></tr>
+<tr><td>E7-3</td><td>Thermal proxy</td><td>B0/B1/B2</td><td>block placement + activity power</td><td>peak T, hotspot, power density</td><td>동일 package/BC로 상대 비교</td><td>thermal summary/heatmap</td><td><span class="status todo">예정</span></td></tr>
+
+<tr><td>E8-1</td><td>통합 PPA·성능 표</td><td>B0/B1/B2</td><td>E2–E7 검증 결과</td><td>area, timing, power, energy, traffic, latency</td><td>모든 값 evidence label과 provenance 보유</td><td>final comparison table</td><td><span class="status todo">예정</span></td></tr>
+<tr><td>E8-2</td><td>Claim gate 및 재현성 audit</td><td>전체</td><td>manifest/artifact/report</td><td>누락, stale result, config mismatch</td><td>필수 gate PASS; 미완료는 limitation에 명시</td><td>final audit report</td><td><span class="status todo">예정</span></td></tr>
+</tbody></table></div>
+
+<h2>5. 현재 확보된 Preliminary RTL 결과</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Case</th><th>Logic PCU</th><th>Normalization</th><th>Yosys generic cells</th><th>증분</th><th>해석</th></tr></thead>
+<tbody>
+<tr><td>B0</td><td class="center">OFF</td><td class="center">OFF</td><td class="num">14,945</td><td>기준</td><td>Bank-side 기준선</td></tr>
+<tr><td>B1</td><td class="center">ON</td><td class="center">OFF</td><td class="num">101,095</td><td class="num">+576.45% vs B0</td><td>Logic PCU, buffers, control 및 reduction 포함</td></tr>
+<tr><td>B2</td><td class="center">ON</td><td class="center">ON</td><td class="num">128,668</td><td class="num">+27.27% vs B1<br>+760.94% vs B0</td><td>현재 normalization engine 추가 비용</td></tr>
+</tbody></table></div>
+<div class="warn callout"><strong>이 숫자는 면적(mm²)이 아니다.</strong> 현재 수치는 Yosys generic cell count 기반 구조 비교다. 보고서의 정식 Area 열은 E3의 Sky130 technology-mapped area와 E4의 physical area가 확보된 뒤 채운다. 축소 parameter 때문에 전체 HBM2 제품 면적으로 직접 외삽하지 않는다.</div>
+
+<h2>6. 최종 비교표 스키마</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Metric</th><th>B0 Bank-only</th><th>B1 Hierarchical</th><th>B2 + Normalization</th><th>B2 vs B0</th><th>Evidence</th></tr></thead>
+<tbody>
+<tr><td>Generic cells</td><td class="num">14,945</td><td class="num">101,095</td><td class="num">128,668</td><td class="num">+760.94%</td><td>MEASURED / Yosys</td></tr>
+<tr><td>Mapped cell area (µm²)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>E3-1</td></tr>
+<tr><td>Core/die area (mm²)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>E4-1/E4-2</td></tr>
+<tr><td>Critical path (ns), WNS/TNS</td><td>—</td><td>—</td><td>—</td><td>—</td><td>E3-2/E4-3/E4-4</td></tr>
+<tr><td>Dynamic/leakage/total power (W)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>E5-2</td></tr>
+<tr><td>Energy per normalization call (J)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>E5-3</td></tr>
+<tr><td>E2E normalization latency/cycles</td><td>—</td><td>—</td><td>—</td><td>—</td><td>E1-5/E6-1</td></tr>
+<tr><td>Off-chip / TSV traffic (bytes)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>E6-2</td></tr>
+<tr><td>Maximum numerical error</td><td>N/A</td><td>N/A</td><td>—</td><td>N/A</td><td>E7-1</td></tr>
+<tr><td>Peak temperature (K)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>E7-3, modeled</td></tr>
+</tbody></table></div>
+
+<h2>7. Claim Gate — 보고서에 써도 되는 시점</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>주장</th><th>필수 증거</th><th>현재 판정</th><th>허용 표현</th></tr></thead>
+<tbody>
+<tr><td>세 architecture가 서로 다른 RTL/netlist다</td><td>E0-2, E1-1, E1-2</td><td><span class="status done">가능</span></td><td>“동일 configuration에서 feature-isolated netlist를 생성했다.”</td></tr>
+<tr><td>Normalization RTL 추가 논리 비용</td><td>E2-1, E2-2</td><td><span class="status done">예비 가능</span></td><td>“Generic cell count 기준 B2는 B1보다 27.27% 증가했다.”</td></tr>
+<tr><td>실제 silicon area 증가</td><td>E3-1 + 동일 library/corner</td><td><span class="status todo">아직 불가</span></td><td>Mapped area 확보 전에는 cell count로 한정</td></tr>
+<tr><td>10 ns timing 만족</td><td>E3/E4 STA에서 non-negative WNS 및 검증된 clocks</td><td><span class="status todo">아직 불가</span></td><td>“10 ns target constraint에서 분석했다”까지만 허용</td></tr>
+<tr><td>Power/energy 개선</td><td>E5 activity-based power + E6 measured latency</td><td><span class="status todo">아직 불가</span></td><td>Synthetic/assumed power를 실측처럼 사용 금지</td></tr>
+<tr><td>Memory I/O 감소</td><td>E6-2 동일 boundary의 transaction bytes</td><td><span class="status todo">모델만 존재</span></td><td>Logical payload와 실제 transaction을 구분</td></tr>
+<tr><td>GR00T normalization E2E 가속</td><td>E1-5 + E6-1 + actual workload validation</td><td><span class="status todo">아직 불가</span></td><td>부분 kernel 또는 projected 결과로 범위 제한</td></tr>
+<tr><td>DRC-clean/signoff GDS</td><td>E4-4 DRC/antenna/timing closure</td><td><span class="status todo">아직 불가</span></td><td>현재 GDS는 physical integration artifact</td></tr>
+</tbody></table></div>
+
+<h2>8. 실행 우선순위와 의사결정 Gate</h2>
+<ol>
+  <li><strong>P0 — 지금:</strong> E0-1, E1-3/E1-4, E2-2, E3-1/E3-2를 완료해 “구조 비용 + mapped area + timing”의 첫 비교표를 만든다.</li>
+  <li><strong>P1 — 다음:</strong> E4 placement/CTS/routing을 동일 조건으로 수행하고 physical feasibility를 확인한다.</li>
+  <li><strong>P1 — 병렬:</strong> E1-5 full normalization E2E gate와 E6 traffic accounting을 완성한다.</li>
+  <li><strong>P2:</strong> 동일 workload VCD/SAIF로 power와 Energy/work를 계산한다.</li>
+  <li><strong>P2:</strong> scale·clock·precision sensitivity를 실행해 단일 축소점의 과도한 일반화를 방지한다.</li>
+  <li><strong>Final:</strong> E8 통합 표와 claim audit가 통과한 값만 최종 보고서 본문에 사용한다.</li>
+</ol>
+
+<div class="danger callout"><strong>중단 조건:</strong> 세 case의 source/constraint/library가 다르거나, 한 case만 다른 optimization/physical 단계까지 실행됐거나, power가 서로 다른 stimulus에서 계산됐다면 해당 비교는 무효다. 설정을 정렬한 뒤 세 case를 모두 다시 실행한다.</div>
+
+<h2>9. 재현 명령과 파일 위치</h2>
+<pre># 현재 generic synthesis matrix
+wsl bash -lc "cd '/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2' &amp;&amp; bash rtl/run_ppa_matrix.sh"
+
+# 현재 결과
+experiment/results/ppa_matrix/configuration.txt
+experiment/results/ppa_matrix/synthesis_summary.csv
+experiment/results/ppa_matrix/B0.log  B0.v
+experiment/results/ppa_matrix/B1.log  B1.v
+experiment/results/ppa_matrix/B2.log  B2.v
+
+# 공통 physical constraint
+flow/designs/sky130hd/stob_pim2/config.mk
+flow/designs/sky130hd/stob_pim2/constraint.sdc</pre>
+
+<h2>10. 최종 제출 체크리스트</h2>
+<ul class="checklist">
+  <li>Architecture 그림에 Bank-PCU, Logic-PCU, partial/global reduction, RSQRT, scalar return/apply 경계를 표시했다.</li>
+  <li>B0/B1/B2의 source hash, parameter, tool/library version을 함께 제출했다.</li>
+  <li>Area는 generic cells, mapped area, physical core/die area를 서로 구분했다.</li>
+  <li>Timing은 target period와 achieved WNS/TNS를 함께 표기했다.</li>
+  <li>Power는 synthetic가 아니라 동일 workload activity 및 분석 corner를 명시했다.</li>
+  <li>Latency는 reduction, transfer, finalize, RSQRT, broadcast/apply, synchronization을 포함한다.</li>
+  <li>Traffic은 logical payload, TSV/on-die, off-chip transaction을 구분했다.</li>
+  <li>실측·파생·모델·가정·미검증 값을 명확하게 분류했다.</li>
+  <li>GDS가 signoff가 아니면 DRC/antenna/timing 잔여 위반을 limitation으로 공개했다.</li>
+  <li>최종 결론은 추가 Area/Power와 감소한 traffic/latency/energy의 tradeoff로 제시했다.</li>
+</ul>
+
+<footer>
+작성 기준일: 2026-08-12 · 대상 저장소: STOB_PIM2 · 문서 성격: 실행 및 보고서 작성용 baseline experiment master plan.<br>
+현재 완료 상태는 저장소의 <code>experiment/results/ppa_matrix</code> 결과를 기준으로 하며, 이후 RTL 또는 toolchain 변경 시 manifest와 상태를 갱신해야 한다.
+</footer>
+</main></body>
+</html>

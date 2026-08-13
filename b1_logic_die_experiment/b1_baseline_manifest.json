@@ -1,0 +1,178 @@
+{
+  "experiment": "B1 hierarchical logic-die baseline",
+  "generated_at": "2026-08-13T08:49:50+09:00",
+  "overall_disposition": "NOT_APPROVED",
+  "reason": "Exact planned configuration is functionally invalid; 10 ns timing is not met; detailed route did not complete.",
+  "plan": {
+    "path": "reports/baseline_b1_logic_die_experiment_plan.html",
+    "sha256": "212ef9bd48039df1f56eb8942f033a7e2967d4967b6679566488a0a45f4b3dcd"
+  },
+  "configuration": {
+    "top": "full_pim_system_top",
+    "features": {
+      "ENABLE_LOGIC_DIE_PCU": 1,
+      "ENABLE_NORMALIZATION_ENGINE": 0
+    },
+    "exact_plan_scale": {
+      "CHANNELS": 1,
+      "BANKS": 1,
+      "PIM_BLOCKS": 1,
+      "PCUS": 1,
+      "ROWS": 1,
+      "COLS": 1,
+      "DATA_WIDTH": 16,
+      "CRF_DEPTH": 2,
+      "WEIGHT_BUFFER_BYTES": 16
+    },
+    "functional_valid_scale": {
+      "CHANNELS": 1,
+      "BANKS": 2,
+      "PIM_BLOCKS": 1,
+      "PCUS": 1,
+      "ROWS": 1,
+      "COLS": 1,
+      "DATA_WIDTH": 32,
+      "CRF_DEPTH": 2,
+      "WEIGHT_BUFFER_BYTES": 16
+    },
+    "technology": "sky130hd",
+    "corner": "sky130_fd_sc_hd__tt_025C_1v80",
+    "clock_period_ns": 10.0,
+    "clock_uncertainty_ns": 0.2
+  },
+  "tools": {
+    "OpenROAD": "26Q3-1080-gab6fd26351",
+    "Yosys": "0.68+48 (ff5817c34-dirty)",
+    "simulator": "Icarus Verilog/vvp"
+  },
+  "functional": {
+    "exact_plan": "EXPECTED_ASSERTION_FAILURE",
+    "contract_failures": [
+      "DATA_WIDTH must be divisible by 32",
+      "each PIM block requires an even/odd bank pair"
+    ],
+    "valid_minimal_e2e": "PASS",
+    "cycles": 41,
+    "work_id": "B1_HIERARCHICAL_41_CYCLE_TRACE",
+    "rtl_regressions": "PASS",
+    "router_formal": "PASS"
+  },
+  "synthesis": {
+    "generic_cells": 101095,
+    "mapped_cells": 56097,
+    "mapped_area_um2": 702769.011199,
+    "unmapped_cells": 0
+  },
+  "physical": {
+    "timing": [
+      {
+        "stage": "pre_layout",
+        "area_um2": 702769.011199,
+        "wns_ns": -48.76,
+        "tns_ns": -115135.01,
+        "clock_period_ns": 10.0,
+        "timing_met": "no"
+      },
+      {
+        "stage": "post_place",
+        "area_um2": 895637,
+        "wns_ns": -44.0,
+        "tns_ns": -144902.47,
+        "clock_period_ns": 10.0,
+        "timing_met": "no"
+      },
+      {
+        "stage": "post_cts",
+        "area_um2": 948024,
+        "wns_ns": -44.42,
+        "tns_ns": -146424.12,
+        "clock_period_ns": 10.0,
+        "timing_met": "no"
+      },
+      {
+        "stage": "global_route",
+        "area_um2": 948024,
+        "wns_ns": -47.21,
+        "tns_ns": -160819.12,
+        "clock_period_ns": 10.0,
+        "timing_met": "no"
+      }
+    ],
+    "detailed_route": {
+      "status": "OOM",
+      "progress_percent": 40,
+      "last_violations": 13497,
+      "final_odb": false,
+      "gds": false
+    }
+  },
+  "power_performance": {
+    "evidence_level": "ESTIMATED_VCD_DERIVED_INPUT_ACTIVITY_PROPAGATED",
+    "total_power_w": 0.742,
+    "latency_cycles": 41,
+    "target_clock_throughput_mwork_s": 2.4390243902439024,
+    "energy_nj_work": 304.21999999999997,
+    "timing_closed": false
+  },
+  "comparison": {
+    "generic_B0_cells": 14945,
+    "generic_B1_cells": 101095,
+    "cell_delta": 86150,
+    "cell_delta_percent": 576.45,
+    "physical_comparison_approved": false,
+    "reason": "Available B0 physical run uses BANKS=2/DATA_WIDTH=32 while exact-plan B1 uses BANKS=1/DATA_WIDTH=16."
+  },
+  "gates": [
+    {
+      "gate": "G0",
+      "status": "PASS_WITH_DEFECT",
+      "result": "계획 구성·툴·제약 고정; 계획 축소 구성의 RTL 계약 충돌 발견"
+    },
+    {
+      "gate": "G1",
+      "status": "PASS",
+      "result": "Logic-die hierarchy present; normalization hierarchy absent"
+    },
+    {
+      "gate": "G2",
+      "status": "PASS",
+      "result": "generic synthesis 101095 cells"
+    },
+    {
+      "gate": "G3",
+      "status": "FAIL_EXACT_CONFIG",
+      "result": "계획 구성은 assertion 실패; 수정된 유효 최소 구성과 회귀·formal은 통과"
+    },
+    {
+      "gate": "G4",
+      "status": "PASS_REPORT_FAIL_TIMING",
+      "result": "Sky130 mapping 56097 cells, unmapped 0; WNS -48.76 ns"
+    },
+    {
+      "gate": "G5",
+      "status": "PASS",
+      "result": "floorplan/place/legalization 완료"
+    },
+    {
+      "gate": "G6",
+      "status": "PARTIAL",
+      "result": "CTS와 post-CTS STA 완료; 별도 skew query는 자원 한계로 미완료"
+    },
+    {
+      "gate": "G7",
+      "status": "FAIL_RESOURCE",
+      "result": "global route 완료; detailed route 40%에서 OOM, DRC/antenna/GDS 없음"
+    },
+    {
+      "gate": "G8",
+      "status": "PARTIAL_ESTIMATE",
+      "result": "공통 work trace 확보; 직접 mapped VCD annotation 0, 파생 activity 전력만 제공"
+    },
+    {
+      "gate": "G9",
+      "status": "NOT_APPROVED",
+      "result": "정확 구성 기능 실패·timing 미달·route 미완료·동일 조건 B0 부재"
+    }
+  ],
+  "hash_manifest": "metrics/hash_manifest.csv"
+}

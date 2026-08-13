@@ -1,0 +1,57 @@
+{
+  "hbm2_4hi_1stack": {
+    "logic_die_yield": 0.8227398823936554,
+    "dram_die_yield": 0.9098313728723629,
+    "bond_chain_yield": 0.980149500625,
+    "tsv_group_yield": 0.995,
+    "assembly_yield": 0.99,
+    "good_system_yield": 0.5443231198080322,
+    "expected_attempts_per_good_system": 1.8371440852129752,
+    "yield_model": "negative_binomial",
+    "kgd_assumption": "individual die yield retained explicitly; no perfect KGD claim"
+  },
+  "hbm2_8hi_1stack": {
+    "logic_die_yield": 0.8227398823936554,
+    "dram_die_yield": 0.9098313728723629,
+    "bond_chain_yield": 0.9606930435754368,
+    "tsv_group_yield": 0.995,
+    "assembly_yield": 0.99,
+    "good_system_yield": 0.3655886772414155,
+    "expected_attempts_per_good_system": 2.7353144729360768,
+    "yield_model": "negative_binomial",
+    "kgd_assumption": "individual die yield retained explicitly; no perfect KGD claim"
+  },
+  "hbm2_12hi_1stack": {
+    "logic_die_yield": 0.8227398823936554,
+    "dram_die_yield": 0.9098313728723629,
+    "bond_chain_yield": 0.9416228069143757,
+    "tsv_group_yield": 0.995,
+    "assembly_yield": 0.99,
+    "good_system_yield": 0.24554364138393456,
+    "expected_attempts_per_good_system": 4.07259578934235,
+    "yield_model": "negative_binomial",
+    "kgd_assumption": "individual die yield retained explicitly; no perfect KGD claim"
+  },
+  "hbm2_8hi_2stack": {
+    "logic_die_yield": 0.8227398823936554,
+    "dram_die_yield": 0.9098313728723629,
+    "bond_chain_yield": 0.9229311239742362,
+    "tsv_group_yield": 0.990025,
+    "assembly_yield": 0.9801,
+    "good_system_yield": 0.13365508092712788,
+    "expected_attempts_per_good_system": 7.481945265853568,
+    "yield_model": "negative_binomial",
+    "kgd_assumption": "individual die yield retained explicitly; no perfect KGD claim"
+  },
+  "hbm2_8hi_no_pim": {
+    "logic_die_yield": 0.8301854472236897,
+    "dram_die_yield": 0.9098313728723629,
+    "bond_chain_yield": 0.9606930435754368,
+    "tsv_group_yield": 0.995,
+    "assembly_yield": 0.99,
+    "good_system_yield": 0.36889715207748175,
+    "expected_attempts_per_good_system": 2.7107826513932096,
+    "yield_model": "negative_binomial",
+    "kgd_assumption": "individual die yield retained explicitly; no perfect KGD claim"
+  }
+}

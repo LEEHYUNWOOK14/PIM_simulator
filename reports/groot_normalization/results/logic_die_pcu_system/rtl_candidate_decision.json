@@ -1,0 +1,98 @@
+{
+  "system_objective": "complete cross-bank normalization on the logic die and eliminate external tensor/intermediate I/O",
+  "recommended_lanes": 8,
+  "recommended_configuration": "LANES_8_SCALAR_ENGINES_4_CONTEXTS_16",
+  "decision_status": "SELECTED_FOR_RTL_FREEZE",
+  "reason": "All lanes provide identical external-I/O elimination and bit-exact model accuracy. Eight lanes captures the large 4-to-8 cycle reduction; sixteen lanes has only a small additional cycle gain for a large arithmetic/storage cost increase.",
+  "trace_scope": "PRETRAINED_ACTION_HEAD_SYNTHETIC_BOUNDARY_INPUT_NOT_FULL_GROOT_INFERENCE",
+  "accuracy": {
+    "profiles_passed_per_lane": 6,
+    "lanes_tested": [
+      4,
+      8,
+      16
+    ],
+    "weighted_elements_per_lane": 21534720,
+    "mixed_precision_model_mismatches": 0
+  },
+  "traffic": {
+    "gpu_external_bytes": 86212608,
+    "logic_die_pcu_external_bytes": 8608,
+    "external_io_reduction_fraction": 0.9999001538150893,
+    "external_io_is_lane_invariant": true,
+    "internal_traffic_is_reported_separately": true
+  },
+  "bank_interface_bounds": {
+    "current_top_rtl": "independent reduction-read, replay-read, and write-back ready/valid paths",
+    "single_shared_port": "conservative cycle-model lower-bandwidth bound",
+    "split_read_write": "one shared read plus one write cycle-model bound",
+    "freeze_requirement": "retain backpressure on all three paths; bank scheduler may serialize without functional changes"
+  },
+  "lane_results": [
+    {
+      "lanes": 4,
+      "scalar_engines": 4,
+      "weighted_rtl_cycles": 412945,
+      "weighted_elements": 21534720,
+      "elements_per_cycle": 52.149123975347806,
+      "speedup_vs_lane4": 1.0,
+      "incremental_cycle_reduction_vs_previous": 0.0,
+      "relative_cost_units": 848.75,
+      "cost_ratio_vs_lane4": 1.0,
+      "incremental_cost_vs_previous": 0.0,
+      "independent_port_model_cycles": 371253,
+      "model_error_fraction": -0.1009625979246631,
+      "mixed_mismatches": 0,
+      "pytorch_bit_mismatches_sample_rows": 37,
+      "weighted_external_bytes": 8608,
+      "weighted_bank_internal_operand_bytes": 215347200,
+      "max_contexts": 9,
+      "accuracy_gate": "PASS"
+    },
+    {
+      "lanes": 8,
+      "scalar_engines": 4,
+      "weighted_rtl_cycles": 263048,
+      "weighted_elements": 21534720,
+      "elements_per_cycle": 81.8661232930872,
+      "speedup_vs_lane4": 1.5698465679267661,
+      "incremental_cycle_reduction_vs_previous": 0.3629950719829517,
+      "relative_cost_units": 1504.75,
+      "cost_ratio_vs_lane4": 1.772901325478645,
+      "incremental_cost_vs_previous": 0.7729013254786451,
+      "independent_port_model_cycles": 231756,
+      "model_error_fraction": -0.11895927739423984,
+      "mixed_mismatches": 0,
+      "pytorch_bit_mismatches_sample_rows": 39,
+      "weighted_external_bytes": 8608,
+      "weighted_bank_internal_operand_bytes": 215347200,
+      "max_contexts": 9,
+      "accuracy_gate": "PASS"
+    },
+    {
+      "lanes": 16,
+      "scalar_engines": 4,
+      "weighted_rtl_cycles": 241282,
+      "weighted_elements": 21534720,
+      "elements_per_cycle": 89.25124957518588,
+      "speedup_vs_lane4": 1.7114621065806814,
+      "incremental_cycle_reduction_vs_previous": 0.0827453544600225,
+      "relative_cost_units": 2816.75,
+      "cost_ratio_vs_lane4": 3.3187039764359354,
+      "incremental_cost_vs_previous": 0.8719056321648114,
+      "independent_port_model_cycles": 226599,
+      "model_error_fraction": -0.060854104326058304,
+      "mixed_mismatches": 0,
+      "pytorch_bit_mismatches_sample_rows": 37,
+      "weighted_external_bytes": 8608,
+      "weighted_bank_internal_operand_bytes": 215347200,
+      "max_contexts": 9,
+      "accuracy_gate": "PASS"
+    }
+  ],
+  "source_logs": [
+    "reports/groot_normalization/results/logic_die_pcu_l4_e4_results/rtl_runs.log",
+    "reports/groot_normalization/results/logic_die_pcu_l8_e4_results/rtl_runs.log",
+    "reports/groot_normalization/results/logic_die_pcu_l16_e4_results/rtl_runs.log"
+  ]
+}

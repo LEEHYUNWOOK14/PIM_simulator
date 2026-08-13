@@ -1,0 +1,85 @@
+{
+  "metrics": [
+    {
+      "top": "fp32_add",
+      "generic_cells": 7105,
+      "wires": 7090,
+      "wire_bits": 7424,
+      "longest_topological_path_cells": 416,
+      "synthesis_status": "YOSYS_CHECK_ASSERT_PASS",
+      "physical_area": "UNAVAILABLE_GENERIC_CELLS_ONLY",
+      "source": "reports/groot_normalization/results/mixed_precision_synthesis/fp32_add_yosys.log"
+    },
+    {
+      "top": "fp32_mul",
+      "generic_cells": 9972,
+      "wires": 9954,
+      "wire_bits": 10418,
+      "longest_topological_path_cells": 132,
+      "synthesis_status": "YOSYS_CHECK_ASSERT_PASS",
+      "physical_area": "UNAVAILABLE_GENERIC_CELLS_ONLY",
+      "source": "reports/groot_normalization/results/mixed_precision_synthesis/fp32_mul_yosys.log"
+    },
+    {
+      "top": "fp32_to_bf16_rne",
+      "generic_cells": 113,
+      "wires": 101,
+      "wire_bits": 177,
+      "longest_topological_path_cells": 15,
+      "synthesis_status": "YOSYS_CHECK_ASSERT_PASS",
+      "physical_area": "UNAVAILABLE_GENERIC_CELLS_ONLY",
+      "source": "reports/groot_normalization/results/mixed_precision_synthesis/fp32_to_bf16_rne_yosys.log"
+    },
+    {
+      "top": "mixed_precision_bank_reducer4",
+      "generic_cells": 97515,
+      "wires": 96656,
+      "wire_bits": 102659,
+      "longest_topological_path_cells": 417,
+      "synthesis_status": "YOSYS_CHECK_ASSERT_PASS",
+      "physical_area": "UNAVAILABLE_GENERIC_CELLS_ONLY",
+      "source": "reports/groot_normalization/results/mixed_precision_synthesis/mixed_precision_bank_reducer4_yosys.log"
+    },
+    {
+      "top": "mixed_precision_global_reducer16",
+      "generic_cells": 214214,
+      "wires": 212766,
+      "wire_bits": 225870,
+      "longest_topological_path_cells": 416,
+      "synthesis_status": "YOSYS_CHECK_ASSERT_PASS",
+      "physical_area": "UNAVAILABLE_GENERIC_CELLS_ONLY",
+      "source": "reports/groot_normalization/results/mixed_precision_synthesis/mixed_precision_global_reducer16_yosys.log"
+    },
+    {
+      "top": "mixed_precision_scalar_nr2",
+      "generic_cells": 93417,
+      "wires": 92799,
+      "wire_bits": 98212,
+      "longest_topological_path_cells": 557,
+      "synthesis_status": "YOSYS_CHECK_ASSERT_PASS",
+      "physical_area": "UNAVAILABLE_GENERIC_CELLS_ONLY",
+      "source": "reports/groot_normalization/results/mixed_precision_synthesis/mixed_precision_scalar_nr2_yosys.log"
+    },
+    {
+      "top": "mixed_precision_bank_apply4",
+      "generic_cells": 138542,
+      "wires": 136958,
+      "wire_bits": 146831,
+      "longest_topological_path_cells": 417,
+      "synthesis_status": "YOSYS_CHECK_ASSERT_PASS",
+      "physical_area": "UNAVAILABLE_GENERIC_CELLS_ONLY",
+      "source": "reports/groot_normalization/results/mixed_precision_synthesis/mixed_precision_bank_apply4_yosys.log"
+    },
+    {
+      "top": "mixed_precision_normalization_datapath",
+      "generic_cells": 4084595,
+      "wires": 4043425,
+      "wire_bits": 4323393,
+      "longest_topological_path_cells": "NOT_RUN_FOR_FULL_TOP",
+      "synthesis_status": "YOSYS_CHECK_ASSERT_PASS",
+      "physical_area": "UNAVAILABLE_GENERIC_CELLS_ONLY",
+      "source": "reports/groot_normalization/results/mixed_precision_synthesis/mixed_precision_normalization_datapath_yosys.log"
+    }
+  ],
+  "warning": "Generic cells and topological cell count are not mapped area or STA."
+}

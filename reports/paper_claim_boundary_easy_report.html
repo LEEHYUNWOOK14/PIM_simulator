@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>논문 결과, 어디까지 믿고 말할 수 있나요?</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #5c667a;
+      --paper: #ffffff;
+      --canvas: #f3f6fb;
+      --line: #dce3ee;
+      --navy: #173b67;
+      --blue: #2d6cdf;
+      --green: #16845b;
+      --green-bg: #e8f7f0;
+      --amber: #a76300;
+      --amber-bg: #fff3d7;
+      --red: #bd3f3f;
+      --red-bg: #fff0ef;
+      --violet-bg: #f2edff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--canvas);
+      font-family: Pretendard, "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      word-break: keep-all;
+    }
+    .page { max-width: 1080px; margin: 0 auto; padding: 28px 20px 72px; }
+    header {
+      padding: 52px 48px;
+      color: white;
+      background: linear-gradient(135deg, #102b4d, #245f9e 68%, #357bc1);
+      border-radius: 24px;
+      box-shadow: 0 18px 44px rgba(16, 43, 77, .18);
+    }
+    header .eyebrow { margin: 0 0 10px; color: #cde4ff; font-weight: 800; letter-spacing: .08em; }
+    h1 { margin: 0; font-size: clamp(2rem, 5vw, 3.45rem); line-height: 1.18; letter-spacing: -.04em; }
+    header .lead { max-width: 780px; margin: 20px 0 0; font-size: 1.14rem; color: #eef6ff; }
+    .meta { margin-top: 22px; font-size: .92rem; color: #cde4ff; }
+    section {
+      margin-top: 26px;
+      padding: 34px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(23, 59, 103, .06);
+    }
+    h2 { margin: 0 0 18px; color: var(--navy); font-size: 1.55rem; letter-spacing: -.025em; }
+    h3 { margin: 0 0 7px; font-size: 1.05rem; }
+    p { margin: 8px 0; }
+    .summary {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 18px;
+    }
+    .hero-result {
+      padding: 24px;
+      background: var(--amber-bg);
+      border-left: 6px solid #e4a022;
+      border-radius: 14px;
+    }
+    .hero-result strong { display: block; margin-bottom: 6px; font-size: 1.45rem; color: #784b00; }
+    .plain {
+      padding: 24px;
+      background: #edf5ff;
+      border-radius: 14px;
+    }
+    .plain strong { color: var(--navy); }
+    .gate-track { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 22px; }
+    .gate { min-height: 148px; padding: 17px; border-radius: 14px; border: 1px solid var(--line); }
+    .gate.pass { background: var(--green-bg); border-color: #a9ddc7; }
+    .gate.pending { background: var(--amber-bg); border-color: #efca76; }
+    .gate .status { display: inline-block; padding: 3px 9px; border-radius: 999px; font-size: .76rem; font-weight: 900; }
+    .pass .status { color: #086541; background: #c8ecdd; }
+    .pending .status { color: #805000; background: #ffe1a0; }
+    .gate h3 { margin-top: 11px; }
+    .gate p { color: var(--muted); font-size: .9rem; line-height: 1.52; }
+    .arrow-note { margin-top: 14px; color: var(--muted); text-align: center; font-size: .9rem; }
+    .class-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .class-card { padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: #fbfcfe; }
+    .class-card code { display: inline-block; color: var(--blue); font-size: .88rem; font-weight: 800; }
+    .class-card p { color: var(--muted); font-size: .92rem; }
+    .claims { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .claim-box { padding: 22px; border-radius: 15px; }
+    .claim-box.ok { background: var(--green-bg); border: 1px solid #a9ddc7; }
+    .claim-box.no { background: var(--red-bg); border: 1px solid #edb9b5; }
+    .claim-box h3 { font-size: 1.15rem; }
+    .claim-box ul { margin: 10px 0 0; padding-left: 21px; }
+    .claim-box li + li { margin-top: 8px; }
+    .matrix { width: 100%; border-collapse: collapse; font-size: .9rem; }
+    .matrix th, .matrix td { padding: 12px 10px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+    .matrix th { color: var(--navy); background: #edf3fa; }
+    .matrix tr:last-child td { border-bottom: 0; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 999px; white-space: nowrap; font-size: .77rem; font-weight: 800; }
+    .supported { color: #086541; background: #d8f1e6; }
+    .blocked { color: #963030; background: #f8d8d5; }
+    .next { display: grid; grid-template-columns: auto 1fr; gap: 12px 18px; align-items: start; }
+    .next .num { display: grid; width: 32px; height: 32px; place-items: center; color: white; background: var(--blue); border-radius: 50%; font-weight: 900; }
+    .technical-note { padding: 18px 20px; color: #465268; background: #f7f9fc; border-radius: 12px; font-size: .91rem; }
+    .links a { color: var(--blue); text-decoration: none; border-bottom: 1px solid #a9c7f5; }
+    footer { padding: 28px 8px 0; color: var(--muted); text-align: center; font-size: .85rem; }
+    @media (max-width: 780px) {
+      header { padding: 38px 26px; }
+      section { padding: 25px 20px; }
+      .summary, .claims { grid-template-columns: 1fr; }
+      .gate-track { grid-template-columns: 1fr; }
+      .class-grid { grid-template-columns: 1fr; }
+      .table-wrap { overflow-x: auto; }
+      .matrix { min-width: 720px; }
+    }
+    @media print {
+      body { background: white; }
+      .page { max-width: none; padding: 0; }
+      header, section { box-shadow: none; break-inside: avoid; }
+      a { color: inherit !important; text-decoration: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <p class="eyebrow">쉬운 설명 보고서</p>
+      <h1>논문 결과,<br>어디까지 믿고 말할 수 있나요?</h1>
+      <p class="lead">실험 결과마다 “컴퓨터에서 동작을 확인한 것인지”, “실제로 칩 배치를 해 본 것인지”, “아직 계산이나 가정에 불과한지”를 구분했습니다. 논문이 확보한 증거보다 더 강하게 말하지 않도록 자동 검사도 추가했습니다.</p>
+      <p class="meta">STOB PIM2 · 작성일 2026-08-13 · 기준: Physical Feasibility Gate</p>
+    </header>
+
+    <section>
+      <h2>한눈에 보는 결론</h2>
+      <div class="summary">
+        <div class="hero-result">
+          <strong>현재 상태: 4단계까지 통과, 마지막 1단계는 대기</strong>
+          회로의 기본 동작, 합성, 통합 합성, 부품 배치는 확인했습니다. 그러나 부품 사이의 모든 배선을 실제로 연결할 수 있는지는 아직 증거가 완성되지 않았습니다.
+        </div>
+        <div class="plain">
+          <strong>따라서 이렇게 이해하면 됩니다.</strong>
+          <p>“설계가 컴퓨터상에서 동작했고 칩 위에 부품을 놓을 수 있었다”는 말은 가능합니다. 하지만 “배선까지 문제없이 가능하다” 또는 “제조 가능한 칩이다”라고 말할 단계는 아닙니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>칩을 만드는 5단계 검사</h2>
+      <p>집을 짓는 과정에 비유하면 이해하기 쉽습니다. 설계도를 시험하고, 자재 목록으로 바꾸고, 방을 배치한 뒤, 마지막으로 전선과 배관이 모두 지나갈 수 있는지 확인하는 흐름입니다.</p>
+      <div class="gate-track">
+        <article class="gate pass">
+          <span class="status">PF-0 PASS</span>
+          <h3>동작 시험</h3>
+          <p>컴퓨터 시뮬레이션에서 회로의 기본 행동과 데이터 흐름을 확인했습니다.</p>
+        </article>
+        <article class="gate pass">
+          <span class="status">PF-1 PASS</span>
+          <h3>부품 변환</h3>
+          <p>어댑터 설계를 실제 반도체 셀 조합으로 바꿀 수 있음을 확인했습니다.</p>
+        </article>
+        <article class="gate pass">
+          <span class="status">PF-2 PASS</span>
+          <h3>통합 설계 변환</h3>
+          <p>PCU와 어댑터를 합친 큰 설계도 셀 조합으로 변환했습니다.</p>
+        </article>
+        <article class="gate pass">
+          <span class="status">PF-3 PASS</span>
+          <h3>부품 배치</h3>
+          <p>변환된 부품들을 정해진 칩 영역 안에 겹치지 않게 배치했습니다.</p>
+        </article>
+        <article class="gate pending">
+          <span class="status">PF-4 PENDING</span>
+          <h3>전체 배선</h3>
+          <p>배선 완료 결과와 혼잡도 자료가 아직 충분하지 않습니다.</p>
+        </article>
+      </div>
+      <p class="arrow-note">PASS는 해당 단계의 제한된 검사를 통과했다는 뜻이며, 완성 칩이나 양산 가능성을 뜻하지 않습니다.</p>
+    </section>
+
+    <section>
+      <h2>결과에 붙이는 여섯 가지 꼬리표</h2>
+      <p>서로 다른 종류의 증거를 하나의 “실측 결과”처럼 섞지 않기 위해 각 결과에 아래 꼬리표를 자동으로 붙입니다.</p>
+      <div class="class-grid">
+        <article class="class-card"><code>rtl_simulated</code><h3>회로 동작 시뮬레이션</h3><p>칩 설계 언어로 작성한 회로가 시험 조건에서 의도대로 움직였다는 뜻입니다.</p></article>
+        <article class="class-card"><code>synthesized</code><h3>합성됨</h3><p>회로 설명을 실제 반도체 기본 부품들의 조합으로 변환했다는 뜻입니다.</p></article>
+        <article class="class-card"><code>placed</code><h3>배치됨</h3><p>합성된 부품을 칩의 제한된 공간에 실제 좌표로 놓아 보았다는 뜻입니다. 배선 완료와는 다릅니다.</p></article>
+        <article class="class-card"><code>modeled</code><h3>모델 계산값</h3><p>정해진 수식과 조건으로 계산한 결과입니다. 실제 칩에서 측정한 값은 아닙니다.</p></article>
+        <article class="class-card"><code>estimated</code><h3>공학적 추정값</h3><p>공개 자료와 가정을 이용한 예상값입니다. 제조사 공개값이나 견적이 아닙니다.</p></article>
+        <article class="class-card"><code>illustrative</code><h3>설명용 그림·값</h3><p>구조를 쉽게 보여 주기 위한 예시입니다. 실제 제조 치수나 배선도를 의미하지 않습니다.</p></article>
+      </div>
+    </section>
+
+    <section>
+      <h2>논문에서 가능한 말과 금지되는 말</h2>
+      <div class="claims">
+        <article class="claim-box ok">
+          <h3>✓ 현재 증거로 말할 수 있음</h3>
+          <ul>
+            <li>어댑터는 보고된 RTL 기능 시험을 통과했다.</li>
+            <li>통합 설계는 공개 Sky130 환경에서 합성·기술 매핑되었다.</li>
+            <li>현재 넷리스트는 최종 배치 위반 0건으로 합법적인 거친 배치에 도달했다.</li>
+            <li>성능·전력·열 값은 명시한 조건 아래의 모델 계산 결과다.</li>
+          </ul>
+        </article>
+        <article class="claim-box no">
+          <h3>✕ 아직 말하면 안 됨</h3>
+          <ul>
+            <li>“이 설계는 routing feasible하다.”</li>
+            <li>“혼잡 없이 전체 배선이 가능하다.”</li>
+            <li>“40 ns 목표 주파수에서 타이밍이 닫혔다.”</li>
+            <li>“제조·양산 가능한 설계” 또는 “실리콘에서 검증되었다.”</li>
+          </ul>
+        </article>
+      </div>
+      <p class="technical-note"><strong>왜 막았나요?</strong> PF-4가 아직 <strong>PENDING</strong>이고, 전체 배선 완료 파일·혼잡도 보고서·배선 초과량 0이라는 증거가 모두 갖춰지지 않았기 때문입니다. 자동 검사기는 PF-4가 통과하기 전까지 <em>routing feasible</em>, <em>routable</em> 같은 긍정 표현을 오류로 처리합니다.</p>
+    </section>
+
+    <section>
+      <h2>현재 evidence matrix</h2>
+      <p>각 주장과 그 주장을 뒷받침하는 증거 종류를 연결한 표입니다. <strong>BLOCKED</strong>는 자료가 전혀 없다는 뜻이 아니라, 그 자료만으로 해당 주장을 확정할 수 없다는 뜻입니다.</p>
+      <div class="table-wrap">
+        <table class="matrix">
+          <thead><tr><th>결과</th><th>분류</th><th>검사 단계</th><th>주장 가능 여부</th><th>쉬운 해석</th></tr></thead>
+          <tbody>
+            <tr><td>어댑터 기능·통신 시험</td><td><code>rtl_simulated</code></td><td>PF-0 PASS</td><td><span class="badge supported">SUPPORTED</span></td><td>컴퓨터상 동작 확인</td></tr>
+            <tr><td>어댑터 단독 합성</td><td><code>synthesized</code></td><td>PF-1 PASS</td><td><span class="badge supported">SUPPORTED</span></td><td>실제 셀 조합으로 변환</td></tr>
+            <tr><td>PCU+어댑터 통합 합성</td><td><code>synthesized</code></td><td>PF-2 PASS</td><td><span class="badge supported">SUPPORTED</span></td><td>통합 회로도 셀로 변환</td></tr>
+            <tr><td>통합 회로의 거친 배치</td><td><code>placed</code></td><td>PF-3 PASS</td><td><span class="badge supported">SUPPORTED</span></td><td>부품을 영역 안에 배치</td></tr>
+            <tr><td>전체 배선 가능성</td><td><code>placed</code></td><td>PF-4 PENDING</td><td><span class="badge blocked">BLOCKED</span></td><td>배치 증거까지만 있으므로 확정 금지</td></tr>
+            <tr><td>지연·처리량·전력·열 예측</td><td><code>modeled</code></td><td>해당 없음</td><td><span class="badge supported">SUPPORTED</span></td><td>모델의 출력으로만 주장</td></tr>
+            <tr><td>제조·수율·비용 가정</td><td><code>estimated</code></td><td>해당 없음</td><td><span class="badge supported">SUPPORTED</span></td><td>추정치임을 표시</td></tr>
+            <tr><td>패키지·평면 배치 그림</td><td><code>illustrative</code></td><td>해당 없음</td><td><span class="badge supported">SUPPORTED</span></td><td>설명용 그림임을 표시</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>자동 보호 장치가 하는 일</h2>
+      <div class="next">
+        <div class="num">1</div><div><h3>증거 파일 확인</h3><p>각 결과가 가리키는 파일이 실제로 존재하는지 확인하고, 파일 크기와 SHA-256 지문을 기록해 나중에 바뀐 자료를 구분합니다.</p></div>
+        <div class="num">2</div><div><h3>여섯 등급 자동 부여</h3><p>결과가 RTL 시험, 합성, 배치, 모델, 추정, 설명용 자료 중 어디에 해당하는지 일관된 규칙으로 분류합니다.</p></div>
+        <div class="num">3</div><div><h3>물리 검사 단계와 연결</h3><p>PF-0부터 PF-4까지의 현재 상태를 읽고, 필요한 단계가 통과하지 않았다면 해당 주장을 자동으로 BLOCKED 처리합니다.</p></div>
+        <div class="num">4</div><div><h3>과장 문구 탐지</h3><p>PF-4가 PENDING인 동안 배선 가능성을 확정하는 문구가 보고서에 들어오면 검사를 실패시킵니다.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>앞으로 PF-4를 통과하려면</h2>
+      <p>전체 배선 작업이 끝났다는 표시만으로는 충분하지 않습니다. 현재 설계와 같은 버전에서 생성된 결과인지 확인하고, 배선 가이드와 혼잡도 보고서가 존재하며, 배선 용량 초과가 0이고, 예외 처리된 고팬아웃 신호가 허용 목록에 포함되는지까지 검증해야 합니다.</p>
+      <p><strong>중요:</strong> PF-4를 통과하더라도 그것은 가벼운 전역 배선 가능성 검사입니다. 상세 배선, 클록 트리, 실제 배선 지연 추출, 전압 강하, 전자 이동, DRC/LVS, 제조 및 실리콘 검증은 별도의 더 강한 단계입니다.</p>
+    </section>
+
+    <section class="links">
+      <h2>근거 자료</h2>
+      <p><a href="paper_evidence_matrix/evidence_matrix.md">상세 Evidence Matrix</a></p>
+      <p><a href="hardware_cost_physical_feasibility/physical_feasibility_report.md">Physical Feasibility 원본 보고서</a></p>
+      <p><a href="paper_evidence_matrix/evidence_matrix.json">기계 판독용 Evidence Matrix JSON</a></p>
+      <p class="technical-note">이 HTML은 비전공자를 위한 설명본입니다. 수치와 자동 판정의 기준 자료는 위 원본 보고서 및 JSON을 우선합니다.</p>
+    </section>
+
+    <footer>STOB PIM2 논문 주장 경계 및 증거 분류 요약</footer>
+  </main>
+</body>
+</html>

@@ -97,10 +97,10 @@ def local_reduce_cycles(profile: Profile, banks: int, bank_pcus: int, lanes: int
     return math.ceil(profile.rows * profile.hidden_size / parallel_elements) * profile.statistic_count
 
 
-def global_reduce_cycles(profile: Profile, banks: int, logic_pcus: int) -> int:
+def global_reduce_cycles(profile: Profile, banks: int, partial_ports: int) -> int:
     # Current RTL accepts one paired SUM/SUMSQ partial per cycle and therefore
     # spends BANKS collection/accumulation cycles for each row assigned to an engine.
-    return math.ceil(profile.rows / max(1, logic_pcus)) * banks
+    return math.ceil(profile.rows * banks / max(1, partial_ports))
 
 
 def rsqrt_cycles(profile: Profile, engines: int, latency: int, initiation_interval: int) -> int:
@@ -144,7 +144,9 @@ def model_profile(profile: Profile, case: str, ref: Dict) -> Dict[str, float | i
 
     bank_local_cycles = bank_local_reduce_cycles(profile, banks)
     logic_local_cycles = logic_raw_reduce_cycles(profile, logic_pcus, lanes)
-    global_cycles = global_reduce_cycles(profile, banks, logic_pcus)
+    hierarchical_global_cycles = global_reduce_cycles(
+        profile, banks, int(ref.get("logic_partial_input_ports", 1))
+    )
     sqrt_cycles = rsqrt_cycles(
         profile,
         logic_pcus,
@@ -201,7 +203,9 @@ def model_profile(profile: Profile, case: str, ref: Dict) -> Dict[str, float | i
             float(ref["ondie_one_way_latency_ns"]),
         )
         breakdown["local_reduce_ns"] = cycles_to_ns(logic_local_cycles, clock)
-        breakdown["global_reduce_ns"] = cycles_to_ns(global_cycles, clock)
+        # Logic-only consumes the raw tensor directly; it does not traverse the
+        # Bank-partial dispatcher modeled by hierarchical_global_cycles.
+        breakdown["global_reduce_ns"] = 0.0
         breakdown["finalize_ns"] = cycles_to_ns(finish_cycles, clock)
         breakdown["rsqrt_ns"] = cycles_to_ns(sqrt_cycles, clock)
         breakdown["apply_ns"] = cycles_to_ns(
@@ -222,7 +226,7 @@ def model_profile(profile: Profile, case: str, ref: Dict) -> Dict[str, float | i
             float(ref["ondie_bandwidth_gbps"]),
             float(ref["ondie_one_way_latency_ns"]),
         )
-        breakdown["global_reduce_ns"] = cycles_to_ns(global_cycles, clock)
+        breakdown["global_reduce_ns"] = cycles_to_ns(hierarchical_global_cycles, clock)
         breakdown["finalize_ns"] = cycles_to_ns(finish_cycles, clock)
         breakdown["rsqrt_ns"] = cycles_to_ns(sqrt_cycles, clock)
         breakdown["return_ns"] = transfer_ns(

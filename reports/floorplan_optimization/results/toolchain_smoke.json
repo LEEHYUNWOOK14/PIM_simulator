@@ -1,0 +1,79 @@
+﻿{
+    "generated_at":  "2026-08-11T13:22:48.9114743Z",
+    "host":  "DESKTOP-6H094OP",
+    "repository":  "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2",
+    "policy":  "Large EDA tools and solver outputs live on remote-desktop local storage, not OneDrive.",
+    "overall_status":  "pass",
+    "checks":  [
+                   {
+                       "name":  "klayout_version",
+                       "status":  "pass",
+                       "exit_code":  0,
+                       "command":  "C:\\Users\\Admin\\AppData\\Roaming\\KLayout\\klayout_app.exe -v",
+                       "output":  ""
+                   },
+                   {
+                       "name":  "klayout_3d_python",
+                       "status":  "pass",
+                       "exit_code":  0,
+                       "command":  "KLayout headless gds3xtrude dependency smoke",
+                       "output":  ""
+                   },
+                   {
+                       "name":  "openscad_version",
+                       "status":  "pass",
+                       "exit_code":  0,
+                       "command":  "C:\\Users\\Admin\\AppData\\Local\\Programs\\OpenSCAD\\openscad.com --version",
+                       "output":  "OpenSCAD version 2021.01"
+                   },
+                   {
+                       "name":  "blender_headless",
+                       "status":  "pass",
+                       "exit_code":  0,
+                       "command":  "C:\\Users\\Admin\\AppData\\Local\\Programs\\Blender\\blender-5.2.0-windows-x64\\blender.exe --background --version",
+                       "output":  "Blender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:35:40)\r\nBlender 5.2.0 LTS\r\n\tbuild date: 2026-07-14\r\n\tbuild time: 01:35:40\r\n\tbuild commit date: 2026-07-13\r\n\tbuild commit time: 15:20\r\n\tbuild hash: fbe6228777e7\r\n\tbuild branch: blender-v5.2-release\r\n\tbuild platform: Windows\r\n\tbuild type: Release\r\n\tbuild c flags:  /W3 -Werror=implicit-function-declaration -Werror=return-type -Wno-tautological-compare -Wno-unknown-pragmas -Wno-char-subscripts -Wstrict-prototypes -Wmissing-prototypes -Wunused-parameter -Wundef -Wundef-prefix -Werror=unguarded-availability-new /DWIN32 /D_WINDOWS /MP /nologo /J /Gy /Gd /showFilenames -Wno-unused-command-line-argument -Wno-microsoft-enum-forward-reference /clang:-funsigned-char /clang:-fno-strict-aliasing /clang:-ffp-contract=off -march=x86-64-v2 \r\n\tbuild c++ flags:  /W3 -Wno-tautological-compare -Wno-unknown-pragmas -Wno-char-subscripts -Wno-overloaded-virtual -Wno-sign-compare -Wno-invalid-offsetof -Wno-suggest-override -Wundef -Wundef-prefix -Wunused-parameter -Wmismatched-tags -Werror=unguarded-availability-new /DWIN32 /D_WINDOWS /EHsc  /Gy /MP /nologo /J /Gd /showFilenames /EHsc -Wno-unused-command-line-argument -Wno-microsoft-enum-forward-reference /clang:-funsigned-char /clang:-fno-strict-aliasing /clang:-ffp-contract=off -march=x86-64-v2 \r\n\tbuild link flags: /MACHINE:X64  /SUBSYSTEM:CONSOLE /STACK:2097152 /ignore:4049 /ignore:4217 /ignore:4221\r\n\tbuild system: CMake"
+                   },
+                   {
+                       "name":  "paraview_python",
+                       "status":  "pass",
+                       "exit_code":  0,
+                       "command":  "C:\\Users\\Admin\\AppData\\Local\\STOB_EDA\\ParaView\\ParaView-6.1.1-Windows-Python3.12-msvc2017-AMD64\\bin\\pvpython.exe --version",
+                       "output":  "paraview version 6.1.1"
+                   },
+                   {
+                       "name":  "python311",
+                       "status":  "pass",
+                       "exit_code":  0,
+                       "command":  "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python311\\python.exe --version",
+                       "output":  "Python 3.11.9"
+                   },
+                   {
+                       "name":  "nvidia_gpu",
+                       "status":  "pass",
+                       "exit_code":  0,
+                       "command":  "nvidia-smi --query-gpu=...",
+                       "output":  "NVIDIA GeForce RTX 4060, 566.36, 8188 MiB"
+                   },
+                   {
+                       "name":  "wsl_eda_stack",
+                       "status":  "pass",
+                       "exit_code":  0,
+                       "command":  "WSL OpenROAD/Yosys/HotSpot/3D-ICE/Python checks",
+                       "output":  "26Q3-1080-gab6fd26351 \r\nOpenROAD 26Q3-1080-gab6fd26351 \r\nFeatures included (+) or not (-): +GPU +GUI +Python\r\nThis program is licensed under the BSD-3 license. See the LICENSE file for details.\r\nComponents of this program may be licensed under more restrictive licenses which must be honored.\r\nYosys 0.68+48 (git sha1 ff5817c34-dirty, Release, Clang /usr/bin/clang++ 21.1.8)\r\n2.5.2 3.11.1 2.1.2 1.4.1 1.6.13"
+                   },
+                   {
+                       "name":  "hotspot_example",
+                       "status":  "pass",
+                       "exit_code":  0,
+                       "command":  "HotSpot example1 steady-state",
+                       "output":  "wsl.exe : Computing steady-state temperatures...\r\nAt C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2\\tools\\check_floorplan_toolchain.ps1:72 char:9\r\n+         \u0026 wsl.exe -d Ubuntu -- bash -c \"set -e; cd /home/chandler/.lo ...\r\n+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (Computing steady-state temperatures...:String) [], RemoteException\r\n    + FullyQualifiedErrorId : NativeCommandError\r\n \r\nParsing input files...\r\nCreating thermal circuit...\r\nSimulation complete."
+                   },
+                   {
+                       "name":  "3d_ice_example",
+                       "status":  "pass",
+                       "exit_code":  0,
+                       "command":  "3D-ICE example_steady.stk",
+                       "output":  "Preparing stk data ... \r\nRead in configuration files took 0.001 sec\r\n\r\nPreparing thermal data ... \r\nUsed threads (1) / maximum available for OpenMP (4)\r\nPreparing thermal data took 0.01900 sec\r\n\r\nFactorization took 2.29115 sec\r\nSolve took 0.02860 sec\r\n\r\nEmulation took 2.323 sec\r\nPeak memory usage: 421.80 MB"
+                   }
+               ]
+}

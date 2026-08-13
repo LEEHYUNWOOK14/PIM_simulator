@@ -62,10 +62,10 @@ current_pipeline_cycles = rows × (vectors_per_row + log2(lanes))
 
 | lanes | non-pipeline Hierarchical | current pipeline Hierarchical | GPU full assumed | pipeline area/bank |
 |---:|---:|---:|---:|---:|
-| 2 | 42.889 ms | 45.977 ms | 36.773 ms | 21,363 cells |
-| 4 | 33.789 ms | 39.967 ms | 36.773 ms | 42,461 cells |
-| 8 | 30.673 ms | 39.939 ms | 36.773 ms | 84,727 cells |
-| 16 | 29.115 ms | 41.470 ms | 36.773 ms | 169,209 cells |
+| 2 | 89.196 ms | 92.285 ms | 36.773 ms | 21,363 cells |
+| 4 | 80.097 ms | 86.274 ms | 36.773 ms | 42,461 cells |
+| 8 | 76.981 ms | 86.247 ms | 36.773 ms | 84,727 cells |
+| 16 | 75.423 ms | 87.777 ms | 36.773 ms | 169,209 cells |
 
 4→8 lanes는 면적이 거의 2배인데 projected latency 차이는 0.027 ms뿐이다. hidden=64 profile에서 bank당 유효 element가 4개뿐이라 8/16 lane이 활용되지 않고 pipeline depth만 늘어나기 때문이다.
 

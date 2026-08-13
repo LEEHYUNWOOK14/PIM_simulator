@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stob.local/schema/logic_die_floorplan.schema.json",
+  "title": "STOB canonical logic-die floorplan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "manifest_id", "coordinate_system", "die",
+    "evidence_snapshot", "external_endpoints", "blocks", "tsv_bundles",
+    "micro_bump_bundles", "reserved_regions", "routing_corridors",
+    "legacy_compatibility"
+  ],
+  "$defs": {
+    "classification": {
+      "enum": ["measured", "rtl_simulated", "synthesized", "placed", "modeled", "estimated", "illustrative"]
+    },
+    "confidence": {"enum": ["low", "medium", "high"]},
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_id", "source_path", "description"],
+      "properties": {
+        "source_id": {"type": "string", "minLength": 1},
+        "source_path": {"type": "string", "minLength": 1},
+        "source_hash_sha256": {"type": ["string", "null"], "pattern": "^[A-Fa-f0-9]{64}$"},
+        "description": {"type": "string", "minLength": 1}
+      }
+    },
+    "rect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x_um", "y_um", "width_um", "height_um"],
+      "properties": {
+        "x_um": {"type": "number", "minimum": 0},
+        "y_um": {"type": "number", "minimum": 0},
+        "width_um": {"type": "number", "exclusiveMinimum": 0},
+        "height_um": {"type": "number", "exclusiveMinimum": 0}
+      }
+    },
+    "uncertainty": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["distribution", "min", "max"],
+      "properties": {
+        "distribution": {"const": "uniform"},
+        "min": {"type": "number"},
+        "max": {"type": "number"}
+      }
+    },
+    "block": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "instance", "module", "role", "x_um", "y_um", "width_um", "height_um",
+        "orientation", "area_source", "placement_source", "status", "dynamic_W",
+        "leakage_W", "power_source", "clock_domain", "voltage_domain",
+        "traffic_endpoints", "timing_criticality", "movable", "halo_um",
+        "allowed_region", "classification", "confidence", "provenance"
+      ],
+      "properties": {
+        "instance": {"type": "string", "minLength": 1},
+        "module": {"type": "string", "minLength": 1},
+        "role": {"type": "string", "minLength": 1},
+        "x_um": {"type": "number", "minimum": 0},
+        "y_um": {"type": "number", "minimum": 0},
+        "width_um": {"type": "number", "exclusiveMinimum": 0},
+        "height_um": {"type": "number", "exclusiveMinimum": 0},
+        "orientation": {"enum": ["N", "S", "E", "W", "FN", "FS", "FE", "FW"]},
+        "area_source": {"type": "string", "minLength": 1},
+        "placement_source": {"type": "string", "minLength": 1},
+        "status": {"enum": ["fixed", "provisional", "illustrative", "placed", "routed"]},
+        "dynamic_W": {"type": "number", "minimum": 0},
+        "leakage_W": {"type": "number", "minimum": 0},
+        "power_source": {"type": "string", "minLength": 1},
+        "clock_domain": {"type": "string", "minLength": 1},
+        "voltage_domain": {"type": "string", "minLength": 1},
+        "traffic_endpoints": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "timing_criticality": {"type": "number", "minimum": 0, "maximum": 1},
+        "movable": {"type": "boolean"},
+        "halo_um": {"type": "number", "minimum": 0},
+        "allowed_region": {"anyOf": [{"$ref": "#/$defs/rect"}, {"type": "null"}]},
+        "classification": {"$ref": "#/$defs/classification"},
+        "confidence": {"$ref": "#/$defs/confidence"},
+        "provenance": {"$ref": "#/$defs/provenance"}
+      }
+    },
+    "vertical_bundle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bundle_id", "kind", "signal_class", "source", "destinations", "x_um", "y_um",
+        "rows", "columns", "pitch_um", "diameter_um", "keepout_um", "redundancy_count",
+        "bandwidth_bits", "direction", "geometry_source", "connectivity_source",
+        "classification", "confidence", "provenance"
+      ],
+      "properties": {
+        "bundle_id": {"type": "string", "minLength": 1},
+        "kind": {"enum": ["tsv", "micro_bump"]},
+        "signal_class": {"enum": ["data", "command_address", "clock", "power", "ground", "spare", "unknown"]},
+        "source": {"type": "string", "minLength": 1},
+        "destinations": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "x_um": {"type": "number", "minimum": 0},
+        "y_um": {"type": "number", "minimum": 0},
+        "rows": {"type": "integer", "minimum": 1},
+        "columns": {"type": "integer", "minimum": 1},
+        "pitch_um": {"type": "number", "exclusiveMinimum": 0},
+        "diameter_um": {"type": "number", "exclusiveMinimum": 0},
+        "keepout_um": {"type": "number", "minimum": 0},
+        "redundancy_count": {"type": "integer", "minimum": 0},
+        "bandwidth_bits": {"type": ["integer", "null"], "minimum": 0},
+        "direction": {"enum": ["up", "down", "bidirectional", "not_applicable", "unknown"]},
+        "geometry_source": {"type": "string", "minLength": 1},
+        "connectivity_source": {"type": "string", "minLength": 1},
+        "classification": {"$ref": "#/$defs/classification"},
+        "confidence": {"$ref": "#/$defs/confidence"},
+        "uncertainty": {"$ref": "#/$defs/uncertainty"},
+        "provenance": {"$ref": "#/$defs/provenance"}
+      }
+    },
+    "region": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["region_id", "role", "x_um", "y_um", "width_um", "height_um", "blocks_prohibited", "classification", "confidence", "provenance"],
+      "properties": {
+        "region_id": {"type": "string", "minLength": 1},
+        "role": {"enum": ["phy", "pdn", "clock", "decap", "routing", "pad", "package", "thermal", "other"]},
+        "x_um": {"type": "number", "minimum": 0},
+        "y_um": {"type": "number", "minimum": 0},
+        "width_um": {"type": "number", "exclusiveMinimum": 0},
+        "height_um": {"type": "number", "exclusiveMinimum": 0},
+        "blocks_prohibited": {"type": "boolean"},
+        "classification": {"$ref": "#/$defs/classification"},
+        "confidence": {"$ref": "#/$defs/confidence"},
+        "provenance": {"$ref": "#/$defs/provenance"}
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "manifest_id": {"type": "string", "minLength": 1},
+    "coordinate_system": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["origin", "positive_x", "positive_y", "length_unit", "bundle_anchor"],
+      "properties": {
+        "origin": {"const": "logic_die_lower_left"},
+        "positive_x": {"const": "right"},
+        "positive_y": {"const": "up"},
+        "length_unit": {"const": "um"},
+        "bundle_anchor": {"const": "lower_left_element_center"}
+      }
+    },
+    "die": {
+      "allOf": [{"$ref": "#/$defs/rect"}],
+      "properties": {
+        "x_um": {"const": 0},
+        "y_um": {"const": 0}
+      }
+    },
+    "evidence_snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["git_commit", "working_tree_dirty", "captured_at", "source_manifest_hashes"],
+      "properties": {
+        "git_commit": {"type": "string", "pattern": "^[A-Fa-f0-9]{40}$"},
+        "working_tree_dirty": {"type": "boolean"},
+        "captured_at": {"type": "string", "format": "date-time"},
+        "source_manifest_hashes": {"type": "object", "additionalProperties": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"}}
+      }
+    },
+    "external_endpoints": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "blocks": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/block"}},
+    "tsv_bundles": {"type": "array", "items": {"$ref": "#/$defs/vertical_bundle"}},
+    "micro_bump_bundles": {"type": "array", "items": {"$ref": "#/$defs/vertical_bundle"}},
+    "reserved_regions": {"type": "array", "items": {"$ref": "#/$defs/region"}},
+    "routing_corridors": {"type": "array", "items": {"$ref": "#/$defs/region"}},
+    "legacy_compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["logic_block_x_um", "logic_block_y_um", "source"],
+      "properties": {
+        "logic_block_x_um": {"type": "number"},
+        "logic_block_y_um": {"type": "number"},
+        "source": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

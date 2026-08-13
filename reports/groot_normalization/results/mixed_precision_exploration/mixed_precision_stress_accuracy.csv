@@ -1,0 +1,7 @@
+case,samples,bit_mismatches,bit_exact_rate,max_abs,mean_abs,rmse,nonfinite,variance_clamp_expected,result
+all_zero,64,0,1.0,0.0,0.0,0.0,0,True,PASS
+constant_1p25,64,0,1.0,0.0,0.0,0.0,0,True,PASS
+small_variance,64,0,1.0,0.0,0.0,0.0,0,False,PASS
+large_offset,64,0,1.0,0.0,0.0,0.0,0,False,PASS
+mixed_magnitude,64,0,1.0,0.0,0.0,0.0,0,False,PASS
+subnormal_input,64,0,1.0,0.0,0.0,0.0,0,True,PASS

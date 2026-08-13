@@ -1,0 +1,24 @@
+{
+  "status": "EXPORTED",
+  "source": "output/floorplan_optimization/thermal/wirelength_first/mapped_power.json",
+  "blocks": [
+    "B0_logic_die_64ch_reduction_top",
+    "B1_bank_local_reduction_buffer",
+    "B2_bank_local_fp16_reduction",
+    "B3_hierarchical_reduction_path",
+    "B4_logic_die_link_arbiter",
+    "B5_logic_die_dual_link_arbiter",
+    "B6_shared_fp16_pipeline_fabric",
+    "B7_shared_fp16_reduction_cluster"
+  ],
+  "input_power_W": 4.0,
+  "solver": "HotSpot f18831e48cef5d62580585cca0d7fab6c71bc3cc",
+  "model": "2-D silicon block model; upstream example1 configuration with ambient/t_chip overrides",
+  "classification": "modeled",
+  "signoff": false,
+  "limitations": [
+    "not the reference solver 3-D stack",
+    "generic package parameters",
+    "estimated candidate power"
+  ]
+}

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.."&&pwd)";lr="${HOME}/.local/iverilog/usr"
+if command -v iverilog>/dev/null 2>&1;then iv="$(command -v iverilog)";vp="$(command -v vvp)";b="";else iv="${lr}/bin/iverilog";vp="${lr}/bin/vvp";b="$(find "${lr}/lib" -type d -name ivl -print -quit)";fi
+cd "${root}";o="${TMPDIR:-/tmp}/hier_norm_bank_core.out";a=(-g2012 -Wall -I. -s hierarchical_normalization_bank_core_top_tb -o "${o}");if [[ -n "${b}" ]];then a=(-B "${b}" "${a[@]}");fi
+src=(rtl/fp16_add.sv rtl/fp16_mul.sv rtl/fp16_rsqrt_lut256.sv rtl/pim_command_decoder.sv rtl/pim_vector_alu.sv rtl/bank_pim_core.sv rtl/bank_normalization_multirow_vector_reducer.sv rtl/logic_normalization_scalar_engine.sv rtl/logic_normalization_scalar_engine_array.sv rtl/logic_normalization_parallel_tree_top.sv rtl/logic_normalization_bank_barrier.sv rtl/logic_normalization_barrier_tree_top.sv rtl/hierarchical_normalization_streaming_top.sv rtl/normalization_row_context_table.sv rtl/normalization_scalar_broadcast.sv rtl/hierarchical_normalization_scalar_return_top.sv rtl/bank_normalization_microprogram_adapter.sv rtl/hierarchical_normalization_bank_issue_top.sv rtl/normalization_bank_result_tracker.sv rtl/hierarchical_normalization_bank_core_top.sv verification/groot_normalization/hierarchical_normalization_bank_core_top_tb.sv)
+"${iv}" "${a[@]}" "${src[@]}";if [[ -n "${b}" ]];then "${vp}" -M "${b}" "${o}";else "${vp}" "${o}";fi

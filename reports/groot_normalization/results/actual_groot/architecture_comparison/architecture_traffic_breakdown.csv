@@ -1,0 +1,19 @@
+architecture,component,bytes,transactions,transaction_bytes,domain,evidence
+GPU,activation_read,43069440,1345920,32.0,logical_memory,DERIVED_32B_MINIMUM_TRANSACTION
+GPU,output_write,43069440,1345920,32.0,logical_memory,DERIVED_32B_MINIMUM_TRANSACTION
+GPU,gamma_beta,73728,2304,32.0,logical_memory,DERIVED_32B_MINIMUM_TRANSACTION
+Bank-only PIM,reduction_activation_read,43069440,5383680,8.0,bank_array,DERIVED_FROM_EXACT_4_LANE_MAPPING
+Bank-only PIM,activation_replay,43069440,1345920,32.0,bank_array,MODELED_256B_BANK_PCU_VECTOR
+Bank-only PIM,final_writeback,43069440,1345920,32.0,bank_array,MODELED_256B_BANK_PCU_VECTOR
+Bank-only PIM,gamma_beta,73728,2304,32.0,bank_array,DERIVED_LOGICAL_PAYLOAD
+Bank-only PIM,partial_sum_sumsq,843520,210880,4.0,offload_link,RTL_INTERFACE_PAYLOAD
+Bank-only PIM,mean_inv_std_return,843520,210880,4.0,offload_link,RTL_INTERFACE_PAYLOAD
+Hierarchical PIM,reduction_activation_read,43069440,5383680,8.0,bank_array,DERIVED_FROM_EXACT_4_LANE_MAPPING
+Hierarchical PIM,activation_replay,43069440,1345920,32.0,bank_array,MODELED_256B_BANK_PCU_VECTOR
+Hierarchical PIM,final_writeback,43069440,1345920,32.0,bank_array,MODELED_256B_BANK_PCU_VECTOR
+Hierarchical PIM,gamma_beta,73728,2304,32.0,bank_array,DERIVED_LOGICAL_PAYLOAD
+Hierarchical PIM,partial_sum_sumsq,843520,210880,4.0,ondie_link,RTL_INTERFACE_PAYLOAD
+Hierarchical PIM,mean_inv_std_return,843520,210880,4.0,ondie_link,RTL_INTERFACE_PAYLOAD
+Logic-only PIM,activation_bank_to_logic,43069440,1345920,32.0,ondie_link,MODELED_256B_TRANSFER
+Logic-only PIM,output_logic_to_bank,43069440,1345920,32.0,ondie_link,MODELED_256B_TRANSFER
+Logic-only PIM,gamma_beta_bank_to_logic,73728,2304,32.0,ondie_link,MODELED_256B_TRANSFER

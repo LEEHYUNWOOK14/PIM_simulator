@@ -1,0 +1,161 @@
+{
+  "status": "PASS",
+  "disclaimer": "Architectural reference thermal model; not calibrated and not signoff.",
+  "profile": "rtl_mapped",
+  "mapped_power_input": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2\\output\\floorplan_optimization\\thermal\\balanced\\mapped_power.json",
+  "grid": [
+    32,
+    16,
+    21
+  ],
+  "stack_count": 1,
+  "dram_dies_per_stack": 8,
+  "input_power_W": 4.0,
+  "peak_temperature_K": 312.24608935630533,
+  "peak_delta_K": 12.246089356305333,
+  "hotspot": {
+    "layer": "logic_die",
+    "x_index": 4,
+    "y_index": 3
+  },
+  "layers": [
+    {
+      "layer": "substrate",
+      "min_K": 306.5845217253348,
+      "mean_K": 309.02602936146434,
+      "max_K": 311.6483409963452
+    },
+    {
+      "layer": "interposer",
+      "min_K": 306.878037693909,
+      "mean_K": 309.43306857016887,
+      "max_K": 312.218368069901
+    },
+    {
+      "layer": "logic_die",
+      "min_K": 306.87746176932455,
+      "mean_K": 309.43480434504613,
+      "max_K": 312.24608935630533
+    },
+    {
+      "layer": "bump_0",
+      "min_K": 306.87158200933726,
+      "mean_K": 309.3605313524696,
+      "max_K": 312.04078927104104
+    },
+    {
+      "layer": "dram_0",
+      "min_K": 306.866526956086,
+      "mean_K": 309.29675907840465,
+      "max_K": 311.86459714180023
+    },
+    {
+      "layer": "bump_1",
+      "min_K": 306.86026708540794,
+      "mean_K": 309.2329868043397,
+      "max_K": 311.702210851565
+    },
+    {
+      "layer": "dram_1",
+      "min_K": 306.85400076462207,
+      "mean_K": 309.16921453027476,
+      "max_K": 311.5398917546188
+    },
+    {
+      "layer": "bump_2",
+      "min_K": 306.8465541631983,
+      "mean_K": 309.10544225620976,
+      "max_K": 311.3886142658487
+    },
+    {
+      "layer": "dram_2",
+      "min_K": 306.8391012524951,
+      "mean_K": 309.04166998214475,
+      "max_K": 311.2373902714197
+    },
+    {
+      "layer": "bump_3",
+      "min_K": 306.8304955987319,
+      "mean_K": 308.9778977080797,
+      "max_K": 311.0960433743303
+    },
+    {
+      "layer": "dram_3",
+      "min_K": 306.8218837919224,
+      "mean_K": 308.91412543401475,
+      "max_K": 310.95534325091035
+    },
+    {
+      "layer": "bump_4",
+      "min_K": 306.8121494752349,
+      "mean_K": 308.8503531599497,
+      "max_K": 310.8212523196681
+    },
+    {
+      "layer": "dram_4",
+      "min_K": 306.80240917543085,
+      "mean_K": 308.78658088588463,
+      "max_K": 310.68719334706975
+    },
+    {
+      "layer": "bump_5",
+      "min_K": 306.7915789679025,
+      "mean_K": 308.7228086118196,
+      "max_K": 310.55834386919594
+    },
+    {
+      "layer": "dram_5",
+      "min_K": 306.78074295907453,
+      "mean_K": 308.65903633775446,
+      "max_K": 310.4295197318923
+    },
+    {
+      "layer": "bump_6",
+      "min_K": 306.76885167127864,
+      "mean_K": 308.59526406368946,
+      "max_K": 310.3048573046588
+    },
+    {
+      "layer": "dram_6",
+      "min_K": 306.7569547740069,
+      "mean_K": 308.5314917896243,
+      "max_K": 310.1802152591549
+    },
+    {
+      "layer": "bump_7",
+      "min_K": 306.74403890015674,
+      "mean_K": 308.4677195155592,
+      "max_K": 310.0589488258603
+    },
+    {
+      "layer": "dram_7",
+      "min_K": 306.7311176167349,
+      "mean_K": 308.4039472414941,
+      "max_K": 309.9376990453547
+    },
+    {
+      "layer": "tim",
+      "min_K": 306.67640490988504,
+      "mean_K": 308.15297671062854,
+      "max_K": 309.4737532088245
+    },
+    {
+      "layer": "lid",
+      "min_K": 306.61715276005185,
+      "mean_K": 307.8820318652595,
+      "max_K": 309.011382935716
+    }
+  ],
+  "external_solver_adapters": {
+    "hotspot": {
+      "url": "https://github.com/uvahotspot/HotSpot",
+      "commit": "f18831e48cef5d62580585cca0d7fab6c71bc3cc",
+      "license": "BSD-style; inspect upstream LICENSE"
+    },
+    "3d_ice": {
+      "url": "https://github.com/esl-epfl/3d-ice",
+      "commit": "4953952a1ef6d38807ff307212a6f15e5b2ef935",
+      "license": "GPL-3.0"
+    }
+  }
+}

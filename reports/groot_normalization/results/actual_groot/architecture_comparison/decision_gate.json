@@ -1,0 +1,18 @@
+{
+  "decision": "NO-GO",
+  "mandatory_reasons": [
+    "Current hierarchical BF16 RTL failed the pre-existing accuracy criterion on 5 of 6 representative profiles.",
+    "At the 40 MHz modeled safe target, hierarchical latency is slower than measured RTX 4060 BF16 LayerNorm.",
+    "Production replay/write-back RTL is absent; its modeled cost is already included and does not reverse the result.",
+    "No comparable activity-calibrated energy or physical area result exists to justify expansion on another axis."
+  ],
+  "modeled_latency_break_even_clock_mhz": 275.0223534734994,
+  "break_even_clock_timing_status": "UNVERIFIED_AND_ABOVE_CURRENT_SKY130_TIMING_EVIDENCE",
+  "accuracy_requirement": "Must pass max_abs <= 0.025 on all representative profiles before production expansion.",
+  "reconsideration_conditions": [
+    "Widen accumulation/scalar/apply precision and pass the accuracy gate.",
+    "Timing-close the integrated datapath at or above the modeled latency break-even frequency.",
+    "Measure replay/writeback latency and energy with production RTL and representative activity.",
+    "Obtain full GR00T inference trace if gated backbone access and >=16 GB GPU become available."
+  ]
+}

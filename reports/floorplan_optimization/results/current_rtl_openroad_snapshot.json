@@ -1,0 +1,91 @@
+{
+  "status": "PASS_WITH_FAILED_DETAILED_ROUTE",
+  "snapshot_scope": "current dirty reduced full_pim_system_top RTL; conflict-copy filenames containing -DESKTOP- excluded from source list",
+  "evidence_class": {
+    "synthesis": "synthesized",
+    "floorplan": "placed",
+    "placement": "placed",
+    "cts": "placed",
+    "global_route": "global_routed",
+    "detailed_route": "failed_not_routed"
+  },
+  "tools": {
+    "yosys": "0.68+48",
+    "openroad": "26Q3-1080-gab6fd26351",
+    "platform": "ORFS sky130hd public research flow"
+  },
+  "synthesis": {
+    "top": "full_pim_system_top",
+    "cell_count": 75925,
+    "cell_area_um2": 836200.732799,
+    "check_problems": 0,
+    "odb_wsl_path": "/home/chandler/OpenROAD-flow-scripts/flow/results/sky130hd/stob_pim2/base/1_synth.odb",
+    "odb_bytes": 47205397,
+    "sha256": "e87e9fe48d0fa606244eeb5877363886abf1644a8ff322f6301e837e0a47322d"
+  },
+  "floorplan": {
+    "die_bbox_um": [0.0, 0.0, 1673.53, 1673.53],
+    "core_bbox_um": [2.3, 2.72, 1671.18, 1670.08],
+    "core_area_um2": 2782623.757,
+    "effective_utilization": 0.301,
+    "tapcells": 36900,
+    "pdn_grid_generated": true,
+    "odb_bytes": 63252213,
+    "sha256": "591ba06cecf735968580dc774e66e9488648bb5d5f468886cbd86a8847228c54"
+  },
+  "placement": {
+    "status": "legal",
+    "illegal_cells": 0,
+    "illegal_sites": 0,
+    "utilization_percent": 39.7,
+    "legalized_hpwl_um": 4871291.1,
+    "post_mirroring_hpwl_um": 4809426.8,
+    "odb_bytes": 77101938,
+    "sha256": "c3d0e39aae2a0f893aacd1597e5964a6658aa55bfaf7bf9b58d4e8e4ca4a0ee9"
+  },
+  "cts": {
+    "clock_sinks_before_tree": 14459,
+    "clock_buffers_created": 1696,
+    "post_cts_illegal_cells": 0,
+    "post_cts_utilization_percent": 41.6,
+    "odb_bytes": 78559490,
+    "sha256": "772f22d61b1ceae01a311990914fe0d23843781f6e219a2055669e9eff12eea0"
+  },
+  "global_route": {
+    "routed_nets": 102932,
+    "wirelength_um": 7914921.0,
+    "vias": 823025,
+    "total_resource_usage_percent": 44.77,
+    "max_horizontal_congestion": 0,
+    "max_vertical_congestion": 0,
+    "total_congestion": 0,
+    "clock_constraint_period_ns": 10.0,
+    "reported_clock_period_ns": 53.06,
+    "reported_clock_slack_ns": -45.853,
+    "path_endpoint_count": 31593,
+    "odb_bytes": 120666859,
+    "sha256": "05feff99b107dcf7580072b55d5fae62d5bf100bfa0d904e548f0b33cd46abbe"
+  },
+  "detailed_route": {
+    "status": "FAIL_RESOURCE_INTERRUPTED",
+    "last_completed_progress_percent": 90,
+    "last_reported_violation_count": 45913,
+    "peak_memory_bytes": 6554836000,
+    "output_odb_created": false,
+    "observed_event": "WSL unclean shutdown/restart after route process reached 90%; exact host termination cause not proven",
+    "not_claimed": ["detailed-routed", "DRC clean", "timing closed", "signoff"]
+  },
+  "constraint_limitations": {
+    "input_ports_missing_input_delay": 554,
+    "output_ports_missing_output_delay": 407,
+    "unconstrained_endpoints": 13481,
+    "timing_signoff": false,
+    "ir_drop_run": false
+  },
+  "logs": [
+    "reports/floorplan_optimization/results/current_rtl_orfs_do_floorplan.log",
+    "reports/floorplan_optimization/results/current_rtl_orfs_do_place.log",
+    "reports/floorplan_optimization/results/current_rtl_orfs_do_cts.log",
+    "reports/floorplan_optimization/results/current_rtl_orfs_do_route.log"
+  ]
+}

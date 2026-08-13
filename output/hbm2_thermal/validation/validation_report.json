@@ -2,12 +2,12 @@
   "status": "PASS",
   "checks": {
     "steady_equation_residual_W": {
-      "value": 3.623767952376511e-13,
+      "value": 2.8421709430404007e-13,
       "limit": 1e-08,
       "pass": true
     },
     "uniform_symmetry_K": {
-      "value": 4.718003765447065e-12,
+      "value": 4.945377440890297e-12,
       "limit": 1e-08,
       "pass": true
     },
@@ -17,29 +17,29 @@
       "pass": true
     },
     "grid_convergence_peak_K": {
-      "value": 3.5413449950283393e-11,
+      "value": 3.785771696129814e-11,
       "limit": 0.05,
       "pass": true
     },
     "variants": {
       "value": {
         "4Hi": {
-          "peak_K": 306.63054627837454,
+          "peak_K": 306.630546278373,
           "pass": true
         },
         "8Hi": {
-          "peak_K": 309.142578752469,
+          "peak_K": 309.14257875246653,
           "pass": true
         },
         "12Hi": {
-          "peak_K": 311.76711362275427,
+          "peak_K": 311.7671136227508,
           "pass": true
         }
       },
       "pass": true
     },
     "tsv_effective_comparison_K": {
-      "value": 0.002158885461369664,
+      "value": 0.002158885464496052,
       "pass": true
     },
     "analytic_single_slab_K": {

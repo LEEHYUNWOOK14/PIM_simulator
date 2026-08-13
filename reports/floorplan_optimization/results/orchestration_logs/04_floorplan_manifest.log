@@ -1,0 +1,27 @@
+FLOORPLAN_MANIFEST_GENERATED blocks=8 tsv_bundles=48 output=C:\Users\Admin\OneDrive\2026-summer\STOB_semiconductor_pim\STOB_PIM2\design\floorplan\logic_die_floorplan.json
+{
+  "status": "PASS",
+  "manifest": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2\\design\\floorplan\\logic_die_floorplan.json",
+  "checks": {
+    "json_schema": "PASS",
+    "coordinate_units": "PASS",
+    "unique_ids": "PASS",
+    "die_boundary": "PASS",
+    "block_overlap": "PASS",
+    "allowed_regions": "PASS",
+    "reserved_regions": "PASS",
+    "tsv_pitch_keepout": "PASS",
+    "connectivity_endpoints": "PASS",
+    "tsv_csv_roundtrip": "PASS"
+  },
+  "counts": {
+    "blocks": 8,
+    "tsv_bundles": 48,
+    "tsv_shapes": 320,
+    "micro_bump_bundles": 48,
+    "micro_bump_shapes": 320,
+    "reserved_regions": 4,
+    "routing_corridors": 8
+  },
+  "scope": "Architectural floorplan contract validation; not foundry DRC, LVS, PI, thermal or timing signoff."
+}

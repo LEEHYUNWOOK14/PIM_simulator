@@ -154,6 +154,7 @@ No latch inferred for signal `\bf16_mul.\lhs_frac' from process `\bf16_mul.$proc
 No latch inferred for signal `\bf16_mul.\rhs_frac' from process `\bf16_mul.$proc$rtl/bf16_mul.sv:14$354'.
 No latch inferred for signal `\bf16_mul.\lhs_sig' from process `\bf16_mul.$proc$rtl/bf16_mul.sv:14$354'.
 No latch inferred for signal `\bf16_mul.\rhs_sig' from process `\bf16_mul.$proc$rtl/bf16_mul.sv:14$354'.
+No latch inferred for signal `\bf16_mul.\shift_amount' from process `\bf16_mul.$proc$rtl/bf16_mul.sv:14$354'.
 No latch inferred for signal `\bf16_mul.\sign' from process `\bf16_mul.$proc$rtl/bf16_mul.sv:14$354'.
 No latch inferred for signal `\bf16_mul.\product' from process `\bf16_mul.$proc$rtl/bf16_mul.sv:14$354'.
 No latch inferred for signal `\bf16_mul.\magnitude' from process `\bf16_mul.$proc$rtl/bf16_mul.sv:14$354'.
@@ -165,7 +166,6 @@ No latch inferred for signal `\bf16_mul.\rhs_unbiased' from process `\bf16_mul.$
 No latch inferred for signal `\bf16_mul.\exponent' from process `\bf16_mul.$proc$rtl/bf16_mul.sv:14$354'.
 No latch inferred for signal `\bf16_mul.\msb_index' from process `\bf16_mul.$proc$rtl/bf16_mul.sv:14$354'.
 No latch inferred for signal `\bf16_mul.$fordecl_block$352.bit_index' from process `\bf16_mul.$proc$rtl/bf16_mul.sv:14$354'.
-Latch inferred for signal `\bf16_mul.\shift_amount' from process `\bf16_mul.$proc$rtl/bf16_mul.sv:14$354': $auto$proc_dlatch.cc:432:proc_dlatch$1192
 
 8.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
 
@@ -178,15 +178,15 @@ Cleaned up 27 empty switches.
 
 8.2.12. Executing OPT_EXPR pass (perform const folding).
 Optimizing module bf16_mul.
-<suppressed ~54 debug messages>
+<suppressed ~15 debug messages>
 
 8.3. Executing OPT_EXPR pass (perform const folding).
 Optimizing module bf16_mul.
 
 8.4. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \bf16_mul..
-Removed 143 unused cells and 488 unused wires.
-<suppressed ~150 debug messages>
+Removed 134 unused cells and 442 unused wires.
+<suppressed ~141 debug messages>
 
 8.5. Executing CHECK pass (checking for obvious problems).
 Checking module bf16_mul...
@@ -366,41 +366,41 @@ Removed top 25 bits (of 32) from port B of cell bf16_mul.$sub$rtl/bf16_mul.sv:23
 Removed top 23 bits (of 32) from port Y of cell bf16_mul.$sub$rtl/bf16_mul.sv:23$364 ($sub).
 Removed top 27 bits (of 32) from port B of cell bf16_mul.$sub$rtl/bf16_mul.sv:27$367 ($sub).
 Removed top 27 bits (of 32) from port B of cell bf16_mul.$add$rtl/bf16_mul.sv:27$368 ($add).
-Removed top 23 bits (of 32) from port B of cell bf16_mul.$ge$rtl/bf16_mul.sv:38$398 ($ge).
-Removed top 24 bits (of 32) from port B of cell bf16_mul.$ge$rtl/bf16_mul.sv:39$399 ($ge).
-Removed top 27 bits (of 32) from port A of cell bf16_mul.$sub$rtl/bf16_mul.sv:40$400 ($sub).
-Removed top 28 bits (of 32) from port B of cell bf16_mul.$sub$rtl/bf16_mul.sv:40$400 ($sub).
-Converting cell bf16_mul.$sub$rtl/bf16_mul.sv:40$400 ($sub) from signed to unsigned.
-Removed top 26 bits (of 32) from port Y of cell bf16_mul.$sub$rtl/bf16_mul.sv:40$400 ($sub).
-Removed top 1 bits (of 5) from port A of cell bf16_mul.$sub$rtl/bf16_mul.sv:40$400 ($sub).
-Removed top 1 bits (of 4) from port B of cell bf16_mul.$sub$rtl/bf16_mul.sv:40$400 ($sub).
-Removed top 1 bits (of 6) from port Y of cell bf16_mul.$sub$rtl/bf16_mul.sv:40$400 ($sub).
-Removed top 27 bits (of 32) from port A of cell bf16_mul.$gt$rtl/bf16_mul.sv:41$401 ($gt).
-Removed top 31 bits (of 32) from port B of cell bf16_mul.$gt$rtl/bf16_mul.sv:41$401 ($gt).
-Removed top 48 bits (of 64) from port A of cell bf16_mul.$shr$rtl/bf16_mul.sv:42$402 ($shr).
-Converting cell bf16_mul.$sub$rtl/bf16_mul.sv:43$403 ($sub) from unsigned to signed.
-Removed top 27 bits (of 32) from port A of cell bf16_mul.$sub$rtl/bf16_mul.sv:43$403 ($sub).
-Removed top 30 bits (of 32) from port B of cell bf16_mul.$sub$rtl/bf16_mul.sv:43$403 ($sub).
-Removed top 26 bits (of 32) from port Y of cell bf16_mul.$sub$rtl/bf16_mul.sv:43$403 ($sub).
-Removed top 63 bits (of 64) from port A of cell bf16_mul.$shl$rtl/bf16_mul.sv:43$404 ($shl).
+Removed top 23 bits (of 32) from port B of cell bf16_mul.$ge$rtl/bf16_mul.sv:39$398 ($ge).
+Removed top 24 bits (of 32) from port B of cell bf16_mul.$ge$rtl/bf16_mul.sv:40$399 ($ge).
+Removed top 27 bits (of 32) from port A of cell bf16_mul.$sub$rtl/bf16_mul.sv:41$400 ($sub).
+Removed top 28 bits (of 32) from port B of cell bf16_mul.$sub$rtl/bf16_mul.sv:41$400 ($sub).
+Converting cell bf16_mul.$sub$rtl/bf16_mul.sv:41$400 ($sub) from signed to unsigned.
+Removed top 26 bits (of 32) from port Y of cell bf16_mul.$sub$rtl/bf16_mul.sv:41$400 ($sub).
+Removed top 1 bits (of 5) from port A of cell bf16_mul.$sub$rtl/bf16_mul.sv:41$400 ($sub).
+Removed top 1 bits (of 4) from port B of cell bf16_mul.$sub$rtl/bf16_mul.sv:41$400 ($sub).
+Removed top 1 bits (of 6) from port Y of cell bf16_mul.$sub$rtl/bf16_mul.sv:41$400 ($sub).
+Removed top 27 bits (of 32) from port A of cell bf16_mul.$gt$rtl/bf16_mul.sv:42$401 ($gt).
+Removed top 31 bits (of 32) from port B of cell bf16_mul.$gt$rtl/bf16_mul.sv:42$401 ($gt).
+Removed top 48 bits (of 64) from port A of cell bf16_mul.$shr$rtl/bf16_mul.sv:43$402 ($shr).
+Converting cell bf16_mul.$sub$rtl/bf16_mul.sv:44$403 ($sub) from unsigned to signed.
+Removed top 27 bits (of 32) from port A of cell bf16_mul.$sub$rtl/bf16_mul.sv:44$403 ($sub).
+Removed top 30 bits (of 32) from port B of cell bf16_mul.$sub$rtl/bf16_mul.sv:44$403 ($sub).
+Removed top 26 bits (of 32) from port Y of cell bf16_mul.$sub$rtl/bf16_mul.sv:44$403 ($sub).
+Removed top 63 bits (of 64) from port A of cell bf16_mul.$shl$rtl/bf16_mul.sv:44$404 ($shl).
 Removed top 26 bits (of 32) from port B of cell bf16_mul.$shiftx$rtl/bf16_mul.sv:0$407 ($shiftx).
-Removed top 48 bits (of 64) from port A of cell bf16_mul.$and$rtl/bf16_mul.sv:45$408 ($and).
-Removed top 48 bits (of 64) from port A of cell bf16_mul.$shl$rtl/bf16_mul.sv:47$414 ($shl).
-Removed top 23 bits (of 32) from port B of cell bf16_mul.$ge$rtl/bf16_mul.sv:48$415 ($ge).
-Removed top 30 bits (of 32) from port B of cell bf16_mul.$add$rtl/bf16_mul.sv:50$417 ($add).
-Removed top 23 bits (of 32) from port B of cell bf16_mul.$ge$rtl/bf16_mul.sv:52$418 ($ge).
-Removed top 24 bits (of 32) from port B of cell bf16_mul.$add$rtl/bf16_mul.sv:54$419 ($add).
-Removed top 24 bits (of 32) from port Y of cell bf16_mul.$add$rtl/bf16_mul.sv:54$419 ($add).
-Removed top 24 bits (of 32) from port A of cell bf16_mul.$add$rtl/bf16_mul.sv:54$419 ($add).
-Removed top 24 bits (of 32) from port B of cell bf16_mul.$add$rtl/bf16_mul.sv:59$421 ($add).
-Removed top 24 bits (of 32) from port B of cell bf16_mul.$ge$rtl/bf16_mul.sv:60$423 ($ge).
-Removed top 31 bits (of 32) from port B of cell bf16_mul.$gt$rtl/bf16_mul.sv:61$424 ($gt).
-Removed top 48 bits (of 64) from port A of cell bf16_mul.$shr$rtl/bf16_mul.sv:62$425 ($shr).
-Removed top 30 bits (of 32) from port B of cell bf16_mul.$sub$rtl/bf16_mul.sv:63$426 ($sub).
-Removed top 63 bits (of 64) from port A of cell bf16_mul.$shl$rtl/bf16_mul.sv:63$427 ($shl).
-Removed top 48 bits (of 64) from port A of cell bf16_mul.$and$rtl/bf16_mul.sv:65$431 ($and).
-Removed top 48 bits (of 64) from port A of cell bf16_mul.$shl$rtl/bf16_mul.sv:67$437 ($shl).
-Removed top 24 bits (of 32) from port B of cell bf16_mul.$ge$rtl/bf16_mul.sv:68$438 ($ge).
+Removed top 48 bits (of 64) from port A of cell bf16_mul.$and$rtl/bf16_mul.sv:46$408 ($and).
+Removed top 48 bits (of 64) from port A of cell bf16_mul.$shl$rtl/bf16_mul.sv:48$414 ($shl).
+Removed top 23 bits (of 32) from port B of cell bf16_mul.$ge$rtl/bf16_mul.sv:49$415 ($ge).
+Removed top 30 bits (of 32) from port B of cell bf16_mul.$add$rtl/bf16_mul.sv:51$417 ($add).
+Removed top 23 bits (of 32) from port B of cell bf16_mul.$ge$rtl/bf16_mul.sv:53$418 ($ge).
+Removed top 24 bits (of 32) from port B of cell bf16_mul.$add$rtl/bf16_mul.sv:55$419 ($add).
+Removed top 24 bits (of 32) from port Y of cell bf16_mul.$add$rtl/bf16_mul.sv:55$419 ($add).
+Removed top 24 bits (of 32) from port A of cell bf16_mul.$add$rtl/bf16_mul.sv:55$419 ($add).
+Removed top 24 bits (of 32) from port B of cell bf16_mul.$add$rtl/bf16_mul.sv:60$421 ($add).
+Removed top 24 bits (of 32) from port B of cell bf16_mul.$ge$rtl/bf16_mul.sv:61$423 ($ge).
+Removed top 31 bits (of 32) from port B of cell bf16_mul.$gt$rtl/bf16_mul.sv:62$424 ($gt).
+Removed top 48 bits (of 64) from port A of cell bf16_mul.$shr$rtl/bf16_mul.sv:63$425 ($shr).
+Removed top 30 bits (of 32) from port B of cell bf16_mul.$sub$rtl/bf16_mul.sv:64$426 ($sub).
+Removed top 63 bits (of 64) from port A of cell bf16_mul.$shl$rtl/bf16_mul.sv:64$427 ($shl).
+Removed top 48 bits (of 64) from port A of cell bf16_mul.$and$rtl/bf16_mul.sv:66$431 ($and).
+Removed top 48 bits (of 64) from port A of cell bf16_mul.$shl$rtl/bf16_mul.sv:68$437 ($shl).
+Removed top 24 bits (of 32) from port B of cell bf16_mul.$ge$rtl/bf16_mul.sv:69$438 ($ge).
 Removed top 1 bits (of 16) from mux cell bf16_mul.$procmux$754 ($mux).
 Removed top 1 bits (of 16) from mux cell bf16_mul.$procmux$844 ($mux).
 Removed top 1 bits (of 16) from mux cell bf16_mul.$procmux$928 ($mux).
@@ -410,11 +410,11 @@ Removed top 28 bits (of 32) from wire bf16_mul.$11\msb_index[31:0].
 Removed top 28 bits (of 32) from wire bf16_mul.$12\msb_index[31:0].
 Removed top 31 bits (of 32) from wire bf16_mul.$2\msb_index[31:0].
 Removed top 30 bits (of 32) from wire bf16_mul.$3\msb_index[31:0].
-Removed top 24 bits (of 32) from wire bf16_mul.$add$rtl/bf16_mul.sv:54$419_Y.
+Removed top 24 bits (of 32) from wire bf16_mul.$add$rtl/bf16_mul.sv:55$419_Y.
 Removed top 28 bits (of 32) from wire bf16_mul.msb_index.
 
 8.10. Executing PEEPOPT pass (run peephole optimizers).
-shiftadd pattern in bf16_mul: shift=$shiftx$rtl/bf16_mul.sv:0$407, add/sub=$sub$rtl/bf16_mul.sv:43$403, offset: -1
+shiftadd pattern in bf16_mul: shift=$shiftx$rtl/bf16_mul.sv:0$407, add/sub=$sub$rtl/bf16_mul.sv:44$403, offset: -1
 
 8.11. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \bf16_mul..
@@ -425,129 +425,129 @@ Removed 0 unused cells and 7 unused wires.
 Extracting $alu and $macc cells in module bf16_mul:
   creating $macc model for $add$rtl/bf16_mul.sv:27$366 ($add).
   creating $macc model for $add$rtl/bf16_mul.sv:27$368 ($add).
-  creating $macc model for $add$rtl/bf16_mul.sv:46$412 ($add).
-  creating $macc model for $add$rtl/bf16_mul.sv:50$417 ($add).
-  creating $macc model for $add$rtl/bf16_mul.sv:54$419 ($add).
-  creating $macc model for $add$rtl/bf16_mul.sv:59$421 ($add).
-  creating $macc model for $add$rtl/bf16_mul.sv:66$435 ($add).
+  creating $macc model for $add$rtl/bf16_mul.sv:47$412 ($add).
+  creating $macc model for $add$rtl/bf16_mul.sv:51$417 ($add).
+  creating $macc model for $add$rtl/bf16_mul.sv:55$419 ($add).
+  creating $macc model for $add$rtl/bf16_mul.sv:60$421 ($add).
+  creating $macc model for $add$rtl/bf16_mul.sv:67$435 ($add).
   creating $macc model for $mul$rtl/bf16_mul.sv:20$359 ($mul).
-  creating $macc model for $neg$rtl/bf16_mul.sv:47$413 ($neg).
-  creating $macc model for $neg$rtl/bf16_mul.sv:59$422 ($neg).
-  creating $macc model for $neg$rtl/bf16_mul.sv:67$436 ($neg).
+  creating $macc model for $neg$rtl/bf16_mul.sv:48$413 ($neg).
+  creating $macc model for $neg$rtl/bf16_mul.sv:60$422 ($neg).
+  creating $macc model for $neg$rtl/bf16_mul.sv:68$436 ($neg).
   creating $macc model for $sub$rtl/bf16_mul.sv:22$361 ($sub).
   creating $macc model for $sub$rtl/bf16_mul.sv:23$364 ($sub).
   creating $macc model for $sub$rtl/bf16_mul.sv:27$367 ($sub).
-  creating $macc model for $sub$rtl/bf16_mul.sv:40$400 ($sub).
-  creating $macc model for $sub$rtl/bf16_mul.sv:43$403 ($sub).
-  creating $macc model for $sub$rtl/bf16_mul.sv:43$405 ($sub).
-  creating $macc model for $sub$rtl/bf16_mul.sv:63$426 ($sub).
-  creating $macc model for $sub$rtl/bf16_mul.sv:63$428 ($sub).
-  merging $macc model for $add$rtl/bf16_mul.sv:59$421 into $neg$rtl/bf16_mul.sv:59$422.
+  creating $macc model for $sub$rtl/bf16_mul.sv:41$400 ($sub).
+  creating $macc model for $sub$rtl/bf16_mul.sv:44$403 ($sub).
+  creating $macc model for $sub$rtl/bf16_mul.sv:44$405 ($sub).
+  creating $macc model for $sub$rtl/bf16_mul.sv:64$426 ($sub).
+  creating $macc model for $sub$rtl/bf16_mul.sv:64$428 ($sub).
+  merging $macc model for $add$rtl/bf16_mul.sv:60$421 into $neg$rtl/bf16_mul.sv:60$422.
   merging $macc model for $sub$rtl/bf16_mul.sv:27$367 into $add$rtl/bf16_mul.sv:27$368.
-  creating $alu model for $macc $sub$rtl/bf16_mul.sv:43$405.
-  creating $alu model for $macc $sub$rtl/bf16_mul.sv:43$403.
-  creating $alu model for $macc $sub$rtl/bf16_mul.sv:40$400.
-  creating $alu model for $macc $sub$rtl/bf16_mul.sv:63$428.
+  creating $alu model for $macc $sub$rtl/bf16_mul.sv:44$405.
+  creating $alu model for $macc $sub$rtl/bf16_mul.sv:44$403.
+  creating $alu model for $macc $sub$rtl/bf16_mul.sv:41$400.
+  creating $alu model for $macc $sub$rtl/bf16_mul.sv:64$428.
   creating $alu model for $macc $sub$rtl/bf16_mul.sv:23$364.
   creating $alu model for $macc $sub$rtl/bf16_mul.sv:22$361.
-  creating $alu model for $macc $neg$rtl/bf16_mul.sv:67$436.
-  creating $alu model for $macc $neg$rtl/bf16_mul.sv:47$413.
-  creating $alu model for $macc $add$rtl/bf16_mul.sv:66$435.
-  creating $alu model for $macc $sub$rtl/bf16_mul.sv:63$426.
-  creating $alu model for $macc $add$rtl/bf16_mul.sv:54$419.
-  creating $alu model for $macc $add$rtl/bf16_mul.sv:50$417.
-  creating $alu model for $macc $add$rtl/bf16_mul.sv:46$412.
+  creating $alu model for $macc $neg$rtl/bf16_mul.sv:68$436.
+  creating $alu model for $macc $neg$rtl/bf16_mul.sv:48$413.
+  creating $alu model for $macc $add$rtl/bf16_mul.sv:67$435.
+  creating $alu model for $macc $sub$rtl/bf16_mul.sv:64$426.
+  creating $alu model for $macc $add$rtl/bf16_mul.sv:55$419.
+  creating $alu model for $macc $add$rtl/bf16_mul.sv:51$417.
+  creating $alu model for $macc $add$rtl/bf16_mul.sv:47$412.
   creating $alu model for $macc $add$rtl/bf16_mul.sv:27$366.
-  creating $macc cell for $neg$rtl/bf16_mul.sv:59$422: $auto$alumacc.cc:365:replace_macc$1200
-  creating $macc cell for $add$rtl/bf16_mul.sv:27$368: $auto$alumacc.cc:365:replace_macc$1201
-  creating $macc cell for $mul$rtl/bf16_mul.sv:20$359: $auto$alumacc.cc:365:replace_macc$1202
-  creating $alu model for $ge$rtl/bf16_mul.sv:38$398 ($ge): new $alu
-  creating $alu model for $ge$rtl/bf16_mul.sv:39$399 ($ge): new $alu
-  creating $alu model for $ge$rtl/bf16_mul.sv:48$415 ($ge): new $alu
-  creating $alu model for $ge$rtl/bf16_mul.sv:52$418 ($ge): new $alu
-  creating $alu model for $ge$rtl/bf16_mul.sv:60$423 ($ge): new $alu
-  creating $alu model for $ge$rtl/bf16_mul.sv:68$438 ($ge): new $alu
-  creating $alu model for $gt$rtl/bf16_mul.sv:41$401 ($gt): new $alu
-  creating $alu model for $gt$rtl/bf16_mul.sv:61$424 ($gt): new $alu
-  creating $alu cell for $gt$rtl/bf16_mul.sv:61$424: $auto$alumacc.cc:495:replace_alu$1211
-  creating $alu cell for $gt$rtl/bf16_mul.sv:41$401: $auto$alumacc.cc:495:replace_alu$1224
-  creating $alu cell for $ge$rtl/bf16_mul.sv:68$438: $auto$alumacc.cc:495:replace_alu$1237
-  creating $alu cell for $ge$rtl/bf16_mul.sv:60$423: $auto$alumacc.cc:495:replace_alu$1250
-  creating $alu cell for $ge$rtl/bf16_mul.sv:52$418: $auto$alumacc.cc:495:replace_alu$1265
-  creating $alu cell for $ge$rtl/bf16_mul.sv:48$415: $auto$alumacc.cc:495:replace_alu$1280
-  creating $alu cell for $ge$rtl/bf16_mul.sv:39$399: $auto$alumacc.cc:495:replace_alu$1293
-  creating $alu cell for $ge$rtl/bf16_mul.sv:38$398: $auto$alumacc.cc:495:replace_alu$1308
-  creating $alu cell for $add$rtl/bf16_mul.sv:27$366: $auto$alumacc.cc:495:replace_alu$1323
-  creating $alu cell for $add$rtl/bf16_mul.sv:46$412: $auto$alumacc.cc:495:replace_alu$1326
-  creating $alu cell for $add$rtl/bf16_mul.sv:50$417: $auto$alumacc.cc:495:replace_alu$1329
-  creating $alu cell for $add$rtl/bf16_mul.sv:54$419: $auto$alumacc.cc:495:replace_alu$1332
-  creating $alu cell for $sub$rtl/bf16_mul.sv:63$426: $auto$alumacc.cc:495:replace_alu$1335
-  creating $alu cell for $add$rtl/bf16_mul.sv:66$435: $auto$alumacc.cc:495:replace_alu$1338
-  creating $alu cell for $neg$rtl/bf16_mul.sv:47$413: $auto$alumacc.cc:495:replace_alu$1341
-  creating $alu cell for $neg$rtl/bf16_mul.sv:67$436: $auto$alumacc.cc:495:replace_alu$1344
-  creating $alu cell for $sub$rtl/bf16_mul.sv:22$361: $auto$alumacc.cc:495:replace_alu$1347
-  creating $alu cell for $sub$rtl/bf16_mul.sv:23$364: $auto$alumacc.cc:495:replace_alu$1350
-  creating $alu cell for $sub$rtl/bf16_mul.sv:63$428: $auto$alumacc.cc:495:replace_alu$1353
-  creating $alu cell for $sub$rtl/bf16_mul.sv:40$400: $auto$alumacc.cc:495:replace_alu$1356
-  creating $alu cell for $sub$rtl/bf16_mul.sv:43$403: $auto$alumacc.cc:495:replace_alu$1359
-  creating $alu cell for $sub$rtl/bf16_mul.sv:43$405: $auto$alumacc.cc:495:replace_alu$1362
+  creating $macc cell for $neg$rtl/bf16_mul.sv:60$422: $auto$alumacc.cc:365:replace_macc$1107
+  creating $macc cell for $add$rtl/bf16_mul.sv:27$368: $auto$alumacc.cc:365:replace_macc$1108
+  creating $macc cell for $mul$rtl/bf16_mul.sv:20$359: $auto$alumacc.cc:365:replace_macc$1109
+  creating $alu model for $ge$rtl/bf16_mul.sv:39$398 ($ge): new $alu
+  creating $alu model for $ge$rtl/bf16_mul.sv:40$399 ($ge): new $alu
+  creating $alu model for $ge$rtl/bf16_mul.sv:49$415 ($ge): new $alu
+  creating $alu model for $ge$rtl/bf16_mul.sv:53$418 ($ge): new $alu
+  creating $alu model for $ge$rtl/bf16_mul.sv:61$423 ($ge): new $alu
+  creating $alu model for $ge$rtl/bf16_mul.sv:69$438 ($ge): new $alu
+  creating $alu model for $gt$rtl/bf16_mul.sv:42$401 ($gt): new $alu
+  creating $alu model for $gt$rtl/bf16_mul.sv:62$424 ($gt): new $alu
+  creating $alu cell for $gt$rtl/bf16_mul.sv:62$424: $auto$alumacc.cc:495:replace_alu$1118
+  creating $alu cell for $gt$rtl/bf16_mul.sv:42$401: $auto$alumacc.cc:495:replace_alu$1131
+  creating $alu cell for $ge$rtl/bf16_mul.sv:69$438: $auto$alumacc.cc:495:replace_alu$1144
+  creating $alu cell for $ge$rtl/bf16_mul.sv:61$423: $auto$alumacc.cc:495:replace_alu$1157
+  creating $alu cell for $ge$rtl/bf16_mul.sv:53$418: $auto$alumacc.cc:495:replace_alu$1172
+  creating $alu cell for $ge$rtl/bf16_mul.sv:49$415: $auto$alumacc.cc:495:replace_alu$1187
+  creating $alu cell for $ge$rtl/bf16_mul.sv:40$399: $auto$alumacc.cc:495:replace_alu$1200
+  creating $alu cell for $ge$rtl/bf16_mul.sv:39$398: $auto$alumacc.cc:495:replace_alu$1215
+  creating $alu cell for $add$rtl/bf16_mul.sv:27$366: $auto$alumacc.cc:495:replace_alu$1230
+  creating $alu cell for $add$rtl/bf16_mul.sv:47$412: $auto$alumacc.cc:495:replace_alu$1233
+  creating $alu cell for $add$rtl/bf16_mul.sv:51$417: $auto$alumacc.cc:495:replace_alu$1236
+  creating $alu cell for $add$rtl/bf16_mul.sv:55$419: $auto$alumacc.cc:495:replace_alu$1239
+  creating $alu cell for $sub$rtl/bf16_mul.sv:64$426: $auto$alumacc.cc:495:replace_alu$1242
+  creating $alu cell for $add$rtl/bf16_mul.sv:67$435: $auto$alumacc.cc:495:replace_alu$1245
+  creating $alu cell for $neg$rtl/bf16_mul.sv:48$413: $auto$alumacc.cc:495:replace_alu$1248
+  creating $alu cell for $neg$rtl/bf16_mul.sv:68$436: $auto$alumacc.cc:495:replace_alu$1251
+  creating $alu cell for $sub$rtl/bf16_mul.sv:22$361: $auto$alumacc.cc:495:replace_alu$1254
+  creating $alu cell for $sub$rtl/bf16_mul.sv:23$364: $auto$alumacc.cc:495:replace_alu$1257
+  creating $alu cell for $sub$rtl/bf16_mul.sv:64$428: $auto$alumacc.cc:495:replace_alu$1260
+  creating $alu cell for $sub$rtl/bf16_mul.sv:41$400: $auto$alumacc.cc:495:replace_alu$1263
+  creating $alu cell for $sub$rtl/bf16_mul.sv:44$403: $auto$alumacc.cc:495:replace_alu$1266
+  creating $alu cell for $sub$rtl/bf16_mul.sv:44$405: $auto$alumacc.cc:495:replace_alu$1269
   created 22 $alu and 3 $macc cells.
 
 8.13. Executing SHARE pass (SAT-based resource sharing).
 Found 6 cells in module bf16_mul that may be considered for resource sharing.
-  Analyzing resource sharing options for $shr$rtl/bf16_mul.sv:62$425 ($shr):
-    Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2826:And$1171 $auto$rtlil.cc:2783:ReduceOr$1307 $auto$rtlil.cc:2826:And$1187 $auto$rtlil.cc:2826:And$1149 $auto$rtlil.cc:2783:ReduceOr$1322 $auto$rtlil.cc:2783:ReduceOr$1249 $auto$rtlil.cc:2779:Not$1223 $auto$rtlil.cc:2783:ReduceOr$1264 }.
-    Found 1 candidates: $shr$rtl/bf16_mul.sv:42$402
-    Analyzing resource sharing with $shr$rtl/bf16_mul.sv:42$402 ($shr):
-      Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2826:And$1171 $auto$rtlil.cc:2783:ReduceOr$1307 $auto$rtlil.cc:2826:And$1187 $auto$rtlil.cc:2826:And$1149 $auto$rtlil.cc:2783:ReduceOr$1322 $auto$rtlil.cc:2783:ReduceOr$1279 $auto$rtlil.cc:2779:Not$1236 }.
-      Forbidden control signals for this pair of cells: { $ge$rtl/bf16_mul.sv:68$438_Y $ge$rtl/bf16_mul.sv:52$418_Y $ge$rtl/bf16_mul.sv:48$415_Y }
-      Activation pattern for cell $shr$rtl/bf16_mul.sv:62$425: { $auto$rtlil.cc:2826:And$1171 $auto$rtlil.cc:2783:ReduceOr$1307 $auto$rtlil.cc:2826:And$1187 $auto$rtlil.cc:2826:And$1149 $auto$rtlil.cc:2783:ReduceOr$1322 $auto$rtlil.cc:2783:ReduceOr$1249 $auto$rtlil.cc:2779:Not$1223 $auto$rtlil.cc:2783:ReduceOr$1264 } = 8'00000010
-      Activation pattern for cell $shr$rtl/bf16_mul.sv:62$425: { $auto$rtlil.cc:2826:And$1171 $auto$rtlil.cc:2783:ReduceOr$1307 $auto$rtlil.cc:2826:And$1187 $auto$rtlil.cc:2826:And$1149 $auto$rtlil.cc:2783:ReduceOr$1322 $auto$rtlil.cc:2779:Not$1223 $auto$rtlil.cc:2783:ReduceOr$1264 } = 7'0000010
-      Activation pattern for cell $shr$rtl/bf16_mul.sv:42$402: { $auto$rtlil.cc:2826:And$1171 $auto$rtlil.cc:2783:ReduceOr$1307 $auto$rtlil.cc:2826:And$1187 $auto$rtlil.cc:2826:And$1149 $auto$rtlil.cc:2783:ReduceOr$1322 $auto$rtlil.cc:2783:ReduceOr$1279 $auto$rtlil.cc:2779:Not$1236 } = 7'0100001
-      Activation pattern for cell $shr$rtl/bf16_mul.sv:42$402: { $auto$rtlil.cc:2826:And$1171 $auto$rtlil.cc:2783:ReduceOr$1307 $auto$rtlil.cc:2826:And$1187 $auto$rtlil.cc:2826:And$1149 $auto$rtlil.cc:2783:ReduceOr$1322 $auto$rtlil.cc:2779:Not$1236 } = 6'010001
+  Analyzing resource sharing options for $shr$rtl/bf16_mul.sv:63$425 ($shr):
+    Found 2 activation_patterns using ctrl signal { $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2783:ReduceOr$1229 $auto$rtlil.cc:2783:ReduceOr$1214 $auto$rtlil.cc:2783:ReduceOr$1156 $auto$rtlil.cc:2779:Not$1130 $auto$rtlil.cc:2783:ReduceOr$1171 }.
+    Found 1 candidates: $shr$rtl/bf16_mul.sv:43$402
+    Analyzing resource sharing with $shr$rtl/bf16_mul.sv:43$402 ($shr):
+      Found 2 activation_patterns using ctrl signal { $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2783:ReduceOr$1229 $auto$rtlil.cc:2783:ReduceOr$1214 $auto$rtlil.cc:2783:ReduceOr$1186 $auto$rtlil.cc:2779:Not$1143 }.
+      Forbidden control signals for this pair of cells: { $ge$rtl/bf16_mul.sv:69$438_Y $ge$rtl/bf16_mul.sv:53$418_Y $ge$rtl/bf16_mul.sv:49$415_Y }
+      Activation pattern for cell $shr$rtl/bf16_mul.sv:63$425: { $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2783:ReduceOr$1229 $auto$rtlil.cc:2783:ReduceOr$1214 $auto$rtlil.cc:2783:ReduceOr$1156 $auto$rtlil.cc:2779:Not$1130 $auto$rtlil.cc:2783:ReduceOr$1171 } = 8'00000010
+      Activation pattern for cell $shr$rtl/bf16_mul.sv:63$425: { $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2783:ReduceOr$1229 $auto$rtlil.cc:2783:ReduceOr$1214 $auto$rtlil.cc:2779:Not$1130 $auto$rtlil.cc:2783:ReduceOr$1171 } = 7'0000010
+      Activation pattern for cell $shr$rtl/bf16_mul.sv:43$402: { $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2783:ReduceOr$1229 $auto$rtlil.cc:2783:ReduceOr$1214 $auto$rtlil.cc:2783:ReduceOr$1186 $auto$rtlil.cc:2779:Not$1143 } = 7'0000101
+      Activation pattern for cell $shr$rtl/bf16_mul.sv:43$402: { $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2783:ReduceOr$1229 $auto$rtlil.cc:2783:ReduceOr$1214 $auto$rtlil.cc:2779:Not$1143 } = 6'000011
       Size of SAT problem: 117 cells, 18441 variables, 48820 clauses
       According to the SAT solver this pair of cells can be shared.
-      Activation signal for $shr$rtl/bf16_mul.sv:42$402: $auto$share.cc:1015:make_cell_activation_logic$1368
-      New cell: $auto$share.cc:669:make_supercell$1375 ($shr)
+      Activation signal for $shr$rtl/bf16_mul.sv:43$402: $auto$share.cc:1015:make_cell_activation_logic$1275
+      New cell: $auto$share.cc:669:make_supercell$1282 ($shr)
       New topology contains loops! Rolling back..
-  Analyzing resource sharing options for $shr$rtl/bf16_mul.sv:42$402 ($shr):
-    Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2826:And$1171 $auto$rtlil.cc:2783:ReduceOr$1307 $auto$rtlil.cc:2826:And$1187 $auto$rtlil.cc:2826:And$1149 $auto$rtlil.cc:2783:ReduceOr$1322 $auto$rtlil.cc:2783:ReduceOr$1279 $auto$rtlil.cc:2779:Not$1236 }.
+  Analyzing resource sharing options for $shr$rtl/bf16_mul.sv:43$402 ($shr):
+    Found 2 activation_patterns using ctrl signal { $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2783:ReduceOr$1229 $auto$rtlil.cc:2783:ReduceOr$1214 $auto$rtlil.cc:2783:ReduceOr$1186 $auto$rtlil.cc:2779:Not$1143 }.
     No candidates found.
-  Analyzing resource sharing options for $shl$rtl/bf16_mul.sv:67$437 ($shl):
-    Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2826:And$1171 $auto$rtlil.cc:2783:ReduceOr$1307 $auto$rtlil.cc:2826:And$1187 $auto$rtlil.cc:2826:And$1149 $auto$rtlil.cc:2783:ReduceOr$1322 $auto$rtlil.cc:2783:ReduceOr$1249 $auto$rtlil.cc:2779:Not$1223 $auto$rtlil.cc:2783:ReduceOr$1264 }.
-    Found 1 candidates: $shl$rtl/bf16_mul.sv:47$414
-    Analyzing resource sharing with $shl$rtl/bf16_mul.sv:47$414 ($shl):
-      Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2826:And$1171 $auto$rtlil.cc:2783:ReduceOr$1307 $auto$rtlil.cc:2826:And$1187 $auto$rtlil.cc:2826:And$1149 $auto$rtlil.cc:2783:ReduceOr$1322 $auto$rtlil.cc:2783:ReduceOr$1279 $auto$rtlil.cc:2779:Not$1236 }.
-      Forbidden control signals for this pair of cells: { $ge$rtl/bf16_mul.sv:68$438_Y $ge$rtl/bf16_mul.sv:52$418_Y $ge$rtl/bf16_mul.sv:48$415_Y }
-      Activation pattern for cell $shl$rtl/bf16_mul.sv:67$437: { $auto$rtlil.cc:2826:And$1171 $auto$rtlil.cc:2783:ReduceOr$1307 $auto$rtlil.cc:2826:And$1187 $auto$rtlil.cc:2826:And$1149 $auto$rtlil.cc:2783:ReduceOr$1322 $auto$rtlil.cc:2779:Not$1223 $auto$rtlil.cc:2783:ReduceOr$1264 } = 7'0000000
-      Activation pattern for cell $shl$rtl/bf16_mul.sv:67$437: { $auto$rtlil.cc:2826:And$1171 $auto$rtlil.cc:2783:ReduceOr$1307 $auto$rtlil.cc:2826:And$1187 $auto$rtlil.cc:2826:And$1149 $auto$rtlil.cc:2783:ReduceOr$1322 $auto$rtlil.cc:2783:ReduceOr$1249 $auto$rtlil.cc:2779:Not$1223 $auto$rtlil.cc:2783:ReduceOr$1264 } = 8'00000000
-      Activation pattern for cell $shl$rtl/bf16_mul.sv:47$414: { $auto$rtlil.cc:2826:And$1171 $auto$rtlil.cc:2783:ReduceOr$1307 $auto$rtlil.cc:2826:And$1187 $auto$rtlil.cc:2826:And$1149 $auto$rtlil.cc:2783:ReduceOr$1322 $auto$rtlil.cc:2779:Not$1236 } = 6'010000
-      Activation pattern for cell $shl$rtl/bf16_mul.sv:47$414: { $auto$rtlil.cc:2826:And$1171 $auto$rtlil.cc:2783:ReduceOr$1307 $auto$rtlil.cc:2826:And$1187 $auto$rtlil.cc:2826:And$1149 $auto$rtlil.cc:2783:ReduceOr$1322 $auto$rtlil.cc:2783:ReduceOr$1279 $auto$rtlil.cc:2779:Not$1236 } = 7'0100000
+  Analyzing resource sharing options for $shl$rtl/bf16_mul.sv:68$437 ($shl):
+    Found 2 activation_patterns using ctrl signal { $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2783:ReduceOr$1229 $auto$rtlil.cc:2783:ReduceOr$1214 $auto$rtlil.cc:2783:ReduceOr$1156 $auto$rtlil.cc:2779:Not$1130 $auto$rtlil.cc:2783:ReduceOr$1171 }.
+    Found 1 candidates: $shl$rtl/bf16_mul.sv:48$414
+    Analyzing resource sharing with $shl$rtl/bf16_mul.sv:48$414 ($shl):
+      Found 2 activation_patterns using ctrl signal { $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2783:ReduceOr$1229 $auto$rtlil.cc:2783:ReduceOr$1214 $auto$rtlil.cc:2783:ReduceOr$1186 $auto$rtlil.cc:2779:Not$1143 }.
+      Forbidden control signals for this pair of cells: { $ge$rtl/bf16_mul.sv:69$438_Y $ge$rtl/bf16_mul.sv:53$418_Y $ge$rtl/bf16_mul.sv:49$415_Y }
+      Activation pattern for cell $shl$rtl/bf16_mul.sv:68$437: { $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2783:ReduceOr$1229 $auto$rtlil.cc:2783:ReduceOr$1214 $auto$rtlil.cc:2779:Not$1130 $auto$rtlil.cc:2783:ReduceOr$1171 } = 7'0000000
+      Activation pattern for cell $shl$rtl/bf16_mul.sv:68$437: { $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2783:ReduceOr$1229 $auto$rtlil.cc:2783:ReduceOr$1214 $auto$rtlil.cc:2783:ReduceOr$1156 $auto$rtlil.cc:2779:Not$1130 $auto$rtlil.cc:2783:ReduceOr$1171 } = 8'00000000
+      Activation pattern for cell $shl$rtl/bf16_mul.sv:48$414: { $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2783:ReduceOr$1229 $auto$rtlil.cc:2783:ReduceOr$1214 $auto$rtlil.cc:2779:Not$1143 } = 6'000010
+      Activation pattern for cell $shl$rtl/bf16_mul.sv:48$414: { $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2783:ReduceOr$1229 $auto$rtlil.cc:2783:ReduceOr$1214 $auto$rtlil.cc:2783:ReduceOr$1186 $auto$rtlil.cc:2779:Not$1143 } = 7'0000100
       Size of SAT problem: 117 cells, 18441 variables, 48820 clauses
       According to the SAT solver this pair of cells can be shared.
-      Activation signal for $shl$rtl/bf16_mul.sv:47$414: $auto$share.cc:1015:make_cell_activation_logic$1381
-      New cell: $auto$share.cc:669:make_supercell$1388 ($shl)
+      Activation signal for $shl$rtl/bf16_mul.sv:48$414: $auto$share.cc:1015:make_cell_activation_logic$1288
+      New cell: $auto$share.cc:669:make_supercell$1295 ($shl)
       New topology contains loops! Rolling back..
-  Analyzing resource sharing options for $shl$rtl/bf16_mul.sv:47$414 ($shl):
-    Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2826:And$1171 $auto$rtlil.cc:2783:ReduceOr$1307 $auto$rtlil.cc:2826:And$1187 $auto$rtlil.cc:2826:And$1149 $auto$rtlil.cc:2783:ReduceOr$1322 $auto$rtlil.cc:2783:ReduceOr$1279 $auto$rtlil.cc:2779:Not$1236 }.
+  Analyzing resource sharing options for $shl$rtl/bf16_mul.sv:48$414 ($shl):
+    Found 2 activation_patterns using ctrl signal { $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2783:ReduceOr$1229 $auto$rtlil.cc:2783:ReduceOr$1214 $auto$rtlil.cc:2783:ReduceOr$1186 $auto$rtlil.cc:2779:Not$1143 }.
     No candidates found.
-  Analyzing resource sharing options for $shl$rtl/bf16_mul.sv:63$427 ($shl):
-    Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2826:And$1171 $auto$rtlil.cc:2783:ReduceOr$1307 $auto$rtlil.cc:2826:And$1187 $auto$rtlil.cc:2826:And$1149 $auto$rtlil.cc:2783:ReduceOr$1322 $auto$rtlil.cc:2783:ReduceOr$1249 $auto$rtlil.cc:2779:Not$1223 $auto$rtlil.cc:2783:ReduceOr$1264 }.
-    Found 1 candidates: $shl$rtl/bf16_mul.sv:43$404
-    Analyzing resource sharing with $shl$rtl/bf16_mul.sv:43$404 ($shl):
-      Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2826:And$1171 $auto$rtlil.cc:2783:ReduceOr$1307 $auto$rtlil.cc:2826:And$1187 $auto$rtlil.cc:2826:And$1149 $auto$rtlil.cc:2783:ReduceOr$1322 $auto$rtlil.cc:2783:ReduceOr$1279 $auto$rtlil.cc:2779:Not$1236 }.
-      Forbidden control signals for this pair of cells: { $ge$rtl/bf16_mul.sv:68$438_Y $ge$rtl/bf16_mul.sv:52$418_Y $ge$rtl/bf16_mul.sv:48$415_Y }
-      Activation pattern for cell $shl$rtl/bf16_mul.sv:63$427: { $auto$rtlil.cc:2826:And$1171 $auto$rtlil.cc:2783:ReduceOr$1307 $auto$rtlil.cc:2826:And$1187 $auto$rtlil.cc:2826:And$1149 $auto$rtlil.cc:2783:ReduceOr$1322 $auto$rtlil.cc:2779:Not$1223 $auto$rtlil.cc:2783:ReduceOr$1264 } = 7'0000010
-      Activation pattern for cell $shl$rtl/bf16_mul.sv:63$427: { $auto$rtlil.cc:2826:And$1171 $auto$rtlil.cc:2783:ReduceOr$1307 $auto$rtlil.cc:2826:And$1187 $auto$rtlil.cc:2826:And$1149 $auto$rtlil.cc:2783:ReduceOr$1322 $auto$rtlil.cc:2783:ReduceOr$1249 $auto$rtlil.cc:2779:Not$1223 $auto$rtlil.cc:2783:ReduceOr$1264 } = 8'00000010
-      Activation pattern for cell $shl$rtl/bf16_mul.sv:43$404: { $auto$rtlil.cc:2826:And$1171 $auto$rtlil.cc:2783:ReduceOr$1307 $auto$rtlil.cc:2826:And$1187 $auto$rtlil.cc:2826:And$1149 $auto$rtlil.cc:2783:ReduceOr$1322 $auto$rtlil.cc:2779:Not$1236 } = 6'010001
-      Activation pattern for cell $shl$rtl/bf16_mul.sv:43$404: { $auto$rtlil.cc:2826:And$1171 $auto$rtlil.cc:2783:ReduceOr$1307 $auto$rtlil.cc:2826:And$1187 $auto$rtlil.cc:2826:And$1149 $auto$rtlil.cc:2783:ReduceOr$1322 $auto$rtlil.cc:2783:ReduceOr$1279 $auto$rtlil.cc:2779:Not$1236 } = 7'0100001
+  Analyzing resource sharing options for $shl$rtl/bf16_mul.sv:64$427 ($shl):
+    Found 2 activation_patterns using ctrl signal { $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2783:ReduceOr$1229 $auto$rtlil.cc:2783:ReduceOr$1214 $auto$rtlil.cc:2783:ReduceOr$1156 $auto$rtlil.cc:2779:Not$1130 $auto$rtlil.cc:2783:ReduceOr$1171 }.
+    Found 1 candidates: $shl$rtl/bf16_mul.sv:44$404
+    Analyzing resource sharing with $shl$rtl/bf16_mul.sv:44$404 ($shl):
+      Found 2 activation_patterns using ctrl signal { $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2783:ReduceOr$1229 $auto$rtlil.cc:2783:ReduceOr$1214 $auto$rtlil.cc:2783:ReduceOr$1186 $auto$rtlil.cc:2779:Not$1143 }.
+      Forbidden control signals for this pair of cells: { $ge$rtl/bf16_mul.sv:69$438_Y $ge$rtl/bf16_mul.sv:53$418_Y $ge$rtl/bf16_mul.sv:49$415_Y }
+      Activation pattern for cell $shl$rtl/bf16_mul.sv:64$427: { $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2783:ReduceOr$1229 $auto$rtlil.cc:2783:ReduceOr$1214 $auto$rtlil.cc:2779:Not$1130 $auto$rtlil.cc:2783:ReduceOr$1171 } = 7'0000010
+      Activation pattern for cell $shl$rtl/bf16_mul.sv:64$427: { $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2783:ReduceOr$1229 $auto$rtlil.cc:2783:ReduceOr$1214 $auto$rtlil.cc:2783:ReduceOr$1156 $auto$rtlil.cc:2779:Not$1130 $auto$rtlil.cc:2783:ReduceOr$1171 } = 8'00000010
+      Activation pattern for cell $shl$rtl/bf16_mul.sv:44$404: { $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2783:ReduceOr$1229 $auto$rtlil.cc:2783:ReduceOr$1214 $auto$rtlil.cc:2779:Not$1143 } = 6'000011
+      Activation pattern for cell $shl$rtl/bf16_mul.sv:44$404: { $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2783:ReduceOr$1229 $auto$rtlil.cc:2783:ReduceOr$1214 $auto$rtlil.cc:2783:ReduceOr$1186 $auto$rtlil.cc:2779:Not$1143 } = 7'0000101
       Size of SAT problem: 117 cells, 18441 variables, 48820 clauses
       According to the SAT solver this pair of cells can be shared.
-      Activation signal for $shl$rtl/bf16_mul.sv:43$404: $auto$share.cc:1015:make_cell_activation_logic$1394
-      New cell: $auto$share.cc:669:make_supercell$1401 ($shl)
+      Activation signal for $shl$rtl/bf16_mul.sv:44$404: $auto$share.cc:1015:make_cell_activation_logic$1301
+      New cell: $auto$share.cc:669:make_supercell$1308 ($shl)
       New topology contains loops! Rolling back..
-  Analyzing resource sharing options for $shl$rtl/bf16_mul.sv:43$404 ($shl):
-    Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2826:And$1171 $auto$rtlil.cc:2783:ReduceOr$1307 $auto$rtlil.cc:2826:And$1187 $auto$rtlil.cc:2826:And$1149 $auto$rtlil.cc:2783:ReduceOr$1322 $auto$rtlil.cc:2783:ReduceOr$1279 $auto$rtlil.cc:2779:Not$1236 }.
+  Analyzing resource sharing options for $shl$rtl/bf16_mul.sv:44$404 ($shl):
+    Found 2 activation_patterns using ctrl signal { $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2783:ReduceOr$1229 $auto$rtlil.cc:2783:ReduceOr$1214 $auto$rtlil.cc:2783:ReduceOr$1186 $auto$rtlil.cc:2779:Not$1143 }.
     No candidates found.
 
 8.14. Executing OPT pass (performing simple optimizations).
@@ -833,7 +833,7 @@ Running muxtree optimizer on module $paramod$constmap:838142fb0de845b41b973a7fdf
   Creating internal representation of mux trees.
   No muxes found in this module.
 Removed 0 multiplexer ports.
-<suppressed ~2412 debug messages>
+<suppressed ~2411 debug messages>
 
 8.20.32. Executing OPT_EXPR pass (perform const folding).
 Optimizing module $paramod$constmap:838142fb0de845b41b973a7fdf149df2f92502b6$paramod$160f353fe3871f761e46a987be0699411d285257\_90_shift_ops_shr_shl_sshl_sshr.
@@ -858,7 +858,7 @@ Running muxtree optimizer on module $paramod$constmap:985bf0015fe932918c6660b9c6
   Creating internal representation of mux trees.
   No muxes found in this module.
 Removed 0 multiplexer ports.
-<suppressed ~1121 debug messages>
+<suppressed ~1122 debug messages>
 
 8.20.54. Executing OPT_EXPR pass (perform const folding).
 Optimizing module $paramod$constmap:985bf0015fe932918c6660b9c6ff0b58a3c024bb$paramod$7c4915d7b07f325af7b374fe37e28ee4d31f73ed\_90_shift_ops_shr_shl_sshl_sshr.
@@ -1094,92 +1094,92 @@ Optimizing module bf16_mul.
 
 Longest topological path in bf16_mul (length=85):
     0: \rhs_i [14]
-    1: $abc$18663$new_n65 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18680)
-    2: $abc$18663$new_n66 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18681)
-    3: $abc$18663$new_n67 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18682)
-    4: $abc$18663$new_n103 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18718)
-    5: $abc$18663$new_n104 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18719)
-    6: $abc$18663$new_n105 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18720)
-    7: $abc$18663$new_n106 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18721)
-    8: $abc$18663$new_n107 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18722)
-    9: $abc$18663$new_n108 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18723)
-   10: $abc$18663$new_n201 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18816)
-   11: $abc$18663$new_n202 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18817)
-   12: $abc$18663$new_n212 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18827)
-   13: $abc$18663$new_n213 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18828)
-   14: $abc$18663$new_n226 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18841)
-   15: $abc$18663$new_n227 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18842)
-   16: $abc$18663$new_n261 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18876)
-   17: $abc$18663$new_n262 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18877)
-   18: $abc$18663$new_n263 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18878)
-   19: $abc$18663$new_n269 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18884)
-   20: $abc$18663$new_n273 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18888)
-   21: $abc$18663$new_n276 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18891)
-   22: $abc$18663$new_n277 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18892)
-   23: $abc$18663$new_n278 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18893)
-   24: $abc$18663$new_n307 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18922)
-   25: $abc$18663$new_n308 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18923)
-   26: $abc$18663$new_n323 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18938)
-   27: $abc$18663$new_n324 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18939)
-   28: $abc$18663$new_n330 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18945)
-   29: $abc$18663$new_n331 (via $abc$18663$auto$blifparse.cc:396:parse_blif$18946)
-   30: $abc$18663$new_n955 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19570)
-   31: $abc$18663$new_n959 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19574)
-   32: $abc$18663$new_n962 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19577)
-   33: $abc$18663$new_n963 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19578)
-   34: $abc$18663$new_n964 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19579)
-   35: $abc$18663$new_n985 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19600)
-   36: $abc$18663$new_n986 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19601)
-   37: $abc$18663$new_n994 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19609)
-   38: $abc$18663$new_n995 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19610)
-   39: $abc$18663$new_n996 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19611)
-   40: $abc$18663$new_n997 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19612)
-   41: $abc$18663$new_n998 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19613)
-   42: $abc$18663$new_n999 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19614)
-   43: $abc$18663$new_n1003 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19618)
-   44: $abc$18663$new_n1004 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19619)
-   45: $abc$18663$new_n1014 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19629)
-   46: $abc$18663$new_n1033 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19648)
-   47: $abc$18663$new_n1034 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19649)
-   48: $abc$18663$new_n1035 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19650)
-   49: $abc$18663$new_n1036 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19651)
-   50: $abc$18663$new_n1037 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19652)
-   51: $abc$18663$new_n1038 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19653)
-   52: $abc$18663$new_n1049 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19664)
-   53: $abc$18663$new_n1051 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19666)
-   54: $abc$18663$new_n1052 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19667)
-   55: $abc$18663$new_n1096 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19711)
-   56: $abc$18663$new_n1097 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19712)
-   57: $abc$18663$new_n1138 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19753)
-   58: $abc$18663$new_n1139 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19754)
-   59: $abc$18663$new_n1157 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19772)
-   60: $abc$18663$new_n1158 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19773)
-   61: $abc$18663$new_n1165 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19780)
-   62: $abc$18663$new_n1166 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19781)
-   63: $abc$18663$new_n1167 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19782)
-   64: $abc$18663$new_n1168 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19783)
-   65: $abc$18663$new_n1169 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19784)
-   66: $abc$18663$new_n1170 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19785)
-   67: $abc$18663$new_n1171 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19786)
-   68: $abc$18663$new_n1172 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19787)
-   69: $abc$18663$new_n1173 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19788)
-   70: $abc$18663$new_n1174 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19789)
-   71: $abc$18663$new_n1282 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19897)
-   72: $abc$18663$new_n1323 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19937)
-   73: $abc$18663$new_n1352 (via $abc$18663$auto$blifparse.cc:396:parse_blif$19966)
-   74: $abc$18663$new_n1394 (via $abc$18663$auto$blifparse.cc:396:parse_blif$20008)
-   75: $abc$18663$new_n1465 (via $abc$18663$auto$blifparse.cc:396:parse_blif$20079)
-   76: $abc$18663$new_n1595 (via $abc$18663$auto$blifparse.cc:396:parse_blif$20209)
-   77: $abc$18663$new_n1721 (via $abc$18663$auto$blifparse.cc:396:parse_blif$20335)
-   78: $abc$18663$new_n1896 (via $abc$18663$auto$blifparse.cc:396:parse_blif$20510)
-   79: $abc$18663$new_n2028 (via $abc$18663$auto$blifparse.cc:396:parse_blif$20642)
-   80: $abc$18663$new_n3438 (via $abc$18663$auto$blifparse.cc:396:parse_blif$22052)
-   81: $abc$18663$new_n3441 (via $abc$18663$auto$blifparse.cc:396:parse_blif$22055)
-   82: $abc$18663$new_n3442 (via $abc$18663$auto$blifparse.cc:396:parse_blif$22056)
-   83: $abc$18663$new_n3443 (via $abc$18663$auto$blifparse.cc:396:parse_blif$22057)
-   84: $abc$18663$new_n3444 (via $abc$18663$auto$blifparse.cc:396:parse_blif$22058)
-   85: \result_o [6] (via $abc$18663$auto$blifparse.cc:396:parse_blif$22059)
+    1: $abc$18570$new_n65 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18587)
+    2: $abc$18570$new_n66 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18588)
+    3: $abc$18570$new_n67 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18589)
+    4: $abc$18570$new_n103 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18625)
+    5: $abc$18570$new_n104 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18626)
+    6: $abc$18570$new_n105 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18627)
+    7: $abc$18570$new_n106 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18628)
+    8: $abc$18570$new_n107 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18629)
+    9: $abc$18570$new_n108 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18630)
+   10: $abc$18570$new_n201 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18723)
+   11: $abc$18570$new_n202 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18724)
+   12: $abc$18570$new_n212 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18734)
+   13: $abc$18570$new_n213 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18735)
+   14: $abc$18570$new_n226 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18748)
+   15: $abc$18570$new_n227 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18749)
+   16: $abc$18570$new_n261 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18783)
+   17: $abc$18570$new_n262 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18784)
+   18: $abc$18570$new_n263 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18785)
+   19: $abc$18570$new_n269 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18791)
+   20: $abc$18570$new_n273 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18795)
+   21: $abc$18570$new_n276 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18798)
+   22: $abc$18570$new_n277 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18799)
+   23: $abc$18570$new_n278 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18800)
+   24: $abc$18570$new_n307 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18829)
+   25: $abc$18570$new_n308 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18830)
+   26: $abc$18570$new_n323 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18845)
+   27: $abc$18570$new_n324 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18846)
+   28: $abc$18570$new_n330 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18852)
+   29: $abc$18570$new_n331 (via $abc$18570$auto$blifparse.cc:396:parse_blif$18853)
+   30: $abc$18570$new_n955 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19477)
+   31: $abc$18570$new_n959 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19481)
+   32: $abc$18570$new_n962 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19484)
+   33: $abc$18570$new_n963 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19485)
+   34: $abc$18570$new_n964 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19486)
+   35: $abc$18570$new_n985 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19507)
+   36: $abc$18570$new_n986 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19508)
+   37: $abc$18570$new_n994 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19516)
+   38: $abc$18570$new_n995 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19517)
+   39: $abc$18570$new_n996 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19518)
+   40: $abc$18570$new_n997 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19519)
+   41: $abc$18570$new_n998 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19520)
+   42: $abc$18570$new_n999 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19521)
+   43: $abc$18570$new_n1003 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19525)
+   44: $abc$18570$new_n1004 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19526)
+   45: $abc$18570$new_n1014 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19536)
+   46: $abc$18570$new_n1033 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19555)
+   47: $abc$18570$new_n1034 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19556)
+   48: $abc$18570$new_n1035 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19557)
+   49: $abc$18570$new_n1036 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19558)
+   50: $abc$18570$new_n1037 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19559)
+   51: $abc$18570$new_n1038 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19560)
+   52: $abc$18570$new_n1049 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19571)
+   53: $abc$18570$new_n1051 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19573)
+   54: $abc$18570$new_n1052 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19574)
+   55: $abc$18570$new_n1096 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19618)
+   56: $abc$18570$new_n1097 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19619)
+   57: $abc$18570$new_n1138 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19660)
+   58: $abc$18570$new_n1139 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19661)
+   59: $abc$18570$new_n1157 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19679)
+   60: $abc$18570$new_n1158 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19680)
+   61: $abc$18570$new_n1165 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19687)
+   62: $abc$18570$new_n1166 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19688)
+   63: $abc$18570$new_n1167 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19689)
+   64: $abc$18570$new_n1168 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19690)
+   65: $abc$18570$new_n1169 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19691)
+   66: $abc$18570$new_n1170 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19692)
+   67: $abc$18570$new_n1171 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19693)
+   68: $abc$18570$new_n1172 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19694)
+   69: $abc$18570$new_n1173 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19695)
+   70: $abc$18570$new_n1174 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19696)
+   71: $abc$18570$new_n1282 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19804)
+   72: $abc$18570$new_n1323 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19844)
+   73: $abc$18570$new_n1352 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19873)
+   74: $abc$18570$new_n1394 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19915)
+   75: $abc$18570$new_n1465 (via $abc$18570$auto$blifparse.cc:396:parse_blif$19986)
+   76: $abc$18570$new_n1595 (via $abc$18570$auto$blifparse.cc:396:parse_blif$20116)
+   77: $abc$18570$new_n1721 (via $abc$18570$auto$blifparse.cc:396:parse_blif$20242)
+   78: $abc$18570$new_n1896 (via $abc$18570$auto$blifparse.cc:396:parse_blif$20417)
+   79: $abc$18570$new_n2028 (via $abc$18570$auto$blifparse.cc:396:parse_blif$20549)
+   80: $abc$18570$new_n3438 (via $abc$18570$auto$blifparse.cc:396:parse_blif$21959)
+   81: $abc$18570$new_n3441 (via $abc$18570$auto$blifparse.cc:396:parse_blif$21962)
+   82: $abc$18570$new_n3442 (via $abc$18570$auto$blifparse.cc:396:parse_blif$21963)
+   83: $abc$18570$new_n3443 (via $abc$18570$auto$blifparse.cc:396:parse_blif$21964)
+   84: $abc$18570$new_n3444 (via $abc$18570$auto$blifparse.cc:396:parse_blif$21965)
+   85: \result_o [6] (via $abc$18570$auto$blifparse.cc:396:parse_blif$21966)
 
-End of script. Logfile hash: 7a20b7d6a6, CPU: user 1.36s system 0.04s, MEM: 62.74 MB peak
+End of script. Logfile hash: 75cf8ed892, CPU: user 1.13s system 0.04s, MEM: 62.99 MB peak
 Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
-Time spent: 34% 1x abc (0 sec), 12% 55x opt_expr (0 sec), ...
+Time spent: 34% 1x abc (0 sec), 13% 55x opt_expr (0 sec), ...

@@ -2,6 +2,7 @@ module hierarchical_normalization_datapath #(
     parameter int unsigned BANKS=4,
     parameter int unsigned TAG_WIDTH=16,
     parameter int unsigned COUNT_WIDTH=16,
+    parameter int unsigned DATA_FORMAT=0,
     parameter int unsigned BANK_WIDTH=BANKS>1?$clog2(BANKS):1
 )(
     input logic clk_i,input logic rst_ni,
@@ -48,7 +49,7 @@ module hierarchical_normalization_datapath #(
     end
     assign begin_ready_o=logic_begin_ready&&all_local_ready&&all_apply_ready;
     for(genvar b=0;b<BANKS;b=b+1)begin:g_bank
-        bank_normalization_local_reducer #(.TAG_WIDTH(TAG_WIDTH),.COUNT_WIDTH(COUNT_WIDTH)) u_reduce(
+        bank_normalization_local_reducer #(.TAG_WIDTH(TAG_WIDTH),.COUNT_WIDTH(COUNT_WIDTH),.DATA_FORMAT(DATA_FORMAT)) u_reduce(
           .clk_i,.rst_ni,.begin_valid_i(begin_valid_i&&begin_ready_o&&expected_bank_mask_i[b]),
           .begin_ready_o(local_begin_ready[b]),.begin_tag_i(tag_i),
           .begin_element_count_i(bank_element_count_i[b]),.element_valid_i(reduce_element_valid_i[b]),
@@ -56,7 +57,7 @@ module hierarchical_normalization_datapath #(
           .result_valid_o(local_result_valid[b]),.result_ready_i(local_result_ready[b]),
           .result_tag_o(local_result_tag[b]),.result_sum_o(local_sum[b]),
           .result_sumsq_o(local_sumsq[b]),.protocol_error_o(local_error[b]));
-        bank_normalization_apply #(.TAG_WIDTH(TAG_WIDTH)) u_apply(
+        bank_normalization_apply #(.TAG_WIDTH(TAG_WIDTH),.DATA_FORMAT(DATA_FORMAT)) u_apply(
           .clk_i,.rst_ni,.config_valid_i(norm_valid&&norm_ready&&mask_q[b]),
           .config_ready_o(apply_config_ready[b]),.config_rms_norm_i(norm_mode),
           .config_tag_i(norm_tag),.config_mean_i(norm_mean),.config_inv_std_i(norm_inv),
@@ -77,7 +78,7 @@ module hierarchical_normalization_datapath #(
             local_result_ready[b]=partial_ready;
         end
     end
-    logic_normalization_reduction_engine #(.BANKS(BANKS),.TAG_WIDTH(TAG_WIDTH)) u_logic(
+    logic_normalization_reduction_engine #(.BANKS(BANKS),.TAG_WIDTH(TAG_WIDTH),.DATA_FORMAT(DATA_FORMAT)) u_logic(
       .clk_i,.rst_ni,.begin_valid_i(begin_valid_i&&begin_ready_o),.begin_ready_o(logic_begin_ready),
       .begin_rms_norm_i(rms_norm_i),.begin_tag_i(tag_i),.begin_expected_mask_i(expected_bank_mask_i),
       .begin_inv_hidden_i(inv_hidden_i),.begin_epsilon_i(epsilon_i),
@@ -98,4 +99,7 @@ module hierarchical_normalization_datapath #(
         if(norm_valid&&norm_ready)begin scalar_configured_o<=1;scalar_mean_o<=norm_mean;scalar_inv_std_o<=norm_inv;end
       end
     end
+`ifndef SYNTHESIS
+    initial if(DATA_FORMAT>1)$fatal(1,"DATA_FORMAT must be 0 (FP16) or 1 (BF16)");
+`endif
 endmodule

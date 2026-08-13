@@ -1,0 +1,15 @@
+OpenROAD 26Q3-1080-gab6fd26351 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+Group                  Internal  Switching    Leakage      Total
+                          Power      Power      Power      Power (Watts)
+----------------------------------------------------------------
+Sequential             6.43e-02   6.88e-04   1.21e-07   6.50e-02   8.8%
+Combinational          2.54e-01   3.61e-01   2.00e-07   6.14e-01  82.8%
+Clock                  3.37e-02   2.93e-02   2.53e-08   6.30e-02   8.5%
+Macro                  0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+Pad                    0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+----------------------------------------------------------------
+Total                  3.52e-01   3.91e-01   3.46e-07   7.42e-01 100.0%
+                          47.4%      52.6%       0.0%

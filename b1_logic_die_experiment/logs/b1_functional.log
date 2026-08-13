@@ -1,0 +1,284 @@
+[B1-G3] exact plan-shape contract probe (expected assertion failure)
+FATAL: rtl/pim_vector_alu.sv:60: DATA_WIDTH must be divisible by 32
+FATAL: rtl/bank_side_pim_subsystem.sv:122: each PIM block requires an even/odd bank pair
+FATAL: rtl/pim_vector_alu.sv:60: DATA_WIDTH must be divisible by 32
+[B1-G3] valid minimal hierarchical end-to-end test
+VCD info: dumpfile b1_logic_die_experiment/artifacts/b1_hierarchical.vcd opened for output.
+B1_HIERARCHICAL_TB PASS cycles=41 bank_to_logic=1 shared_buffer_bp=3 result_bp=3 tag_order=1 epoch=1 norm_idle=1 protocol_errors=0
+/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b1_logic_die_experiment/b1_hierarchical_tb.sv:190: $finish called at 406000 (1ps)
+[B1-G3] existing bank/logic regression set
+FP16_MUL_AUDIT vectors=4217 mismatches=0
+verification/rtl_audit/fp16_mul_random_audit_tb.sv:20: $finish called at 4217 (1s)
+AUDIT_FIX PASS: bank command remained blocked while referenced operands were invalid
+verification/rtl_audit/bank_operand_validity_repro_tb.sv:45: $finish called at 155 (1s)
+AUDIT_FIX PASS: illegal CRF word reported an error and retired
+verification/rtl_audit/invalid_crf_deadlock_repro_tb.sv:37: $finish called at 105 (1s)
+AUDIT_FIX PASS: stalled DRAM response stayed stable and blocked overwrite
+verification/rtl_audit/dram_read_backpressure_repro_tb.sv:29: $finish called at 146 (1s)
+AUDIT_FIX PASS: tWR/tCCD/tRRD/tFAW/tRFC/turnaround enforced
+verification/rtl_audit/dram_extended_timing_tb.sv:41: $finish called at 440 (1s)
+AUDIT_FIX PASS: finite JUMP completed; accepted=5
+verification/rtl_audit/crf_jump_repro_tb.sv:25: $finish called at 155 (1s)
+AUDIT_FIX PASS: CRF NOP/FILL/AUTO repeat semantics match C++
+verification/rtl_audit/crf_repeat_semantics_tb.sv:38: $finish called at 335 (1s)
+AUDIT_FIX PASS: epoch gated dispatch and independent source channel metadata
+verification/rtl_audit/logic_tag_channel_repro_tb.sv:47: $finish called at 166 (1s)
+[B1-G3] result-router exhaustive combinational proof
+
+-- Running command `read_verilog -formal -sv rtl/logic_result_router.sv verification/rtl_audit/logic_result_router_formal.sv; prep -top logic_result_router_formal -flatten; select -module logic_result_router_formal; sat -prove ok 1' --
+
+1. Executing Verilog-2005 frontend: rtl/logic_result_router.sv
+Parsing formal SystemVerilog input from `rtl/logic_result_router.sv' to AST representation.
+Generating RTLIL representation for module `\logic_result_router'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: verification/rtl_audit/logic_result_router_formal.sv
+Parsing formal SystemVerilog input from `verification/rtl_audit/logic_result_router_formal.sv' to AST representation.
+Generating RTLIL representation for module `\logic_result_router_formal'.
+Successfully finished Verilog frontend.
+
+3. Executing PREP pass.
+
+3.1. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1.1. Analyzing design hierarchy..
+Top module:  \logic_result_router_formal
+Used module:     \logic_result_router
+Parameter \KEY_WIDTH = 32
+Parameter \DATA_WIDTH = 32
+
+3.1.2. Executing AST frontend in derive mode using pre-parsed AST for module `\logic_result_router'.
+Parameter \KEY_WIDTH = 32
+Parameter \DATA_WIDTH = 32
+Generating RTLIL representation for module `$paramod$bfe9036c413b36b20690b394377b1c1e40a1a758\logic_result_router'.
+
+3.1.3. Analyzing design hierarchy..
+Top module:  \logic_result_router_formal
+Used module:     $paramod$bfe9036c413b36b20690b394377b1c1e40a1a758\logic_result_router
+
+3.1.4. Analyzing design hierarchy..
+Top module:  \logic_result_router_formal
+Used module:     $paramod$bfe9036c413b36b20690b394377b1c1e40a1a758\logic_result_router
+Removing unused module `\logic_result_router'.
+Removed 1 unused modules.
+
+3.2. Executing PROC pass (convert processes to netlists).
+
+3.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+3.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 8 assignments to connections.
+
+3.2.4. Executing PROC_INIT pass (extract init attributes).
+
+3.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+3.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+3.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\logic_result_router_formal.$proc$verification/rtl_audit/logic_result_router_formal.sv:11$12'.
+Creating decoders for process `$paramod$bfe9036c413b36b20690b394377b1c1e40a1a758\logic_result_router.$proc$rtl/logic_result_router.sv:16$33'.
+
+3.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\logic_result_router_formal.\ok' from process `\logic_result_router_formal.$proc$verification/rtl_audit/logic_result_router_formal.sv:11$12'.
+No latch inferred for signal `$paramod$bfe9036c413b36b20690b394377b1c1e40a1a758\logic_result_router.\result_ready_o' from process `$paramod$bfe9036c413b36b20690b394377b1c1e40a1a758\logic_result_router.$proc$rtl/logic_result_router.sv:16$33'.
+No latch inferred for signal `$paramod$bfe9036c413b36b20690b394377b1c1e40a1a758\logic_result_router.\bank_valid_o' from process `$paramod$bfe9036c413b36b20690b394377b1c1e40a1a758\logic_result_router.$proc$rtl/logic_result_router.sv:16$33'.
+No latch inferred for signal `$paramod$bfe9036c413b36b20690b394377b1c1e40a1a758\logic_result_router.\bank_key_o' from process `$paramod$bfe9036c413b36b20690b394377b1c1e40a1a758\logic_result_router.$proc$rtl/logic_result_router.sv:16$33'.
+No latch inferred for signal `$paramod$bfe9036c413b36b20690b394377b1c1e40a1a758\logic_result_router.\bank_data_o' from process `$paramod$bfe9036c413b36b20690b394377b1c1e40a1a758\logic_result_router.$proc$rtl/logic_result_router.sv:16$33'.
+No latch inferred for signal `$paramod$bfe9036c413b36b20690b394377b1c1e40a1a758\logic_result_router.\host_valid_o' from process `$paramod$bfe9036c413b36b20690b394377b1c1e40a1a758\logic_result_router.$proc$rtl/logic_result_router.sv:16$33'.
+No latch inferred for signal `$paramod$bfe9036c413b36b20690b394377b1c1e40a1a758\logic_result_router.\host_key_o' from process `$paramod$bfe9036c413b36b20690b394377b1c1e40a1a758\logic_result_router.$proc$rtl/logic_result_router.sv:16$33'.
+No latch inferred for signal `$paramod$bfe9036c413b36b20690b394377b1c1e40a1a758\logic_result_router.\host_data_o' from process `$paramod$bfe9036c413b36b20690b394377b1c1e40a1a758\logic_result_router.$proc$rtl/logic_result_router.sv:16$33'.
+
+3.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+3.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `logic_result_router_formal.$proc$verification/rtl_audit/logic_result_router_formal.sv:11$12'.
+Removing empty process `$paramod$bfe9036c413b36b20690b394377b1c1e40a1a758\logic_result_router.$proc$rtl/logic_result_router.sv:16$33'.
+Cleaned up 0 empty switches.
+
+3.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module logic_result_router_formal.
+Optimizing module $paramod$bfe9036c413b36b20690b394377b1c1e40a1a758\logic_result_router.
+
+3.3. Executing FLATTEN pass (flatten design).
+Deleting now unused module $paramod$bfe9036c413b36b20690b394377b1c1e40a1a758\logic_result_router.
+<suppressed ~1 debug messages>
+
+3.4. Executing FUTURE pass.
+
+3.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module logic_result_router_formal.
+
+3.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \logic_result_router_formal..
+Removed 0 unused cells and 18 unused wires.
+<suppressed ~1 debug messages>
+
+3.7. Executing CHECK pass (checking for obvious problems).
+Checking module logic_result_router_formal...
+Found and reported 0 problems.
+
+3.8. Executing OPT pass (performing simple optimizations).
+
+3.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module logic_result_router_formal.
+<suppressed ~8 debug messages>
+
+3.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\logic_result_router_formal'.
+<suppressed ~9 debug messages>
+Removed a total of 3 cells.
+
+3.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \logic_result_router_formal..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+3.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \logic_result_router_formal.
+Performed a total of 0 changes.
+
+3.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\logic_result_router_formal'.
+<suppressed ~3 debug messages>
+Removed a total of 1 cells.
+
+3.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \logic_result_router_formal..
+Removed 2 unused cells and 24 unused wires.
+<suppressed ~15 debug messages>
+
+3.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module logic_result_router_formal.
+<suppressed ~6 debug messages>
+
+3.8.8. Rerunning OPT passes. (Maybe there is more to do..)
+
+3.8.9. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \logic_result_router_formal..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $flatten\dut.$ternary$rtl/logic_result_router.sv:19$37.
+    dead port 2/2 on $mux $flatten\dut.$ternary$rtl/logic_result_router.sv:19$37.
+Removed 2 multiplexer ports.
+
+3.8.10. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \logic_result_router_formal.
+Performed a total of 0 changes.
+
+3.8.11. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\logic_result_router_formal'.
+Removed a total of 0 cells.
+
+3.8.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \logic_result_router_formal..
+Removed 2 unused cells and 12 unused wires.
+<suppressed ~9 debug messages>
+
+3.8.13. Executing OPT_EXPR pass (perform const folding).
+Optimizing module logic_result_router_formal.
+
+3.8.14. Rerunning OPT passes. (Maybe there is more to do..)
+
+3.8.15. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \logic_result_router_formal..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+3.8.16. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \logic_result_router_formal.
+Performed a total of 0 changes.
+
+3.8.17. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\logic_result_router_formal'.
+Removed a total of 0 cells.
+
+3.8.18. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \logic_result_router_formal..
+
+3.8.19. Executing OPT_EXPR pass (perform const folding).
+Optimizing module logic_result_router_formal.
+
+3.8.20. Finished OPT passes. (There is nothing left to do.)
+
+3.9. Executing WREDUCE pass (reducing word size of cells).
+
+3.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \logic_result_router_formal..
+
+3.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+3.12. Executing OPT pass (performing simple optimizations).
+
+3.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module logic_result_router_formal.
+
+3.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\logic_result_router_formal'.
+Removed a total of 0 cells.
+
+3.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \logic_result_router_formal..
+
+3.12.4. Finished fast OPT passes.
+
+3.13. Printing statistics.
+
+=== logic_result_router_formal ===
+
+   Number of wires:                 11
+   Number of wire bits:             11
+   Number of public wires:           9
+   Number of public wire bits:       9
+   Number of ports:                  1
+   Number of port bits:              1
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  8
+     $anyconst                       2
+     $logic_and                      3
+     $logic_not                      2
+     $scopeinfo                      1
+
+3.14. Executing CHECK pass (checking for obvious problems).
+Checking module logic_result_router_formal...
+Found and reported 0 problems.
+
+4. Executing SAT pass (solving SAT problems in the circuit).
+
+Setting up SAT problem:
+Final constraint equation: { } = { }
+Imported 8 cells to SAT database.
+Import proof-constraint: \ok = 1'1
+Final proof equation: \ok = 1'1
+
+Solving problem with 29 variables and 69 clauses..
+SAT proof finished - no model found: SUCCESS!
+
+                  /$$$$$$      /$$$$$$$$     /$$$$$$$    
+                 /$$__  $$    | $$_____/    | $$__  $$   
+                | $$  \ $$    | $$          | $$  \ $$   
+                | $$  | $$    | $$$$$       | $$  | $$   
+                | $$  | $$    | $$__/       | $$  | $$   
+                | $$/$$ $$    | $$          | $$  | $$   
+                |  $$$$$$/ /$$| $$$$$$$$ /$$| $$$$$$$//$$
+                 \____ $$$|__/|________/|__/|_______/|__/
+                       \__/                              
+
+End of script. Logfile hash: 3ea51d2052, CPU: user 0.01s system 0.01s, MEM: 14.57 MB peak
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+Time spent: 25% 7x opt_expr (0 sec), 23% 6x opt_clean (0 sec), ...

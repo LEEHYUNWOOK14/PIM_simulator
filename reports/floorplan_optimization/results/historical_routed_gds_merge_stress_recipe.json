@@ -1,0 +1,501 @@
+{
+  "schema_version": "1.0",
+  "inputs": {
+    "rtl": {
+      "path": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2\\output\\output.gds",
+      "top_cell": "full_pim_system_top",
+      "expected_sha256": "c1bc8c4561d34112db9dfe2c647c4d006f011e166aa73f2127ef342026e75cf1"
+    },
+    "overlay": {
+      "path": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2\\output\\floorplan_optimization\\visualization\\thermal_first\\logic_die_floorplan.gds",
+      "top_cell": "STOB_LOGIC_DIE_FLOORPLAN_NOT_SIGNOFF",
+      "expected_sha256": "e39ad2d6f370f117c8f024cc86fefdb56c54911b6612c4bc6c8e980f240e1980"
+    },
+    "floorplan_manifest": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2\\output\\floorplan_optimization\\exploration\\candidates\\thermal_first.json",
+    "overlay_lyp": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2\\output\\floorplan_optimization\\visualization\\thermal_first\\logic_die_floorplan.lyp"
+  },
+  "output": {
+    "gds": "C:\\Users\\Admin\\AppData\\Local\\STOB_EDA\\gds-merge\\historical-routed-stress\\merged_final_physical.gds",
+    "lyp": "C:\\Users\\Admin\\AppData\\Local\\STOB_EDA\\gds-merge\\historical-routed-stress\\merged_final_physical.lyp",
+    "report": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2\\reports\\floorplan_optimization\\results\\historical_routed_gds_merge_stress_report.json",
+    "top_cell": "STOB_FINAL_PHYSICAL_MERGED_NOT_SIGNOFF",
+    "dbu_um": 0.001
+  },
+  "namespaces": {
+    "rtl_prefix": "RTL__",
+    "overlay_prefix": "OVERLAY__"
+  },
+  "layer_mapping": {
+    "unmapped_rtl_policy": "error",
+    "forbid_overlay_collisions": true,
+    "rules": [
+      {
+        "name": "source_64_5",
+        "from": {
+          "layer": 64,
+          "datatype": 5
+        },
+        "to": {
+          "layer": 64,
+          "datatype": 5
+        }
+      },
+      {
+        "name": "source_64_16",
+        "from": {
+          "layer": 64,
+          "datatype": 16
+        },
+        "to": {
+          "layer": 64,
+          "datatype": 16
+        }
+      },
+      {
+        "name": "source_64_20",
+        "from": {
+          "layer": 64,
+          "datatype": 20
+        },
+        "to": {
+          "layer": 64,
+          "datatype": 20
+        }
+      },
+      {
+        "name": "source_64_59",
+        "from": {
+          "layer": 64,
+          "datatype": 59
+        },
+        "to": {
+          "layer": 64,
+          "datatype": 59
+        }
+      },
+      {
+        "name": "source_65_20",
+        "from": {
+          "layer": 65,
+          "datatype": 20
+        },
+        "to": {
+          "layer": 65,
+          "datatype": 20
+        }
+      },
+      {
+        "name": "source_65_44",
+        "from": {
+          "layer": 65,
+          "datatype": 44
+        },
+        "to": {
+          "layer": 65,
+          "datatype": 44
+        }
+      },
+      {
+        "name": "source_66_15",
+        "from": {
+          "layer": 66,
+          "datatype": 15
+        },
+        "to": {
+          "layer": 66,
+          "datatype": 15
+        }
+      },
+      {
+        "name": "source_66_20",
+        "from": {
+          "layer": 66,
+          "datatype": 20
+        },
+        "to": {
+          "layer": 66,
+          "datatype": 20
+        }
+      },
+      {
+        "name": "source_66_44",
+        "from": {
+          "layer": 66,
+          "datatype": 44
+        },
+        "to": {
+          "layer": 66,
+          "datatype": 44
+        }
+      },
+      {
+        "name": "source_67_5",
+        "from": {
+          "layer": 67,
+          "datatype": 5
+        },
+        "to": {
+          "layer": 67,
+          "datatype": 5
+        }
+      },
+      {
+        "name": "source_67_16",
+        "from": {
+          "layer": 67,
+          "datatype": 16
+        },
+        "to": {
+          "layer": 67,
+          "datatype": 16
+        }
+      },
+      {
+        "name": "source_67_20",
+        "from": {
+          "layer": 67,
+          "datatype": 20
+        },
+        "to": {
+          "layer": 67,
+          "datatype": 20
+        }
+      },
+      {
+        "name": "source_67_44",
+        "from": {
+          "layer": 67,
+          "datatype": 44
+        },
+        "to": {
+          "layer": 67,
+          "datatype": 44
+        }
+      },
+      {
+        "name": "source_68_5",
+        "from": {
+          "layer": 68,
+          "datatype": 5
+        },
+        "to": {
+          "layer": 68,
+          "datatype": 5
+        }
+      },
+      {
+        "name": "source_68_16",
+        "from": {
+          "layer": 68,
+          "datatype": 16
+        },
+        "to": {
+          "layer": 68,
+          "datatype": 16
+        }
+      },
+      {
+        "name": "source_68_20",
+        "from": {
+          "layer": 68,
+          "datatype": 20
+        },
+        "to": {
+          "layer": 68,
+          "datatype": 20
+        }
+      },
+      {
+        "name": "source_68_44",
+        "from": {
+          "layer": 68,
+          "datatype": 44
+        },
+        "to": {
+          "layer": 68,
+          "datatype": 44
+        }
+      },
+      {
+        "name": "source_69_5",
+        "from": {
+          "layer": 69,
+          "datatype": 5
+        },
+        "to": {
+          "layer": 69,
+          "datatype": 5
+        }
+      },
+      {
+        "name": "source_69_16",
+        "from": {
+          "layer": 69,
+          "datatype": 16
+        },
+        "to": {
+          "layer": 69,
+          "datatype": 16
+        }
+      },
+      {
+        "name": "source_69_20",
+        "from": {
+          "layer": 69,
+          "datatype": 20
+        },
+        "to": {
+          "layer": 69,
+          "datatype": 20
+        }
+      },
+      {
+        "name": "source_69_44",
+        "from": {
+          "layer": 69,
+          "datatype": 44
+        },
+        "to": {
+          "layer": 69,
+          "datatype": 44
+        }
+      },
+      {
+        "name": "source_70_5",
+        "from": {
+          "layer": 70,
+          "datatype": 5
+        },
+        "to": {
+          "layer": 70,
+          "datatype": 5
+        }
+      },
+      {
+        "name": "source_70_16",
+        "from": {
+          "layer": 70,
+          "datatype": 16
+        },
+        "to": {
+          "layer": 70,
+          "datatype": 16
+        }
+      },
+      {
+        "name": "source_70_20",
+        "from": {
+          "layer": 70,
+          "datatype": 20
+        },
+        "to": {
+          "layer": 70,
+          "datatype": 20
+        }
+      },
+      {
+        "name": "source_70_44",
+        "from": {
+          "layer": 70,
+          "datatype": 44
+        },
+        "to": {
+          "layer": 70,
+          "datatype": 44
+        }
+      },
+      {
+        "name": "source_71_20",
+        "from": {
+          "layer": 71,
+          "datatype": 20
+        },
+        "to": {
+          "layer": 71,
+          "datatype": 20
+        }
+      },
+      {
+        "name": "source_71_44",
+        "from": {
+          "layer": 71,
+          "datatype": 44
+        },
+        "to": {
+          "layer": 71,
+          "datatype": 44
+        }
+      },
+      {
+        "name": "source_72_5",
+        "from": {
+          "layer": 72,
+          "datatype": 5
+        },
+        "to": {
+          "layer": 72,
+          "datatype": 5
+        }
+      },
+      {
+        "name": "source_72_16",
+        "from": {
+          "layer": 72,
+          "datatype": 16
+        },
+        "to": {
+          "layer": 72,
+          "datatype": 16
+        }
+      },
+      {
+        "name": "source_72_20",
+        "from": {
+          "layer": 72,
+          "datatype": 20
+        },
+        "to": {
+          "layer": 72,
+          "datatype": 20
+        }
+      },
+      {
+        "name": "source_78_44",
+        "from": {
+          "layer": 78,
+          "datatype": 44
+        },
+        "to": {
+          "layer": 78,
+          "datatype": 44
+        }
+      },
+      {
+        "name": "source_81_4",
+        "from": {
+          "layer": 81,
+          "datatype": 4
+        },
+        "to": {
+          "layer": 81,
+          "datatype": 4
+        }
+      },
+      {
+        "name": "source_83_44",
+        "from": {
+          "layer": 83,
+          "datatype": 44
+        },
+        "to": {
+          "layer": 83,
+          "datatype": 44
+        }
+      },
+      {
+        "name": "source_93_44",
+        "from": {
+          "layer": 93,
+          "datatype": 44
+        },
+        "to": {
+          "layer": 93,
+          "datatype": 44
+        }
+      },
+      {
+        "name": "source_94_20",
+        "from": {
+          "layer": 94,
+          "datatype": 20
+        },
+        "to": {
+          "layer": 94,
+          "datatype": 20
+        }
+      },
+      {
+        "name": "source_95_20",
+        "from": {
+          "layer": 95,
+          "datatype": 20
+        },
+        "to": {
+          "layer": 95,
+          "datatype": 20
+        }
+      },
+      {
+        "name": "source_122_16",
+        "from": {
+          "layer": 122,
+          "datatype": 16
+        },
+        "to": {
+          "layer": 122,
+          "datatype": 16
+        }
+      },
+      {
+        "name": "source_235_4",
+        "from": {
+          "layer": 235,
+          "datatype": 4
+        },
+        "to": {
+          "layer": 235,
+          "datatype": 4
+        }
+      },
+      {
+        "name": "source_236_0",
+        "from": {
+          "layer": 236,
+          "datatype": 0
+        },
+        "to": {
+          "layer": 236,
+          "datatype": 0
+        }
+      }
+    ]
+  },
+  "placement": {
+    "orientation": "R0",
+    "physical_scale": 1.0,
+    "allow_non_unit_scale": false,
+    "translation_mode": "from_anchors",
+    "anchor_tolerance_um": 0.001,
+    "anchors": [
+      {
+        "name": "historical_origin",
+        "source_um": {
+          "x_um": 0.0,
+          "y_um": 0.0
+        },
+        "target_um": {
+          "x_um": 3231.7675,
+          "y_um": 5231.7675
+        }
+      },
+      {
+        "name": "historical_center",
+        "source_um": {
+          "x_um": 768.2325,
+          "y_um": 768.2325
+        },
+        "target_um": {
+          "x_um": 4000.0,
+          "y_um": 6000.0
+        }
+      }
+    ]
+  },
+  "verification": {
+    "require_anchor_alignment": true,
+    "minimum_anchor_count": 2,
+    "require_rtl_shapes": true,
+    "require_overlay_shapes": true,
+    "enforce_rtl_within_manifest_die": true
+  }
+}

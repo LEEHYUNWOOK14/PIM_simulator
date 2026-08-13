@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>GR00T Normalization PCU 물리 구현 가능성 판정</title>
+  <style>
+    body{font-family:system-ui,"Noto Sans KR",sans-serif;max-width:1080px;margin:38px auto;padding:0 22px;line-height:1.62;color:#172033;background:#f5f7fa}
+    h1,h2{line-height:1.25}.card{background:#fff;border:1px solid #dce3eb;border-radius:12px;padding:20px;margin:16px 0}
+    .fail{border-left:7px solid #b42318}.ok{color:#08783e;font-weight:700}.bad{color:#b42318;font-weight:700}.warn{color:#a15c00;font-weight:700}
+    table{width:100%;border-collapse:collapse;background:#fff}th,td{padding:10px;border:1px solid #dce3eb;text-align:left;vertical-align:top}th{background:#eef2f6}
+    code{background:#eef2f6;padding:2px 5px;border-radius:4px}
+  </style>
+</head>
+<body>
+<h1>GR00T Normalization PCU + HBM Adapter<br>경량 물리 구현 가능성 판정</h1>
+<p>갱신일 2026-08-13 · Sky130 공개 표준셀/LEF proxy · 공정 sign-off PPA/STA 제외</p>
+
+<section class="card fail">
+  <h2>결론: 아직 물리 구현 가능성이 증명되지 않았다</h2>
+  <p><span class="bad">합성·면적·완화 타이밍·합법 배치는 통과했지만 global-route gate는 FAIL이다.</span>
+  분산 HBM 랜딩패드로 기존 perimeter-pin 병목을 99.84% 줄였으나 잔여 혼잡 2,620이 남았다.
+  16-bank 물리 island를 적용하면 합법 배치는 성공하지만, wide inter-bank bus가 island 경계를 가로지르며 잔여 혼잡이 1,182,646으로 악화됐다.</p>
+</section>
+
+<h2>현재까지 증명된 것</h2>
+<table><thead><tr><th>항목</th><th>증거</th><th>판정</th></tr></thead><tbody>
+<tr><td>Adapter 표준셀 매핑</td><td>58,201 cells, 14,639 FF, 0.6219 mm², Yosys check 0</td><td class="ok">PASS</td></tr>
+<tr><td>PCU+adapter 통합 매핑</td><td>3,322,275 cells, 26.8639 mm², unmapped primitive 0, mapped latch cell 0</td><td class="ok">PASS</td></tr>
+<tr><td>면적 budget</td><td>81.539 mm² die proxy &lt; usable logic-die proxy 91.8 mm²; post-repair cells 30.430 mm²</td><td class="ok">PASS</td></tr>
+<tr><td>Fanout/slew/cap repair</td><td>78,087 buffers, 10,805 resizes, library violation remaining 0</td><td class="ok">PASS (bounded)</td></tr>
+<tr><td>완화 클럭 timing</td><td>1000 ns에서 adapter slack +123.34 ns, integrated slack +972.576 ns</td><td class="ok">PASS</td></tr>
+<tr><td>Bank-aware placement</td><td>3,578,068 bank cells를 4×4 guide로 배치 후 guide 해제; 위반 16,160→0, 최대 이동 26.0 µm, HPWL +5%</td><td class="ok">PASS</td></tr>
+<tr><td>Global route</td><td>가장 좋은 V4도 remaining congestion 2,620, overflow edge 2,003</td><td class="bad">FAIL</td></tr>
+</tbody></table>
+
+<section class="card">
+  <h2>세 가지 물리 실험의 의미</h2>
+  <table><thead><tr><th>실험</th><th>물리 모델</th><th>결과</th><th>해석</th></tr></thead><tbody>
+  <tr><td>V2</td><td>Flat placement + perimeter HBM pins</td><td>잔여 혼잡 1,600,437</td><td>HBM 내부 접점을 package edge I/O처럼 둔 모델이 부적절</td></tr>
+  <tr><td>V4</td><td>Flat placement + 565개 분산 met5 landing pad</td><td>잔여 혼잡 2,620</td><td>perimeter artifact는 제거됐지만 flat 내부 배선 hotspot이 남음</td></tr>
+  <tr><td>V5</td><td>16개 2.0 mm bank guide + 분산 landing pad</td><td>잔여 혼잡 1,182,646</td><td>bank를 hard island처럼 분리하면 2048-bit급 global/replay/writeback 연결이 경계 병목을 만듦</td></tr>
+  </tbody></table>
+  <p>V5 라우팅은 실패 수치가 명확해진 뒤 대형 congestion report 직렬화 단계에서 종료했다. 따라서 route guide 완주를 PASS 증거로 사용하지 않으며, <b>1,182,646은 CuGR가 계산한 판정 수치</b>로만 기록한다.</p>
+</section>
+
+<section class="card">
+  <h2>현재 문제의 정확한 위치</h2>
+  <p>문제는 rsqrt/LN/RMSNorm 연산 셀의 합성 가능성이나 총 면적이 아니다. 현재 RTL은 bank별 reducer/apply와 중앙 global reducer, adapter 사이에 폭이 큰 병렬 버스를 그대로 유지한다. Flat placement에서는 locality가 약하고, bank island에서는 이 버스가 island 경계를 대량 횡단한다. 즉 <b>물리적으로 필요한 다음 최적화는 inter-bank communication fabric의 계층화</b>다.</p>
+</section>
+
+<section class="card">
+  <h2>RTL 최종 확정 전 필수 작업</h2>
+  <ol>
+    <li>16 bank를 4개 quad로 묶고 quad-local reduction/replay/writeback endpoint를 둔다.</li>
+    <li>2048-bit 동시 장거리 버스를 registered slice 또는 narrow packet/flit link로 바꾼다.</li>
+    <li>중앙 global reducer는 16개 bank 원시 데이터가 아니라 4개 quad partial만 받도록 한다.</li>
+    <li>변경 후 기존 GR00T trace의 정확도와 cycle regression을 다시 통과시킨다.</li>
+    <li>재합성·fanout repair·합법 배치·global route를 반복해 serious congestion 0을 확인한다.</li>
+    <li>마지막으로 relaxed-clock RC-aware STA와 구조/제약 감사를 재수행한 뒤 RTL을 동결한다.</li>
+  </ol>
+</section>
+
+<p><b>범위 주의:</b> 이번 FAIL은 회로 개념 전체가 불가능하다는 뜻이 아니다. 현재 wide-bus 물리 인터커넥트 구조로는 배선 가능성이 아직 증명되지 않았다는 뜻이다. CTS, detailed-route DRC, IR/EM 및 공정 sign-off PPA/STA는 이번 범위 밖이다.</p>
+</body>
+</html>

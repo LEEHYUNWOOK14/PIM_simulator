@@ -1,0 +1,29 @@
+{
+  "status": "PROVISIONAL_ONLY",
+  "reason": [
+    "activation is synthetic",
+    "no full GR00T E2E profiler",
+    "no pretrained BF16 activation/transaction trace",
+    "100MHz Sky130 timing fails measured 2/4-lane variants"
+  ],
+  "actual_evidence": [
+    "7 profile manifest rows",
+    "333 synthetic replay calls",
+    "2 simulator tests PASS",
+    "normalization_synthesis_metrics.csv",
+    "normalization_sky130_metrics.csv"
+  ],
+  "missing_evidence": [
+    "raw GR00T command/address/timestamp trace",
+    "seeded full inference command",
+    "actual bank/channel distribution",
+    "real bandwidth and queue occupancy",
+    "activity-annotated power/energy"
+  ],
+  "reproduction": [
+    "python tools/analyze_gr00t_workload_architecture.py",
+    "bash verification/groot_normalization/run_foundation_regression.sh --tests-only",
+    "bash verification/groot_normalization/run_normalization_structural_audit.sh",
+    "bash verification/groot_normalization/run_normalization_sky130_mapping.sh"
+  ]
+}

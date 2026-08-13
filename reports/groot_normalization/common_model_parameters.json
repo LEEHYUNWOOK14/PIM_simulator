@@ -36,6 +36,7 @@
     "banks": 16,
     "bank_pcus": 8,
     "logic_pcus": 16,
+    "logic_partial_input_ports": 1,
     "offload_one_way_latency_ns": 2500,
     "offload_bandwidth_gbps": 64,
     "ondie_one_way_latency_ns": 50,
@@ -62,6 +63,105 @@
       "scalar_finalize_rsqrt_cycles_per_row": 5,
       "status": "RTL_MEASURED_GENERIC_SYNTHESIS",
       "source": "17_phase5_logic_engine_replication_report.md"
+    },
+    "logic_normalization_dispatcher": {
+      "engines": [4, 8, 16],
+      "generic_cells_with_dispatcher": [111053, 222644, 445337],
+      "shared_partial_input_ports": 1,
+      "status": "RTL_MEASURED_GENERIC_SYNTHESIS",
+      "source": "18_phase5_logic_dispatcher_report.md"
+    },
+    "logic_parallel_partial_tree": {
+      "banks": 16,
+      "scalar_engines": [8, 16],
+      "generic_cells": [264552, 431390],
+      "generic_logic_path_length": [340, 340],
+      "row_initiation_interval_cycles": 1,
+      "selected_scalar_engines": 8,
+      "status": "RTL_MEASURED_GENERIC_SYNTHESIS",
+      "source": "19_phase5_parallel_partial_tree_report.md"
+    },
+    "logic_bank_barrier_parallel_tree": {
+      "banks": 16,
+      "scalar_engines": 8,
+      "generic_cells": 265421,
+      "barrier_overhead_generic_cells": 869,
+      "status": "RTL_MEASURED_GENERIC_SYNTHESIS",
+      "source": "20_phase5_bank_barrier_and_skew_report.md"
+    },
+    "hierarchical_streaming_raw_to_scalar_top": {
+      "banks": 16,
+      "lanes_per_bank": 4,
+      "scalar_engines": 8,
+      "generic_cells": 953623,
+      "status": "RTL_MEASURED_GENERIC_SYNTHESIS",
+      "source": "21_phase5_raw_to_scalar_streaming_top_report.md"
+    },
+    "normalization_scalar_broadcast": {
+      "banks": [4, 8, 16],
+      "generic_cells": [75, 99, 147],
+      "selected_banks": 16,
+      "selected_generic_cells": 147,
+      "delivery_semantics": "EACH_TARGET_BANK_EXACTLY_ONCE_WITH_INDEPENDENT_BACKPRESSURE",
+      "status": "RTL_MEASURED_GENERIC_SYNTHESIS",
+      "source": "22_phase5_scalar_broadcast_report.md"
+    },
+    "normalization_row_context_table": {
+      "banks": 16,
+      "entries": 16,
+      "generic_cells": 4828,
+      "association": "TAG_TO_TARGET_BANK_MASK",
+      "status": "RTL_MEASURED_GENERIC_SYNTHESIS",
+      "source": "23_phase5_row_context_table_report.md"
+    },
+    "hierarchical_raw_to_bank_scalar_return_top": {
+      "banks": 16,
+      "lanes_per_bank": 4,
+      "scalar_engines": 8,
+      "context_entries": 16,
+      "generic_cells": 958507,
+      "wire_bits": 1032771,
+      "generic_cell_overhead_vs_raw_to_scalar": 4884,
+      "status": "RTL_MEASURED_GENERIC_SYNTHESIS",
+      "source": "24_phase5_raw_to_bank_scalar_return_report.md"
+    },
+    "bank_normalization_microprogram_adapter": {
+      "data_width": 256,
+      "generic_cells_per_bank": 171,
+      "rmsnorm_commands_per_vector": 2,
+      "layernorm_commands_per_vector": 4,
+      "status": "RTL_MEASURED_WITH_BANK_PIM_CORE_GENERIC_SYNTHESIS_ADAPTER_ONLY",
+      "source": "25_phase5_bank_microprogram_adapter_report.md"
+    },
+    "hierarchical_raw_to_bank_command_issue_top": {
+      "banks": 16,
+      "lanes_per_bank_reducer": 4,
+      "bank_pcu_data_width": 256,
+      "scalar_engines": 8,
+      "generic_cells": 961299,
+      "wire_bits": 1048405,
+      "generic_cell_overhead_vs_scalar_return": 2792,
+      "status": "RTL_MEASURED_GENERIC_SYNTHESIS",
+      "source": "26_phase5_raw_to_bank_command_issue_report.md"
+    },
+    "hierarchical_raw_to_affine_bank_core_top": {
+      "banks_synthesized": [4, 16],
+      "generic_cells": [1144779, 4088425],
+      "wire_bits": [1224019, 4363917],
+      "bank_pcu_data_width": 256,
+      "functional_test_banks": 4,
+      "functional_modes": ["RMSNORM", "LAYERNORM"],
+      "generic_cell_increment_for_16_bank_pcu_array": 3127126,
+      "status": "RTL_MEASURED_FUNCTIONAL_AND_GENERIC_SYNTHESIS",
+      "source": "27_phase5_raw_to_affine_bank_core_e2e_report.md"
+    },
+    "normalization_bank_result_completion_tracker": {
+      "banks": 16,
+      "entries": 16,
+      "generic_cells": 15283,
+      "completion_basis": "FINAL_BANK_RESULT_HANDSHAKE_MASK",
+      "status": "RTL_MEASURED_GENERIC_SYNTHESIS",
+      "source": "28_phase5_bank_result_completion_tracker_report.md"
     },
     "bank_local_scalar_reducer_generic_cells_per_bank": {"value": 15307, "status": "RTL_MEASURED_GENERIC_SYNTHESIS", "source": "09_phase5_bank_local_reduce_apply_report.md"},
     "bank_local_scalar_reducer_elements_per_cycle_per_bank": {"value": 1, "status": "RTL_MEASURED_FROM_INTERFACE", "source": "rtl/bank_normalization_local_reducer.sv"},
@@ -102,11 +202,27 @@
     "status": "ASSUMED_ARRIVAL_AND_RESOURCE_CAPACITY_WITH_RTL_STAGE_LATENCIES"
   },
   "local_gpu_environment": {
-    "nvidia_smi_available": false,
-    "pytorch_version": "2.8.0+cpu",
-    "torch_cuda_available": false,
-    "status": "MEASURED_2026_08_11",
-    "gpu_baseline_allowed": false
+    "nvidia_smi_available_in_wsl": true,
+    "gpu": "NVIDIA GeForce RTX 4060",
+    "pytorch_version": "2.9.0+cu128",
+    "torch_cuda_available": true,
+    "bf16_supported": true,
+    "status": "MEASURED_2026_08_11_WSL",
+    "gpu_baseline_allowed": true,
+    "source": "results/actual_groot/gpu_benchmark/gpu_layernorm_latency.json"
+  },
+  "actual_groot_action_head_validation": {
+    "source_classification": "PRETRAINED_ACTION_HEAD_SYNTHETIC_BOUNDARY_INPUT",
+    "normalization_invocations": 269,
+    "normalization_rows": 13180,
+    "bf16_input_bytes": 43069440,
+    "gpu_projected_serial_latency_us": 3121.2077312469482,
+    "hierarchical_reference_clock_mhz": 40,
+    "hierarchical_modeled_latency_us": 21224.555,
+    "hierarchical_modeled_break_even_clock_mhz": 275.0223534734994,
+    "accuracy_gate": "FAIL_1_OF_6_PROFILES_PASS",
+    "architecture_decision": "NO-GO",
+    "source": "results/actual_groot/architecture_comparison/architecture_comparison.json"
   },
   "unknown_until_measured": {
     "gpu_normalization_latency_ns": null,

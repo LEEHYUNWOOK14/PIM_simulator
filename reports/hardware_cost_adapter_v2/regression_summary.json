@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "evidence_contract_version": 2,
+  "baseline": "synthetic_low_area",
+  "revision_count": 3,
+  "final_architecture_parameters_selected": false,
+  "outputs": [
+    "paper_revision_table.csv",
+    "paper_category_table.csv",
+    "paper_delta_table.csv",
+    "paper_regression_report.md",
+    "paper_revision_overview.png",
+    "paper_category_power.png",
+    "paper_timing_throughput.png"
+  ]
+}

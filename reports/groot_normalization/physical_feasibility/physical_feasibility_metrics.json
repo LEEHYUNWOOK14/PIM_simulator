@@ -1,0 +1,86 @@
+{
+  "date": "2026-08-13",
+  "scope": "lightweight physical feasibility; not process sign-off PPA/STA",
+  "verdict": "FAIL_CURRENT_FLAT_PHYSICAL_ARCHITECTURE_NOT_PROVEN",
+  "adapter_mapping": {
+    "cells": 58201,
+    "flip_flops": 14639,
+    "cell_area_mm2": 0.621866,
+    "yosys_check_problems": 0,
+    "repaired_max_raw_data_fanout": 57,
+    "repair_buffers": 2595
+  },
+  "integrated_mapping": {
+    "cells": 3322275,
+    "mapped_cell_area_mm2": 26.863932,
+    "yosys_check_problems": 0,
+    "mapped_latch_cells": 0,
+    "unmapped_internal_primitives": 0
+  },
+  "v2_floorplan_and_placement": {
+    "die_width_mm": 9.0299,
+    "die_height_mm": 9.0299,
+    "die_area_mm2": 81.5391,
+    "project_usable_logic_die_proxy_mm2": 91.8,
+    "pre_repair_cell_area_mm2": 29.527022,
+    "post_repair_cell_area_mm2": 30.430141,
+    "repair_area_overhead_mm2": 0.903119,
+    "post_repair_utilization_percent": 37.5,
+    "repair_buffers": 78087,
+    "resized_cells": 10805,
+    "library_fanout_slew_cap_remaining": 0,
+    "initial_legalization_violations": 3897,
+    "final_legalization_violations": 0,
+    "max_displacement_um": 25.6,
+    "hpwl_increase_percent": 6,
+    "io_aware_global_placement_overflow": 0.0998
+  },
+  "timing_and_constraints": {
+    "relaxed_clock_period_ns": 1000,
+    "adapter_worst_slack_ns": 123.34,
+    "adapter_worst_path_delay_ns": 874.66,
+    "integrated_worst_slack_ns": 972.576,
+    "integrated_worst_path_delay_ns": 26.854,
+    "check_setup_reported_constraint_errors": 0
+  },
+  "global_route": {
+    "router": "CuGR",
+    "layers": "met2-met5",
+    "iterations": 1,
+    "route_guide_generated": true,
+    "congestion_report_generated": true,
+    "remaining_congestion": 1600437,
+    "report_entries": 20000,
+    "report_overflow_edges": 9504,
+    "report_total_overflow_tracks": 10281,
+    "report_max_capacity": 11,
+    "report_max_usage": 15,
+    "report_boundary_entries": 19520,
+    "route_gate_pass": false
+  },
+  "v4_distributed_landing_pad_route": {
+    "pin_model": "565 distributed internal met5 20um landing pads",
+    "remaining_congestion": 2620,
+    "report_entries": 5998,
+    "report_overflow_edges": 2003,
+    "report_total_overflow_tracks": 2253,
+    "route_gate_pass": false,
+    "interpretation": "perimeter-pin artifact removed, but residual flat-placement congestion remains"
+  },
+  "v5_bank_aware_placement": {
+    "placement_model": "16 soft 2.0mm bank guides in a 4x4 grid, released before legalization",
+    "grouped_bank_cells": 3578068,
+    "retained_tapcells": 1080364,
+    "initial_legalization_violations": 16160,
+    "final_legalization_violations": 0,
+    "max_displacement_um": 26.0,
+    "hpwl_increase_percent": 5,
+    "cell_area_mm2": 30.430141,
+    "utilization_percent": 37.5,
+    "remaining_route_congestion": 1182646,
+    "route_run_terminated_after_decisive_failure": true,
+    "route_gate_pass": false,
+    "interpretation": "hard bank islands improve locality but create severe crossings for wide global reducer and adapter buses"
+  },
+  "next_required_action": "Replace wide cross-die inter-bank buses with a hierarchical registered or packetized reduction/replay/writeback fabric, preserve the proven distributed HBM landing-pad model, then repeat functional/cycle regression, mapping, legal placement, and global route."
+}

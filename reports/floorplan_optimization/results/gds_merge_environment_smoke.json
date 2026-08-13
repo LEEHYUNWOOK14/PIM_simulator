@@ -1,0 +1,47 @@
+{
+  "status": "PASS",
+  "generated_at": "2026-08-12T01:01:11.385617+00:00",
+  "host": "Windows-10-10.0.26100-SP0",
+  "python": "3.11.9",
+  "versions": {
+    "klayout": "0.30.10",
+    "gdstk": "0.9.61",
+    "numpy": "2.3.2",
+    "shapely": "2.1.1",
+    "jsonschema": "4.25.0",
+    "PyYAML": "6.0.2",
+    "Pillow": "11.3.0"
+  },
+  "smoke": {
+    "operation": "separate GDS read -> 90-degree rotation + translation -> hierarchy-preserving merge",
+    "unit_um": 1.0,
+    "precision_um": 0.001,
+    "merged_top": "GDS_MERGE_TRANSFORM_SMOKE_TOP",
+    "bbox_dbu": [
+      950000,
+      2000000,
+      1030000,
+      2100000
+    ],
+    "metal_shapes_recursive": 1,
+    "tsv_shapes_recursive": 1,
+    "geometry_clearance_um": 20.0
+  },
+  "artifacts": [
+    {
+      "path": "C:\\Users\\Admin\\AppData\\Local\\STOB_EDA\\gds-merge\\smoke\\rtl_fixture.gds",
+      "bytes": 188,
+      "sha256": "94e901d06746a3bc2bf91acb1dfb500a08cdf32e1784cdd7548b68431961a572"
+    },
+    {
+      "path": "C:\\Users\\Admin\\AppData\\Local\\STOB_EDA\\gds-merge\\smoke\\tsv_overlay_fixture.gds",
+      "bytes": 566,
+      "sha256": "bf5cc76357fe48a3abd7945a4afcc19e0eb8132c7a1e4daf09a9dcd2cca31553"
+    },
+    {
+      "path": "C:\\Users\\Admin\\AppData\\Local\\STOB_EDA\\gds-merge\\smoke\\merged_transform_smoke.gds",
+      "bytes": 854,
+      "sha256": "6241c422a21d13f23a97ddc89a4d158e4d1b5f9f3fcf53b597205f970a6c1e12"
+    }
+  ]
+}

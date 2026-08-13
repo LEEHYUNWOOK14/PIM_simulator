@@ -1,0 +1,17 @@
+requirement_id,requirement,status,evidence_class,primary_artifact,verification,limitations
+R01,"기존 파이프라인 재사용 및 추가 기능 문서화",PASS,provenance-record,reports/floorplan_optimization/08_final_audit.md,"재사용/추가 파일 구분표",없음
+R02,"canonical manifest schema 및 geometry round-trip",PASS,modeled,design/floorplan/logic_die_floorplan.json,"validator PASS 및 KLayout bbox 0..8000 x 0..12000 um",제조 좌표 아님
+R03,"block TSV bump keep-out reserved region 공통 좌표 추적",PASS,modeled/illustrative,output/floorplan_optimization/visualization/thermal_first/visualization_manifest.json,"8 blocks; 48 TSV bundles/320 shapes; 48 bump bundles/320 shapes; 4 reserved; 8 corridors",bit-level pin map 없음
+R04,"invalid overlap boundary unit connectivity provenance 거부",PASS,verified-synthetic,verification/floorplan_optimization/test_floorplan_manifest.py,"10 manifest tests PASS",synthetic invalid fixtures
+R05,"baseline과 최소 3개 목적별 후보",PASS,modeled,output/floorplan_optimization/exploration/selected_candidates.csv,"manual wirelength thermal balanced cost 후보 생성",balanced와 cost_first 동일 candidate ID
+R06,"seed 기반 후보 재현",PASS,modeled,output/floorplan_optimization/exploration/optimization_summary.json,"seed 235; 400 attempts; reproducibility tests PASS",heuristic search
+R07,"Pareto frontier와 weight sensitivity",PASS,modeled,output/floorplan_optimization/exploration/pareto_frontier.csv,"45 Pareto candidates; 9 weight scenarios",proxy metric 기준
+R08,"OpenROAD 결과 또는 구체적 실행 불가 근거",PASS_WITH_LIMITATIONS,global-routed-proxy/placed, reports/floorplan_optimization/04_openroad_validation.md,"5 macro proxies global-route PASS; current RTL through global route PASS; detailed route failure preserved",candidate STA/IR 없음; current timing 미수렴; detailed route 실패
+R09,"후보별 전력 보존 및 열해석 검증",PASS,modeled/estimated-power,output/floorplan_optimization/thermal_results.csv,"모든 후보 4.0 W; conservation error <=1e-12 W; reference validation PASS",절대 온도 안전성 결론 불가
+R10,"실제 가격과 비용 proxy 구분",PASS,estimated-proxy,output/floorplan_optimization/candidate_comparison.csv,"normalized structural cost와 fixed HBM revision 분리",제조사 견적 아님
+R11,"KLayout TSV 연결 keep-out block thermal overlay",PASS,illustrative/from-modeled-data,output/floorplan_optimization/visualization/thermal_first/logic_die_floorplan.gds,"계층/shape count exact check PASS; thermal bins 512",GDS DRC/LVS signoff 아님
+R12,"동일 축척 범례 단위 provenance 논문 그림",PASS,illustrative/from-modeled-data,output/floorplan_optimization/visualization/paper_figures/figure_manifest.json,"필수 6개 figure와 300 dpi PNG/SVG 생성",caption의 claim boundary 준수 필요
+R13,"architecture RTL-to-3D thermal hardware-cost 회귀",PASS,verified-model,reports/floorplan_optimization/results/orchestration_results.json,"기존 통합 회귀와 확장된 26 floorplan tests PASS",RTL-to-3D fixture는 synthetic snapshot
+R14,"진행 중 RTL 및 사용자 변경 보존",PASS,provenance-record,output/floorplan_optimization/generation_manifest.json,"dirty status snapshot 보존; RTL/protocol 미수정",동시 채팅 변경으로 hash는 실행 시점 기준
+R15,"모든 요구사항 실제 artifact 연결",PASS,provenance-record,reports/floorplan_optimization/requirement_to_evidence.csv,"R01-R16 파일 및 검증 연결",generation manifest 생성 시 hash 고정
+R16,"최종 RTL 미확정 시 provisional recommendation",PASS,modeled/provisional,reports/floorplan_optimization/06_candidate_tradeoff.md,"thermal_first/wirelength_first/manual shortlist만 제시",최종 GR00T/RTL 확정 후 재실행 필수

@@ -1,0 +1,229 @@
+{
+  "method": "software emulation of the exact 16-bank BF16 reduction order, BF16 scalar datapath, LUT256 RSQRT, and four-operation BF16 affine apply",
+  "all_logged_scalars_match_emulation": true,
+  "all_actual_outputs_match_emulated_apply": true,
+  "profiles": {
+    "action_vlln": {
+      "canonical": {
+        "mean": 0.0009205174137605354,
+        "variance": 1.028963555655446,
+        "inv_std": 0.985820609336188
+      },
+      "rtl_staged": {
+        "sum": 2.53125,
+        "sumsq": 2096.0,
+        "mean": 0.0012359619140625,
+        "mean_square": 1.0234375,
+        "mean_squared": 1.5273690223693848e-06,
+        "variance": 1.0234375,
+        "rsqrt_argument": 1.0234375,
+        "inv_std": 0.984375
+      },
+      "metrics": {
+        "actual_rtl_vs_pytorch": {
+          "bit_mismatches": 983,
+          "max_abs": 0.03125,
+          "mean_abs": 0.0019250307232141495,
+          "rmse": 0.003733262424904892
+        },
+        "emulated_logged_scalars_vs_pytorch": {
+          "bit_mismatches": 983,
+          "max_abs": 0.03125,
+          "mean_abs": 0.0019250307232141495,
+          "rmse": 0.003733262424904892
+        },
+        "canonical_scalars_rtl_apply_vs_pytorch": {
+          "bit_mismatches": 881,
+          "max_abs": 0.03125,
+          "mean_abs": 0.0018681865185499191,
+          "rmse": 0.0037147459003414236
+        }
+      }
+    },
+    "action_vl_self_attention_norm1": {
+      "canonical": {
+        "mean": -0.00016339682042598724,
+        "variance": 1.0684908420564783,
+        "inv_std": 0.9674144401665429
+      },
+      "rtl_staged": {
+        "sum": -0.25,
+        "sumsq": 2144.0,
+        "mean": -0.0001220703125,
+        "mean_square": 1.046875,
+        "mean_squared": 1.4901161193847656e-08,
+        "variance": 1.046875,
+        "rsqrt_argument": 1.046875,
+        "inv_std": 0.9765625
+      },
+      "metrics": {
+        "actual_rtl_vs_pytorch": {
+          "bit_mismatches": 1986,
+          "max_abs": 0.046875,
+          "mean_abs": 0.007105150260031223,
+          "rmse": 0.009517778541535196
+        },
+        "emulated_logged_scalars_vs_pytorch": {
+          "bit_mismatches": 1986,
+          "max_abs": 0.046875,
+          "mean_abs": 0.007105150260031223,
+          "rmse": 0.009517778541535196
+        },
+        "canonical_scalars_rtl_apply_vs_pytorch": {
+          "bit_mismatches": 822,
+          "max_abs": 0.015625,
+          "mean_abs": 0.0016373908147215843,
+          "rmse": 0.0033570717634582377
+        }
+      }
+    },
+    "action_vl_self_attention_norm3": {
+      "canonical": {
+        "mean": -0.0032118558883666992,
+        "variance": 1.0984728514540478,
+        "inv_std": 0.9541207903530706
+      },
+      "rtl_staged": {
+        "sum": -5.09375,
+        "sumsq": 2224.0,
+        "mean": -0.0024871826171875,
+        "mean_square": 1.0859375,
+        "mean_squared": 6.198883056640625e-06,
+        "variance": 1.0859375,
+        "rsqrt_argument": 1.0859375,
+        "inv_std": 0.95703125
+      },
+      "metrics": {
+        "actual_rtl_vs_pytorch": {
+          "bit_mismatches": 1228,
+          "max_abs": 0.03125,
+          "mean_abs": 0.0028126202523708344,
+          "rmse": 0.004901109362676991
+        },
+        "emulated_logged_scalars_vs_pytorch": {
+          "bit_mismatches": 1228,
+          "max_abs": 0.03125,
+          "mean_abs": 0.0028126202523708344,
+          "rmse": 0.004901109362676991
+        },
+        "canonical_scalars_rtl_apply_vs_pytorch": {
+          "bit_mismatches": 962,
+          "max_abs": 0.015625,
+          "mean_abs": 0.00223536416888237,
+          "rmse": 0.0042133030340167615
+        }
+      }
+    },
+    "action_dit_adaln_norm1": {
+      "canonical": {
+        "mean": -0.01078618069489797,
+        "variance": 1.0012621412029563,
+        "inv_std": 0.9993645356345894
+      },
+      "rtl_staged": {
+        "sum": -17.25,
+        "sumsq": 1520.0,
+        "mean": -0.01123046875,
+        "mean_square": 0.9921875,
+        "mean_squared": 0.000125885009765625,
+        "variance": 0.9921875,
+        "rsqrt_argument": 0.9921875,
+        "inv_std": 1.0
+      },
+      "metrics": {
+        "actual_rtl_vs_pytorch": {
+          "bit_mismatches": 470,
+          "max_abs": 0.0078125,
+          "mean_abs": 0.0006329926351706187,
+          "rmse": 0.0017203177239536573
+        },
+        "emulated_logged_scalars_vs_pytorch": {
+          "bit_mismatches": 470,
+          "max_abs": 0.0078125,
+          "mean_abs": 0.0006329926351706187,
+          "rmse": 0.0017203177239536573
+        },
+        "canonical_scalars_rtl_apply_vs_pytorch": {
+          "bit_mismatches": 250,
+          "max_abs": 0.0078125,
+          "mean_abs": 0.0005321415762106577,
+          "rmse": 0.0016980687966011514
+        }
+      }
+    },
+    "action_dit_norm3": {
+      "canonical": {
+        "mean": -0.011022041241327921,
+        "variance": 1.0267453837858012,
+        "inv_std": 0.9868849036275374
+      },
+      "rtl_staged": {
+        "sum": -16.75,
+        "sumsq": 1560.0,
+        "mean": -0.01092529296875,
+        "mean_square": 1.015625,
+        "mean_squared": 0.00011920928955078125,
+        "variance": 1.015625,
+        "rsqrt_argument": 1.015625,
+        "inv_std": 0.9921875
+      },
+      "metrics": {
+        "actual_rtl_vs_pytorch": {
+          "bit_mismatches": 1340,
+          "max_abs": 0.03125,
+          "mean_abs": 0.004452804724375407,
+          "rmse": 0.006392255637189542
+        },
+        "emulated_logged_scalars_vs_pytorch": {
+          "bit_mismatches": 1340,
+          "max_abs": 0.03125,
+          "mean_abs": 0.004452804724375407,
+          "rmse": 0.006392255637189542
+        },
+        "canonical_scalars_rtl_apply_vs_pytorch": {
+          "bit_mismatches": 451,
+          "max_abs": 0.015625,
+          "mean_abs": 0.0013263622919718425,
+          "rmse": 0.0030876037286984514
+        }
+      }
+    },
+    "action_dit_norm_out": {
+      "canonical": {
+        "mean": 1.744571367899577,
+        "variance": 809.4348850453848,
+        "inv_std": 0.035148681703222856
+      },
+      "rtl_staged": {
+        "sum": 2656.0,
+        "sumsq": 1228800.0,
+        "mean": 1.734375,
+        "mean_square": 800.0,
+        "mean_squared": 3.015625,
+        "variance": 796.0,
+        "rsqrt_argument": 796.0,
+        "inv_std": 0.035400390625
+      },
+      "metrics": {
+        "actual_rtl_vs_pytorch": {
+          "bit_mismatches": 1289,
+          "max_abs": 0.0625,
+          "mean_abs": 0.0019204045335451763,
+          "rmse": 0.0067768505645552
+        },
+        "emulated_logged_scalars_vs_pytorch": {
+          "bit_mismatches": 1289,
+          "max_abs": 0.0625,
+          "mean_abs": 0.0019204045335451763,
+          "rmse": 0.0067768505645552
+        },
+        "canonical_scalars_rtl_apply_vs_pytorch": {
+          "bit_mismatches": 479,
+          "max_abs": 0.0625,
+          "mean_abs": 0.00031011303265889484,
+          "rmse": 0.002267011347458979
+        }
+      }
+    }
+  }
+}

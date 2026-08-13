@@ -1,0 +1,44 @@
+from gds3xtrude.include import layer
+
+# HBM2 PIM architectural visualization - not signoff layout
+
+package_substrate = layer(10, 0)
+silicon_interposer = layer(11, 0)
+logic_base_die = layer(20, 0)
+logic_die_pim = layer(30, 0)
+channel_interface = layer(31, 0)
+bank_side_pim = layer(32, 0)
+micro_bump = layer(40, 0)
+tsv = layer(50, 0)
+peripheral_logic = layer(60, 0)
+bank_array = layer(61, 0)
+dram_die_0 = layer(100, 0)
+dram_die_1 = layer(101, 0)
+dram_die_2 = layer(102, 0)
+dram_die_3 = layer(103, 0)
+dram_die_4 = layer(104, 0)
+dram_die_5 = layer(105, 0)
+dram_die_6 = layer(106, 0)
+dram_die_7 = layer(107, 0)
+
+layerstack = [
+    (180, package_substrate),
+    (100, silicon_interposer),
+    (100, [logic_base_die, logic_die_pim, channel_interface, tsv]),
+    (12, [micro_bump, tsv]),
+    (50, [dram_die_0, bank_array, peripheral_logic, bank_side_pim, tsv]),
+    (12, [micro_bump, tsv]),
+    (50, [dram_die_1, bank_array, peripheral_logic, bank_side_pim, tsv]),
+    (12, [micro_bump, tsv]),
+    (50, [dram_die_2, bank_array, peripheral_logic, bank_side_pim, tsv]),
+    (12, [micro_bump, tsv]),
+    (50, [dram_die_3, bank_array, peripheral_logic, bank_side_pim, tsv]),
+    (12, [micro_bump, tsv]),
+    (50, [dram_die_4, bank_array, peripheral_logic, bank_side_pim, tsv]),
+    (12, [micro_bump, tsv]),
+    (50, [dram_die_5, bank_array, peripheral_logic, bank_side_pim, tsv]),
+    (12, [micro_bump, tsv]),
+    (50, [dram_die_6, bank_array, peripheral_logic, bank_side_pim, tsv]),
+    (12, [micro_bump, tsv]),
+    (50, [dram_die_7, bank_array, peripheral_logic, bank_side_pim, tsv]),
+]

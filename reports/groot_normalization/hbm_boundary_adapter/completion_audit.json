@@ -1,0 +1,124 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "requirement": "required artifacts",
+      "status": "PASS",
+      "evidence": "all present"
+    },
+    {
+      "requirement": "timing-and-credit RTL integration",
+      "status": "PASS",
+      "evidence": {
+        "(0, 128)": {
+          "wall": 523,
+          "adapter": 521,
+          "act": 16,
+          "read": 48,
+          "write": 16,
+          "pre": 16,
+          "wait": 166,
+          "peak": 1,
+          "final": 0,
+          "timing": 0
+        },
+        "(0, 2048)": {
+          "wall": 3509,
+          "adapter": 3507,
+          "act": 16,
+          "read": 512,
+          "write": 128,
+          "pre": 16,
+          "wait": 1056,
+          "peak": 1,
+          "final": 0,
+          "timing": 0
+        },
+        "(1, 128)": {
+          "wall": 511,
+          "adapter": 509,
+          "act": 16,
+          "read": 48,
+          "write": 16,
+          "pre": 16,
+          "wait": 166,
+          "peak": 1,
+          "final": 0,
+          "timing": 0
+        },
+        "(1, 2048)": {
+          "wall": 3497,
+          "adapter": 3495,
+          "act": 16,
+          "read": 512,
+          "write": 128,
+          "pre": 16,
+          "wait": 1056,
+          "peak": 1,
+          "final": 0,
+          "timing": 0
+        }
+      }
+    },
+    {
+      "requirement": "abstract PCU cycle baseline",
+      "status": "PASS",
+      "evidence": {
+        "(0, 128)": 130,
+        "(0, 2048)": 167,
+        "(1, 128)": 118,
+        "(1, 2048)": 155
+      }
+    },
+    {
+      "requirement": "abstract-versus-HBM cycle comparison",
+      "status": "PASS",
+      "evidence": {
+        "(0, 128)": [
+          130,
+          523
+        ],
+        "(0, 2048)": [
+          167,
+          3509
+        ],
+        "(1, 128)": [
+          118,
+          511
+        ],
+        "(1, 2048)": [
+          155,
+          3497
+        ]
+      }
+    },
+    {
+      "requirement": "adapter synthesizability",
+      "status": "PASS",
+      "evidence": "Yosys check=0 problems and statistics emitted"
+    },
+    {
+      "requirement": "PCU-to-command RTL mapping",
+      "status": "PASS",
+      "evidence": [
+        "DRAM_CMD_ACT",
+        "DRAM_CMD_RD",
+        "DRAM_CMD_WR",
+        "DRAM_CMD_PRE",
+        "x_base_q",
+        "affine_base_q",
+        "output_base_q"
+      ]
+    },
+    {
+      "requirement": "queue/arbitration optimization decision",
+      "status": "PASS",
+      "evidence": "credit-limited queue decision and accepted command-reduction optimizations documented"
+    },
+    {
+      "requirement": "post-supply-floor PCU scheduler review",
+      "status": "PASS",
+      "evidence": "scheduler reviewed after connected supply result; freeze retained with rationale"
+    }
+  ]
+}

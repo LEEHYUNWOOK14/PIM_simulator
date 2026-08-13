@@ -21,5 +21,5 @@ Status: **PASS**
 |invalid probability rejected|True|`assembly_yield=1.5`|
 |all pipeline READMEs exist|True|`['hardware_cost/README.md', 'hardware_cost/area/README.md', 'hardware_cost/package/README.md', 'hardware_cost/yield/README.md', 'hardware_cost/power_performance/README.md', 'hardware_cost/thermal/README.md', 'hardware_cost/integration/README.md']`|
 |required outputs exist|True|`['integrated_metrics.json', 'design_comparison.csv', 'pareto_frontier.csv', 'uncertainty_summary.csv', 'uncertainty_samples.csv', 'hardware_cost_report.md', 'parameter_provenance.json', 'source_traceability.md', 'cost_indices.png', 'uncertainty_performance_per_cost.png', 'area/area_report.md', 'pack`|
-|seeded uncertainty reproducible|True|`[{'scenario': 'hbm2_4hi_1stack', 'p05': 1.4413874905241968, 'p50': 1.5829500186428498, 'p95': 1.769086999690303, 'best_rank_probability': 0.0, 'samples': 2000}, {'scenario': 'hbm2_8hi_1stack', 'p05': 1.0, 'p50': 1.0, 'p95': 1.0, 'best_rank_probability': 0.561, 'samples': 2000}, {'scenario': 'hbm2_12`|
-|rank probabilities sum to one|True|`[0.0, 0.561, 0.0, 0.4, 0.039]`|
+|seeded uncertainty reproducible|True|`[{'scenario': 'hbm2_4hi_1stack', 'p05': 1.4413874905241968, 'p50': 1.58295001864285, 'p95': 1.769086999690303, 'best_rank_probability': 0.0, 'no_feasible_probability': 0.0, 'samples': 2000}, {'scenario': 'hbm2_8hi_1stack', 'p05': 1.0, 'p50': 1.0, 'p95': 1.0, 'best_rank_probability': 0.561, 'no_feasi`|
+|rank and no-feasible probabilities sum to one|True|`{'rank': [0.0, 0.561, 0.0, 0.4, 0.039], 'no_feasible': 0.0}`|

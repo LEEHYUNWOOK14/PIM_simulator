@@ -149,9 +149,10 @@
         {
           "scenario": "hbm2_4hi_1stack",
           "p05": 1.4413874905241968,
-          "p50": 1.5829500186428498,
+          "p50": 1.58295001864285,
           "p95": 1.769086999690303,
           "best_rank_probability": 0.0,
+          "no_feasible_probability": 0.0,
           "samples": 2000
         },
         {
@@ -160,22 +161,25 @@
           "p50": 1.0,
           "p95": 1.0,
           "best_rank_probability": 0.561,
+          "no_feasible_probability": 0.0,
           "samples": 2000
         },
         {
           "scenario": "hbm2_12hi_1stack",
           "p05": 0.62059973734796,
           "p50": 0.6918069237379679,
-          "p95": 0.7588892795043177,
+          "p95": 0.7588892795043178,
           "best_rank_probability": 0.0,
+          "no_feasible_probability": 0.0,
           "samples": 2000
         },
         {
           "scenario": "hbm2_8hi_2stack",
           "p05": 0.7816718662963362,
-          "p50": 0.9626269147978861,
+          "p50": 0.962626914797886,
           "p95": 1.1733855650724303,
           "best_rank_probability": 0.4,
+          "no_feasible_probability": 0.0,
           "samples": 2000
         },
         {
@@ -184,20 +188,24 @@
           "p50": 0.571176238936531,
           "p95": 1.0117441752519263,
           "best_rank_probability": 0.039,
+          "no_feasible_probability": 0.0,
           "samples": 2000
         }
       ]
     },
     {
-      "name": "rank probabilities sum to one",
+      "name": "rank and no-feasible probabilities sum to one",
       "pass": true,
-      "detail": [
-        0.0,
-        0.561,
-        0.0,
-        0.4,
-        0.039
-      ]
+      "detail": {
+        "rank": [
+          0.0,
+          0.561,
+          0.0,
+          0.4,
+          0.039
+        ],
+        "no_feasible": 0.0
+      }
     }
   ],
   "scope": "Architectural model verification; not validation against proprietary HBM2 manufacturing data."

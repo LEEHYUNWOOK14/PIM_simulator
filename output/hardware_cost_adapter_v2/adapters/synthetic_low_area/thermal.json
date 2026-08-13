@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "adapter_contract_version": 1,
+  "status": "PASS",
+  "candidate": {
+    "id": "synthetic_low_area",
+    "label": "Synthetic low-area candidate",
+    "parameters": {
+      "lanes": null,
+      "bank_port_mode": null,
+      "scheduler_policy": null,
+      "context_depth": null
+    }
+  },
+  "claim_class": "modeled",
+  "operating_point": {
+    "pdk": null,
+    "library": null,
+    "process_corner": null,
+    "voltage_V": null,
+    "temperature_C": 26.85,
+    "clock_constraint_ns": 10.0,
+    "workload_trace_id": "fixture:synthetic_low_area"
+  },
+  "source_evidence": [
+    {
+      "path": "hardware_cost/regression/synthetic_candidate_definitions.json",
+      "sha256": "25788f3a97948467c0b0cacc4786f60b2a9fc2dd0ee590c317e3aa1c1821b820",
+      "bytes": 2365
+    }
+  ],
+  "notes": [
+    "Deterministic synthetic fixture; not physical evidence."
+  ],
+  "axis": "thermal",
+  "calibration": "synthetic_architectural",
+  "tool": {
+    "name": "synthetic-thermal-fixture",
+    "version": "1"
+  },
+  "metrics": {
+    "peak_temperature_K": 318.0,
+    "peak_delta_K": 18.0,
+    "hotspot": {
+      "layer": "logic",
+      "x_index": 1,
+      "y_index": 1
+    }
+  }
+}

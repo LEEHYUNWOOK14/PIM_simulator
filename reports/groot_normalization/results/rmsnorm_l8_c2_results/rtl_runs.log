@@ -1,0 +1,4 @@
+PCU_TRACE PASS profile=rmsnorm_w128 mode_rms=1 affine_per_row=0 lanes=8 engines=4 local_reduce_contexts=2 top_contexts=8 fifo=16 rows=8 hidden=128 elements=1024 mixed_mismatches=0 reference_bit_mismatches=0 cycles=200 max_contexts=8 external_bytes=32 bank_internal_bytes=10240
+verification/groot_normalization/groot_logic_die_pcu_trace_tb.sv:51: $finish called at 2030 (1s)
+PCU_TRACE PASS profile=rmsnorm_w2048 mode_rms=1 affine_per_row=0 lanes=8 engines=4 local_reduce_contexts=2 top_contexts=8 fifo=16 rows=4 hidden=2048 elements=8192 mixed_mismatches=0 reference_bit_mismatches=0 cycles=196 max_contexts=4 external_bytes=32 bank_internal_bytes=81920
+verification/groot_normalization/groot_logic_die_pcu_trace_tb.sv:51: $finish called at 1990 (1s)

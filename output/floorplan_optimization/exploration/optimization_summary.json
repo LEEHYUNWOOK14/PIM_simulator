@@ -1,0 +1,75 @@
+{
+  "status": "PASS",
+  "seed": 235,
+  "attempted_random_candidates": 400,
+  "feasible_unique_candidates": 283,
+  "rejected_candidates": 118,
+  "pareto_candidates": 45,
+  "selected": {
+    "manual_baseline": "cand_deb1a75ad74b",
+    "wirelength_first": "cand_79bdf2d4412e",
+    "thermal_first": "cand_40d1fe3576c0",
+    "balanced": "cand_47f1b95e9a56",
+    "cost_first": "cand_47f1b95e9a56"
+  },
+  "normalization_ranges": {
+    "peak_temperature_proxy_C": {
+      "min": 36.09190792166335,
+      "max": 43.74825614728808
+    },
+    "traffic_weighted_manhattan_um": {
+      "min": 5047.41343345849,
+      "max": 8407.707551105548
+    },
+    "global_route_congestion_proxy": {
+      "min": 1.7232105013884533,
+      "max": 2.699860194639709
+    },
+    "timing_distance_proxy_um": {
+      "min": 5826.41304347826,
+      "max": 7592.391304347825
+    },
+    "ir_drop_distance_proxy_Wum_per_W": {
+      "min": 2041.25,
+      "max": 4358.75
+    },
+    "normalized_cost_proxy_raw": {
+      "min": 0.2360586580475059,
+      "max": 0.26948942397731435
+    }
+  },
+  "weights": {
+    "cost_first": {
+      "thermal": 0.1,
+      "wirelength": 0.15,
+      "congestion": 0.1,
+      "timing": 0.1,
+      "ir_drop": 0.05,
+      "area_cost": 0.5
+    },
+    "balanced": {
+      "thermal": 0.25,
+      "wirelength": 0.2,
+      "congestion": 0.15,
+      "timing": 0.15,
+      "ir_drop": 0.1,
+      "area_cost": 0.15
+    },
+    "thermal_first": {
+      "thermal": 0.55,
+      "wirelength": 0.1,
+      "congestion": 0.1,
+      "timing": 0.1,
+      "ir_drop": 0.1,
+      "area_cost": 0.05
+    }
+  },
+  "power_input_W": 4.0,
+  "evidence": {
+    "candidate_metrics": "modeled analytical proxies",
+    "geometry": "illustrative/provisional",
+    "timing_congestion_ir_drop": "proxy only until OpenROAD Phase 4",
+    "temperature": "proxy only until solver Phase 5"
+  },
+  "disclaimer": "Candidate ranking is pre-physical exploration, not timing, routability, PI, thermal or manufacturing signoff."
+}

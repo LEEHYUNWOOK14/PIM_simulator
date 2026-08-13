@@ -31,6 +31,7 @@ module fp16_mul (
         low_mask = '0;
         round_up = 1'b0;
         result_exp_field = '0;
+        shift_amount = 0;
         if ((lhs_exp == 5'h1f && lhs_frac != 0) ||
                  (rhs_exp == 5'h1f && rhs_frac != 0) ||
                  ((lhs_exp == 5'h1f || rhs_exp == 5'h1f) &&

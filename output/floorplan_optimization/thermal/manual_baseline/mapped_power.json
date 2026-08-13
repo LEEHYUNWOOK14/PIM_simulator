@@ -1,0 +1,277 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "coordinate_system": "local die coordinates; origin at lower-left; x right; y up",
+  "units": {
+    "length": "um",
+    "area": "um^2",
+    "power": "W"
+  },
+  "architecture": {
+    "die_width_um": 8000.0,
+    "die_height_um": 12000.0,
+    "stack_count": 1,
+    "dram_dies_per_stack": 8
+  },
+  "sources": {
+    "floorplan_manifest": "output/floorplan_optimization/exploration/candidates/manual_baseline.json",
+    "floorplan_sha256": "5418a61e44f58823b9b154a37af3af5d97acf02a737a98096607e6d4ea4818e2",
+    "power": "estimated_4W_logic_die_allocation_for_relative_candidate_comparison"
+  },
+  "blocks": [
+    {
+      "instance": "top.logic_die_64ch_reduction_top",
+      "module": "logic_die_64ch_reduction_top",
+      "rule_id": "floorplan_candidate_logic_die",
+      "target": {
+        "stack": 0,
+        "layer": "logic",
+        "die": -1,
+        "channel": -1,
+        "bank": -1
+      },
+      "rectangle_um": {
+        "x_um": 675.0,
+        "y_um": 1100.0,
+        "width_um": 650.0,
+        "height_um": 4000.0
+      },
+      "synthesis_area_um2": 2600000.0,
+      "mapped_area_um2": 2600000.0,
+      "dynamic_power_W": 0.49500000000000005,
+      "leakage_power_W": 0.05500000000000001,
+      "total_power_W": 0.55,
+      "power_density_W_mm2": 0.21153846153846154,
+      "activity": {
+        "format": "estimated_allocation",
+        "source": "estimated_4W_logic_die_allocation_for_relative_candidate_comparison"
+      },
+      "classification": "modeled",
+      "confidence": "low"
+    },
+    {
+      "instance": "top.bank_local_reduction_buffer",
+      "module": "bank_local_reduction_buffer",
+      "rule_id": "floorplan_candidate_logic_die",
+      "target": {
+        "stack": 0,
+        "layer": "logic",
+        "die": -1,
+        "channel": -1,
+        "bank": -1
+      },
+      "rectangle_um": {
+        "x_um": 1675.0,
+        "y_um": 1100.0,
+        "width_um": 650.0,
+        "height_um": 4000.0
+      },
+      "synthesis_area_um2": 2600000.0,
+      "mapped_area_um2": 2600000.0,
+      "dynamic_power_W": 0.225,
+      "leakage_power_W": 0.025,
+      "total_power_W": 0.25,
+      "power_density_W_mm2": 0.09615384615384616,
+      "activity": {
+        "format": "estimated_allocation",
+        "source": "estimated_4W_logic_die_allocation_for_relative_candidate_comparison"
+      },
+      "classification": "modeled",
+      "confidence": "low"
+    },
+    {
+      "instance": "top.bank_local_fp16_reduction",
+      "module": "bank_local_fp16_reduction",
+      "rule_id": "floorplan_candidate_logic_die",
+      "target": {
+        "stack": 0,
+        "layer": "logic",
+        "die": -1,
+        "channel": -1,
+        "bank": -1
+      },
+      "rectangle_um": {
+        "x_um": 2675.0,
+        "y_um": 1100.0,
+        "width_um": 650.0,
+        "height_um": 4000.0
+      },
+      "synthesis_area_um2": 2600000.0,
+      "mapped_area_um2": 2600000.0,
+      "dynamic_power_W": 0.405,
+      "leakage_power_W": 0.045000000000000005,
+      "total_power_W": 0.45,
+      "power_density_W_mm2": 0.17307692307692307,
+      "activity": {
+        "format": "estimated_allocation",
+        "source": "estimated_4W_logic_die_allocation_for_relative_candidate_comparison"
+      },
+      "classification": "modeled",
+      "confidence": "low"
+    },
+    {
+      "instance": "top.hierarchical_reduction_path",
+      "module": "hierarchical_reduction_path",
+      "rule_id": "floorplan_candidate_logic_die",
+      "target": {
+        "stack": 0,
+        "layer": "logic",
+        "die": -1,
+        "channel": -1,
+        "bank": -1
+      },
+      "rectangle_um": {
+        "x_um": 4675.0,
+        "y_um": 1100.0,
+        "width_um": 650.0,
+        "height_um": 4000.0
+      },
+      "synthesis_area_um2": 2600000.0,
+      "mapped_area_um2": 2600000.0,
+      "dynamic_power_W": 0.49500000000000005,
+      "leakage_power_W": 0.05500000000000001,
+      "total_power_W": 0.55,
+      "power_density_W_mm2": 0.21153846153846154,
+      "activity": {
+        "format": "estimated_allocation",
+        "source": "estimated_4W_logic_die_allocation_for_relative_candidate_comparison"
+      },
+      "classification": "modeled",
+      "confidence": "low"
+    },
+    {
+      "instance": "top.logic_die_link_arbiter",
+      "module": "logic_die_link_arbiter",
+      "rule_id": "floorplan_candidate_logic_die",
+      "target": {
+        "stack": 0,
+        "layer": "logic",
+        "die": -1,
+        "channel": -1,
+        "bank": -1
+      },
+      "rectangle_um": {
+        "x_um": 675.0,
+        "y_um": 6500.0,
+        "width_um": 650.0,
+        "height_um": 4000.0
+      },
+      "synthesis_area_um2": 2600000.0,
+      "mapped_area_um2": 2600000.0,
+      "dynamic_power_W": 0.18000000000000002,
+      "leakage_power_W": 0.020000000000000004,
+      "total_power_W": 0.2,
+      "power_density_W_mm2": 0.07692307692307693,
+      "activity": {
+        "format": "estimated_allocation",
+        "source": "estimated_4W_logic_die_allocation_for_relative_candidate_comparison"
+      },
+      "classification": "modeled",
+      "confidence": "low"
+    },
+    {
+      "instance": "top.logic_die_dual_link_arbiter",
+      "module": "logic_die_dual_link_arbiter",
+      "rule_id": "floorplan_candidate_logic_die",
+      "target": {
+        "stack": 0,
+        "layer": "logic",
+        "die": -1,
+        "channel": -1,
+        "bank": -1
+      },
+      "rectangle_um": {
+        "x_um": 1675.0,
+        "y_um": 6500.0,
+        "width_um": 650.0,
+        "height_um": 4000.0
+      },
+      "synthesis_area_um2": 2600000.0,
+      "mapped_area_um2": 2600000.0,
+      "dynamic_power_W": 0.18000000000000002,
+      "leakage_power_W": 0.020000000000000004,
+      "total_power_W": 0.2,
+      "power_density_W_mm2": 0.07692307692307693,
+      "activity": {
+        "format": "estimated_allocation",
+        "source": "estimated_4W_logic_die_allocation_for_relative_candidate_comparison"
+      },
+      "classification": "modeled",
+      "confidence": "low"
+    },
+    {
+      "instance": "top.shared_fp16_pipeline_fabric",
+      "module": "shared_fp16_pipeline_fabric",
+      "rule_id": "floorplan_candidate_logic_die",
+      "target": {
+        "stack": 0,
+        "layer": "logic",
+        "die": -1,
+        "channel": -1,
+        "bank": -1
+      },
+      "rectangle_um": {
+        "x_um": 2675.0,
+        "y_um": 6500.0,
+        "width_um": 650.0,
+        "height_um": 4000.0
+      },
+      "synthesis_area_um2": 2600000.0,
+      "mapped_area_um2": 2600000.0,
+      "dynamic_power_W": 0.9,
+      "leakage_power_W": 0.1,
+      "total_power_W": 1.0,
+      "power_density_W_mm2": 0.38461538461538464,
+      "activity": {
+        "format": "estimated_allocation",
+        "source": "estimated_4W_logic_die_allocation_for_relative_candidate_comparison"
+      },
+      "classification": "modeled",
+      "confidence": "low"
+    },
+    {
+      "instance": "top.shared_fp16_reduction_cluster",
+      "module": "shared_fp16_reduction_cluster",
+      "rule_id": "floorplan_candidate_logic_die",
+      "target": {
+        "stack": 0,
+        "layer": "logic",
+        "die": -1,
+        "channel": -1,
+        "bank": -1
+      },
+      "rectangle_um": {
+        "x_um": 4675.0,
+        "y_um": 6500.0,
+        "width_um": 650.0,
+        "height_um": 4000.0
+      },
+      "synthesis_area_um2": 2600000.0,
+      "mapped_area_um2": 2600000.0,
+      "dynamic_power_W": 0.7200000000000001,
+      "leakage_power_W": 0.08000000000000002,
+      "total_power_W": 0.8,
+      "power_density_W_mm2": 0.3076923076923077,
+      "activity": {
+        "format": "estimated_allocation",
+        "source": "estimated_4W_logic_die_allocation_for_relative_candidate_comparison"
+      },
+      "classification": "modeled",
+      "confidence": "low"
+    }
+  ],
+  "unmapped_blocks": [],
+  "warnings": [],
+  "checks": {
+    "unit_validation": "PASS",
+    "bounds_validation": "PASS",
+    "input_power_W": 4.0,
+    "mapped_power_W": 4.0,
+    "unmapped_power_W": 0.0,
+    "power_conservation_error_W": 0.0,
+    "power_conservation_tolerance_W": 1e-12,
+    "power_conservation": "PASS",
+    "unmapped_detection": "PASS"
+  },
+  "disclaimer": "Manifest block power is estimated and supports relative architectural comparison only; not calibrated or signoff power."
+}

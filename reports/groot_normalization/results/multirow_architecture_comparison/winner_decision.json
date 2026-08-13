@@ -1,0 +1,116 @@
+{
+  "decision": "NO-GO",
+  "production_gate_speedup": 1.3,
+  "candidate": "LANES_8_SCALAR_ENGINES_4_PINGPONG_2",
+  "accuracy": "FULL_RTL_6_OF_6_MODEL_BIT_EXACT;39_PYTORCH_BIT_MISMATCHES;MAX_ABS_0.015625",
+  "component_bound_period_ns": 27.87,
+  "component_bound_clock_mhz": 35.88087549336203,
+  "clock_evidence": "MAX_OF_MAPPED_COMPONENT_STA;FULL_TOP_UNROUTED",
+  "total_weighted_cycles": 262232,
+  "core_latency_us": 7308.405840000001,
+  "ondie_link_latency_us": 40.08,
+  "hierarchical_latency_us": 7348.485840000001,
+  "gpu_latency_us": 3121.2077312469482,
+  "speedup_vs_gpu": 0.4247416133344482,
+  "break_even_clock_mhz": 85.10909734140537,
+  "speedup_1p3_clock_mhz": 111.07529423956449,
+  "logical_traffic_bytes": 130969088,
+  "component_sum_area_um2": 21522864.6336,
+  "area_evidence": "16*(one bank reducer+apply)+scalar4+global; excludes context/control and routing",
+  "fulltop_mapping": "TIMED_OUT_AFTER_15_MINUTES_IN_ABC;301301_FLIP_FLOPS;NO_NETLIST_OR_STA",
+  "production_replay_writeback": "BLOCKED_UNLESS_SPEEDUP_GE_1P3_AND_FULL_TOP_PPA_CLOSES",
+  "lane_dse": [
+    {
+      "lanes": 4,
+      "scalar_engines": 4,
+      "action_dit_norm3_cycles": 1201,
+      "component_period_ns": 27.57,
+      "component_fmax_mhz": 36.27130939426913,
+      "representative_core_us": 33.11157,
+      "component_sum_area_mm2": 12.129355513599998,
+      "accuracy_gate": "PASS"
+    },
+    {
+      "lanes": 8,
+      "scalar_engines": 4,
+      "action_dit_norm3_cycles": 820,
+      "component_period_ns": 27.87,
+      "component_fmax_mhz": 35.88087549336203,
+      "representative_core_us": 22.853400000000004,
+      "component_sum_area_mm2": 21.5228646336,
+      "accuracy_gate": "PASS"
+    },
+    {
+      "lanes": 16,
+      "scalar_engines": 4,
+      "action_dit_norm3_cycles": 761,
+      "component_period_ns": 50.72,
+      "component_fmax_mhz": 19.71608832807571,
+      "representative_core_us": 38.59792,
+      "component_sum_area_mm2": 40.371662124784,
+      "accuracy_gate": "PASS"
+    }
+  ],
+  "profiles": [
+    {
+      "profile_id": "action_vlln",
+      "shape": "1x280x2048",
+      "invocations": 1,
+      "cycles": 5448,
+      "mixed_mismatches": 0,
+      "pytorch_bit_mismatches": 7,
+      "max_contexts": 3,
+      "weighted_cycles": 5448
+    },
+    {
+      "profile_id": "action_vl_self_attention_norm1",
+      "shape": "1x280x2048",
+      "invocations": 4,
+      "cycles": 5448,
+      "mixed_mismatches": 0,
+      "pytorch_bit_mismatches": 8,
+      "max_contexts": 3,
+      "weighted_cycles": 21792
+    },
+    {
+      "profile_id": "action_vl_self_attention_norm3",
+      "shape": "1x280x2048",
+      "invocations": 4,
+      "cycles": 5448,
+      "mixed_mismatches": 0,
+      "pytorch_bit_mismatches": 18,
+      "max_contexts": 3,
+      "weighted_cycles": 21792
+    },
+    {
+      "profile_id": "action_dit_adaln_norm1",
+      "shape": "1x41x1536",
+      "invocations": 128,
+      "cycles": 820,
+      "mixed_mismatches": 0,
+      "pytorch_bit_mismatches": 2,
+      "max_contexts": 3,
+      "weighted_cycles": 104960
+    },
+    {
+      "profile_id": "action_dit_norm3",
+      "shape": "1x41x1536",
+      "invocations": 128,
+      "cycles": 820,
+      "mixed_mismatches": 0,
+      "pytorch_bit_mismatches": 0,
+      "max_contexts": 3,
+      "weighted_cycles": 104960
+    },
+    {
+      "profile_id": "action_dit_norm_out",
+      "shape": "1x41x1536",
+      "invocations": 4,
+      "cycles": 820,
+      "mixed_mismatches": 0,
+      "pytorch_bit_mismatches": 4,
+      "max_contexts": 3,
+      "weighted_cycles": 3280
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+test_block_outside_die_is_rejected (test_floorplan_manifest.FloorplanManifestTests.test_block_outside_die_is_rejected) ... ok
+test_block_overlap_is_rejected (test_floorplan_manifest.FloorplanManifestTests.test_block_overlap_is_rejected) ... ok
+test_csv_mismatch_is_rejected (test_floorplan_manifest.FloorplanManifestTests.test_csv_mismatch_is_rejected) ... ok
+test_dangling_endpoint_is_rejected (test_floorplan_manifest.FloorplanManifestTests.test_dangling_endpoint_is_rejected) ... ok
+test_duplicate_bundle_is_rejected (test_floorplan_manifest.FloorplanManifestTests.test_duplicate_bundle_is_rejected) ... ok
+test_legacy_and_physical_report_adapter (test_floorplan_manifest.FloorplanManifestTests.test_legacy_and_physical_report_adapter) ... ok
+test_reserved_region_collision_is_rejected (test_floorplan_manifest.FloorplanManifestTests.test_reserved_region_collision_is_rejected) ... ok
+test_tsv_keepout_is_rejected (test_floorplan_manifest.FloorplanManifestTests.test_tsv_keepout_is_rejected) ... ok
+test_valid_manifest_and_csv_roundtrip (test_floorplan_manifest.FloorplanManifestTests.test_valid_manifest_and_csv_roundtrip) ... ok
+test_wrong_coordinate_unit_is_rejected (test_floorplan_manifest.FloorplanManifestTests.test_wrong_coordinate_unit_is_rejected) ... ok
+test_candidate_thermal_adapter_conserves_power (test_floorplan_optimizer.FloorplanOptimizerTests.test_candidate_thermal_adapter_conserves_power) ... ok
+test_openroad_congestion_and_def_roundtrip_parsers (test_floorplan_optimizer.FloorplanOptimizerTests.test_openroad_congestion_and_def_roundtrip_parsers) ... ok
+test_pareto_rows_and_rejection_reasons_are_present (test_floorplan_optimizer.FloorplanOptimizerTests.test_pareto_rows_and_rejection_reasons_are_present) ... ok
+test_seeded_search_is_reproducible_and_exports_legal_candidates (test_floorplan_optimizer.FloorplanOptimizerTests.test_seeded_search_is_reproducible_and_exports_legal_candidates) ... ok
+test_all_candidate_solvers_conserve_the_same_estimated_power (test_pipeline_integration.FloorplanPipelineIntegrationTests.test_all_candidate_solvers_conserve_the_same_estimated_power) ... ok
+test_candidate_gds_hierarchy_and_thermal_overlay (test_pipeline_integration.FloorplanPipelineIntegrationTests.test_candidate_gds_hierarchy_and_thermal_overlay) ... ok
+test_candidate_sets_and_evidence_are_aligned (test_pipeline_integration.FloorplanPipelineIntegrationTests.test_candidate_sets_and_evidence_are_aligned) ... ok
+test_current_rtl_physical_scope_is_not_overclaimed (test_pipeline_integration.FloorplanPipelineIntegrationTests.test_current_rtl_physical_scope_is_not_overclaimed) ... ok
+test_phase8_evidence_package_is_complete (test_pipeline_integration.FloorplanPipelineIntegrationTests.test_phase8_evidence_package_is_complete) ... ok
+test_visualization_deliverables_are_nonempty (test_pipeline_integration.FloorplanPipelineIntegrationTests.test_visualization_deliverables_are_nonempty) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 1.780s
+
+OK
+FLOORPLAN_MANIFEST_GENERATED blocks=8 tsv_bundles=48 output=C:\Users\Admin\AppData\Local\Temp\tmp9zmws__1\out.json
+FLOORPLAN_THERMAL_ADAPTER PASS blocks=8 power_W=4 output=C:\Users\Admin\AppData\Local\Temp\tmpsbt1ma1k\mapped_power.json
+FLOORPLAN_OPTIMIZATION PASS feasible=57 rejected=24 pareto=15 seed=235
+FLOORPLAN_OPTIMIZATION PASS feasible=57 rejected=24 pareto=15 seed=235

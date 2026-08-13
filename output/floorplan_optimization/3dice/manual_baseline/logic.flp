@@ -1,0 +1,39 @@
+B0_logic_die_64ch_reduction_top :
+  position 675, 1100 ;
+  dimension 650, 4000 ;
+  power values 0.55 ;
+
+B1_bank_local_reduction_buffer :
+  position 1675, 1100 ;
+  dimension 650, 4000 ;
+  power values 0.25 ;
+
+B2_bank_local_fp16_reduction :
+  position 2675, 1100 ;
+  dimension 650, 4000 ;
+  power values 0.45 ;
+
+B3_hierarchical_reduction_path :
+  position 4675, 1100 ;
+  dimension 650, 4000 ;
+  power values 0.55 ;
+
+B4_logic_die_link_arbiter :
+  position 675, 6500 ;
+  dimension 650, 4000 ;
+  power values 0.2 ;
+
+B5_logic_die_dual_link_arbiter :
+  position 1675, 6500 ;
+  dimension 650, 4000 ;
+  power values 0.2 ;
+
+B6_shared_fp16_pipeline_fabric :
+  position 2675, 6500 ;
+  dimension 650, 4000 ;
+  power values 1 ;
+
+B7_shared_fp16_reduction_cluster :
+  position 4675, 6500 ;
+  dimension 650, 4000 ;
+  power values 0.8 ;

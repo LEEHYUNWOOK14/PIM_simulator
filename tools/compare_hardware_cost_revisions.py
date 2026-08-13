@@ -3,6 +3,7 @@
 from __future__ import annotations
 import argparse,csv,json,math
 from pathlib import Path
+from hardware_cost_evidence_contract import EvidenceContractError, comparison_policy, require_valid_snapshot
 ROOT=Path(__file__).resolve().parents[1]
 CATEGORIES=("bf16_fp16","normalization_rounding","accumulator_reduction","buffer_register","control_routing")
 
@@ -21,13 +22,32 @@ def precision_cells(snapshot,precision):
     return sum(values) if len(values)>1 else values[0] if values else None
 
 def validate_snapshot(s):
-    if s.get("schema_version")!=1: raise CompareError("snapshot schema_version must be 1")
+    try: require_valid_snapshot(s)
+    except EvidenceContractError as exc: raise CompareError(str(exc)) from exc
     if s["parameter_status"].get("final_architecture_parameters_selected") is not False: raise CompareError("final parameter selection is forbidden")
     if set(s["categories"])!=set(CATEGORIES): raise CompareError(f"category set mismatch in {s['revision']['id']}")
     power=sum(s["categories"][x]["total_power_W"] for x in CATEGORIES)
     if abs(power-s["physical_totals"]["total_power_W"])>1e-12: raise CompareError(f"category power mismatch in {s['revision']['id']}")
     block_power=sum(x["total_power_W"] for x in s.get("block_metrics",[]))
     if abs(block_power-s["physical_totals"]["total_power_W"])>1e-12: raise CompareError(f"block power mismatch in {s['revision']['id']}")
+
+def metric_policy(current,reference,axes):
+    policies=[comparison_policy(current["calibration"][axis],reference["calibration"][axis]) for axis in axes]
+    order={"quantitative":0,"reference_only":1,"unavailable":2,"prohibited":3}
+    status=max((p["status"] for p in policies),key=lambda x:order[x])
+    return {"status":status,"delta_allowed":all(p["delta_allowed"] for p in policies),"axes":list(axes)}
+
+def guarded_pct(value,base,current,reference,axes):
+    if value is None or base is None:
+        return None,"unavailable"
+    policy=metric_policy(current,reference,axes)
+    return (pct(value,base) if policy["delta_allowed"] else None),policy["status"]
+
+def guarded_difference(value,base,current,reference,axes):
+    if value is None or base is None:
+        return None,"unavailable"
+    policy=metric_policy(current,reference,axes)
+    return ((value-base) if policy["delta_allowed"] and value is not None and base is not None else None),policy["status"]
 
 def compare(revisions_path,baseline_id,output_path):
     rp=path(revisions_path); files=sorted(rp.glob("*.json")); snapshots=[]
@@ -41,36 +61,51 @@ def compare(revisions_path,baseline_id,output_path):
     rows=[]
     for i,s in enumerate(snapshots):
         p=snapshots[i-1] if i else None; t=s["physical_totals"]; bt=base["physical_totals"]; th=s["thermal"]; bth=base["thermal"]; w=s["workload"]
+        area_base,area_base_policy=guarded_pct(t["mapped_floorplan_area_um2"],bt["mapped_floorplan_area_um2"],s,base,("physical",))
+        power_base,power_base_policy=guarded_pct(t["total_power_W"],bt["total_power_W"],s,base,("power",))
+        peak_base,peak_base_policy=guarded_difference(th["peak_temperature_K"],bth["peak_temperature_K"],s,base,("thermal",))
+        energy_base,energy_base_policy=guarded_pct(w["energy_per_op_J"],base["workload"]["energy_per_op_J"],s,base,("power","workload"))
+        timing_base,timing_base_policy=guarded_pct(t["critical_path_ns"],bt["critical_path_ns"],s,base,("timing",))
+        throughput_base,throughput_base_policy=guarded_pct(w["throughput_ops_s"],base["workload"]["throughput_ops_s"],s,base,("workload",))
+        area_prev,area_prev_policy=guarded_pct(t["mapped_floorplan_area_um2"],p["physical_totals"]["mapped_floorplan_area_um2"],s,p,("physical",)) if p else (None,"unavailable")
+        power_prev,power_prev_policy=guarded_pct(t["total_power_W"],p["physical_totals"]["total_power_W"],s,p,("power",)) if p else (None,"unavailable")
+        peak_prev,peak_prev_policy=guarded_difference(th["peak_temperature_K"],p["thermal"]["peak_temperature_K"],s,p,("thermal",)) if p else (None,"unavailable")
+        timing_prev,timing_prev_policy=guarded_pct(t["critical_path_ns"],p["physical_totals"]["critical_path_ns"],s,p,("timing",)) if p else (None,"unavailable")
+        throughput_prev,throughput_prev_policy=guarded_pct(w["throughput_ops_s"],p["workload"]["throughput_ops_s"],s,p,("workload",)) if p else (None,"unavailable")
         row={"revision":s["revision"]["id"],"label":s["revision"]["label"],"git_commit":s["revision"]["git_commit"],"dirty":s["revision"]["working_tree_dirty"],
-             "parameter_status":"PROVISIONAL","fp16_generic_cells":precision_cells(s,"FP16"),"bf16_generic_cells":precision_cells(s,"BF16"),
+             "parameter_status":"PROVISIONAL","physical_feasibility_status":s["physical_feasibility"]["status"],"rtl_freeze_allowed":s["physical_feasibility"]["rtl_freeze_allowed"],"fp16_generic_cells":precision_cells(s,"FP16"),"bf16_generic_cells":precision_cells(s,"BF16"),
              "mapped_area_um2":t["mapped_floorplan_area_um2"],"technology_mapped_area_um2":t["technology_mapped_area_um2"],"critical_path_ns":t["critical_path_ns"],"slack_ns":t["slack_ns"],
              "dynamic_power_W":t["dynamic_power_W"],"leakage_power_W":t["leakage_power_W"],"total_power_W":t["total_power_W"],
              "energy_per_op_J":w["energy_per_op_J"],"throughput_ops_s":w["throughput_ops_s"],"peak_temperature_K":th["peak_temperature_K"],
              "hotspot_layer":th["hotspot"].get("layer"),"hotspot_x":th["hotspot"].get("x_index"),"hotspot_y":th["hotspot"].get("y_index"),
-             "area_vs_baseline_pct":pct(t["mapped_floorplan_area_um2"],bt["mapped_floorplan_area_um2"]),"power_vs_baseline_pct":pct(t["total_power_W"],bt["total_power_W"]),
-             "peak_delta_vs_baseline_K":th["peak_temperature_K"]-bth["peak_temperature_K"],"energy_vs_baseline_pct":pct(w["energy_per_op_J"],base["workload"]["energy_per_op_J"]),
-             "area_vs_previous_pct":pct(t["mapped_floorplan_area_um2"],p["physical_totals"]["mapped_floorplan_area_um2"]) if p else None,
-             "power_vs_previous_pct":pct(t["total_power_W"],p["physical_totals"]["total_power_W"]) if p else None,
-             "peak_delta_vs_previous_K":th["peak_temperature_K"]-p["thermal"]["peak_temperature_K"] if p else None}
+             "physical_calibration":s["calibration"]["physical"],"timing_calibration":s["calibration"]["timing"],"power_calibration":s["calibration"]["power"],"thermal_calibration":s["calibration"]["thermal"],"workload_calibration":s["calibration"]["workload"],
+             "area_vs_baseline_pct":area_base,"area_vs_baseline_policy":area_base_policy,"power_vs_baseline_pct":power_base,"power_vs_baseline_policy":power_base_policy,
+             "peak_delta_vs_baseline_K":peak_base,"peak_vs_baseline_policy":peak_base_policy,"energy_vs_baseline_pct":energy_base,"energy_vs_baseline_policy":energy_base_policy,
+             "critical_path_vs_baseline_pct":timing_base,"critical_path_vs_baseline_policy":timing_base_policy,"throughput_vs_baseline_pct":throughput_base,"throughput_vs_baseline_policy":throughput_base_policy,
+             "area_vs_previous_pct":area_prev,"area_vs_previous_policy":area_prev_policy,"power_vs_previous_pct":power_prev,"power_vs_previous_policy":power_prev_policy,
+             "peak_delta_vs_previous_K":peak_prev,"peak_vs_previous_policy":peak_prev_policy,"critical_path_vs_previous_pct":timing_prev,"critical_path_vs_previous_policy":timing_prev_policy,"throughput_vs_previous_pct":throughput_prev,"throughput_vs_previous_policy":throughput_prev_policy}
         rows.append(row)
     cats=[]
     for s in snapshots:
         for c in CATEGORIES:
             x=s["categories"][c]; b=base["categories"][c]
-            cats.append({"revision":s["revision"]["id"],"category":c,"mapped_area_um2":x["mapped_area_um2"],"area_vs_baseline_ratio":ratio(x["mapped_area_um2"],b["mapped_area_um2"]),
-                         "dynamic_power_W":x["dynamic_power_W"],"leakage_power_W":x["leakage_power_W"],"total_power_W":x["total_power_W"],"power_vs_baseline_ratio":ratio(x["total_power_W"],b["total_power_W"]),
+            area_policy=comparison_policy(x["physical_calibration"],b["physical_calibration"])
+            power_policy=comparison_policy(x["power_calibration"],b["power_calibration"])
+            cats.append({"revision":s["revision"]["id"],"category":c,"mapped_area_um2":x["mapped_area_um2"],"area_vs_baseline_ratio":ratio(x["mapped_area_um2"],b["mapped_area_um2"]) if area_policy["delta_allowed"] else None,
+                         "dynamic_power_W":x["dynamic_power_W"],"leakage_power_W":x["leakage_power_W"],"total_power_W":x["total_power_W"],"power_vs_baseline_ratio":ratio(x["total_power_W"],b["total_power_W"]) if power_policy["delta_allowed"] else None,
                          "fp16_generic_cells":sum(o["generic_cells"] for o in x["synthesis_observations"] if o["precision"]=="FP16") or None,
                          "bf16_generic_cells":sum(o["generic_cells"] for o in x["synthesis_observations"] if o["precision"]=="BF16") or None,
-                         "calibration":x["physical_calibration"]})
-    deltas=[{"revision":r["revision"],"area_vs_baseline_pct":r["area_vs_baseline_pct"],"power_vs_baseline_pct":r["power_vs_baseline_pct"],"peak_delta_vs_baseline_K":r["peak_delta_vs_baseline_K"],"energy_vs_baseline_pct":r["energy_vs_baseline_pct"],"area_vs_previous_pct":r["area_vs_previous_pct"],"power_vs_previous_pct":r["power_vs_previous_pct"],"peak_delta_vs_previous_K":r["peak_delta_vs_previous_K"]} for r in rows]
+                         "physical_calibration":x["physical_calibration"],"power_calibration":x["power_calibration"],"area_comparison_policy":area_policy["status"],"power_comparison_policy":power_policy["status"]})
+    delta_keys=("area_vs_baseline_pct","area_vs_baseline_policy","power_vs_baseline_pct","power_vs_baseline_policy","peak_delta_vs_baseline_K","peak_vs_baseline_policy","energy_vs_baseline_pct","energy_vs_baseline_policy","critical_path_vs_baseline_pct","critical_path_vs_baseline_policy","throughput_vs_baseline_pct","throughput_vs_baseline_policy","area_vs_previous_pct","area_vs_previous_policy","power_vs_previous_pct","power_vs_previous_policy","peak_delta_vs_previous_K","peak_vs_previous_policy","critical_path_vs_previous_pct","critical_path_vs_previous_policy","throughput_vs_previous_pct","throughput_vs_previous_policy")
+    deltas=[{"revision":r["revision"],**{key:r[key] for key in delta_keys}} for r in rows]
     write_csv(out/"paper_revision_table.csv",rows); write_csv(out/"paper_category_table.csv",cats); write_csv(out/"paper_delta_table.csv",deltas)
     report=["# Hardware-cost revision regression","",f"Baseline: `{baseline_id}`", "","> All revisions are provisional. GR00T-driven final architecture parameters are intentionally not selected.","",
-            "## Paper revision table","","|Revision|FP16 cells|BF16 cells|Area (um^2)|Power (W)|Energy/op (J)|Peak (K)|Hotspot|Area Δ base|Power Δ base|Peak Δ base|Area Δ prev|Power Δ prev|Peak Δ prev|",
-            "|---|---:|---:|---:|---:|---:|---:|---|---:|---:|---:|---:|---:|---:|"]
-    for r in rows: report.append(f"|{r['revision']}|{r['fp16_generic_cells'] or 'N/A'}|{r['bf16_generic_cells'] or 'N/A'}|{fmt(r['mapped_area_um2'],1)}|{fmt(r['total_power_W'])}|{fmt(r['energy_per_op_J'],9)}|{fmt(r['peak_temperature_K'])}|{r['hotspot_layer']} ({r['hotspot_x']},{r['hotspot_y']})|{fmt(r['area_vs_baseline_pct'])}%|{fmt(r['power_vs_baseline_pct'])}%|{fmt(r['peak_delta_vs_baseline_K'])} K|{fmt(r['area_vs_previous_pct'])}%|{fmt(r['power_vs_previous_pct'])}%|{fmt(r['peak_delta_vs_previous_K'])} K|")
-    report += ["","## Cost-category table","","|Revision|Category|Mapped area (um^2)|Power (W)|FP16 cells|BF16 cells|Calibration|","|---|---|---:|---:|---:|---:|---|"]
-    for r in cats: report.append(f"|{r['revision']}|{r['category']}|{fmt(r['mapped_area_um2'],1)}|{fmt(r['total_power_W'])}|{r['fp16_generic_cells'] or 'N/A'}|{r['bf16_generic_cells'] or 'N/A'}|{r['calibration']}|")
-    report += ["","## Interpretation limits","","- Generic cell count is not silicon area; generic topological path length is not ns.","- `N/A` energy/op is expected until a completed GR00T workload supplies throughput or equivalent completed-work timing.","- Synthetic area, power, and temperature establish regression plumbing, not absolute silicon claims.","- A zero with `not_available` calibration means no physical block was mapped for that category; it is not a measured zero-cost claim.","- Categories are exclusive for physical totals. Alternative FP16/BF16 synthesis candidates are reported separately and are never summed into a chosen architecture."]
+            "## Paper revision table","","|Revision|Physical gate|RTL freeze|Cells|Area (um^2)|Path (ns)|Throughput (op/s)|Power (W)|Energy/op (J)|Peak (K)|Calibrations (A/T/P/W/Th)|Area Δ|Path Δ|Throughput Δ|Power Δ|Peak Δ|",
+            "|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---:|---:|---:|---:|---:|"]
+    for r in rows: report.append(f"|{r['revision']}|{r['physical_feasibility_status']}|{r['rtl_freeze_allowed']}|{r['fp16_generic_cells'] or r['bf16_generic_cells'] or 'N/A'}|{fmt(r['mapped_area_um2'],1)}|{fmt(r['critical_path_ns'])}|{fmt(r['throughput_ops_s'],1)}|{fmt(r['total_power_W'])}|{fmt(r['energy_per_op_J'],9)}|{fmt(r['peak_temperature_K'])}|{r['physical_calibration']} / {r['timing_calibration']} / {r['power_calibration']} / {r['workload_calibration']} / {r['thermal_calibration']}|{fmt(r['area_vs_baseline_pct'])}% ({r['area_vs_baseline_policy']})|{fmt(r['critical_path_vs_baseline_pct'])}% ({r['critical_path_vs_baseline_policy']})|{fmt(r['throughput_vs_baseline_pct'])}% ({r['throughput_vs_baseline_policy']})|{fmt(r['power_vs_baseline_pct'])}% ({r['power_vs_baseline_policy']})|{fmt(r['peak_delta_vs_baseline_K'])} K ({r['peak_vs_baseline_policy']})|")
+    report += ["","## Cost-category table","","|Revision|Category|Mapped area (um^2)|Power (W)|FP16 cells|BF16 cells|Area calibration|Power calibration|","|---|---|---:|---:|---:|---:|---|---|"]
+    for r in cats: report.append(f"|{r['revision']}|{r['category']}|{fmt(r['mapped_area_um2'],1)}|{fmt(r['total_power_W'])}|{r['fp16_generic_cells'] or 'N/A'}|{r['bf16_generic_cells'] or 'N/A'}|{r['physical_calibration']}|{r['power_calibration']}|")
+    report += ["","## Calibration comparison policy","","- `quantitative`: identical calibration stages; numerical deltas are emitted.","- `reference_only`: adjacent stages; absolute values remain visible but deltas are suppressed.","- `prohibited`: stages differ by two or more levels; deltas are suppressed.","- `unavailable`: at least one required evidence axis is pending or unavailable.","","## Interpretation limits","","- Generic cell count is not silicon area; generic topological path length is not ns.","- Energy/op requires activity-based or stronger power evidence plus workload throughput.","- Synthetic area, power, and temperature establish regression plumbing, not absolute silicon claims.","- A zero with `not_available` calibration means no physical block was mapped for that category; it is not a measured zero-cost claim.","- Categories are exclusive for physical totals. Alternative FP16/BF16 synthesis candidates are reported separately and are never summed into a chosen architecture."]
     (out/"paper_regression_report.md").write_text("\n".join(report)+"\n",encoding="utf-8")
     try:
         import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
@@ -84,8 +119,13 @@ def compare(revisions_path,baseline_id,output_path):
         for c in CATEGORIES:
             vals=[s["categories"][c]["total_power_W"] for s in snapshots]; ax.bar(labels,vals,bottom=bottom,label=c); bottom=[a+b for a,b in zip(bottom,vals)]
         ax.set_ylabel("Power (W)"); ax.legend(fontsize=8,ncol=2); ax.tick_params(axis="x",rotation=20); fig.tight_layout(); fig.savefig(out/"paper_category_power.png",dpi=180); plt.close(fig)
+        fig,axes=plt.subplots(1,2,figsize=(10,4.5))
+        axes[0].bar(labels,[r["critical_path_ns"] or 0 for r in rows]); axes[0].set_ylabel("Critical path (ns)")
+        axes[1].bar(labels,[r["throughput_ops_s"] or 0 for r in rows]); axes[1].set_ylabel("Throughput (op/s)")
+        for ax in axes: ax.tick_params(axis="x",rotation=20); ax.grid(axis="y",alpha=.2)
+        fig.tight_layout(); fig.savefig(out/"paper_timing_throughput.png",dpi=180); plt.close(fig)
     except ImportError: raise CompareError("matplotlib is required for paper plots")
-    summary={"status":"PASS","baseline":baseline_id,"revision_count":len(rows),"final_architecture_parameters_selected":False,"outputs":["paper_revision_table.csv","paper_category_table.csv","paper_delta_table.csv","paper_regression_report.md","paper_revision_overview.png","paper_category_power.png"]}
+    summary={"status":"PASS","evidence_contract_version":2,"baseline":baseline_id,"revision_count":len(rows),"final_architecture_parameters_selected":False,"outputs":["paper_revision_table.csv","paper_category_table.csv","paper_delta_table.csv","paper_regression_report.md","paper_revision_overview.png","paper_category_power.png","paper_timing_throughput.png"]}
     (out/"regression_summary.json").write_text(json.dumps(summary,indent=2),encoding="utf-8"); print(json.dumps(summary,indent=2)); return summary
 
 def main():

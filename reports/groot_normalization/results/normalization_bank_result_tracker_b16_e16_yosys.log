@@ -1,0 +1,2708 @@
+
+-- Running command `read_verilog -sv rtl/normalization_bank_result_tracker.sv; chparam -set BANKS 16 -set ENTRIES 16 normalization_bank_result_tracker; hierarchy -check -top normalization_bank_result_tracker; synth -top normalization_bank_result_tracker; stat; check -assert' --
+
+1. Executing Verilog-2005 frontend: rtl/normalization_bank_result_tracker.sv
+Parsing SystemVerilog input from `rtl/normalization_bank_result_tracker.sv' to AST representation.
+Generating RTLIL representation for module `\normalization_bank_result_tracker'.
+Warning: Replacing memory \received_q with list of registers. See rtl/normalization_bank_result_tracker.sv:39
+Warning: Replacing memory \expected_q with list of registers. See rtl/normalization_bank_result_tracker.sv:39
+Warning: Replacing memory \tag_q with list of registers. See rtl/normalization_bank_result_tracker.sv:39
+Warning: Replacing memory \received_d with list of registers. See rtl/normalization_bank_result_tracker.sv:21
+Successfully finished Verilog frontend.
+Parameter \BANKS = 16
+Parameter \ENTRIES = 16
+
+2. Executing AST frontend in derive mode using pre-parsed AST for module `\normalization_bank_result_tracker'.
+Parameter \BANKS = 16
+Parameter \ENTRIES = 16
+Generating RTLIL representation for module `$paramod$0f4fd52ed08671025fb4f6e020e40ab96de786b5\normalization_bank_result_tracker'.
+Warning: Replacing memory \received_q with list of registers. See rtl/normalization_bank_result_tracker.sv:39
+Warning: Replacing memory \expected_q with list of registers. See rtl/normalization_bank_result_tracker.sv:39
+Warning: Replacing memory \tag_q with list of registers. See rtl/normalization_bank_result_tracker.sv:39
+Warning: Replacing memory \received_d with list of registers. See rtl/normalization_bank_result_tracker.sv:21
+
+3. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1. Analyzing design hierarchy..
+Top module:  \normalization_bank_result_tracker
+
+3.2. Analyzing design hierarchy..
+Top module:  \normalization_bank_result_tracker
+Removed 0 unused modules.
+
+4. Executing SYNTH pass.
+
+4.1. Executing HIERARCHY pass (managing design hierarchy).
+
+4.1.1. Analyzing design hierarchy..
+Top module:  \normalization_bank_result_tracker
+
+4.1.2. Analyzing design hierarchy..
+Top module:  \normalization_bank_result_tracker
+Removed 0 unused modules.
+
+4.2. Executing PROC pass (convert processes to netlists).
+
+4.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed 1 dead cases from process $proc$rtl/normalization_bank_result_tracker.sv:17$2934 in module normalization_bank_result_tracker.
+Marked 562 switch rules as full_case in process $proc$rtl/normalization_bank_result_tracker.sv:17$2934 in module normalization_bank_result_tracker.
+Marked 39 switch rules as full_case in process $proc$rtl/normalization_bank_result_tracker.sv:37$5652 in module normalization_bank_result_tracker.
+Removed a total of 1 dead cases.
+
+4.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 16 redundant assignments.
+Promoted 352 assignments to connections.
+
+4.2.4. Executing PROC_INIT pass (extract init attributes).
+
+4.2.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_ni in `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+
+4.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~634 debug messages>
+
+4.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+     1/1365: $32\received_d[15][15:15]
+     2/1365: $31\received_d[15][15:15]
+     3/1365: $256\bank_result_ready_o[15:15]
+     4/1365: $256\bank_duplicate[15:15]
+     5/1365: $256\bank_match[15:15]
+     6/1365: $32\received_d[14][15:15]
+     7/1365: $31\received_d[14][15:15]
+     8/1365: $255\bank_result_ready_o[15:15]
+     9/1365: $255\bank_duplicate[15:15]
+    10/1365: $255\bank_match[15:15]
+    11/1365: $32\received_d[13][15:15]
+    12/1365: $31\received_d[13][15:15]
+    13/1365: $254\bank_result_ready_o[15:15]
+    14/1365: $254\bank_duplicate[15:15]
+    15/1365: $254\bank_match[15:15]
+    16/1365: $32\received_d[12][15:15]
+    17/1365: $31\received_d[12][15:15]
+    18/1365: $253\bank_result_ready_o[15:15]
+    19/1365: $253\bank_duplicate[15:15]
+    20/1365: $253\bank_match[15:15]
+    21/1365: $32\received_d[11][15:15]
+    22/1365: $31\received_d[11][15:15]
+    23/1365: $252\bank_result_ready_o[15:15]
+    24/1365: $252\bank_duplicate[15:15]
+    25/1365: $252\bank_match[15:15]
+    26/1365: $32\received_d[10][15:15]
+    27/1365: $31\received_d[10][15:15]
+    28/1365: $251\bank_result_ready_o[15:15]
+    29/1365: $251\bank_duplicate[15:15]
+    30/1365: $251\bank_match[15:15]
+    31/1365: $32\received_d[9][15:15]
+    32/1365: $31\received_d[9][15:15]
+    33/1365: $250\bank_result_ready_o[15:15]
+    34/1365: $250\bank_duplicate[15:15]
+    35/1365: $250\bank_match[15:15]
+    36/1365: $32\received_d[8][15:15]
+    37/1365: $31\received_d[8][15:15]
+    38/1365: $249\bank_result_ready_o[15:15]
+    39/1365: $249\bank_duplicate[15:15]
+    40/1365: $249\bank_match[15:15]
+    41/1365: $32\received_d[7][15:15]
+    42/1365: $31\received_d[7][15:15]
+    43/1365: $248\bank_result_ready_o[15:15]
+    44/1365: $248\bank_duplicate[15:15]
+    45/1365: $248\bank_match[15:15]
+    46/1365: $32\received_d[6][15:15]
+    47/1365: $31\received_d[6][15:15]
+    48/1365: $247\bank_result_ready_o[15:15]
+    49/1365: $247\bank_duplicate[15:15]
+    50/1365: $247\bank_match[15:15]
+    51/1365: $32\received_d[5][15:15]
+    52/1365: $31\received_d[5][15:15]
+    53/1365: $246\bank_result_ready_o[15:15]
+    54/1365: $246\bank_duplicate[15:15]
+    55/1365: $246\bank_match[15:15]
+    56/1365: $32\received_d[4][15:15]
+    57/1365: $31\received_d[4][15:15]
+    58/1365: $245\bank_result_ready_o[15:15]
+    59/1365: $245\bank_duplicate[15:15]
+    60/1365: $245\bank_match[15:15]
+    61/1365: $32\received_d[3][15:15]
+    62/1365: $31\received_d[3][15:15]
+    63/1365: $244\bank_result_ready_o[15:15]
+    64/1365: $244\bank_duplicate[15:15]
+    65/1365: $244\bank_match[15:15]
+    66/1365: $32\received_d[2][15:15]
+    67/1365: $31\received_d[2][15:15]
+    68/1365: $243\bank_result_ready_o[15:15]
+    69/1365: $243\bank_duplicate[15:15]
+    70/1365: $243\bank_match[15:15]
+    71/1365: $32\received_d[1][15:15]
+    72/1365: $31\received_d[1][15:15]
+    73/1365: $242\bank_result_ready_o[15:15]
+    74/1365: $242\bank_duplicate[15:15]
+    75/1365: $242\bank_match[15:15]
+    76/1365: $32\received_d[0][15:15]
+    77/1365: $31\received_d[0][15:15]
+    78/1365: $241\bank_result_ready_o[15:15]
+    79/1365: $241\bank_duplicate[15:15]
+    80/1365: $241\bank_match[15:15]
+    81/1365: $30\received_d[15][14:14]
+    82/1365: $29\received_d[15][14:14]
+    83/1365: $240\bank_result_ready_o[14:14]
+    84/1365: $240\bank_duplicate[14:14]
+    85/1365: $240\bank_match[14:14]
+    86/1365: $30\received_d[14][14:14]
+    87/1365: $29\received_d[14][14:14]
+    88/1365: $239\bank_result_ready_o[14:14]
+    89/1365: $239\bank_duplicate[14:14]
+    90/1365: $239\bank_match[14:14]
+    91/1365: $30\received_d[13][14:14]
+    92/1365: $29\received_d[13][14:14]
+    93/1365: $238\bank_result_ready_o[14:14]
+    94/1365: $238\bank_duplicate[14:14]
+    95/1365: $238\bank_match[14:14]
+    96/1365: $30\received_d[12][14:14]
+    97/1365: $29\received_d[12][14:14]
+    98/1365: $237\bank_result_ready_o[14:14]
+    99/1365: $237\bank_duplicate[14:14]
+   100/1365: $237\bank_match[14:14]
+   101/1365: $30\received_d[11][14:14]
+   102/1365: $29\received_d[11][14:14]
+   103/1365: $236\bank_result_ready_o[14:14]
+   104/1365: $236\bank_duplicate[14:14]
+   105/1365: $236\bank_match[14:14]
+   106/1365: $30\received_d[10][14:14]
+   107/1365: $29\received_d[10][14:14]
+   108/1365: $235\bank_result_ready_o[14:14]
+   109/1365: $235\bank_duplicate[14:14]
+   110/1365: $235\bank_match[14:14]
+   111/1365: $30\received_d[9][14:14]
+   112/1365: $29\received_d[9][14:14]
+   113/1365: $234\bank_result_ready_o[14:14]
+   114/1365: $234\bank_duplicate[14:14]
+   115/1365: $234\bank_match[14:14]
+   116/1365: $30\received_d[8][14:14]
+   117/1365: $29\received_d[8][14:14]
+   118/1365: $233\bank_result_ready_o[14:14]
+   119/1365: $233\bank_duplicate[14:14]
+   120/1365: $233\bank_match[14:14]
+   121/1365: $30\received_d[7][14:14]
+   122/1365: $29\received_d[7][14:14]
+   123/1365: $232\bank_result_ready_o[14:14]
+   124/1365: $232\bank_duplicate[14:14]
+   125/1365: $232\bank_match[14:14]
+   126/1365: $30\received_d[6][14:14]
+   127/1365: $29\received_d[6][14:14]
+   128/1365: $231\bank_result_ready_o[14:14]
+   129/1365: $231\bank_duplicate[14:14]
+   130/1365: $231\bank_match[14:14]
+   131/1365: $30\received_d[5][14:14]
+   132/1365: $29\received_d[5][14:14]
+   133/1365: $230\bank_result_ready_o[14:14]
+   134/1365: $230\bank_duplicate[14:14]
+   135/1365: $230\bank_match[14:14]
+   136/1365: $30\received_d[4][14:14]
+   137/1365: $29\received_d[4][14:14]
+   138/1365: $229\bank_result_ready_o[14:14]
+   139/1365: $229\bank_duplicate[14:14]
+   140/1365: $229\bank_match[14:14]
+   141/1365: $30\received_d[3][14:14]
+   142/1365: $29\received_d[3][14:14]
+   143/1365: $228\bank_result_ready_o[14:14]
+   144/1365: $228\bank_duplicate[14:14]
+   145/1365: $228\bank_match[14:14]
+   146/1365: $30\received_d[2][14:14]
+   147/1365: $29\received_d[2][14:14]
+   148/1365: $227\bank_result_ready_o[14:14]
+   149/1365: $227\bank_duplicate[14:14]
+   150/1365: $227\bank_match[14:14]
+   151/1365: $30\received_d[1][14:14]
+   152/1365: $29\received_d[1][14:14]
+   153/1365: $226\bank_result_ready_o[14:14]
+   154/1365: $226\bank_duplicate[14:14]
+   155/1365: $226\bank_match[14:14]
+   156/1365: $30\received_d[0][14:14]
+   157/1365: $29\received_d[0][14:14]
+   158/1365: $225\bank_result_ready_o[14:14]
+   159/1365: $225\bank_duplicate[14:14]
+   160/1365: $225\bank_match[14:14]
+   161/1365: $28\received_d[15][13:13]
+   162/1365: $27\received_d[15][13:13]
+   163/1365: $224\bank_result_ready_o[13:13]
+   164/1365: $224\bank_duplicate[13:13]
+   165/1365: $224\bank_match[13:13]
+   166/1365: $28\received_d[14][13:13]
+   167/1365: $27\received_d[14][13:13]
+   168/1365: $223\bank_result_ready_o[13:13]
+   169/1365: $223\bank_duplicate[13:13]
+   170/1365: $223\bank_match[13:13]
+   171/1365: $28\received_d[13][13:13]
+   172/1365: $27\received_d[13][13:13]
+   173/1365: $222\bank_result_ready_o[13:13]
+   174/1365: $222\bank_duplicate[13:13]
+   175/1365: $222\bank_match[13:13]
+   176/1365: $28\received_d[12][13:13]
+   177/1365: $27\received_d[12][13:13]
+   178/1365: $221\bank_result_ready_o[13:13]
+   179/1365: $221\bank_duplicate[13:13]
+   180/1365: $221\bank_match[13:13]
+   181/1365: $28\received_d[11][13:13]
+   182/1365: $27\received_d[11][13:13]
+   183/1365: $220\bank_result_ready_o[13:13]
+   184/1365: $220\bank_duplicate[13:13]
+   185/1365: $220\bank_match[13:13]
+   186/1365: $28\received_d[10][13:13]
+   187/1365: $27\received_d[10][13:13]
+   188/1365: $219\bank_result_ready_o[13:13]
+   189/1365: $219\bank_duplicate[13:13]
+   190/1365: $219\bank_match[13:13]
+   191/1365: $28\received_d[9][13:13]
+   192/1365: $27\received_d[9][13:13]
+   193/1365: $218\bank_result_ready_o[13:13]
+   194/1365: $218\bank_duplicate[13:13]
+   195/1365: $218\bank_match[13:13]
+   196/1365: $28\received_d[8][13:13]
+   197/1365: $27\received_d[8][13:13]
+   198/1365: $217\bank_result_ready_o[13:13]
+   199/1365: $217\bank_duplicate[13:13]
+   200/1365: $217\bank_match[13:13]
+   201/1365: $28\received_d[7][13:13]
+   202/1365: $27\received_d[7][13:13]
+   203/1365: $216\bank_result_ready_o[13:13]
+   204/1365: $216\bank_duplicate[13:13]
+   205/1365: $216\bank_match[13:13]
+   206/1365: $28\received_d[6][13:13]
+   207/1365: $27\received_d[6][13:13]
+   208/1365: $215\bank_result_ready_o[13:13]
+   209/1365: $215\bank_duplicate[13:13]
+   210/1365: $215\bank_match[13:13]
+   211/1365: $28\received_d[5][13:13]
+   212/1365: $27\received_d[5][13:13]
+   213/1365: $214\bank_result_ready_o[13:13]
+   214/1365: $214\bank_duplicate[13:13]
+   215/1365: $214\bank_match[13:13]
+   216/1365: $28\received_d[4][13:13]
+   217/1365: $27\received_d[4][13:13]
+   218/1365: $213\bank_result_ready_o[13:13]
+   219/1365: $213\bank_duplicate[13:13]
+   220/1365: $213\bank_match[13:13]
+   221/1365: $28\received_d[3][13:13]
+   222/1365: $27\received_d[3][13:13]
+   223/1365: $212\bank_result_ready_o[13:13]
+   224/1365: $212\bank_duplicate[13:13]
+   225/1365: $212\bank_match[13:13]
+   226/1365: $28\received_d[2][13:13]
+   227/1365: $27\received_d[2][13:13]
+   228/1365: $211\bank_result_ready_o[13:13]
+   229/1365: $211\bank_duplicate[13:13]
+   230/1365: $211\bank_match[13:13]
+   231/1365: $28\received_d[1][13:13]
+   232/1365: $27\received_d[1][13:13]
+   233/1365: $210\bank_result_ready_o[13:13]
+   234/1365: $210\bank_duplicate[13:13]
+   235/1365: $210\bank_match[13:13]
+   236/1365: $28\received_d[0][13:13]
+   237/1365: $27\received_d[0][13:13]
+   238/1365: $209\bank_result_ready_o[13:13]
+   239/1365: $209\bank_duplicate[13:13]
+   240/1365: $209\bank_match[13:13]
+   241/1365: $26\received_d[15][12:12]
+   242/1365: $25\received_d[15][12:12]
+   243/1365: $208\bank_result_ready_o[12:12]
+   244/1365: $208\bank_duplicate[12:12]
+   245/1365: $208\bank_match[12:12]
+   246/1365: $26\received_d[14][12:12]
+   247/1365: $25\received_d[14][12:12]
+   248/1365: $207\bank_result_ready_o[12:12]
+   249/1365: $207\bank_duplicate[12:12]
+   250/1365: $207\bank_match[12:12]
+   251/1365: $26\received_d[13][12:12]
+   252/1365: $25\received_d[13][12:12]
+   253/1365: $206\bank_result_ready_o[12:12]
+   254/1365: $206\bank_duplicate[12:12]
+   255/1365: $206\bank_match[12:12]
+   256/1365: $26\received_d[12][12:12]
+   257/1365: $25\received_d[12][12:12]
+   258/1365: $205\bank_result_ready_o[12:12]
+   259/1365: $205\bank_duplicate[12:12]
+   260/1365: $205\bank_match[12:12]
+   261/1365: $26\received_d[11][12:12]
+   262/1365: $25\received_d[11][12:12]
+   263/1365: $204\bank_result_ready_o[12:12]
+   264/1365: $204\bank_duplicate[12:12]
+   265/1365: $204\bank_match[12:12]
+   266/1365: $26\received_d[10][12:12]
+   267/1365: $25\received_d[10][12:12]
+   268/1365: $203\bank_result_ready_o[12:12]
+   269/1365: $203\bank_duplicate[12:12]
+   270/1365: $203\bank_match[12:12]
+   271/1365: $26\received_d[9][12:12]
+   272/1365: $25\received_d[9][12:12]
+   273/1365: $202\bank_result_ready_o[12:12]
+   274/1365: $202\bank_duplicate[12:12]
+   275/1365: $202\bank_match[12:12]
+   276/1365: $26\received_d[8][12:12]
+   277/1365: $25\received_d[8][12:12]
+   278/1365: $201\bank_result_ready_o[12:12]
+   279/1365: $201\bank_duplicate[12:12]
+   280/1365: $201\bank_match[12:12]
+   281/1365: $26\received_d[7][12:12]
+   282/1365: $25\received_d[7][12:12]
+   283/1365: $200\bank_result_ready_o[12:12]
+   284/1365: $200\bank_duplicate[12:12]
+   285/1365: $200\bank_match[12:12]
+   286/1365: $26\received_d[6][12:12]
+   287/1365: $25\received_d[6][12:12]
+   288/1365: $199\bank_result_ready_o[12:12]
+   289/1365: $199\bank_duplicate[12:12]
+   290/1365: $199\bank_match[12:12]
+   291/1365: $26\received_d[5][12:12]
+   292/1365: $25\received_d[5][12:12]
+   293/1365: $198\bank_result_ready_o[12:12]
+   294/1365: $198\bank_duplicate[12:12]
+   295/1365: $198\bank_match[12:12]
+   296/1365: $26\received_d[4][12:12]
+   297/1365: $25\received_d[4][12:12]
+   298/1365: $197\bank_result_ready_o[12:12]
+   299/1365: $197\bank_duplicate[12:12]
+   300/1365: $197\bank_match[12:12]
+   301/1365: $26\received_d[3][12:12]
+   302/1365: $25\received_d[3][12:12]
+   303/1365: $196\bank_result_ready_o[12:12]
+   304/1365: $196\bank_duplicate[12:12]
+   305/1365: $196\bank_match[12:12]
+   306/1365: $26\received_d[2][12:12]
+   307/1365: $25\received_d[2][12:12]
+   308/1365: $195\bank_result_ready_o[12:12]
+   309/1365: $195\bank_duplicate[12:12]
+   310/1365: $195\bank_match[12:12]
+   311/1365: $26\received_d[1][12:12]
+   312/1365: $25\received_d[1][12:12]
+   313/1365: $194\bank_result_ready_o[12:12]
+   314/1365: $194\bank_duplicate[12:12]
+   315/1365: $194\bank_match[12:12]
+   316/1365: $26\received_d[0][12:12]
+   317/1365: $25\received_d[0][12:12]
+   318/1365: $193\bank_result_ready_o[12:12]
+   319/1365: $193\bank_duplicate[12:12]
+   320/1365: $193\bank_match[12:12]
+   321/1365: $24\received_d[15][11:11]
+   322/1365: $23\received_d[15][11:11]
+   323/1365: $192\bank_result_ready_o[11:11]
+   324/1365: $192\bank_duplicate[11:11]
+   325/1365: $192\bank_match[11:11]
+   326/1365: $24\received_d[14][11:11]
+   327/1365: $23\received_d[14][11:11]
+   328/1365: $191\bank_result_ready_o[11:11]
+   329/1365: $191\bank_duplicate[11:11]
+   330/1365: $191\bank_match[11:11]
+   331/1365: $24\received_d[13][11:11]
+   332/1365: $23\received_d[13][11:11]
+   333/1365: $190\bank_result_ready_o[11:11]
+   334/1365: $190\bank_duplicate[11:11]
+   335/1365: $190\bank_match[11:11]
+   336/1365: $24\received_d[12][11:11]
+   337/1365: $23\received_d[12][11:11]
+   338/1365: $189\bank_result_ready_o[11:11]
+   339/1365: $189\bank_duplicate[11:11]
+   340/1365: $189\bank_match[11:11]
+   341/1365: $24\received_d[11][11:11]
+   342/1365: $23\received_d[11][11:11]
+   343/1365: $188\bank_result_ready_o[11:11]
+   344/1365: $188\bank_duplicate[11:11]
+   345/1365: $188\bank_match[11:11]
+   346/1365: $24\received_d[10][11:11]
+   347/1365: $23\received_d[10][11:11]
+   348/1365: $187\bank_result_ready_o[11:11]
+   349/1365: $187\bank_duplicate[11:11]
+   350/1365: $187\bank_match[11:11]
+   351/1365: $24\received_d[9][11:11]
+   352/1365: $23\received_d[9][11:11]
+   353/1365: $186\bank_result_ready_o[11:11]
+   354/1365: $186\bank_duplicate[11:11]
+   355/1365: $186\bank_match[11:11]
+   356/1365: $24\received_d[8][11:11]
+   357/1365: $23\received_d[8][11:11]
+   358/1365: $185\bank_result_ready_o[11:11]
+   359/1365: $185\bank_duplicate[11:11]
+   360/1365: $185\bank_match[11:11]
+   361/1365: $24\received_d[7][11:11]
+   362/1365: $23\received_d[7][11:11]
+   363/1365: $184\bank_result_ready_o[11:11]
+   364/1365: $184\bank_duplicate[11:11]
+   365/1365: $184\bank_match[11:11]
+   366/1365: $24\received_d[6][11:11]
+   367/1365: $23\received_d[6][11:11]
+   368/1365: $183\bank_result_ready_o[11:11]
+   369/1365: $183\bank_duplicate[11:11]
+   370/1365: $183\bank_match[11:11]
+   371/1365: $24\received_d[5][11:11]
+   372/1365: $23\received_d[5][11:11]
+   373/1365: $182\bank_result_ready_o[11:11]
+   374/1365: $182\bank_duplicate[11:11]
+   375/1365: $182\bank_match[11:11]
+   376/1365: $24\received_d[4][11:11]
+   377/1365: $23\received_d[4][11:11]
+   378/1365: $181\bank_result_ready_o[11:11]
+   379/1365: $181\bank_duplicate[11:11]
+   380/1365: $181\bank_match[11:11]
+   381/1365: $24\received_d[3][11:11]
+   382/1365: $23\received_d[3][11:11]
+   383/1365: $180\bank_result_ready_o[11:11]
+   384/1365: $180\bank_duplicate[11:11]
+   385/1365: $180\bank_match[11:11]
+   386/1365: $24\received_d[2][11:11]
+   387/1365: $23\received_d[2][11:11]
+   388/1365: $179\bank_result_ready_o[11:11]
+   389/1365: $179\bank_duplicate[11:11]
+   390/1365: $179\bank_match[11:11]
+   391/1365: $24\received_d[1][11:11]
+   392/1365: $23\received_d[1][11:11]
+   393/1365: $178\bank_result_ready_o[11:11]
+   394/1365: $178\bank_duplicate[11:11]
+   395/1365: $178\bank_match[11:11]
+   396/1365: $24\received_d[0][11:11]
+   397/1365: $23\received_d[0][11:11]
+   398/1365: $177\bank_result_ready_o[11:11]
+   399/1365: $177\bank_duplicate[11:11]
+   400/1365: $177\bank_match[11:11]
+   401/1365: $22\received_d[15][10:10]
+   402/1365: $21\received_d[15][10:10]
+   403/1365: $176\bank_result_ready_o[10:10]
+   404/1365: $176\bank_duplicate[10:10]
+   405/1365: $176\bank_match[10:10]
+   406/1365: $22\received_d[14][10:10]
+   407/1365: $21\received_d[14][10:10]
+   408/1365: $175\bank_result_ready_o[10:10]
+   409/1365: $175\bank_duplicate[10:10]
+   410/1365: $175\bank_match[10:10]
+   411/1365: $22\received_d[13][10:10]
+   412/1365: $21\received_d[13][10:10]
+   413/1365: $174\bank_result_ready_o[10:10]
+   414/1365: $174\bank_duplicate[10:10]
+   415/1365: $174\bank_match[10:10]
+   416/1365: $22\received_d[12][10:10]
+   417/1365: $21\received_d[12][10:10]
+   418/1365: $173\bank_result_ready_o[10:10]
+   419/1365: $173\bank_duplicate[10:10]
+   420/1365: $173\bank_match[10:10]
+   421/1365: $22\received_d[11][10:10]
+   422/1365: $21\received_d[11][10:10]
+   423/1365: $172\bank_result_ready_o[10:10]
+   424/1365: $172\bank_duplicate[10:10]
+   425/1365: $172\bank_match[10:10]
+   426/1365: $22\received_d[10][10:10]
+   427/1365: $21\received_d[10][10:10]
+   428/1365: $171\bank_result_ready_o[10:10]
+   429/1365: $171\bank_duplicate[10:10]
+   430/1365: $171\bank_match[10:10]
+   431/1365: $22\received_d[9][10:10]
+   432/1365: $21\received_d[9][10:10]
+   433/1365: $170\bank_result_ready_o[10:10]
+   434/1365: $170\bank_duplicate[10:10]
+   435/1365: $170\bank_match[10:10]
+   436/1365: $22\received_d[8][10:10]
+   437/1365: $21\received_d[8][10:10]
+   438/1365: $169\bank_result_ready_o[10:10]
+   439/1365: $169\bank_duplicate[10:10]
+   440/1365: $169\bank_match[10:10]
+   441/1365: $22\received_d[7][10:10]
+   442/1365: $21\received_d[7][10:10]
+   443/1365: $168\bank_result_ready_o[10:10]
+   444/1365: $168\bank_duplicate[10:10]
+   445/1365: $168\bank_match[10:10]
+   446/1365: $22\received_d[6][10:10]
+   447/1365: $21\received_d[6][10:10]
+   448/1365: $167\bank_result_ready_o[10:10]
+   449/1365: $167\bank_duplicate[10:10]
+   450/1365: $167\bank_match[10:10]
+   451/1365: $22\received_d[5][10:10]
+   452/1365: $21\received_d[5][10:10]
+   453/1365: $166\bank_result_ready_o[10:10]
+   454/1365: $166\bank_duplicate[10:10]
+   455/1365: $166\bank_match[10:10]
+   456/1365: $22\received_d[4][10:10]
+   457/1365: $21\received_d[4][10:10]
+   458/1365: $165\bank_result_ready_o[10:10]
+   459/1365: $165\bank_duplicate[10:10]
+   460/1365: $165\bank_match[10:10]
+   461/1365: $22\received_d[3][10:10]
+   462/1365: $21\received_d[3][10:10]
+   463/1365: $164\bank_result_ready_o[10:10]
+   464/1365: $164\bank_duplicate[10:10]
+   465/1365: $164\bank_match[10:10]
+   466/1365: $22\received_d[2][10:10]
+   467/1365: $21\received_d[2][10:10]
+   468/1365: $163\bank_result_ready_o[10:10]
+   469/1365: $163\bank_duplicate[10:10]
+   470/1365: $163\bank_match[10:10]
+   471/1365: $22\received_d[1][10:10]
+   472/1365: $21\received_d[1][10:10]
+   473/1365: $162\bank_result_ready_o[10:10]
+   474/1365: $162\bank_duplicate[10:10]
+   475/1365: $162\bank_match[10:10]
+   476/1365: $22\received_d[0][10:10]
+   477/1365: $21\received_d[0][10:10]
+   478/1365: $161\bank_result_ready_o[10:10]
+   479/1365: $161\bank_duplicate[10:10]
+   480/1365: $161\bank_match[10:10]
+   481/1365: $20\received_d[15][9:9]
+   482/1365: $19\received_d[15][9:9]
+   483/1365: $160\bank_result_ready_o[9:9]
+   484/1365: $160\bank_duplicate[9:9]
+   485/1365: $160\bank_match[9:9]
+   486/1365: $20\received_d[14][9:9]
+   487/1365: $19\received_d[14][9:9]
+   488/1365: $159\bank_result_ready_o[9:9]
+   489/1365: $159\bank_duplicate[9:9]
+   490/1365: $159\bank_match[9:9]
+   491/1365: $20\received_d[13][9:9]
+   492/1365: $19\received_d[13][9:9]
+   493/1365: $158\bank_result_ready_o[9:9]
+   494/1365: $158\bank_duplicate[9:9]
+   495/1365: $158\bank_match[9:9]
+   496/1365: $20\received_d[12][9:9]
+   497/1365: $19\received_d[12][9:9]
+   498/1365: $157\bank_result_ready_o[9:9]
+   499/1365: $157\bank_duplicate[9:9]
+   500/1365: $157\bank_match[9:9]
+   501/1365: $20\received_d[11][9:9]
+   502/1365: $19\received_d[11][9:9]
+   503/1365: $156\bank_result_ready_o[9:9]
+   504/1365: $156\bank_duplicate[9:9]
+   505/1365: $156\bank_match[9:9]
+   506/1365: $20\received_d[10][9:9]
+   507/1365: $19\received_d[10][9:9]
+   508/1365: $155\bank_result_ready_o[9:9]
+   509/1365: $155\bank_duplicate[9:9]
+   510/1365: $155\bank_match[9:9]
+   511/1365: $20\received_d[9][9:9]
+   512/1365: $19\received_d[9][9:9]
+   513/1365: $154\bank_result_ready_o[9:9]
+   514/1365: $154\bank_duplicate[9:9]
+   515/1365: $154\bank_match[9:9]
+   516/1365: $20\received_d[8][9:9]
+   517/1365: $19\received_d[8][9:9]
+   518/1365: $153\bank_result_ready_o[9:9]
+   519/1365: $153\bank_duplicate[9:9]
+   520/1365: $153\bank_match[9:9]
+   521/1365: $20\received_d[7][9:9]
+   522/1365: $19\received_d[7][9:9]
+   523/1365: $152\bank_result_ready_o[9:9]
+   524/1365: $152\bank_duplicate[9:9]
+   525/1365: $152\bank_match[9:9]
+   526/1365: $20\received_d[6][9:9]
+   527/1365: $19\received_d[6][9:9]
+   528/1365: $151\bank_result_ready_o[9:9]
+   529/1365: $151\bank_duplicate[9:9]
+   530/1365: $151\bank_match[9:9]
+   531/1365: $20\received_d[5][9:9]
+   532/1365: $19\received_d[5][9:9]
+   533/1365: $150\bank_result_ready_o[9:9]
+   534/1365: $150\bank_duplicate[9:9]
+   535/1365: $150\bank_match[9:9]
+   536/1365: $20\received_d[4][9:9]
+   537/1365: $19\received_d[4][9:9]
+   538/1365: $149\bank_result_ready_o[9:9]
+   539/1365: $149\bank_duplicate[9:9]
+   540/1365: $149\bank_match[9:9]
+   541/1365: $20\received_d[3][9:9]
+   542/1365: $19\received_d[3][9:9]
+   543/1365: $148\bank_result_ready_o[9:9]
+   544/1365: $148\bank_duplicate[9:9]
+   545/1365: $148\bank_match[9:9]
+   546/1365: $20\received_d[2][9:9]
+   547/1365: $19\received_d[2][9:9]
+   548/1365: $147\bank_result_ready_o[9:9]
+   549/1365: $147\bank_duplicate[9:9]
+   550/1365: $147\bank_match[9:9]
+   551/1365: $20\received_d[1][9:9]
+   552/1365: $19\received_d[1][9:9]
+   553/1365: $146\bank_result_ready_o[9:9]
+   554/1365: $146\bank_duplicate[9:9]
+   555/1365: $146\bank_match[9:9]
+   556/1365: $20\received_d[0][9:9]
+   557/1365: $19\received_d[0][9:9]
+   558/1365: $145\bank_result_ready_o[9:9]
+   559/1365: $145\bank_duplicate[9:9]
+   560/1365: $145\bank_match[9:9]
+   561/1365: $18\received_d[15][8:8]
+   562/1365: $17\received_d[15][8:8]
+   563/1365: $144\bank_result_ready_o[8:8]
+   564/1365: $144\bank_duplicate[8:8]
+   565/1365: $144\bank_match[8:8]
+   566/1365: $18\received_d[14][8:8]
+   567/1365: $17\received_d[14][8:8]
+   568/1365: $143\bank_result_ready_o[8:8]
+   569/1365: $143\bank_duplicate[8:8]
+   570/1365: $143\bank_match[8:8]
+   571/1365: $18\received_d[13][8:8]
+   572/1365: $17\received_d[13][8:8]
+   573/1365: $142\bank_result_ready_o[8:8]
+   574/1365: $142\bank_duplicate[8:8]
+   575/1365: $142\bank_match[8:8]
+   576/1365: $18\received_d[12][8:8]
+   577/1365: $17\received_d[12][8:8]
+   578/1365: $141\bank_result_ready_o[8:8]
+   579/1365: $141\bank_duplicate[8:8]
+   580/1365: $141\bank_match[8:8]
+   581/1365: $18\received_d[11][8:8]
+   582/1365: $17\received_d[11][8:8]
+   583/1365: $140\bank_result_ready_o[8:8]
+   584/1365: $140\bank_duplicate[8:8]
+   585/1365: $140\bank_match[8:8]
+   586/1365: $18\received_d[10][8:8]
+   587/1365: $17\received_d[10][8:8]
+   588/1365: $139\bank_result_ready_o[8:8]
+   589/1365: $139\bank_duplicate[8:8]
+   590/1365: $139\bank_match[8:8]
+   591/1365: $18\received_d[9][8:8]
+   592/1365: $17\received_d[9][8:8]
+   593/1365: $138\bank_result_ready_o[8:8]
+   594/1365: $138\bank_duplicate[8:8]
+   595/1365: $138\bank_match[8:8]
+   596/1365: $18\received_d[8][8:8]
+   597/1365: $17\received_d[8][8:8]
+   598/1365: $137\bank_result_ready_o[8:8]
+   599/1365: $137\bank_duplicate[8:8]
+   600/1365: $137\bank_match[8:8]
+   601/1365: $18\received_d[7][8:8]
+   602/1365: $17\received_d[7][8:8]
+   603/1365: $136\bank_result_ready_o[8:8]
+   604/1365: $136\bank_duplicate[8:8]
+   605/1365: $136\bank_match[8:8]
+   606/1365: $18\received_d[6][8:8]
+   607/1365: $17\received_d[6][8:8]
+   608/1365: $135\bank_result_ready_o[8:8]
+   609/1365: $135\bank_duplicate[8:8]
+   610/1365: $135\bank_match[8:8]
+   611/1365: $18\received_d[5][8:8]
+   612/1365: $17\received_d[5][8:8]
+   613/1365: $134\bank_result_ready_o[8:8]
+   614/1365: $134\bank_duplicate[8:8]
+   615/1365: $134\bank_match[8:8]
+   616/1365: $18\received_d[4][8:8]
+   617/1365: $17\received_d[4][8:8]
+   618/1365: $133\bank_result_ready_o[8:8]
+   619/1365: $133\bank_duplicate[8:8]
+   620/1365: $133\bank_match[8:8]
+   621/1365: $18\received_d[3][8:8]
+   622/1365: $17\received_d[3][8:8]
+   623/1365: $132\bank_result_ready_o[8:8]
+   624/1365: $132\bank_duplicate[8:8]
+   625/1365: $132\bank_match[8:8]
+   626/1365: $18\received_d[2][8:8]
+   627/1365: $17\received_d[2][8:8]
+   628/1365: $131\bank_result_ready_o[8:8]
+   629/1365: $131\bank_duplicate[8:8]
+   630/1365: $131\bank_match[8:8]
+   631/1365: $18\received_d[1][8:8]
+   632/1365: $17\received_d[1][8:8]
+   633/1365: $130\bank_result_ready_o[8:8]
+   634/1365: $130\bank_duplicate[8:8]
+   635/1365: $130\bank_match[8:8]
+   636/1365: $18\received_d[0][8:8]
+   637/1365: $17\received_d[0][8:8]
+   638/1365: $129\bank_result_ready_o[8:8]
+   639/1365: $129\bank_duplicate[8:8]
+   640/1365: $129\bank_match[8:8]
+   641/1365: $16\received_d[15][7:7]
+   642/1365: $15\received_d[15][7:7]
+   643/1365: $128\bank_result_ready_o[7:7]
+   644/1365: $128\bank_duplicate[7:7]
+   645/1365: $128\bank_match[7:7]
+   646/1365: $16\received_d[14][7:7]
+   647/1365: $15\received_d[14][7:7]
+   648/1365: $127\bank_result_ready_o[7:7]
+   649/1365: $127\bank_duplicate[7:7]
+   650/1365: $127\bank_match[7:7]
+   651/1365: $16\received_d[13][7:7]
+   652/1365: $15\received_d[13][7:7]
+   653/1365: $126\bank_result_ready_o[7:7]
+   654/1365: $126\bank_duplicate[7:7]
+   655/1365: $126\bank_match[7:7]
+   656/1365: $16\received_d[12][7:7]
+   657/1365: $15\received_d[12][7:7]
+   658/1365: $125\bank_result_ready_o[7:7]
+   659/1365: $125\bank_duplicate[7:7]
+   660/1365: $125\bank_match[7:7]
+   661/1365: $16\received_d[11][7:7]
+   662/1365: $15\received_d[11][7:7]
+   663/1365: $124\bank_result_ready_o[7:7]
+   664/1365: $124\bank_duplicate[7:7]
+   665/1365: $124\bank_match[7:7]
+   666/1365: $16\received_d[10][7:7]
+   667/1365: $15\received_d[10][7:7]
+   668/1365: $123\bank_result_ready_o[7:7]
+   669/1365: $123\bank_duplicate[7:7]
+   670/1365: $123\bank_match[7:7]
+   671/1365: $16\received_d[9][7:7]
+   672/1365: $15\received_d[9][7:7]
+   673/1365: $122\bank_result_ready_o[7:7]
+   674/1365: $122\bank_duplicate[7:7]
+   675/1365: $122\bank_match[7:7]
+   676/1365: $16\received_d[8][7:7]
+   677/1365: $15\received_d[8][7:7]
+   678/1365: $121\bank_result_ready_o[7:7]
+   679/1365: $121\bank_duplicate[7:7]
+   680/1365: $121\bank_match[7:7]
+   681/1365: $16\received_d[7][7:7]
+   682/1365: $15\received_d[7][7:7]
+   683/1365: $120\bank_result_ready_o[7:7]
+   684/1365: $120\bank_duplicate[7:7]
+   685/1365: $120\bank_match[7:7]
+   686/1365: $16\received_d[6][7:7]
+   687/1365: $15\received_d[6][7:7]
+   688/1365: $119\bank_result_ready_o[7:7]
+   689/1365: $119\bank_duplicate[7:7]
+   690/1365: $119\bank_match[7:7]
+   691/1365: $16\received_d[5][7:7]
+   692/1365: $15\received_d[5][7:7]
+   693/1365: $118\bank_result_ready_o[7:7]
+   694/1365: $118\bank_duplicate[7:7]
+   695/1365: $118\bank_match[7:7]
+   696/1365: $16\received_d[4][7:7]
+   697/1365: $15\received_d[4][7:7]
+   698/1365: $117\bank_result_ready_o[7:7]
+   699/1365: $117\bank_duplicate[7:7]
+   700/1365: $117\bank_match[7:7]
+   701/1365: $16\received_d[3][7:7]
+   702/1365: $15\received_d[3][7:7]
+   703/1365: $116\bank_result_ready_o[7:7]
+   704/1365: $116\bank_duplicate[7:7]
+   705/1365: $116\bank_match[7:7]
+   706/1365: $16\received_d[2][7:7]
+   707/1365: $15\received_d[2][7:7]
+   708/1365: $115\bank_result_ready_o[7:7]
+   709/1365: $115\bank_duplicate[7:7]
+   710/1365: $115\bank_match[7:7]
+   711/1365: $16\received_d[1][7:7]
+   712/1365: $15\received_d[1][7:7]
+   713/1365: $114\bank_result_ready_o[7:7]
+   714/1365: $114\bank_duplicate[7:7]
+   715/1365: $114\bank_match[7:7]
+   716/1365: $16\received_d[0][7:7]
+   717/1365: $15\received_d[0][7:7]
+   718/1365: $113\bank_result_ready_o[7:7]
+   719/1365: $113\bank_duplicate[7:7]
+   720/1365: $113\bank_match[7:7]
+   721/1365: $14\received_d[15][6:6]
+   722/1365: $13\received_d[15][6:6]
+   723/1365: $112\bank_result_ready_o[6:6]
+   724/1365: $112\bank_duplicate[6:6]
+   725/1365: $112\bank_match[6:6]
+   726/1365: $14\received_d[14][6:6]
+   727/1365: $13\received_d[14][6:6]
+   728/1365: $111\bank_result_ready_o[6:6]
+   729/1365: $111\bank_duplicate[6:6]
+   730/1365: $111\bank_match[6:6]
+   731/1365: $14\received_d[13][6:6]
+   732/1365: $13\received_d[13][6:6]
+   733/1365: $110\bank_result_ready_o[6:6]
+   734/1365: $110\bank_duplicate[6:6]
+   735/1365: $110\bank_match[6:6]
+   736/1365: $14\received_d[12][6:6]
+   737/1365: $13\received_d[12][6:6]
+   738/1365: $109\bank_result_ready_o[6:6]
+   739/1365: $109\bank_duplicate[6:6]
+   740/1365: $109\bank_match[6:6]
+   741/1365: $14\received_d[11][6:6]
+   742/1365: $13\received_d[11][6:6]
+   743/1365: $108\bank_result_ready_o[6:6]
+   744/1365: $108\bank_duplicate[6:6]
+   745/1365: $108\bank_match[6:6]
+   746/1365: $14\received_d[10][6:6]
+   747/1365: $13\received_d[10][6:6]
+   748/1365: $107\bank_result_ready_o[6:6]
+   749/1365: $107\bank_duplicate[6:6]
+   750/1365: $107\bank_match[6:6]
+   751/1365: $14\received_d[9][6:6]
+   752/1365: $13\received_d[9][6:6]
+   753/1365: $106\bank_result_ready_o[6:6]
+   754/1365: $106\bank_duplicate[6:6]
+   755/1365: $106\bank_match[6:6]
+   756/1365: $14\received_d[8][6:6]
+   757/1365: $13\received_d[8][6:6]
+   758/1365: $105\bank_result_ready_o[6:6]
+   759/1365: $105\bank_duplicate[6:6]
+   760/1365: $105\bank_match[6:6]
+   761/1365: $14\received_d[7][6:6]
+   762/1365: $13\received_d[7][6:6]
+   763/1365: $104\bank_result_ready_o[6:6]
+   764/1365: $104\bank_duplicate[6:6]
+   765/1365: $104\bank_match[6:6]
+   766/1365: $14\received_d[6][6:6]
+   767/1365: $13\received_d[6][6:6]
+   768/1365: $103\bank_result_ready_o[6:6]
+   769/1365: $103\bank_duplicate[6:6]
+   770/1365: $103\bank_match[6:6]
+   771/1365: $14\received_d[5][6:6]
+   772/1365: $13\received_d[5][6:6]
+   773/1365: $102\bank_result_ready_o[6:6]
+   774/1365: $102\bank_duplicate[6:6]
+   775/1365: $102\bank_match[6:6]
+   776/1365: $14\received_d[4][6:6]
+   777/1365: $13\received_d[4][6:6]
+   778/1365: $101\bank_result_ready_o[6:6]
+   779/1365: $101\bank_duplicate[6:6]
+   780/1365: $101\bank_match[6:6]
+   781/1365: $14\received_d[3][6:6]
+   782/1365: $13\received_d[3][6:6]
+   783/1365: $100\bank_result_ready_o[6:6]
+   784/1365: $100\bank_duplicate[6:6]
+   785/1365: $100\bank_match[6:6]
+   786/1365: $14\received_d[2][6:6]
+   787/1365: $13\received_d[2][6:6]
+   788/1365: $99\bank_result_ready_o[6:6]
+   789/1365: $99\bank_duplicate[6:6]
+   790/1365: $99\bank_match[6:6]
+   791/1365: $14\received_d[1][6:6]
+   792/1365: $13\received_d[1][6:6]
+   793/1365: $98\bank_result_ready_o[6:6]
+   794/1365: $98\bank_duplicate[6:6]
+   795/1365: $98\bank_match[6:6]
+   796/1365: $14\received_d[0][6:6]
+   797/1365: $13\received_d[0][6:6]
+   798/1365: $97\bank_result_ready_o[6:6]
+   799/1365: $97\bank_duplicate[6:6]
+   800/1365: $97\bank_match[6:6]
+   801/1365: $12\received_d[15][5:5]
+   802/1365: $11\received_d[15][5:5]
+   803/1365: $96\bank_result_ready_o[5:5]
+   804/1365: $96\bank_duplicate[5:5]
+   805/1365: $96\bank_match[5:5]
+   806/1365: $12\received_d[14][5:5]
+   807/1365: $11\received_d[14][5:5]
+   808/1365: $95\bank_result_ready_o[5:5]
+   809/1365: $95\bank_duplicate[5:5]
+   810/1365: $95\bank_match[5:5]
+   811/1365: $12\received_d[13][5:5]
+   812/1365: $11\received_d[13][5:5]
+   813/1365: $94\bank_result_ready_o[5:5]
+   814/1365: $94\bank_duplicate[5:5]
+   815/1365: $94\bank_match[5:5]
+   816/1365: $12\received_d[12][5:5]
+   817/1365: $11\received_d[12][5:5]
+   818/1365: $93\bank_result_ready_o[5:5]
+   819/1365: $93\bank_duplicate[5:5]
+   820/1365: $93\bank_match[5:5]
+   821/1365: $12\received_d[11][5:5]
+   822/1365: $11\received_d[11][5:5]
+   823/1365: $92\bank_result_ready_o[5:5]
+   824/1365: $92\bank_duplicate[5:5]
+   825/1365: $92\bank_match[5:5]
+   826/1365: $12\received_d[10][5:5]
+   827/1365: $11\received_d[10][5:5]
+   828/1365: $91\bank_result_ready_o[5:5]
+   829/1365: $91\bank_duplicate[5:5]
+   830/1365: $91\bank_match[5:5]
+   831/1365: $12\received_d[9][5:5]
+   832/1365: $11\received_d[9][5:5]
+   833/1365: $90\bank_result_ready_o[5:5]
+   834/1365: $90\bank_duplicate[5:5]
+   835/1365: $90\bank_match[5:5]
+   836/1365: $12\received_d[8][5:5]
+   837/1365: $11\received_d[8][5:5]
+   838/1365: $89\bank_result_ready_o[5:5]
+   839/1365: $89\bank_duplicate[5:5]
+   840/1365: $89\bank_match[5:5]
+   841/1365: $12\received_d[7][5:5]
+   842/1365: $11\received_d[7][5:5]
+   843/1365: $88\bank_result_ready_o[5:5]
+   844/1365: $88\bank_duplicate[5:5]
+   845/1365: $88\bank_match[5:5]
+   846/1365: $12\received_d[6][5:5]
+   847/1365: $11\received_d[6][5:5]
+   848/1365: $87\bank_result_ready_o[5:5]
+   849/1365: $87\bank_duplicate[5:5]
+   850/1365: $87\bank_match[5:5]
+   851/1365: $12\received_d[5][5:5]
+   852/1365: $11\received_d[5][5:5]
+   853/1365: $86\bank_result_ready_o[5:5]
+   854/1365: $86\bank_duplicate[5:5]
+   855/1365: $86\bank_match[5:5]
+   856/1365: $12\received_d[4][5:5]
+   857/1365: $11\received_d[4][5:5]
+   858/1365: $85\bank_result_ready_o[5:5]
+   859/1365: $85\bank_duplicate[5:5]
+   860/1365: $85\bank_match[5:5]
+   861/1365: $12\received_d[3][5:5]
+   862/1365: $11\received_d[3][5:5]
+   863/1365: $84\bank_result_ready_o[5:5]
+   864/1365: $84\bank_duplicate[5:5]
+   865/1365: $84\bank_match[5:5]
+   866/1365: $12\received_d[2][5:5]
+   867/1365: $11\received_d[2][5:5]
+   868/1365: $83\bank_result_ready_o[5:5]
+   869/1365: $83\bank_duplicate[5:5]
+   870/1365: $83\bank_match[5:5]
+   871/1365: $12\received_d[1][5:5]
+   872/1365: $11\received_d[1][5:5]
+   873/1365: $82\bank_result_ready_o[5:5]
+   874/1365: $82\bank_duplicate[5:5]
+   875/1365: $82\bank_match[5:5]
+   876/1365: $12\received_d[0][5:5]
+   877/1365: $11\received_d[0][5:5]
+   878/1365: $81\bank_result_ready_o[5:5]
+   879/1365: $81\bank_duplicate[5:5]
+   880/1365: $81\bank_match[5:5]
+   881/1365: $10\received_d[15][4:4]
+   882/1365: $9\received_d[15][4:4]
+   883/1365: $80\bank_result_ready_o[4:4]
+   884/1365: $80\bank_duplicate[4:4]
+   885/1365: $80\bank_match[4:4]
+   886/1365: $10\received_d[14][4:4]
+   887/1365: $9\received_d[14][4:4]
+   888/1365: $79\bank_result_ready_o[4:4]
+   889/1365: $79\bank_duplicate[4:4]
+   890/1365: $79\bank_match[4:4]
+   891/1365: $10\received_d[13][4:4]
+   892/1365: $9\received_d[13][4:4]
+   893/1365: $78\bank_result_ready_o[4:4]
+   894/1365: $78\bank_duplicate[4:4]
+   895/1365: $78\bank_match[4:4]
+   896/1365: $10\received_d[12][4:4]
+   897/1365: $9\received_d[12][4:4]
+   898/1365: $77\bank_result_ready_o[4:4]
+   899/1365: $77\bank_duplicate[4:4]
+   900/1365: $77\bank_match[4:4]
+   901/1365: $10\received_d[11][4:4]
+   902/1365: $9\received_d[11][4:4]
+   903/1365: $76\bank_result_ready_o[4:4]
+   904/1365: $76\bank_duplicate[4:4]
+   905/1365: $76\bank_match[4:4]
+   906/1365: $10\received_d[10][4:4]
+   907/1365: $9\received_d[10][4:4]
+   908/1365: $75\bank_result_ready_o[4:4]
+   909/1365: $75\bank_duplicate[4:4]
+   910/1365: $75\bank_match[4:4]
+   911/1365: $10\received_d[9][4:4]
+   912/1365: $9\received_d[9][4:4]
+   913/1365: $74\bank_result_ready_o[4:4]
+   914/1365: $74\bank_duplicate[4:4]
+   915/1365: $74\bank_match[4:4]
+   916/1365: $10\received_d[8][4:4]
+   917/1365: $9\received_d[8][4:4]
+   918/1365: $73\bank_result_ready_o[4:4]
+   919/1365: $73\bank_duplicate[4:4]
+   920/1365: $73\bank_match[4:4]
+   921/1365: $10\received_d[7][4:4]
+   922/1365: $9\received_d[7][4:4]
+   923/1365: $72\bank_result_ready_o[4:4]
+   924/1365: $72\bank_duplicate[4:4]
+   925/1365: $72\bank_match[4:4]
+   926/1365: $10\received_d[6][4:4]
+   927/1365: $9\received_d[6][4:4]
+   928/1365: $71\bank_result_ready_o[4:4]
+   929/1365: $71\bank_duplicate[4:4]
+   930/1365: $71\bank_match[4:4]
+   931/1365: $10\received_d[5][4:4]
+   932/1365: $9\received_d[5][4:4]
+   933/1365: $70\bank_result_ready_o[4:4]
+   934/1365: $70\bank_duplicate[4:4]
+   935/1365: $70\bank_match[4:4]
+   936/1365: $10\received_d[4][4:4]
+   937/1365: $9\received_d[4][4:4]
+   938/1365: $69\bank_result_ready_o[4:4]
+   939/1365: $69\bank_duplicate[4:4]
+   940/1365: $69\bank_match[4:4]
+   941/1365: $10\received_d[3][4:4]
+   942/1365: $9\received_d[3][4:4]
+   943/1365: $68\bank_result_ready_o[4:4]
+   944/1365: $68\bank_duplicate[4:4]
+   945/1365: $68\bank_match[4:4]
+   946/1365: $10\received_d[2][4:4]
+   947/1365: $9\received_d[2][4:4]
+   948/1365: $67\bank_result_ready_o[4:4]
+   949/1365: $67\bank_duplicate[4:4]
+   950/1365: $67\bank_match[4:4]
+   951/1365: $10\received_d[1][4:4]
+   952/1365: $9\received_d[1][4:4]
+   953/1365: $66\bank_result_ready_o[4:4]
+   954/1365: $66\bank_duplicate[4:4]
+   955/1365: $66\bank_match[4:4]
+   956/1365: $10\received_d[0][4:4]
+   957/1365: $9\received_d[0][4:4]
+   958/1365: $65\bank_result_ready_o[4:4]
+   959/1365: $65\bank_duplicate[4:4]
+   960/1365: $65\bank_match[4:4]
+   961/1365: $8\received_d[15][3:3]
+   962/1365: $7\received_d[15][3:3]
+   963/1365: $64\bank_result_ready_o[3:3]
+   964/1365: $64\bank_duplicate[3:3]
+   965/1365: $64\bank_match[3:3]
+   966/1365: $8\received_d[14][3:3]
+   967/1365: $7\received_d[14][3:3]
+   968/1365: $63\bank_result_ready_o[3:3]
+   969/1365: $63\bank_duplicate[3:3]
+   970/1365: $63\bank_match[3:3]
+   971/1365: $8\received_d[13][3:3]
+   972/1365: $7\received_d[13][3:3]
+   973/1365: $62\bank_result_ready_o[3:3]
+   974/1365: $62\bank_duplicate[3:3]
+   975/1365: $62\bank_match[3:3]
+   976/1365: $8\received_d[12][3:3]
+   977/1365: $7\received_d[12][3:3]
+   978/1365: $61\bank_result_ready_o[3:3]
+   979/1365: $61\bank_duplicate[3:3]
+   980/1365: $61\bank_match[3:3]
+   981/1365: $8\received_d[11][3:3]
+   982/1365: $7\received_d[11][3:3]
+   983/1365: $60\bank_result_ready_o[3:3]
+   984/1365: $60\bank_duplicate[3:3]
+   985/1365: $60\bank_match[3:3]
+   986/1365: $8\received_d[10][3:3]
+   987/1365: $7\received_d[10][3:3]
+   988/1365: $59\bank_result_ready_o[3:3]
+   989/1365: $59\bank_duplicate[3:3]
+   990/1365: $59\bank_match[3:3]
+   991/1365: $8\received_d[9][3:3]
+   992/1365: $7\received_d[9][3:3]
+   993/1365: $58\bank_result_ready_o[3:3]
+   994/1365: $58\bank_duplicate[3:3]
+   995/1365: $58\bank_match[3:3]
+   996/1365: $8\received_d[8][3:3]
+   997/1365: $7\received_d[8][3:3]
+   998/1365: $57\bank_result_ready_o[3:3]
+   999/1365: $57\bank_duplicate[3:3]
+  1000/1365: $57\bank_match[3:3]
+  1001/1365: $8\received_d[7][3:3]
+  1002/1365: $7\received_d[7][3:3]
+  1003/1365: $56\bank_result_ready_o[3:3]
+  1004/1365: $56\bank_duplicate[3:3]
+  1005/1365: $56\bank_match[3:3]
+  1006/1365: $8\received_d[6][3:3]
+  1007/1365: $7\received_d[6][3:3]
+  1008/1365: $55\bank_result_ready_o[3:3]
+  1009/1365: $55\bank_duplicate[3:3]
+  1010/1365: $55\bank_match[3:3]
+  1011/1365: $8\received_d[5][3:3]
+  1012/1365: $7\received_d[5][3:3]
+  1013/1365: $54\bank_result_ready_o[3:3]
+  1014/1365: $54\bank_duplicate[3:3]
+  1015/1365: $54\bank_match[3:3]
+  1016/1365: $8\received_d[4][3:3]
+  1017/1365: $7\received_d[4][3:3]
+  1018/1365: $53\bank_result_ready_o[3:3]
+  1019/1365: $53\bank_duplicate[3:3]
+  1020/1365: $53\bank_match[3:3]
+  1021/1365: $8\received_d[3][3:3]
+  1022/1365: $7\received_d[3][3:3]
+  1023/1365: $52\bank_result_ready_o[3:3]
+  1024/1365: $52\bank_duplicate[3:3]
+  1025/1365: $52\bank_match[3:3]
+  1026/1365: $8\received_d[2][3:3]
+  1027/1365: $7\received_d[2][3:3]
+  1028/1365: $51\bank_result_ready_o[3:3]
+  1029/1365: $51\bank_duplicate[3:3]
+  1030/1365: $51\bank_match[3:3]
+  1031/1365: $8\received_d[1][3:3]
+  1032/1365: $7\received_d[1][3:3]
+  1033/1365: $50\bank_result_ready_o[3:3]
+  1034/1365: $50\bank_duplicate[3:3]
+  1035/1365: $50\bank_match[3:3]
+  1036/1365: $8\received_d[0][3:3]
+  1037/1365: $7\received_d[0][3:3]
+  1038/1365: $49\bank_result_ready_o[3:3]
+  1039/1365: $49\bank_duplicate[3:3]
+  1040/1365: $49\bank_match[3:3]
+  1041/1365: $6\received_d[15][2:2]
+  1042/1365: $5\received_d[15][2:2]
+  1043/1365: $48\bank_result_ready_o[2:2]
+  1044/1365: $48\bank_duplicate[2:2]
+  1045/1365: $48\bank_match[2:2]
+  1046/1365: $6\received_d[14][2:2]
+  1047/1365: $5\received_d[14][2:2]
+  1048/1365: $47\bank_result_ready_o[2:2]
+  1049/1365: $47\bank_duplicate[2:2]
+  1050/1365: $47\bank_match[2:2]
+  1051/1365: $6\received_d[13][2:2]
+  1052/1365: $5\received_d[13][2:2]
+  1053/1365: $46\bank_result_ready_o[2:2]
+  1054/1365: $46\bank_duplicate[2:2]
+  1055/1365: $46\bank_match[2:2]
+  1056/1365: $6\received_d[12][2:2]
+  1057/1365: $5\received_d[12][2:2]
+  1058/1365: $45\bank_result_ready_o[2:2]
+  1059/1365: $45\bank_duplicate[2:2]
+  1060/1365: $45\bank_match[2:2]
+  1061/1365: $6\received_d[11][2:2]
+  1062/1365: $5\received_d[11][2:2]
+  1063/1365: $44\bank_result_ready_o[2:2]
+  1064/1365: $44\bank_duplicate[2:2]
+  1065/1365: $44\bank_match[2:2]
+  1066/1365: $6\received_d[10][2:2]
+  1067/1365: $5\received_d[10][2:2]
+  1068/1365: $43\bank_result_ready_o[2:2]
+  1069/1365: $43\bank_duplicate[2:2]
+  1070/1365: $43\bank_match[2:2]
+  1071/1365: $6\received_d[9][2:2]
+  1072/1365: $5\received_d[9][2:2]
+  1073/1365: $42\bank_result_ready_o[2:2]
+  1074/1365: $42\bank_duplicate[2:2]
+  1075/1365: $42\bank_match[2:2]
+  1076/1365: $6\received_d[8][2:2]
+  1077/1365: $5\received_d[8][2:2]
+  1078/1365: $41\bank_result_ready_o[2:2]
+  1079/1365: $41\bank_duplicate[2:2]
+  1080/1365: $41\bank_match[2:2]
+  1081/1365: $6\received_d[7][2:2]
+  1082/1365: $5\received_d[7][2:2]
+  1083/1365: $40\bank_result_ready_o[2:2]
+  1084/1365: $40\bank_duplicate[2:2]
+  1085/1365: $40\bank_match[2:2]
+  1086/1365: $6\received_d[6][2:2]
+  1087/1365: $5\received_d[6][2:2]
+  1088/1365: $39\bank_result_ready_o[2:2]
+  1089/1365: $39\bank_duplicate[2:2]
+  1090/1365: $39\bank_match[2:2]
+  1091/1365: $6\received_d[5][2:2]
+  1092/1365: $5\received_d[5][2:2]
+  1093/1365: $38\bank_result_ready_o[2:2]
+  1094/1365: $38\bank_duplicate[2:2]
+  1095/1365: $38\bank_match[2:2]
+  1096/1365: $6\received_d[4][2:2]
+  1097/1365: $5\received_d[4][2:2]
+  1098/1365: $37\bank_result_ready_o[2:2]
+  1099/1365: $37\bank_duplicate[2:2]
+  1100/1365: $37\bank_match[2:2]
+  1101/1365: $6\received_d[3][2:2]
+  1102/1365: $5\received_d[3][2:2]
+  1103/1365: $36\bank_result_ready_o[2:2]
+  1104/1365: $36\bank_duplicate[2:2]
+  1105/1365: $36\bank_match[2:2]
+  1106/1365: $6\received_d[2][2:2]
+  1107/1365: $5\received_d[2][2:2]
+  1108/1365: $35\bank_result_ready_o[2:2]
+  1109/1365: $35\bank_duplicate[2:2]
+  1110/1365: $35\bank_match[2:2]
+  1111/1365: $6\received_d[1][2:2]
+  1112/1365: $5\received_d[1][2:2]
+  1113/1365: $34\bank_result_ready_o[2:2]
+  1114/1365: $34\bank_duplicate[2:2]
+  1115/1365: $34\bank_match[2:2]
+  1116/1365: $6\received_d[0][2:2]
+  1117/1365: $5\received_d[0][2:2]
+  1118/1365: $33\bank_result_ready_o[2:2]
+  1119/1365: $33\bank_duplicate[2:2]
+  1120/1365: $33\bank_match[2:2]
+  1121/1365: $4\received_d[15][1:1]
+  1122/1365: $3\received_d[15][1:1]
+  1123/1365: $32\bank_result_ready_o[1:1]
+  1124/1365: $32\bank_duplicate[1:1]
+  1125/1365: $32\bank_match[1:1]
+  1126/1365: $4\received_d[14][1:1]
+  1127/1365: $3\received_d[14][1:1]
+  1128/1365: $31\bank_result_ready_o[1:1]
+  1129/1365: $31\bank_duplicate[1:1]
+  1130/1365: $31\bank_match[1:1]
+  1131/1365: $4\received_d[13][1:1]
+  1132/1365: $3\received_d[13][1:1]
+  1133/1365: $30\bank_result_ready_o[1:1]
+  1134/1365: $30\bank_duplicate[1:1]
+  1135/1365: $30\bank_match[1:1]
+  1136/1365: $4\received_d[12][1:1]
+  1137/1365: $3\received_d[12][1:1]
+  1138/1365: $29\bank_result_ready_o[1:1]
+  1139/1365: $29\bank_duplicate[1:1]
+  1140/1365: $29\bank_match[1:1]
+  1141/1365: $4\received_d[11][1:1]
+  1142/1365: $3\received_d[11][1:1]
+  1143/1365: $28\bank_result_ready_o[1:1]
+  1144/1365: $28\bank_duplicate[1:1]
+  1145/1365: $28\bank_match[1:1]
+  1146/1365: $4\received_d[10][1:1]
+  1147/1365: $3\received_d[10][1:1]
+  1148/1365: $27\bank_result_ready_o[1:1]
+  1149/1365: $27\bank_duplicate[1:1]
+  1150/1365: $27\bank_match[1:1]
+  1151/1365: $4\received_d[9][1:1]
+  1152/1365: $3\received_d[9][1:1]
+  1153/1365: $26\bank_result_ready_o[1:1]
+  1154/1365: $26\bank_duplicate[1:1]
+  1155/1365: $26\bank_match[1:1]
+  1156/1365: $4\received_d[8][1:1]
+  1157/1365: $3\received_d[8][1:1]
+  1158/1365: $25\bank_result_ready_o[1:1]
+  1159/1365: $25\bank_duplicate[1:1]
+  1160/1365: $25\bank_match[1:1]
+  1161/1365: $4\received_d[7][1:1]
+  1162/1365: $3\received_d[7][1:1]
+  1163/1365: $24\bank_result_ready_o[1:1]
+  1164/1365: $24\bank_duplicate[1:1]
+  1165/1365: $24\bank_match[1:1]
+  1166/1365: $4\received_d[6][1:1]
+  1167/1365: $3\received_d[6][1:1]
+  1168/1365: $23\bank_result_ready_o[1:1]
+  1169/1365: $23\bank_duplicate[1:1]
+  1170/1365: $23\bank_match[1:1]
+  1171/1365: $4\received_d[5][1:1]
+  1172/1365: $3\received_d[5][1:1]
+  1173/1365: $22\bank_result_ready_o[1:1]
+  1174/1365: $22\bank_duplicate[1:1]
+  1175/1365: $22\bank_match[1:1]
+  1176/1365: $4\received_d[4][1:1]
+  1177/1365: $3\received_d[4][1:1]
+  1178/1365: $21\bank_result_ready_o[1:1]
+  1179/1365: $21\bank_duplicate[1:1]
+  1180/1365: $21\bank_match[1:1]
+  1181/1365: $4\received_d[3][1:1]
+  1182/1365: $3\received_d[3][1:1]
+  1183/1365: $20\bank_result_ready_o[1:1]
+  1184/1365: $20\bank_duplicate[1:1]
+  1185/1365: $20\bank_match[1:1]
+  1186/1365: $4\received_d[2][1:1]
+  1187/1365: $3\received_d[2][1:1]
+  1188/1365: $19\bank_result_ready_o[1:1]
+  1189/1365: $19\bank_duplicate[1:1]
+  1190/1365: $19\bank_match[1:1]
+  1191/1365: $4\received_d[1][1:1]
+  1192/1365: $3\received_d[1][1:1]
+  1193/1365: $18\bank_result_ready_o[1:1]
+  1194/1365: $18\bank_duplicate[1:1]
+  1195/1365: $18\bank_match[1:1]
+  1196/1365: $4\received_d[0][1:1]
+  1197/1365: $3\received_d[0][1:1]
+  1198/1365: $17\bank_result_ready_o[1:1]
+  1199/1365: $17\bank_duplicate[1:1]
+  1200/1365: $17\bank_match[1:1]
+  1201/1365: $2\received_d[15][0:0]
+  1202/1365: $1\received_d[15][0:0]
+  1203/1365: $16\bank_result_ready_o[0:0]
+  1204/1365: $16\bank_duplicate[0:0]
+  1205/1365: $16\bank_match[0:0]
+  1206/1365: $2\received_d[14][0:0]
+  1207/1365: $1\received_d[14][0:0]
+  1208/1365: $15\bank_result_ready_o[0:0]
+  1209/1365: $15\bank_duplicate[0:0]
+  1210/1365: $15\bank_match[0:0]
+  1211/1365: $2\received_d[13][0:0]
+  1212/1365: $1\received_d[13][0:0]
+  1213/1365: $14\bank_result_ready_o[0:0]
+  1214/1365: $14\bank_duplicate[0:0]
+  1215/1365: $14\bank_match[0:0]
+  1216/1365: $2\received_d[12][0:0]
+  1217/1365: $1\received_d[12][0:0]
+  1218/1365: $13\bank_result_ready_o[0:0]
+  1219/1365: $13\bank_duplicate[0:0]
+  1220/1365: $13\bank_match[0:0]
+  1221/1365: $2\received_d[11][0:0]
+  1222/1365: $1\received_d[11][0:0]
+  1223/1365: $12\bank_result_ready_o[0:0]
+  1224/1365: $12\bank_duplicate[0:0]
+  1225/1365: $12\bank_match[0:0]
+  1226/1365: $2\received_d[10][0:0]
+  1227/1365: $1\received_d[10][0:0]
+  1228/1365: $11\bank_result_ready_o[0:0]
+  1229/1365: $11\bank_duplicate[0:0]
+  1230/1365: $11\bank_match[0:0]
+  1231/1365: $2\received_d[9][0:0]
+  1232/1365: $1\received_d[9][0:0]
+  1233/1365: $10\bank_result_ready_o[0:0]
+  1234/1365: $10\bank_duplicate[0:0]
+  1235/1365: $10\bank_match[0:0]
+  1236/1365: $2\received_d[8][0:0]
+  1237/1365: $1\received_d[8][0:0]
+  1238/1365: $9\bank_result_ready_o[0:0]
+  1239/1365: $9\bank_duplicate[0:0]
+  1240/1365: $9\bank_match[0:0]
+  1241/1365: $2\received_d[7][0:0]
+  1242/1365: $1\received_d[7][0:0]
+  1243/1365: $8\bank_result_ready_o[0:0]
+  1244/1365: $8\bank_duplicate[0:0]
+  1245/1365: $8\bank_match[0:0]
+  1246/1365: $2\received_d[6][0:0]
+  1247/1365: $1\received_d[6][0:0]
+  1248/1365: $7\bank_result_ready_o[0:0]
+  1249/1365: $7\bank_duplicate[0:0]
+  1250/1365: $7\bank_match[0:0]
+  1251/1365: $2\received_d[5][0:0]
+  1252/1365: $1\received_d[5][0:0]
+  1253/1365: $6\bank_result_ready_o[0:0]
+  1254/1365: $6\bank_duplicate[0:0]
+  1255/1365: $6\bank_match[0:0]
+  1256/1365: $2\received_d[4][0:0]
+  1257/1365: $1\received_d[4][0:0]
+  1258/1365: $5\bank_result_ready_o[0:0]
+  1259/1365: $5\bank_duplicate[0:0]
+  1260/1365: $5\bank_match[0:0]
+  1261/1365: $2\received_d[3][0:0]
+  1262/1365: $1\received_d[3][0:0]
+  1263/1365: $4\bank_result_ready_o[0:0]
+  1264/1365: $4\bank_duplicate[0:0]
+  1265/1365: $4\bank_match[0:0]
+  1266/1365: $2\received_d[2][0:0]
+  1267/1365: $1\received_d[2][0:0]
+  1268/1365: $3\bank_result_ready_o[0:0]
+  1269/1365: $3\bank_duplicate[0:0]
+  1270/1365: $3\bank_match[0:0]
+  1271/1365: $2\received_d[1][0:0]
+  1272/1365: $1\received_d[1][0:0]
+  1273/1365: $2\bank_result_ready_o[0:0]
+  1274/1365: $2\bank_duplicate[0:0]
+  1275/1365: $2\bank_match[0:0]
+  1276/1365: $2\received_d[0][0:0]
+  1277/1365: $1\received_d[0][0:0]
+  1278/1365: $1\bank_result_ready_o[0:0]
+  1279/1365: $1\bank_duplicate[0:0]
+  1280/1365: $1\bank_match[0:0]
+  1281/1365: $2$mem2reg_rd$\tag_q$rtl/normalization_bank_result_tracker.sv:27$2929_DATA[15:0]$3089
+  1282/1365: $1\completion_tag_o[15:0]
+  1283/1365: $1$mem2reg_rd$\tag_q$rtl/normalization_bank_result_tracker.sv:27$2929_DATA[15:0]$3088
+  1284/1365: $1$mem2reg_rd$\tag_q$rtl/normalization_bank_result_tracker.sv:27$2929_ADDR[3:0]$3087
+  1285/1365: $1\completion_valid_o[0:0]
+  1286/1365: $16\completion_idx[31:0]
+  1287/1365: $16\completion_found[0:0]
+  1288/1365: $16\free_idx[31:0]
+  1289/1365: $16\free_found[0:0]
+  1290/1365: $16\duplicate[0:0]
+  1291/1365: $15\completion_idx[31:0]
+  1292/1365: $15\completion_found[0:0]
+  1293/1365: $15\free_idx[31:0]
+  1294/1365: $15\free_found[0:0]
+  1295/1365: $15\duplicate[0:0]
+  1296/1365: $14\completion_idx[31:0]
+  1297/1365: $14\completion_found[0:0]
+  1298/1365: $14\free_idx[31:0]
+  1299/1365: $14\free_found[0:0]
+  1300/1365: $14\duplicate[0:0]
+  1301/1365: $13\completion_idx[31:0]
+  1302/1365: $13\completion_found[0:0]
+  1303/1365: $13\free_idx[31:0]
+  1304/1365: $13\free_found[0:0]
+  1305/1365: $13\duplicate[0:0]
+  1306/1365: $12\completion_idx[31:0]
+  1307/1365: $12\completion_found[0:0]
+  1308/1365: $12\free_idx[31:0]
+  1309/1365: $12\free_found[0:0]
+  1310/1365: $12\duplicate[0:0]
+  1311/1365: $11\completion_idx[31:0]
+  1312/1365: $11\completion_found[0:0]
+  1313/1365: $11\free_idx[31:0]
+  1314/1365: $11\free_found[0:0]
+  1315/1365: $11\duplicate[0:0]
+  1316/1365: $10\completion_idx[31:0]
+  1317/1365: $10\completion_found[0:0]
+  1318/1365: $10\free_idx[31:0]
+  1319/1365: $10\free_found[0:0]
+  1320/1365: $10\duplicate[0:0]
+  1321/1365: $9\completion_idx[31:0]
+  1322/1365: $9\completion_found[0:0]
+  1323/1365: $9\free_idx[31:0]
+  1324/1365: $9\free_found[0:0]
+  1325/1365: $9\duplicate[0:0]
+  1326/1365: $8\completion_idx[31:0]
+  1327/1365: $8\completion_found[0:0]
+  1328/1365: $8\free_idx[31:0]
+  1329/1365: $8\free_found[0:0]
+  1330/1365: $8\duplicate[0:0]
+  1331/1365: $7\completion_idx[31:0]
+  1332/1365: $7\completion_found[0:0]
+  1333/1365: $7\free_idx[31:0]
+  1334/1365: $7\free_found[0:0]
+  1335/1365: $7\duplicate[0:0]
+  1336/1365: $6\completion_idx[31:0]
+  1337/1365: $6\completion_found[0:0]
+  1338/1365: $6\free_idx[31:0]
+  1339/1365: $6\free_found[0:0]
+  1340/1365: $6\duplicate[0:0]
+  1341/1365: $5\completion_idx[31:0]
+  1342/1365: $5\completion_found[0:0]
+  1343/1365: $5\free_idx[31:0]
+  1344/1365: $5\free_found[0:0]
+  1345/1365: $5\duplicate[0:0]
+  1346/1365: $4\completion_idx[31:0]
+  1347/1365: $4\completion_found[0:0]
+  1348/1365: $4\free_idx[31:0]
+  1349/1365: $4\free_found[0:0]
+  1350/1365: $4\duplicate[0:0]
+  1351/1365: $3\completion_idx[31:0]
+  1352/1365: $3\completion_found[0:0]
+  1353/1365: $3\free_idx[31:0]
+  1354/1365: $3\free_found[0:0]
+  1355/1365: $3\duplicate[0:0]
+  1356/1365: $2\completion_idx[31:0]
+  1357/1365: $2\completion_found[0:0]
+  1358/1365: $2\free_idx[31:0]
+  1359/1365: $2\free_found[0:0]
+  1360/1365: $2\duplicate[0:0]
+  1361/1365: $1\completion_idx[31:0]
+  1362/1365: $1\completion_found[0:0]
+  1363/1365: $1\free_idx[31:0]
+  1364/1365: $1\free_found[0:0]
+  1365/1365: $1\duplicate[0:0]
+Creating decoders for process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+     1/102: $2$mem2reg_wr$\received_q$rtl/normalization_bank_result_tracker.sv:52$2933_ADDR[3:0]$5817
+     2/102: $2$mem2reg_wr$\received_q$rtl/normalization_bank_result_tracker.sv:52$2933_DATA[15:0]$5818
+     3/102: $2$mem2reg_wr$\expected_q$rtl/normalization_bank_result_tracker.sv:52$2932_ADDR[3:0]$5815
+     4/102: $2$mem2reg_wr$\expected_q$rtl/normalization_bank_result_tracker.sv:52$2932_DATA[15:0]$5816
+     5/102: $2$mem2reg_wr$\tag_q$rtl/normalization_bank_result_tracker.sv:52$2931_ADDR[3:0]$5813
+     6/102: $2$mem2reg_wr$\tag_q$rtl/normalization_bank_result_tracker.sv:52$2931_DATA[15:0]$5814
+     7/102: $19$lookahead\complete_q$5651[15:0]$5820
+     8/102: $2$bitselwrite$pos$rtl/normalization_bank_result_tracker.sv:51$2928[31:0]$5812
+     9/102: $3$lookahead\valid_q$5650[15:0]$5819
+    10/102: $2$bitselwrite$pos$rtl/normalization_bank_result_tracker.sv:51$2927[31:0]$5811
+    11/102: $2$mem2reg_wr$\received_q$rtl/normalization_bank_result_tracker.sv:50$2930_ADDR[3:0]$5792
+    12/102: $2$mem2reg_wr$\received_q$rtl/normalization_bank_result_tracker.sv:50$2930_DATA[15:0]$5793
+    13/102: $18$lookahead\complete_q$5651[15:0]$5795
+    14/102: $2$bitselwrite$pos$rtl/normalization_bank_result_tracker.sv:50$2926[31:0]$5791
+    15/102: $2$lookahead\valid_q$5650[15:0]$5794
+    16/102: $2$bitselwrite$pos$rtl/normalization_bank_result_tracker.sv:50$2925[31:0]$5790
+    17/102: $17$lookahead\complete_q$5651[15:15]$5788
+    18/102: $16$lookahead\complete_q$5651[14:14]$5783
+    19/102: $15$lookahead\complete_q$5651[13:13]$5778
+    20/102: $14$lookahead\complete_q$5651[12:12]$5773
+    21/102: $13$lookahead\complete_q$5651[11:11]$5768
+    22/102: $12$lookahead\complete_q$5651[10:10]$5763
+    23/102: $11$lookahead\complete_q$5651[9:9]$5758
+    24/102: $10$lookahead\complete_q$5651[8:8]$5753
+    25/102: $9$lookahead\complete_q$5651[7:7]$5748
+    26/102: $8$lookahead\complete_q$5651[6:6]$5743
+    27/102: $7$lookahead\complete_q$5651[5:5]$5738
+    28/102: $6$lookahead\complete_q$5651[4:4]$5733
+    29/102: $5$lookahead\complete_q$5651[3:3]$5728
+    30/102: $4$lookahead\complete_q$5651[2:2]$5723
+    31/102: $3$lookahead\complete_q$5651[1:1]$5718
+    32/102: $2$lookahead\complete_q$5651[0:0]$5713
+    33/102: $1$lookahead\complete_q$5651[15:0]$5689
+    34/102: $1$lookahead\valid_q$5650[15:0]$5688
+    35/102: $1$mem2reg_wr$\received_q$rtl/normalization_bank_result_tracker.sv:52$2933_DATA[15:0]$5687
+    36/102: $1$mem2reg_wr$\received_q$rtl/normalization_bank_result_tracker.sv:52$2933_ADDR[3:0]$5686
+    37/102: $1$mem2reg_wr$\expected_q$rtl/normalization_bank_result_tracker.sv:52$2932_DATA[15:0]$5685
+    38/102: $1$mem2reg_wr$\expected_q$rtl/normalization_bank_result_tracker.sv:52$2932_ADDR[3:0]$5684
+    39/102: $1$mem2reg_wr$\tag_q$rtl/normalization_bank_result_tracker.sv:52$2931_DATA[15:0]$5683
+    40/102: $1$mem2reg_wr$\tag_q$rtl/normalization_bank_result_tracker.sv:52$2931_ADDR[3:0]$5682
+    41/102: $1$bitselwrite$pos$rtl/normalization_bank_result_tracker.sv:51$2928[31:0]$5679
+    42/102: $1$bitselwrite$pos$rtl/normalization_bank_result_tracker.sv:51$2927[31:0]$5678
+    43/102: $1$mem2reg_wr$\received_q$rtl/normalization_bank_result_tracker.sv:50$2930_DATA[15:0]$5681
+    44/102: $1$mem2reg_wr$\received_q$rtl/normalization_bank_result_tracker.sv:50$2930_ADDR[3:0]$5680
+    45/102: $1$bitselwrite$pos$rtl/normalization_bank_result_tracker.sv:50$2926[31:0]$5677
+    46/102: $1$bitselwrite$pos$rtl/normalization_bank_result_tracker.sv:50$2925[31:0]$5676
+    47/102: $1$fordecl_block$13.e[31:0]$5675
+    48/102: $1$fordecl_block$11.b[31:0]$5674
+    49/102: $1$fordecl_block$9.e[31:0]$5673
+    50/102: $0\received_q[15][15:0]
+    51/102: $0\received_q[14][15:0]
+    52/102: $0\received_q[13][15:0]
+    53/102: $0\received_q[12][15:0]
+    54/102: $0\received_q[11][15:0]
+    55/102: $0\received_q[10][15:0]
+    56/102: $0\received_q[9][15:0]
+    57/102: $0\received_q[8][15:0]
+    58/102: $0\received_q[7][15:0]
+    59/102: $0\received_q[6][15:0]
+    60/102: $0\received_q[5][15:0]
+    61/102: $0\received_q[4][15:0]
+    62/102: $0\received_q[3][15:0]
+    63/102: $0\received_q[2][15:0]
+    64/102: $0\received_q[1][15:0]
+    65/102: $0\received_q[0][15:0]
+    66/102: $1$fordecl_block$7.e[31:0]$5672
+    67/102: $0\expected_q[15][15:0]
+    68/102: $0\expected_q[14][15:0]
+    69/102: $0\expected_q[13][15:0]
+    70/102: $0\expected_q[12][15:0]
+    71/102: $0\expected_q[11][15:0]
+    72/102: $0\expected_q[10][15:0]
+    73/102: $0\expected_q[9][15:0]
+    74/102: $0\expected_q[8][15:0]
+    75/102: $0\expected_q[7][15:0]
+    76/102: $0\expected_q[6][15:0]
+    77/102: $0\expected_q[5][15:0]
+    78/102: $0\expected_q[4][15:0]
+    79/102: $0\expected_q[3][15:0]
+    80/102: $0\expected_q[2][15:0]
+    81/102: $0\expected_q[1][15:0]
+    82/102: $0\expected_q[0][15:0]
+    83/102: $0\tag_q[15][15:0]
+    84/102: $0\tag_q[14][15:0]
+    85/102: $0\tag_q[13][15:0]
+    86/102: $0\tag_q[12][15:0]
+    87/102: $0\tag_q[11][15:0]
+    88/102: $0\tag_q[10][15:0]
+    89/102: $0\tag_q[9][15:0]
+    90/102: $0\tag_q[8][15:0]
+    91/102: $0\tag_q[7][15:0]
+    92/102: $0\tag_q[6][15:0]
+    93/102: $0\tag_q[5][15:0]
+    94/102: $0\tag_q[4][15:0]
+    95/102: $0\tag_q[3][15:0]
+    96/102: $0\tag_q[2][15:0]
+    97/102: $0\tag_q[1][15:0]
+    98/102: $0\tag_q[0][15:0]
+    99/102: $0\zero_mask_error_o[0:0]
+   100/102: $0\duplicate_bank_error_o[0:0]
+   101/102: $0\unknown_tag_error_o[0:0]
+   102/102: $0\duplicate_tag_error_o[0:0]
+
+4.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\normalization_bank_result_tracker.\allocate_ready_o' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.\bank_result_ready_o' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.\completion_valid_o' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.\completion_tag_o' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.\duplicate' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.\free_found' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.\completion_found' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.\free_idx' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.\completion_idx' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.\bank_match' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.\bank_duplicate' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.$fordecl_block$1.e' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.$fordecl_block$3.b' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.$fordecl_block$3.$for_loop$4[0].$fordecl_block$5.e' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.$fordecl_block$3.$for_loop$4[1].$fordecl_block$5.e' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.$fordecl_block$3.$for_loop$4[2].$fordecl_block$5.e' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.$fordecl_block$3.$for_loop$4[3].$fordecl_block$5.e' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.$fordecl_block$3.$for_loop$4[4].$fordecl_block$5.e' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.$fordecl_block$3.$for_loop$4[5].$fordecl_block$5.e' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.$fordecl_block$3.$for_loop$4[6].$fordecl_block$5.e' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.$fordecl_block$3.$for_loop$4[7].$fordecl_block$5.e' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.$fordecl_block$3.$for_loop$4[8].$fordecl_block$5.e' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.$fordecl_block$3.$for_loop$4[9].$fordecl_block$5.e' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.$fordecl_block$3.$for_loop$4[10].$fordecl_block$5.e' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.$fordecl_block$3.$for_loop$4[11].$fordecl_block$5.e' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.$fordecl_block$3.$for_loop$4[12].$fordecl_block$5.e' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.$fordecl_block$3.$for_loop$4[13].$fordecl_block$5.e' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.$fordecl_block$3.$for_loop$4[14].$fordecl_block$5.e' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.$fordecl_block$3.$for_loop$4[15].$fordecl_block$5.e' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.\received_d[0]' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.\received_d[1]' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.\received_d[2]' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.\received_d[3]' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.\received_d[4]' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.\received_d[5]' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.\received_d[6]' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.\received_d[7]' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.\received_d[8]' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.\received_d[9]' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.\received_d[10]' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.\received_d[11]' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.\received_d[12]' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.\received_d[13]' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.\received_d[14]' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.\received_d[15]' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.$mem2reg_rd$\tag_q$rtl/normalization_bank_result_tracker.sv:27$2929_ADDR' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+No latch inferred for signal `\normalization_bank_result_tracker.$mem2reg_rd$\tag_q$rtl/normalization_bank_result_tracker.sv:27$2929_DATA' from process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+
+4.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\normalization_bank_result_tracker.\duplicate_tag_error_o' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11809' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\unknown_tag_error_o' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11814' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\duplicate_bank_error_o' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11819' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\zero_mask_error_o' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11824' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\valid_q' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11829' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\complete_q' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11834' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.$fordecl_block$7.e' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11839' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.$fordecl_block$9.e' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $dff cell `$procdff$11846' with positive edge clock.
+Creating register for signal `\normalization_bank_result_tracker.$fordecl_block$11.b' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $dff cell `$procdff$11853' with positive edge clock.
+Creating register for signal `\normalization_bank_result_tracker.$fordecl_block$13.e' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $dff cell `$procdff$11860' with positive edge clock.
+Creating register for signal `\normalization_bank_result_tracker.\tag_q[0]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11865' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\tag_q[1]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11870' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\tag_q[2]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11875' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\tag_q[3]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11880' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\tag_q[4]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11885' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\tag_q[5]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11890' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\tag_q[6]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11895' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\tag_q[7]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11900' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\tag_q[8]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11905' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\tag_q[9]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11910' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\tag_q[10]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11915' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\tag_q[11]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11920' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\tag_q[12]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11925' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\tag_q[13]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11930' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\tag_q[14]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11935' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\tag_q[15]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11940' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\expected_q[0]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11945' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\expected_q[1]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11950' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\expected_q[2]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11955' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\expected_q[3]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11960' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\expected_q[4]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11965' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\expected_q[5]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11970' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\expected_q[6]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11975' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\expected_q[7]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11980' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\expected_q[8]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11985' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\expected_q[9]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11990' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\expected_q[10]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$11995' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\expected_q[11]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12000' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\expected_q[12]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12005' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\expected_q[13]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12010' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\expected_q[14]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12015' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\expected_q[15]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12020' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\received_q[0]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12025' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\received_q[1]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12030' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\received_q[2]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12035' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\received_q[3]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12040' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\received_q[4]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12045' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\received_q[5]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12050' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\received_q[6]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12055' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\received_q[7]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12060' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\received_q[8]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12065' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\received_q[9]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12070' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\received_q[10]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12075' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\received_q[11]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12080' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\received_q[12]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12085' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\received_q[13]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12090' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\received_q[14]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12095' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.\received_q[15]' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12100' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.$bitselwrite$pos$rtl/normalization_bank_result_tracker.sv:50$2925' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12105' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.$bitselwrite$pos$rtl/normalization_bank_result_tracker.sv:50$2926' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12110' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.$bitselwrite$pos$rtl/normalization_bank_result_tracker.sv:51$2927' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12115' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.$bitselwrite$pos$rtl/normalization_bank_result_tracker.sv:51$2928' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12120' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.$mem2reg_wr$\received_q$rtl/normalization_bank_result_tracker.sv:50$2930_ADDR' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12125' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.$mem2reg_wr$\received_q$rtl/normalization_bank_result_tracker.sv:50$2930_DATA' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12130' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.$mem2reg_wr$\tag_q$rtl/normalization_bank_result_tracker.sv:52$2931_ADDR' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12135' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.$mem2reg_wr$\tag_q$rtl/normalization_bank_result_tracker.sv:52$2931_DATA' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12140' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.$mem2reg_wr$\expected_q$rtl/normalization_bank_result_tracker.sv:52$2932_ADDR' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12145' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.$mem2reg_wr$\expected_q$rtl/normalization_bank_result_tracker.sv:52$2932_DATA' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12150' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.$mem2reg_wr$\received_q$rtl/normalization_bank_result_tracker.sv:52$2933_ADDR' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12155' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.$mem2reg_wr$\received_q$rtl/normalization_bank_result_tracker.sv:52$2933_DATA' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12160' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.$lookahead\valid_q$5650' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12165' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_bank_result_tracker.$lookahead\complete_q$5651' using process `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+  created $adff cell `$procdff$12170' with positive edge clock and positive level reset.
+
+4.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+4.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 562 empty switches in `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+Removing empty process `normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:17$2934'.
+Found and cleaned up 72 empty switches in `\normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+Removing empty process `normalization_bank_result_tracker.$proc$rtl/normalization_bank_result_tracker.sv:37$5652'.
+Cleaned up 634 empty switches.
+
+4.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_bank_result_tracker.
+<suppressed ~221 debug messages>
+
+4.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_bank_result_tracker.
+
+4.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_bank_result_tracker..
+Removed 125 unused cells and 3897 unused wires.
+<suppressed ~126 debug messages>
+
+4.5. Executing CHECK pass (checking for obvious problems).
+Checking module normalization_bank_result_tracker...
+Found and reported 0 problems.
+
+4.6. Executing OPT pass (performing simple optimizations).
+
+4.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_bank_result_tracker.
+
+4.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_bank_result_tracker'.
+<suppressed ~948 debug messages>
+Removed a total of 316 cells.
+
+4.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \normalization_bank_result_tracker..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$10015.
+    dead port 2/2 on $mux $procmux$10033.
+    dead port 2/2 on $mux $procmux$10051.
+    dead port 2/2 on $mux $procmux$10069.
+    dead port 2/2 on $mux $procmux$10087.
+    dead port 2/2 on $mux $procmux$10105.
+    dead port 2/2 on $mux $procmux$10123.
+    dead port 2/2 on $mux $procmux$10141.
+    dead port 2/2 on $mux $procmux$10159.
+    dead port 2/2 on $mux $procmux$10177.
+    dead port 2/2 on $mux $procmux$10195.
+    dead port 2/2 on $mux $procmux$10213.
+    dead port 2/2 on $mux $procmux$10231.
+    dead port 2/2 on $mux $procmux$10249.
+    dead port 2/2 on $mux $procmux$10267.
+    dead port 2/2 on $mux $procmux$10285.
+    dead port 2/2 on $mux $procmux$10303.
+    dead port 2/2 on $mux $procmux$10321.
+    dead port 2/2 on $mux $procmux$10339.
+    dead port 2/2 on $mux $procmux$10357.
+    dead port 2/2 on $mux $procmux$10375.
+    dead port 2/2 on $mux $procmux$10393.
+    dead port 2/2 on $mux $procmux$10411.
+    dead port 2/2 on $mux $procmux$10429.
+    dead port 2/2 on $mux $procmux$10461.
+    dead port 2/2 on $mux $procmux$5839.
+    dead port 2/2 on $mux $procmux$5857.
+    dead port 2/2 on $mux $procmux$5875.
+    dead port 2/2 on $mux $procmux$5893.
+    dead port 2/2 on $mux $procmux$5911.
+    dead port 2/2 on $mux $procmux$5929.
+    dead port 2/2 on $mux $procmux$5947.
+    dead port 2/2 on $mux $procmux$5965.
+    dead port 2/2 on $mux $procmux$5983.
+    dead port 2/2 on $mux $procmux$6001.
+    dead port 2/2 on $mux $procmux$6019.
+    dead port 2/2 on $mux $procmux$6037.
+    dead port 2/2 on $mux $procmux$6055.
+    dead port 2/2 on $mux $procmux$6073.
+    dead port 2/2 on $mux $procmux$6091.
+    dead port 2/2 on $mux $procmux$6109.
+    dead port 2/2 on $mux $procmux$6127.
+    dead port 2/2 on $mux $procmux$6145.
+    dead port 2/2 on $mux $procmux$6163.
+    dead port 2/2 on $mux $procmux$6181.
+    dead port 2/2 on $mux $procmux$6199.
+    dead port 2/2 on $mux $procmux$6217.
+    dead port 2/2 on $mux $procmux$6235.
+    dead port 2/2 on $mux $procmux$6253.
+    dead port 2/2 on $mux $procmux$6271.
+    dead port 2/2 on $mux $procmux$6289.
+    dead port 2/2 on $mux $procmux$6307.
+    dead port 2/2 on $mux $procmux$6325.
+    dead port 2/2 on $mux $procmux$6343.
+    dead port 2/2 on $mux $procmux$6361.
+    dead port 2/2 on $mux $procmux$6379.
+    dead port 2/2 on $mux $procmux$6397.
+    dead port 2/2 on $mux $procmux$6415.
+    dead port 2/2 on $mux $procmux$6433.
+    dead port 2/2 on $mux $procmux$6451.
+    dead port 2/2 on $mux $procmux$6469.
+    dead port 2/2 on $mux $procmux$6487.
+    dead port 2/2 on $mux $procmux$6505.
+    dead port 2/2 on $mux $procmux$6523.
+    dead port 2/2 on $mux $procmux$6541.
+    dead port 2/2 on $mux $procmux$6559.
+    dead port 2/2 on $mux $procmux$6577.
+    dead port 2/2 on $mux $procmux$6595.
+    dead port 2/2 on $mux $procmux$6613.
+    dead port 2/2 on $mux $procmux$6631.
+    dead port 2/2 on $mux $procmux$6649.
+    dead port 2/2 on $mux $procmux$6667.
+    dead port 2/2 on $mux $procmux$6685.
+    dead port 2/2 on $mux $procmux$6703.
+    dead port 2/2 on $mux $procmux$6721.
+    dead port 2/2 on $mux $procmux$6739.
+    dead port 2/2 on $mux $procmux$6757.
+    dead port 2/2 on $mux $procmux$6775.
+    dead port 2/2 on $mux $procmux$6793.
+    dead port 2/2 on $mux $procmux$6811.
+    dead port 2/2 on $mux $procmux$6829.
+    dead port 2/2 on $mux $procmux$6847.
+    dead port 2/2 on $mux $procmux$6865.
+    dead port 2/2 on $mux $procmux$6883.
+    dead port 2/2 on $mux $procmux$6901.
+    dead port 2/2 on $mux $procmux$6919.
+    dead port 2/2 on $mux $procmux$6937.
+    dead port 2/2 on $mux $procmux$6955.
+    dead port 2/2 on $mux $procmux$6973.
+    dead port 2/2 on $mux $procmux$6991.
+    dead port 2/2 on $mux $procmux$7009.
+    dead port 2/2 on $mux $procmux$7027.
+    dead port 2/2 on $mux $procmux$7045.
+    dead port 2/2 on $mux $procmux$7063.
+    dead port 2/2 on $mux $procmux$7081.
+    dead port 2/2 on $mux $procmux$7099.
+    dead port 2/2 on $mux $procmux$7117.
+    dead port 2/2 on $mux $procmux$7135.
+    dead port 2/2 on $mux $procmux$7153.
+    dead port 2/2 on $mux $procmux$7171.
+    dead port 2/2 on $mux $procmux$7189.
+    dead port 2/2 on $mux $procmux$7207.
+    dead port 2/2 on $mux $procmux$7225.
+    dead port 2/2 on $mux $procmux$7243.
+    dead port 2/2 on $mux $procmux$7261.
+    dead port 2/2 on $mux $procmux$7279.
+    dead port 2/2 on $mux $procmux$7297.
+    dead port 2/2 on $mux $procmux$7315.
+    dead port 2/2 on $mux $procmux$7333.
+    dead port 2/2 on $mux $procmux$7351.
+    dead port 2/2 on $mux $procmux$7369.
+    dead port 2/2 on $mux $procmux$7387.
+    dead port 2/2 on $mux $procmux$7405.
+    dead port 2/2 on $mux $procmux$7423.
+    dead port 2/2 on $mux $procmux$7441.
+    dead port 2/2 on $mux $procmux$7459.
+    dead port 2/2 on $mux $procmux$7477.
+    dead port 2/2 on $mux $procmux$7495.
+    dead port 2/2 on $mux $procmux$7513.
+    dead port 2/2 on $mux $procmux$7531.
+    dead port 2/2 on $mux $procmux$7549.
+    dead port 2/2 on $mux $procmux$7567.
+    dead port 2/2 on $mux $procmux$7585.
+    dead port 2/2 on $mux $procmux$7603.
+    dead port 2/2 on $mux $procmux$7621.
+    dead port 2/2 on $mux $procmux$7639.
+    dead port 2/2 on $mux $procmux$7657.
+    dead port 2/2 on $mux $procmux$7675.
+    dead port 2/2 on $mux $procmux$7693.
+    dead port 2/2 on $mux $procmux$7711.
+    dead port 2/2 on $mux $procmux$7729.
+    dead port 2/2 on $mux $procmux$7747.
+    dead port 2/2 on $mux $procmux$7765.
+    dead port 2/2 on $mux $procmux$7783.
+    dead port 2/2 on $mux $procmux$7801.
+    dead port 2/2 on $mux $procmux$7819.
+    dead port 2/2 on $mux $procmux$7837.
+    dead port 2/2 on $mux $procmux$7855.
+    dead port 2/2 on $mux $procmux$7873.
+    dead port 2/2 on $mux $procmux$7891.
+    dead port 2/2 on $mux $procmux$7909.
+    dead port 2/2 on $mux $procmux$7927.
+    dead port 2/2 on $mux $procmux$7945.
+    dead port 2/2 on $mux $procmux$7963.
+    dead port 2/2 on $mux $procmux$7981.
+    dead port 2/2 on $mux $procmux$7999.
+    dead port 2/2 on $mux $procmux$8017.
+    dead port 2/2 on $mux $procmux$8035.
+    dead port 2/2 on $mux $procmux$8053.
+    dead port 2/2 on $mux $procmux$8071.
+    dead port 2/2 on $mux $procmux$8089.
+    dead port 2/2 on $mux $procmux$8107.
+    dead port 2/2 on $mux $procmux$8125.
+    dead port 2/2 on $mux $procmux$8143.
+    dead port 2/2 on $mux $procmux$8161.
+    dead port 2/2 on $mux $procmux$8179.
+    dead port 2/2 on $mux $procmux$8197.
+    dead port 2/2 on $mux $procmux$8215.
+    dead port 2/2 on $mux $procmux$8233.
+    dead port 2/2 on $mux $procmux$8251.
+    dead port 2/2 on $mux $procmux$8269.
+    dead port 2/2 on $mux $procmux$8287.
+    dead port 2/2 on $mux $procmux$8305.
+    dead port 2/2 on $mux $procmux$8323.
+    dead port 2/2 on $mux $procmux$8341.
+    dead port 2/2 on $mux $procmux$8359.
+    dead port 2/2 on $mux $procmux$8377.
+    dead port 2/2 on $mux $procmux$8395.
+    dead port 2/2 on $mux $procmux$8413.
+    dead port 2/2 on $mux $procmux$8431.
+    dead port 2/2 on $mux $procmux$8449.
+    dead port 2/2 on $mux $procmux$8467.
+    dead port 2/2 on $mux $procmux$8485.
+    dead port 2/2 on $mux $procmux$8503.
+    dead port 2/2 on $mux $procmux$8521.
+    dead port 2/2 on $mux $procmux$8539.
+    dead port 2/2 on $mux $procmux$8557.
+    dead port 2/2 on $mux $procmux$8575.
+    dead port 2/2 on $mux $procmux$8593.
+    dead port 2/2 on $mux $procmux$8611.
+    dead port 2/2 on $mux $procmux$8629.
+    dead port 2/2 on $mux $procmux$8647.
+    dead port 2/2 on $mux $procmux$8665.
+    dead port 2/2 on $mux $procmux$8683.
+    dead port 2/2 on $mux $procmux$8701.
+    dead port 2/2 on $mux $procmux$8719.
+    dead port 2/2 on $mux $procmux$8737.
+    dead port 2/2 on $mux $procmux$8755.
+    dead port 2/2 on $mux $procmux$8773.
+    dead port 2/2 on $mux $procmux$8791.
+    dead port 2/2 on $mux $procmux$8809.
+    dead port 2/2 on $mux $procmux$8827.
+    dead port 2/2 on $mux $procmux$8845.
+    dead port 2/2 on $mux $procmux$8863.
+    dead port 2/2 on $mux $procmux$8881.
+    dead port 2/2 on $mux $procmux$8899.
+    dead port 2/2 on $mux $procmux$8917.
+    dead port 2/2 on $mux $procmux$8935.
+    dead port 2/2 on $mux $procmux$8953.
+    dead port 2/2 on $mux $procmux$8971.
+    dead port 2/2 on $mux $procmux$8989.
+    dead port 2/2 on $mux $procmux$9007.
+    dead port 2/2 on $mux $procmux$9025.
+    dead port 2/2 on $mux $procmux$9043.
+    dead port 2/2 on $mux $procmux$9061.
+    dead port 2/2 on $mux $procmux$9079.
+    dead port 2/2 on $mux $procmux$9097.
+    dead port 2/2 on $mux $procmux$9115.
+    dead port 2/2 on $mux $procmux$9133.
+    dead port 2/2 on $mux $procmux$9151.
+    dead port 2/2 on $mux $procmux$9169.
+    dead port 2/2 on $mux $procmux$9187.
+    dead port 2/2 on $mux $procmux$9205.
+    dead port 2/2 on $mux $procmux$9223.
+    dead port 2/2 on $mux $procmux$9241.
+    dead port 2/2 on $mux $procmux$9259.
+    dead port 2/2 on $mux $procmux$9277.
+    dead port 2/2 on $mux $procmux$9295.
+    dead port 2/2 on $mux $procmux$9313.
+    dead port 2/2 on $mux $procmux$9331.
+    dead port 2/2 on $mux $procmux$9349.
+    dead port 2/2 on $mux $procmux$9367.
+    dead port 2/2 on $mux $procmux$9385.
+    dead port 2/2 on $mux $procmux$9403.
+    dead port 2/2 on $mux $procmux$9421.
+    dead port 2/2 on $mux $procmux$9439.
+    dead port 2/2 on $mux $procmux$9457.
+    dead port 2/2 on $mux $procmux$9475.
+    dead port 2/2 on $mux $procmux$9493.
+    dead port 2/2 on $mux $procmux$9511.
+    dead port 2/2 on $mux $procmux$9529.
+    dead port 2/2 on $mux $procmux$9547.
+    dead port 2/2 on $mux $procmux$9565.
+    dead port 2/2 on $mux $procmux$9583.
+    dead port 2/2 on $mux $procmux$9601.
+    dead port 2/2 on $mux $procmux$9619.
+    dead port 2/2 on $mux $procmux$9637.
+    dead port 2/2 on $mux $procmux$9655.
+    dead port 2/2 on $mux $procmux$9673.
+    dead port 2/2 on $mux $procmux$9691.
+    dead port 2/2 on $mux $procmux$9709.
+    dead port 2/2 on $mux $procmux$9727.
+    dead port 2/2 on $mux $procmux$9745.
+    dead port 2/2 on $mux $procmux$9763.
+    dead port 2/2 on $mux $procmux$9781.
+    dead port 2/2 on $mux $procmux$9799.
+    dead port 2/2 on $mux $procmux$9817.
+    dead port 2/2 on $mux $procmux$9835.
+    dead port 2/2 on $mux $procmux$9853.
+    dead port 2/2 on $mux $procmux$9871.
+    dead port 2/2 on $mux $procmux$9889.
+    dead port 2/2 on $mux $procmux$9907.
+    dead port 2/2 on $mux $procmux$9925.
+    dead port 2/2 on $mux $procmux$9943.
+    dead port 2/2 on $mux $procmux$9961.
+    dead port 2/2 on $mux $procmux$9979.
+    dead port 2/2 on $mux $procmux$9997.
+Removed 257 multiplexer ports.
+<suppressed ~746 debug messages>
+
+4.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \normalization_bank_result_tracker.
+Performed a total of 0 changes.
+
+4.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_bank_result_tracker'.
+Removed a total of 0 cells.
+
+4.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_bank_result_tracker..
+Removed 0 unused cells and 573 unused wires.
+<suppressed ~1 debug messages>
+
+4.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_bank_result_tracker.
+
+4.6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \normalization_bank_result_tracker..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~746 debug messages>
+
+4.6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \normalization_bank_result_tracker.
+Performed a total of 0 changes.
+
+4.6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_bank_result_tracker'.
+Removed a total of 0 cells.
+
+4.6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_bank_result_tracker..
+
+4.6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_bank_result_tracker.
+
+4.6.16. Finished OPT passes. (There is nothing left to do.)
+
+4.7. Executing FSM pass (extract and optimize FSM).
+
+4.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+4.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+4.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+4.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_bank_result_tracker..
+
+4.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+4.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+4.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+4.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+4.8. Executing OPT pass (performing simple optimizations).
+
+4.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_bank_result_tracker.
+
+4.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_bank_result_tracker'.
+Removed a total of 0 cells.
+
+4.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \normalization_bank_result_tracker..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~746 debug messages>
+
+4.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \normalization_bank_result_tracker.
+Performed a total of 0 changes.
+
+4.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_bank_result_tracker'.
+Removed a total of 0 cells.
+
+4.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$12020 ($adff) from module normalization_bank_result_tracker (D = \allocate_expected_mask_i, Q = \expected_q[15]).
+Adding EN signal on $procdff$12015 ($adff) from module normalization_bank_result_tracker (D = \allocate_expected_mask_i, Q = \expected_q[14]).
+Adding EN signal on $procdff$12010 ($adff) from module normalization_bank_result_tracker (D = \allocate_expected_mask_i, Q = \expected_q[13]).
+Adding EN signal on $procdff$12005 ($adff) from module normalization_bank_result_tracker (D = \allocate_expected_mask_i, Q = \expected_q[12]).
+Adding EN signal on $procdff$12000 ($adff) from module normalization_bank_result_tracker (D = \allocate_expected_mask_i, Q = \expected_q[11]).
+Adding EN signal on $procdff$11995 ($adff) from module normalization_bank_result_tracker (D = \allocate_expected_mask_i, Q = \expected_q[10]).
+Adding EN signal on $procdff$11990 ($adff) from module normalization_bank_result_tracker (D = \allocate_expected_mask_i, Q = \expected_q[9]).
+Adding EN signal on $procdff$11985 ($adff) from module normalization_bank_result_tracker (D = \allocate_expected_mask_i, Q = \expected_q[8]).
+Adding EN signal on $procdff$11980 ($adff) from module normalization_bank_result_tracker (D = \allocate_expected_mask_i, Q = \expected_q[7]).
+Adding EN signal on $procdff$11975 ($adff) from module normalization_bank_result_tracker (D = \allocate_expected_mask_i, Q = \expected_q[6]).
+Adding EN signal on $procdff$11970 ($adff) from module normalization_bank_result_tracker (D = \allocate_expected_mask_i, Q = \expected_q[5]).
+Adding EN signal on $procdff$11965 ($adff) from module normalization_bank_result_tracker (D = \allocate_expected_mask_i, Q = \expected_q[4]).
+Adding EN signal on $procdff$11960 ($adff) from module normalization_bank_result_tracker (D = \allocate_expected_mask_i, Q = \expected_q[3]).
+Adding EN signal on $procdff$11955 ($adff) from module normalization_bank_result_tracker (D = \allocate_expected_mask_i, Q = \expected_q[2]).
+Adding EN signal on $procdff$11950 ($adff) from module normalization_bank_result_tracker (D = \allocate_expected_mask_i, Q = \expected_q[1]).
+Adding EN signal on $procdff$11945 ($adff) from module normalization_bank_result_tracker (D = \allocate_expected_mask_i, Q = \expected_q[0]).
+Adding EN signal on $procdff$11940 ($adff) from module normalization_bank_result_tracker (D = \allocate_tag_i, Q = \tag_q[15]).
+Adding EN signal on $procdff$11935 ($adff) from module normalization_bank_result_tracker (D = \allocate_tag_i, Q = \tag_q[14]).
+Adding EN signal on $procdff$11930 ($adff) from module normalization_bank_result_tracker (D = \allocate_tag_i, Q = \tag_q[13]).
+Adding EN signal on $procdff$11925 ($adff) from module normalization_bank_result_tracker (D = \allocate_tag_i, Q = \tag_q[12]).
+Adding EN signal on $procdff$11920 ($adff) from module normalization_bank_result_tracker (D = \allocate_tag_i, Q = \tag_q[11]).
+Adding EN signal on $procdff$11915 ($adff) from module normalization_bank_result_tracker (D = \allocate_tag_i, Q = \tag_q[10]).
+Adding EN signal on $procdff$11910 ($adff) from module normalization_bank_result_tracker (D = \allocate_tag_i, Q = \tag_q[9]).
+Adding EN signal on $procdff$11905 ($adff) from module normalization_bank_result_tracker (D = \allocate_tag_i, Q = \tag_q[8]).
+Adding EN signal on $procdff$11900 ($adff) from module normalization_bank_result_tracker (D = \allocate_tag_i, Q = \tag_q[7]).
+Adding EN signal on $procdff$11895 ($adff) from module normalization_bank_result_tracker (D = \allocate_tag_i, Q = \tag_q[6]).
+Adding EN signal on $procdff$11890 ($adff) from module normalization_bank_result_tracker (D = \allocate_tag_i, Q = \tag_q[5]).
+Adding EN signal on $procdff$11885 ($adff) from module normalization_bank_result_tracker (D = \allocate_tag_i, Q = \tag_q[4]).
+Adding EN signal on $procdff$11880 ($adff) from module normalization_bank_result_tracker (D = \allocate_tag_i, Q = \tag_q[3]).
+Adding EN signal on $procdff$11875 ($adff) from module normalization_bank_result_tracker (D = \allocate_tag_i, Q = \tag_q[2]).
+Adding EN signal on $procdff$11870 ($adff) from module normalization_bank_result_tracker (D = \allocate_tag_i, Q = \tag_q[1]).
+Adding EN signal on $procdff$11865 ($adff) from module normalization_bank_result_tracker (D = \allocate_tag_i, Q = \tag_q[0]).
+Adding EN signal on $procdff$11824 ($adff) from module normalization_bank_result_tracker (D = 1'1, Q = \zero_mask_error_o).
+Adding EN signal on $procdff$11809 ($adff) from module normalization_bank_result_tracker (D = 1'1, Q = \duplicate_tag_error_o).
+
+4.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_bank_result_tracker..
+Removed 66 unused cells and 66 unused wires.
+<suppressed ~67 debug messages>
+
+4.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_bank_result_tracker.
+
+4.8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \normalization_bank_result_tracker..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~712 debug messages>
+
+4.8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \normalization_bank_result_tracker.
+Performed a total of 0 changes.
+
+4.8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_bank_result_tracker'.
+<suppressed ~48 debug messages>
+Removed a total of 16 cells.
+
+4.8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_bank_result_tracker..
+Removed 0 unused cells and 16 unused wires.
+<suppressed ~1 debug messages>
+
+4.8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_bank_result_tracker.
+
+4.8.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.8.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \normalization_bank_result_tracker..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~712 debug messages>
+
+4.8.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \normalization_bank_result_tracker.
+Performed a total of 0 changes.
+
+4.8.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_bank_result_tracker'.
+Removed a total of 0 cells.
+
+4.8.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.8.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_bank_result_tracker..
+
+4.8.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_bank_result_tracker.
+
+4.8.23. Finished OPT passes. (There is nothing left to do.)
+
+4.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 3 bits (of 4) from port B of cell normalization_bank_result_tracker.$procmux$11166_CMP0 ($eq).
+Removed top 2 bits (of 4) from port B of cell normalization_bank_result_tracker.$procmux$11128_CMP0 ($eq).
+Removed top 2 bits (of 4) from port B of cell normalization_bank_result_tracker.$procmux$11092_CMP0 ($eq).
+Removed top 1 bits (of 4) from port B of cell normalization_bank_result_tracker.$procmux$11058_CMP0 ($eq).
+Removed top 1 bits (of 4) from port B of cell normalization_bank_result_tracker.$procmux$11026_CMP0 ($eq).
+Removed top 1 bits (of 4) from port B of cell normalization_bank_result_tracker.$procmux$10996_CMP0 ($eq).
+Removed top 1 bits (of 4) from port B of cell normalization_bank_result_tracker.$procmux$10968_CMP0 ($eq).
+Removed top 31 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10692 ($mux).
+Removed top 31 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10686 ($mux).
+Removed top 30 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10677 ($mux).
+Removed top 30 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10671 ($mux).
+Removed top 30 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10662 ($mux).
+Removed top 30 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10656 ($mux).
+Removed top 29 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10647 ($mux).
+Removed top 29 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10641 ($mux).
+Removed top 29 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10632 ($mux).
+Removed top 29 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10626 ($mux).
+Removed top 29 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10617 ($mux).
+Removed top 29 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10611 ($mux).
+Removed top 29 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10602 ($mux).
+Removed top 29 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10596 ($mux).
+Removed top 28 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10587 ($mux).
+Removed top 28 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10581 ($mux).
+Removed top 28 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10572 ($mux).
+Removed top 28 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10566 ($mux).
+Removed top 28 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10557 ($mux).
+Removed top 28 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10551 ($mux).
+Removed top 28 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10542 ($mux).
+Removed top 28 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10536 ($mux).
+Removed top 28 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10527 ($mux).
+Removed top 28 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10521 ($mux).
+Removed top 28 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10512 ($mux).
+Removed top 28 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10506 ($mux).
+Removed top 28 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10497 ($mux).
+Removed top 28 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10491 ($mux).
+Removed top 28 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10482 ($mux).
+Removed top 28 bits (of 32) from mux cell normalization_bank_result_tracker.$procmux$10476 ($mux).
+Removed top 3 bits (of 4) from port B of cell normalization_bank_result_tracker.$procmux$10459_CMP0 ($eq).
+Removed top 2 bits (of 4) from port B of cell normalization_bank_result_tracker.$procmux$10458_CMP0 ($eq).
+Removed top 2 bits (of 4) from port B of cell normalization_bank_result_tracker.$procmux$10457_CMP0 ($eq).
+Removed top 1 bits (of 4) from port B of cell normalization_bank_result_tracker.$procmux$10456_CMP0 ($eq).
+Removed top 1 bits (of 4) from port B of cell normalization_bank_result_tracker.$procmux$10455_CMP0 ($eq).
+Removed top 1 bits (of 4) from port B of cell normalization_bank_result_tracker.$procmux$10454_CMP0 ($eq).
+Removed top 1 bits (of 4) from port B of cell normalization_bank_result_tracker.$procmux$10453_CMP0 ($eq).
+Removed top 28 bits (of 33) from port A of cell normalization_bank_result_tracker.$neg$rtl/normalization_bank_result_tracker.sv:0$5796 ($neg).
+Converting cell normalization_bank_result_tracker.$neg$rtl/normalization_bank_result_tracker.sv:0$5796 ($neg) from signed to unsigned.
+Removed top 1 bits (of 5) from port A of cell normalization_bank_result_tracker.$neg$rtl/normalization_bank_result_tracker.sv:0$5796 ($neg).
+Removed top 16 bits (of 32) from port Y of cell normalization_bank_result_tracker.$or$rtl/normalization_bank_result_tracker.sv:0$5802 ($or).
+Removed top 16 bits (of 32) from port A of cell normalization_bank_result_tracker.$or$rtl/normalization_bank_result_tracker.sv:0$5802 ($or).
+Removed top 16 bits (of 32) from port B of cell normalization_bank_result_tracker.$or$rtl/normalization_bank_result_tracker.sv:0$5802 ($or).
+Removed top 16 bits (of 32) from port Y of cell normalization_bank_result_tracker.$or$rtl/normalization_bank_result_tracker.sv:0$5809 ($or).
+Removed top 16 bits (of 32) from port A of cell normalization_bank_result_tracker.$or$rtl/normalization_bank_result_tracker.sv:0$5809 ($or).
+Removed top 16 bits (of 32) from port B of cell normalization_bank_result_tracker.$or$rtl/normalization_bank_result_tracker.sv:0$5809 ($or).
+Removed top 28 bits (of 33) from port A of cell normalization_bank_result_tracker.$neg$rtl/normalization_bank_result_tracker.sv:0$5821 ($neg).
+Converting cell normalization_bank_result_tracker.$neg$rtl/normalization_bank_result_tracker.sv:0$5821 ($neg) from signed to unsigned.
+Removed top 1 bits (of 5) from port A of cell normalization_bank_result_tracker.$neg$rtl/normalization_bank_result_tracker.sv:0$5821 ($neg).
+Removed top 16 bits (of 32) from port Y of cell normalization_bank_result_tracker.$or$rtl/normalization_bank_result_tracker.sv:0$5827 ($or).
+Removed top 16 bits (of 32) from port A of cell normalization_bank_result_tracker.$or$rtl/normalization_bank_result_tracker.sv:0$5827 ($or).
+Removed top 16 bits (of 32) from port B of cell normalization_bank_result_tracker.$or$rtl/normalization_bank_result_tracker.sv:0$5827 ($or).
+Removed top 16 bits (of 32) from port Y of cell normalization_bank_result_tracker.$or$rtl/normalization_bank_result_tracker.sv:0$5834 ($or).
+Removed top 16 bits (of 32) from port A of cell normalization_bank_result_tracker.$or$rtl/normalization_bank_result_tracker.sv:0$5834 ($or).
+Removed top 16 bits (of 32) from port B of cell normalization_bank_result_tracker.$or$rtl/normalization_bank_result_tracker.sv:0$5834 ($or).
+Removed top 16 bits (of 32) from port Y of cell normalization_bank_result_tracker.$and$rtl/normalization_bank_result_tracker.sv:0$5799 ($and).
+Removed top 16 bits (of 32) from port B of cell normalization_bank_result_tracker.$and$rtl/normalization_bank_result_tracker.sv:0$5799 ($and).
+Removed top 16 bits (of 32) from port Y of cell normalization_bank_result_tracker.$shift$rtl/normalization_bank_result_tracker.sv:0$5801 ($shift).
+Removed top 16 bits (of 32) from port Y of cell normalization_bank_result_tracker.$and$rtl/normalization_bank_result_tracker.sv:0$5806 ($and).
+Removed top 16 bits (of 32) from port B of cell normalization_bank_result_tracker.$and$rtl/normalization_bank_result_tracker.sv:0$5806 ($and).
+Removed top 16 bits (of 32) from port Y of cell normalization_bank_result_tracker.$and$rtl/normalization_bank_result_tracker.sv:0$5824 ($and).
+Removed top 16 bits (of 32) from port B of cell normalization_bank_result_tracker.$and$rtl/normalization_bank_result_tracker.sv:0$5824 ($and).
+Removed top 16 bits (of 32) from port Y of cell normalization_bank_result_tracker.$and$rtl/normalization_bank_result_tracker.sv:0$5831 ($and).
+Removed top 16 bits (of 32) from port B of cell normalization_bank_result_tracker.$and$rtl/normalization_bank_result_tracker.sv:0$5831 ($and).
+Removed top 16 bits (of 32) from port Y of cell normalization_bank_result_tracker.$shift$rtl/normalization_bank_result_tracker.sv:0$5833 ($shift).
+Removed top 16 bits (of 32) from port Y of cell normalization_bank_result_tracker.$not$rtl/normalization_bank_result_tracker.sv:0$5798 ($not).
+Removed top 16 bits (of 32) from port A of cell normalization_bank_result_tracker.$not$rtl/normalization_bank_result_tracker.sv:0$5798 ($not).
+Removed top 16 bits (of 32) from port Y of cell normalization_bank_result_tracker.$not$rtl/normalization_bank_result_tracker.sv:0$5823 ($not).
+Removed top 16 bits (of 32) from port A of cell normalization_bank_result_tracker.$not$rtl/normalization_bank_result_tracker.sv:0$5823 ($not).
+Removed top 16 bits (of 32) from port Y of cell normalization_bank_result_tracker.$shift$rtl/normalization_bank_result_tracker.sv:0$5797 ($shift).
+Removed top 16 bits (of 32) from port Y of cell normalization_bank_result_tracker.$shift$rtl/normalization_bank_result_tracker.sv:0$5822 ($shift).
+Removed top 28 bits (of 32) from wire normalization_bank_result_tracker.$10\completion_idx[31:0].
+Removed top 28 bits (of 32) from wire normalization_bank_result_tracker.$10\free_idx[31:0].
+Removed top 28 bits (of 32) from wire normalization_bank_result_tracker.$11\completion_idx[31:0].
+Removed top 28 bits (of 32) from wire normalization_bank_result_tracker.$11\free_idx[31:0].
+Removed top 28 bits (of 32) from wire normalization_bank_result_tracker.$12\completion_idx[31:0].
+Removed top 28 bits (of 32) from wire normalization_bank_result_tracker.$12\free_idx[31:0].
+Removed top 28 bits (of 32) from wire normalization_bank_result_tracker.$13\completion_idx[31:0].
+Removed top 28 bits (of 32) from wire normalization_bank_result_tracker.$13\free_idx[31:0].
+Removed top 28 bits (of 32) from wire normalization_bank_result_tracker.$14\completion_idx[31:0].
+Removed top 28 bits (of 32) from wire normalization_bank_result_tracker.$14\free_idx[31:0].
+Removed top 28 bits (of 32) from wire normalization_bank_result_tracker.$15\completion_idx[31:0].
+Removed top 28 bits (of 32) from wire normalization_bank_result_tracker.$15\free_idx[31:0].
+Removed top 31 bits (of 32) from wire normalization_bank_result_tracker.$2\completion_idx[31:0].
+Removed top 31 bits (of 32) from wire normalization_bank_result_tracker.$2\free_idx[31:0].
+Removed top 30 bits (of 32) from wire normalization_bank_result_tracker.$3\completion_idx[31:0].
+Removed top 30 bits (of 32) from wire normalization_bank_result_tracker.$3\free_idx[31:0].
+Removed top 30 bits (of 32) from wire normalization_bank_result_tracker.$4\completion_idx[31:0].
+Removed top 30 bits (of 32) from wire normalization_bank_result_tracker.$4\free_idx[31:0].
+Removed top 29 bits (of 32) from wire normalization_bank_result_tracker.$5\completion_idx[31:0].
+Removed top 29 bits (of 32) from wire normalization_bank_result_tracker.$5\free_idx[31:0].
+Removed top 29 bits (of 32) from wire normalization_bank_result_tracker.$6\completion_idx[31:0].
+Removed top 29 bits (of 32) from wire normalization_bank_result_tracker.$6\free_idx[31:0].
+Removed top 29 bits (of 32) from wire normalization_bank_result_tracker.$7\completion_idx[31:0].
+Removed top 29 bits (of 32) from wire normalization_bank_result_tracker.$7\free_idx[31:0].
+Removed top 29 bits (of 32) from wire normalization_bank_result_tracker.$8\completion_idx[31:0].
+Removed top 29 bits (of 32) from wire normalization_bank_result_tracker.$8\free_idx[31:0].
+Removed top 28 bits (of 32) from wire normalization_bank_result_tracker.$9\completion_idx[31:0].
+Removed top 28 bits (of 32) from wire normalization_bank_result_tracker.$9\free_idx[31:0].
+Removed top 16 bits (of 32) from wire normalization_bank_result_tracker.$and$rtl/normalization_bank_result_tracker.sv:0$5799_Y.
+Removed top 16 bits (of 32) from wire normalization_bank_result_tracker.$and$rtl/normalization_bank_result_tracker.sv:0$5806_Y.
+Removed top 16 bits (of 32) from wire normalization_bank_result_tracker.$and$rtl/normalization_bank_result_tracker.sv:0$5824_Y.
+Removed top 16 bits (of 32) from wire normalization_bank_result_tracker.$and$rtl/normalization_bank_result_tracker.sv:0$5831_Y.
+Removed top 11 bits (of 33) from wire normalization_bank_result_tracker.$neg$rtl/normalization_bank_result_tracker.sv:0$5821_Y.
+Removed top 16 bits (of 32) from wire normalization_bank_result_tracker.$or$rtl/normalization_bank_result_tracker.sv:0$5809_Y.
+Removed top 16 bits (of 32) from wire normalization_bank_result_tracker.$or$rtl/normalization_bank_result_tracker.sv:0$5834_Y.
+Removed top 16 bits (of 32) from wire normalization_bank_result_tracker.$shift$rtl/normalization_bank_result_tracker.sv:0$5833_Y.
+Removed top 28 bits (of 32) from wire normalization_bank_result_tracker.completion_idx.
+Removed top 28 bits (of 32) from wire normalization_bank_result_tracker.free_idx.
+
+4.10. Executing PEEPOPT pass (run peephole optimizers).
+
+4.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_bank_result_tracker..
+Removed 0 unused cells and 38 unused wires.
+<suppressed ~1 debug messages>
+
+4.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module normalization_bank_result_tracker:
+  creating $macc model for $neg$rtl/normalization_bank_result_tracker.sv:0$5796 ($neg).
+  creating $macc model for $neg$rtl/normalization_bank_result_tracker.sv:0$5821 ($neg).
+  creating $alu model for $macc $neg$rtl/normalization_bank_result_tracker.sv:0$5821.
+  creating $alu model for $macc $neg$rtl/normalization_bank_result_tracker.sv:0$5796.
+  creating $alu cell for $neg$rtl/normalization_bank_result_tracker.sv:0$5796: $auto$alumacc.cc:495:replace_alu$12307
+  creating $alu cell for $neg$rtl/normalization_bank_result_tracker.sv:0$5821: $auto$alumacc.cc:495:replace_alu$12310
+  created 2 $alu and 0 $macc cells.
+
+4.13. Executing SHARE pass (SAT-based resource sharing).
+
+4.14. Executing OPT pass (performing simple optimizations).
+
+4.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_bank_result_tracker.
+
+4.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_bank_result_tracker'.
+Removed a total of 0 cells.
+
+4.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \normalization_bank_result_tracker..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~712 debug messages>
+
+4.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \normalization_bank_result_tracker.
+Performed a total of 0 changes.
+
+4.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_bank_result_tracker'.
+Removed a total of 0 cells.
+
+4.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_bank_result_tracker..
+
+4.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_bank_result_tracker.
+
+4.14.9. Finished OPT passes. (There is nothing left to do.)
+
+4.15. Executing MEMORY pass.
+
+4.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+4.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+4.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+4.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+4.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+4.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_bank_result_tracker..
+
+4.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+4.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+4.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_bank_result_tracker..
+
+4.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+4.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_bank_result_tracker..
+
+4.17. Executing OPT pass (performing simple optimizations).
+
+4.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_bank_result_tracker.
+<suppressed ~628 debug messages>
+
+4.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_bank_result_tracker'.
+Removed a total of 0 cells.
+
+4.17.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_bank_result_tracker..
+Removed 0 unused cells and 20 unused wires.
+<suppressed ~1 debug messages>
+
+4.17.5. Finished fast OPT passes.
+
+4.18. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+4.19. Executing OPT pass (performing simple optimizations).
+
+4.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_bank_result_tracker.
+
+4.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_bank_result_tracker'.
+Removed a total of 0 cells.
+
+4.19.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \normalization_bank_result_tracker..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~383 debug messages>
+
+4.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \normalization_bank_result_tracker.
+Performed a total of 0 changes.
+
+4.19.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_bank_result_tracker'.
+Removed a total of 0 cells.
+
+4.19.6. Executing OPT_SHARE pass.
+
+4.19.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.19.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_bank_result_tracker..
+
+4.19.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_bank_result_tracker.
+
+4.19.10. Finished OPT passes. (There is nothing left to do.)
+
+4.20. Executing TECHMAP pass (map to technology primitives).
+
+4.20.1. Executing Verilog-2005 frontend: /home/chandler/.local/yosys/usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/home/chandler/.local/yosys/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+4.20.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $adff.
+Using extmapper simplemap for cells of type $adffe.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $not.
+Using template $paramod$e85bcdd999a9f7e1064fcb77207041270947b77a\_90_pmux for cells of type $pmux.
+Using template $paramod$97660dde2e18e70860c70ea72052e17deab62b4d\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $logic_or.
+Using extmapper simplemap for cells of type $reduce_and.
+Using template $paramod$constmap:c47a025e68eca44acec5c4b3c436aff29a128f4e$paramod$bea5f16d923b4c4f84c7ce092d892400f41c6d61\_90_shift_shiftx for cells of type $shift.
+Analyzing pattern of constant bits for this cell:
+  Constant input on bit 0 of port A: 1'0
+Creating constmapped module `$paramod$constmap:2e640526f63aed33d7cd51bc5b4769f861b247cc$paramod$bea5f16d923b4c4f84c7ce092d892400f41c6d61\_90_shift_shiftx'.
+
+4.20.12. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$constmap:2e640526f63aed33d7cd51bc5b4769f861b247cc$paramod$bea5f16d923b4c4f84c7ce092d892400f41c6d61\_90_shift_shiftx..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$29656.
+    dead port 2/2 on $mux $procmux$29650.
+    dead port 2/2 on $mux $procmux$29644.
+    dead port 2/2 on $mux $procmux$29638.
+    dead port 2/2 on $mux $procmux$29632.
+Removed 5 multiplexer ports.
+<suppressed ~4376 debug messages>
+
+4.20.13. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$constmap:2e640526f63aed33d7cd51bc5b4769f861b247cc$paramod$bea5f16d923b4c4f84c7ce092d892400f41c6d61\_90_shift_shiftx.
+<suppressed ~36 debug messages>
+Removed 53 unused cells and 71 unused wires.
+Using template $paramod$constmap:2e640526f63aed33d7cd51bc5b4769f861b247cc$paramod$bea5f16d923b4c4f84c7ce092d892400f41c6d61\_90_shift_shiftx for cells of type $shift.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100001 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using extmapper simplemap for cells of type $ne.
+No more expansions possible.
+<suppressed ~655 debug messages>
+
+4.21. Executing OPT pass (performing simple optimizations).
+
+4.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_bank_result_tracker.
+<suppressed ~1888 debug messages>
+
+4.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_bank_result_tracker'.
+<suppressed ~705 debug messages>
+Removed a total of 235 cells.
+
+4.21.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_bank_result_tracker..
+Removed 37 unused cells and 1006 unused wires.
+<suppressed ~38 debug messages>
+
+4.21.5. Finished fast OPT passes.
+
+4.22. Executing ABC pass (technology mapping using ABC).
+
+4.22.1. Extracting gate netlist of module `\normalization_bank_result_tracker' to `<abc-temp-dir>/input.blif'..
+Extracted 14892 gates and 16002 wires to a netlist network with 1108 inputs and 342 outputs.
+
+4.22.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+4.22.1.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       60
+ABC RESULTS:            ANDNOT cells:     2077
+ABC RESULTS:               MUX cells:     1376
+ABC RESULTS:              NAND cells:      160
+ABC RESULTS:               NOR cells:      108
+ABC RESULTS:               NOT cells:      850
+ABC RESULTS:                OR cells:     4829
+ABC RESULTS:             ORNOT cells:      410
+ABC RESULTS:              XNOR cells:      257
+ABC RESULTS:               XOR cells:     4355
+ABC RESULTS:        internal signals:    14552
+ABC RESULTS:           input signals:     1108
+ABC RESULTS:          output signals:      342
+Removing temp directory.
+
+4.23. Executing OPT pass (performing simple optimizations).
+
+4.23.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_bank_result_tracker.
+<suppressed ~32 debug messages>
+
+4.23.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_bank_result_tracker'.
+<suppressed ~9 debug messages>
+Removed a total of 3 cells.
+
+4.23.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.23.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_bank_result_tracker..
+Removed 0 unused cells and 6750 unused wires.
+<suppressed ~23 debug messages>
+
+4.23.5. Finished fast OPT passes.
+
+4.24. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `normalization_bank_result_tracker'. Setting top module to normalization_bank_result_tracker.
+
+4.24.1. Analyzing design hierarchy..
+Top module:  \normalization_bank_result_tracker
+
+4.24.2. Analyzing design hierarchy..
+Top module:  \normalization_bank_result_tracker
+Removed 0 unused modules.
+
+4.25. Printing statistics.
+
+=== normalization_bank_result_tracker ===
+
+   Number of wires:              14242
+   Number of wire bits:          15592
+   Number of public wires:          67
+   Number of public wire bits:    1147
+   Number of ports:                 16
+   Number of port bits:            346
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:              15283
+     $_ANDNOT_                    2077
+     $_AND_                         60
+     $_DFFE_PN0P_                  514
+     $_DFF_PN0_                    290
+     $_MUX_                       1376
+     $_NAND_                       160
+     $_NOR_                        108
+     $_NOT_                        850
+     $_ORNOT_                      408
+     $_OR_                        4828
+     $_XNOR_                       257
+     $_XOR_                       4355
+
+4.26. Executing CHECK pass (checking for obvious problems).
+Checking module normalization_bank_result_tracker...
+Found and reported 0 problems.
+
+5. Printing statistics.
+
+=== normalization_bank_result_tracker ===
+
+   Number of wires:              14242
+   Number of wire bits:          15592
+   Number of public wires:          67
+   Number of public wire bits:    1147
+   Number of ports:                 16
+   Number of port bits:            346
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:              15283
+     $_ANDNOT_                    2077
+     $_AND_                         60
+     $_DFFE_PN0P_                  514
+     $_DFF_PN0_                    290
+     $_MUX_                       1376
+     $_NAND_                       160
+     $_NOR_                        108
+     $_NOT_                        850
+     $_ORNOT_                      408
+     $_OR_                        4828
+     $_XNOR_                       257
+     $_XOR_                       4355
+
+6. Executing CHECK pass (checking for obvious problems).
+Checking module normalization_bank_result_tracker...
+Found and reported 0 problems.
+
+Warnings: 4 unique messages, 8 total
+End of script. Logfile hash: 8b7884605f, CPU: user 2.92s system 0.07s, MEM: 67.11 MB peak
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+Time spent: 21% 21x opt_expr (0 sec), 17% 17x opt_clean (0 sec), ...

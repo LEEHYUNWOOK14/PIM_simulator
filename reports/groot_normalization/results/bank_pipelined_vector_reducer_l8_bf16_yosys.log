@@ -274,11 +274,11 @@ No latch inferred for signal `\bf16_add.\add_ext' from process `\bf16_add.$proc$
 No latch inferred for signal `\bf16_add.\rounded_sig' from process `\bf16_add.$proc$rtl/bf16_add.sv:29$229'.
 No latch inferred for signal `\bf16_add.\result_exp' from process `\bf16_add.$proc$rtl/bf16_add.sv:29$229'.
 No latch inferred for signal `\bf16_add.\shift_amount' from process `\bf16_add.$proc$rtl/bf16_add.sv:29$229'.
+No latch inferred for signal `\bf16_add.\normalize_step' from process `\bf16_add.$proc$rtl/bf16_add.sv:29$229'.
 No latch inferred for signal `\bf16_add.\shift_right_sticky$func$rtl/bf16_add.sv:48$228.$result' from process `\bf16_add.$proc$rtl/bf16_add.sv:29$229'.
 No latch inferred for signal `\bf16_add.\shift_right_sticky$func$rtl/bf16_add.sv:48$228.value' from process `\bf16_add.$proc$rtl/bf16_add.sv:29$229'.
 No latch inferred for signal `\bf16_add.\shift_right_sticky$func$rtl/bf16_add.sv:48$228.amount' from process `\bf16_add.$proc$rtl/bf16_add.sv:29$229'.
 No latch inferred for signal `\bf16_add.\shift_right_sticky$func$rtl/bf16_add.sv:48$228.sticky' from process `\bf16_add.$proc$rtl/bf16_add.sv:29$229'.
-Latch inferred for signal `\bf16_add.\normalize_step' from process `\bf16_add.$proc$rtl/bf16_add.sv:29$229': $auto$proc_dlatch.cc:432:proc_dlatch$1545
 No latch inferred for signal `\bank_normalization_pipelined_vector_reducer.\sum_stage_d[0]' from process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:0$562'.
 No latch inferred for signal `\bank_normalization_pipelined_vector_reducer.\sum_stage_d[1]' from process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:0$562'.
 No latch inferred for signal `\bank_normalization_pipelined_vector_reducer.\sum_stage_d[2]' from process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:0$562'.
@@ -301,6 +301,7 @@ No latch inferred for signal `\bf16_mul.\lhs_frac' from process `\bf16_mul.$proc
 No latch inferred for signal `\bf16_mul.\rhs_frac' from process `\bf16_mul.$proc$rtl/bf16_mul.sv:14$354'.
 No latch inferred for signal `\bf16_mul.\lhs_sig' from process `\bf16_mul.$proc$rtl/bf16_mul.sv:14$354'.
 No latch inferred for signal `\bf16_mul.\rhs_sig' from process `\bf16_mul.$proc$rtl/bf16_mul.sv:14$354'.
+No latch inferred for signal `\bf16_mul.\shift_amount' from process `\bf16_mul.$proc$rtl/bf16_mul.sv:14$354'.
 No latch inferred for signal `\bf16_mul.\sign' from process `\bf16_mul.$proc$rtl/bf16_mul.sv:14$354'.
 No latch inferred for signal `\bf16_mul.\product' from process `\bf16_mul.$proc$rtl/bf16_mul.sv:14$354'.
 No latch inferred for signal `\bf16_mul.\magnitude' from process `\bf16_mul.$proc$rtl/bf16_mul.sv:14$354'.
@@ -312,73 +313,72 @@ No latch inferred for signal `\bf16_mul.\rhs_unbiased' from process `\bf16_mul.$
 No latch inferred for signal `\bf16_mul.\exponent' from process `\bf16_mul.$proc$rtl/bf16_mul.sv:14$354'.
 No latch inferred for signal `\bf16_mul.\msb_index' from process `\bf16_mul.$proc$rtl/bf16_mul.sv:14$354'.
 No latch inferred for signal `\bf16_mul.$fordecl_block$352.bit_index' from process `\bf16_mul.$proc$rtl/bf16_mul.sv:14$354'.
-Latch inferred for signal `\bf16_mul.\shift_amount' from process `\bf16_mul.$proc$rtl/bf16_mul.sv:14$354': $auto$proc_dlatch.cc:432:proc_dlatch$1638
 
 8.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\result_valid_o' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $adff cell `$procdff$1643' with positive edge clock and positive level reset.
+  created $adff cell `$procdff$1541' with positive edge clock and positive level reset.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\result_tag_o' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $adff cell `$procdff$1648' with positive edge clock and positive level reset.
+  created $adff cell `$procdff$1546' with positive edge clock and positive level reset.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\result_sum_o' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $adff cell `$procdff$1653' with positive edge clock and positive level reset.
+  created $adff cell `$procdff$1551' with positive edge clock and positive level reset.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\result_sumsq_o' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $adff cell `$procdff$1658' with positive edge clock and positive level reset.
+  created $adff cell `$procdff$1556' with positive edge clock and positive level reset.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\protocol_error_o' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $adff cell `$procdff$1663' with positive edge clock and positive level reset.
+  created $adff cell `$procdff$1561' with positive edge clock and positive level reset.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\busy_q' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $adff cell `$procdff$1668' with positive edge clock and positive level reset.
+  created $adff cell `$procdff$1566' with positive edge clock and positive level reset.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\accepting_q' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $adff cell `$procdff$1673' with positive edge clock and positive level reset.
+  created $adff cell `$procdff$1571' with positive edge clock and positive level reset.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\tag_q' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $adff cell `$procdff$1678' with positive edge clock and positive level reset.
+  created $adff cell `$procdff$1576' with positive edge clock and positive level reset.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\input_remaining_q' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $adff cell `$procdff$1683' with positive edge clock and positive level reset.
+  created $adff cell `$procdff$1581' with positive edge clock and positive level reset.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\row_sum_q' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $adff cell `$procdff$1688' with positive edge clock and positive level reset.
+  created $adff cell `$procdff$1586' with positive edge clock and positive level reset.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\row_sumsq_q' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $adff cell `$procdff$1693' with positive edge clock and positive level reset.
+  created $adff cell `$procdff$1591' with positive edge clock and positive level reset.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\valid_pipe_q' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $adff cell `$procdff$1698' with positive edge clock and positive level reset.
+  created $adff cell `$procdff$1596' with positive edge clock and positive level reset.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\last_pipe_q' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $adff cell `$procdff$1703' with positive edge clock and positive level reset.
+  created $adff cell `$procdff$1601' with positive edge clock and positive level reset.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.$fordecl_block$443.level' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $dff cell `$procdff$1710' with positive edge clock.
+  created $dff cell `$procdff$1608' with positive edge clock.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.$fordecl_block$445.level' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $dff cell `$procdff$1717' with positive edge clock.
+  created $dff cell `$procdff$1615' with positive edge clock.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.$fordecl_block$445.$for_loop$446[0].$fordecl_block$447.node' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $dff cell `$procdff$1724' with positive edge clock.
+  created $dff cell `$procdff$1622' with positive edge clock.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.$fordecl_block$445.$for_loop$446[1].$fordecl_block$447.node' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $dff cell `$procdff$1731' with positive edge clock.
+  created $dff cell `$procdff$1629' with positive edge clock.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\sum_stage_q[0]' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $dff cell `$procdff$1738' with positive edge clock.
+  created $dff cell `$procdff$1636' with positive edge clock.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\sum_stage_q[1]' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $dff cell `$procdff$1745' with positive edge clock.
+  created $dff cell `$procdff$1643' with positive edge clock.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\sum_stage_q[2]' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $dff cell `$procdff$1752' with positive edge clock.
+  created $dff cell `$procdff$1650' with positive edge clock.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\sum_stage_q[3]' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $dff cell `$procdff$1759' with positive edge clock.
+  created $dff cell `$procdff$1657' with positive edge clock.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\sumsq_stage_q[0]' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $dff cell `$procdff$1766' with positive edge clock.
+  created $dff cell `$procdff$1664' with positive edge clock.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\sumsq_stage_q[1]' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $dff cell `$procdff$1773' with positive edge clock.
+  created $dff cell `$procdff$1671' with positive edge clock.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\sumsq_stage_q[2]' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $dff cell `$procdff$1780' with positive edge clock.
+  created $dff cell `$procdff$1678' with positive edge clock.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\sumsq_stage_q[3]' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $dff cell `$procdff$1787' with positive edge clock.
+  created $dff cell `$procdff$1685' with positive edge clock.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.$fordecl_block$445.$for_loop$446[2].$fordecl_block$447.node' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $dff cell `$procdff$1794' with positive edge clock.
+  created $dff cell `$procdff$1692' with positive edge clock.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\sum_stage_q[8]' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $dff cell `$procdff$1801' with positive edge clock.
+  created $dff cell `$procdff$1699' with positive edge clock.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\sum_stage_q[9]' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $dff cell `$procdff$1808' with positive edge clock.
+  created $dff cell `$procdff$1706' with positive edge clock.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\sum_stage_q[16]' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $dff cell `$procdff$1815' with positive edge clock.
+  created $dff cell `$procdff$1713' with positive edge clock.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\sumsq_stage_q[8]' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $dff cell `$procdff$1822' with positive edge clock.
+  created $dff cell `$procdff$1720' with positive edge clock.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\sumsq_stage_q[9]' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $dff cell `$procdff$1829' with positive edge clock.
+  created $dff cell `$procdff$1727' with positive edge clock.
 Creating register for signal `\bank_normalization_pipelined_vector_reducer.\sumsq_stage_q[16]' using process `\bank_normalization_pipelined_vector_reducer.$proc$rtl/bank_normalization_pipelined_vector_reducer.sv:81$543'.
-  created $dff cell `$procdff$1836' with positive edge clock.
+  created $dff cell `$procdff$1734' with positive edge clock.
 
 8.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
 
@@ -394,11 +394,11 @@ Cleaned up 58 empty switches.
 
 8.2.12. Executing OPT_EXPR pass (perform const folding).
 Optimizing module bf16_add.
-<suppressed ~31 debug messages>
+<suppressed ~26 debug messages>
 Optimizing module bank_normalization_pipelined_vector_reducer.
 <suppressed ~65 debug messages>
 Optimizing module bf16_mul.
-<suppressed ~54 debug messages>
+<suppressed ~15 debug messages>
 
 8.3. Executing OPT_EXPR pass (perform const folding).
 Optimizing module bf16_add.
@@ -409,8 +409,8 @@ Optimizing module bf16_mul.
 Finding unused cells or wires in module \bf16_add..
 Finding unused cells or wires in module \bank_normalization_pipelined_vector_reducer..
 Finding unused cells or wires in module \bf16_mul..
-Removed 192 unused cells and 967 unused wires.
-<suppressed ~271 debug messages>
+Removed 182 unused cells and 917 unused wires.
+<suppressed ~261 debug messages>
 
 8.5. Executing CHECK pass (checking for obvious problems).
 Checking module bank_normalization_pipelined_vector_reducer...
@@ -441,9 +441,9 @@ Running muxtree optimizer on module \bank_normalization_pipelined_vector_reducer
 Running muxtree optimizer on module \bf16_add..
   Creating internal representation of mux trees.
   Evaluating internal representation of mux trees.
-      Replacing known input bits on port A of cell $procmux$651: $add$rtl/bf16_add.sv:69$321_Y -> { 1'0 $add$rtl/bf16_add.sv:69$321_Y [7:0] }
-      Replacing known input bits on port B of cell $procmux$651: { 1'0 $add$rtl/bf16_add.sv:69$321_Y [8:1] } -> { 2'01 $add$rtl/bf16_add.sv:69$321_Y [7:1] }
-      Replacing known input bits on port B of cell $procmux$775: $add$rtl/bf16_add.sv:52$264_Y [11:2] -> { 1'1 $add$rtl/bf16_add.sv:52$264_Y [10:2] }
+      Replacing known input bits on port A of cell $procmux$651: $add$rtl/bf16_add.sv:70$321_Y -> { 1'0 $add$rtl/bf16_add.sv:70$321_Y [7:0] }
+      Replacing known input bits on port B of cell $procmux$651: { 1'0 $add$rtl/bf16_add.sv:70$321_Y [8:1] } -> { 2'01 $add$rtl/bf16_add.sv:70$321_Y [7:1] }
+      Replacing known input bits on port B of cell $procmux$775: $add$rtl/bf16_add.sv:53$264_Y [11:2] -> { 1'1 $add$rtl/bf16_add.sv:53$264_Y [10:2] }
   Analyzing evaluation results.
     dead port 1/2 on $mux $procmux$567.
     dead port 1/2 on $mux $procmux$570.
@@ -647,27 +647,27 @@ Finding identical cells in module `\bf16_mul'.
 Removed a total of 0 cells.
 
 8.8.6. Executing OPT_DFF pass (perform DFF optimizations).
-Adding EN signal on $procdff$1836 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sumsq_stage_d[16], Q = \sumsq_stage_q[16]).
-Adding EN signal on $procdff$1829 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sumsq_stage_d[9], Q = \sumsq_stage_q[9]).
-Adding EN signal on $procdff$1822 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sumsq_stage_d[8], Q = \sumsq_stage_q[8]).
-Adding EN signal on $procdff$1815 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sum_stage_d[16], Q = \sum_stage_q[16]).
-Adding EN signal on $procdff$1808 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sum_stage_d[9], Q = \sum_stage_q[9]).
-Adding EN signal on $procdff$1801 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sum_stage_d[8], Q = \sum_stage_q[8]).
-Adding EN signal on $procdff$1787 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sumsq_stage_d[3], Q = \sumsq_stage_q[3]).
-Adding EN signal on $procdff$1780 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sumsq_stage_d[2], Q = \sumsq_stage_q[2]).
-Adding EN signal on $procdff$1773 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sumsq_stage_d[1], Q = \sumsq_stage_q[1]).
-Adding EN signal on $procdff$1766 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sumsq_stage_d[0], Q = \sumsq_stage_q[0]).
-Adding EN signal on $procdff$1759 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sum_stage_d[3], Q = \sum_stage_q[3]).
-Adding EN signal on $procdff$1752 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sum_stage_d[2], Q = \sum_stage_q[2]).
-Adding EN signal on $procdff$1745 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sum_stage_d[1], Q = \sum_stage_q[1]).
-Adding EN signal on $procdff$1738 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sum_stage_d[0], Q = \sum_stage_q[0]).
-Adding EN signal on $procdff$1693 ($adff) from module bank_normalization_pipelined_vector_reducer (D = $0\row_sumsq_q[15:0], Q = \row_sumsq_q).
-Adding EN signal on $procdff$1688 ($adff) from module bank_normalization_pipelined_vector_reducer (D = $0\row_sum_q[15:0], Q = \row_sum_q).
-Adding EN signal on $procdff$1683 ($adff) from module bank_normalization_pipelined_vector_reducer (D = $0\input_remaining_q[15:0], Q = \input_remaining_q).
-Adding EN signal on $procdff$1678 ($adff) from module bank_normalization_pipelined_vector_reducer (D = \begin_tag_i, Q = \tag_q).
-Adding EN signal on $procdff$1658 ($adff) from module bank_normalization_pipelined_vector_reducer (D = \accumulated_sumsq, Q = \result_sumsq_o).
-Adding EN signal on $procdff$1653 ($adff) from module bank_normalization_pipelined_vector_reducer (D = \accumulated_sum, Q = \result_sum_o).
-Adding EN signal on $procdff$1648 ($adff) from module bank_normalization_pipelined_vector_reducer (D = \tag_q, Q = \result_tag_o).
+Adding EN signal on $procdff$1734 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sumsq_stage_d[16], Q = \sumsq_stage_q[16]).
+Adding EN signal on $procdff$1727 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sumsq_stage_d[9], Q = \sumsq_stage_q[9]).
+Adding EN signal on $procdff$1720 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sumsq_stage_d[8], Q = \sumsq_stage_q[8]).
+Adding EN signal on $procdff$1713 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sum_stage_d[16], Q = \sum_stage_q[16]).
+Adding EN signal on $procdff$1706 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sum_stage_d[9], Q = \sum_stage_q[9]).
+Adding EN signal on $procdff$1699 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sum_stage_d[8], Q = \sum_stage_q[8]).
+Adding EN signal on $procdff$1685 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sumsq_stage_d[3], Q = \sumsq_stage_q[3]).
+Adding EN signal on $procdff$1678 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sumsq_stage_d[2], Q = \sumsq_stage_q[2]).
+Adding EN signal on $procdff$1671 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sumsq_stage_d[1], Q = \sumsq_stage_q[1]).
+Adding EN signal on $procdff$1664 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sumsq_stage_d[0], Q = \sumsq_stage_q[0]).
+Adding EN signal on $procdff$1657 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sum_stage_d[3], Q = \sum_stage_q[3]).
+Adding EN signal on $procdff$1650 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sum_stage_d[2], Q = \sum_stage_q[2]).
+Adding EN signal on $procdff$1643 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sum_stage_d[1], Q = \sum_stage_q[1]).
+Adding EN signal on $procdff$1636 ($dff) from module bank_normalization_pipelined_vector_reducer (D = \sum_stage_d[0], Q = \sum_stage_q[0]).
+Adding EN signal on $procdff$1591 ($adff) from module bank_normalization_pipelined_vector_reducer (D = $0\row_sumsq_q[15:0], Q = \row_sumsq_q).
+Adding EN signal on $procdff$1586 ($adff) from module bank_normalization_pipelined_vector_reducer (D = $0\row_sum_q[15:0], Q = \row_sum_q).
+Adding EN signal on $procdff$1581 ($adff) from module bank_normalization_pipelined_vector_reducer (D = $0\input_remaining_q[15:0], Q = \input_remaining_q).
+Adding EN signal on $procdff$1576 ($adff) from module bank_normalization_pipelined_vector_reducer (D = \begin_tag_i, Q = \tag_q).
+Adding EN signal on $procdff$1556 ($adff) from module bank_normalization_pipelined_vector_reducer (D = \accumulated_sumsq, Q = \result_sumsq_o).
+Adding EN signal on $procdff$1551 ($adff) from module bank_normalization_pipelined_vector_reducer (D = \accumulated_sum, Q = \result_sum_o).
+Adding EN signal on $procdff$1546 ($adff) from module bank_normalization_pipelined_vector_reducer (D = \tag_q, Q = \result_tag_o).
 
 8.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \bank_normalization_pipelined_vector_reducer..
@@ -781,52 +781,52 @@ Removed top 31 bits (of 32) from port B of cell bf16_add.$le$rtl/bf16_add.sv:10$
 Removed top 23 bits (of 32) from port A of cell bf16_add.$ge$rtl/bf16_add.sv:11$253 ($ge).
 Removed top 27 bits (of 32) from port B of cell bf16_add.$ge$rtl/bf16_add.sv:11$253 ($ge).
 Removed top 10 bits (of 11) from port A of cell bf16_add.$shl$rtl/bf16_add.sv:13$257 ($shl).
-Removed top 1 bits (of 12) from port A of cell bf16_add.$add$rtl/bf16_add.sv:52$264 ($add).
-Removed top 1 bits (of 12) from port B of cell bf16_add.$add$rtl/bf16_add.sv:52$264 ($add).
-Removed top 23 bits (of 32) from port A of cell bf16_add.$add$rtl/bf16_add.sv:56$266 ($add).
-Removed top 30 bits (of 32) from port B of cell bf16_add.$add$rtl/bf16_add.sv:56$266 ($add).
-Converting cell bf16_add.$add$rtl/bf16_add.sv:56$266 ($add) from signed to unsigned.
-Removed top 22 bits (of 32) from port Y of cell bf16_add.$add$rtl/bf16_add.sv:56$266 ($add).
-Removed top 1 bits (of 9) from port A of cell bf16_add.$add$rtl/bf16_add.sv:56$266 ($add).
-Removed top 1 bits (of 2) from port B of cell bf16_add.$add$rtl/bf16_add.sv:56$266 ($add).
-Removed top 1 bits (of 10) from port Y of cell bf16_add.$add$rtl/bf16_add.sv:56$266 ($add).
-Removed top 23 bits (of 32) from port A of cell bf16_add.$gt$rtl/bf16_add.sv:62$269 ($gt).
-Removed top 30 bits (of 32) from port B of cell bf16_add.$gt$rtl/bf16_add.sv:62$269 ($gt).
-Converting cell bf16_add.$gt$rtl/bf16_add.sv:62$269 ($gt) from signed to unsigned.
-Removed top 1 bits (of 9) from port A of cell bf16_add.$gt$rtl/bf16_add.sv:62$269 ($gt).
-Removed top 1 bits (of 2) from port B of cell bf16_add.$gt$rtl/bf16_add.sv:62$269 ($gt).
-Removed top 23 bits (of 32) from port A of cell bf16_add.$sub$rtl/bf16_add.sv:64$272 ($sub).
-Removed top 30 bits (of 32) from port B of cell bf16_add.$sub$rtl/bf16_add.sv:64$272 ($sub).
-Converting cell bf16_add.$sub$rtl/bf16_add.sv:64$272 ($sub) from signed to unsigned.
-Removed top 22 bits (of 32) from port Y of cell bf16_add.$sub$rtl/bf16_add.sv:64$272 ($sub).
-Removed top 1 bits (of 9) from port A of cell bf16_add.$sub$rtl/bf16_add.sv:64$272 ($sub).
-Removed top 1 bits (of 2) from port B of cell bf16_add.$sub$rtl/bf16_add.sv:64$272 ($sub).
-Removed top 1 bits (of 10) from port Y of cell bf16_add.$sub$rtl/bf16_add.sv:64$272 ($sub).
-Removed top 30 bits (of 32) from port B of cell bf16_add.$gt$rtl/bf16_add.sv:62$274 ($gt).
-Removed top 30 bits (of 32) from port B of cell bf16_add.$sub$rtl/bf16_add.sv:64$277 ($sub).
-Removed top 30 bits (of 32) from port B of cell bf16_add.$gt$rtl/bf16_add.sv:62$279 ($gt).
-Removed top 30 bits (of 32) from port B of cell bf16_add.$sub$rtl/bf16_add.sv:64$282 ($sub).
-Removed top 30 bits (of 32) from port B of cell bf16_add.$gt$rtl/bf16_add.sv:62$284 ($gt).
-Removed top 30 bits (of 32) from port B of cell bf16_add.$sub$rtl/bf16_add.sv:64$287 ($sub).
-Removed top 30 bits (of 32) from port B of cell bf16_add.$gt$rtl/bf16_add.sv:62$289 ($gt).
-Removed top 30 bits (of 32) from port B of cell bf16_add.$sub$rtl/bf16_add.sv:64$292 ($sub).
-Removed top 30 bits (of 32) from port B of cell bf16_add.$gt$rtl/bf16_add.sv:62$294 ($gt).
-Removed top 30 bits (of 32) from port B of cell bf16_add.$sub$rtl/bf16_add.sv:64$297 ($sub).
-Removed top 30 bits (of 32) from port B of cell bf16_add.$gt$rtl/bf16_add.sv:62$299 ($gt).
-Removed top 30 bits (of 32) from port B of cell bf16_add.$sub$rtl/bf16_add.sv:64$302 ($sub).
-Removed top 30 bits (of 32) from port B of cell bf16_add.$gt$rtl/bf16_add.sv:62$304 ($gt).
-Removed top 30 bits (of 32) from port B of cell bf16_add.$sub$rtl/bf16_add.sv:64$307 ($sub).
-Removed top 30 bits (of 32) from port B of cell bf16_add.$gt$rtl/bf16_add.sv:62$309 ($gt).
-Removed top 30 bits (of 32) from port B of cell bf16_add.$sub$rtl/bf16_add.sv:64$312 ($sub).
-Removed top 30 bits (of 32) from port B of cell bf16_add.$gt$rtl/bf16_add.sv:62$314 ($gt).
-Removed top 30 bits (of 32) from port B of cell bf16_add.$sub$rtl/bf16_add.sv:64$317 ($sub).
-Removed top 1 bits (of 9) from port A of cell bf16_add.$add$rtl/bf16_add.sv:69$321 ($add).
-Removed top 30 bits (of 32) from port B of cell bf16_add.$add$rtl/bf16_add.sv:72$323 ($add).
-Removed top 23 bits (of 32) from port B of cell bf16_add.$ge$rtl/bf16_add.sv:85$348 ($ge).
-Removed top 30 bits (of 32) from port B of cell bf16_add.$le$rtl/bf16_add.sv:86$349 ($le).
+Removed top 1 bits (of 12) from port A of cell bf16_add.$add$rtl/bf16_add.sv:53$264 ($add).
+Removed top 1 bits (of 12) from port B of cell bf16_add.$add$rtl/bf16_add.sv:53$264 ($add).
+Removed top 23 bits (of 32) from port A of cell bf16_add.$add$rtl/bf16_add.sv:57$266 ($add).
+Removed top 30 bits (of 32) from port B of cell bf16_add.$add$rtl/bf16_add.sv:57$266 ($add).
+Converting cell bf16_add.$add$rtl/bf16_add.sv:57$266 ($add) from signed to unsigned.
+Removed top 22 bits (of 32) from port Y of cell bf16_add.$add$rtl/bf16_add.sv:57$266 ($add).
+Removed top 1 bits (of 9) from port A of cell bf16_add.$add$rtl/bf16_add.sv:57$266 ($add).
+Removed top 1 bits (of 2) from port B of cell bf16_add.$add$rtl/bf16_add.sv:57$266 ($add).
+Removed top 1 bits (of 10) from port Y of cell bf16_add.$add$rtl/bf16_add.sv:57$266 ($add).
+Removed top 23 bits (of 32) from port A of cell bf16_add.$gt$rtl/bf16_add.sv:63$269 ($gt).
+Removed top 30 bits (of 32) from port B of cell bf16_add.$gt$rtl/bf16_add.sv:63$269 ($gt).
+Converting cell bf16_add.$gt$rtl/bf16_add.sv:63$269 ($gt) from signed to unsigned.
+Removed top 1 bits (of 9) from port A of cell bf16_add.$gt$rtl/bf16_add.sv:63$269 ($gt).
+Removed top 1 bits (of 2) from port B of cell bf16_add.$gt$rtl/bf16_add.sv:63$269 ($gt).
+Removed top 23 bits (of 32) from port A of cell bf16_add.$sub$rtl/bf16_add.sv:65$272 ($sub).
+Removed top 30 bits (of 32) from port B of cell bf16_add.$sub$rtl/bf16_add.sv:65$272 ($sub).
+Converting cell bf16_add.$sub$rtl/bf16_add.sv:65$272 ($sub) from signed to unsigned.
+Removed top 22 bits (of 32) from port Y of cell bf16_add.$sub$rtl/bf16_add.sv:65$272 ($sub).
+Removed top 1 bits (of 9) from port A of cell bf16_add.$sub$rtl/bf16_add.sv:65$272 ($sub).
+Removed top 1 bits (of 2) from port B of cell bf16_add.$sub$rtl/bf16_add.sv:65$272 ($sub).
+Removed top 1 bits (of 10) from port Y of cell bf16_add.$sub$rtl/bf16_add.sv:65$272 ($sub).
+Removed top 30 bits (of 32) from port B of cell bf16_add.$gt$rtl/bf16_add.sv:63$274 ($gt).
+Removed top 30 bits (of 32) from port B of cell bf16_add.$sub$rtl/bf16_add.sv:65$277 ($sub).
+Removed top 30 bits (of 32) from port B of cell bf16_add.$gt$rtl/bf16_add.sv:63$279 ($gt).
+Removed top 30 bits (of 32) from port B of cell bf16_add.$sub$rtl/bf16_add.sv:65$282 ($sub).
+Removed top 30 bits (of 32) from port B of cell bf16_add.$gt$rtl/bf16_add.sv:63$284 ($gt).
+Removed top 30 bits (of 32) from port B of cell bf16_add.$sub$rtl/bf16_add.sv:65$287 ($sub).
+Removed top 30 bits (of 32) from port B of cell bf16_add.$gt$rtl/bf16_add.sv:63$289 ($gt).
+Removed top 30 bits (of 32) from port B of cell bf16_add.$sub$rtl/bf16_add.sv:65$292 ($sub).
+Removed top 30 bits (of 32) from port B of cell bf16_add.$gt$rtl/bf16_add.sv:63$294 ($gt).
+Removed top 30 bits (of 32) from port B of cell bf16_add.$sub$rtl/bf16_add.sv:65$297 ($sub).
+Removed top 30 bits (of 32) from port B of cell bf16_add.$gt$rtl/bf16_add.sv:63$299 ($gt).
+Removed top 30 bits (of 32) from port B of cell bf16_add.$sub$rtl/bf16_add.sv:65$302 ($sub).
+Removed top 30 bits (of 32) from port B of cell bf16_add.$gt$rtl/bf16_add.sv:63$304 ($gt).
+Removed top 30 bits (of 32) from port B of cell bf16_add.$sub$rtl/bf16_add.sv:65$307 ($sub).
+Removed top 30 bits (of 32) from port B of cell bf16_add.$gt$rtl/bf16_add.sv:63$309 ($gt).
+Removed top 30 bits (of 32) from port B of cell bf16_add.$sub$rtl/bf16_add.sv:65$312 ($sub).
+Removed top 30 bits (of 32) from port B of cell bf16_add.$gt$rtl/bf16_add.sv:63$314 ($gt).
+Removed top 30 bits (of 32) from port B of cell bf16_add.$sub$rtl/bf16_add.sv:65$317 ($sub).
+Removed top 1 bits (of 9) from port A of cell bf16_add.$add$rtl/bf16_add.sv:70$321 ($add).
+Removed top 30 bits (of 32) from port B of cell bf16_add.$add$rtl/bf16_add.sv:73$323 ($add).
+Removed top 23 bits (of 32) from port B of cell bf16_add.$ge$rtl/bf16_add.sv:86$348 ($ge).
+Removed top 30 bits (of 32) from port B of cell bf16_add.$le$rtl/bf16_add.sv:87$349 ($le).
 Removed top 1 bits (of 16) from mux cell bf16_add.$procmux$585 ($mux).
-Removed top 23 bits (of 32) from wire bf16_add.$add$rtl/bf16_add.sv:56$266_Y.
-Removed top 1 bits (of 11) from wire bf16_add.$sub$rtl/bf16_add.sv:59$267_Y.
+Removed top 23 bits (of 32) from wire bf16_add.$add$rtl/bf16_add.sv:57$266_Y.
+Removed top 1 bits (of 11) from wire bf16_add.$sub$rtl/bf16_add.sv:60$267_Y.
 Removed top 1 bits (of 9) from wire bf16_add.rounded_sig.
 Removed top 8 bits (of 16) from mux cell bf16_mul.$procmux$915 ($mux).
 Removed top 25 bits (of 32) from port B of cell bf16_mul.$sub$rtl/bf16_mul.sv:22$361 ($sub).
@@ -834,30 +834,30 @@ Removed top 23 bits (of 32) from port Y of cell bf16_mul.$sub$rtl/bf16_mul.sv:22
 Removed top 25 bits (of 32) from port B of cell bf16_mul.$sub$rtl/bf16_mul.sv:23$364 ($sub).
 Removed top 23 bits (of 32) from port Y of cell bf16_mul.$sub$rtl/bf16_mul.sv:23$364 ($sub).
 Removed top 27 bits (of 32) from port B of cell bf16_mul.$sub$rtl/bf16_mul.sv:27$367 ($sub).
-Removed top 23 bits (of 32) from port B of cell bf16_mul.$ge$rtl/bf16_mul.sv:38$398 ($ge).
-Removed top 24 bits (of 32) from port B of cell bf16_mul.$ge$rtl/bf16_mul.sv:39$399 ($ge).
-Removed top 28 bits (of 32) from port B of cell bf16_mul.$sub$rtl/bf16_mul.sv:40$400 ($sub).
-Removed top 31 bits (of 32) from port B of cell bf16_mul.$gt$rtl/bf16_mul.sv:41$401 ($gt).
-Removed top 48 bits (of 64) from port A of cell bf16_mul.$shr$rtl/bf16_mul.sv:42$402 ($shr).
-Removed top 30 bits (of 32) from port B of cell bf16_mul.$sub$rtl/bf16_mul.sv:43$403 ($sub).
-Removed top 63 bits (of 64) from port A of cell bf16_mul.$shl$rtl/bf16_mul.sv:43$404 ($shl).
-Removed top 48 bits (of 64) from port A of cell bf16_mul.$and$rtl/bf16_mul.sv:45$408 ($and).
-Removed top 48 bits (of 64) from port A of cell bf16_mul.$shl$rtl/bf16_mul.sv:47$414 ($shl).
-Removed top 23 bits (of 32) from port B of cell bf16_mul.$ge$rtl/bf16_mul.sv:48$415 ($ge).
-Removed top 30 bits (of 32) from port B of cell bf16_mul.$add$rtl/bf16_mul.sv:50$417 ($add).
-Removed top 23 bits (of 32) from port B of cell bf16_mul.$ge$rtl/bf16_mul.sv:52$418 ($ge).
-Removed top 24 bits (of 32) from port B of cell bf16_mul.$add$rtl/bf16_mul.sv:54$419 ($add).
-Removed top 24 bits (of 32) from port Y of cell bf16_mul.$add$rtl/bf16_mul.sv:54$419 ($add).
-Removed top 24 bits (of 32) from port A of cell bf16_mul.$add$rtl/bf16_mul.sv:54$419 ($add).
-Removed top 24 bits (of 32) from port B of cell bf16_mul.$add$rtl/bf16_mul.sv:59$421 ($add).
-Removed top 24 bits (of 32) from port B of cell bf16_mul.$ge$rtl/bf16_mul.sv:60$423 ($ge).
-Removed top 31 bits (of 32) from port B of cell bf16_mul.$gt$rtl/bf16_mul.sv:61$424 ($gt).
-Removed top 48 bits (of 64) from port A of cell bf16_mul.$shr$rtl/bf16_mul.sv:62$425 ($shr).
-Removed top 30 bits (of 32) from port B of cell bf16_mul.$sub$rtl/bf16_mul.sv:63$426 ($sub).
-Removed top 63 bits (of 64) from port A of cell bf16_mul.$shl$rtl/bf16_mul.sv:63$427 ($shl).
-Removed top 48 bits (of 64) from port A of cell bf16_mul.$and$rtl/bf16_mul.sv:65$431 ($and).
-Removed top 48 bits (of 64) from port A of cell bf16_mul.$shl$rtl/bf16_mul.sv:67$437 ($shl).
-Removed top 24 bits (of 32) from port B of cell bf16_mul.$ge$rtl/bf16_mul.sv:68$438 ($ge).
+Removed top 23 bits (of 32) from port B of cell bf16_mul.$ge$rtl/bf16_mul.sv:39$398 ($ge).
+Removed top 24 bits (of 32) from port B of cell bf16_mul.$ge$rtl/bf16_mul.sv:40$399 ($ge).
+Removed top 28 bits (of 32) from port B of cell bf16_mul.$sub$rtl/bf16_mul.sv:41$400 ($sub).
+Removed top 31 bits (of 32) from port B of cell bf16_mul.$gt$rtl/bf16_mul.sv:42$401 ($gt).
+Removed top 48 bits (of 64) from port A of cell bf16_mul.$shr$rtl/bf16_mul.sv:43$402 ($shr).
+Removed top 30 bits (of 32) from port B of cell bf16_mul.$sub$rtl/bf16_mul.sv:44$403 ($sub).
+Removed top 63 bits (of 64) from port A of cell bf16_mul.$shl$rtl/bf16_mul.sv:44$404 ($shl).
+Removed top 48 bits (of 64) from port A of cell bf16_mul.$and$rtl/bf16_mul.sv:46$408 ($and).
+Removed top 48 bits (of 64) from port A of cell bf16_mul.$shl$rtl/bf16_mul.sv:48$414 ($shl).
+Removed top 23 bits (of 32) from port B of cell bf16_mul.$ge$rtl/bf16_mul.sv:49$415 ($ge).
+Removed top 30 bits (of 32) from port B of cell bf16_mul.$add$rtl/bf16_mul.sv:51$417 ($add).
+Removed top 23 bits (of 32) from port B of cell bf16_mul.$ge$rtl/bf16_mul.sv:53$418 ($ge).
+Removed top 24 bits (of 32) from port B of cell bf16_mul.$add$rtl/bf16_mul.sv:55$419 ($add).
+Removed top 24 bits (of 32) from port Y of cell bf16_mul.$add$rtl/bf16_mul.sv:55$419 ($add).
+Removed top 24 bits (of 32) from port A of cell bf16_mul.$add$rtl/bf16_mul.sv:55$419 ($add).
+Removed top 24 bits (of 32) from port B of cell bf16_mul.$add$rtl/bf16_mul.sv:60$421 ($add).
+Removed top 24 bits (of 32) from port B of cell bf16_mul.$ge$rtl/bf16_mul.sv:61$423 ($ge).
+Removed top 31 bits (of 32) from port B of cell bf16_mul.$gt$rtl/bf16_mul.sv:62$424 ($gt).
+Removed top 48 bits (of 64) from port A of cell bf16_mul.$shr$rtl/bf16_mul.sv:63$425 ($shr).
+Removed top 30 bits (of 32) from port B of cell bf16_mul.$sub$rtl/bf16_mul.sv:64$426 ($sub).
+Removed top 63 bits (of 64) from port A of cell bf16_mul.$shl$rtl/bf16_mul.sv:64$427 ($shl).
+Removed top 48 bits (of 64) from port A of cell bf16_mul.$and$rtl/bf16_mul.sv:66$431 ($and).
+Removed top 48 bits (of 64) from port A of cell bf16_mul.$shl$rtl/bf16_mul.sv:68$437 ($shl).
+Removed top 24 bits (of 32) from port B of cell bf16_mul.$ge$rtl/bf16_mul.sv:69$438 ($ge).
 Removed top 57 bits (of 64) from mux cell bf16_mul.$procmux$1105 ($mux).
 Removed top 1 bits (of 16) from mux cell bf16_mul.$procmux$1051 ($mux).
 Removed top 1 bits (of 16) from mux cell bf16_mul.$procmux$1191 ($mux).
@@ -867,7 +867,7 @@ Removed top 1 bits (of 16) from mux cell bf16_mul.$procmux$1428 ($mux).
 Removed top 31 bits (of 32) from mux cell bf16_mul.$procmux$1533 ($mux).
 Removed top 31 bits (of 32) from wire bf16_mul.$2\msb_index[31:0].
 Removed top 57 bits (of 64) from wire bf16_mul.$7\rounded_wide[63:0].
-Removed top 24 bits (of 32) from wire bf16_mul.$add$rtl/bf16_mul.sv:54$419_Y.
+Removed top 24 bits (of 32) from wire bf16_mul.$add$rtl/bf16_mul.sv:55$419_Y.
 
 8.10. Executing PEEPOPT pass (run peephole optimizers).
 
@@ -883,214 +883,214 @@ Extracting $alu and $macc cells in module bank_normalization_pipelined_vector_re
   creating $macc model for $sub$rtl/bank_normalization_pipelined_vector_reducer.sv:125$561 ($sub).
   creating $alu model for $macc $sub$rtl/bank_normalization_pipelined_vector_reducer.sv:125$561.
   creating $alu model for $eq$rtl/bank_normalization_pipelined_vector_reducer.sv:38$538 ($eq): merged with $sub$rtl/bank_normalization_pipelined_vector_reducer.sv:125$561.
-  creating $alu cell for $sub$rtl/bank_normalization_pipelined_vector_reducer.sv:125$561, $eq$rtl/bank_normalization_pipelined_vector_reducer.sv:38$538: $auto$alumacc.cc:495:replace_alu$1892
+  creating $alu cell for $sub$rtl/bank_normalization_pipelined_vector_reducer.sv:125$561, $eq$rtl/bank_normalization_pipelined_vector_reducer.sv:38$538: $auto$alumacc.cc:495:replace_alu$1790
   created 1 $alu and 0 $macc cells.
 Extracting $alu and $macc cells in module bf16_add:
-  creating $macc model for $add$rtl/bf16_add.sv:52$264 ($add).
-  creating $macc model for $add$rtl/bf16_add.sv:56$266 ($add).
-  creating $macc model for $add$rtl/bf16_add.sv:69$321 ($add).
-  creating $macc model for $add$rtl/bf16_add.sv:72$323 ($add).
+  creating $macc model for $add$rtl/bf16_add.sv:53$264 ($add).
+  creating $macc model for $add$rtl/bf16_add.sv:57$266 ($add).
+  creating $macc model for $add$rtl/bf16_add.sv:70$321 ($add).
+  creating $macc model for $add$rtl/bf16_add.sv:73$323 ($add).
   creating $macc model for $sub$rtl/bf16_add.sv:13$258 ($sub).
   creating $macc model for $sub$rtl/bf16_add.sv:47$249 ($sub).
-  creating $macc model for $sub$rtl/bf16_add.sv:59$267 ($sub).
-  creating $macc model for $sub$rtl/bf16_add.sv:64$272 ($sub).
-  creating $macc model for $sub$rtl/bf16_add.sv:64$277 ($sub).
-  creating $macc model for $sub$rtl/bf16_add.sv:64$282 ($sub).
-  creating $macc model for $sub$rtl/bf16_add.sv:64$287 ($sub).
-  creating $macc model for $sub$rtl/bf16_add.sv:64$292 ($sub).
-  creating $macc model for $sub$rtl/bf16_add.sv:64$297 ($sub).
-  creating $macc model for $sub$rtl/bf16_add.sv:64$302 ($sub).
-  creating $macc model for $sub$rtl/bf16_add.sv:64$307 ($sub).
-  creating $macc model for $sub$rtl/bf16_add.sv:64$312 ($sub).
-  creating $macc model for $sub$rtl/bf16_add.sv:64$317 ($sub).
-  creating $alu model for $macc $sub$rtl/bf16_add.sv:64$317.
-  creating $alu model for $macc $sub$rtl/bf16_add.sv:64$312.
-  creating $alu model for $macc $sub$rtl/bf16_add.sv:64$307.
-  creating $alu model for $macc $sub$rtl/bf16_add.sv:64$302.
-  creating $alu model for $macc $sub$rtl/bf16_add.sv:64$297.
-  creating $alu model for $macc $sub$rtl/bf16_add.sv:64$292.
-  creating $alu model for $macc $sub$rtl/bf16_add.sv:64$287.
-  creating $alu model for $macc $sub$rtl/bf16_add.sv:64$282.
-  creating $alu model for $macc $sub$rtl/bf16_add.sv:64$277.
-  creating $alu model for $macc $sub$rtl/bf16_add.sv:64$272.
-  creating $alu model for $macc $sub$rtl/bf16_add.sv:59$267.
+  creating $macc model for $sub$rtl/bf16_add.sv:60$267 ($sub).
+  creating $macc model for $sub$rtl/bf16_add.sv:65$272 ($sub).
+  creating $macc model for $sub$rtl/bf16_add.sv:65$277 ($sub).
+  creating $macc model for $sub$rtl/bf16_add.sv:65$282 ($sub).
+  creating $macc model for $sub$rtl/bf16_add.sv:65$287 ($sub).
+  creating $macc model for $sub$rtl/bf16_add.sv:65$292 ($sub).
+  creating $macc model for $sub$rtl/bf16_add.sv:65$297 ($sub).
+  creating $macc model for $sub$rtl/bf16_add.sv:65$302 ($sub).
+  creating $macc model for $sub$rtl/bf16_add.sv:65$307 ($sub).
+  creating $macc model for $sub$rtl/bf16_add.sv:65$312 ($sub).
+  creating $macc model for $sub$rtl/bf16_add.sv:65$317 ($sub).
+  creating $alu model for $macc $sub$rtl/bf16_add.sv:65$317.
+  creating $alu model for $macc $sub$rtl/bf16_add.sv:65$312.
+  creating $alu model for $macc $sub$rtl/bf16_add.sv:65$307.
+  creating $alu model for $macc $sub$rtl/bf16_add.sv:65$302.
+  creating $alu model for $macc $sub$rtl/bf16_add.sv:65$297.
+  creating $alu model for $macc $sub$rtl/bf16_add.sv:65$292.
+  creating $alu model for $macc $sub$rtl/bf16_add.sv:65$287.
+  creating $alu model for $macc $sub$rtl/bf16_add.sv:65$282.
+  creating $alu model for $macc $sub$rtl/bf16_add.sv:65$277.
+  creating $alu model for $macc $sub$rtl/bf16_add.sv:65$272.
+  creating $alu model for $macc $sub$rtl/bf16_add.sv:60$267.
   creating $alu model for $macc $sub$rtl/bf16_add.sv:47$249.
   creating $alu model for $macc $sub$rtl/bf16_add.sv:13$258.
-  creating $alu model for $macc $add$rtl/bf16_add.sv:72$323.
-  creating $alu model for $macc $add$rtl/bf16_add.sv:69$321.
-  creating $alu model for $macc $add$rtl/bf16_add.sv:56$266.
-  creating $alu model for $macc $add$rtl/bf16_add.sv:52$264.
+  creating $alu model for $macc $add$rtl/bf16_add.sv:73$323.
+  creating $alu model for $macc $add$rtl/bf16_add.sv:70$321.
+  creating $alu model for $macc $add$rtl/bf16_add.sv:57$266.
+  creating $alu model for $macc $add$rtl/bf16_add.sv:53$264.
   creating $alu model for $ge$rtl/bf16_add.sv:11$253 ($ge): new $alu
-  creating $alu model for $ge$rtl/bf16_add.sv:85$348 ($ge): new $alu
+  creating $alu model for $ge$rtl/bf16_add.sv:86$348 ($ge): new $alu
   creating $alu model for $gt$rtl/bf16_add.sv:39$244 ($gt): new $alu
-  creating $alu model for $gt$rtl/bf16_add.sv:62$269 ($gt): merged with $sub$rtl/bf16_add.sv:64$272.
-  creating $alu model for $gt$rtl/bf16_add.sv:62$274 ($gt): merged with $sub$rtl/bf16_add.sv:64$277.
-  creating $alu model for $gt$rtl/bf16_add.sv:62$279 ($gt): merged with $sub$rtl/bf16_add.sv:64$282.
-  creating $alu model for $gt$rtl/bf16_add.sv:62$284 ($gt): merged with $sub$rtl/bf16_add.sv:64$287.
-  creating $alu model for $gt$rtl/bf16_add.sv:62$289 ($gt): merged with $sub$rtl/bf16_add.sv:64$292.
-  creating $alu model for $gt$rtl/bf16_add.sv:62$294 ($gt): merged with $sub$rtl/bf16_add.sv:64$297.
-  creating $alu model for $gt$rtl/bf16_add.sv:62$299 ($gt): merged with $sub$rtl/bf16_add.sv:64$302.
-  creating $alu model for $gt$rtl/bf16_add.sv:62$304 ($gt): merged with $sub$rtl/bf16_add.sv:64$307.
-  creating $alu model for $gt$rtl/bf16_add.sv:62$309 ($gt): merged with $sub$rtl/bf16_add.sv:64$312.
-  creating $alu model for $gt$rtl/bf16_add.sv:62$314 ($gt): merged with $sub$rtl/bf16_add.sv:64$317.
+  creating $alu model for $gt$rtl/bf16_add.sv:63$269 ($gt): merged with $sub$rtl/bf16_add.sv:65$272.
+  creating $alu model for $gt$rtl/bf16_add.sv:63$274 ($gt): merged with $sub$rtl/bf16_add.sv:65$277.
+  creating $alu model for $gt$rtl/bf16_add.sv:63$279 ($gt): merged with $sub$rtl/bf16_add.sv:65$282.
+  creating $alu model for $gt$rtl/bf16_add.sv:63$284 ($gt): merged with $sub$rtl/bf16_add.sv:65$287.
+  creating $alu model for $gt$rtl/bf16_add.sv:63$289 ($gt): merged with $sub$rtl/bf16_add.sv:65$292.
+  creating $alu model for $gt$rtl/bf16_add.sv:63$294 ($gt): merged with $sub$rtl/bf16_add.sv:65$297.
+  creating $alu model for $gt$rtl/bf16_add.sv:63$299 ($gt): merged with $sub$rtl/bf16_add.sv:65$302.
+  creating $alu model for $gt$rtl/bf16_add.sv:63$304 ($gt): merged with $sub$rtl/bf16_add.sv:65$307.
+  creating $alu model for $gt$rtl/bf16_add.sv:63$309 ($gt): merged with $sub$rtl/bf16_add.sv:65$312.
+  creating $alu model for $gt$rtl/bf16_add.sv:63$314 ($gt): merged with $sub$rtl/bf16_add.sv:65$317.
   creating $alu model for $le$rtl/bf16_add.sv:10$250 ($le): new $alu
-  creating $alu model for $le$rtl/bf16_add.sv:86$349 ($le): new $alu
-  creating $alu cell for $le$rtl/bf16_add.sv:86$349: $auto$alumacc.cc:495:replace_alu$1902
-  creating $alu cell for $le$rtl/bf16_add.sv:10$250: $auto$alumacc.cc:495:replace_alu$1913
-  creating $alu cell for $gt$rtl/bf16_add.sv:39$244: $auto$alumacc.cc:495:replace_alu$1924
-  creating $alu cell for $ge$rtl/bf16_add.sv:85$348: $auto$alumacc.cc:495:replace_alu$1935
-  creating $alu cell for $ge$rtl/bf16_add.sv:11$253: $auto$alumacc.cc:495:replace_alu$1950
-  creating $alu cell for $add$rtl/bf16_add.sv:52$264: $auto$alumacc.cc:495:replace_alu$1965
-  creating $alu cell for $add$rtl/bf16_add.sv:56$266: $auto$alumacc.cc:495:replace_alu$1968
-  creating $alu cell for $add$rtl/bf16_add.sv:69$321: $auto$alumacc.cc:495:replace_alu$1971
-  creating $alu cell for $add$rtl/bf16_add.sv:72$323: $auto$alumacc.cc:495:replace_alu$1974
-  creating $alu cell for $sub$rtl/bf16_add.sv:13$258: $auto$alumacc.cc:495:replace_alu$1977
-  creating $alu cell for $sub$rtl/bf16_add.sv:47$249: $auto$alumacc.cc:495:replace_alu$1980
-  creating $alu cell for $sub$rtl/bf16_add.sv:59$267: $auto$alumacc.cc:495:replace_alu$1983
-  creating $alu cell for $sub$rtl/bf16_add.sv:64$272, $gt$rtl/bf16_add.sv:62$269: $auto$alumacc.cc:495:replace_alu$1986
-  creating $alu cell for $sub$rtl/bf16_add.sv:64$277, $gt$rtl/bf16_add.sv:62$274: $auto$alumacc.cc:495:replace_alu$1997
-  creating $alu cell for $sub$rtl/bf16_add.sv:64$282, $gt$rtl/bf16_add.sv:62$279: $auto$alumacc.cc:495:replace_alu$2010
-  creating $alu cell for $sub$rtl/bf16_add.sv:64$287, $gt$rtl/bf16_add.sv:62$284: $auto$alumacc.cc:495:replace_alu$2023
-  creating $alu cell for $sub$rtl/bf16_add.sv:64$292, $gt$rtl/bf16_add.sv:62$289: $auto$alumacc.cc:495:replace_alu$2036
-  creating $alu cell for $sub$rtl/bf16_add.sv:64$297, $gt$rtl/bf16_add.sv:62$294: $auto$alumacc.cc:495:replace_alu$2049
-  creating $alu cell for $sub$rtl/bf16_add.sv:64$302, $gt$rtl/bf16_add.sv:62$299: $auto$alumacc.cc:495:replace_alu$2062
-  creating $alu cell for $sub$rtl/bf16_add.sv:64$307, $gt$rtl/bf16_add.sv:62$304: $auto$alumacc.cc:495:replace_alu$2075
-  creating $alu cell for $sub$rtl/bf16_add.sv:64$312, $gt$rtl/bf16_add.sv:62$309: $auto$alumacc.cc:495:replace_alu$2088
-  creating $alu cell for $sub$rtl/bf16_add.sv:64$317, $gt$rtl/bf16_add.sv:62$314: $auto$alumacc.cc:495:replace_alu$2101
+  creating $alu model for $le$rtl/bf16_add.sv:87$349 ($le): new $alu
+  creating $alu cell for $le$rtl/bf16_add.sv:87$349: $auto$alumacc.cc:495:replace_alu$1800
+  creating $alu cell for $le$rtl/bf16_add.sv:10$250: $auto$alumacc.cc:495:replace_alu$1811
+  creating $alu cell for $gt$rtl/bf16_add.sv:39$244: $auto$alumacc.cc:495:replace_alu$1822
+  creating $alu cell for $ge$rtl/bf16_add.sv:86$348: $auto$alumacc.cc:495:replace_alu$1833
+  creating $alu cell for $ge$rtl/bf16_add.sv:11$253: $auto$alumacc.cc:495:replace_alu$1848
+  creating $alu cell for $add$rtl/bf16_add.sv:53$264: $auto$alumacc.cc:495:replace_alu$1863
+  creating $alu cell for $add$rtl/bf16_add.sv:57$266: $auto$alumacc.cc:495:replace_alu$1866
+  creating $alu cell for $add$rtl/bf16_add.sv:70$321: $auto$alumacc.cc:495:replace_alu$1869
+  creating $alu cell for $add$rtl/bf16_add.sv:73$323: $auto$alumacc.cc:495:replace_alu$1872
+  creating $alu cell for $sub$rtl/bf16_add.sv:13$258: $auto$alumacc.cc:495:replace_alu$1875
+  creating $alu cell for $sub$rtl/bf16_add.sv:47$249: $auto$alumacc.cc:495:replace_alu$1878
+  creating $alu cell for $sub$rtl/bf16_add.sv:60$267: $auto$alumacc.cc:495:replace_alu$1881
+  creating $alu cell for $sub$rtl/bf16_add.sv:65$272, $gt$rtl/bf16_add.sv:63$269: $auto$alumacc.cc:495:replace_alu$1884
+  creating $alu cell for $sub$rtl/bf16_add.sv:65$277, $gt$rtl/bf16_add.sv:63$274: $auto$alumacc.cc:495:replace_alu$1895
+  creating $alu cell for $sub$rtl/bf16_add.sv:65$282, $gt$rtl/bf16_add.sv:63$279: $auto$alumacc.cc:495:replace_alu$1908
+  creating $alu cell for $sub$rtl/bf16_add.sv:65$287, $gt$rtl/bf16_add.sv:63$284: $auto$alumacc.cc:495:replace_alu$1921
+  creating $alu cell for $sub$rtl/bf16_add.sv:65$292, $gt$rtl/bf16_add.sv:63$289: $auto$alumacc.cc:495:replace_alu$1934
+  creating $alu cell for $sub$rtl/bf16_add.sv:65$297, $gt$rtl/bf16_add.sv:63$294: $auto$alumacc.cc:495:replace_alu$1947
+  creating $alu cell for $sub$rtl/bf16_add.sv:65$302, $gt$rtl/bf16_add.sv:63$299: $auto$alumacc.cc:495:replace_alu$1960
+  creating $alu cell for $sub$rtl/bf16_add.sv:65$307, $gt$rtl/bf16_add.sv:63$304: $auto$alumacc.cc:495:replace_alu$1973
+  creating $alu cell for $sub$rtl/bf16_add.sv:65$312, $gt$rtl/bf16_add.sv:63$309: $auto$alumacc.cc:495:replace_alu$1986
+  creating $alu cell for $sub$rtl/bf16_add.sv:65$317, $gt$rtl/bf16_add.sv:63$314: $auto$alumacc.cc:495:replace_alu$1999
   created 22 $alu and 0 $macc cells.
 Extracting $alu and $macc cells in module bf16_mul:
   creating $macc model for $add$rtl/bf16_mul.sv:27$366 ($add).
   creating $macc model for $add$rtl/bf16_mul.sv:27$368 ($add).
-  creating $macc model for $add$rtl/bf16_mul.sv:46$412 ($add).
-  creating $macc model for $add$rtl/bf16_mul.sv:50$417 ($add).
-  creating $macc model for $add$rtl/bf16_mul.sv:54$419 ($add).
-  creating $macc model for $add$rtl/bf16_mul.sv:59$421 ($add).
-  creating $macc model for $add$rtl/bf16_mul.sv:66$435 ($add).
+  creating $macc model for $add$rtl/bf16_mul.sv:47$412 ($add).
+  creating $macc model for $add$rtl/bf16_mul.sv:51$417 ($add).
+  creating $macc model for $add$rtl/bf16_mul.sv:55$419 ($add).
+  creating $macc model for $add$rtl/bf16_mul.sv:60$421 ($add).
+  creating $macc model for $add$rtl/bf16_mul.sv:67$435 ($add).
   creating $macc model for $mul$rtl/bf16_mul.sv:20$359 ($mul).
-  creating $macc model for $neg$rtl/bf16_mul.sv:47$413 ($neg).
-  creating $macc model for $neg$rtl/bf16_mul.sv:59$422 ($neg).
-  creating $macc model for $neg$rtl/bf16_mul.sv:67$436 ($neg).
+  creating $macc model for $neg$rtl/bf16_mul.sv:48$413 ($neg).
+  creating $macc model for $neg$rtl/bf16_mul.sv:60$422 ($neg).
+  creating $macc model for $neg$rtl/bf16_mul.sv:68$436 ($neg).
   creating $macc model for $sub$rtl/bf16_mul.sv:22$361 ($sub).
   creating $macc model for $sub$rtl/bf16_mul.sv:23$364 ($sub).
   creating $macc model for $sub$rtl/bf16_mul.sv:27$367 ($sub).
-  creating $macc model for $sub$rtl/bf16_mul.sv:40$400 ($sub).
-  creating $macc model for $sub$rtl/bf16_mul.sv:43$403 ($sub).
-  creating $macc model for $sub$rtl/bf16_mul.sv:43$405 ($sub).
-  creating $macc model for $sub$rtl/bf16_mul.sv:63$426 ($sub).
-  creating $macc model for $sub$rtl/bf16_mul.sv:63$428 ($sub).
-  merging $macc model for $add$rtl/bf16_mul.sv:59$421 into $neg$rtl/bf16_mul.sv:59$422.
+  creating $macc model for $sub$rtl/bf16_mul.sv:41$400 ($sub).
+  creating $macc model for $sub$rtl/bf16_mul.sv:44$403 ($sub).
+  creating $macc model for $sub$rtl/bf16_mul.sv:44$405 ($sub).
+  creating $macc model for $sub$rtl/bf16_mul.sv:64$426 ($sub).
+  creating $macc model for $sub$rtl/bf16_mul.sv:64$428 ($sub).
+  merging $macc model for $add$rtl/bf16_mul.sv:60$421 into $neg$rtl/bf16_mul.sv:60$422.
   merging $macc model for $sub$rtl/bf16_mul.sv:27$367 into $add$rtl/bf16_mul.sv:27$368.
-  creating $alu model for $macc $sub$rtl/bf16_mul.sv:43$405.
-  creating $alu model for $macc $sub$rtl/bf16_mul.sv:43$403.
-  creating $alu model for $macc $sub$rtl/bf16_mul.sv:40$400.
-  creating $alu model for $macc $sub$rtl/bf16_mul.sv:63$428.
+  creating $alu model for $macc $sub$rtl/bf16_mul.sv:44$405.
+  creating $alu model for $macc $sub$rtl/bf16_mul.sv:44$403.
+  creating $alu model for $macc $sub$rtl/bf16_mul.sv:41$400.
+  creating $alu model for $macc $sub$rtl/bf16_mul.sv:64$428.
   creating $alu model for $macc $sub$rtl/bf16_mul.sv:23$364.
   creating $alu model for $macc $sub$rtl/bf16_mul.sv:22$361.
-  creating $alu model for $macc $neg$rtl/bf16_mul.sv:67$436.
-  creating $alu model for $macc $neg$rtl/bf16_mul.sv:47$413.
-  creating $alu model for $macc $add$rtl/bf16_mul.sv:66$435.
-  creating $alu model for $macc $sub$rtl/bf16_mul.sv:63$426.
-  creating $alu model for $macc $add$rtl/bf16_mul.sv:54$419.
-  creating $alu model for $macc $add$rtl/bf16_mul.sv:50$417.
-  creating $alu model for $macc $add$rtl/bf16_mul.sv:46$412.
+  creating $alu model for $macc $neg$rtl/bf16_mul.sv:68$436.
+  creating $alu model for $macc $neg$rtl/bf16_mul.sv:48$413.
+  creating $alu model for $macc $add$rtl/bf16_mul.sv:67$435.
+  creating $alu model for $macc $sub$rtl/bf16_mul.sv:64$426.
+  creating $alu model for $macc $add$rtl/bf16_mul.sv:55$419.
+  creating $alu model for $macc $add$rtl/bf16_mul.sv:51$417.
+  creating $alu model for $macc $add$rtl/bf16_mul.sv:47$412.
   creating $alu model for $macc $add$rtl/bf16_mul.sv:27$366.
-  creating $macc cell for $neg$rtl/bf16_mul.sv:59$422: $auto$alumacc.cc:365:replace_macc$2114
-  creating $macc cell for $add$rtl/bf16_mul.sv:27$368: $auto$alumacc.cc:365:replace_macc$2115
-  creating $macc cell for $mul$rtl/bf16_mul.sv:20$359: $auto$alumacc.cc:365:replace_macc$2116
-  creating $alu model for $ge$rtl/bf16_mul.sv:38$398 ($ge): new $alu
-  creating $alu model for $ge$rtl/bf16_mul.sv:39$399 ($ge): new $alu
-  creating $alu model for $ge$rtl/bf16_mul.sv:48$415 ($ge): new $alu
-  creating $alu model for $ge$rtl/bf16_mul.sv:52$418 ($ge): new $alu
-  creating $alu model for $ge$rtl/bf16_mul.sv:60$423 ($ge): new $alu
-  creating $alu model for $ge$rtl/bf16_mul.sv:68$438 ($ge): new $alu
-  creating $alu model for $gt$rtl/bf16_mul.sv:41$401 ($gt): new $alu
-  creating $alu model for $gt$rtl/bf16_mul.sv:61$424 ($gt): new $alu
-  creating $alu cell for $gt$rtl/bf16_mul.sv:61$424: $auto$alumacc.cc:495:replace_alu$2125
-  creating $alu cell for $gt$rtl/bf16_mul.sv:41$401: $auto$alumacc.cc:495:replace_alu$2138
-  creating $alu cell for $ge$rtl/bf16_mul.sv:68$438: $auto$alumacc.cc:495:replace_alu$2151
-  creating $alu cell for $ge$rtl/bf16_mul.sv:60$423: $auto$alumacc.cc:495:replace_alu$2164
-  creating $alu cell for $ge$rtl/bf16_mul.sv:52$418: $auto$alumacc.cc:495:replace_alu$2179
-  creating $alu cell for $ge$rtl/bf16_mul.sv:48$415: $auto$alumacc.cc:495:replace_alu$2194
-  creating $alu cell for $ge$rtl/bf16_mul.sv:39$399: $auto$alumacc.cc:495:replace_alu$2207
-  creating $alu cell for $ge$rtl/bf16_mul.sv:38$398: $auto$alumacc.cc:495:replace_alu$2222
-  creating $alu cell for $add$rtl/bf16_mul.sv:27$366: $auto$alumacc.cc:495:replace_alu$2237
-  creating $alu cell for $add$rtl/bf16_mul.sv:46$412: $auto$alumacc.cc:495:replace_alu$2240
-  creating $alu cell for $add$rtl/bf16_mul.sv:50$417: $auto$alumacc.cc:495:replace_alu$2243
-  creating $alu cell for $add$rtl/bf16_mul.sv:54$419: $auto$alumacc.cc:495:replace_alu$2246
-  creating $alu cell for $sub$rtl/bf16_mul.sv:63$426: $auto$alumacc.cc:495:replace_alu$2249
-  creating $alu cell for $add$rtl/bf16_mul.sv:66$435: $auto$alumacc.cc:495:replace_alu$2252
-  creating $alu cell for $neg$rtl/bf16_mul.sv:47$413: $auto$alumacc.cc:495:replace_alu$2255
-  creating $alu cell for $neg$rtl/bf16_mul.sv:67$436: $auto$alumacc.cc:495:replace_alu$2258
-  creating $alu cell for $sub$rtl/bf16_mul.sv:22$361: $auto$alumacc.cc:495:replace_alu$2261
-  creating $alu cell for $sub$rtl/bf16_mul.sv:23$364: $auto$alumacc.cc:495:replace_alu$2264
-  creating $alu cell for $sub$rtl/bf16_mul.sv:63$428: $auto$alumacc.cc:495:replace_alu$2267
-  creating $alu cell for $sub$rtl/bf16_mul.sv:40$400: $auto$alumacc.cc:495:replace_alu$2270
-  creating $alu cell for $sub$rtl/bf16_mul.sv:43$403: $auto$alumacc.cc:495:replace_alu$2273
-  creating $alu cell for $sub$rtl/bf16_mul.sv:43$405: $auto$alumacc.cc:495:replace_alu$2276
+  creating $macc cell for $neg$rtl/bf16_mul.sv:60$422: $auto$alumacc.cc:365:replace_macc$2012
+  creating $macc cell for $add$rtl/bf16_mul.sv:27$368: $auto$alumacc.cc:365:replace_macc$2013
+  creating $macc cell for $mul$rtl/bf16_mul.sv:20$359: $auto$alumacc.cc:365:replace_macc$2014
+  creating $alu model for $ge$rtl/bf16_mul.sv:39$398 ($ge): new $alu
+  creating $alu model for $ge$rtl/bf16_mul.sv:40$399 ($ge): new $alu
+  creating $alu model for $ge$rtl/bf16_mul.sv:49$415 ($ge): new $alu
+  creating $alu model for $ge$rtl/bf16_mul.sv:53$418 ($ge): new $alu
+  creating $alu model for $ge$rtl/bf16_mul.sv:61$423 ($ge): new $alu
+  creating $alu model for $ge$rtl/bf16_mul.sv:69$438 ($ge): new $alu
+  creating $alu model for $gt$rtl/bf16_mul.sv:42$401 ($gt): new $alu
+  creating $alu model for $gt$rtl/bf16_mul.sv:62$424 ($gt): new $alu
+  creating $alu cell for $gt$rtl/bf16_mul.sv:62$424: $auto$alumacc.cc:495:replace_alu$2023
+  creating $alu cell for $gt$rtl/bf16_mul.sv:42$401: $auto$alumacc.cc:495:replace_alu$2036
+  creating $alu cell for $ge$rtl/bf16_mul.sv:69$438: $auto$alumacc.cc:495:replace_alu$2049
+  creating $alu cell for $ge$rtl/bf16_mul.sv:61$423: $auto$alumacc.cc:495:replace_alu$2062
+  creating $alu cell for $ge$rtl/bf16_mul.sv:53$418: $auto$alumacc.cc:495:replace_alu$2077
+  creating $alu cell for $ge$rtl/bf16_mul.sv:49$415: $auto$alumacc.cc:495:replace_alu$2092
+  creating $alu cell for $ge$rtl/bf16_mul.sv:40$399: $auto$alumacc.cc:495:replace_alu$2105
+  creating $alu cell for $ge$rtl/bf16_mul.sv:39$398: $auto$alumacc.cc:495:replace_alu$2120
+  creating $alu cell for $add$rtl/bf16_mul.sv:27$366: $auto$alumacc.cc:495:replace_alu$2135
+  creating $alu cell for $add$rtl/bf16_mul.sv:47$412: $auto$alumacc.cc:495:replace_alu$2138
+  creating $alu cell for $add$rtl/bf16_mul.sv:51$417: $auto$alumacc.cc:495:replace_alu$2141
+  creating $alu cell for $add$rtl/bf16_mul.sv:55$419: $auto$alumacc.cc:495:replace_alu$2144
+  creating $alu cell for $sub$rtl/bf16_mul.sv:64$426: $auto$alumacc.cc:495:replace_alu$2147
+  creating $alu cell for $add$rtl/bf16_mul.sv:67$435: $auto$alumacc.cc:495:replace_alu$2150
+  creating $alu cell for $neg$rtl/bf16_mul.sv:48$413: $auto$alumacc.cc:495:replace_alu$2153
+  creating $alu cell for $neg$rtl/bf16_mul.sv:68$436: $auto$alumacc.cc:495:replace_alu$2156
+  creating $alu cell for $sub$rtl/bf16_mul.sv:22$361: $auto$alumacc.cc:495:replace_alu$2159
+  creating $alu cell for $sub$rtl/bf16_mul.sv:23$364: $auto$alumacc.cc:495:replace_alu$2162
+  creating $alu cell for $sub$rtl/bf16_mul.sv:64$428: $auto$alumacc.cc:495:replace_alu$2165
+  creating $alu cell for $sub$rtl/bf16_mul.sv:41$400: $auto$alumacc.cc:495:replace_alu$2168
+  creating $alu cell for $sub$rtl/bf16_mul.sv:44$403: $auto$alumacc.cc:495:replace_alu$2171
+  creating $alu cell for $sub$rtl/bf16_mul.sv:44$405: $auto$alumacc.cc:495:replace_alu$2174
   created 22 $alu and 3 $macc cells.
 
 8.13. Executing SHARE pass (SAT-based resource sharing).
 Found 2 cells in module bf16_add that may be considered for resource sharing.
   Analyzing resource sharing options for $shr$rtl/bf16_add.sv:14$261 ($shr):
-    Found 4 activation_patterns using ctrl signal { $auto$rtlil.cc:2783:ReduceOr$1923 $logic_and$rtl/bf16_add.sv:86$351_Y $eq$rtl/bf16_add.sv:84$347_Y $logic_and$rtl/bf16_add.sv:81$345_Y $logic_or$rtl/bf16_add.sv:75$336_Y $eq$rtl/bf16_add.sv:76$327_Y $eq$rtl/bf16_add.sv:75$324_Y $auto$rtlil.cc:2783:ReduceOr$1949 $auto$rtlil.cc:2783:ReduceOr$1964 }.
+    Found 4 activation_patterns using ctrl signal { $auto$rtlil.cc:2783:ReduceOr$1821 $logic_and$rtl/bf16_add.sv:87$351_Y $eq$rtl/bf16_add.sv:85$347_Y $logic_and$rtl/bf16_add.sv:82$345_Y $logic_or$rtl/bf16_add.sv:76$336_Y $eq$rtl/bf16_add.sv:77$327_Y $eq$rtl/bf16_add.sv:76$324_Y $auto$rtlil.cc:2783:ReduceOr$1847 $auto$rtlil.cc:2783:ReduceOr$1862 }.
     No candidates found.
   Analyzing resource sharing options for $shl$rtl/bf16_add.sv:13$257 ($shl):
-    Found 4 activation_patterns using ctrl signal { $auto$rtlil.cc:2783:ReduceOr$1923 $logic_and$rtl/bf16_add.sv:86$351_Y $eq$rtl/bf16_add.sv:84$347_Y $logic_and$rtl/bf16_add.sv:81$345_Y $logic_or$rtl/bf16_add.sv:75$336_Y $eq$rtl/bf16_add.sv:76$327_Y $eq$rtl/bf16_add.sv:75$324_Y $auto$rtlil.cc:2783:ReduceOr$1949 $auto$rtlil.cc:2783:ReduceOr$1964 }.
+    Found 4 activation_patterns using ctrl signal { $auto$rtlil.cc:2783:ReduceOr$1821 $logic_and$rtl/bf16_add.sv:87$351_Y $eq$rtl/bf16_add.sv:85$347_Y $logic_and$rtl/bf16_add.sv:82$345_Y $logic_or$rtl/bf16_add.sv:76$336_Y $eq$rtl/bf16_add.sv:77$327_Y $eq$rtl/bf16_add.sv:76$324_Y $auto$rtlil.cc:2783:ReduceOr$1847 $auto$rtlil.cc:2783:ReduceOr$1862 }.
     No candidates found.
 Found 6 cells in module bf16_mul that may be considered for resource sharing.
-  Analyzing resource sharing options for $shr$rtl/bf16_mul.sv:62$425 ($shr):
-    Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2826:And$1633 $auto$rtlil.cc:2826:And$1617 $auto$rtlil.cc:2826:And$1595 $auto$rtlil.cc:2783:ReduceOr$2163 $auto$rtlil.cc:2783:ReduceOr$2178 $auto$rtlil.cc:2783:ReduceOr$2221 $auto$rtlil.cc:2783:ReduceOr$2236 $auto$rtlil.cc:2779:Not$2137 }.
-    Found 1 candidates: $shr$rtl/bf16_mul.sv:42$402
-    Analyzing resource sharing with $shr$rtl/bf16_mul.sv:42$402 ($shr):
-      Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2826:And$1633 $auto$rtlil.cc:2826:And$1617 $auto$rtlil.cc:2779:Not$2150 $auto$rtlil.cc:2826:And$1595 $auto$rtlil.cc:2783:ReduceOr$2193 $auto$rtlil.cc:2783:ReduceOr$2221 $auto$rtlil.cc:2783:ReduceOr$2236 }.
-      Forbidden control signals for this pair of cells: { $ge$rtl/bf16_mul.sv:68$438_Y $ge$rtl/bf16_mul.sv:52$418_Y $ge$rtl/bf16_mul.sv:48$415_Y }
-      Activation pattern for cell $shr$rtl/bf16_mul.sv:62$425: { $auto$rtlil.cc:2826:And$1633 $auto$rtlil.cc:2826:And$1617 $auto$rtlil.cc:2826:And$1595 $auto$rtlil.cc:2783:ReduceOr$2163 $auto$rtlil.cc:2783:ReduceOr$2178 $auto$rtlil.cc:2783:ReduceOr$2221 $auto$rtlil.cc:2783:ReduceOr$2236 $auto$rtlil.cc:2779:Not$2137 } = 8'00000001
-      Activation pattern for cell $shr$rtl/bf16_mul.sv:62$425: { $auto$rtlil.cc:2826:And$1633 $auto$rtlil.cc:2826:And$1617 $auto$rtlil.cc:2826:And$1595 $auto$rtlil.cc:2783:ReduceOr$2178 $auto$rtlil.cc:2783:ReduceOr$2221 $auto$rtlil.cc:2783:ReduceOr$2236 $auto$rtlil.cc:2779:Not$2137 } = 7'0000001
-      Activation pattern for cell $shr$rtl/bf16_mul.sv:42$402: { $auto$rtlil.cc:2826:And$1633 $auto$rtlil.cc:2826:And$1617 $auto$rtlil.cc:2779:Not$2150 $auto$rtlil.cc:2826:And$1595 $auto$rtlil.cc:2783:ReduceOr$2193 $auto$rtlil.cc:2783:ReduceOr$2221 $auto$rtlil.cc:2783:ReduceOr$2236 } = 7'0010010
-      Activation pattern for cell $shr$rtl/bf16_mul.sv:42$402: { $auto$rtlil.cc:2826:And$1633 $auto$rtlil.cc:2826:And$1617 $auto$rtlil.cc:2779:Not$2150 $auto$rtlil.cc:2826:And$1595 $auto$rtlil.cc:2783:ReduceOr$2221 $auto$rtlil.cc:2783:ReduceOr$2236 } = 6'001010
+  Analyzing resource sharing options for $shr$rtl/bf16_mul.sv:63$425 ($shr):
+    Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2783:ReduceOr$2061 $auto$rtlil.cc:2783:ReduceOr$2076 $auto$rtlil.cc:2783:ReduceOr$2119 $auto$rtlil.cc:2783:ReduceOr$2134 $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2779:Not$2035 }.
+    Found 1 candidates: $shr$rtl/bf16_mul.sv:43$402
+    Analyzing resource sharing with $shr$rtl/bf16_mul.sv:43$402 ($shr):
+      Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2779:Not$2048 $auto$rtlil.cc:2783:ReduceOr$2091 $auto$rtlil.cc:2783:ReduceOr$2119 $auto$rtlil.cc:2783:ReduceOr$2134 $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y }.
+      Forbidden control signals for this pair of cells: { $ge$rtl/bf16_mul.sv:69$438_Y $ge$rtl/bf16_mul.sv:53$418_Y $ge$rtl/bf16_mul.sv:49$415_Y }
+      Activation pattern for cell $shr$rtl/bf16_mul.sv:63$425: { $auto$rtlil.cc:2783:ReduceOr$2061 $auto$rtlil.cc:2783:ReduceOr$2076 $auto$rtlil.cc:2783:ReduceOr$2119 $auto$rtlil.cc:2783:ReduceOr$2134 $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2779:Not$2035 } = 8'00000001
+      Activation pattern for cell $shr$rtl/bf16_mul.sv:63$425: { $auto$rtlil.cc:2783:ReduceOr$2076 $auto$rtlil.cc:2783:ReduceOr$2119 $auto$rtlil.cc:2783:ReduceOr$2134 $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2779:Not$2035 } = 7'0000001
+      Activation pattern for cell $shr$rtl/bf16_mul.sv:43$402: { $auto$rtlil.cc:2779:Not$2048 $auto$rtlil.cc:2783:ReduceOr$2091 $auto$rtlil.cc:2783:ReduceOr$2119 $auto$rtlil.cc:2783:ReduceOr$2134 $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y } = 7'1010000
+      Activation pattern for cell $shr$rtl/bf16_mul.sv:43$402: { $auto$rtlil.cc:2779:Not$2048 $auto$rtlil.cc:2783:ReduceOr$2119 $auto$rtlil.cc:2783:ReduceOr$2134 $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y } = 6'110000
       Size of SAT problem: 117 cells, 21704 variables, 57567 clauses
       According to the SAT solver this pair of cells can be shared.
-      Activation signal for $shr$rtl/bf16_mul.sv:42$402: $auto$share.cc:1015:make_cell_activation_logic$2282
-      New cell: $auto$share.cc:669:make_supercell$2289 ($shr)
+      Activation signal for $shr$rtl/bf16_mul.sv:43$402: $auto$share.cc:1015:make_cell_activation_logic$2180
+      New cell: $auto$share.cc:669:make_supercell$2187 ($shr)
       New topology contains loops! Rolling back..
-  Analyzing resource sharing options for $shr$rtl/bf16_mul.sv:42$402 ($shr):
-    Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2826:And$1633 $auto$rtlil.cc:2826:And$1617 $auto$rtlil.cc:2779:Not$2150 $auto$rtlil.cc:2826:And$1595 $auto$rtlil.cc:2783:ReduceOr$2193 $auto$rtlil.cc:2783:ReduceOr$2221 $auto$rtlil.cc:2783:ReduceOr$2236 }.
+  Analyzing resource sharing options for $shr$rtl/bf16_mul.sv:43$402 ($shr):
+    Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2779:Not$2048 $auto$rtlil.cc:2783:ReduceOr$2091 $auto$rtlil.cc:2783:ReduceOr$2119 $auto$rtlil.cc:2783:ReduceOr$2134 $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y }.
     No candidates found.
-  Analyzing resource sharing options for $shl$rtl/bf16_mul.sv:67$437 ($shl):
-    Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2826:And$1633 $auto$rtlil.cc:2826:And$1617 $auto$rtlil.cc:2826:And$1595 $auto$rtlil.cc:2783:ReduceOr$2163 $auto$rtlil.cc:2783:ReduceOr$2178 $auto$rtlil.cc:2783:ReduceOr$2221 $auto$rtlil.cc:2783:ReduceOr$2236 $auto$rtlil.cc:2779:Not$2137 }.
-    Found 1 candidates: $shl$rtl/bf16_mul.sv:47$414
-    Analyzing resource sharing with $shl$rtl/bf16_mul.sv:47$414 ($shl):
-      Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2826:And$1633 $auto$rtlil.cc:2826:And$1617 $auto$rtlil.cc:2779:Not$2150 $auto$rtlil.cc:2826:And$1595 $auto$rtlil.cc:2783:ReduceOr$2193 $auto$rtlil.cc:2783:ReduceOr$2221 $auto$rtlil.cc:2783:ReduceOr$2236 }.
-      Forbidden control signals for this pair of cells: { $ge$rtl/bf16_mul.sv:68$438_Y $ge$rtl/bf16_mul.sv:52$418_Y $ge$rtl/bf16_mul.sv:48$415_Y }
-      Activation pattern for cell $shl$rtl/bf16_mul.sv:67$437: { $auto$rtlil.cc:2826:And$1633 $auto$rtlil.cc:2826:And$1617 $auto$rtlil.cc:2826:And$1595 $auto$rtlil.cc:2783:ReduceOr$2178 $auto$rtlil.cc:2783:ReduceOr$2221 $auto$rtlil.cc:2783:ReduceOr$2236 $auto$rtlil.cc:2779:Not$2137 } = 7'0000000
-      Activation pattern for cell $shl$rtl/bf16_mul.sv:67$437: { $auto$rtlil.cc:2826:And$1633 $auto$rtlil.cc:2826:And$1617 $auto$rtlil.cc:2826:And$1595 $auto$rtlil.cc:2783:ReduceOr$2163 $auto$rtlil.cc:2783:ReduceOr$2178 $auto$rtlil.cc:2783:ReduceOr$2221 $auto$rtlil.cc:2783:ReduceOr$2236 $auto$rtlil.cc:2779:Not$2137 } = 8'00000000
-      Activation pattern for cell $shl$rtl/bf16_mul.sv:47$414: { $auto$rtlil.cc:2826:And$1633 $auto$rtlil.cc:2826:And$1617 $auto$rtlil.cc:2779:Not$2150 $auto$rtlil.cc:2826:And$1595 $auto$rtlil.cc:2783:ReduceOr$2221 $auto$rtlil.cc:2783:ReduceOr$2236 } = 6'000010
-      Activation pattern for cell $shl$rtl/bf16_mul.sv:47$414: { $auto$rtlil.cc:2826:And$1633 $auto$rtlil.cc:2826:And$1617 $auto$rtlil.cc:2779:Not$2150 $auto$rtlil.cc:2826:And$1595 $auto$rtlil.cc:2783:ReduceOr$2193 $auto$rtlil.cc:2783:ReduceOr$2221 $auto$rtlil.cc:2783:ReduceOr$2236 } = 7'0000010
+  Analyzing resource sharing options for $shl$rtl/bf16_mul.sv:68$437 ($shl):
+    Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2783:ReduceOr$2061 $auto$rtlil.cc:2783:ReduceOr$2076 $auto$rtlil.cc:2783:ReduceOr$2119 $auto$rtlil.cc:2783:ReduceOr$2134 $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2779:Not$2035 }.
+    Found 1 candidates: $shl$rtl/bf16_mul.sv:48$414
+    Analyzing resource sharing with $shl$rtl/bf16_mul.sv:48$414 ($shl):
+      Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2779:Not$2048 $auto$rtlil.cc:2783:ReduceOr$2091 $auto$rtlil.cc:2783:ReduceOr$2119 $auto$rtlil.cc:2783:ReduceOr$2134 $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y }.
+      Forbidden control signals for this pair of cells: { $ge$rtl/bf16_mul.sv:69$438_Y $ge$rtl/bf16_mul.sv:53$418_Y $ge$rtl/bf16_mul.sv:49$415_Y }
+      Activation pattern for cell $shl$rtl/bf16_mul.sv:68$437: { $auto$rtlil.cc:2783:ReduceOr$2076 $auto$rtlil.cc:2783:ReduceOr$2119 $auto$rtlil.cc:2783:ReduceOr$2134 $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2779:Not$2035 } = 7'0000000
+      Activation pattern for cell $shl$rtl/bf16_mul.sv:68$437: { $auto$rtlil.cc:2783:ReduceOr$2061 $auto$rtlil.cc:2783:ReduceOr$2076 $auto$rtlil.cc:2783:ReduceOr$2119 $auto$rtlil.cc:2783:ReduceOr$2134 $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2779:Not$2035 } = 8'00000000
+      Activation pattern for cell $shl$rtl/bf16_mul.sv:48$414: { $auto$rtlil.cc:2779:Not$2048 $auto$rtlil.cc:2783:ReduceOr$2119 $auto$rtlil.cc:2783:ReduceOr$2134 $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y } = 6'010000
+      Activation pattern for cell $shl$rtl/bf16_mul.sv:48$414: { $auto$rtlil.cc:2779:Not$2048 $auto$rtlil.cc:2783:ReduceOr$2091 $auto$rtlil.cc:2783:ReduceOr$2119 $auto$rtlil.cc:2783:ReduceOr$2134 $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y } = 7'0010000
       Size of SAT problem: 117 cells, 21704 variables, 57567 clauses
       According to the SAT solver this pair of cells can be shared.
-      Activation signal for $shl$rtl/bf16_mul.sv:47$414: $auto$share.cc:1015:make_cell_activation_logic$2295
-      New cell: $auto$share.cc:669:make_supercell$2302 ($shl)
+      Activation signal for $shl$rtl/bf16_mul.sv:48$414: $auto$share.cc:1015:make_cell_activation_logic$2193
+      New cell: $auto$share.cc:669:make_supercell$2200 ($shl)
       New topology contains loops! Rolling back..
-  Analyzing resource sharing options for $shl$rtl/bf16_mul.sv:47$414 ($shl):
-    Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2826:And$1633 $auto$rtlil.cc:2826:And$1617 $auto$rtlil.cc:2779:Not$2150 $auto$rtlil.cc:2826:And$1595 $auto$rtlil.cc:2783:ReduceOr$2193 $auto$rtlil.cc:2783:ReduceOr$2221 $auto$rtlil.cc:2783:ReduceOr$2236 }.
+  Analyzing resource sharing options for $shl$rtl/bf16_mul.sv:48$414 ($shl):
+    Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2779:Not$2048 $auto$rtlil.cc:2783:ReduceOr$2091 $auto$rtlil.cc:2783:ReduceOr$2119 $auto$rtlil.cc:2783:ReduceOr$2134 $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y }.
     No candidates found.
-  Analyzing resource sharing options for $shl$rtl/bf16_mul.sv:63$427 ($shl):
-    Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2826:And$1633 $auto$rtlil.cc:2826:And$1617 $auto$rtlil.cc:2826:And$1595 $auto$rtlil.cc:2783:ReduceOr$2163 $auto$rtlil.cc:2783:ReduceOr$2178 $auto$rtlil.cc:2783:ReduceOr$2221 $auto$rtlil.cc:2783:ReduceOr$2236 $auto$rtlil.cc:2779:Not$2137 }.
-    Found 1 candidates: $shl$rtl/bf16_mul.sv:43$404
-    Analyzing resource sharing with $shl$rtl/bf16_mul.sv:43$404 ($shl):
-      Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2826:And$1633 $auto$rtlil.cc:2826:And$1617 $auto$rtlil.cc:2779:Not$2150 $auto$rtlil.cc:2826:And$1595 $auto$rtlil.cc:2783:ReduceOr$2193 $auto$rtlil.cc:2783:ReduceOr$2221 $auto$rtlil.cc:2783:ReduceOr$2236 }.
-      Forbidden control signals for this pair of cells: { $ge$rtl/bf16_mul.sv:68$438_Y $ge$rtl/bf16_mul.sv:52$418_Y $ge$rtl/bf16_mul.sv:48$415_Y }
-      Activation pattern for cell $shl$rtl/bf16_mul.sv:63$427: { $auto$rtlil.cc:2826:And$1633 $auto$rtlil.cc:2826:And$1617 $auto$rtlil.cc:2826:And$1595 $auto$rtlil.cc:2783:ReduceOr$2178 $auto$rtlil.cc:2783:ReduceOr$2221 $auto$rtlil.cc:2783:ReduceOr$2236 $auto$rtlil.cc:2779:Not$2137 } = 7'0000001
-      Activation pattern for cell $shl$rtl/bf16_mul.sv:63$427: { $auto$rtlil.cc:2826:And$1633 $auto$rtlil.cc:2826:And$1617 $auto$rtlil.cc:2826:And$1595 $auto$rtlil.cc:2783:ReduceOr$2163 $auto$rtlil.cc:2783:ReduceOr$2178 $auto$rtlil.cc:2783:ReduceOr$2221 $auto$rtlil.cc:2783:ReduceOr$2236 $auto$rtlil.cc:2779:Not$2137 } = 8'00000001
-      Activation pattern for cell $shl$rtl/bf16_mul.sv:43$404: { $auto$rtlil.cc:2826:And$1633 $auto$rtlil.cc:2826:And$1617 $auto$rtlil.cc:2779:Not$2150 $auto$rtlil.cc:2826:And$1595 $auto$rtlil.cc:2783:ReduceOr$2221 $auto$rtlil.cc:2783:ReduceOr$2236 } = 6'001010
-      Activation pattern for cell $shl$rtl/bf16_mul.sv:43$404: { $auto$rtlil.cc:2826:And$1633 $auto$rtlil.cc:2826:And$1617 $auto$rtlil.cc:2779:Not$2150 $auto$rtlil.cc:2826:And$1595 $auto$rtlil.cc:2783:ReduceOr$2193 $auto$rtlil.cc:2783:ReduceOr$2221 $auto$rtlil.cc:2783:ReduceOr$2236 } = 7'0010010
+  Analyzing resource sharing options for $shl$rtl/bf16_mul.sv:64$427 ($shl):
+    Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2783:ReduceOr$2061 $auto$rtlil.cc:2783:ReduceOr$2076 $auto$rtlil.cc:2783:ReduceOr$2119 $auto$rtlil.cc:2783:ReduceOr$2134 $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2779:Not$2035 }.
+    Found 1 candidates: $shl$rtl/bf16_mul.sv:44$404
+    Analyzing resource sharing with $shl$rtl/bf16_mul.sv:44$404 ($shl):
+      Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2779:Not$2048 $auto$rtlil.cc:2783:ReduceOr$2091 $auto$rtlil.cc:2783:ReduceOr$2119 $auto$rtlil.cc:2783:ReduceOr$2134 $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y }.
+      Forbidden control signals for this pair of cells: { $ge$rtl/bf16_mul.sv:69$438_Y $ge$rtl/bf16_mul.sv:53$418_Y $ge$rtl/bf16_mul.sv:49$415_Y }
+      Activation pattern for cell $shl$rtl/bf16_mul.sv:64$427: { $auto$rtlil.cc:2783:ReduceOr$2076 $auto$rtlil.cc:2783:ReduceOr$2119 $auto$rtlil.cc:2783:ReduceOr$2134 $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2779:Not$2035 } = 7'0000001
+      Activation pattern for cell $shl$rtl/bf16_mul.sv:64$427: { $auto$rtlil.cc:2783:ReduceOr$2061 $auto$rtlil.cc:2783:ReduceOr$2076 $auto$rtlil.cc:2783:ReduceOr$2119 $auto$rtlil.cc:2783:ReduceOr$2134 $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y $auto$rtlil.cc:2779:Not$2035 } = 8'00000001
+      Activation pattern for cell $shl$rtl/bf16_mul.sv:44$404: { $auto$rtlil.cc:2779:Not$2048 $auto$rtlil.cc:2783:ReduceOr$2119 $auto$rtlil.cc:2783:ReduceOr$2134 $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y } = 6'110000
+      Activation pattern for cell $shl$rtl/bf16_mul.sv:44$404: { $auto$rtlil.cc:2779:Not$2048 $auto$rtlil.cc:2783:ReduceOr$2091 $auto$rtlil.cc:2783:ReduceOr$2119 $auto$rtlil.cc:2783:ReduceOr$2134 $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y } = 7'1010000
       Size of SAT problem: 117 cells, 21704 variables, 57567 clauses
       According to the SAT solver this pair of cells can be shared.
-      Activation signal for $shl$rtl/bf16_mul.sv:43$404: $auto$share.cc:1015:make_cell_activation_logic$2308
-      New cell: $auto$share.cc:669:make_supercell$2315 ($shl)
+      Activation signal for $shl$rtl/bf16_mul.sv:44$404: $auto$share.cc:1015:make_cell_activation_logic$2206
+      New cell: $auto$share.cc:669:make_supercell$2213 ($shl)
       New topology contains loops! Rolling back..
-  Analyzing resource sharing options for $shl$rtl/bf16_mul.sv:43$404 ($shl):
-    Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2826:And$1633 $auto$rtlil.cc:2826:And$1617 $auto$rtlil.cc:2779:Not$2150 $auto$rtlil.cc:2826:And$1595 $auto$rtlil.cc:2783:ReduceOr$2193 $auto$rtlil.cc:2783:ReduceOr$2221 $auto$rtlil.cc:2783:ReduceOr$2236 }.
+  Analyzing resource sharing options for $shl$rtl/bf16_mul.sv:44$404 ($shl):
+    Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2779:Not$2048 $auto$rtlil.cc:2783:ReduceOr$2091 $auto$rtlil.cc:2783:ReduceOr$2119 $auto$rtlil.cc:2783:ReduceOr$2134 $logic_or$rtl/bf16_mul.sv:30$387_Y $logic_or$rtl/bf16_mul.sv:33$385_Y $logic_or$rtl/bf16_mul.sv:32$378_Y }.
     No candidates found.
 
 8.14. Executing OPT pass (performing simple optimizations).
@@ -1297,12 +1297,12 @@ Removed 0 multiplexer ports.
       New ports: A=\result_exp [7:0], B=8'00000000, Y=$7\result_o[15:0] [14:7]
       New connections: $7\result_o[15:0] [6:0] = \rounded_sig [6:0]
     Consolidated identical input bits for $mux cell $procmux$762:
-      Old ports: A={ 24'000000000000000000000000 \large_exp }, B={ $sub$rtl/bf16_add.sv:64$272_Y [31] $sub$rtl/bf16_add.sv:64$272_Y [31] $sub$rtl/bf16_add.sv:64$272_Y [31] $sub$rtl/bf16_add.sv:64$272_Y [31] $sub$rtl/bf16_add.sv:64$272_Y [31] $sub$rtl/bf16_add.sv:64$272_Y [31] $sub$rtl/bf16_add.sv:64$272_Y [31] $sub$rtl/bf16_add.sv:64$272_Y [31] $sub$rtl/bf16_add.sv:64$272_Y [31] $sub$rtl/bf16_add.sv:64$272_Y [31] $sub$rtl/bf16_add.sv:64$272_Y [31] $sub$rtl/bf16_add.sv:64$272_Y [31] $sub$rtl/bf16_add.sv:64$272_Y [31] $sub$rtl/bf16_add.sv:64$272_Y [31] $sub$rtl/bf16_add.sv:64$272_Y [31] $sub$rtl/bf16_add.sv:64$272_Y [31] $sub$rtl/bf16_add.sv:64$272_Y [31] $sub$rtl/bf16_add.sv:64$272_Y [31] $sub$rtl/bf16_add.sv:64$272_Y [31] $sub$rtl/bf16_add.sv:64$272_Y [31] $sub$rtl/bf16_add.sv:64$272_Y [31] $sub$rtl/bf16_add.sv:64$272_Y [31] $sub$rtl/bf16_add.sv:64$272_Y [31] $sub$rtl/bf16_add.sv:64$272_Y [31] $sub$rtl/bf16_add.sv:64$272_Y [7:0] }, Y=$3\result_exp[31:0]
-      New ports: A={ 1'0 \large_exp }, B={ $sub$rtl/bf16_add.sv:64$272_Y [31] $sub$rtl/bf16_add.sv:64$272_Y [7:0] }, Y=$3\result_exp[31:0] [8:0]
+      Old ports: A={ 24'000000000000000000000000 \large_exp }, B={ $sub$rtl/bf16_add.sv:65$272_Y [31] $sub$rtl/bf16_add.sv:65$272_Y [31] $sub$rtl/bf16_add.sv:65$272_Y [31] $sub$rtl/bf16_add.sv:65$272_Y [31] $sub$rtl/bf16_add.sv:65$272_Y [31] $sub$rtl/bf16_add.sv:65$272_Y [31] $sub$rtl/bf16_add.sv:65$272_Y [31] $sub$rtl/bf16_add.sv:65$272_Y [31] $sub$rtl/bf16_add.sv:65$272_Y [31] $sub$rtl/bf16_add.sv:65$272_Y [31] $sub$rtl/bf16_add.sv:65$272_Y [31] $sub$rtl/bf16_add.sv:65$272_Y [31] $sub$rtl/bf16_add.sv:65$272_Y [31] $sub$rtl/bf16_add.sv:65$272_Y [31] $sub$rtl/bf16_add.sv:65$272_Y [31] $sub$rtl/bf16_add.sv:65$272_Y [31] $sub$rtl/bf16_add.sv:65$272_Y [31] $sub$rtl/bf16_add.sv:65$272_Y [31] $sub$rtl/bf16_add.sv:65$272_Y [31] $sub$rtl/bf16_add.sv:65$272_Y [31] $sub$rtl/bf16_add.sv:65$272_Y [31] $sub$rtl/bf16_add.sv:65$272_Y [31] $sub$rtl/bf16_add.sv:65$272_Y [31] $sub$rtl/bf16_add.sv:65$272_Y [31] $sub$rtl/bf16_add.sv:65$272_Y [7:0] }, Y=$3\result_exp[31:0]
+      New ports: A={ 1'0 \large_exp }, B={ $sub$rtl/bf16_add.sv:65$272_Y [31] $sub$rtl/bf16_add.sv:65$272_Y [7:0] }, Y=$3\result_exp[31:0] [8:0]
       New connections: $3\result_exp[31:0] [31:9] = { $3\result_exp[31:0] [8] $3\result_exp[31:0] [8] $3\result_exp[31:0] [8] $3\result_exp[31:0] [8] $3\result_exp[31:0] [8] $3\result_exp[31:0] [8] $3\result_exp[31:0] [8] $3\result_exp[31:0] [8] $3\result_exp[31:0] [8] $3\result_exp[31:0] [8] $3\result_exp[31:0] [8] $3\result_exp[31:0] [8] $3\result_exp[31:0] [8] $3\result_exp[31:0] [8] $3\result_exp[31:0] [8] $3\result_exp[31:0] [8] $3\result_exp[31:0] [8] $3\result_exp[31:0] [8] $3\result_exp[31:0] [8] $3\result_exp[31:0] [8] $3\result_exp[31:0] [8] $3\result_exp[31:0] [8] $3\result_exp[31:0] [8] }
     Consolidated identical input bits for $mux cell $procmux$781:
-      Old ports: A={ 24'000000000000000000000000 \large_exp }, B={ 23'00000000000000000000000 $add$rtl/bf16_add.sv:56$266_Y }, Y=$2\result_exp[31:0]
-      New ports: A={ 1'0 \large_exp }, B=$add$rtl/bf16_add.sv:56$266_Y, Y=$2\result_exp[31:0] [8:0]
+      Old ports: A={ 24'000000000000000000000000 \large_exp }, B={ 23'00000000000000000000000 $add$rtl/bf16_add.sv:57$266_Y }, Y=$2\result_exp[31:0]
+      New ports: A={ 1'0 \large_exp }, B=$add$rtl/bf16_add.sv:57$266_Y, Y=$2\result_exp[31:0] [8:0]
       New connections: $2\result_exp[31:0] [31:9] = 23'00000000000000000000000
   Optimizing cells in module \bf16_add.
   Optimizing cells in module \bf16_mul.
@@ -1519,10 +1519,10 @@ Using template $paramod$aefdc9ad27328d454e6b79637701f46aa20d6632\_90_alu for cel
   add { 28'0000000000000000000000000000 \msb_index [3:0] } (32 bits, signed)
   add 32'11111111111111111111111111110010 (32 bits, unsigned)
 Using template $paramod$e7b8cd5b6261b3f836d10410a3c20674238aa349\_90_alu for cells of type $alu.
-Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001001 for cells of type $lcu.
-Using extmapper simplemap for cells of type $pos.
 Using template $paramod$fbc7873bff55778c0b3173955b7e4bce1d9d6834\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $pos.
 Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001001 for cells of type $lcu.
 Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000001000000 for cells of type $lcu.
 Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000010000 for cells of type $fa.
 Using template $paramod$6df0329addda9228fcc2546de2aaf14ad26c98e1\_90_alu for cells of type $alu.
@@ -2041,289 +2041,289 @@ Optimizing module bank_normalization_pipelined_vector_reducer.
 
 Longest topological path in bank_normalization_pipelined_vector_reducer (length=280):
     0: \vector_data_i [122]
-    1: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n56 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32070)
-    2: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n140 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32146)
-    3: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n141 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32147)
-    4: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n142 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32148)
-    5: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n147 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32149)
-    6: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n149 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32151)
-    7: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n151 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32153)
-    8: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n152 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32154)
-    9: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n198 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32200)
-   10: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n199 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32201)
-   11: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n202 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32204)
-   12: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n212 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32214)
-   13: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n213 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32215)
-   14: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n226 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32228)
-   15: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n227 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32229)
-   16: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n261 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32263)
-   17: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n262 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32264)
-   18: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n269 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32271)
-   19: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n273 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32275)
-   20: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n276 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32278)
-   21: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n277 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32279)
-   22: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n278 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32280)
-   23: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n307 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32309)
-   24: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n308 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32310)
-   25: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n323 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32325)
-   26: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n324 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32326)
-   27: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n330 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32332)
-   28: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n331 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32333)
-   29: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n958 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32960)
-   30: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n962 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32964)
-   31: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n965 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32967)
-   32: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n966 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32968)
-   33: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n967 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32969)
-   34: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n988 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32990)
-   35: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n989 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32991)
-   36: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n997 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$32999)
-   37: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n998 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33000)
-   38: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n999 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33001)
-   39: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1000 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33002)
-   40: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1001 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33003)
-   41: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1002 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33004)
-   42: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1006 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33008)
-   43: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1007 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33009)
-   44: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1008 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33010)
-   45: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1026 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33028)
-   46: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1027 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33029)
-   47: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1028 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33030)
-   48: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1029 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33031)
-   49: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1030 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33032)
-   50: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1031 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33033)
-   51: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1051 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33053)
-   52: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1053 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33055)
-   53: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1054 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33056)
-   54: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1097 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33099)
-   55: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1098 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33100)
-   56: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1138 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33140)
-   57: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1139 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33141)
-   58: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1157 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33159)
-   59: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1158 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33160)
-   60: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1165 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33167)
-   61: $auto$rtlil.cc:3016:NotGate$35687 (via $auto$opt_expr.cc:617:replace_const_cells$35686)
-   62: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1167 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33169)
-   63: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1168 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33170)
-   64: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1169 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33171)
-   65: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1170 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33172)
-   66: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1171 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33173)
-   67: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1172 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33174)
-   68: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1173 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33175)
-   69: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1174 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33176)
-   70: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1283 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33285)
-   71: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1324 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33325)
-   72: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1353 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33354)
-   73: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1395 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33396)
-   74: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1466 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33467)
-   75: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1596 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33597)
-   76: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1722 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33723)
-   77: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n1897 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$33898)
-   78: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n2029 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$34030)
-   79: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n3480 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$35481)
-   80: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n3481 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$35482)
-   81: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n3482 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$35483)
-   82: $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$new_n3483 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$35484)
-   83: \g_first_level[3].g_bf16_first.u_sumsq.rhs_i [7] (via $flatten\g_square[7].g_bf16_square.u_square.$abc$32050$auto$blifparse.cc:396:parse_blif$35485)
-   84: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n49 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29318)
-   85: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n51 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29320)
-   86: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n55 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29324)
-   87: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n104 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29373)
-   88: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n106 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29375)
-   89: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n107 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29376)
-   90: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n108 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29377)
-   91: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n109 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29378)
-   92: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n110 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29379)
-   93: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n111 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29380)
-   94: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n112 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29381)
-   95: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n151 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29420)
-   96: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n157 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29426)
-   97: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n204 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29473)
-   98: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n205 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29474)
-   99: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n206 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29475)
-  100: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n207 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29476)
-  101: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n208 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29477)
-  102: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n209 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29478)
-  103: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n215 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29484)
-  104: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n216 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29485)
-  105: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n219 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29488)
-  106: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n220 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29489)
-  107: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n221 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29490)
-  108: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n260 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29529)
-  109: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n261 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29530)
-  110: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n262 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29531)
-  111: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n438 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29707)
-  112: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n447 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29716)
-  113: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n448 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29717)
-  114: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n449 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29718)
-  115: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n450 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29719)
-  116: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n451 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29720)
-  117: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n460 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29729)
-  118: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n461 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29730)
-  119: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n496 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29765)
-  120: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n497 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29766)
-  121: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n510 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29779)
-  122: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n511 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29780)
-  123: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n512 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29781)
-  124: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n513 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29782)
-  125: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n514 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29783)
-  126: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n515 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29784)
-  127: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n516 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29785)
-  128: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n517 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29786)
-  129: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n525 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29794)
-  130: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n526 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29795)
-  131: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n527 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29796)
-  132: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n536 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29805)
-  133: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n537 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29806)
-  134: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n538 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29807)
-  135: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n539 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29808)
-  136: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n540 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29809)
-  137: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n541 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29810)
-  138: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n542 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29811)
-  139: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n561 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29830)
-  140: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n609 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29878)
-  141: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n610 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29879)
-  142: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n611 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29880)
-  143: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n612 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29881)
-  144: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n613 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29882)
-  145: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n614 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29883)
-  146: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n615 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29884)
-  147: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n620 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29889)
-  148: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n621 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29890)
-  149: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n666 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29933)
-  150: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n667 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29934)
-  151: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n668 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29935)
-  152: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n669 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29936)
-  153: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n670 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29937)
-  154: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n671 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29938)
-  155: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n672 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29939)
-  156: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n673 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29940)
-  157: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n674 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29941)
-  158: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n675 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29942)
-  159: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n690 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29957)
-  160: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n696 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29963)
-  161: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n697 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$29964)
-  162: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n889 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30156)
-  163: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n890 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30157)
-  164: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n891 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30158)
-  165: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n892 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30159)
-  166: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n893 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30160)
-  167: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n894 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30161)
-  168: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n895 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30162)
-  169: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n896 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30163)
-  170: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n899 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30166)
-  171: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n900 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30167)
-  172: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n901 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30168)
-  173: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n902 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30169)
-  174: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n903 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30170)
-  175: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n904 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30171)
-  176: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n905 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30172)
-  177: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n919 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30186)
-  178: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n920 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30187)
-  179: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n923 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30190)
-  180: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n934 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30201)
-  181: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n956 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30223)
-  182: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1003 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30270)
-  183: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1091 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30358)
-  184: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1092 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30359)
-  185: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1100 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30367)
-  186: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1106 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30373)
-  187: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1107 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30374)
-  188: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1280 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30547)
-  189: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1281 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30548)
-  190: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1282 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30549)
-  191: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1283 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30550)
-  192: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1284 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30551)
-  193: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1285 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30552)
-  194: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1286 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30553)
-  195: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1287 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30554)
-  196: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1290 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30557)
-  197: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1291 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30558)
-  198: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1292 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30559)
-  199: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1293 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30560)
-  200: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1294 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30561)
-  201: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1295 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30562)
-  202: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1296 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30563)
-  203: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1312 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30579)
-  204: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1313 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30580)
-  205: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1316 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30583)
-  206: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1327 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30594)
-  207: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1349 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30616)
-  208: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1396 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30663)
-  209: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1484 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30751)
-  210: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1485 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30752)
-  211: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1493 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30760)
-  212: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1499 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30766)
-  213: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1500 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30767)
-  214: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1676 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30943)
-  215: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1677 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30944)
-  216: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1678 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30945)
-  217: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1679 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30946)
-  218: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1680 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30947)
-  219: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1681 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30948)
-  220: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1682 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30949)
-  221: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1683 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30950)
-  222: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1686 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30953)
-  223: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1687 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30954)
-  224: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1688 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30955)
-  225: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1689 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30956)
-  226: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1690 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30957)
-  227: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1691 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30958)
-  228: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1692 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30959)
-  229: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1710 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30977)
-  230: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1711 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30978)
-  231: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1714 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30981)
-  232: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1725 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$30992)
-  233: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1747 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31014)
-  234: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1796 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31063)
-  235: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1886 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31153)
-  236: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1887 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31154)
-  237: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1895 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31162)
-  238: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1901 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31168)
-  239: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n1902 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31169)
-  240: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2077 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31344)
-  241: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2078 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31345)
-  242: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2079 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31346)
-  243: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2080 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31347)
-  244: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2081 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31348)
-  245: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2082 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31349)
-  246: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2083 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31350)
-  247: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2084 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31351)
-  248: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2263 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31530)
-  249: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2264 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31531)
-  250: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2265 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31532)
-  251: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2266 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31533)
-  252: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2267 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31534)
-  253: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2268 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31535)
-  254: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2269 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31536)
-  255: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2270 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31537)
-  256: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2274 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31541)
-  257: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2283 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31550)
-  258: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2303 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31570)
-  259: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2415 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31682)
-  260: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2433 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31700)
-  261: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2434 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31701)
-  262: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2435 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31702)
-  263: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2436 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31703)
-  264: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2439 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31706)
-  265: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2556 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31823)
-  266: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2557 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31824)
-  267: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2558 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31825)
-  268: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2559 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31826)
-  269: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2571 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31838)
-  270: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2718 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31975)
-  271: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2726 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31976)
-  272: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2732 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31982)
-  273: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2734 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$31984)
-  274: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2784 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$32034)
-  275: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2785 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$32035)
-  276: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2786 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$32036)
-  277: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2787 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$32037)
-  278: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2788 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$32038)
-  279: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$new_n2789 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$32039)
-  280: \g_first_level[3].g_bf16_first.u_sumsq.result_o [14] (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29317$auto$blifparse.cc:396:parse_blif$32040)
-   ff: \sumsq_stage_q[3] [14] (via $auto$ff.cc:266:slice$27088)
+    1: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n56 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$31968)
+    2: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n140 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32044)
+    3: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n141 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32045)
+    4: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n142 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32046)
+    5: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n147 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32047)
+    6: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n149 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32049)
+    7: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n151 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32051)
+    8: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n152 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32052)
+    9: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n198 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32098)
+   10: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n199 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32099)
+   11: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n202 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32102)
+   12: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n212 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32112)
+   13: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n213 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32113)
+   14: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n226 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32126)
+   15: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n227 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32127)
+   16: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n261 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32161)
+   17: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n262 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32162)
+   18: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n269 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32169)
+   19: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n273 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32173)
+   20: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n276 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32176)
+   21: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n277 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32177)
+   22: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n278 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32178)
+   23: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n307 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32207)
+   24: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n308 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32208)
+   25: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n323 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32223)
+   26: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n324 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32224)
+   27: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n330 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32230)
+   28: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n331 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32231)
+   29: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n958 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32858)
+   30: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n962 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32862)
+   31: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n965 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32865)
+   32: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n966 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32866)
+   33: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n967 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32867)
+   34: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n988 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32888)
+   35: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n989 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32889)
+   36: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n997 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32897)
+   37: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n998 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32898)
+   38: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n999 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32899)
+   39: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1000 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32900)
+   40: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1001 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32901)
+   41: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1002 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32902)
+   42: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1006 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32906)
+   43: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1007 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32907)
+   44: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1008 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32908)
+   45: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1026 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32926)
+   46: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1027 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32927)
+   47: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1028 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32928)
+   48: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1029 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32929)
+   49: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1030 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32930)
+   50: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1031 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32931)
+   51: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1051 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32951)
+   52: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1053 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32953)
+   53: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1054 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32954)
+   54: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1097 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32997)
+   55: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1098 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$32998)
+   56: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1138 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$33038)
+   57: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1139 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$33039)
+   58: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1157 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$33057)
+   59: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1158 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$33058)
+   60: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1165 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$33065)
+   61: $auto$rtlil.cc:3016:NotGate$35585 (via $auto$opt_expr.cc:617:replace_const_cells$35584)
+   62: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1167 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$33067)
+   63: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1168 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$33068)
+   64: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1169 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$33069)
+   65: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1170 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$33070)
+   66: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1171 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$33071)
+   67: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1172 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$33072)
+   68: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1173 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$33073)
+   69: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1174 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$33074)
+   70: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1283 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$33183)
+   71: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1324 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$33223)
+   72: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1353 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$33252)
+   73: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1395 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$33294)
+   74: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1466 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$33365)
+   75: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1596 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$33495)
+   76: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1722 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$33621)
+   77: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n1897 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$33796)
+   78: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n2029 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$33928)
+   79: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n3480 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$35379)
+   80: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n3481 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$35380)
+   81: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n3482 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$35381)
+   82: $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$new_n3483 (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$35382)
+   83: \g_first_level[3].g_bf16_first.u_sumsq.rhs_i [7] (via $flatten\g_square[7].g_bf16_square.u_square.$abc$31948$auto$blifparse.cc:396:parse_blif$35383)
+   84: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n49 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29216)
+   85: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n51 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29218)
+   86: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n55 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29222)
+   87: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n104 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29271)
+   88: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n106 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29273)
+   89: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n107 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29274)
+   90: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n108 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29275)
+   91: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n109 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29276)
+   92: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n110 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29277)
+   93: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n111 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29278)
+   94: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n112 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29279)
+   95: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n151 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29318)
+   96: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n157 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29324)
+   97: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n204 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29371)
+   98: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n205 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29372)
+   99: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n206 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29373)
+  100: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n207 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29374)
+  101: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n208 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29375)
+  102: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n209 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29376)
+  103: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n215 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29382)
+  104: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n216 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29383)
+  105: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n219 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29386)
+  106: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n220 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29387)
+  107: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n221 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29388)
+  108: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n260 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29427)
+  109: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n261 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29428)
+  110: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n262 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29429)
+  111: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n438 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29605)
+  112: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n447 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29614)
+  113: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n448 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29615)
+  114: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n449 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29616)
+  115: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n450 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29617)
+  116: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n451 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29618)
+  117: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n460 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29627)
+  118: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n461 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29628)
+  119: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n496 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29663)
+  120: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n497 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29664)
+  121: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n510 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29677)
+  122: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n511 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29678)
+  123: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n512 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29679)
+  124: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n513 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29680)
+  125: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n514 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29681)
+  126: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n515 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29682)
+  127: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n516 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29683)
+  128: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n517 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29684)
+  129: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n525 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29692)
+  130: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n526 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29693)
+  131: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n527 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29694)
+  132: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n536 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29703)
+  133: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n537 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29704)
+  134: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n538 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29705)
+  135: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n539 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29706)
+  136: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n540 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29707)
+  137: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n541 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29708)
+  138: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n542 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29709)
+  139: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n561 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29728)
+  140: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n609 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29776)
+  141: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n610 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29777)
+  142: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n611 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29778)
+  143: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n612 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29779)
+  144: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n613 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29780)
+  145: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n614 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29781)
+  146: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n615 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29782)
+  147: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n620 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29787)
+  148: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n621 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29788)
+  149: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n666 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29831)
+  150: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n667 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29832)
+  151: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n668 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29833)
+  152: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n669 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29834)
+  153: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n670 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29835)
+  154: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n671 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29836)
+  155: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n672 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29837)
+  156: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n673 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29838)
+  157: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n674 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29839)
+  158: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n675 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29840)
+  159: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n690 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29855)
+  160: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n696 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29861)
+  161: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n697 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$29862)
+  162: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n889 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30054)
+  163: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n890 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30055)
+  164: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n891 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30056)
+  165: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n892 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30057)
+  166: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n893 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30058)
+  167: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n894 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30059)
+  168: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n895 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30060)
+  169: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n896 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30061)
+  170: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n899 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30064)
+  171: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n900 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30065)
+  172: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n901 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30066)
+  173: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n902 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30067)
+  174: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n903 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30068)
+  175: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n904 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30069)
+  176: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n905 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30070)
+  177: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n919 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30084)
+  178: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n920 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30085)
+  179: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n923 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30088)
+  180: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n934 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30099)
+  181: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n956 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30121)
+  182: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1003 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30168)
+  183: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1091 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30256)
+  184: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1092 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30257)
+  185: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1100 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30265)
+  186: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1106 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30271)
+  187: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1107 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30272)
+  188: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1280 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30445)
+  189: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1281 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30446)
+  190: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1282 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30447)
+  191: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1283 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30448)
+  192: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1284 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30449)
+  193: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1285 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30450)
+  194: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1286 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30451)
+  195: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1287 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30452)
+  196: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1290 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30455)
+  197: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1291 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30456)
+  198: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1292 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30457)
+  199: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1293 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30458)
+  200: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1294 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30459)
+  201: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1295 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30460)
+  202: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1296 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30461)
+  203: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1312 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30477)
+  204: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1313 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30478)
+  205: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1316 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30481)
+  206: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1327 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30492)
+  207: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1349 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30514)
+  208: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1396 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30561)
+  209: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1484 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30649)
+  210: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1485 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30650)
+  211: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1493 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30658)
+  212: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1499 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30664)
+  213: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1500 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30665)
+  214: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1676 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30841)
+  215: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1677 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30842)
+  216: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1678 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30843)
+  217: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1679 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30844)
+  218: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1680 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30845)
+  219: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1681 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30846)
+  220: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1682 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30847)
+  221: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1683 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30848)
+  222: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1686 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30851)
+  223: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1687 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30852)
+  224: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1688 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30853)
+  225: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1689 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30854)
+  226: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1690 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30855)
+  227: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1691 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30856)
+  228: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1692 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30857)
+  229: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1710 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30875)
+  230: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1711 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30876)
+  231: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1714 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30879)
+  232: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1725 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30890)
+  233: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1747 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30912)
+  234: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1796 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$30961)
+  235: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1886 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31051)
+  236: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1887 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31052)
+  237: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1895 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31060)
+  238: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1901 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31066)
+  239: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n1902 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31067)
+  240: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2077 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31242)
+  241: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2078 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31243)
+  242: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2079 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31244)
+  243: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2080 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31245)
+  244: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2081 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31246)
+  245: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2082 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31247)
+  246: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2083 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31248)
+  247: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2084 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31249)
+  248: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2263 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31428)
+  249: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2264 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31429)
+  250: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2265 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31430)
+  251: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2266 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31431)
+  252: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2267 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31432)
+  253: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2268 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31433)
+  254: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2269 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31434)
+  255: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2270 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31435)
+  256: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2274 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31439)
+  257: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2283 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31448)
+  258: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2303 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31468)
+  259: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2415 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31580)
+  260: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2433 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31598)
+  261: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2434 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31599)
+  262: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2435 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31600)
+  263: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2436 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31601)
+  264: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2439 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31604)
+  265: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2556 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31721)
+  266: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2557 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31722)
+  267: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2558 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31723)
+  268: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2559 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31724)
+  269: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2571 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31736)
+  270: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2718 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31873)
+  271: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2726 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31874)
+  272: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2732 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31880)
+  273: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2734 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31882)
+  274: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2784 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31932)
+  275: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2785 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31933)
+  276: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2786 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31934)
+  277: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2787 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31935)
+  278: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2788 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31936)
+  279: $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$new_n2789 (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31937)
+  280: \g_first_level[3].g_bf16_first.u_sumsq.result_o [14] (via $flatten\g_first_level[3].g_bf16_first.u_sumsq.$abc$29215$auto$blifparse.cc:396:parse_blif$31938)
+   ff: \sumsq_stage_q[3] [14] (via $auto$ff.cc:266:slice$26986)
 
 Warnings: 4 unique messages, 8 total
-End of script. Logfile hash: 13053573f2, CPU: user 11.69s system 0.43s, MEM: 207.67 MB peak
+End of script. Logfile hash: 1eb06a754f, CPU: user 6.43s system 0.13s, MEM: 207.50 MB peak
 Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
-Time spent: 23% 56x opt_expr (3 sec), 20% 32x opt_clean (2 sec), ...
+Time spent: 25% 56x opt_expr (1 sec), 21% 32x opt_clean (1 sec), ...

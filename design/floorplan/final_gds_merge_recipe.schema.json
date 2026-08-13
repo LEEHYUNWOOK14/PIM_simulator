@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stob.local/schema/final-gds-merge-recipe.schema.json",
+  "title": "STOB final routed-RTL and TSV-overlay GDS merge recipe",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "inputs", "output", "namespaces", "layer_mapping", "placement", "verification"],
+  "$defs": {
+    "path_input": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "top_cell"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "top_cell": {"type": "string", "minLength": 1},
+        "expected_sha256": {"type": ["string", "null"], "pattern": "^[A-Fa-f0-9]{64}$"}
+      }
+    },
+    "layer": {
+      "type": "object", "additionalProperties": false, "required": ["layer", "datatype"],
+      "properties": {
+        "layer": {"type": "integer", "minimum": 0, "maximum": 65535},
+        "datatype": {"type": "integer", "minimum": 0, "maximum": 65535}
+      }
+    },
+    "point": {
+      "type": "object", "additionalProperties": false, "required": ["x_um", "y_um"],
+      "properties": {"x_um": {"type": "number"}, "y_um": {"type": "number"}}
+    },
+    "manifest_ref": {
+      "type": "object", "additionalProperties": false,
+      "required": ["object_type", "object_id", "point"],
+      "properties": {
+        "object_type": {"enum": ["tsv_bundle", "micro_bump_bundle", "block", "reserved_region"]},
+        "object_id": {"type": "string", "minLength": 1},
+        "point": {"enum": ["centroid", "lower_left_element_center", "center"]}
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "inputs": {
+      "type": "object", "additionalProperties": false,
+      "required": ["rtl", "overlay", "floorplan_manifest"],
+      "properties": {
+        "rtl": {"$ref": "#/$defs/path_input"},
+        "overlay": {"$ref": "#/$defs/path_input"},
+        "floorplan_manifest": {"type": "string", "minLength": 1},
+        "overlay_lyp": {"type": ["string", "null"]}
+      }
+    },
+    "output": {
+      "type": "object", "additionalProperties": false,
+      "required": ["gds", "lyp", "report", "top_cell", "dbu_um"],
+      "properties": {
+        "gds": {"type": "string", "minLength": 1},
+        "lyp": {"type": "string", "minLength": 1},
+        "report": {"type": "string", "minLength": 1},
+        "top_cell": {"type": "string", "minLength": 1},
+        "dbu_um": {"type": "number", "exclusiveMinimum": 0, "maximum": 1}
+      }
+    },
+    "namespaces": {
+      "type": "object", "additionalProperties": false, "required": ["rtl_prefix", "overlay_prefix"],
+      "properties": {
+        "rtl_prefix": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_]*$"},
+        "overlay_prefix": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_]*$"}
+      }
+    },
+    "layer_mapping": {
+      "type": "object", "additionalProperties": false,
+      "required": ["unmapped_rtl_policy", "forbid_overlay_collisions", "rules"],
+      "properties": {
+        "unmapped_rtl_policy": {"enum": ["error", "preserve", "drop"]},
+        "forbid_overlay_collisions": {"type": "boolean"},
+        "rules": {
+          "type": "array", "minItems": 1,
+          "items": {
+            "type": "object", "additionalProperties": false, "required": ["name", "from", "to"],
+            "properties": {
+              "name": {"type": "string", "minLength": 1},
+              "from": {"$ref": "#/$defs/layer"}, "to": {"$ref": "#/$defs/layer"}
+            }
+          }
+        }
+      }
+    },
+    "placement": {
+      "type": "object", "additionalProperties": false,
+      "required": ["orientation", "physical_scale", "allow_non_unit_scale", "translation_mode", "anchor_tolerance_um", "anchors"],
+      "properties": {
+        "orientation": {"enum": ["R0", "R90", "R180", "R270", "MX", "MY", "MXR90", "MYR90"]},
+        "physical_scale": {"type": "number", "exclusiveMinimum": 0},
+        "allow_non_unit_scale": {"type": "boolean"},
+        "translation_mode": {"enum": ["from_anchors", "explicit"]},
+        "translation_um": {"$ref": "#/$defs/point"},
+        "anchor_tolerance_um": {"type": "number", "minimum": 0},
+        "anchors": {
+          "type": "array",
+          "items": {
+            "type": "object", "additionalProperties": false,
+            "required": ["name", "source_um"],
+            "properties": {
+              "name": {"type": "string", "minLength": 1},
+              "source_um": {"$ref": "#/$defs/point"},
+              "target_um": {"$ref": "#/$defs/point"},
+              "target_manifest_ref": {"$ref": "#/$defs/manifest_ref"}
+            },
+            "oneOf": [{"required": ["target_um"]}, {"required": ["target_manifest_ref"]}]
+          }
+        }
+      }
+    },
+    "verification": {
+      "type": "object", "additionalProperties": false,
+      "required": ["require_anchor_alignment", "minimum_anchor_count", "require_rtl_shapes", "require_overlay_shapes", "enforce_rtl_within_manifest_die"],
+      "properties": {
+        "require_anchor_alignment": {"type": "boolean"},
+        "minimum_anchor_count": {"type": "integer", "minimum": 1},
+        "require_rtl_shapes": {"type": "boolean"},
+        "require_overlay_shapes": {"type": "boolean"},
+        "enforce_rtl_within_manifest_die": {"type": "boolean"}
+      }
+    }
+  }
+}

@@ -1,0 +1,653 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-08-12T05:59:47.777923+00:00",
+  "status": "PASS",
+  "signoff": false,
+  "reproduction": {
+    "entrypoint": ".\\tools\\run_logic_die_floorplan_analysis.ps1",
+    "seed": 235,
+    "samples": 400,
+    "note": "Final RTL detailed route is intentionally excluded from the default run."
+  },
+  "repository": {
+    "commit": "14dd245dbfc8d53177f73526ade4f0b72d2b7f6b",
+    "dirty": true,
+    "status_snapshot": "M design/normalization_rtl_interface_contract.md\n M flow/designs/sky130hd/stob_pim2/config.mk\n M flow/run_flow.ps1\n M hardware_cost/regression/README.md\n M hardware_cost/regression/baseline_manifest.json\n M hardware_cost/regression/revisions/provisional_baseline_2026_08_11.json\n M hardware_cost/regression/snapshot_schema.json\n M output/hbm2_arch/generation_manifest.json\n M output/hbm2_arch/hbm2_pim_architecture.gds\n M output/hbm2_arch/model_summary.md\n M output/hbm2_arch/parameter_provenance.json\n M output/hbm2_hardware_cost/design_comparison.csv\n M output/hbm2_hardware_cost/integrated_metrics.json\n M output/hbm2_hardware_cost/package/package_metrics.json\n M output/hbm2_hardware_cost/parameter_provenance.json\n M output/hbm2_hardware_cost/uncertainty_samples.csv\n M output/hbm2_hardware_cost/uncertainty_summary.csv\n M output/hbm2_hardware_cost/validation/validation_report.json\n M output/hbm2_hardware_cost/validation/validation_report.md\n M output/hbm2_thermal/rtl_mapped/block_temperatures.csv\n M output/hbm2_thermal/rtl_mapped/layer_temperatures.csv\n M output/hbm2_thermal/rtl_mapped/summary.json\n M output/hbm2_thermal/rtl_mapped/temperature_bins.gds\n M output/hbm2_thermal/rtl_mapped/temperature_field.npz\n M output/hbm2_thermal/validation/validation_report.json\n M output/rtl_to_3d/mapped_power.json\n M output/rtl_to_3d/normalized_input.json\n M reports/groot_normalization/13_phase6_rtl_calibrated_system_simulation_report.md\n M reports/groot_normalization/14_phase5_bank_vector_reducer_tradeoff_report.md\n M reports/groot_normalization/15_phase5_pipelined_bank_vector_reducer_report.md\n M reports/groot_normalization/15_workload_independent_foundation_progress.md\n M reports/groot_normalization/16_phase5_multirow_overlap_reducer_report.md\n M reports/groot_normalization/17_phase5_logic_engine_replication_report.md\n M reports/groot_normalization/common_model_parameters.json\n M reports/groot_normalization/results/bank_normalization_apply_bf16_yosys.log\n M reports/groot_normalization/results/bank_normalization_local_reducer_bf16_yosys.log\n M reports/groot_normalization/results/bank_pipelined_vector_reducer_l16_bf16_yosys.log\n M reports/groot_normalization/results/bank_pipelined_vector_reducer_l16_yosys.log\n M reports/groot_normalization/results/bank_pipelined_vector_reducer_l2_bf16_yosys.log\n M reports/groot_normalization/results/bank_pipelined_vector_reducer_l2_yosys.log\n M reports/groot_normalization/results/bank_pipelined_vector_reducer_l4_bf16_yosys.log\n M reports/groot_normalization/results/bank_pipelined_vector_reducer_l4_yosys.log\n M reports/groot_normalization/results/bank_pipelined_vector_reducer_l8_bf16_yosys.log\n M reports/groot_normalization/results/bank_pipelined_vector_reducer_l8_yosys.log\n M reports/groot_normalization/results/bank_vector_reducer_l16_bf16_yosys.log\n M reports/groot_normalization/results/bank_vector_reducer_l16_yosys.log\n M reports/groot_normalization/results/bank_vector_reducer_l1_bf16_yosys.log\n M reports/groot_normalization/results/bank_vector_reducer_l1_yosys.log\n M reports/groot_normalization/results/bank_vector_reducer_l2_bf16_yosys.log\n M reports/groot_normalization/results/bank_vector_reducer_l2_yosys.log\n M reports/groot_normalization/results/bank_vector_reducer_l4_bf16_yosys.log\n M reports/groot_normalization/results/bank_vector_reducer_l4_yosys.log\n M reports/groot_normalization/results/bank_vector_reducer_l8_bf16_yosys.log\n M reports/groot_normalization/results/bank_vector_reducer_l8_yosys.log\n M reports/groot_normalization/results/bank_vector_reducer_tradeoff.csv\n M reports/groot_normalization/results/bf16_add_bf16_yosys.log\n M reports/groot_normalization/results/bf16_mul_bf16_yosys.log\n M reports/groot_normalization/results/foundation_regression_results.csv\n M reports/groot_normalization/results/logic_engine_replication_tradeoff.csv\n M reports/groot_normalization/results/offload_break_even_sweep.csv\n M reports/groot_normalization/results/reference_architecture_comparison.csv\n M reports/groot_normalization/results/shared_pair_reducer_b16_yosys.log\n M reports/groot_normalization/results/shared_pair_reducer_b1_yosys.log\n M reports/groot_normalization/results/shared_pair_reducer_b2_yosys.log\n M reports/groot_normalization/results/shared_pair_reducer_b4_yosys.log\n M reports/groot_normalization/results/shared_pair_reducer_b8_yosys.log\n M reports/groot_normalization/results/system_simulation_summary.csv\n M reports/groot_normalization/results/system_simulation_trace.csv\n M reports/hardware_cost_regression/paper_category_table.csv\n M reports/hardware_cost_regression/paper_delta_table.csv\n M reports/hardware_cost_regression/paper_regression_report.md\n M reports/hardware_cost_regression/paper_revision_table.csv\n M reports/hardware_cost_regression/regression_summary.json\n M reports/hardware_cost_regression/validation_report.json\n M requirements.txt\n M rtl/bf16_add.sv\n M rtl/bf16_mul.sv\n M rtl/fp16_mul.sv\n M rtl/full_pim_system_top.sv\n M rtl/hierarchical_normalization_datapath.sv\n M rtl/logic_normalization_reduction_engine.sv\n M rtl/logic_normalization_scalar_engine.sv\n M tools/analyze_bank_reducer_tradeoff.py\n M tools/analyze_logic_engine_replication.py\n M tools/capture_hardware_cost_revision.py\n M tools/check_gr00t_docs.py\n M tools/compare_hardware_cost_revisions.py\n M tools/generate_normalization_scalar_vectors.py\n M tools/groot_normalization_model.py\n M tools/groot_normalization_system_sim.py\n M tools/validate_hardware_cost_regression.py\n M verification/groot_normalization/full_normalization_top.ys\n M verification/groot_normalization/hierarchical_normalization_datapath_tb.sv\n M verification/groot_normalization/logic_normalization_dispatcher_top_tb.sv\n M verification/groot_normalization/logic_normalization_scalar_engine_tb.sv\n M verification/groot_normalization/run_foundation_regression.sh\n M verification/groot_normalization/run_hierarchical_normalization_test.sh\n M verification/groot_normalization/run_normalization_scalar_test.sh\n M verification/hardware_cost_regression/test_hardware_cost_regression.py\n?? .vscode/\n?? design/__pycache__/\n?? design/floorplan/\n?? experiment/gr00t_placement/__pycache__/\n?? groot_actual_workload_validation_goal_prompt.md\n?? groot_normalization_completion_tracker_goal_prompt.md\n?? logic_die_floorplan_visualization_goal_prompt.md\n?? openroad-flow-scripts.partial/\n?? openroad-flow-scripts/\n?? output/floorplan_optimization/\n?? output/hardware_cost_regression/\n?? output/output.gds\n?? reports/floorplan_optimization/\n?? reports/groot_normalization/16_bf16_fullpath_foundation_report.md\n?? reports/groot_normalization/17_workload_independent_physical_and_robustness_report.md\n?? reports/groot_normalization/18_phase5_logic_dispatcher_report.md\n?? reports/groot_normalization/19_phase5_parallel_partial_tree_report.md\n?? reports/groot_normalization/20_phase5_bank_barrier_and_skew_report.md\n?? reports/groot_normalization/21_phase5_raw_to_scalar_streaming_top_report.md\n?? reports/groot_normalization/22_phase5_scalar_broadcast_report.md\n?? reports/groot_normalization/23_phase5_row_context_table_report.md\n?? reports/groot_normalization/24_phase5_raw_to_bank_scalar_return_report.md\n?? reports/groot_normalization/25_phase5_bank_microprogram_adapter_report.md\n?? reports/groot_normalization/26_phase5_raw_to_bank_command_issue_report.md\n?? reports/groot_normalization/27_phase5_raw_to_affine_bank_core_e2e_report.md\n?? reports/groot_normalization/27_workload_independent_foundation_completion_audit.md\n?? reports/groot_normalization/28_gr00t_workload_audit_and_provisional_architecture.md\n?? reports/groot_normalization/28_phase5_bank_result_completion_tracker_report.md\n?? reports/groot_normalization/29_phase5_completion_tracker_top_integration_report.md\n?? reports/groot_normalization/actual_workload_validation/\n?? reports/groot_normalization/full_normalization_inventory/\n?? reports/groot_normalization/logic_die_pcu_system/\n?? reports/groot_normalization/mixed_precision_optimization/\n?? reports/groot_normalization/multirow_throughput_prototype/\n?? reports/groot_normalization/results/actual_groot/\n?? reports/groot_normalization/results/adalayernorm_l8_results/\n?? reports/groot_normalization/results/adalayernorm_l8_vectors/\n?? reports/groot_normalization/results/bank_normalization_microprogram_adapter_yosys.log\n?? reports/groot_normalization/results/bank_skew_sensitivity.csv\n?? reports/groot_normalization/results/full_normalization_inventory/\n?? reports/groot_normalization/results/full_pim_normalization_top_bf16_structural_yosys.log\n?? reports/groot_normalization/results/full_pim_normalization_top_fp16_structural_yosys.log\n?? reports/groot_normalization/results/full_pim_normalization_top_fp16_yosys.log\n?? reports/groot_normalization/results/gr00t_workload_architecture/\n?? reports/groot_normalization/results/groot_actual_workload_manifest.csv\n?? reports/groot_normalization/results/groot_actual_workload_manifest.json\n?? reports/groot_normalization/results/groot_bf16_trace_manifest.json\n?? reports/groot_normalization/results/hierarchical_normalization_bank_core_b16_l4_e8_yosys.log\n?? reports/groot_normalization/results/hierarchical_normalization_bank_core_b4_l4_e8_yosys.log\n?? reports/groot_normalization/results/hierarchical_normalization_bank_issue_b16_l4_e8_yosys.log\n?? reports/groot_normalization/results/hierarchical_normalization_datapath_bf16_yosys.log\n?? reports/groot_normalization/results/hierarchical_normalization_datapath_fp16_yosys.log\n?? reports/groot_normalization/results/hierarchical_normalization_scalar_return_b16_l4_e8_yosys.log\n?? reports/groot_normalization/results/hierarchical_normalization_streaming_top_yosys.log\n?? reports/groot_normalization/results/logic_die_pcu_l16_e4_results/\n?? reports/groot_normalization/results/logic_die_pcu_l4_e4_results/\n?? reports/groot_normalization/results/logic_die_pcu_l8_e4_results/\n?? reports/groot_normalization/results/logic_die_pcu_system/\n?? reports/groot_normalization/results/logic_die_pcu_system_scheduler/\n?? reports/groot_normalization/results/logic_normalization_barrier_tree_e8_yosys.log\n?? reports/groot_normalization/results/logic_normalization_dispatcher_e16_yosys.log\n?? reports/groot_normalization/results/logic_normalization_dispatcher_e4_yosys.log\n?? reports/groot_normalization/results/logic_normalization_dispatcher_e8_yosys.log\n?? reports/groot_normalization/results/logic_normalization_parallel_tree_e16_yosys.log\n?? reports/groot_normalization/results/logic_normalization_parallel_tree_e8_yosys.log\n?? reports/groot_normalization/results/logic_normalization_reduction_engine_bf16_yosys.log\n?? reports/groot_normalization/results/logic_normalization_reduction_engine_fp16_yosys.log\n?? reports/groot_normalization/results/logic_normalization_scalar_engine_bf16_yosys.log\n?? reports/groot_normalization/results/logic_normalization_scalar_engine_fp16_yosys.log\n?? reports/groot_normalization/results/logic_partial_port_sweep.csv\n?? reports/groot_normalization/results/mixed_precision_c11_architecture_comparison/\n?? reports/groot_normalization/results/mixed_precision_c11_rtl_results/\n?? reports/groot_normalization/results/mixed_precision_c11_rtl_vectors/\n?? reports/groot_normalization/results/mixed_precision_exploration/\n?? reports/groot_normalization/results/mixed_precision_rtl_results/\n?? reports/groot_normalization/results/mixed_precision_rtl_vectors/\n?? reports/groot_normalization/results/mixed_precision_sky130/\n?? reports/groot_normalization/results/mixed_precision_stress_vectors/\n?? reports/groot_normalization/results/mixed_precision_synthesis/\n?? reports/groot_normalization/results/multirow_architecture_comparison/\n?? reports/groot_normalization/results/multirow_fulltop_sky130/\n?? reports/groot_normalization/results/multirow_l16_e16_results/\n?? reports/groot_normalization/results/multirow_l16_e4_results/\n?? reports/groot_normalization/results/multirow_l16_e8_results/\n?? reports/groot_normalization/results/multirow_l16_vectors/\n?? reports/groot_normalization/results/multirow_l4_e4_results/\n?? reports/groot_normalization/results/multirow_l4_vectors/\n?? reports/groot_normalization/results/multirow_l8_e4_results/\n?? reports/groot_normalization/results/multirow_l8_vectors/\n?? reports/groot_normalization/results/multirow_sky130/\n?? reports/groot_normalization/results/normalization_bank_result_tracker_b16_e16_yosys.log\n?? reports/groot_normalization/results/normalization_row_context_table_b16_e16_yosys.log\n?? reports/groot_normalization/results/normalization_scalar_broadcast_b16_yosys.log\n?? reports/groot_normalization/results/normalization_scalar_broadcast_b4_yosys.log\n?? reports/groot_normalization/results/normalization_scalar_broadcast_b8_yosys.log\n?? reports/groot_normalization/results/normalization_sky130_metrics.csv\n?? reports/groot_normalization/results/parallel_partial_tree_candidate.csv\n?? reports/groot_normalization/results/rmsnorm_l8_c2_results/\n?? reports/groot_normalization/results/rmsnorm_l8_c4_results/\n?? reports/groot_normalization/results/rmsnorm_l8_results/\n?? reports/groot_normalization/results/rmsnorm_l8_vectors/\n?? reports/groot_normalization/results/sky130_mapping/\n?? reports/groot_normalization/results/structural_audit/\n?? reports/reproducibility/\n?? rtl/bank_normalization_microprogram_adapter.sv\n?? rtl/bf16_add_pipe2.sv\n?? rtl/bf16_rsqrt_lut256.sv\n?? rtl/bf16_rsqrt_lut256_case.svh\n?? rtl/bf16_to_fp32.sv\n?? rtl/fp16_add_pipe2.sv\n?? rtl/fp32_add.sv\n?? rtl/fp32_add_pipe4.sv\n?? rtl/fp32_mul.sv\n?? rtl/fp32_mul_pipe4.sv\n?? rtl/fp32_to_bf16_rne.sv\n?? rtl/hierarchical_normalization_bank_core_top.sv\n?? rtl/hierarchical_normalization_bank_issue_top.sv\n?? rtl/hierarchical_normalization_scalar_return_top.sv\n?? rtl/hierarchical_normalization_streaming_top.sv\n?? rtl/logic_die_normalization_pcu_top.sv\n?? rtl/logic_normalization_bank_barrier.sv\n?? rtl/logic_normalization_barrier_tree_top.sv\n?? rtl/logic_normalization_parallel_tree_top.sv\n?? rtl/logic_normalization_scalar_engine_array.sv\n?? rtl/mixed_precision_bank_apply4.sv\n?? rtl/mixed_precision_bank_apply4_pipe.sv\n?? rtl/mixed_precision_bank_apply_pipe.sv\n?? rtl/mixed_precision_bank_reducer4.sv\n?? rtl/mixed_precision_bank_reducer4_interleaved.sv\n?? rtl/mixed_precision_bank_reducer_interleaved.sv\n?? rtl/mixed_precision_bank_reducer_pingpong.sv\n?? rtl/mixed_precision_global_reducer16.sv\n?? rtl/mixed_precision_global_reducer16_pipe.sv\n?? rtl/mixed_precision_multirow_datapath.sv\n?? rtl/mixed_precision_normalization_datapath.sv\n?? rtl/mixed_precision_normalization_datapath_c11.sv\n?? rtl/mixed_precision_row_context_table.sv\n?? rtl/mixed_precision_scalar_engine_array.sv\n?? rtl/mixed_precision_scalar_nr2.sv\n?? rtl/mixed_precision_scalar_nr2_pipe.sv\n?? rtl/normalization_accumulator_pipe2.sv\n?? rtl/normalization_bank_result_tracker-DESKTOP-6H094OP.sv\n?? rtl/normalization_bank_result_tracker.sv\n?? rtl/normalization_bank_scheduler.sv\n?? rtl/normalization_row_context_table.sv\n?? rtl/normalization_scalar_broadcast.sv\n?? test_file.txt\n?? tools/__pycache__/\n?? tools/analyze_bank_skew_sensitivity.py\n?? tools/analyze_gr00t_workload_architecture.py\n?? tools/analyze_groot_mixed_precision_rtl.py\n?? tools/analyze_groot_rtl_accuracy.py\n?? tools/analyze_groot_rtl_accuracy_stages.py\n?? tools/analyze_logic_die_pcu_system.py\n?? tools/analyze_logic_partial_ports.py\n?? tools/analyze_multirow_winner.py\n?? tools/analyze_parallel_partial_tree.py\n?? tools/audit_actual_groot_normalization.py\n?? tools/benchmark_groot_normalization_gpu.py\n?? tools/build_full_normalization_inventory.py\n?? tools/capture_pretrained_groot_action_head_trace.py\n?? tools/check_floorplan_toolchain.ps1\n?? tools/check_gds_merge_environment.py\n?? tools/check_logic_die_floorplan_gds.py\n?? tools/collect_floorplan_3dice_metrics.py\n?? tools/collect_floorplan_generation_manifest.py\n?? tools/collect_floorplan_hotspot_metrics.py\n?? tools/collect_floorplan_openroad_proxy_metrics.py\n?? tools/collect_floorplan_thermal_metrics.py\n?? tools/collect_logic_die_pcu_rtl_results.py\n?? tools/collect_mixed_precision_synthesis_metrics.py\n?? tools/collect_multirow_component_metrics.py\n?? tools/collect_normalization_sky130_metrics.py\n?? tools/collect_reproducibility_manifest.py\n?? tools/compare_actual_groot_architectures.py\n?? tools/compare_c11_actual_groot_architectures.py\n?? tools/compare_floorplan_candidates.py\n?? tools/convert_groot_trace_to_rtl.py\n?? tools/enter_gds_merge_environment.ps1\n?? tools/evaluate_groot_mixed_precision_stress.py\n?? tools/explore_groot_mixed_precision.py\n?? tools/export_floorplan_3dice.py\n?? tools/export_floorplan_hotspot.py\n?? tools/export_floorplan_openroad_proxy.py\n?? tools/export_floorplan_paraview.py\n?? tools/export_logic_die_floorplan_gds.py\n?? tools/floorplan_manifest_to_mapped_power.py\n?? tools/gds_merge_requirements.txt\n?? tools/generate_bf16_rsqrt_rtl_assets.py\n?? tools/generate_floorplan_paper_figures.py\n?? tools/generate_fp32_mixed_precision_vectors.py\n?? tools/generate_logic_die_floorplan_manifest.py\n?? tools/generate_visualization_pipeline_html_report.py\n?? tools/hardware_cost_evidence_contract.py\n?? tools/merge_final_rtl_gds.py\n?? tools/optimize_logic_die_floorplan.py\n?? tools/prepare_adalayernorm_rtl_vectors.py\n?? tools/prepare_final_gds_merge_recipe.py\n?? tools/prepare_groot_mixed_precision_rtl_vectors.py\n?? tools/prepare_groot_multirow_vectors.py\n?? tools/prepare_groot_rtl_accuracy_vectors.py\n?? tools/prepare_rmsnorm_rtl_vectors.py\n?? tools/render_floorplan_klayout.py\n?? tools/render_floorplan_paraview.py\n?? tools/run_final_rtl_gds_merge.ps1\n?? tools/run_floorplan_3dice_candidates.ps1\n?? tools/run_floorplan_hotspot_candidates.ps1\n?? tools/run_floorplan_openroad_proxies.ps1\n?? tools/run_floorplan_thermal_candidates.ps1\n?? tools/run_full_regression_gate.py\n?? tools/run_logic_die_floorplan_analysis.ps1\n?? tools/setup_gds_merge_environment.ps1\n?? tools/validate_logic_die_floorplan.py\n?? verification/floorplan_optimization/\n?? verification/groot_normalization/__pycache__/\n?? verification/groot_normalization/audit_full_normalization_inventory.py\n?? verification/groot_normalization/audit_logic_die_pcu_completion.py\n?? verification/groot_normalization/bank_normalization_microprogram_adapter_tb.sv\n?? verification/groot_normalization/bf16_normalization_scalar_vectors.hex\n?? verification/groot_normalization/bf16_rsqrt_exhaustive.hex\n?? verification/groot_normalization/bf16_rsqrt_lut256_tb.sv\n?? verification/groot_normalization/fp32_add_pipe4_tb.sv\n?? verification/groot_normalization/fp32_mixed_precision_primitives_tb.sv\n?? verification/groot_normalization/fp32_mixed_precision_vectors.hex\n?? verification/groot_normalization/fp32_mul_pipe4_tb.sv\n?? verification/groot_normalization/fp_bf16_add_pipe2_tb.sv\n?? verification/groot_normalization/groot_actual_trace_bf16_tb.sv\n?? verification/groot_normalization/groot_logic_die_pcu_trace_tb.sv\n?? verification/groot_normalization/groot_mixed_precision_trace_tb.sv\n?? verification/groot_normalization/groot_multirow_trace_tb.sv\n?? verification/groot_normalization/hierarchical_normalization_bank_core_top_tb.sv\n?? verification/groot_normalization/hierarchical_normalization_bank_issue_top_tb.sv\n?? verification/groot_normalization/hierarchical_normalization_scalar_return_top_tb.sv\n?? verification/groot_normalization/hierarchical_normalization_streaming_top_tb.sv\n?? verification/groot_normalization/logic_die_normalization_pcu_top_tb.sv\n?? verification/groot_normalization/logic_normalization_barrier_tree_top_tb.sv\n?? verification/groot_normalization/logic_normalization_parallel_tree_top_tb.sv\n?? verification/groot_normalization/mixed_precision_apply_pipe_tb.sv\n?? verification/groot_normalization/mixed_precision_context_full_wrap_tb.sv\n?? verification/groot_normalization/mixed_precision_generic_apply_tb.sv\n?? verification/groot_normalization/mixed_precision_generic_reducer_tb.sv\n?? verification/groot_normalization/mixed_precision_global_pipe_tb.sv\n?? verification/groot_normalization/mixed_precision_interleaved_reducer_tb.sv\n?? verification/groot_normalization/mixed_precision_multirow_tb.sv\n?? verification/groot_normalization/mixed_precision_protocol_tb.sv\n?? verification/groot_normalization/mixed_precision_scalar_array_tb.sv\n?? verification/groot_normalization/mixed_precision_scalar_latency_tb.sv\n?? verification/groot_normalization/mixed_precision_scalar_pipe_tb.sv\n?? verification/groot_normalization/normalization_accumulator_pipe2_tb.sv\n?? verification/groot_normalization/normalization_bank_result_tracker_tb.sv\n?? verification/groot_normalization/normalization_bank_scheduler_tb.sv\n?? verification/groot_normalization/normalization_reset_contract_tb.sv\n?? verification/groot_normalization/normalization_row_context_table_tb.sv\n?? verification/groot_normalization/normalization_scalar_broadcast_tb.sv\n?? verification/groot_normalization/normalization_sky130_sta.tcl\n?? verification/groot_normalization/normalization_special_values_tb.sv\n?? verification/groot_normalization/run_adalayernorm_logic_die_pcu_trace_test.sh\n?? verification/groot_normalization/run_bank_normalization_microprogram_adapter_synthesis.sh\n?? verification/groot_normalization/run_bank_normalization_microprogram_adapter_test.sh\n?? verification/groot_normalization/run_bf16_rsqrt_test.sh\n?? verification/groot_normalization/run_fp32_add_pipe4_test.sh\n?? verification/groot_normalization/run_fp32_mixed_precision_primitives_test.sh\n?? verification/groot_normalization/run_fp32_mul_pipe4_test.sh\n?? verification/groot_normalization/run_groot_actual_trace_bf16_test.sh\n?? verification/groot_normalization/run_groot_logic_die_pcu_trace_test.sh\n?? verification/groot_normalization/run_groot_mixed_precision_c11_trace_test.sh\n?? verification/groot_normalization/run_groot_mixed_precision_trace_test.sh\n?? verification/groot_normalization/run_groot_multirow_trace_test.sh\n?? verification/groot_normalization/run_hierarchical_normalization_bank_core_top_synthesis.sh\n?? verification/groot_normalization/run_hierarchical_normalization_bank_core_top_test.sh\n?? verification/groot_normalization/run_hierarchical_normalization_bank_issue_top_synthesis.sh\n?? verification/groot_normalization/run_hierarchical_normalization_bank_issue_top_test.sh\n?? verification/groot_normalization/run_hierarchical_normalization_scalar_return_top_synthesis.sh\n?? verification/groot_normalization/run_hierarchical_normalization_scalar_return_top_test.sh\n?? verification/groot_normalization/run_hierarchical_normalization_streaming_top_synthesis.sh\n?? verification/groot_normalization/run_hierarchical_normalization_streaming_top_test.sh\n?? verification/groot_normalization/run_logic_die_normalization_pcu_top_test.sh\n?? verification/groot_normalization/run_logic_normalization_barrier_tree_top_synthesis.sh\n?? verification/groot_normalization/run_logic_normalization_barrier_tree_top_test.sh\n?? verification/groot_normalization/run_logic_normalization_parallel_tree_top_synthesis.sh\n?? verification/groot_normalization/run_logic_normalization_parallel_tree_top_test.sh\n?? verification/groot_normalization/run_mixed_precision_apply_pipe_test.sh\n?? verification/groot_normalization/run_mixed_precision_context_full_wrap_test.sh\n?? verification/groot_normalization/run_mixed_precision_generic_apply_test.sh\n?? verification/groot_normalization/run_mixed_precision_generic_reducer_test.sh\n?? verification/groot_normalization/run_mixed_precision_global_pipe_test.sh\n?? verification/groot_normalization/run_mixed_precision_interleaved_reducer_test.sh\n?? verification/groot_normalization/run_mixed_precision_multirow_test.sh\n?? verification/groot_normalization/run_mixed_precision_protocol_test.sh\n?? verification/groot_normalization/run_mixed_precision_scalar_array_test.sh\n?? verification/groot_normalization/run_mixed_precision_scalar_latency_test.sh\n?? verification/groot_normalization/run_mixed_precision_scalar_pipe_test.sh\n?? verification/groot_normalization/run_mixed_precision_sky130_mapping.sh\n?? verification/groot_normalization/run_mixed_precision_stress_test.sh\n?? verification/groot_normalization/run_mixed_precision_synthesis.sh\n?? verification/groot_normalization/run_multirow_component_sky130.sh\n?? verification/groot_normalization/run_multirow_fulltop_sky130.sh\n?? verification/groot_normalization/run_normalization_bank_result_tracker_synthesis.sh\n?? verification/groot_normalization/run_normalization_bank_result_tracker_test.sh\n?? verification/groot_normalization/run_normalization_bank_scheduler_test.sh\n?? verification/groot_normalization/run_normalization_fullpath_synthesis.sh\n?? verification/groot_normalization/run_normalization_reset_contract_test.sh\n?? verification/groot_normalization/run_normalization_row_context_table_synthesis.sh\n?? verification/groot_normalization/run_normalization_row_context_table_test.sh\n?? verification/groot_normalization/run_normalization_scalar_broadcast_synthesis.sh\n?? verification/groot_normalization/run_normalization_scalar_broadcast_test.sh\n?? verification/groot_normalization/run_normalization_sky130_mapping.sh\n?? verification/groot_normalization/run_normalization_special_values_test.sh\n?? verification/groot_normalization/run_normalization_structural_audit.sh\n?? verification/groot_normalization/run_rmsnorm_logic_die_pcu_trace_test.sh\n?? verification/groot_normalization/test_logic_die_pcu_system.py\n?? verification/hardware_cost_regression/__pycache__/\n?? verification/reproducibility/\n?? verification/rtl_audit/bank_synth.log\n?? verification/rtl_audit/scheduler_synth.log\n?? verification/rtl_to_3d/__pycache__/\n?? yosys_top.log"
+  },
+  "host": {
+    "platform": "Windows-10-10.0.26100-SP0",
+    "python": "3.11.9"
+  },
+  "tools": {
+    "klayout": "0.30.10",
+    "openroad": "26Q3-1080-gab6fd26351",
+    "yosys": "0.68+48",
+    "hotspot": "f188 pinned source revision",
+    "3d_ice": "4.0 / 495 pinned source revision",
+    "paraview": "6.1.1",
+    "openscad": "2021.01",
+    "blender": "5.2 LTS"
+  },
+  "artifact_count": 103,
+  "artifacts": [
+    {
+      "path": "design/floorplan/final_gds_merge_recipe.schema.json",
+      "sha256": "feae83057a74cb6e727db1be7a136aab0c3ee47de6bef736442c180dffc61f09",
+      "size_bytes": 5320,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "design/floorplan/logic_die_floorplan.json",
+      "sha256": "ff82bb295506d43d6caa4fe11adc35a523c9bdf5b9db4e4b972d2819a1bc9c33",
+      "size_bytes": 131630,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "design/floorplan/logic_die_floorplan.schema.json",
+      "sha256": "4b73ef8fd5056dddfefe0e283ae9988304f73a4ceeee6038663b9cccd244c159",
+      "size_bytes": 8686,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "design/floorplan/placement_objectives.json",
+      "sha256": "1db99f7bf6686998eadba08bdd7c0b9240f5b021e9f6870e3dd25fadcc9f00d6",
+      "size_bytes": 1421,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "design/floorplan/tsv_connectivity.csv",
+      "sha256": "d187eed50bd32b2c98bdf19b9520b4313884a0cf614949533b72895c5f24a560",
+      "size_bytes": 10938,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "output/floorplan_optimization/3dice_results.csv",
+      "sha256": "682ce973a47fb3b266aa3bd0fc983a0814fa18754f9d5bc0be360ad4c79f90c4",
+      "size_bytes": 1473,
+      "evidence_class": "modeled/estimated-power"
+    },
+    {
+      "path": "output/floorplan_optimization/candidate_comparison.csv",
+      "sha256": "0c38f266803f09c445c54dfe0c667a10fdafed884aef3cdf9c3996ba2e8e2aee",
+      "size_bytes": 2872,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "output/floorplan_optimization/cost_thermal_pareto.csv",
+      "sha256": "0c38f266803f09c445c54dfe0c667a10fdafed884aef3cdf9c3996ba2e8e2aee",
+      "size_bytes": 2872,
+      "evidence_class": "modeled/estimated-power"
+    },
+    {
+      "path": "output/floorplan_optimization/cost_weight_sensitivity.csv",
+      "sha256": "f5d73ceb9c9c958239c7abde2886bb69d03837943f3688257b88bb4e2a639c5f",
+      "size_bytes": 620,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "output/floorplan_optimization/exploration/candidates/balanced.json",
+      "sha256": "33ae1b0c9df99587f27104366a3b30608fc234f471fc85cbf0d39de88e21d519",
+      "size_bytes": 131606,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "output/floorplan_optimization/exploration/candidates/cost_first.json",
+      "sha256": "ef60008a31a52688588de9bfb17cd6a0dc94a316cde081799efcb7d1cdf8a659",
+      "size_bytes": 131608,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "output/floorplan_optimization/exploration/candidates/manual_baseline.json",
+      "sha256": "5418a61e44f58823b9b154a37af3af5d97acf02a737a98096607e6d4ea4818e2",
+      "size_bytes": 131611,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "output/floorplan_optimization/exploration/candidates/thermal_first.json",
+      "sha256": "23a4a9c50d49bd73f8eecf5d6e6252a0f9574c9509e041bee05dd1a66ebbbae6",
+      "size_bytes": 131613,
+      "evidence_class": "modeled/estimated-power"
+    },
+    {
+      "path": "output/floorplan_optimization/exploration/candidates/wirelength_first.json",
+      "sha256": "55fb24140698d28127f52bf61209af5841a36c9a6dd4d45e6e349f7a2bf0aa04",
+      "size_bytes": 131614,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "output/floorplan_optimization/exploration/optimization_summary.json",
+      "sha256": "f380090a5a958c07fccb7164ef53811d0b325667750903666c166f5c4b58992a",
+      "size_bytes": 2046,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "output/floorplan_optimization/exploration/pareto_frontier.csv",
+      "sha256": "fe444312105a11e4515ad8ee0e13d265c50dc0822c3fba48a22c70c660bb0275",
+      "size_bytes": 19764,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "output/floorplan_optimization/exploration/placement_candidates.csv",
+      "sha256": "dfbe4d24904642d80342c6c962afcf60d147ddc0c3ada1d1519b6a430fe63155",
+      "size_bytes": 120438,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "output/floorplan_optimization/exploration/rejected_candidates.csv",
+      "sha256": "b28d4074a97cd8d012044235aaa0352c4c156e386991e3d025419b2fdd80c922",
+      "size_bytes": 107612,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "output/floorplan_optimization/exploration/selected_candidates.csv",
+      "sha256": "ba36b7e096d83dc2b23de4151cb954d5f7fe5f96c7418cb05aaf33bc03d042ad",
+      "size_bytes": 3118,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "output/floorplan_optimization/exploration/weight_sensitivity.csv",
+      "sha256": "a541fe2d360ccf89dc8520d300e28d6d229eb11c831f0048d0fd4fecc14c2124",
+      "size_bytes": 2715,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "output/floorplan_optimization/hotspot_results.csv",
+      "sha256": "6076e01aaf248896728917269a56f5964869217062171fe954e925b47e7f5bf4",
+      "size_bytes": 1281,
+      "evidence_class": "modeled/estimated-power"
+    },
+    {
+      "path": "output/floorplan_optimization/openroad_proxy/openroad_proxy_metrics.csv",
+      "sha256": "f6d422c4de78fee74eaded5ac2be958d31777a9e8acc36a76d19e1d0b21aaed4",
+      "size_bytes": 3382,
+      "evidence_class": "modeled/global-routed-proxy"
+    },
+    {
+      "path": "output/floorplan_optimization/thermal_results.csv",
+      "sha256": "bd00984d16fedd1d516aaeaafefdefb18160d21a00639f61db596cd7abacabc2",
+      "size_bytes": 2326,
+      "evidence_class": "modeled/estimated-power"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/balanced/logic_die_floorplan.gds",
+      "sha256": "2c1b7e024e37968095c09f54e4c1f315659c3cce004057df508c1765d8fbeb53",
+      "size_bytes": 951204,
+      "evidence_class": "illustrative/from-modeled-data"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/balanced/paraview/stack_temperature_physical_z.vtu",
+      "sha256": "5b29d58cec90ca1fa3afabe8d399b795ad6fc2933320bc35696475894fe80fb5",
+      "size_bytes": 1103192,
+      "evidence_class": "illustrative/from-modeled-data"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/balanced/paraview/stack_temperature_z20_exaggerated.vtu",
+      "sha256": "82bbe2acc0704570555842187c6fdeaf3845a7be76c7b31949d70e11c90d8462",
+      "size_bytes": 1122729,
+      "evidence_class": "illustrative/from-modeled-data"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/cost_first/logic_die_floorplan.gds",
+      "sha256": "1e84014c634014335ef1ed1772be37d3effccc33e0454bbfb8ade3d678717acc",
+      "size_bytes": 951204,
+      "evidence_class": "illustrative/from-modeled-data"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/cost_first/paraview/stack_temperature_physical_z.vtu",
+      "sha256": "5b29d58cec90ca1fa3afabe8d399b795ad6fc2933320bc35696475894fe80fb5",
+      "size_bytes": 1103192,
+      "evidence_class": "illustrative/from-modeled-data"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/cost_first/paraview/stack_temperature_z20_exaggerated.vtu",
+      "sha256": "82bbe2acc0704570555842187c6fdeaf3845a7be76c7b31949d70e11c90d8462",
+      "size_bytes": 1122729,
+      "evidence_class": "illustrative/from-modeled-data"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/manual_baseline/logic_die_floorplan.gds",
+      "sha256": "b694971931bc82bfefcffe94919195c4bea697fcc5c52dd08ff6c58f4cf59ace",
+      "size_bytes": 951204,
+      "evidence_class": "illustrative/from-modeled-data"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/manual_baseline/paraview/stack_temperature_physical_z.vtu",
+      "sha256": "d5aaf387d66a8a80f518097c5ef1869212cf696de9f34ce2d1c11fb1a8b5a430",
+      "size_bytes": 1103252,
+      "evidence_class": "illustrative/from-modeled-data"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/manual_baseline/paraview/stack_temperature_z20_exaggerated.vtu",
+      "sha256": "eb7ffb7bf60a9226dc7ee04bbbbf62aaae50cc712f50905373ccbb84bfccacb2",
+      "size_bytes": 1122789,
+      "evidence_class": "illustrative/from-modeled-data"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/paper_figures/figure_01_hbm_stack_3d.png",
+      "sha256": "98800cb6d3d43c0539e599f927ce0c2550dc5c8462d2d9e5f44a71fb971b8e17",
+      "size_bytes": 314506,
+      "evidence_class": "illustrative/from-modeled-data"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/paper_figures/figure_02_logic_die_tsv_coordinates.png",
+      "sha256": "72eb2fd6fb6e1558e2b330c617f54ab3ebe3c9d534afbe4a4c2b9b4b2f9e4c59",
+      "size_bytes": 195718,
+      "evidence_class": "illustrative/from-modeled-data"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/paper_figures/figure_02_logic_die_tsv_coordinates.svg",
+      "sha256": "f739556d0dbe666f7b2f435793f6ee255e2c893530e2079953fbac85998c3ebb",
+      "size_bytes": 102821,
+      "evidence_class": "illustrative/from-modeled-data"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/paper_figures/figure_03_candidate_placement_comparison.png",
+      "sha256": "8ffd1f8514ce0b1671d9fe42f43f41422626c38a099e80b1dd04b53bd5f1b3f1",
+      "size_bytes": 212616,
+      "evidence_class": "illustrative/from-modeled-data"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/paper_figures/figure_03_candidate_placement_comparison.svg",
+      "sha256": "6ff928ed7e3e7e50e3a723e272c495ef0562ab641082a48c104f727b85043bb4",
+      "size_bytes": 217470,
+      "evidence_class": "illustrative/from-modeled-data"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/paper_figures/figure_04_openroad_routing_congestion.png",
+      "sha256": "322eeee93e09045d7db5afdb4f5e6e223525b7992c13cf7b2b8f3cbe3ae0ed94",
+      "size_bytes": 160116,
+      "evidence_class": "illustrative/from-modeled-data"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/paper_figures/figure_04_openroad_routing_congestion.svg",
+      "sha256": "e6a66943c552e3bd86f049bc9bc715212dc24f7f68f18caa9b0eeefe589e668e",
+      "size_bytes": 61317,
+      "evidence_class": "illustrative/from-modeled-data"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/paper_figures/figure_05_power_temperature_heatmaps.png",
+      "sha256": "644154d801d7671f76a145dd003660b1f903c402c1e4109edddc5b4f6379549d",
+      "size_bytes": 157687,
+      "evidence_class": "illustrative/from-modeled-data"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/paper_figures/figure_05_power_temperature_heatmaps.svg",
+      "sha256": "c4b090bdee68e99ed7257b88c0aeb52acaaee310446c07da2df6551f12af0231",
+      "size_bytes": 74247,
+      "evidence_class": "illustrative/from-modeled-data"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/paper_figures/figure_06_cost_wire_temperature_pareto.png",
+      "sha256": "99821d9fadaf0da0ce032f735a38f408acd7d3223e1f5c365e3e0009439e740c",
+      "size_bytes": 157565,
+      "evidence_class": "illustrative/from-modeled-data"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/paper_figures/figure_06_cost_wire_temperature_pareto.svg",
+      "sha256": "eac0ff546cece589be467f77a7f23bd2aea4dde10e9c637c68b15a7d9c7b0c88",
+      "size_bytes": 81235,
+      "evidence_class": "illustrative/from-modeled-data"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/paper_figures/figure_manifest.json",
+      "sha256": "104a0451c9496bf014f2f8309af8f6e9f604c79b388a6d2e324adf0973c43310",
+      "size_bytes": 1101,
+      "evidence_class": "illustrative/from-modeled-data"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/thermal_first/logic_die_floorplan.gds",
+      "sha256": "e39ad2d6f370f117c8f024cc86fefdb56c54911b6612c4bc6c8e980f240e1980",
+      "size_bytes": 951204,
+      "evidence_class": "modeled/estimated-power"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/thermal_first/paraview/stack_temperature_physical_z.vtu",
+      "sha256": "2746687f27172f7a4505adaf0db3fdcc902d6fd5fcb2b672aad944c7356f4181",
+      "size_bytes": 1103204,
+      "evidence_class": "modeled/estimated-power"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/thermal_first/paraview/stack_temperature_z20_exaggerated.vtu",
+      "sha256": "c2638ca2927ae6629fadf654ce75ba44f774eed965f2621d7aa84c8dec971b91",
+      "size_bytes": 1122741,
+      "evidence_class": "modeled/estimated-power"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/wirelength_first/logic_die_floorplan.gds",
+      "sha256": "900369fbc8b2fc81201fc24c60cb71d14691b82971cfef5e14ef2502cb6fea6d",
+      "size_bytes": 951204,
+      "evidence_class": "illustrative/from-modeled-data"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/wirelength_first/paraview/stack_temperature_physical_z.vtu",
+      "sha256": "58292632c7e89f42d3491fd97aa4248831dd96d6198628e619a406ec81e22132",
+      "size_bytes": 1103289,
+      "evidence_class": "illustrative/from-modeled-data"
+    },
+    {
+      "path": "output/floorplan_optimization/visualization/wirelength_first/paraview/stack_temperature_z20_exaggerated.vtu",
+      "sha256": "553b6d4279022b659ede471b47e5fd4ff3e8d8dc0ca888f27471a1dd4bf69716",
+      "size_bytes": 1122826,
+      "evidence_class": "illustrative/from-modeled-data"
+    },
+    {
+      "path": "reports/floorplan_optimization/00_baseline_audit.md",
+      "sha256": "753abfbb3f6168ad13613992dcdcf3e60ccb6b0b26fc4c7e73b4f4c52bf266a3",
+      "size_bytes": 8762,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/00_environment_setup.md",
+      "sha256": "b3d59aa58def538ce75dad314a647623d84472fe2c04c318ddff50393030611b",
+      "size_bytes": 3799,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/02_tsv_connectivity_report.md",
+      "sha256": "d2f6aa3672306480d166ef1a043dff08084cbb0a18c3c8539274803874311141",
+      "size_bytes": 4611,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/03_candidate_exploration.md",
+      "sha256": "2578485b2c254eb0c0114b634459a9e63ebcadb95996fabd5fa8e7065faf0909",
+      "size_bytes": 4458,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/04_openroad_validation.md",
+      "sha256": "80940990846d9438901dd56ba332aa5e39a0c3a55c45598f4cffacdeb1bebc9f",
+      "size_bytes": 4083,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/05_thermal_validation.md",
+      "sha256": "5e04d3bff6fca67163d1197a185e0d9e7315014f4a95d4e1269f96d2bd7a5674",
+      "size_bytes": 2578,
+      "evidence_class": "modeled/estimated-power"
+    },
+    {
+      "path": "reports/floorplan_optimization/06_candidate_tradeoff.md",
+      "sha256": "de6a825681908489bed0b33353c02130705fa0d59a4f581e03a3bded44a56c83",
+      "size_bytes": 3163,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/07_visualization.md",
+      "sha256": "f50976d9bdd6472ac466b7f4b175c85bcbc468b58680e9c3ae2ce288bb795e2b",
+      "size_bytes": 3148,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/08_final_audit.md",
+      "sha256": "f38978cfeda30fa5187aeff8a913ca96b65046dc587a2c26edb9a7728031685f",
+      "size_bytes": 8173,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/09_gds_merge_environment_setup.md",
+      "sha256": "a1319dd31d094b42b0b0b272716221cea366bd619ca3c734f1f1b845cbd4b597",
+      "size_bytes": 3045,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/10_production_gds_merger.md",
+      "sha256": "2a3879be7a76f4cc40b0faef768d107034da43d615d4026789fa660d37d0cb10",
+      "size_bytes": 5080,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/paper_figure_index.md",
+      "sha256": "cba779490ed25d1d7c8bd77b60d5863deab5d7eb456fe7c8715f200bc9d7692b",
+      "size_bytes": 1733,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/requirement_to_evidence.csv",
+      "sha256": "61a8ba716c75ba79fc88ca8a11670ffc033936a1998c676505799ba52c1ef332",
+      "size_bytes": 3802,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/baseline_artifacts.json",
+      "sha256": "29124617390a467182072a871b2554e15e5e33e2bc2815b430040963a99053ad",
+      "size_bytes": 5478,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/current_rtl_openroad_snapshot.json",
+      "sha256": "e027e3bce16f3e4ada1e738d3f52427ea13d93e3da85be2e32723518269ef1f1",
+      "size_bytes": 3316,
+      "evidence_class": "synthesized/placed"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/current_rtl_orfs_do_cts.log",
+      "sha256": "72d6a51cf5a3ebd0e69c7b4db8d93c16f06bbf3e5474409586e6518bd92aca98",
+      "size_bytes": 5843,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/current_rtl_orfs_do_floorplan.log",
+      "sha256": "91b08866f8fc95ff19dc727548dba9a061ac5986ca045f47ab2f675a729e17e8",
+      "size_bytes": 6519,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/current_rtl_orfs_do_place.log",
+      "sha256": "f5c701084ba821ed92412502a1e7071e8b673103815b1928c32836e5b0056bf2",
+      "size_bytes": 70881,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/current_rtl_orfs_do_route.log",
+      "sha256": "b71a8688e184c8efd8e1d635eeb06d7beb2d1d0e1c2737081373b78a9fff7df3",
+      "size_bytes": 19110,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/current_rtl_orfs_floorplan.log",
+      "sha256": "2515a8b9bdfe4f411683600243245bf9b5e3765595b1fac0f9fec14eaf1313b1",
+      "size_bytes": 31112,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/current_rtl_orfs_synth.log",
+      "sha256": "f6f1b76d8c1462e565a4e21442a92172ef3a6bc36f4c6872deb644c284b20462",
+      "size_bytes": 49232,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/current_rtl_orfs_synth_completion.log",
+      "sha256": "4350a41966f95a69d15f00e4a94bdff597f83d8f0b6d5cf01125ca2582543506",
+      "size_bytes": 18162,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/floorplan_manifest_validation.json",
+      "sha256": "6198b470ce9de665de5536b88ab2922d9fe22d4c03137192e91a1b7ec30c0e42",
+      "size_bytes": 819,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/gds_merge_environment_smoke.json",
+      "sha256": "f529eaa2a18031ffbe02eb6bac9edb23a4aeaf4d710109aa991c81e97302f000",
+      "size_bytes": 1447,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/historical_routed_gds_merge_stress_recipe.json",
+      "sha256": "674155b3815afe722d05c122448c09d5345cc1bb7353b168e20f641979e14b0d",
+      "size_bytes": 10899,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/historical_routed_gds_merge_stress_report.json",
+      "sha256": "a4710dcd3b9c96ffd472604b8ce1eab601e11a5610d5d008dc4f43a3c908da94",
+      "size_bytes": 42714,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/orchestration_logs/01_architecture.log",
+      "sha256": "5f502d7dd37ffcda4b9e3230261fc061b1ac7bb90e9610055dc7f343ae13d57b",
+      "size_bytes": 980,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/orchestration_logs/02_rtl_to_3d.log",
+      "sha256": "22498d03f309f1937f4dbb6237aaa7bb27f7da2b6526c332fa7ab5190d1cff4f",
+      "size_bytes": 5694,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/orchestration_logs/03_hardware_cost.log",
+      "sha256": "c298858cc10170a78e1e6a657a4cade71dd0f0c47bfa5d1050e2b2419309ab03",
+      "size_bytes": 12930,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/orchestration_logs/04_floorplan_manifest.log",
+      "sha256": "0d22db166147872eec06e3c436ddd00525832176badf507d76e05b7ea4579e11",
+      "size_bytes": 993,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/orchestration_logs/05_candidate_exploration.log",
+      "sha256": "9a5db9a837c9113695c184d0b469d40d16dcfe6c7515dc986f26afbbc850f00b",
+      "size_bytes": 74,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/orchestration_logs/06_openroad_macro_proxies.log",
+      "sha256": "099b262f72ff9fe0daa59ac9a4dfcb478d19cc10e8c5b43add0059c8af0ca958",
+      "size_bytes": 2114,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/orchestration_logs/07_reference_thermal.log",
+      "sha256": "900c7b7c19b6796664845209a7bb9bbac854576e20e31e4ebd6ffb209880ea47",
+      "size_bytes": 23319,
+      "evidence_class": "modeled/estimated-power"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/orchestration_logs/08_hotspot.log",
+      "sha256": "a9b1ff56d58c63541b158e80cf3842f26a34c5099be5f9c396c465f017c32850",
+      "size_bytes": 564,
+      "evidence_class": "modeled/estimated-power"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/orchestration_logs/09_3dice.log",
+      "sha256": "f052eb1be59cb0ac2382fbb232b04bb807ff8d1846ad0ca63c42094987e17a8d",
+      "size_bytes": 1128,
+      "evidence_class": "modeled/estimated-power"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/orchestration_logs/10_candidate_comparison.log",
+      "sha256": "a2e9099562173fad67c264958605884de79906442d3b8eebba5c1528a866623f",
+      "size_bytes": 59,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/orchestration_logs/11_candidate_visualization.log",
+      "sha256": "1b697b601c8f77f94223091290ed138bbe7620107ce9d66839f71bb9fd4a34c7",
+      "size_bytes": 2370,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/orchestration_logs/13_floorplan_regression.log",
+      "sha256": "c576d9c024d38f7df912884916a60f150f901f7549a30adb89b1b1add3bc1b98",
+      "size_bytes": 3430,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/orchestration_results.json",
+      "sha256": "40bfc2170f8e2eafe00d4e3e5c8e541bf7fe7b7cb84f303cbcfcbaadfb3b0fbb",
+      "size_bytes": 3392,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/results/toolchain_smoke.json",
+      "sha256": "9980e64a01716ac0ced3712a84dea3dbf22c192a0eaba065a7b01b3468ce6e6a",
+      "size_bytes": 6490,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/rtl_refresh_handoff.md",
+      "sha256": "95e14198af476022c3eaed3e2a21ce12cc7e6f3b919d2d139ee34b77fc179c50",
+      "size_bytes": 1392,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "reports/floorplan_optimization/visualization_pipeline_report.html",
+      "sha256": "252aeb2271d4946445f6240173c41195c365b389743c0f24c66b0605e84aa93d",
+      "size_bytes": 1633740,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "tools/check_gds_merge_environment.py",
+      "sha256": "461437f018dbf77ec4f845f85be9bcbe57ee2f0245de97632540340eb7188fce",
+      "size_bytes": 4571,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "tools/enter_gds_merge_environment.ps1",
+      "sha256": "f2a34a74d57145aafd3646d4b321b316ef7c61327c8cd41e94481354f2cbf5c3",
+      "size_bytes": 708,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "tools/gds_merge_requirements.txt",
+      "sha256": "d87ff2614ca569ed6982eb62dbcc8ff9eb0c44506534bcc1c4ef2e4726e7b774",
+      "size_bytes": 183,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "tools/generate_visualization_pipeline_html_report.py",
+      "sha256": "2d9dcc46ac7af60c3450f5bd675fcf941c4a341fd79148cd9f060668398a881a",
+      "size_bytes": 34166,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "tools/prepare_final_gds_merge_recipe.py",
+      "sha256": "8f7faa5a5b9fcb6603882522319eb0326bdc3ff21a0dd7bcd06f109d8975f808",
+      "size_bytes": 5608,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "tools/run_final_rtl_gds_merge.ps1",
+      "sha256": "aab1e3b8b717eebb9c5110e19cc1f09500944c32f678f9a5be77914233862f48",
+      "size_bytes": 1323,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "tools/setup_gds_merge_environment.ps1",
+      "sha256": "04e46fd987dbc428751b6b3d0f55451ec23aa5a32de60759708262cfae4f5748",
+      "size_bytes": 2000,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "verification/floorplan_optimization/test_final_gds_merge.py",
+      "sha256": "ceafc2894279f92b8dbeab80a8a32a850c80b93fa023c71f293a8fd6746afa7d",
+      "size_bytes": 8755,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "verification/floorplan_optimization/test_floorplan_manifest.py",
+      "sha256": "7296ff30682149d8b7faa1285ecea1e33cb03677643069af9e183751316ab8d5",
+      "size_bytes": 5263,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "verification/floorplan_optimization/test_floorplan_optimizer.py",
+      "sha256": "057d96739beac77dd60d30a119fa1040461926038806b3266f497a8c61d60228",
+      "size_bytes": 3959,
+      "evidence_class": "modeled/provenance-record"
+    },
+    {
+      "path": "verification/floorplan_optimization/test_pipeline_integration.py",
+      "sha256": "36450e59c1673dd70ef0235d8ee50b0f8d7131fbaf9adf9d059fe1832890d182",
+      "size_bytes": 5312,
+      "evidence_class": "modeled/provenance-record"
+    }
+  ],
+  "claim_boundary": "Research/provisional evidence; no manufacturing, SI/PI, DRC/LVS, thermal-calibration, or silicon signoff."
+}

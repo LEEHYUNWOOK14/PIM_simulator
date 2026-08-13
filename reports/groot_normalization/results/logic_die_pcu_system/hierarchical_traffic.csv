@@ -1,0 +1,11 @@
+boundary,bytes,meaning
+external_gpu_baseline,86212608,GPU reads activation/affine and writes output across the external memory interface
+external_bank_only,3374080,partial statistics leave memory and normalization scalars return
+external_logic_die_pcu_resident,8608,"commands only; activation, affine, and output remain in memory"
+external_logic_die_pcu_cold_affine,82336,commands plus cold affine load
+bank_array_reduction_read,43069440,first activation pass inside memory
+bank_array_replay_read,43069440,second activation pass inside memory
+bank_array_affine_read,86138880,gamma/beta payload read inside memory
+bank_array_writeback,43069440,normalized output stored back to banks
+bank_to_logic_partial,1687040,FP32 sum and sumsq from every bank and row
+logic_to_bank_scalar,1687040,FP32 mean and inv_std returned to every bank and row

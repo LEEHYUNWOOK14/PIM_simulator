@@ -1,0 +1,7 @@
+profile_id,shape,invocations,cycles,mixed_mismatches,pytorch_bit_mismatches,max_contexts,weighted_cycles
+action_vlln,1x280x2048,1,5448,0,7,3,5448
+action_vl_self_attention_norm1,1x280x2048,4,5448,0,8,3,21792
+action_vl_self_attention_norm3,1x280x2048,4,5448,0,18,3,21792
+action_dit_adaln_norm1,1x41x1536,128,820,0,2,3,104960
+action_dit_norm3,1x41x1536,128,820,0,0,3,104960
+action_dit_norm_out,1x41x1536,4,820,0,4,3,3280

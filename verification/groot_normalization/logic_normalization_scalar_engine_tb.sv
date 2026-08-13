@@ -1,4 +1,6 @@
-module logic_normalization_scalar_engine_tb;
+module logic_normalization_scalar_engine_tb #(
+    parameter int DATA_FORMAT = 0
+);
     logic clk = 1'b0, rst_n = 1'b0;
     logic request_valid, request_ready, rms_norm;
     logic [15:0] request_tag, sum, sumsq, inv_hidden, epsilon;
@@ -10,7 +12,7 @@ module logic_normalization_scalar_engine_tb;
     logic [49:0] stalled_payload;
 
     always #5 clk = ~clk;
-    logic_normalization_scalar_engine dut(
+    logic_normalization_scalar_engine #(.DATA_FORMAT(DATA_FORMAT)) dut(
         .clk_i(clk),.rst_ni(rst_n),.request_valid_i(request_valid),
         .request_ready_o(request_ready),.rms_norm_i(rms_norm),
         .request_tag_i(request_tag),.sum_i(sum),.sumsq_i(sumsq),
@@ -48,7 +50,8 @@ module logic_normalization_scalar_engine_tb;
     end
 
     initial begin
-        $readmemh("verification/groot_normalization/normalization_scalar_vectors.hex",vectors);
+        if(DATA_FORMAT)$readmemh("verification/groot_normalization/bf16_normalization_scalar_vectors.hex",vectors);
+        else $readmemh("verification/groot_normalization/normalization_scalar_vectors.hex",vectors);
         request_valid=0; response_ready=0; rms_norm=0; request_tag=0;
         sum=0; sumsq=0; inv_hidden=0; epsilon=0;
         sent=0; received=0; cycles=0; mismatches=0;
@@ -68,7 +71,7 @@ module logic_normalization_scalar_engine_tb;
             epsilon=vectors[sent][63:48];
         end
         if(mismatches) $fatal(1,"LOGIC_NORMALIZATION_SCALAR_ENGINE_TB FAIL mismatches=%0d",mismatches);
-        $display("LOGIC_NORMALIZATION_SCALAR_ENGINE_TB PASS vectors=2048 cycles=%0d",cycles);
+        $display("LOGIC_NORMALIZATION_SCALAR_ENGINE_TB PASS format=%0d vectors=2048 cycles=%0d",DATA_FORMAT,cycles);
         $finish;
     end
 endmodule

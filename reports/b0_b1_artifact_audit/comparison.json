@@ -1,0 +1,76 @@
+{
+  "comparable": false,
+  "experiments": {
+    "b0": {
+      "snapshot": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2\\reports\\b0_b1_artifact_audit\\snapshots\\b0.json",
+      "status": "PENDING"
+    },
+    "b1": {
+      "snapshot": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2\\reports\\b0_b1_artifact_audit\\snapshots\\b1.json",
+      "status": "PENDING"
+    }
+  },
+  "generated_at": "2026-08-12T15:26:56.099364+00:00",
+  "metrics": [
+    {
+      "b0": null,
+      "b1": null,
+      "delta": null,
+      "delta_pct": null,
+      "name": "area_um2",
+      "status": "PENDING",
+      "unit": "um2"
+    },
+    {
+      "b0": null,
+      "b1": null,
+      "delta": null,
+      "delta_pct": null,
+      "name": "critical_path_ns",
+      "status": "PENDING",
+      "unit": "ns"
+    },
+    {
+      "b0": null,
+      "b1": null,
+      "delta": null,
+      "delta_pct": null,
+      "name": "power_mw",
+      "status": "PENDING",
+      "unit": "mW"
+    },
+    {
+      "b0": null,
+      "b1": null,
+      "delta": null,
+      "delta_pct": null,
+      "name": "energy_pj_per_work",
+      "status": "PENDING",
+      "unit": "pJ/work"
+    },
+    {
+      "b0": null,
+      "b1": null,
+      "delta": null,
+      "delta_pct": null,
+      "name": "congestion_overflow",
+      "status": "PENDING",
+      "unit": "count"
+    },
+    {
+      "b0": null,
+      "b1": null,
+      "delta": null,
+      "delta_pct": null,
+      "name": "utilization_pct",
+      "status": "PENDING",
+      "unit": "%"
+    }
+  ],
+  "reasons": [
+    "b0: completion token absent: reports/b0_b1_artifact_audit/completion/b0.json",
+    "b1: completion token absent: reports/b0_b1_artifact_audit/completion/b1.json"
+  ],
+  "schema_version": 1,
+  "status": "PENDING"
+}

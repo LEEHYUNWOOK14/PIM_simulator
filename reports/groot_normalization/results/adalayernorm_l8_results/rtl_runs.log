@@ -1,0 +1,2 @@
+PCU_TRACE PASS profile=adaln_w128 mode_rms=0 affine_per_row=1 lanes=8 engines=4 local_reduce_contexts=2 top_contexts=8 fifo=16 rows=8 hidden=128 elements=1024 mixed_mismatches=0 reference_bit_mismatches=0 cycles=224 max_contexts=8 external_bytes=32 bank_internal_bytes=10240
+verification/groot_normalization/groot_logic_die_pcu_trace_tb.sv:51: $finish called at 2270 (1s)

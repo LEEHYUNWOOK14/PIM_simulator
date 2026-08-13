@@ -1,0 +1,1168 @@
+{
+  "status": "PASS",
+  "generated_at": "2026-08-12T01:26:42.536921+00:00",
+  "signoff": false,
+  "recipe": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2\\reports\\floorplan_optimization\\results\\historical_routed_gds_merge_stress_recipe.json",
+  "inputs": {
+    "rtl": {
+      "path": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2\\output\\output.gds",
+      "sha256": "c1bc8c4561d34112db9dfe2c647c4d006f011e166aa73f2127ef342026e75cf1",
+      "dbu_um": 0.0009999999999999998,
+      "top": "full_pim_system_top",
+      "layers_before": {
+        "64/5": 279870,
+        "64/16": 281014,
+        "64/20": 295761,
+        "64/59": 293240,
+        "65/20": 257409,
+        "65/44": 62150,
+        "66/15": 612,
+        "66/20": 427389,
+        "66/44": 2478102,
+        "67/5": 332747,
+        "67/16": 347471,
+        "67/20": 1627612,
+        "67/44": 4239668,
+        "68/5": 591977,
+        "68/16": 594265,
+        "68/20": 1749020,
+        "68/44": 416763,
+        "69/5": 252,
+        "69/16": 252,
+        "69/20": 615179,
+        "69/44": 153370,
+        "70/5": 509,
+        "70/16": 509,
+        "70/20": 153720,
+        "70/44": 132444,
+        "71/20": 47534,
+        "71/44": 6293,
+        "72/5": 2,
+        "72/16": 112,
+        "72/20": 6418,
+        "78/44": 296529,
+        "81/4": 295761,
+        "83/44": 470098,
+        "93/44": 326836,
+        "94/20": 326836,
+        "95/20": 60407,
+        "122/16": 281068,
+        "235/4": 1,
+        "236/0": 57611
+      }
+    },
+    "overlay": {
+      "path": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2\\output\\floorplan_optimization\\visualization\\thermal_first\\logic_die_floorplan.gds",
+      "sha256": "e39ad2d6f370f117c8f024cc86fefdb56c54911b6612c4bc6c8e980f240e1980",
+      "dbu_um": 0.001,
+      "top": "STOB_LOGIC_DIE_FLOORPLAN_NOT_SIGNOFF",
+      "layers": {
+        "100/0": 1,
+        "110/0": 8,
+        "120/0": 128,
+        "121/0": 32,
+        "122/0": 16,
+        "123/0": 64,
+        "124/0": 64,
+        "125/0": 16,
+        "130/0": 128,
+        "130/1": 32,
+        "130/2": 16,
+        "130/3": 64,
+        "130/4": 64,
+        "130/5": 16,
+        "140/0": 128,
+        "141/0": 32,
+        "142/0": 16,
+        "143/0": 64,
+        "144/0": 64,
+        "145/0": 16,
+        "150/1": 1,
+        "151/1": 2,
+        "152/1": 1,
+        "154/0": 8,
+        "170/0": 8,
+        "170/1": 8,
+        "170/2": 8,
+        "170/3": 8,
+        "170/4": 8,
+        "170/5": 8,
+        "199/1": 8,
+        "199/2": 48,
+        "199/3": 48,
+        "199/4": 4,
+        "199/5": 1,
+        "200/0": 12,
+        "201/0": 37,
+        "202/0": 37,
+        "203/0": 27,
+        "204/0": 31,
+        "205/0": 27,
+        "206/0": 29,
+        "207/0": 22,
+        "208/0": 26,
+        "209/0": 39,
+        "210/0": 49,
+        "211/0": 59,
+        "212/0": 39,
+        "213/0": 39,
+        "214/0": 18,
+        "215/0": 21
+      }
+    },
+    "manifest": {
+      "path": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2\\output\\floorplan_optimization\\exploration\\candidates\\thermal_first.json",
+      "sha256": "23a4a9c50d49bd73f8eecf5d6e6252a0f9574c9509e041bee05dd1a66ebbbae6"
+    }
+  },
+  "normalization": {
+    "output_dbu_um": 0.001,
+    "method": "KLayout copy_tree cross-layout DBU conversion; references do not repeat the DBU ratio",
+    "orientation": "R0",
+    "physical_scale": 1.0,
+    "translation_um": [
+      3231.768,
+      5231.768
+    ],
+    "rtl_reference_magnification": 1.0,
+    "overlay_reference_magnification": 1.0
+  },
+  "anchors": [
+    {
+      "name": "historical_origin",
+      "source_um": [
+        0.0,
+        0.0
+      ],
+      "target_um": [
+        3231.7675,
+        5231.7675
+      ],
+      "translation_candidate_um": [
+        3231.7675,
+        5231.7675
+      ],
+      "transformed_um": [
+        3231.768,
+        5231.768
+      ],
+      "residual_um": 0.0007071067813306042
+    },
+    {
+      "name": "historical_center",
+      "source_um": [
+        768.2325,
+        768.2325
+      ],
+      "target_um": [
+        4000.0,
+        6000.0
+      ],
+      "translation_candidate_um": [
+        3231.7675,
+        5231.7675
+      ],
+      "transformed_um": [
+        4000.0005,
+        6000.0005
+      ],
+      "residual_um": 0.0007071067813306042
+    }
+  ],
+  "minimum_anchor_count": 2,
+  "max_anchor_residual_um": 0.0007071067813306042,
+  "layer_mapping": {
+    "rules": [
+      {
+        "name": "source_64_5",
+        "from": {
+          "layer": 64,
+          "datatype": 5
+        },
+        "to": {
+          "layer": 64,
+          "datatype": 5
+        }
+      },
+      {
+        "name": "source_64_16",
+        "from": {
+          "layer": 64,
+          "datatype": 16
+        },
+        "to": {
+          "layer": 64,
+          "datatype": 16
+        }
+      },
+      {
+        "name": "source_64_20",
+        "from": {
+          "layer": 64,
+          "datatype": 20
+        },
+        "to": {
+          "layer": 64,
+          "datatype": 20
+        }
+      },
+      {
+        "name": "source_64_59",
+        "from": {
+          "layer": 64,
+          "datatype": 59
+        },
+        "to": {
+          "layer": 64,
+          "datatype": 59
+        }
+      },
+      {
+        "name": "source_65_20",
+        "from": {
+          "layer": 65,
+          "datatype": 20
+        },
+        "to": {
+          "layer": 65,
+          "datatype": 20
+        }
+      },
+      {
+        "name": "source_65_44",
+        "from": {
+          "layer": 65,
+          "datatype": 44
+        },
+        "to": {
+          "layer": 65,
+          "datatype": 44
+        }
+      },
+      {
+        "name": "source_66_15",
+        "from": {
+          "layer": 66,
+          "datatype": 15
+        },
+        "to": {
+          "layer": 66,
+          "datatype": 15
+        }
+      },
+      {
+        "name": "source_66_20",
+        "from": {
+          "layer": 66,
+          "datatype": 20
+        },
+        "to": {
+          "layer": 66,
+          "datatype": 20
+        }
+      },
+      {
+        "name": "source_66_44",
+        "from": {
+          "layer": 66,
+          "datatype": 44
+        },
+        "to": {
+          "layer": 66,
+          "datatype": 44
+        }
+      },
+      {
+        "name": "source_67_5",
+        "from": {
+          "layer": 67,
+          "datatype": 5
+        },
+        "to": {
+          "layer": 67,
+          "datatype": 5
+        }
+      },
+      {
+        "name": "source_67_16",
+        "from": {
+          "layer": 67,
+          "datatype": 16
+        },
+        "to": {
+          "layer": 67,
+          "datatype": 16
+        }
+      },
+      {
+        "name": "source_67_20",
+        "from": {
+          "layer": 67,
+          "datatype": 20
+        },
+        "to": {
+          "layer": 67,
+          "datatype": 20
+        }
+      },
+      {
+        "name": "source_67_44",
+        "from": {
+          "layer": 67,
+          "datatype": 44
+        },
+        "to": {
+          "layer": 67,
+          "datatype": 44
+        }
+      },
+      {
+        "name": "source_68_5",
+        "from": {
+          "layer": 68,
+          "datatype": 5
+        },
+        "to": {
+          "layer": 68,
+          "datatype": 5
+        }
+      },
+      {
+        "name": "source_68_16",
+        "from": {
+          "layer": 68,
+          "datatype": 16
+        },
+        "to": {
+          "layer": 68,
+          "datatype": 16
+        }
+      },
+      {
+        "name": "source_68_20",
+        "from": {
+          "layer": 68,
+          "datatype": 20
+        },
+        "to": {
+          "layer": 68,
+          "datatype": 20
+        }
+      },
+      {
+        "name": "source_68_44",
+        "from": {
+          "layer": 68,
+          "datatype": 44
+        },
+        "to": {
+          "layer": 68,
+          "datatype": 44
+        }
+      },
+      {
+        "name": "source_69_5",
+        "from": {
+          "layer": 69,
+          "datatype": 5
+        },
+        "to": {
+          "layer": 69,
+          "datatype": 5
+        }
+      },
+      {
+        "name": "source_69_16",
+        "from": {
+          "layer": 69,
+          "datatype": 16
+        },
+        "to": {
+          "layer": 69,
+          "datatype": 16
+        }
+      },
+      {
+        "name": "source_69_20",
+        "from": {
+          "layer": 69,
+          "datatype": 20
+        },
+        "to": {
+          "layer": 69,
+          "datatype": 20
+        }
+      },
+      {
+        "name": "source_69_44",
+        "from": {
+          "layer": 69,
+          "datatype": 44
+        },
+        "to": {
+          "layer": 69,
+          "datatype": 44
+        }
+      },
+      {
+        "name": "source_70_5",
+        "from": {
+          "layer": 70,
+          "datatype": 5
+        },
+        "to": {
+          "layer": 70,
+          "datatype": 5
+        }
+      },
+      {
+        "name": "source_70_16",
+        "from": {
+          "layer": 70,
+          "datatype": 16
+        },
+        "to": {
+          "layer": 70,
+          "datatype": 16
+        }
+      },
+      {
+        "name": "source_70_20",
+        "from": {
+          "layer": 70,
+          "datatype": 20
+        },
+        "to": {
+          "layer": 70,
+          "datatype": 20
+        }
+      },
+      {
+        "name": "source_70_44",
+        "from": {
+          "layer": 70,
+          "datatype": 44
+        },
+        "to": {
+          "layer": 70,
+          "datatype": 44
+        }
+      },
+      {
+        "name": "source_71_20",
+        "from": {
+          "layer": 71,
+          "datatype": 20
+        },
+        "to": {
+          "layer": 71,
+          "datatype": 20
+        }
+      },
+      {
+        "name": "source_71_44",
+        "from": {
+          "layer": 71,
+          "datatype": 44
+        },
+        "to": {
+          "layer": 71,
+          "datatype": 44
+        }
+      },
+      {
+        "name": "source_72_5",
+        "from": {
+          "layer": 72,
+          "datatype": 5
+        },
+        "to": {
+          "layer": 72,
+          "datatype": 5
+        }
+      },
+      {
+        "name": "source_72_16",
+        "from": {
+          "layer": 72,
+          "datatype": 16
+        },
+        "to": {
+          "layer": 72,
+          "datatype": 16
+        }
+      },
+      {
+        "name": "source_72_20",
+        "from": {
+          "layer": 72,
+          "datatype": 20
+        },
+        "to": {
+          "layer": 72,
+          "datatype": 20
+        }
+      },
+      {
+        "name": "source_78_44",
+        "from": {
+          "layer": 78,
+          "datatype": 44
+        },
+        "to": {
+          "layer": 78,
+          "datatype": 44
+        }
+      },
+      {
+        "name": "source_81_4",
+        "from": {
+          "layer": 81,
+          "datatype": 4
+        },
+        "to": {
+          "layer": 81,
+          "datatype": 4
+        }
+      },
+      {
+        "name": "source_83_44",
+        "from": {
+          "layer": 83,
+          "datatype": 44
+        },
+        "to": {
+          "layer": 83,
+          "datatype": 44
+        }
+      },
+      {
+        "name": "source_93_44",
+        "from": {
+          "layer": 93,
+          "datatype": 44
+        },
+        "to": {
+          "layer": 93,
+          "datatype": 44
+        }
+      },
+      {
+        "name": "source_94_20",
+        "from": {
+          "layer": 94,
+          "datatype": 20
+        },
+        "to": {
+          "layer": 94,
+          "datatype": 20
+        }
+      },
+      {
+        "name": "source_95_20",
+        "from": {
+          "layer": 95,
+          "datatype": 20
+        },
+        "to": {
+          "layer": 95,
+          "datatype": 20
+        }
+      },
+      {
+        "name": "source_122_16",
+        "from": {
+          "layer": 122,
+          "datatype": 16
+        },
+        "to": {
+          "layer": 122,
+          "datatype": 16
+        }
+      },
+      {
+        "name": "source_235_4",
+        "from": {
+          "layer": 235,
+          "datatype": 4
+        },
+        "to": {
+          "layer": 235,
+          "datatype": 4
+        }
+      },
+      {
+        "name": "source_236_0",
+        "from": {
+          "layer": 236,
+          "datatype": 0
+        },
+        "to": {
+          "layer": 236,
+          "datatype": 0
+        }
+      }
+    ],
+    "rtl_layers_after": {
+      "64/5": 279870,
+      "64/16": 281014,
+      "64/20": 295761,
+      "64/59": 293240,
+      "65/20": 257409,
+      "65/44": 62150,
+      "66/15": 612,
+      "66/20": 427389,
+      "66/44": 2478102,
+      "67/5": 332747,
+      "67/16": 347471,
+      "67/20": 1627612,
+      "67/44": 4239668,
+      "68/5": 591977,
+      "68/16": 594265,
+      "68/20": 1749020,
+      "68/44": 416763,
+      "69/5": 252,
+      "69/16": 252,
+      "69/20": 615179,
+      "69/44": 153370,
+      "70/5": 509,
+      "70/16": 509,
+      "70/20": 153720,
+      "70/44": 132444,
+      "71/20": 47534,
+      "71/44": 6293,
+      "72/5": 2,
+      "72/16": 112,
+      "72/20": 6418,
+      "78/44": 296529,
+      "81/4": 295761,
+      "83/44": 470098,
+      "93/44": 326836,
+      "94/20": 326836,
+      "95/20": 60407,
+      "122/16": 281068,
+      "235/4": 1,
+      "236/0": 57611
+    },
+    "overlay_collisions": []
+  },
+  "cell_namespace": {
+    "rtl": {
+      "VIA_M4M5_PR": "RTL__VIA_M4M5_PR",
+      "VIA_M3M4_PR": "RTL__VIA_M3M4_PR",
+      "VIA_M1M2_PR_MR": "RTL__VIA_M1M2_PR_MR",
+      "VIA_M2M3_PR": "RTL__VIA_M2M3_PR",
+      "VIA_M1M2_PR": "RTL__VIA_M1M2_PR",
+      "VIA_L1M1_PR": "RTL__VIA_L1M1_PR",
+      "VIA_L1M1_PR_MR": "RTL__VIA_L1M1_PR_MR",
+      "VIA_via2_3_1600_480_1_5_320_320": "RTL__VIA_via2_3_1600_480_1_5_320_320",
+      "VIA_via3_4_1600_480_1_4_400_400": "RTL__VIA_via3_4_1600_480_1_4_400_400",
+      "VIA_via4_5_1600_480_1_4_400_400": "RTL__VIA_via4_5_1600_480_1_4_400_400",
+      "VIA_via5_6_1600_1600_1_1_1600_1600": "RTL__VIA_via5_6_1600_1600_1_1_1600_1600",
+      "sky130_fd_sc_hd__clkbuf_4": "RTL__sky130_fd_sc_hd__clkbuf_4",
+      "sky130_fd_sc_hd__dlymetal6s2s_1": "RTL__sky130_fd_sc_hd__dlymetal6s2s_1",
+      "sky130_fd_sc_hd__clkbuf_8": "RTL__sky130_fd_sc_hd__clkbuf_8",
+      "sky130_fd_sc_hd__buf_2": "RTL__sky130_fd_sc_hd__buf_2",
+      "sky130_fd_sc_hd__buf_6": "RTL__sky130_fd_sc_hd__buf_6",
+      "sky130_fd_sc_hd__buf_8": "RTL__sky130_fd_sc_hd__buf_8",
+      "sky130_fd_sc_hd__buf_12": "RTL__sky130_fd_sc_hd__buf_12",
+      "sky130_fd_sc_hd__buf_16": "RTL__sky130_fd_sc_hd__buf_16",
+      "sky130_fd_sc_hd__dfstp_2": "RTL__sky130_fd_sc_hd__dfstp_2",
+      "sky130_fd_sc_hd__dfstp_1": "RTL__sky130_fd_sc_hd__dfstp_1",
+      "sky130_fd_sc_hd__edfxtp_1": "RTL__sky130_fd_sc_hd__edfxtp_1",
+      "sky130_fd_sc_hd__dfrtp_1": "RTL__sky130_fd_sc_hd__dfrtp_1",
+      "sky130_fd_sc_hd__dfrtp_2": "RTL__sky130_fd_sc_hd__dfrtp_2",
+      "sky130_fd_sc_hd__dfrtp_4": "RTL__sky130_fd_sc_hd__dfrtp_4",
+      "sky130_fd_sc_hd__clkbuf_16": "RTL__sky130_fd_sc_hd__clkbuf_16",
+      "sky130_fd_sc_hd__buf_4": "RTL__sky130_fd_sc_hd__buf_4",
+      "sky130_fd_sc_hd__clkbuf_2": "RTL__sky130_fd_sc_hd__clkbuf_2",
+      "sky130_fd_sc_hd__clkbuf_1": "RTL__sky130_fd_sc_hd__clkbuf_1",
+      "sky130_fd_sc_hd__conb_1": "RTL__sky130_fd_sc_hd__conb_1",
+      "sky130_fd_sc_hd__ha_2": "RTL__sky130_fd_sc_hd__ha_2",
+      "sky130_fd_sc_hd__ha_4": "RTL__sky130_fd_sc_hd__ha_4",
+      "sky130_fd_sc_hd__ha_1": "RTL__sky130_fd_sc_hd__ha_1",
+      "sky130_fd_sc_hd__fa_4": "RTL__sky130_fd_sc_hd__fa_4",
+      "sky130_fd_sc_hd__fa_2": "RTL__sky130_fd_sc_hd__fa_2",
+      "sky130_fd_sc_hd__fa_1": "RTL__sky130_fd_sc_hd__fa_1",
+      "sky130_fd_sc_hd__a32oi_2": "RTL__sky130_fd_sc_hd__a32oi_2",
+      "sky130_fd_sc_hd__and2b_4": "RTL__sky130_fd_sc_hd__and2b_4",
+      "sky130_fd_sc_hd__and4bb_4": "RTL__sky130_fd_sc_hd__and4bb_4",
+      "sky130_fd_sc_hd__and4bb_1": "RTL__sky130_fd_sc_hd__and4bb_1",
+      "sky130_fd_sc_hd__a311o_4": "RTL__sky130_fd_sc_hd__a311o_4",
+      "sky130_fd_sc_hd__nor4bb_1": "RTL__sky130_fd_sc_hd__nor4bb_1",
+      "sky130_fd_sc_hd__o41a_2": "RTL__sky130_fd_sc_hd__o41a_2",
+      "sky130_fd_sc_hd__o221a_2": "RTL__sky130_fd_sc_hd__o221a_2",
+      "sky130_fd_sc_hd__a32o_4": "RTL__sky130_fd_sc_hd__a32o_4",
+      "sky130_fd_sc_hd__and4b_1": "RTL__sky130_fd_sc_hd__and4b_1",
+      "sky130_fd_sc_hd__and2b_2": "RTL__sky130_fd_sc_hd__and2b_2",
+      "sky130_fd_sc_hd__and4b_2": "RTL__sky130_fd_sc_hd__and4b_2",
+      "sky130_fd_sc_hd__o32a_2": "RTL__sky130_fd_sc_hd__o32a_2",
+      "sky130_fd_sc_hd__and3b_2": "RTL__sky130_fd_sc_hd__and3b_2",
+      "sky130_fd_sc_hd__nor4bb_4": "RTL__sky130_fd_sc_hd__nor4bb_4",
+      "sky130_fd_sc_hd__mux4_2": "RTL__sky130_fd_sc_hd__mux4_2",
+      "sky130_fd_sc_hd__o311ai_0": "RTL__sky130_fd_sc_hd__o311ai_0",
+      "sky130_fd_sc_hd__clkinv_16": "RTL__sky130_fd_sc_hd__clkinv_16",
+      "sky130_fd_sc_hd__o22a_2": "RTL__sky130_fd_sc_hd__o22a_2",
+      "sky130_fd_sc_hd__or2b_4": "RTL__sky130_fd_sc_hd__or2b_4",
+      "sky130_fd_sc_hd__or2b_2": "RTL__sky130_fd_sc_hd__or2b_2",
+      "sky130_fd_sc_hd__or2b_1": "RTL__sky130_fd_sc_hd__or2b_1",
+      "sky130_fd_sc_hd__o41a_1": "RTL__sky130_fd_sc_hd__o41a_1",
+      "sky130_fd_sc_hd__o221a_4": "RTL__sky130_fd_sc_hd__o221a_4",
+      "sky130_fd_sc_hd__nor3b_2": "RTL__sky130_fd_sc_hd__nor3b_2",
+      "sky130_fd_sc_hd__a2111oi_0": "RTL__sky130_fd_sc_hd__a2111oi_0",
+      "sky130_fd_sc_hd__and2b_1": "RTL__sky130_fd_sc_hd__and2b_1",
+      "sky130_fd_sc_hd__and3b_4": "RTL__sky130_fd_sc_hd__and3b_4",
+      "sky130_fd_sc_hd__o32ai_2": "RTL__sky130_fd_sc_hd__o32ai_2",
+      "sky130_fd_sc_hd__o2bb2ai_2": "RTL__sky130_fd_sc_hd__o2bb2ai_2",
+      "sky130_fd_sc_hd__o2111a_4": "RTL__sky130_fd_sc_hd__o2111a_4",
+      "sky130_fd_sc_hd__o32a_1": "RTL__sky130_fd_sc_hd__o32a_1",
+      "sky130_fd_sc_hd__or3b_2": "RTL__sky130_fd_sc_hd__or3b_2",
+      "sky130_fd_sc_hd__o21ba_1": "RTL__sky130_fd_sc_hd__o21ba_1",
+      "sky130_fd_sc_hd__o221a_1": "RTL__sky130_fd_sc_hd__o221a_1",
+      "sky130_fd_sc_hd__o2111a_2": "RTL__sky130_fd_sc_hd__o2111a_2",
+      "sky130_fd_sc_hd__a41o_1": "RTL__sky130_fd_sc_hd__a41o_1",
+      "sky130_fd_sc_hd__a221o_4": "RTL__sky130_fd_sc_hd__a221o_4",
+      "sky130_fd_sc_hd__a211o_4": "RTL__sky130_fd_sc_hd__a211o_4",
+      "sky130_fd_sc_hd__a2111o_4": "RTL__sky130_fd_sc_hd__a2111o_4",
+      "sky130_fd_sc_hd__or3b_4": "RTL__sky130_fd_sc_hd__or3b_4",
+      "sky130_fd_sc_hd__o31a_2": "RTL__sky130_fd_sc_hd__o31a_2",
+      "sky130_fd_sc_hd__o31a_4": "RTL__sky130_fd_sc_hd__o31a_4",
+      "sky130_fd_sc_hd__o211a_4": "RTL__sky130_fd_sc_hd__o211a_4",
+      "sky130_fd_sc_hd__a311o_2": "RTL__sky130_fd_sc_hd__a311o_2",
+      "sky130_fd_sc_hd__a31o_4": "RTL__sky130_fd_sc_hd__a31o_4",
+      "sky130_fd_sc_hd__o22a_4": "RTL__sky130_fd_sc_hd__o22a_4",
+      "sky130_fd_sc_hd__o31a_1": "RTL__sky130_fd_sc_hd__o31a_1",
+      "sky130_fd_sc_hd__o311ai_1": "RTL__sky130_fd_sc_hd__o311ai_1",
+      "sky130_fd_sc_hd__a2111o_2": "RTL__sky130_fd_sc_hd__a2111o_2",
+      "sky130_fd_sc_hd__o2bb2ai_1": "RTL__sky130_fd_sc_hd__o2bb2ai_1",
+      "sky130_fd_sc_hd__a41oi_1": "RTL__sky130_fd_sc_hd__a41oi_1",
+      "sky130_fd_sc_hd__nor2b_4": "RTL__sky130_fd_sc_hd__nor2b_4",
+      "sky130_fd_sc_hd__a2bb2oi_2": "RTL__sky130_fd_sc_hd__a2bb2oi_2",
+      "sky130_fd_sc_hd__o21ba_4": "RTL__sky130_fd_sc_hd__o21ba_4",
+      "sky130_fd_sc_hd__and3b_1": "RTL__sky130_fd_sc_hd__and3b_1",
+      "sky130_fd_sc_hd__a41oi_2": "RTL__sky130_fd_sc_hd__a41oi_2",
+      "sky130_fd_sc_hd__a31o_1": "RTL__sky130_fd_sc_hd__a31o_1",
+      "sky130_fd_sc_hd__a22oi_1": "RTL__sky130_fd_sc_hd__a22oi_1",
+      "sky130_fd_sc_hd__a32oi_1": "RTL__sky130_fd_sc_hd__a32oi_1",
+      "sky130_fd_sc_hd__nor4bb_2": "RTL__sky130_fd_sc_hd__nor4bb_2",
+      "sky130_fd_sc_hd__a22o_1": "RTL__sky130_fd_sc_hd__a22o_1",
+      "sky130_fd_sc_hd__o41ai_1": "RTL__sky130_fd_sc_hd__o41ai_1",
+      "sky130_fd_sc_hd__xnor3_1": "RTL__sky130_fd_sc_hd__xnor3_1",
+      "sky130_fd_sc_hd__and4bb_2": "RTL__sky130_fd_sc_hd__and4bb_2",
+      "sky130_fd_sc_hd__o31ai_4": "RTL__sky130_fd_sc_hd__o31ai_4",
+      "sky130_fd_sc_hd__a221o_2": "RTL__sky130_fd_sc_hd__a221o_2",
+      "sky130_fd_sc_hd__a222oi_1": "RTL__sky130_fd_sc_hd__a222oi_1",
+      "sky130_fd_sc_hd__o2bb2a_1": "RTL__sky130_fd_sc_hd__o2bb2a_1",
+      "sky130_fd_sc_hd__a2111oi_1": "RTL__sky130_fd_sc_hd__a2111oi_1",
+      "sky130_fd_sc_hd__a21o_4": "RTL__sky130_fd_sc_hd__a21o_4",
+      "sky130_fd_sc_hd__o211a_2": "RTL__sky130_fd_sc_hd__o211a_2",
+      "sky130_fd_sc_hd__a22o_4": "RTL__sky130_fd_sc_hd__a22o_4",
+      "sky130_fd_sc_hd__o22ai_2": "RTL__sky130_fd_sc_hd__o22ai_2",
+      "sky130_fd_sc_hd__o22a_1": "RTL__sky130_fd_sc_hd__o22a_1",
+      "sky130_fd_sc_hd__o31ai_1": "RTL__sky130_fd_sc_hd__o31ai_1",
+      "sky130_fd_sc_hd__or3b_1": "RTL__sky130_fd_sc_hd__or3b_1",
+      "sky130_fd_sc_hd__nand4bb_2": "RTL__sky130_fd_sc_hd__nand4bb_2",
+      "sky130_fd_sc_hd__a2111o_1": "RTL__sky130_fd_sc_hd__a2111o_1",
+      "sky130_fd_sc_hd__a22o_2": "RTL__sky130_fd_sc_hd__a22o_2",
+      "sky130_fd_sc_hd__o2111ai_1": "RTL__sky130_fd_sc_hd__o2111ai_1",
+      "sky130_fd_sc_hd__o2111ai_4": "RTL__sky130_fd_sc_hd__o2111ai_4",
+      "sky130_fd_sc_hd__o32ai_1": "RTL__sky130_fd_sc_hd__o32ai_1",
+      "sky130_fd_sc_hd__a32o_2": "RTL__sky130_fd_sc_hd__a32o_2",
+      "sky130_fd_sc_hd__a21bo_1": "RTL__sky130_fd_sc_hd__a21bo_1",
+      "sky130_fd_sc_hd__o2111a_1": "RTL__sky130_fd_sc_hd__o2111a_1",
+      "sky130_fd_sc_hd__mux4_1": "RTL__sky130_fd_sc_hd__mux4_1",
+      "sky130_fd_sc_hd__xnor3_4": "RTL__sky130_fd_sc_hd__xnor3_4",
+      "sky130_fd_sc_hd__mux2_2": "RTL__sky130_fd_sc_hd__mux2_2",
+      "sky130_fd_sc_hd__a221oi_2": "RTL__sky130_fd_sc_hd__a221oi_2",
+      "sky130_fd_sc_hd__o2bb2ai_4": "RTL__sky130_fd_sc_hd__o2bb2ai_4",
+      "sky130_fd_sc_hd__o32a_4": "RTL__sky130_fd_sc_hd__o32a_4",
+      "sky130_fd_sc_hd__a2bb2oi_4": "RTL__sky130_fd_sc_hd__a2bb2oi_4",
+      "sky130_fd_sc_hd__and3_4": "RTL__sky130_fd_sc_hd__and3_4",
+      "sky130_fd_sc_hd__clkinv_8": "RTL__sky130_fd_sc_hd__clkinv_8",
+      "sky130_fd_sc_hd__inv_12": "RTL__sky130_fd_sc_hd__inv_12",
+      "sky130_fd_sc_hd__or4b_4": "RTL__sky130_fd_sc_hd__or4b_4",
+      "sky130_fd_sc_hd__a311oi_2": "RTL__sky130_fd_sc_hd__a311oi_2",
+      "sky130_fd_sc_hd__a311o_1": "RTL__sky130_fd_sc_hd__a311o_1",
+      "sky130_fd_sc_hd__mux2_8": "RTL__sky130_fd_sc_hd__mux2_8",
+      "sky130_fd_sc_hd__mux2_4": "RTL__sky130_fd_sc_hd__mux2_4",
+      "sky130_fd_sc_hd__nor2_8": "RTL__sky130_fd_sc_hd__nor2_8",
+      "sky130_fd_sc_hd__or4_4": "RTL__sky130_fd_sc_hd__or4_4",
+      "sky130_fd_sc_hd__nor4_4": "RTL__sky130_fd_sc_hd__nor4_4",
+      "sky130_fd_sc_hd__mux2_1": "RTL__sky130_fd_sc_hd__mux2_1",
+      "sky130_fd_sc_hd__o2111ai_2": "RTL__sky130_fd_sc_hd__o2111ai_2",
+      "sky130_fd_sc_hd__nand2_4": "RTL__sky130_fd_sc_hd__nand2_4",
+      "sky130_fd_sc_hd__and2_2": "RTL__sky130_fd_sc_hd__and2_2",
+      "sky130_fd_sc_hd__a21boi_2": "RTL__sky130_fd_sc_hd__a21boi_2",
+      "sky130_fd_sc_hd__a221o_1": "RTL__sky130_fd_sc_hd__a221o_1",
+      "sky130_fd_sc_hd__a221oi_4": "RTL__sky130_fd_sc_hd__a221oi_4",
+      "sky130_fd_sc_hd__clkinv_4": "RTL__sky130_fd_sc_hd__clkinv_4",
+      "sky130_fd_sc_hd__inv_6": "RTL__sky130_fd_sc_hd__inv_6",
+      "sky130_fd_sc_hd__a21boi_1": "RTL__sky130_fd_sc_hd__a21boi_1",
+      "sky130_fd_sc_hd__nor3b_4": "RTL__sky130_fd_sc_hd__nor3b_4",
+      "sky130_fd_sc_hd__nand4b_4": "RTL__sky130_fd_sc_hd__nand4b_4",
+      "sky130_fd_sc_hd__a22oi_4": "RTL__sky130_fd_sc_hd__a22oi_4",
+      "sky130_fd_sc_hd__clkinvlp_4": "RTL__sky130_fd_sc_hd__clkinvlp_4",
+      "sky130_fd_sc_hd__inv_4": "RTL__sky130_fd_sc_hd__inv_4",
+      "sky130_fd_sc_hd__and2_1": "RTL__sky130_fd_sc_hd__and2_1",
+      "sky130_fd_sc_hd__a21boi_4": "RTL__sky130_fd_sc_hd__a21boi_4",
+      "sky130_fd_sc_hd__o21a_2": "RTL__sky130_fd_sc_hd__o21a_2",
+      "sky130_fd_sc_hd__a21bo_2": "RTL__sky130_fd_sc_hd__a21bo_2",
+      "sky130_fd_sc_hd__and3_2": "RTL__sky130_fd_sc_hd__and3_2",
+      "sky130_fd_sc_hd__inv_8": "RTL__sky130_fd_sc_hd__inv_8",
+      "sky130_fd_sc_hd__nand3b_4": "RTL__sky130_fd_sc_hd__nand3b_4",
+      "sky130_fd_sc_hd__mux2i_2": "RTL__sky130_fd_sc_hd__mux2i_2",
+      "sky130_fd_sc_hd__and4_4": "RTL__sky130_fd_sc_hd__and4_4",
+      "sky130_fd_sc_hd__or2_1": "RTL__sky130_fd_sc_hd__or2_1",
+      "sky130_fd_sc_hd__or3_2": "RTL__sky130_fd_sc_hd__or3_2",
+      "sky130_fd_sc_hd__a21boi_0": "RTL__sky130_fd_sc_hd__a21boi_0",
+      "sky130_fd_sc_hd__a41o_4": "RTL__sky130_fd_sc_hd__a41o_4",
+      "sky130_fd_sc_hd__nand3_4": "RTL__sky130_fd_sc_hd__nand3_4",
+      "sky130_fd_sc_hd__a22oi_2": "RTL__sky130_fd_sc_hd__a22oi_2",
+      "sky130_fd_sc_hd__or4b_2": "RTL__sky130_fd_sc_hd__or4b_2",
+      "sky130_fd_sc_hd__and4_2": "RTL__sky130_fd_sc_hd__and4_2",
+      "sky130_fd_sc_hd__nand3b_2": "RTL__sky130_fd_sc_hd__nand3b_2",
+      "sky130_fd_sc_hd__mux2i_1": "RTL__sky130_fd_sc_hd__mux2i_1",
+      "sky130_fd_sc_hd__nand3b_1": "RTL__sky130_fd_sc_hd__nand3b_1",
+      "sky130_fd_sc_hd__a31oi_1": "RTL__sky130_fd_sc_hd__a31oi_1",
+      "sky130_fd_sc_hd__xnor2_2": "RTL__sky130_fd_sc_hd__xnor2_2",
+      "sky130_fd_sc_hd__nor4b_2": "RTL__sky130_fd_sc_hd__nor4b_2",
+      "sky130_fd_sc_hd__o41ai_2": "RTL__sky130_fd_sc_hd__o41ai_2",
+      "sky130_fd_sc_hd__o21bai_1": "RTL__sky130_fd_sc_hd__o21bai_1",
+      "sky130_fd_sc_hd__nand4bb_4": "RTL__sky130_fd_sc_hd__nand4bb_4",
+      "sky130_fd_sc_hd__a221oi_1": "RTL__sky130_fd_sc_hd__a221oi_1",
+      "sky130_fd_sc_hd__a2111oi_4": "RTL__sky130_fd_sc_hd__a2111oi_4",
+      "sky130_fd_sc_hd__a211oi_1": "RTL__sky130_fd_sc_hd__a211oi_1",
+      "sky130_fd_sc_hd__and2_0": "RTL__sky130_fd_sc_hd__and2_0",
+      "sky130_fd_sc_hd__and4b_4": "RTL__sky130_fd_sc_hd__and4b_4",
+      "sky130_fd_sc_hd__nor4b_4": "RTL__sky130_fd_sc_hd__nor4b_4",
+      "sky130_fd_sc_hd__o311a_2": "RTL__sky130_fd_sc_hd__o311a_2",
+      "sky130_fd_sc_hd__o311a_1": "RTL__sky130_fd_sc_hd__o311a_1",
+      "sky130_fd_sc_hd__a2bb2oi_1": "RTL__sky130_fd_sc_hd__a2bb2oi_1",
+      "sky130_fd_sc_hd__o211ai_4": "RTL__sky130_fd_sc_hd__o211ai_4",
+      "sky130_fd_sc_hd__o41ai_4": "RTL__sky130_fd_sc_hd__o41ai_4",
+      "sky130_fd_sc_hd__xor2_2": "RTL__sky130_fd_sc_hd__xor2_2",
+      "sky130_fd_sc_hd__or4_2": "RTL__sky130_fd_sc_hd__or4_2",
+      "sky130_fd_sc_hd__nand2b_2": "RTL__sky130_fd_sc_hd__nand2b_2",
+      "sky130_fd_sc_hd__o311ai_2": "RTL__sky130_fd_sc_hd__o311ai_2",
+      "sky130_fd_sc_hd__o21a_4": "RTL__sky130_fd_sc_hd__o21a_4",
+      "sky130_fd_sc_hd__a21o_2": "RTL__sky130_fd_sc_hd__a21o_2",
+      "sky130_fd_sc_hd__o211a_1": "RTL__sky130_fd_sc_hd__o211a_1",
+      "sky130_fd_sc_hd__a31oi_2": "RTL__sky130_fd_sc_hd__a31oi_2",
+      "sky130_fd_sc_hd__a41o_2": "RTL__sky130_fd_sc_hd__a41o_2",
+      "sky130_fd_sc_hd__o221ai_2": "RTL__sky130_fd_sc_hd__o221ai_2",
+      "sky130_fd_sc_hd__o31ai_2": "RTL__sky130_fd_sc_hd__o31ai_2",
+      "sky130_fd_sc_hd__o32ai_4": "RTL__sky130_fd_sc_hd__o32ai_4",
+      "sky130_fd_sc_hd__a311oi_4": "RTL__sky130_fd_sc_hd__a311oi_4",
+      "sky130_fd_sc_hd__or3_4": "RTL__sky130_fd_sc_hd__or3_4",
+      "sky130_fd_sc_hd__a32o_1": "RTL__sky130_fd_sc_hd__a32o_1",
+      "sky130_fd_sc_hd__or4_1": "RTL__sky130_fd_sc_hd__or4_1",
+      "sky130_fd_sc_hd__mux2i_4": "RTL__sky130_fd_sc_hd__mux2i_4",
+      "sky130_fd_sc_hd__o22ai_4": "RTL__sky130_fd_sc_hd__o22ai_4",
+      "sky130_fd_sc_hd__o21ba_2": "RTL__sky130_fd_sc_hd__o21ba_2",
+      "sky130_fd_sc_hd__a211o_2": "RTL__sky130_fd_sc_hd__a211o_2",
+      "sky130_fd_sc_hd__a41oi_4": "RTL__sky130_fd_sc_hd__a41oi_4",
+      "sky130_fd_sc_hd__inv_2": "RTL__sky130_fd_sc_hd__inv_2",
+      "sky130_fd_sc_hd__o21bai_4": "RTL__sky130_fd_sc_hd__o21bai_4",
+      "sky130_fd_sc_hd__a21oi_4": "RTL__sky130_fd_sc_hd__a21oi_4",
+      "sky130_fd_sc_hd__o311a_4": "RTL__sky130_fd_sc_hd__o311a_4",
+      "sky130_fd_sc_hd__nand4b_2": "RTL__sky130_fd_sc_hd__nand4b_2",
+      "sky130_fd_sc_hd__or2_4": "RTL__sky130_fd_sc_hd__or2_4",
+      "sky130_fd_sc_hd__and2_4": "RTL__sky130_fd_sc_hd__and2_4",
+      "sky130_fd_sc_hd__a211o_1": "RTL__sky130_fd_sc_hd__a211o_1",
+      "sky130_fd_sc_hd__nand2_2": "RTL__sky130_fd_sc_hd__nand2_2",
+      "sky130_fd_sc_hd__o211ai_1": "RTL__sky130_fd_sc_hd__o211ai_1",
+      "sky130_fd_sc_hd__o21bai_2": "RTL__sky130_fd_sc_hd__o21bai_2",
+      "sky130_fd_sc_hd__a2111oi_2": "RTL__sky130_fd_sc_hd__a2111oi_2",
+      "sky130_fd_sc_hd__o21ai_4": "RTL__sky130_fd_sc_hd__o21ai_4",
+      "sky130_fd_sc_hd__o21ai_2": "RTL__sky130_fd_sc_hd__o21ai_2",
+      "sky130_fd_sc_hd__a211oi_4": "RTL__sky130_fd_sc_hd__a211oi_4",
+      "sky130_fd_sc_hd__a32oi_4": "RTL__sky130_fd_sc_hd__a32oi_4",
+      "sky130_fd_sc_hd__o311ai_4": "RTL__sky130_fd_sc_hd__o311ai_4",
+      "sky130_fd_sc_hd__a211oi_2": "RTL__sky130_fd_sc_hd__a211oi_2",
+      "sky130_fd_sc_hd__a31o_2": "RTL__sky130_fd_sc_hd__a31o_2",
+      "sky130_fd_sc_hd__or3_1": "RTL__sky130_fd_sc_hd__or3_1",
+      "sky130_fd_sc_hd__nand4b_1": "RTL__sky130_fd_sc_hd__nand4b_1",
+      "sky130_fd_sc_hd__o41a_4": "RTL__sky130_fd_sc_hd__o41a_4",
+      "sky130_fd_sc_hd__o221ai_4": "RTL__sky130_fd_sc_hd__o221ai_4",
+      "sky130_fd_sc_hd__nand2b_1": "RTL__sky130_fd_sc_hd__nand2b_1",
+      "sky130_fd_sc_hd__o21a_1": "RTL__sky130_fd_sc_hd__o21a_1",
+      "sky130_fd_sc_hd__o22ai_1": "RTL__sky130_fd_sc_hd__o22ai_1",
+      "sky130_fd_sc_hd__or2_2": "RTL__sky130_fd_sc_hd__or2_2",
+      "sky130_fd_sc_hd__nor2_2": "RTL__sky130_fd_sc_hd__nor2_2",
+      "sky130_fd_sc_hd__xor2_4": "RTL__sky130_fd_sc_hd__xor2_4",
+      "sky130_fd_sc_hd__o21ai_1": "RTL__sky130_fd_sc_hd__o21ai_1",
+      "sky130_fd_sc_hd__a21oi_2": "RTL__sky130_fd_sc_hd__a21oi_2",
+      "sky130_fd_sc_hd__a21o_1": "RTL__sky130_fd_sc_hd__a21o_1",
+      "sky130_fd_sc_hd__xnor2_4": "RTL__sky130_fd_sc_hd__xnor2_4",
+      "sky130_fd_sc_hd__xnor2_1": "RTL__sky130_fd_sc_hd__xnor2_1",
+      "sky130_fd_sc_hd__nand4_4": "RTL__sky130_fd_sc_hd__nand4_4",
+      "sky130_fd_sc_hd__nor2b_2": "RTL__sky130_fd_sc_hd__nor2b_2",
+      "sky130_fd_sc_hd__nor3_2": "RTL__sky130_fd_sc_hd__nor3_2",
+      "sky130_fd_sc_hd__inv_1": "RTL__sky130_fd_sc_hd__inv_1",
+      "sky130_fd_sc_hd__and3_1": "RTL__sky130_fd_sc_hd__and3_1",
+      "sky130_fd_sc_hd__nor3_4": "RTL__sky130_fd_sc_hd__nor3_4",
+      "sky130_fd_sc_hd__nand2_8": "RTL__sky130_fd_sc_hd__nand2_8",
+      "sky130_fd_sc_hd__nor2_4": "RTL__sky130_fd_sc_hd__nor2_4",
+      "sky130_fd_sc_hd__a21oi_1": "RTL__sky130_fd_sc_hd__a21oi_1",
+      "sky130_fd_sc_hd__nand3_2": "RTL__sky130_fd_sc_hd__nand3_2",
+      "sky130_fd_sc_hd__a311oi_1": "RTL__sky130_fd_sc_hd__a311oi_1",
+      "sky130_fd_sc_hd__o211ai_2": "RTL__sky130_fd_sc_hd__o211ai_2",
+      "sky130_fd_sc_hd__o221ai_1": "RTL__sky130_fd_sc_hd__o221ai_1",
+      "sky130_fd_sc_hd__xor2_1": "RTL__sky130_fd_sc_hd__xor2_1",
+      "sky130_fd_sc_hd__and4_1": "RTL__sky130_fd_sc_hd__and4_1",
+      "sky130_fd_sc_hd__nor4b_1": "RTL__sky130_fd_sc_hd__nor4b_1",
+      "sky130_fd_sc_hd__clkinv_2": "RTL__sky130_fd_sc_hd__clkinv_2",
+      "sky130_fd_sc_hd__nor3_1": "RTL__sky130_fd_sc_hd__nor3_1",
+      "sky130_fd_sc_hd__a31oi_4": "RTL__sky130_fd_sc_hd__a31oi_4",
+      "sky130_fd_sc_hd__or2_0": "RTL__sky130_fd_sc_hd__or2_0",
+      "sky130_fd_sc_hd__nor2b_1": "RTL__sky130_fd_sc_hd__nor2b_1",
+      "sky130_fd_sc_hd__nand3_1": "RTL__sky130_fd_sc_hd__nand3_1",
+      "sky130_fd_sc_hd__nor3b_1": "RTL__sky130_fd_sc_hd__nor3b_1",
+      "sky130_fd_sc_hd__nand4_2": "RTL__sky130_fd_sc_hd__nand4_2",
+      "sky130_fd_sc_hd__nand2_1": "RTL__sky130_fd_sc_hd__nand2_1",
+      "sky130_fd_sc_hd__nand4_1": "RTL__sky130_fd_sc_hd__nand4_1",
+      "sky130_fd_sc_hd__o21ai_0": "RTL__sky130_fd_sc_hd__o21ai_0",
+      "sky130_fd_sc_hd__or4b_1": "RTL__sky130_fd_sc_hd__or4b_1",
+      "sky130_fd_sc_hd__nor4_1": "RTL__sky130_fd_sc_hd__nor4_1",
+      "sky130_fd_sc_hd__nor4_2": "RTL__sky130_fd_sc_hd__nor4_2",
+      "sky130_fd_sc_hd__nor2_1": "RTL__sky130_fd_sc_hd__nor2_1",
+      "sky130_fd_sc_hd__nand2b_4": "RTL__sky130_fd_sc_hd__nand2b_4",
+      "sky130_fd_sc_hd__tapvpwrvgnd_1": "RTL__sky130_fd_sc_hd__tapvpwrvgnd_1",
+      "sky130_fd_sc_hd__fill_2": "RTL__sky130_fd_sc_hd__fill_2",
+      "sky130_fd_sc_hd__fill_1": "RTL__sky130_fd_sc_hd__fill_1",
+      "sky130_fd_sc_hd__fill_4": "RTL__sky130_fd_sc_hd__fill_4",
+      "sky130_fd_sc_hd__fill_8": "RTL__sky130_fd_sc_hd__fill_8",
+      "full_pim_system_top": "RTL__full_pim_system_top"
+    },
+    "overlay": {
+      "STOB_LOGIC_DIE_FLOORPLAN_NOT_SIGNOFF": "OVERLAY__STOB_LOGIC_DIE_FLOORPLAN_NOT_SIGNOFF",
+      "BLOCK_top_logic_die_64ch_reduction_top": "OVERLAY__BLOCK_top_logic_die_64ch_reduction_top",
+      "BLOCK_top_bank_local_reduction_buffer": "OVERLAY__BLOCK_top_bank_local_reduction_buffer",
+      "BLOCK_top_bank_local_fp16_reduction": "OVERLAY__BLOCK_top_bank_local_fp16_reduction",
+      "BLOCK_top_hierarchical_reduction_path": "OVERLAY__BLOCK_top_hierarchical_reduction_path",
+      "BLOCK_top_logic_die_link_arbiter": "OVERLAY__BLOCK_top_logic_die_link_arbiter",
+      "BLOCK_top_logic_die_dual_link_arbiter": "OVERLAY__BLOCK_top_logic_die_dual_link_arbiter",
+      "BLOCK_top_shared_fp16_pipeline_fabric": "OVERLAY__BLOCK_top_shared_fp16_pipeline_fabric",
+      "BLOCK_top_shared_fp16_reduction_cluster": "OVERLAY__BLOCK_top_shared_fp16_reduction_cluster",
+      "TSV_TSV_CH0_DATA": "OVERLAY__TSV_TSV_CH0_DATA",
+      "TSV_TSV_CH0_CA": "OVERLAY__TSV_TSV_CH0_CA",
+      "TSV_TSV_CH0_CLK": "OVERLAY__TSV_TSV_CH0_CLK",
+      "TSV_TSV_CH0_POWER": "OVERLAY__TSV_TSV_CH0_POWER",
+      "TSV_TSV_CH0_GROUND": "OVERLAY__TSV_TSV_CH0_GROUND",
+      "TSV_TSV_CH0_SPARE": "OVERLAY__TSV_TSV_CH0_SPARE",
+      "TSV_TSV_CH1_DATA": "OVERLAY__TSV_TSV_CH1_DATA",
+      "TSV_TSV_CH1_CA": "OVERLAY__TSV_TSV_CH1_CA",
+      "TSV_TSV_CH1_CLK": "OVERLAY__TSV_TSV_CH1_CLK",
+      "TSV_TSV_CH1_POWER": "OVERLAY__TSV_TSV_CH1_POWER",
+      "TSV_TSV_CH1_GROUND": "OVERLAY__TSV_TSV_CH1_GROUND",
+      "TSV_TSV_CH1_SPARE": "OVERLAY__TSV_TSV_CH1_SPARE",
+      "TSV_TSV_CH2_DATA": "OVERLAY__TSV_TSV_CH2_DATA",
+      "TSV_TSV_CH2_CA": "OVERLAY__TSV_TSV_CH2_CA",
+      "TSV_TSV_CH2_CLK": "OVERLAY__TSV_TSV_CH2_CLK",
+      "TSV_TSV_CH2_POWER": "OVERLAY__TSV_TSV_CH2_POWER",
+      "TSV_TSV_CH2_GROUND": "OVERLAY__TSV_TSV_CH2_GROUND",
+      "TSV_TSV_CH2_SPARE": "OVERLAY__TSV_TSV_CH2_SPARE",
+      "TSV_TSV_CH3_DATA": "OVERLAY__TSV_TSV_CH3_DATA",
+      "TSV_TSV_CH3_CA": "OVERLAY__TSV_TSV_CH3_CA",
+      "TSV_TSV_CH3_CLK": "OVERLAY__TSV_TSV_CH3_CLK",
+      "TSV_TSV_CH3_POWER": "OVERLAY__TSV_TSV_CH3_POWER",
+      "TSV_TSV_CH3_GROUND": "OVERLAY__TSV_TSV_CH3_GROUND",
+      "TSV_TSV_CH3_SPARE": "OVERLAY__TSV_TSV_CH3_SPARE",
+      "TSV_TSV_CH4_DATA": "OVERLAY__TSV_TSV_CH4_DATA",
+      "TSV_TSV_CH4_CA": "OVERLAY__TSV_TSV_CH4_CA",
+      "TSV_TSV_CH4_CLK": "OVERLAY__TSV_TSV_CH4_CLK",
+      "TSV_TSV_CH4_POWER": "OVERLAY__TSV_TSV_CH4_POWER",
+      "TSV_TSV_CH4_GROUND": "OVERLAY__TSV_TSV_CH4_GROUND",
+      "TSV_TSV_CH4_SPARE": "OVERLAY__TSV_TSV_CH4_SPARE",
+      "TSV_TSV_CH5_DATA": "OVERLAY__TSV_TSV_CH5_DATA",
+      "TSV_TSV_CH5_CA": "OVERLAY__TSV_TSV_CH5_CA",
+      "TSV_TSV_CH5_CLK": "OVERLAY__TSV_TSV_CH5_CLK",
+      "TSV_TSV_CH5_POWER": "OVERLAY__TSV_TSV_CH5_POWER",
+      "TSV_TSV_CH5_GROUND": "OVERLAY__TSV_TSV_CH5_GROUND",
+      "TSV_TSV_CH5_SPARE": "OVERLAY__TSV_TSV_CH5_SPARE",
+      "TSV_TSV_CH6_DATA": "OVERLAY__TSV_TSV_CH6_DATA",
+      "TSV_TSV_CH6_CA": "OVERLAY__TSV_TSV_CH6_CA",
+      "TSV_TSV_CH6_CLK": "OVERLAY__TSV_TSV_CH6_CLK",
+      "TSV_TSV_CH6_POWER": "OVERLAY__TSV_TSV_CH6_POWER",
+      "TSV_TSV_CH6_GROUND": "OVERLAY__TSV_TSV_CH6_GROUND",
+      "TSV_TSV_CH6_SPARE": "OVERLAY__TSV_TSV_CH6_SPARE",
+      "TSV_TSV_CH7_DATA": "OVERLAY__TSV_TSV_CH7_DATA",
+      "TSV_TSV_CH7_CA": "OVERLAY__TSV_TSV_CH7_CA",
+      "TSV_TSV_CH7_CLK": "OVERLAY__TSV_TSV_CH7_CLK",
+      "TSV_TSV_CH7_POWER": "OVERLAY__TSV_TSV_CH7_POWER",
+      "TSV_TSV_CH7_GROUND": "OVERLAY__TSV_TSV_CH7_GROUND",
+      "TSV_TSV_CH7_SPARE": "OVERLAY__TSV_TSV_CH7_SPARE",
+      "BUMP_MBUMP_CH0_DATA": "OVERLAY__BUMP_MBUMP_CH0_DATA",
+      "BUMP_MBUMP_CH0_CA": "OVERLAY__BUMP_MBUMP_CH0_CA",
+      "BUMP_MBUMP_CH0_CLK": "OVERLAY__BUMP_MBUMP_CH0_CLK",
+      "BUMP_MBUMP_CH0_POWER": "OVERLAY__BUMP_MBUMP_CH0_POWER",
+      "BUMP_MBUMP_CH0_GROUND": "OVERLAY__BUMP_MBUMP_CH0_GROUND",
+      "BUMP_MBUMP_CH0_SPARE": "OVERLAY__BUMP_MBUMP_CH0_SPARE",
+      "BUMP_MBUMP_CH1_DATA": "OVERLAY__BUMP_MBUMP_CH1_DATA",
+      "BUMP_MBUMP_CH1_CA": "OVERLAY__BUMP_MBUMP_CH1_CA",
+      "BUMP_MBUMP_CH1_CLK": "OVERLAY__BUMP_MBUMP_CH1_CLK",
+      "BUMP_MBUMP_CH1_POWER": "OVERLAY__BUMP_MBUMP_CH1_POWER",
+      "BUMP_MBUMP_CH1_GROUND": "OVERLAY__BUMP_MBUMP_CH1_GROUND",
+      "BUMP_MBUMP_CH1_SPARE": "OVERLAY__BUMP_MBUMP_CH1_SPARE",
+      "BUMP_MBUMP_CH2_DATA": "OVERLAY__BUMP_MBUMP_CH2_DATA",
+      "BUMP_MBUMP_CH2_CA": "OVERLAY__BUMP_MBUMP_CH2_CA",
+      "BUMP_MBUMP_CH2_CLK": "OVERLAY__BUMP_MBUMP_CH2_CLK",
+      "BUMP_MBUMP_CH2_POWER": "OVERLAY__BUMP_MBUMP_CH2_POWER",
+      "BUMP_MBUMP_CH2_GROUND": "OVERLAY__BUMP_MBUMP_CH2_GROUND",
+      "BUMP_MBUMP_CH2_SPARE": "OVERLAY__BUMP_MBUMP_CH2_SPARE",
+      "BUMP_MBUMP_CH3_DATA": "OVERLAY__BUMP_MBUMP_CH3_DATA",
+      "BUMP_MBUMP_CH3_CA": "OVERLAY__BUMP_MBUMP_CH3_CA",
+      "BUMP_MBUMP_CH3_CLK": "OVERLAY__BUMP_MBUMP_CH3_CLK",
+      "BUMP_MBUMP_CH3_POWER": "OVERLAY__BUMP_MBUMP_CH3_POWER",
+      "BUMP_MBUMP_CH3_GROUND": "OVERLAY__BUMP_MBUMP_CH3_GROUND",
+      "BUMP_MBUMP_CH3_SPARE": "OVERLAY__BUMP_MBUMP_CH3_SPARE",
+      "BUMP_MBUMP_CH4_DATA": "OVERLAY__BUMP_MBUMP_CH4_DATA",
+      "BUMP_MBUMP_CH4_CA": "OVERLAY__BUMP_MBUMP_CH4_CA",
+      "BUMP_MBUMP_CH4_CLK": "OVERLAY__BUMP_MBUMP_CH4_CLK",
+      "BUMP_MBUMP_CH4_POWER": "OVERLAY__BUMP_MBUMP_CH4_POWER",
+      "BUMP_MBUMP_CH4_GROUND": "OVERLAY__BUMP_MBUMP_CH4_GROUND",
+      "BUMP_MBUMP_CH4_SPARE": "OVERLAY__BUMP_MBUMP_CH4_SPARE",
+      "BUMP_MBUMP_CH5_DATA": "OVERLAY__BUMP_MBUMP_CH5_DATA",
+      "BUMP_MBUMP_CH5_CA": "OVERLAY__BUMP_MBUMP_CH5_CA",
+      "BUMP_MBUMP_CH5_CLK": "OVERLAY__BUMP_MBUMP_CH5_CLK",
+      "BUMP_MBUMP_CH5_POWER": "OVERLAY__BUMP_MBUMP_CH5_POWER",
+      "BUMP_MBUMP_CH5_GROUND": "OVERLAY__BUMP_MBUMP_CH5_GROUND",
+      "BUMP_MBUMP_CH5_SPARE": "OVERLAY__BUMP_MBUMP_CH5_SPARE",
+      "BUMP_MBUMP_CH6_DATA": "OVERLAY__BUMP_MBUMP_CH6_DATA",
+      "BUMP_MBUMP_CH6_CA": "OVERLAY__BUMP_MBUMP_CH6_CA",
+      "BUMP_MBUMP_CH6_CLK": "OVERLAY__BUMP_MBUMP_CH6_CLK",
+      "BUMP_MBUMP_CH6_POWER": "OVERLAY__BUMP_MBUMP_CH6_POWER",
+      "BUMP_MBUMP_CH6_GROUND": "OVERLAY__BUMP_MBUMP_CH6_GROUND",
+      "BUMP_MBUMP_CH6_SPARE": "OVERLAY__BUMP_MBUMP_CH6_SPARE",
+      "BUMP_MBUMP_CH7_DATA": "OVERLAY__BUMP_MBUMP_CH7_DATA",
+      "BUMP_MBUMP_CH7_CA": "OVERLAY__BUMP_MBUMP_CH7_CA",
+      "BUMP_MBUMP_CH7_CLK": "OVERLAY__BUMP_MBUMP_CH7_CLK",
+      "BUMP_MBUMP_CH7_POWER": "OVERLAY__BUMP_MBUMP_CH7_POWER",
+      "BUMP_MBUMP_CH7_GROUND": "OVERLAY__BUMP_MBUMP_CH7_GROUND",
+      "BUMP_MBUMP_CH7_SPARE": "OVERLAY__BUMP_MBUMP_CH7_SPARE",
+      "THERMAL_FIELD_REFERENCE_SOLVER_NOT_SIGNOFF": "OVERLAY__THERMAL_FIELD_REFERENCE_SOLVER_NOT_SIGNOFF"
+    },
+    "output_top": "STOB_FINAL_PHYSICAL_MERGED_NOT_SIGNOFF",
+    "output_cell_count": 392
+  },
+  "geometry": {
+    "manifest_die_bbox_um": [
+      0.0,
+      0.0,
+      8000.0,
+      12000.0
+    ],
+    "transformed_rtl_bbox_um": [
+      3231.768,
+      5231.768,
+      4768.233,
+      6768.233
+    ],
+    "rtl_within_manifest_die": true,
+    "merged_bbox_um": [
+      0.0,
+      0.0,
+      8000.0,
+      12000.0
+    ]
+  },
+  "output": {
+    "gds": "C:\\Users\\Admin\\AppData\\Local\\STOB_EDA\\gds-merge\\historical-routed-stress\\merged_final_physical.gds",
+    "gds_sha256": "38abe69ce8c7acfce1bc897fe9055091e9ad21c0faa2b0437fe94889cba615b3",
+    "bytes": 130925998,
+    "lyp": "C:\\Users\\Admin\\AppData\\Local\\STOB_EDA\\gds-merge\\historical-routed-stress\\merged_final_physical.lyp",
+    "layers": {
+      "64/5": 279870,
+      "64/16": 281014,
+      "64/20": 295761,
+      "64/59": 293240,
+      "65/20": 257409,
+      "65/44": 62150,
+      "66/15": 612,
+      "66/20": 427389,
+      "66/44": 2478102,
+      "67/5": 332747,
+      "67/16": 347471,
+      "67/20": 1627612,
+      "67/44": 4239668,
+      "68/5": 591977,
+      "68/16": 594265,
+      "68/20": 1749020,
+      "68/44": 416763,
+      "69/5": 252,
+      "69/16": 252,
+      "69/20": 615179,
+      "69/44": 153370,
+      "70/5": 509,
+      "70/16": 509,
+      "70/20": 153720,
+      "70/44": 132444,
+      "71/20": 47534,
+      "71/44": 6293,
+      "72/5": 2,
+      "72/16": 112,
+      "72/20": 6418,
+      "78/44": 296529,
+      "81/4": 295761,
+      "83/44": 470098,
+      "93/44": 326836,
+      "94/20": 326836,
+      "95/20": 60407,
+      "100/0": 1,
+      "110/0": 8,
+      "120/0": 128,
+      "121/0": 32,
+      "122/0": 16,
+      "122/16": 281068,
+      "123/0": 64,
+      "124/0": 64,
+      "125/0": 16,
+      "130/0": 128,
+      "130/1": 32,
+      "130/2": 16,
+      "130/3": 64,
+      "130/4": 64,
+      "130/5": 16,
+      "140/0": 128,
+      "141/0": 32,
+      "142/0": 16,
+      "143/0": 64,
+      "144/0": 64,
+      "145/0": 16,
+      "150/1": 1,
+      "151/1": 2,
+      "152/1": 1,
+      "154/0": 8,
+      "170/0": 8,
+      "170/1": 8,
+      "170/2": 8,
+      "170/3": 8,
+      "170/4": 8,
+      "170/5": 8,
+      "199/1": 8,
+      "199/2": 48,
+      "199/3": 48,
+      "199/4": 4,
+      "199/5": 1,
+      "200/0": 12,
+      "201/0": 37,
+      "202/0": 37,
+      "203/0": 27,
+      "204/0": 31,
+      "205/0": 27,
+      "206/0": 29,
+      "207/0": 22,
+      "208/0": 26,
+      "209/0": 39,
+      "210/0": 49,
+      "211/0": 59,
+      "212/0": 39,
+      "213/0": 39,
+      "214/0": 18,
+      "215/0": 21,
+      "235/4": 1,
+      "236/0": 57611
+    }
+  },
+  "claim_boundary": "Geometry integration only; does not establish DRC/LVS, timing, IR-drop, SI/PI, package, thermal, or silicon signoff."
+}

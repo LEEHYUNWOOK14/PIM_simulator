@@ -1,0 +1,131 @@
+{
+  "decision": "NO-GO",
+  "reason": "Production replay/write-back remains gated on measured end-to-end advantage.",
+  "c11_clock_mhz": 35.90664272890485,
+  "c11_period_ns": 27.85,
+  "block_arrival_ns": {
+    "mixed_precision_bank_reducer4_interleaved": 12.83,
+    "mixed_precision_global_reducer16_pipe": 15.5,
+    "mixed_precision_scalar_nr2_pipe": 22.54,
+    "mixed_precision_bank_apply4_pipe": 27.85
+  },
+  "total_weighted_calls": 269,
+  "total_c11_cycles": 2136209,
+  "core_latency_us": 59493.42065,
+  "ondie_link_latency_us": 40.08,
+  "break_even_clock_mhz": 693.320493771112,
+  "comparison": [
+    {
+      "architecture": "GPU",
+      "latency_us": 3121.2077312469482,
+      "traffic_total_bytes": 86212608,
+      "speedup_vs_gpu": 1.0,
+      "accuracy": "PYTORCH_GOLDEN",
+      "evidence": "MEASURED_CUDA_EVENTS"
+    },
+    {
+      "architecture": "Bank-only PIM",
+      "latency_us": 62394.30065,
+      "traffic_total_bytes": 130969088,
+      "speedup_vs_gpu": 0.050023923639361256,
+      "accuracy": "C11_BANK_ARITHMETIC_VALIDATED;SCALAR_OFFLOAD_MODELED",
+      "evidence": "C11_MEASURED_CYCLES_STA_PLUS_ASSUMED_OFFLOAD"
+    },
+    {
+      "architecture": "Logic-only PIM",
+      "latency_us": 12563.7562,
+      "traffic_total_bytes": 172425216,
+      "speedup_vs_gpu": 0.24842950480421996,
+      "accuracy": "UNVERIFIED",
+      "evidence": "LEGACY_MODELED_VECTOR_THROUGHPUT"
+    },
+    {
+      "architecture": "Hierarchical PIM C11",
+      "latency_us": 59533.50065,
+      "traffic_total_bytes": 130969088,
+      "speedup_vs_gpu": 0.05242775407407439,
+      "accuracy": "FULL_RTL_6_OF_6_PASS_1909248_ELEMENTS_37_PYTORCH_BIT_MISMATCHES",
+      "evidence": "ACTUAL_C11_TRACE_CYCLES_PLUS_SKY130_BLOCK_STA"
+    }
+  ],
+  "cycle_model": "rows*(111+2*vectors_per_bank)+1; fitted exactly to 1536/2048 actual RTL traces",
+  "traffic_definition": "logical payload bytes; hierarchical includes reduction read, replay/apply read, output write, affine, partial/scalar traffic",
+  "multirow_projection": {
+    "scalar_service_cycles": 60,
+    "model": "per_call=111+(rows-1)*max(vectors_per_bank,ceil(scalar_service/engines))+2*vectors_per_bank",
+    "best_candidates": [
+      {
+        "lanes_per_bank": 16,
+        "scalar_engines": 16,
+        "clock_mhz": 100.0,
+        "projected_cycles": 115611,
+        "latency_us": 1196.1899999999998,
+        "speedup_vs_gpu": 2.609290941444878,
+        "status": "UNIMPLEMENTED_MULTIROW_PROJECTION"
+      },
+      {
+        "lanes_per_bank": 16,
+        "scalar_engines": 8,
+        "clock_mhz": 100.0,
+        "projected_cycles": 136411,
+        "latency_us": 1404.1899999999998,
+        "speedup_vs_gpu": 2.2227816258817885,
+        "status": "UNIMPLEMENTED_MULTIROW_PROJECTION"
+      },
+      {
+        "lanes_per_bank": 8,
+        "scalar_engines": 8,
+        "clock_mhz": 100.0,
+        "projected_cycles": 201363,
+        "latency_us": 2053.71,
+        "speedup_vs_gpu": 1.519789907653441,
+        "status": "UNIMPLEMENTED_MULTIROW_PROJECTION"
+      },
+      {
+        "lanes_per_bank": 8,
+        "scalar_engines": 16,
+        "clock_mhz": 100.0,
+        "projected_cycles": 201363,
+        "latency_us": 2053.71,
+        "speedup_vs_gpu": 1.519789907653441,
+        "status": "UNIMPLEMENTED_MULTIROW_PROJECTION"
+      },
+      {
+        "lanes_per_bank": 16,
+        "scalar_engines": 4,
+        "clock_mhz": 100.0,
+        "projected_cycles": 226788,
+        "latency_us": 2307.96,
+        "speedup_vs_gpu": 1.3523664756958302,
+        "status": "UNIMPLEMENTED_MULTIROW_PROJECTION"
+      },
+      {
+        "lanes_per_bank": 16,
+        "scalar_engines": 16,
+        "clock_mhz": 50.0,
+        "projected_cycles": 115611,
+        "latency_us": 2352.2999999999997,
+        "speedup_vs_gpu": 1.3268748591790795,
+        "status": "UNIMPLEMENTED_MULTIROW_PROJECTION"
+      },
+      {
+        "lanes_per_bank": 8,
+        "scalar_engines": 4,
+        "clock_mhz": 100.0,
+        "projected_cycles": 232563,
+        "latency_us": 2365.71,
+        "speedup_vs_gpu": 1.3193534842592491,
+        "status": "UNIMPLEMENTED_MULTIROW_PROJECTION"
+      },
+      {
+        "lanes_per_bank": 16,
+        "scalar_engines": 8,
+        "clock_mhz": 50.0,
+        "projected_cycles": 136411,
+        "latency_us": 2768.2999999999997,
+        "speedup_vs_gpu": 1.1274817509832564,
+        "status": "UNIMPLEMENTED_MULTIROW_PROJECTION"
+      }
+    ]
+  }
+}

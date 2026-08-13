@@ -47,6 +47,7 @@ module bf16_add (
         shift_amount = large_exp - small_exp;
         small_ext = shift_right_sticky({small_sig, 3'b000}, shift_amount);
         result_sign = large_sign; result_exp = large_exp;
+        normalize_step = 0;
         add_ext = '0;
         if (large_sign == small_sign) begin
             add_ext = {1'b0, large_ext} + {1'b0, small_ext};

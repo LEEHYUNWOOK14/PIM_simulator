@@ -1,0 +1,6 @@
+FATAL: rtl/pim_vector_alu.sv:60: DATA_WIDTH must be divisible by 32
+       Time: 0  Scope: full_pim_system_top.g_channel[0].u_bank.g_block[0].u_core.u_alu
+FATAL: rtl/bank_side_pim_subsystem.sv:122: each PIM block requires an even/odd bank pair
+       Time: 0  Scope: full_pim_system_top.g_channel[0].u_bank
+FATAL: rtl/pim_vector_alu.sv:60: DATA_WIDTH must be divisible by 32
+       Time: 0  Scope: full_pim_system_top.g_logic_die_enabled.u_logic_die.u_scheduler.g_pcu[0].u_pcu.u_alu

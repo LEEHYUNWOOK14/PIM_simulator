@@ -1,0 +1,12 @@
+PCU_TRACE PASS profile=action_vlln lanes=16 engines=4 rows=280 hidden=2048 elements=573440 mixed_mismatches=0 pytorch_bit_mismatches=7 cycles=4738 max_contexts=8 external_bytes=32 bank_internal_bytes=5734400
+verification/groot_normalization/groot_logic_die_pcu_trace_tb.sv:50: $finish called at 47410 (1s)
+PCU_TRACE PASS profile=action_vl_self_attention_norm1 lanes=16 engines=4 rows=280 hidden=2048 elements=573440 mixed_mismatches=0 pytorch_bit_mismatches=7 cycles=4738 max_contexts=8 external_bytes=32 bank_internal_bytes=5734400
+verification/groot_normalization/groot_logic_die_pcu_trace_tb.sv:50: $finish called at 47410 (1s)
+PCU_TRACE PASS profile=action_vl_self_attention_norm3 lanes=16 engines=4 rows=280 hidden=2048 elements=573440 mixed_mismatches=0 pytorch_bit_mismatches=17 cycles=4738 max_contexts=8 external_bytes=32 bank_internal_bytes=5734400
+verification/groot_normalization/groot_logic_die_pcu_trace_tb.sv:50: $finish called at 47410 (1s)
+PCU_TRACE PASS profile=action_dit_adaln_norm1 lanes=16 engines=4 rows=41 hidden=1536 elements=62976 mixed_mismatches=0 pytorch_bit_mismatches=2 cycles=764 max_contexts=9 external_bytes=32 bank_internal_bytes=629760
+verification/groot_normalization/groot_logic_die_pcu_trace_tb.sv:50: $finish called at 7670 (1s)
+PCU_TRACE PASS profile=action_dit_norm3 lanes=16 engines=4 rows=41 hidden=1536 elements=62976 mixed_mismatches=0 pytorch_bit_mismatches=0 cycles=764 max_contexts=9 external_bytes=32 bank_internal_bytes=629760
+verification/groot_normalization/groot_logic_die_pcu_trace_tb.sv:50: $finish called at 7670 (1s)
+PCU_TRACE PASS profile=action_dit_norm_out lanes=16 engines=4 rows=41 hidden=1536 elements=62976 mixed_mismatches=0 pytorch_bit_mismatches=4 cycles=764 max_contexts=9 external_bytes=32 bank_internal_bytes=629760
+verification/groot_normalization/groot_logic_die_pcu_trace_tb.sv:50: $finish called at 7670 (1s)

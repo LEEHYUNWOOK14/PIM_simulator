@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "fixed_axes_mm": [
+    0,
+    8,
+    0,
+    12
+  ],
+  "dpi": 300,
+  "figures": {
+    "figure_01_hbm_stack_3d.png": {
+      "generator": "ParaView 6.1.1 / RTX 4060",
+      "claim": "modeled stack, TSV centerlines, block overlay and temperature; z scale 20x exaggerated"
+    },
+    "figure_02_logic_die_tsv_coordinates.png": {
+      "claim": "canonical manifest coordinates and bundle signal classes"
+    },
+    "figure_03_candidate_placement_comparison.png": {
+      "claim": "same-scale provisional candidate geometry"
+    },
+    "figure_04_openroad_routing_congestion.png": {
+      "claim": "global-routed conceptual macro proxy only"
+    },
+    "figure_05_power_temperature_heatmaps.png": {
+      "claim": "estimated 4 W reference finite-volume field; not calibrated"
+    },
+    "figure_06_cost_wire_temperature_pareto.png": {
+      "claim": "normalized cost proxy and modeled physical/thermal trade-off"
+    }
+  },
+  "raw_klayout_images": "output/floorplan_optimization/visualization/<strategy>/klayout_fixed_camera.png",
+  "signoff": false
+}

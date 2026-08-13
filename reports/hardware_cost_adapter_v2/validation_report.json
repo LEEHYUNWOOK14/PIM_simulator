@@ -1,0 +1,160 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "baseline exists",
+      "pass": true,
+      "detail": [
+        "synthetic_balanced",
+        "synthetic_high_performance",
+        "synthetic_low_area"
+      ]
+    },
+    {
+      "name": "revision ids unique",
+      "pass": true,
+      "detail": 3
+    },
+    {
+      "name": "architecture remains provisional",
+      "pass": true,
+      "detail": [
+        "synthetic_balanced",
+        "synthetic_high_performance",
+        "synthetic_low_area"
+      ]
+    },
+    {
+      "name": "Evidence Contract v2 schema and calibration invariants",
+      "pass": true,
+      "detail": {
+        "synthetic_balanced": [],
+        "synthetic_high_performance": [],
+        "synthetic_low_area": []
+      }
+    },
+    {
+      "name": "all cost categories present",
+      "pass": true,
+      "detail": [
+        "accumulator_reduction",
+        "bf16_fp16",
+        "buffer_register",
+        "control_routing",
+        "normalization_rounding"
+      ]
+    },
+    {
+      "name": "category power conservation",
+      "pass": true,
+      "detail": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "block power conservation",
+      "pass": true,
+      "detail": [
+        4.440892098500626e-16,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "source hashes and claim classes recorded",
+      "pass": true,
+      "detail": "sha256, byte count, and claim class"
+    },
+    {
+      "name": "metric values finite or null",
+      "pass": true,
+      "detail": "area/timing/energy/temperature"
+    },
+    {
+      "name": "paper outputs exist",
+      "pass": true,
+      "detail": [
+        "paper_revision_table.csv",
+        "paper_category_table.csv",
+        "paper_delta_table.csv",
+        "paper_regression_report.md",
+        "paper_revision_overview.png",
+        "paper_category_power.png",
+        "paper_timing_throughput.png",
+        "regression_summary.json"
+      ]
+    },
+    {
+      "name": "paper table covers every revision",
+      "pass": true,
+      "detail": [
+        "synthetic_low_area",
+        "synthetic_balanced",
+        "synthetic_high_performance"
+      ]
+    },
+    {
+      "name": "paper table exposes calibration levels",
+      "pass": true,
+      "detail": "five adapter axes"
+    },
+    {
+      "name": "baseline deltas are zero",
+      "pass": true,
+      "detail": {
+        "revision": "synthetic_low_area",
+        "label": "Synthetic low-area candidate",
+        "git_commit": "14dd245dbfc8d53177f73526ade4f0b72d2b7f6b",
+        "dirty": "True",
+        "parameter_status": "PROVISIONAL",
+        "physical_feasibility_status": "PENDING",
+        "rtl_freeze_allowed": "False",
+        "fp16_generic_cells": "",
+        "bf16_generic_cells": "80000",
+        "mapped_area_um2": "8000000.0",
+        "technology_mapped_area_um2": "",
+        "critical_path_ns": "12.0",
+        "slack_ns": "-2.0",
+        "dynamic_power_W": "2.64",
+        "leakage_power_W": "0.36",
+        "total_power_W": "3.0",
+        "energy_per_op_J": "",
+        "throughput_ops_s": "1000000000.0",
+        "peak_temperature_K": "318.0",
+        "hotspot_layer": "logic",
+        "hotspot_x": "1",
+        "hotspot_y": "1",
+        "physical_calibration": "synthetic",
+        "timing_calibration": "synthetic",
+        "power_calibration": "synthetic",
+        "thermal_calibration": "synthetic_architectural",
+        "workload_calibration": "workload_model",
+        "area_vs_baseline_pct": "0.0",
+        "area_vs_baseline_policy": "quantitative",
+        "power_vs_baseline_pct": "0.0",
+        "power_vs_baseline_policy": "quantitative",
+        "peak_delta_vs_baseline_K": "0.0",
+        "peak_vs_baseline_policy": "quantitative",
+        "energy_vs_baseline_pct": "",
+        "energy_vs_baseline_policy": "unavailable",
+        "critical_path_vs_baseline_pct": "0.0",
+        "critical_path_vs_baseline_policy": "quantitative",
+        "throughput_vs_baseline_pct": "0.0",
+        "throughput_vs_baseline_policy": "quantitative",
+        "area_vs_previous_pct": "",
+        "area_vs_previous_policy": "unavailable",
+        "power_vs_previous_pct": "",
+        "power_vs_previous_policy": "unavailable",
+        "peak_delta_vs_previous_K": "",
+        "peak_vs_previous_policy": "unavailable",
+        "critical_path_vs_previous_pct": "",
+        "critical_path_vs_previous_policy": "unavailable",
+        "throughput_vs_previous_pct": "",
+        "throughput_vs_previous_policy": "unavailable"
+      }
+    }
+  ],
+  "scope": "Revision regression plumbing; no final architecture choice or silicon signoff."
+}

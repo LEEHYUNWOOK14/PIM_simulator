@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stob-pim.local/schema/b0-b1-comparison-v1.json",
+  "title": "B0/B1 comparison result",
+  "type": "object",
+  "required": ["schema_version", "status", "comparable", "reasons", "experiments", "metrics"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "status": {"enum": ["PASS", "FAIL", "PENDING", "NOT_COMPARABLE"]},
+    "comparable": {"type": "boolean"},
+    "reasons": {"type": "array", "items": {"type": "string"}},
+    "experiments": {"type": "object", "required": ["b0", "b1"]},
+    "metrics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "unit", "status", "b0", "b1", "delta", "delta_pct"],
+        "properties": {
+          "name": {"type": "string"},
+          "unit": {"type": "string"},
+          "status": {"enum": ["PASS", "PENDING", "NOT_COMPARABLE"]},
+          "b0": {"type": ["number", "null"]},
+          "b1": {"type": ["number", "null"]},
+          "delta": {"type": ["number", "null"]},
+          "delta_pct": {"type": ["number", "null"]}
+        }
+      }
+    }
+  }
+}

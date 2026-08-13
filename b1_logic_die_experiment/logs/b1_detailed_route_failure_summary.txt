@@ -1,0 +1,16 @@
+B1 detailed-route terminal summary
+stage: 5_2_route
+exit_code: 1
+elapsed_seconds: 379
+last_progress: optimization iteration 0, 40 percent
+violations_at_last_progress: 13497
+last_logged_openroad_memory_mb: 4459.74
+termination: Linux OOM killer terminated openroad
+oom_total_vm_kb: 27717548
+oom_anon_rss_kb: 21195172
+oom_page_tables_kb: 53972
+result_5_2_route_odb: absent
+final_drc_antenna_gds: not produced
+
+Kernel OOM values were captured immediately after the failed standalone run.
+The original progress log is orfs_do-5_2_route.log.

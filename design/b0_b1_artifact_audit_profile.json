@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "repository_root": ".",
+  "metric_schema": "design/b0_b1_metric_schema.json",
+  "comparison_keys": ["workload_id", "clock_period_ns", "technology", "library_id", "physical_options_id"],
+  "equal_digest_groups": ["source", "tool", "library", "sdc", "stimulus"],
+  "common_sources": [
+    "rtl/pim_command_decoder.sv", "rtl/fp16_add.sv", "rtl/fp16_mul.sv",
+    "rtl/fp16_vector_add.sv", "rtl/pim_vector_alu.sv", "rtl/pim_crf.sv",
+    "rtl/dram_bank_array_model.sv", "rtl/bank_pim_core.sv", "rtl/bank_side_pim_subsystem.sv",
+    "rtl/logic_die_link_arbiter.sv", "rtl/channel_tsv_interconnect.sv", "rtl/logic_epoch_barrier.sv",
+    "rtl/logic_shared_buffer.sv", "rtl/logic_pcu.sv", "rtl/logic_pcu_scheduler.sv",
+    "rtl/logic_command_coalescer.sv", "rtl/logic_operand_context_buffer.sv",
+    "rtl/cross_channel_reduction_network.sv", "rtl/logic_result_router.sv",
+    "rtl/logic_die_pim_top.sv", "rtl/fp16_rsqrt_lut256.sv",
+    "rtl/logic_normalization_scalar_engine.sv", "rtl/logic_normalization_reduction_engine.sv",
+    "rtl/full_pim_system_top.sv"
+  ],
+  "experiments": {
+    "b0": {
+      "completion_token": "reports/b0_b1_artifact_audit/completion/b0.json",
+      "groups": {
+        "source": {"paths_from": "common_sources"},
+        "tool": {"paths": ["b0_baseline_experiment/manifest/yosys_version.txt", "b0_baseline_experiment/manifest/openroad_version.txt"]},
+        "library": {"paths": ["b0_baseline_experiment/manifest/library_sha256.txt"]},
+        "sdc": {"paths": ["b0_baseline_experiment/config/constraint.sdc"]},
+        "stimulus": {"paths": ["b0_baseline_experiment/tb/b0_full_pim_system_tb.sv"]},
+        "config": {"paths": ["b0_baseline_experiment/config/b0_configuration.txt", "b0_baseline_experiment/config/orfs_config.mk"]}
+      },
+      "required_artifacts": [
+        "b0_baseline_experiment/results/functional/b0_functional_results.csv",
+        "b0_baseline_experiment/results/functional/b0_run.log",
+        "b0_baseline_experiment/results/functional/b0_activity.vcd",
+        "b0_baseline_experiment/results/synthesis/b0_synthesis_metrics.csv",
+        "b0_baseline_experiment/results/synthesis/b0_generic.v",
+        "b0_baseline_experiment/results/synthesis/b0_sky130.v",
+        "b0_baseline_experiment/results/synthesis/b0_sky130_sta.log",
+        "b0_baseline_experiment/results/physical/orfs_paths.txt",
+        "b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/6_final.def",
+        "b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/6_final.gds",
+        "b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/6_final.odb",
+        "b0_baseline_experiment/results/power/b0_power_metrics.csv"
+      ],
+      "metric_sources": [
+        "b0_baseline_experiment/results/synthesis/b0_synthesis_metrics.csv",
+        "b0_baseline_experiment/results/physical/b0_physical_metrics.csv",
+        "b0_baseline_experiment/results/power/b0_power_metrics.csv"
+      ]
+    },
+    "b1": {
+      "completion_token": "reports/b0_b1_artifact_audit/completion/b1.json",
+      "groups": {
+        "source": {"paths_from": "common_sources"},
+        "tool": {"paths": ["b1_logic_die_experiment/manifest/yosys_version.txt", "b1_logic_die_experiment/manifest/openroad_version.txt"]},
+        "library": {"paths": ["b1_logic_die_experiment/manifest/library_sha256.txt"]},
+        "sdc": {"paths": ["b1_logic_die_experiment/constraint.sdc"]},
+        "stimulus": {"paths": ["b1_logic_die_experiment/b1_hierarchical_tb.sv"]},
+        "config": {"paths": ["b1_logic_die_experiment/configuration.txt", "b1_logic_die_experiment/orfs_config.mk"]}
+      },
+      "required_artifacts": [
+        "b1_logic_die_experiment/metrics/b1_functional_results.csv",
+        "b1_logic_die_experiment/logs/b1_functional.log",
+        "b1_logic_die_experiment/artifacts/b1_hierarchical.vcd",
+        "b1_logic_die_experiment/metrics/b1_synthesis_metrics.csv",
+        "b1_logic_die_experiment/logs/b1_pre_layout_sta.log",
+        "b1_logic_die_experiment/orfs/results/sky130hd/b1_logic_die_baseline/base/1_synth.v",
+        "b1_logic_die_experiment/metrics/b1_physical_metrics.csv",
+        "b1_logic_die_experiment/orfs/results/sky130hd/b1_logic_die_baseline/base/6_final.def",
+        "b1_logic_die_experiment/orfs/results/sky130hd/b1_logic_die_baseline/base/6_final.gds",
+        "b1_logic_die_experiment/orfs/results/sky130hd/b1_logic_die_baseline/base/6_final.odb",
+        "b1_logic_die_experiment/metrics/b1_power_metrics.csv"
+      ],
+      "metric_sources": [
+        "b1_logic_die_experiment/metrics/b1_synthesis_metrics.csv",
+        "b1_logic_die_experiment/metrics/b1_physical_metrics.csv",
+        "b1_logic_die_experiment/metrics/b1_power_metrics.csv"
+      ]
+    }
+  }
+}

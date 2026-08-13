@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-11T23:05:00+09:00",
+  "repository_commit": "eb03227e05575d37e8046418c4302963acff567b",
+  "working_tree": {
+    "dirty": true,
+    "porcelain_entries_at_capture": 265,
+    "rtl_entries_at_capture": 39,
+    "policy": "RTL and protocol files are read-only snapshot inputs for this goal."
+  },
+  "coordinate_system": {
+    "origin": "logic die lower-left",
+    "positive_x": "right",
+    "positive_y": "up",
+    "length_unit": "um"
+  },
+  "pipelines": [
+    {
+      "id": "hbm2_architecture",
+      "status": "PASS",
+      "evidence_class": "illustrative",
+      "command": ".venv/Scripts/python.exe tools/generate_hbm2_architecture.py --config design/hbm2_architecture.json --output output/floorplan_optimization/baseline/hbm2_arch",
+      "validation": "HBM2_ARCH_VALIDATION PASS; HBM2_ARCH_VARIANTS PASS",
+      "artifact": "output/floorplan_optimization/baseline/hbm2_arch/generation_manifest.json",
+      "sha256": "A5C20367950AB0D7A49DE14546D6715B8976E79F691E1AD8857EF50B4184FCEB",
+      "facts": {
+        "top_cell": "HBM2_PIM_ARCHITECTURE_NOT_SIGNOFF",
+        "stacks": 1,
+        "dram_dies": 8,
+        "physical_channels": 8,
+        "tsv_groups": 8,
+        "rtl_module_names_detected": 8
+      }
+    },
+    {
+      "id": "rtl_to_3d",
+      "status": "PASS",
+      "evidence_class": "synthetic",
+      "command": "tools/run_rtl_to_3d_analysis.ps1 with verification/rtl_to_3d/fixtures/report_manifest.json and isolated output paths",
+      "validation": "7 unittest cases PASS; units, bounds, unmapped detection and power conservation PASS",
+      "artifact": "output/floorplan_optimization/baseline/rtl_to_3d_wrapper/mapped_power.json",
+      "sha256": "5C1F86E27536350767BDEB78BCA3A716D023D95D915B2FF6C8F1581B80DFBA01",
+      "facts": {
+        "mapped_blocks": 5,
+        "input_power_W": 4.0,
+        "mapped_power_W": 4.0,
+        "power_conservation_error_W": 0.0
+      }
+    },
+    {
+      "id": "reference_thermal",
+      "status": "PASS",
+      "evidence_class": "modeled",
+      "command": ".venv/Scripts/python.exe tools/run_hbm2_thermal.py --mapped-power <isolated mapped_power.json> --output output/floorplan_optimization/baseline/thermal",
+      "validation": "reference solver completed; existing physics validation PASS",
+      "artifact": "output/floorplan_optimization/baseline/thermal/summary.json",
+      "sha256": "8A6B30726D6667AF85FA3961B4D204738B2A67CA4C20A5812AF9DE4C96375729",
+      "facts": {
+        "input_power_W": 4.0,
+        "peak_temperature_K": 322.58181130667003,
+        "peak_delta_K": 22.581811306670033,
+        "power_evidence_class": "synthetic"
+      }
+    },
+    {
+      "id": "hardware_cost",
+      "status": "PASS",
+      "evidence_class": "modeled",
+      "command": ".venv/Scripts/python.exe tools/run_hbm2_hardware_cost.py --config hardware_cost/config.json --thermal-summary <isolated summary.json> --output output/floorplan_optimization/baseline/cost",
+      "validation": "19 analytic, provenance, output and seeded-reproducibility checks PASS",
+      "artifact": "output/floorplan_optimization/baseline/cost/integrated_metrics.json",
+      "sha256": "8766F8405868E90D09E650FD38FC25CC2A6E823884CAC53DCDCB8A5F9038CDCC",
+      "limitations": [
+        "not a vendor quote",
+        "logic and DRAM die areas are illustrative",
+        "TSV keep-out and routing demand are low-confidence assumptions"
+      ]
+    },
+    {
+      "id": "klayout_architecture_check",
+      "status": "PASS",
+      "evidence_class": "structural_validation",
+      "command": "klayout_app.exe -zz -r tools/check_hbm2_gds_klayout.py",
+      "validation": "KLAYOUT_HBM2_GDS PASS: HBM2_PIM_ARCHITECTURE_NOT_SIGNOFF",
+      "artifact": "output/floorplan_optimization/baseline/hbm2_arch/hbm2_pim_architecture.gds"
+    },
+    {
+      "id": "openroad_existing_gds",
+      "status": "STALE_PASS_ARTIFACT",
+      "evidence_class": "routed",
+      "command": "historical OpenROAD-flow-scripts run documented in reports/rtl_audit/07_aud_009_014_repair_progress.md",
+      "validation": "FULL_PIM_GDS PASS top=full_pim_system_top cells=285 bbox=(0,0;1536465,1536465)",
+      "artifact": "output/output.gds",
+      "sha256": "C1BC8C4561D34112DB9DFE2C647C4D006F011E166AA73F2127EF342026E75CF1",
+      "facts": {
+        "configuration": "1 channel, 1 bank, 1 bank-PIM block, 1 PCU",
+        "bbox_um": [1536.465, 1536.465],
+        "detailed_route_violations": 274099,
+        "antenna_net_violations": 602,
+        "timing_closed_10ns": false
+      },
+      "limitations": [
+        "predates current dirty RTL snapshot",
+        "integration evidence only",
+        "not DRC clean",
+        "not timing closed"
+      ]
+    },
+    {
+      "id": "openroad_current_launcher",
+      "status": "FAIL",
+      "evidence_class": "environment_and_launcher_failure",
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File flow/run_flow.ps1",
+      "failure": "ORFS reports PLATFORM variable not set because RepoRoot=/mnt/c/orfs does not exist; configured legacy OpenROAD also fails to load libtclreadline-2.3.8.so",
+      "available_replacement": "/home/chandler/.local/stob-eda/openroad/bin/openroad",
+      "replacement_version": "26Q3-1080-gab6fd26351"
+    }
+  ],
+  "phase0_gate": {
+    "status": "PASS_WITH_RECORDED_OPENROAD_REPRODUCIBILITY_FAILURE",
+    "reason": "Existing flows and evidence classes are separated, baseline failures are explicit, and enhancement points are identified."
+  }
+}

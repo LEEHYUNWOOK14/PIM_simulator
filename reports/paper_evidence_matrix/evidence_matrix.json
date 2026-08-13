@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "physical_feasibility_source": "reports/hardware_cost_physical_feasibility/physical_feasibility.json",
+  "physical_status": "FAIL",
+  "gate_status": {
+    "PF-0": "PASS",
+    "PF-1": "PASS",
+    "PF-2": "PASS",
+    "PF-3": "PASS",
+    "PF-4": "FAIL"
+  },
+  "routing_claim_allowed": false,
+  "results": [
+    {
+      "id": "R-RTL-01",
+      "result": "HBM boundary-adapter behavior, protocol, and backpressure checks",
+      "basis": "rtl_simulation",
+      "required_gate": "PF-0",
+      "evidence": [
+        "reports/groot_normalization/hbm_boundary_adapter/05_completion_audit.md"
+      ],
+      "allowed_claim": "The boundary adapter passed the reported RTL-level functional checks.",
+      "boundary": "This does not establish synthesis, timing closure, placement, or routing.",
+      "classification": "rtl_simulated",
+      "gate_status": "PASS",
+      "claim_status": "SUPPORTED",
+      "evidence_records": [
+        {
+          "path": "reports/groot_normalization/hbm_boundary_adapter/05_completion_audit.md",
+          "bytes": 2133,
+          "sha256": "ffc88b36b5fcd45056b6c860a67d412ae4f6ac714a1eaaf69db79a73627c8c36"
+        }
+      ],
+      "missing_evidence": []
+    },
+    {
+      "id": "R-SYN-01",
+      "result": "Standalone adapter Sky130 mapping and constrained-path audit",
+      "basis": "technology_mapping",
+      "required_gate": "PF-1",
+      "evidence": [
+        "reports/groot_normalization/physical_feasibility/normalization_hbm_boundary_adapter_sky130_yosys.log",
+        "reports/groot_normalization/physical_feasibility/normalization_hbm_boundary_adapter_sky130_sta.log"
+      ],
+      "allowed_claim": "The standalone adapter was synthesized and technology-mapped with the reported proxy area and constrained STA result.",
+      "boundary": "The 40 ns project timing target is not met; no timing-closure claim is allowed.",
+      "classification": "synthesized",
+      "gate_status": "PASS",
+      "claim_status": "SUPPORTED",
+      "evidence_records": [
+        {
+          "path": "reports/groot_normalization/physical_feasibility/normalization_hbm_boundary_adapter_sky130_yosys.log",
+          "bytes": 277434,
+          "sha256": "6797ee19ecf7ba4f8b2b1015ae7afc7eb2b10f62b277c0923552317150d796bc"
+        },
+        {
+          "path": "reports/groot_normalization/physical_feasibility/normalization_hbm_boundary_adapter_sky130_sta.log",
+          "bytes": 5653063,
+          "sha256": "bad553c21f896928d3e5a3af8a8ad1a0a2e7db5708c6f3801bcd12f1fbffcbef"
+        }
+      ],
+      "missing_evidence": []
+    },
+    {
+      "id": "R-SYN-02",
+      "result": "Integrated PCU plus adapter Sky130 mapping",
+      "basis": "technology_mapping",
+      "required_gate": "PF-2",
+      "evidence": [
+        "reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_sky130_yosys.log",
+        "reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_sky130_sta.log"
+      ],
+      "allowed_claim": "The integrated PCU plus adapter was synthesized and technology-mapped in the public Sky130 proxy flow.",
+      "boundary": "This is proxy technology mapping, not production-process PPA or timing closure.",
+      "classification": "synthesized",
+      "gate_status": "PASS",
+      "claim_status": "SUPPORTED",
+      "evidence_records": [
+        {
+          "path": "reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_sky130_yosys.log",
+          "bytes": 1570264,
+          "sha256": "33e0f05928330a7c2b678558c0f4519c2bf847950992cfc8f77a51bfb5a55fee"
+        },
+        {
+          "path": "reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_sky130_sta.log",
+          "bytes": 11848,
+          "sha256": "e22ce0cf96f71986dee89ae215fde2520fe8abbd0802f9858c7132b412bfd0a6"
+        }
+      ],
+      "missing_evidence": []
+    },
+    {
+      "id": "R-PLC-01",
+      "result": "Integrated mapped-netlist legal coarse placement",
+      "basis": "legal_placement",
+      "required_gate": "PF-3",
+      "evidence": [
+        "reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_v2_repair_legalize.log"
+      ],
+      "allowed_claim": "The current mapped netlist reached legal coarse placement with zero final legalization violations.",
+      "boundary": "Legal placement does not establish routability, detailed-route completion, or signoff.",
+      "classification": "placed",
+      "gate_status": "PASS",
+      "claim_status": "SUPPORTED",
+      "evidence_records": [
+        {
+          "path": "reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_v2_repair_legalize.log",
+          "bytes": 2343,
+          "sha256": "8335b677fced450546bc5a40f51a11b0630c72e464c36a3382b4774347ca79f3"
+        }
+      ],
+      "missing_evidence": []
+    },
+    {
+      "id": "R-RTE-01",
+      "result": "Global-routing feasibility",
+      "basis": "global_routing",
+      "required_gate": "PF-4",
+      "evidence": [
+        "reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_v4_route.log",
+        "reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_v4.congestion.rpt"
+      ],
+      "allowed_claim": "The v4 full-net CUGR measurement produced a complete guide and congestion report, but residual severe congestion remains, the process did not emit a clean exit marker, and PF-4 failed.",
+      "boundary": "Routing feasibility remains unestablished; routability and congestion closure cannot be claimed, and RTL freeze remains blocked.",
+      "classification": "placed",
+      "gate_status": "FAIL",
+      "claim_status": "BLOCKED",
+      "evidence_records": [
+        {
+          "path": "reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_v4_route.log",
+          "bytes": 534,
+          "sha256": "fc8d495c549ec363ae520727ff341e0267141837d5979b680b81866f31e3152f"
+        },
+        {
+          "path": "reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_v4.congestion.rpt",
+          "bytes": 5424875,
+          "sha256": "8024aab4666baa702226587b996811dd322004b0228a01f31c4f4bf05d4eb05b"
+        }
+      ],
+      "missing_evidence": []
+    },
+    {
+      "id": "R-MOD-01",
+      "result": "Architectural latency, throughput, power, and thermal projections",
+      "basis": "computational_model",
+      "required_gate": null,
+      "evidence": [
+        "output/hbm2_hardware_cost/integrated_metrics.json"
+      ],
+      "allowed_claim": "These values are outputs of the stated architectural models under their documented inputs.",
+      "boundary": "They are not RTL measurements, post-route results, or silicon measurements.",
+      "classification": "modeled",
+      "gate_status": "NOT_APPLICABLE",
+      "claim_status": "SUPPORTED",
+      "evidence_records": [
+        {
+          "path": "output/hbm2_hardware_cost/integrated_metrics.json",
+          "bytes": 18805,
+          "sha256": "72ae20713d6f070d4d70dc9aa23d4770c1b585852167d52095a8c3fa1d33a68f"
+        }
+      ],
+      "missing_evidence": []
+    },
+    {
+      "id": "R-EST-01",
+      "result": "Manufacturing, yield, geometry, and cost assumptions",
+      "basis": "engineering_estimate",
+      "required_gate": null,
+      "evidence": [
+        "hardware_cost/config.json"
+      ],
+      "allowed_claim": "These values are engineering estimates used for sensitivity analysis.",
+      "boundary": "They are not vendor disclosures, quotes, or measured manufacturing data.",
+      "classification": "estimated",
+      "gate_status": "NOT_APPLICABLE",
+      "claim_status": "SUPPORTED",
+      "evidence_records": [
+        {
+          "path": "hardware_cost/config.json",
+          "bytes": 6342,
+          "sha256": "25996ec9edc25fd8a5496a317570e86ed1d85257f603f6255d5083d8ea148c82"
+        }
+      ],
+      "missing_evidence": []
+    },
+    {
+      "id": "R-ILL-01",
+      "result": "HBM2 package and floorplan visualizations",
+      "basis": "illustration",
+      "required_gate": null,
+      "evidence": [
+        "design/hbm2_architecture.json"
+      ],
+      "allowed_claim": "The figures illustrate the modeled architecture and relative organization.",
+      "boundary": "Shape placement and dimensions do not establish a manufacturable layout or routed connectivity.",
+      "classification": "illustrative",
+      "gate_status": "NOT_APPLICABLE",
+      "claim_status": "SUPPORTED",
+      "evidence_records": [
+        {
+          "path": "design/hbm2_architecture.json",
+          "bytes": 2477,
+          "sha256": "2a5e5b2676e57a28e21365bbdeebe7cc60a1a5558727d2fac1e9ac2f89b507f7"
+        }
+      ],
+      "missing_evidence": []
+    }
+  ]
+}

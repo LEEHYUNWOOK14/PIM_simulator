@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "normalization": "min_max_over_feasible_candidate_set",
+  "pareto_metrics": [
+    "peak_temperature_C",
+    "temperature_gradient_C_per_mm",
+    "hotspot_overlap_score",
+    "traffic_weighted_manhattan_um",
+    "tsv_access_distance_um",
+    "tsv_channel_distance_cv",
+    "global_route_overflow",
+    "setup_wns_ns",
+    "hold_wns_ns",
+    "static_ir_drop_mV",
+    "keepout_lost_area_um2",
+    "routing_corridor_area_um2",
+    "tsv_microbump_count",
+    "normalized_cost_proxy"
+  ],
+  "profiles": {
+    "cost_first": {"thermal": 0.10, "wirelength": 0.15, "congestion": 0.10, "timing": 0.10, "ir_drop": 0.05, "area_cost": 0.50},
+    "balanced": {"thermal": 0.25, "wirelength": 0.20, "congestion": 0.15, "timing": 0.15, "ir_drop": 0.10, "area_cost": 0.15},
+    "thermal_first": {"thermal": 0.55, "wirelength": 0.10, "congestion": 0.10, "timing": 0.10, "ir_drop": 0.10, "area_cost": 0.05}
+  },
+  "weight_sensitivity": {
+    "relative_perturbations": [-0.2, 0.0, 0.2],
+    "renormalize_to_one": true
+  },
+  "hard_constraints": {
+    "die_boundary": true,
+    "block_overlap": true,
+    "tsv_keepout": true,
+    "reserved_region": true,
+    "minimum_spacing": true,
+    "fixed_macro_preservation": true,
+    "allowed_region": true
+  },
+  "classification": "modeled",
+  "disclaimer": "Weights rank research candidates only; Pareto dominance is reported separately and no signoff claim is implied."
+}

@@ -1,0 +1,4 @@
+lanes,scalar_engines,weighted_rtl_cycles,weighted_elements,elements_per_cycle,speedup_vs_lane4,incremental_cycle_reduction_vs_previous,relative_cost_units,cost_ratio_vs_lane4,incremental_cost_vs_previous,independent_port_model_cycles,model_error_fraction,mixed_mismatches,pytorch_bit_mismatches_sample_rows,weighted_external_bytes,weighted_bank_internal_operand_bytes,max_contexts,accuracy_gate
+4,4,412945,21534720,52.149123975347806,1.0,0.0,848.75,1.0,0.0,371253,-0.1009625979246631,0,37,8608,215347200,9,PASS
+8,4,263048,21534720,81.8661232930872,1.5698465679267661,0.3629950719829517,1504.75,1.772901325478645,0.7729013254786451,231756,-0.11895927739423984,0,39,8608,215347200,9,PASS
+16,4,241282,21534720,89.25124957518588,1.7114621065806814,0.0827453544600225,2816.75,3.3187039764359354,0.8719056321648114,226599,-0.060854104326058304,0,37,8608,215347200,9,PASS

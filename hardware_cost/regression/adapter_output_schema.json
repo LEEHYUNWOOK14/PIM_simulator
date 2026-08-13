@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stob-pim.local/schemas/hardware-cost-adapter-output-v1.json",
+  "title": "Hardware-cost common adapter output contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "adapter_contract_version", "status", "candidate", "axis", "calibration", "claim_class", "tool", "operating_point", "metrics", "source_evidence", "notes"],
+  "$defs": {
+    "numberOrNull": {"type": ["number", "null"]},
+    "nonnegativeOrNull": {"type": ["number", "null"], "minimum": 0},
+    "categoryMetric": {
+      "type": "object", "additionalProperties": false,
+      "required": ["mapped_area_um2", "dynamic_power_W", "leakage_power_W", "total_power_W"],
+      "properties": {
+        "mapped_area_um2": {"$ref": "#/$defs/nonnegativeOrNull"},
+        "dynamic_power_W": {"$ref": "#/$defs/nonnegativeOrNull"},
+        "leakage_power_W": {"$ref": "#/$defs/nonnegativeOrNull"},
+        "total_power_W": {"$ref": "#/$defs/nonnegativeOrNull"}
+      }
+    },
+    "source": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "sha256", "bytes"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "bytes": {"type": ["integer", "null"], "minimum": 1}
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {"const": 1},
+    "adapter_contract_version": {"const": 1},
+    "status": {"enum": ["PASS", "UNAVAILABLE"]},
+    "candidate": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "label", "parameters"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1}, "label": {"type": "string", "minLength": 1},
+        "parameters": {
+          "type": "object", "additionalProperties": false,
+          "required": ["lanes", "bank_port_mode", "scheduler_policy", "context_depth"],
+          "properties": {"lanes": {"type": ["integer", "null"], "minimum": 1}, "bank_port_mode": {"type": ["string", "null"]}, "scheduler_policy": {"type": ["string", "null"]}, "context_depth": {"type": ["integer", "null"], "minimum": 1}}
+        }
+      }
+    },
+    "axis": {"enum": ["area", "timing", "power", "workload", "thermal"]},
+    "calibration": {"enum": ["not_available", "pending", "synthetic", "synthetic_architectural", "synthesis_generic", "technology_mapped", "placed", "activity_based", "workload_model", "post_route", "measured"]},
+    "claim_class": {"enum": ["measured", "derived", "modeled", "assumed"]},
+    "tool": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {"name": {"type": ["string", "null"]}, "version": {"type": ["string", "null"]}}
+    },
+    "operating_point": {
+      "type": "object", "additionalProperties": false,
+      "required": ["pdk", "library", "process_corner", "voltage_V", "temperature_C", "clock_constraint_ns", "workload_trace_id"],
+      "properties": {
+        "pdk": {"type": ["string", "null"]}, "library": {"type": ["string", "null"]}, "process_corner": {"type": ["string", "null"]},
+        "voltage_V": {"$ref": "#/$defs/nonnegativeOrNull"}, "temperature_C": {"$ref": "#/$defs/numberOrNull"},
+        "clock_constraint_ns": {"$ref": "#/$defs/nonnegativeOrNull"}, "workload_trace_id": {"type": ["string", "null"]}
+      }
+    },
+    "metrics": {"type": "object"},
+    "source_evidence": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/source"}},
+    "notes": {"type": "array", "items": {"type": "string"}}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"axis": {"const": "area"}}},
+      "then": {"properties": {"metrics": {
+        "type": "object", "additionalProperties": false,
+        "required": ["precision", "primary_category", "generic_cells", "generic_topological_path_length", "technology_mapped_area_um2", "mapped_floorplan_area_um2", "categories"],
+        "properties": {
+          "precision": {"type": "string", "minLength": 1}, "primary_category": {"type": "string", "minLength": 1},
+          "generic_cells": {"type": ["integer", "null"], "minimum": 0}, "generic_topological_path_length": {"type": ["integer", "null"], "minimum": 0},
+          "technology_mapped_area_um2": {"$ref": "#/$defs/nonnegativeOrNull"}, "mapped_floorplan_area_um2": {"$ref": "#/$defs/nonnegativeOrNull"},
+          "categories": {"type": "object", "additionalProperties": {"$ref": "#/$defs/categoryMetric"}}
+        }
+      }}}
+    },
+    {
+      "if": {"properties": {"axis": {"const": "timing"}}},
+      "then": {"properties": {"metrics": {
+        "type": "object", "additionalProperties": false, "required": ["critical_path_ns", "slack_ns"],
+        "properties": {"critical_path_ns": {"$ref": "#/$defs/nonnegativeOrNull"}, "slack_ns": {"$ref": "#/$defs/numberOrNull"}}
+      }}}
+    },
+    {
+      "if": {"properties": {"axis": {"const": "power"}}},
+      "then": {"properties": {"metrics": {
+        "type": "object", "additionalProperties": false, "required": ["dynamic_power_W", "leakage_power_W", "total_power_W", "categories", "blocks"],
+        "properties": {
+          "dynamic_power_W": {"$ref": "#/$defs/nonnegativeOrNull"}, "leakage_power_W": {"$ref": "#/$defs/nonnegativeOrNull"}, "total_power_W": {"$ref": "#/$defs/nonnegativeOrNull"},
+          "categories": {"type": "object", "additionalProperties": {"$ref": "#/$defs/categoryMetric"}},
+          "blocks": {"type": "array", "items": {"type": "object", "required": ["instance", "module", "category", "mapped_area_um2", "dynamic_power_W", "leakage_power_W", "total_power_W"]}}
+        }
+      }}}
+    },
+    {
+      "if": {"properties": {"axis": {"const": "workload"}}},
+      "then": {"properties": {"metrics": {
+        "type": "object", "additionalProperties": false, "required": ["name", "precision", "operation_count", "latency_cycles", "clock_period_ns", "throughput_ops_s"],
+        "properties": {
+          "name": {"type": ["string", "null"]}, "precision": {"type": ["string", "null"]}, "operation_count": {"$ref": "#/$defs/nonnegativeOrNull"},
+          "latency_cycles": {"$ref": "#/$defs/nonnegativeOrNull"}, "clock_period_ns": {"$ref": "#/$defs/nonnegativeOrNull"}, "throughput_ops_s": {"$ref": "#/$defs/nonnegativeOrNull"}
+        }
+      }}}
+    },
+    {
+      "if": {"properties": {"axis": {"const": "thermal"}}},
+      "then": {"properties": {"metrics": {
+        "type": "object", "additionalProperties": false, "required": ["peak_temperature_K", "peak_delta_K", "hotspot"],
+        "properties": {
+          "peak_temperature_K": {"$ref": "#/$defs/nonnegativeOrNull"}, "peak_delta_K": {"$ref": "#/$defs/nonnegativeOrNull"},
+          "hotspot": {"type": ["object", "null"], "properties": {"layer": {"type": "string"}, "x_index": {"type": "integer"}, "y_index": {"type": "integer"}}}
+        }
+      }}}
+    }
+  ]
+}

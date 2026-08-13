@@ -1,0 +1,151 @@
+{
+  "source_classification": "PRETRAINED_ACTION_HEAD_SYNTHETIC_BOUNDARY_INPUT",
+  "model": "nvidia/GR00T-N1.7-3B",
+  "model_revision": "2fc962b973bccdd5d8ce4f67cc63b264d6886495",
+  "mapping": {
+    "formula": "column=vector_address*(BANKS*LANES)+bank*LANES+lane",
+    "packed_order": "lane3..lane0; each lane is one 16-bit BF16 word",
+    "bank_parity": "bank_id bit 0",
+    "padding": "zero in invalid tail lanes",
+    "tag": "0x1000 + profile_index*0x400 + row"
+  },
+  "banks": 16,
+  "lanes": 4,
+  "profiles": [
+    {
+      "profile_id": "action_vlln",
+      "source_shape": [
+        1,
+        280,
+        2048
+      ],
+      "rows": 280,
+      "hidden_size": 2048,
+      "banks": 16,
+      "lanes": 4,
+      "vectors_per_bank": 32,
+      "packets": 143360,
+      "padding_elements": 0,
+      "input_elements": 573440,
+      "input_sha256": "fed1a9111ab1b995d05838cc5d2d2767d87b8cf6d6e46a51ec025ab0ec93ac88",
+      "roundtrip_sha256": "fed1a9111ab1b995d05838cc5d2d2767d87b8cf6d6e46a51ec025ab0ec93ac88",
+      "roundtrip_mismatches": 0,
+      "tag_base": "1000",
+      "packet_csv": "action_vlln_bank_packets.csv",
+      "packet_hex": "action_vlln_bank_packets.hex"
+    },
+    {
+      "profile_id": "action_vl_self_attention_norm1",
+      "source_shape": [
+        1,
+        280,
+        2048
+      ],
+      "rows": 280,
+      "hidden_size": 2048,
+      "banks": 16,
+      "lanes": 4,
+      "vectors_per_bank": 32,
+      "packets": 143360,
+      "padding_elements": 0,
+      "input_elements": 573440,
+      "input_sha256": "d14a46c68a37984b690fe05b2732c45636014d61f83fc302912492d56866effc",
+      "roundtrip_sha256": "d14a46c68a37984b690fe05b2732c45636014d61f83fc302912492d56866effc",
+      "roundtrip_mismatches": 0,
+      "tag_base": "1400",
+      "packet_csv": "action_vl_self_attention_norm1_bank_packets.csv",
+      "packet_hex": "action_vl_self_attention_norm1_bank_packets.hex"
+    },
+    {
+      "profile_id": "action_vl_self_attention_norm3",
+      "source_shape": [
+        1,
+        280,
+        2048
+      ],
+      "rows": 280,
+      "hidden_size": 2048,
+      "banks": 16,
+      "lanes": 4,
+      "vectors_per_bank": 32,
+      "packets": 143360,
+      "padding_elements": 0,
+      "input_elements": 573440,
+      "input_sha256": "648a77ebef0a1bc6b7aa71b6724e7427e082bc818b5fe65f6de842049ee8f9a2",
+      "roundtrip_sha256": "648a77ebef0a1bc6b7aa71b6724e7427e082bc818b5fe65f6de842049ee8f9a2",
+      "roundtrip_mismatches": 0,
+      "tag_base": "1800",
+      "packet_csv": "action_vl_self_attention_norm3_bank_packets.csv",
+      "packet_hex": "action_vl_self_attention_norm3_bank_packets.hex"
+    },
+    {
+      "profile_id": "action_dit_adaln_norm1",
+      "source_shape": [
+        1,
+        41,
+        1536
+      ],
+      "rows": 41,
+      "hidden_size": 1536,
+      "banks": 16,
+      "lanes": 4,
+      "vectors_per_bank": 24,
+      "packets": 15744,
+      "padding_elements": 0,
+      "input_elements": 62976,
+      "input_sha256": "a15b94232d5eb6a3bbcd2c135ffaa2914a8824f08bc023f80add56204ea728a6",
+      "roundtrip_sha256": "a15b94232d5eb6a3bbcd2c135ffaa2914a8824f08bc023f80add56204ea728a6",
+      "roundtrip_mismatches": 0,
+      "tag_base": "1c00",
+      "packet_csv": "action_dit_adaln_norm1_bank_packets.csv",
+      "packet_hex": "action_dit_adaln_norm1_bank_packets.hex"
+    },
+    {
+      "profile_id": "action_dit_norm3",
+      "source_shape": [
+        1,
+        41,
+        1536
+      ],
+      "rows": 41,
+      "hidden_size": 1536,
+      "banks": 16,
+      "lanes": 4,
+      "vectors_per_bank": 24,
+      "packets": 15744,
+      "padding_elements": 0,
+      "input_elements": 62976,
+      "input_sha256": "d4776086c5371681f1079b01ce903ce77f87b6a3c3b88f79d97291a0ed8ed251",
+      "roundtrip_sha256": "d4776086c5371681f1079b01ce903ce77f87b6a3c3b88f79d97291a0ed8ed251",
+      "roundtrip_mismatches": 0,
+      "tag_base": "2000",
+      "packet_csv": "action_dit_norm3_bank_packets.csv",
+      "packet_hex": "action_dit_norm3_bank_packets.hex"
+    },
+    {
+      "profile_id": "action_dit_norm_out",
+      "source_shape": [
+        1,
+        41,
+        1536
+      ],
+      "rows": 41,
+      "hidden_size": 1536,
+      "banks": 16,
+      "lanes": 4,
+      "vectors_per_bank": 24,
+      "packets": 15744,
+      "padding_elements": 0,
+      "input_elements": 62976,
+      "input_sha256": "0a605eebf397a3fd177515ffea3bd7faae29b6ffc307659ed2089df39b21ec03",
+      "roundtrip_sha256": "0a605eebf397a3fd177515ffea3bd7faae29b6ffc307659ed2089df39b21ec03",
+      "roundtrip_mismatches": 0,
+      "tag_base": "2400",
+      "packet_csv": "action_dit_norm_out_bank_packets.csv",
+      "packet_hex": "action_dit_norm_out_bank_packets.hex"
+    }
+  ],
+  "total_packets": 477312,
+  "total_roundtrip_mismatches": 0,
+  "status": "PASS"
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stob-pim.local/schema/b0-b1-metrics-v1.json",
+  "title": "B0/B1 baseline metric contract",
+  "schema_version": 1,
+  "metrics": {
+    "area_um2": {"unit": "um2", "direction": "lower", "required": true, "valid_exclusive_min": 0, "aliases": ["mapped_chip_area", "design_area"]},
+    "critical_path_ns": {"unit": "ns", "direction": "lower", "required": true, "valid_exclusive_min": 0, "aliases": ["prelayout_critical_path", "critical_path"]},
+    "power_mw": {"unit": "mW", "direction": "lower", "required": true, "valid_exclusive_min": 0, "aliases": ["total_power_mw", "power"]},
+    "energy_pj_per_work": {"unit": "pJ/work", "direction": "lower", "required": true, "valid_exclusive_min": 0, "aliases": ["energy_per_work_pj", "energy"]},
+    "congestion_overflow": {"unit": "count", "direction": "lower", "required": true, "valid_min": 0, "pass_max": 0, "aliases": ["global_route_overflow", "overflow"]},
+    "utilization_pct": {"unit": "%", "direction": "context", "required": true, "valid_exclusive_min": 0, "valid_max": 100, "aliases": ["core_utilization_pct", "utilization"]}
+  },
+  "metric_record": {
+    "type": "object",
+    "required": ["name", "value", "unit", "evidence", "source"],
+    "properties": {
+      "name": {"type": "string"},
+      "value": {"type": "number"},
+      "unit": {"type": "string"},
+      "evidence": {"enum": ["MEASURED", "RTL_SIMULATED", "SYNTHESIZED", "PLACED", "ROUTED", "MODELED", "ESTIMATED", "DERIVED"]},
+      "source": {"type": "string"}
+    },
+    "additionalProperties": false
+  }
+}

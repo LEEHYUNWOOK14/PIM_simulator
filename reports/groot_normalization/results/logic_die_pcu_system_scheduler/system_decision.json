@@ -1,0 +1,119 @@
+{
+  "objective": "logic-die PCU completes cross-bank normalization while minimizing external memory I/O",
+  "evidence_class": "ACTUAL_ACTION_HEAD_TRACE_PLUS_TRANSACTION_LEVEL_MODEL_PLUS_EXISTING_RTL_ACCURACY",
+  "trace_scope": "PRETRAINED_ACTION_HEAD_SYNTHETIC_BOUNDARY_INPUT_NOT_FULL_GROOT_INFERENCE",
+  "traffic": {
+    "invocations": 269,
+    "tensor_bytes": 43069440,
+    "affine_bytes": 73728,
+    "row_invocations": 13180,
+    "gpu_external_bytes": 86212608,
+    "bank_only_external_bytes": 3374080,
+    "pcu_external_bytes_resident": 8608,
+    "pcu_external_bytes_cold_affine": 82336,
+    "bank_array_reduction_read_bytes": 43069440,
+    "bank_array_replay_read_bytes": 43069440,
+    "bank_array_affine_read_bytes": 86138880,
+    "bank_array_writeback_bytes": 43069440,
+    "bank_to_logic_partial_bytes": 1687040,
+    "logic_to_bank_scalar_bytes": 1687040,
+    "external_reduction_fraction_resident": 0.9999001538150893,
+    "external_reduction_fraction_cold_affine": 0.9990449656736982
+  },
+  "cycle_model": {
+    "banks": 16,
+    "contexts": 8,
+    "scalar_engines": 4,
+    "global_reducer_latency": 14,
+    "layernorm_scalar_service_cycles": 63,
+    "rmsnorm_scalar_service_cycles": 51,
+    "local_reducer_contexts": 2,
+    "controller_row_handoff_cycles": 2,
+    "bounded_context_fixed_overhead": 11,
+    "apply_pipeline_latency": 12,
+    "bank_port_modes": [
+      "single_shared",
+      "split_rw",
+      "independent_pcu_ports"
+    ],
+    "clock_or_process_assumption": "NONE; output is cycles and transaction counts"
+  },
+  "candidate_decision": {
+    "recommended_knee_lanes": 8,
+    "pareto_frontier_lanes": [
+      4,
+      8,
+      16
+    ],
+    "bank_word_bits": 256,
+    "minimum_bank_supply_fraction": 0.5,
+    "lane_supply_fraction": {
+      "4": 0.25,
+      "8": 0.5,
+      "16": 1.0
+    },
+    "freeze_status": "FROZEN_8_LANES_SPLIT_RW_CONTEXTS8_FIFO16",
+    "selection_rule": "minimum hardware cost that consumes at least one 128-bit slice per active bank cycle",
+    "excluded_16_lane_reason": "passes throughput floor but costs more than the minimum passing 8-lane design"
+  },
+  "lane_dse": [
+    {
+      "lanes": 4,
+      "scalar_engines": 4,
+      "single_shared_weighted_cycles": 1014327,
+      "split_rw_weighted_cycles": 683989,
+      "independent_pcu_ports_weighted_cycles": 400841,
+      "split_rw_speedup_vs_lane4": 1.0,
+      "single_shared_speedup_vs_lane4": 1.0,
+      "fp32_adders": 372,
+      "fp32_multipliers": 208,
+      "rsqrt_units": 4,
+      "estimated_state_bits": 28544,
+      "relative_cost_units": 847.875,
+      "external_bytes_saved": 86204000,
+      "external_bytes_saved_per_cost_unit": 101670.64720625093,
+      "trace_accuracy_evidence": "EXISTING_FULL_RTL_MODEL_BIT_EXACT_6_OF_6"
+    },
+    {
+      "lanes": 8,
+      "scalar_engines": 4,
+      "single_shared_weighted_cycles": 516224,
+      "split_rw_weighted_cycles": 358483,
+      "independent_pcu_ports_weighted_cycles": 260044,
+      "split_rw_speedup_vs_lane4": 1.9080095848338694,
+      "single_shared_speedup_vs_lane4": 1.9648970214480534,
+      "fp32_adders": 628,
+      "fp32_multipliers": 400,
+      "rsqrt_units": 4,
+      "estimated_state_bits": 44928,
+      "relative_cost_units": 1503.875,
+      "external_bytes_saved": 86204000,
+      "external_bytes_saved_per_cost_unit": 57321.253428642674,
+      "trace_accuracy_evidence": "EXISTING_FULL_RTL_MODEL_BIT_EXACT_6_OF_6"
+    },
+    {
+      "lanes": 16,
+      "scalar_engines": 4,
+      "single_shared_weighted_cycles": 297522,
+      "split_rw_weighted_cycles": 248055,
+      "independent_pcu_ports_weighted_cycles": 241450,
+      "split_rw_speedup_vs_lane4": 2.757408639213078,
+      "single_shared_speedup_vs_lane4": 3.4092504083731625,
+      "fp32_adders": 1140,
+      "fp32_multipliers": 784,
+      "rsqrt_units": 4,
+      "estimated_state_bits": 77696,
+      "relative_cost_units": 2815.875,
+      "external_bytes_saved": 86204000,
+      "external_bytes_saved_per_cost_unit": 30613.57482132552,
+      "trace_accuracy_evidence": "EXISTING_FULL_RTL_MODEL_BIT_EXACT_6_OF_6"
+    }
+  ],
+  "gates": {
+    "numerical_accuracy": "PASS_FROM_EXISTING_6_PROFILE_FULL_RTL_REPLAY",
+    "external_io_reduction_resident": 0.9999001538150893,
+    "external_io_reduction_cold_affine": 0.9990449656736982,
+    "top_rtl_replay_writeback": "IMPLEMENTED_INTERFACE_REQUIRES_TRACE_REPLAY_VERIFICATION",
+    "process_signoff": "OUT_OF_SCOPE"
+  }
+}

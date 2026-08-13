@@ -1,0 +1,523 @@
+{
+  "disclaimer": "Architectural relative cost model; not a vendor quote, manufacturing yield disclosure, or signoff result.",
+  "baseline": "hbm2_8hi_1stack",
+  "results": [
+    {
+      "scenario": "hbm2_4hi_1stack",
+      "settings": {
+        "name": "hbm2_4hi_1stack",
+        "stacks": 1,
+        "dies": 4,
+        "pim_enabled": true,
+        "workload_scale": 1.0
+      },
+      "area": {
+        "footprint_area_mm2": 100.8,
+        "cumulative_silicon_mm2": 484.8,
+        "logic_area_mm2": 100.8,
+        "dram_silicon_mm2": 384.0,
+        "pim_added_area_mm2": 4.8,
+        "pim_area_overhead_ratio": 0.049999999999999996,
+        "tsv_koz_upper_bound_mm2": 0.5026548245743669,
+        "usable_logic_area_mm2": 92.29734517542563,
+        "tsv_count_model": 256
+      },
+      "package": {
+        "microbump_count_model": 3072,
+        "signal_tsv_count_model": 256,
+        "bond_interfaces": 4,
+        "interposer_area_mm2": 152.25,
+        "package_footprint_mm2": 192.0,
+        "stack_height_without_lid_mm": 0.34800000000000003,
+        "routing_demand_bit_equivalent": 1024.0,
+        "package_complexity_index": 0.725,
+        "normalized_terms": {
+          "interposer": 1.0,
+          "microbump": 0.5,
+          "tsv": 0.5,
+          "bond": 0.5,
+          "routing": 1.0
+        }
+      },
+      "yield": {
+        "logic_die_yield": 0.8227398823936554,
+        "dram_die_yield": 0.9098313728723629,
+        "bond_chain_yield": 0.980149500625,
+        "tsv_group_yield": 0.995,
+        "assembly_yield": 0.99,
+        "good_system_yield": 0.5443231198080322,
+        "expected_attempts_per_good_system": 1.8371440852129752,
+        "yield_model": "negative_binomial",
+        "kgd_assumption": "individual die yield retained explicitly; no perfect KGD claim"
+      },
+      "power_performance": {
+        "capacity_GB": 4.0,
+        "required_capacity_GB": 8.0,
+        "capacity_feasible": false,
+        "theoretical_bandwidth_GBs": 307.2,
+        "achieved_bandwidth_GBs": 215.04,
+        "bandwidth_utilization": 0.7,
+        "normalized_useful_performance": 387.072,
+        "estimated_power_W": 3.4499999999999997,
+        "energy_per_GB_work_J": 0.008913070436507936,
+        "io_energy_per_transferred_bit_pJ": 2.0054408482142856,
+        "pim_speedup_assumption": 1.8,
+        "power_evidence": "architectural/synthetic unless replaced by activity or measurement"
+      },
+      "thermal": {
+        "ambient_temperature_K": 300.0,
+        "predicted_peak_temperature_K": 316.0683701079024,
+        "peak_temperature_rise_K": 16.068370107902393,
+        "temperature_limit_K": 358.15,
+        "thermal_headroom_K": 42.08162989209757,
+        "equivalent_stack_thermal_resistance_K_W": 4.657498582000694,
+        "required_cooling_conductance_W_K": 0.05932932072227001,
+        "thermal_burden_ratio": 0.27632622713503696,
+        "thermal_feasible": true,
+        "reference_solver": "output/hbm2_thermal/reference/summary.json",
+        "evidence": "derived from the uncalibrated architectural thermal reference model"
+      },
+      "integration": {
+        "indices": {
+          "area": 0.5580110497237569,
+          "package": 0.725,
+          "yield": 0.671639076014902,
+          "energy": 0.7500000000000001,
+          "thermal": 0.6187499999999999
+        },
+        "combined_cost_index": 0.6609044061581876,
+        "normalized_performance": 1.0,
+        "performance_per_cost": 1.5130781254931591,
+        "feasible": false,
+        "feasibility": {
+          "thermal": true,
+          "capacity": false
+        },
+        "pareto_optimal": false
+      }
+    },
+    {
+      "scenario": "hbm2_8hi_1stack",
+      "settings": {
+        "name": "hbm2_8hi_1stack",
+        "stacks": 1,
+        "dies": 8,
+        "pim_enabled": true,
+        "workload_scale": 1.0
+      },
+      "area": {
+        "footprint_area_mm2": 100.8,
+        "cumulative_silicon_mm2": 868.8,
+        "logic_area_mm2": 100.8,
+        "dram_silicon_mm2": 768.0,
+        "pim_added_area_mm2": 4.8,
+        "pim_area_overhead_ratio": 0.049999999999999996,
+        "tsv_koz_upper_bound_mm2": 1.0053096491487339,
+        "usable_logic_area_mm2": 91.79469035085127,
+        "tsv_count_model": 512
+      },
+      "package": {
+        "microbump_count_model": 6144,
+        "signal_tsv_count_model": 512,
+        "bond_interfaces": 8,
+        "interposer_area_mm2": 152.25,
+        "package_footprint_mm2": 192.0,
+        "stack_height_without_lid_mm": 0.596,
+        "routing_demand_bit_equivalent": 1024.0,
+        "package_complexity_index": 1.0,
+        "normalized_terms": {
+          "interposer": 1.0,
+          "microbump": 1.0,
+          "tsv": 1.0,
+          "bond": 1.0,
+          "routing": 1.0
+        }
+      },
+      "yield": {
+        "logic_die_yield": 0.8227398823936554,
+        "dram_die_yield": 0.9098313728723629,
+        "bond_chain_yield": 0.9606930435754368,
+        "tsv_group_yield": 0.995,
+        "assembly_yield": 0.99,
+        "good_system_yield": 0.3655886772414155,
+        "expected_attempts_per_good_system": 2.7353144729360768,
+        "yield_model": "negative_binomial",
+        "kgd_assumption": "individual die yield retained explicitly; no perfect KGD claim"
+      },
+      "power_performance": {
+        "capacity_GB": 8.0,
+        "required_capacity_GB": 8.0,
+        "capacity_feasible": true,
+        "theoretical_bandwidth_GBs": 307.2,
+        "achieved_bandwidth_GBs": 215.04,
+        "bandwidth_utilization": 0.7,
+        "normalized_useful_performance": 387.072,
+        "estimated_power_W": 4.6,
+        "energy_per_GB_work_J": 0.011884093915343914,
+        "io_energy_per_transferred_bit_pJ": 2.6739211309523805,
+        "pim_speedup_assumption": 1.8,
+        "power_evidence": "architectural/synthetic unless replaced by activity or measurement"
+      },
+      "thermal": {
+        "ambient_temperature_K": 300.0,
+        "predicted_peak_temperature_K": 325.9690830026705,
+        "peak_temperature_rise_K": 25.969083002670537,
+        "temperature_limit_K": 358.15,
+        "thermal_headroom_K": 32.18091699732946,
+        "equivalent_stack_thermal_resistance_K_W": 5.645452826667508,
+        "required_cooling_conductance_W_K": 0.07910576096302668,
+        "thermal_burden_ratio": 0.4465878418344032,
+        "thermal_feasible": true,
+        "reference_solver": "output/hbm2_thermal/reference/summary.json",
+        "evidence": "derived from the uncalibrated architectural thermal reference model"
+      },
+      "integration": {
+        "indices": {
+          "area": 1.0,
+          "package": 1.0,
+          "yield": 1.0,
+          "energy": 1.0,
+          "thermal": 1.0
+        },
+        "combined_cost_index": 1.0,
+        "normalized_performance": 1.0,
+        "performance_per_cost": 1.0,
+        "feasible": true,
+        "feasibility": {
+          "thermal": true,
+          "capacity": true
+        },
+        "pareto_optimal": true
+      }
+    },
+    {
+      "scenario": "hbm2_12hi_1stack",
+      "settings": {
+        "name": "hbm2_12hi_1stack",
+        "stacks": 1,
+        "dies": 12,
+        "pim_enabled": true,
+        "workload_scale": 1.0
+      },
+      "area": {
+        "footprint_area_mm2": 100.8,
+        "cumulative_silicon_mm2": 1252.8,
+        "logic_area_mm2": 100.8,
+        "dram_silicon_mm2": 1152.0,
+        "pim_added_area_mm2": 4.8,
+        "pim_area_overhead_ratio": 0.049999999999999996,
+        "tsv_koz_upper_bound_mm2": 1.5079644737231008,
+        "usable_logic_area_mm2": 91.29203552627689,
+        "tsv_count_model": 768
+      },
+      "package": {
+        "microbump_count_model": 9216,
+        "signal_tsv_count_model": 768,
+        "bond_interfaces": 12,
+        "interposer_area_mm2": 152.25,
+        "package_footprint_mm2": 192.0,
+        "stack_height_without_lid_mm": 0.844,
+        "routing_demand_bit_equivalent": 1024.0,
+        "package_complexity_index": 1.275,
+        "normalized_terms": {
+          "interposer": 1.0,
+          "microbump": 1.5,
+          "tsv": 1.5,
+          "bond": 1.5,
+          "routing": 1.0
+        }
+      },
+      "yield": {
+        "logic_die_yield": 0.8227398823936554,
+        "dram_die_yield": 0.9098313728723629,
+        "bond_chain_yield": 0.9416228069143757,
+        "tsv_group_yield": 0.995,
+        "assembly_yield": 0.99,
+        "good_system_yield": 0.24554364138393456,
+        "expected_attempts_per_good_system": 4.07259578934235,
+        "yield_model": "negative_binomial",
+        "kgd_assumption": "individual die yield retained explicitly; no perfect KGD claim"
+      },
+      "power_performance": {
+        "capacity_GB": 12.0,
+        "required_capacity_GB": 8.0,
+        "capacity_feasible": true,
+        "theoretical_bandwidth_GBs": 307.2,
+        "achieved_bandwidth_GBs": 215.04,
+        "bandwidth_utilization": 0.7,
+        "normalized_useful_performance": 387.072,
+        "estimated_power_W": 5.75,
+        "energy_per_GB_work_J": 0.014855117394179895,
+        "io_energy_per_transferred_bit_pJ": 3.3424014136904763,
+        "pim_speedup_assumption": 1.8,
+        "power_evidence": "architectural/synthetic unless replaced by activity or measurement"
+      },
+      "thermal": {
+        "ambient_temperature_K": 300.0,
+        "predicted_peak_temperature_K": 338.14209066017236,
+        "peak_temperature_rise_K": 38.14209066017235,
+        "temperature_limit_K": 358.15,
+        "thermal_headroom_K": 20.00790933982762,
+        "equivalent_stack_thermal_resistance_K_W": 6.633407071334322,
+        "required_cooling_conductance_W_K": 0.09888220120378335,
+        "thermal_burden_ratio": 0.6559258926942797,
+        "thermal_feasible": true,
+        "reference_solver": "output/hbm2_thermal/reference/summary.json",
+        "evidence": "derived from the uncalibrated architectural thermal reference model"
+      },
+      "integration": {
+        "indices": {
+          "area": 1.441988950276243,
+          "package": 1.275,
+          "yield": 1.4888949075646285,
+          "energy": 1.2500000000000002,
+          "thermal": 1.46875
+        },
+        "combined_cost_index": 1.3811435222928024,
+        "normalized_performance": 1.0,
+        "performance_per_cost": 0.7240377150232183,
+        "feasible": true,
+        "feasibility": {
+          "thermal": true,
+          "capacity": true
+        },
+        "pareto_optimal": false
+      }
+    },
+    {
+      "scenario": "hbm2_8hi_2stack",
+      "settings": {
+        "name": "hbm2_8hi_2stack",
+        "stacks": 2,
+        "dies": 8,
+        "pim_enabled": true,
+        "workload_scale": 2.0
+      },
+      "area": {
+        "footprint_area_mm2": 201.6,
+        "cumulative_silicon_mm2": 1737.6,
+        "logic_area_mm2": 201.6,
+        "dram_silicon_mm2": 1536.0,
+        "pim_added_area_mm2": 9.6,
+        "pim_area_overhead_ratio": 0.049999999999999996,
+        "tsv_koz_upper_bound_mm2": 2.0106192982974678,
+        "usable_logic_area_mm2": 183.58938070170254,
+        "tsv_count_model": 1024
+      },
+      "package": {
+        "microbump_count_model": 12288,
+        "signal_tsv_count_model": 1024,
+        "bond_interfaces": 16,
+        "interposer_area_mm2": 304.5,
+        "package_footprint_mm2": 384.0,
+        "stack_height_without_lid_mm": 0.596,
+        "routing_demand_bit_equivalent": 2048.0,
+        "package_complexity_index": 2.0,
+        "normalized_terms": {
+          "interposer": 2.0,
+          "microbump": 2.0,
+          "tsv": 2.0,
+          "bond": 2.0,
+          "routing": 2.0
+        }
+      },
+      "yield": {
+        "logic_die_yield": 0.8227398823936554,
+        "dram_die_yield": 0.9098313728723629,
+        "bond_chain_yield": 0.9229311239742362,
+        "tsv_group_yield": 0.990025,
+        "assembly_yield": 0.9801,
+        "good_system_yield": 0.13365508092712788,
+        "expected_attempts_per_good_system": 7.481945265853568,
+        "yield_model": "negative_binomial",
+        "kgd_assumption": "individual die yield retained explicitly; no perfect KGD claim"
+      },
+      "power_performance": {
+        "capacity_GB": 16.0,
+        "required_capacity_GB": 8.0,
+        "capacity_feasible": true,
+        "theoretical_bandwidth_GBs": 614.4,
+        "achieved_bandwidth_GBs": 430.08,
+        "bandwidth_utilization": 0.7,
+        "normalized_useful_performance": 774.144,
+        "estimated_power_W": 9.2,
+        "energy_per_GB_work_J": 0.011884093915343914,
+        "io_energy_per_transferred_bit_pJ": 2.6739211309523805,
+        "pim_speedup_assumption": 1.8,
+        "power_evidence": "architectural/synthetic unless replaced by activity or measurement"
+      },
+      "thermal": {
+        "ambient_temperature_K": 300.0,
+        "predicted_peak_temperature_K": 351.9381660053411,
+        "peak_temperature_rise_K": 51.938166005341074,
+        "temperature_limit_K": 358.15,
+        "thermal_headroom_K": 6.211833994658889,
+        "equivalent_stack_thermal_resistance_K_W": 5.645452826667508,
+        "required_cooling_conductance_W_K": 0.15821152192605337,
+        "thermal_burden_ratio": 0.8931756836688064,
+        "thermal_feasible": true,
+        "reference_solver": "output/hbm2_thermal/reference/summary.json",
+        "evidence": "derived from the uncalibrated architectural thermal reference model"
+      },
+      "integration": {
+        "indices": {
+          "area": 2.0,
+          "package": 2.0,
+          "yield": 2.735314472936077,
+          "energy": 1.0,
+          "thermal": 2.0
+        },
+        "combined_cost_index": 1.853614636538505,
+        "normalized_performance": 2.0,
+        "performance_per_cost": 1.0789729216504567,
+        "feasible": true,
+        "feasibility": {
+          "thermal": true,
+          "capacity": true
+        },
+        "pareto_optimal": true
+      }
+    },
+    {
+      "scenario": "hbm2_8hi_no_pim",
+      "settings": {
+        "name": "hbm2_8hi_no_pim",
+        "stacks": 1,
+        "dies": 8,
+        "pim_enabled": false,
+        "workload_scale": 1.0
+      },
+      "area": {
+        "footprint_area_mm2": 96.0,
+        "cumulative_silicon_mm2": 864.0,
+        "logic_area_mm2": 96.0,
+        "dram_silicon_mm2": 768.0,
+        "pim_added_area_mm2": 0,
+        "pim_area_overhead_ratio": 0,
+        "tsv_koz_upper_bound_mm2": 1.0053096491487339,
+        "usable_logic_area_mm2": 86.99469035085127,
+        "tsv_count_model": 512
+      },
+      "package": {
+        "microbump_count_model": 6144,
+        "signal_tsv_count_model": 512,
+        "bond_interfaces": 8,
+        "interposer_area_mm2": 152.25,
+        "package_footprint_mm2": 192.0,
+        "stack_height_without_lid_mm": 0.596,
+        "routing_demand_bit_equivalent": 1024.0,
+        "package_complexity_index": 1.0,
+        "normalized_terms": {
+          "interposer": 1.0,
+          "microbump": 1.0,
+          "tsv": 1.0,
+          "bond": 1.0,
+          "routing": 1.0
+        }
+      },
+      "yield": {
+        "logic_die_yield": 0.8301854472236897,
+        "dram_die_yield": 0.9098313728723629,
+        "bond_chain_yield": 0.9606930435754368,
+        "tsv_group_yield": 0.995,
+        "assembly_yield": 0.99,
+        "good_system_yield": 0.36889715207748175,
+        "expected_attempts_per_good_system": 2.7107826513932096,
+        "yield_model": "negative_binomial",
+        "kgd_assumption": "individual die yield retained explicitly; no perfect KGD claim"
+      },
+      "power_performance": {
+        "capacity_GB": 8.0,
+        "required_capacity_GB": 8.0,
+        "capacity_feasible": true,
+        "theoretical_bandwidth_GBs": 307.2,
+        "achieved_bandwidth_GBs": 215.04,
+        "bandwidth_utilization": 0.7,
+        "normalized_useful_performance": 215.04,
+        "estimated_power_W": 4.0,
+        "energy_per_GB_work_J": 0.018601190476190476,
+        "io_energy_per_transferred_bit_pJ": 2.3251488095238098,
+        "pim_speedup_assumption": 1.0,
+        "power_evidence": "architectural/synthetic unless replaced by activity or measurement"
+      },
+      "thermal": {
+        "ambient_temperature_K": 300.0,
+        "predicted_peak_temperature_K": 322.58181130667003,
+        "peak_temperature_rise_K": 22.581811306670033,
+        "temperature_limit_K": 358.15,
+        "thermal_headroom_K": 35.568188693329944,
+        "equivalent_stack_thermal_resistance_K_W": 5.645452826667508,
+        "required_cooling_conductance_W_K": 0.06878761822871886,
+        "thermal_burden_ratio": 0.3883372537690463,
+        "thermal_feasible": true,
+        "reference_solver": "output/hbm2_thermal/reference/summary.json",
+        "evidence": "derived from the uncalibrated architectural thermal reference model"
+      },
+      "integration": {
+        "indices": {
+          "area": 0.994475138121547,
+          "package": 1.0,
+          "yield": 0.9910314438118207,
+          "energy": 1.5652173913043481,
+          "thermal": 0.8695652173913044
+        },
+        "combined_cost_index": 1.0605023561968878,
+        "normalized_performance": 0.5555555555555556,
+        "performance_per_cost": 0.5238607460975917,
+        "feasible": true,
+        "feasibility": {
+          "thermal": true,
+          "capacity": true
+        },
+        "pareto_optimal": true
+      }
+    }
+  ],
+  "uncertainty": [
+    {
+      "scenario": "hbm2_4hi_1stack",
+      "p05": 1.4413874905241968,
+      "p50": 1.58295001864285,
+      "p95": 1.769086999690303,
+      "best_rank_probability": 0.0,
+      "no_feasible_probability": 0.0305,
+      "samples": 2000
+    },
+    {
+      "scenario": "hbm2_8hi_1stack",
+      "p05": 1.0,
+      "p50": 1.0,
+      "p95": 1.0,
+      "best_rank_probability": 0.711,
+      "no_feasible_probability": 0.0305,
+      "samples": 2000
+    },
+    {
+      "scenario": "hbm2_12hi_1stack",
+      "p05": 0.62059973734796,
+      "p50": 0.691806923737968,
+      "p95": 0.7588892795043178,
+      "best_rank_probability": 0.0,
+      "no_feasible_probability": 0.0305,
+      "samples": 2000
+    },
+    {
+      "scenario": "hbm2_8hi_2stack",
+      "p05": 0.7816718662963362,
+      "p50": 0.962626914797886,
+      "p95": 1.1733855650724303,
+      "best_rank_probability": 0.111,
+      "no_feasible_probability": 0.0305,
+      "samples": 2000
+    },
+    {
+      "scenario": "hbm2_8hi_no_pim",
+      "p05": 0.37510819876893664,
+      "p50": 0.571176238936531,
+      "p95": 1.011744175251926,
+      "best_rank_probability": 0.1475,
+      "no_feasible_probability": 0.0305,
+      "samples": 2000
+    }
+  ]
+}

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import importlib.util
+import argparse
 import math
 import random
 import struct
@@ -13,7 +14,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 EVALUATOR = ROOT / "tools" / "evaluate_rsqrt_candidates.py"
-OUTPUT = ROOT / "verification" / "groot_normalization" / "normalization_scalar_vectors.hex"
 VECTOR_COUNT = 2048
 
 
@@ -27,19 +27,26 @@ def load_evaluator():
     return module
 
 
-def bits(value: float) -> int:
+def bits(value: float, dtype: str) -> int:
     if math.isnan(value):
-        return 0x7E00
-    return struct.unpack("<H", struct.pack("<e", value))[0]
+        return 0x7E00 if dtype == "FP16" else 0x7FC0
+    if dtype == "FP16":
+        return struct.unpack("<H", struct.pack("<e", value))[0]
+    word = struct.unpack(">I", struct.pack(">f", value))[0]
+    if (word & 0x7F800000) != 0x7F800000:
+        word += 0x7FFF + ((word >> 16) & 1)
+    return (word >> 16) & 0xFFFF
 
 
-def qneg(value: float, q) -> float:
-    encoded = bits(value) ^ 0x8000
-    return struct.unpack("<e", struct.pack("<H", encoded))[0]
+def qneg(value: float, dtype: str) -> float:
+    encoded = bits(value, dtype) ^ 0x8000
+    if dtype == "FP16":
+        return struct.unpack("<e", struct.pack("<H", encoded))[0]
+    return struct.unpack(">f", struct.pack(">I", encoded << 16))[0]
 
 
-def make_vector(module, index: int, rng: random.Random) -> int:
-    q = module.fp16
+def make_vector(module, index: int, rng: random.Random, dtype: str) -> int:
+    q = module.fp16 if dtype == "FP16" else module.bf16
     mode = index & 1
     hidden = (64, 256, 1536, 2048)[(index // 2) % 4]
     inv_hidden = q(1.0 / hidden)
@@ -58,33 +65,38 @@ def make_vector(module, index: int, rng: random.Random) -> int:
         clamped = 0
     else:
         mean_squared = q(mean * mean)
-        variance = q(mean_square + qneg(mean_squared, q))
+        variance = q(mean_square + qneg(mean_squared, dtype))
         clamped = int(math.copysign(1.0, variance) < 0.0 and variance != 0.0)
         if clamped:
             variance = q(0.0)
     argument = q(variance + epsilon)
-    inv_std = module.rsqrt_candidate(argument, "FP16", 0)
+    inv_std = module.rsqrt_candidate(argument, dtype, 0)
     packed = 0
     packed |= mode << 112
-    packed |= bits(sum_value) << 96
-    packed |= bits(sumsq_value) << 80
-    packed |= bits(inv_hidden) << 64
-    packed |= bits(epsilon) << 48
-    packed |= bits(mean) << 32
-    packed |= bits(inv_std) << 16
+    packed |= bits(sum_value, dtype) << 96
+    packed |= bits(sumsq_value, dtype) << 80
+    packed |= bits(inv_hidden, dtype) << 64
+    packed |= bits(epsilon, dtype) << 48
+    packed |= bits(mean, dtype) << 32
+    packed |= bits(inv_std, dtype) << 16
     packed |= clamped << 15
     packed |= index & 0x7FFF
     return packed
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--format", choices=("FP16", "BF16"), default="FP16")
+    args = parser.parse_args()
     module = load_evaluator()
     rng = random.Random(20260811)
-    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    with OUTPUT.open("w", encoding="ascii", newline="\n") as stream:
+    name = "normalization_scalar_vectors.hex" if args.format == "FP16" else "bf16_normalization_scalar_vectors.hex"
+    output = ROOT / "verification" / "groot_normalization" / name
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with output.open("w", encoding="ascii", newline="\n") as stream:
         for index in range(VECTOR_COUNT):
-            stream.write(f"{make_vector(module,index,rng):032x}\n")
-    print(f"WROTE normalization_scalar_vectors={VECTOR_COUNT}")
+            stream.write(f"{make_vector(module,index,rng,args.format):032x}\n")
+    print(f"WROTE {args.format} normalization_scalar_vectors={VECTOR_COUNT}")
 
 
 if __name__ == "__main__":

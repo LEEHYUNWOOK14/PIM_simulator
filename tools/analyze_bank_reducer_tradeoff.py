@@ -60,10 +60,17 @@ def main() -> None:
     params = load_parameters()
     ref = params["reference_point"]
     banks = int(ref["banks"])
-    logic_array = params["rtl_measurements"]["logic_normalization_engine_array"]
-    logic_cells = dict(zip(logic_array["engines"], logic_array["generic_cells"]))[
-        int(ref["logic_pcus"])
-    ]
+    if int(ref.get("logic_partial_input_ports", 1)) == 1:
+        logic_array = params["rtl_measurements"]["logic_normalization_dispatcher"]
+        logic_cells = dict(zip(logic_array["engines"],
+                               logic_array["generic_cells_with_dispatcher"]))[
+            int(ref["logic_pcus"])
+        ]
+    else:
+        logic_array = params["rtl_measurements"]["logic_normalization_engine_array"]
+        logic_cells = dict(zip(logic_array["engines"], logic_array["generic_cells"]))[
+            int(ref["logic_pcus"])
+        ]
     scalar_cells = int(params["rtl_measurements"]["bank_local_scalar_reducer_generic_cells_per_bank"]["value"])
     fixed = {}
     for case in ("gpu_full", "logic_only"):

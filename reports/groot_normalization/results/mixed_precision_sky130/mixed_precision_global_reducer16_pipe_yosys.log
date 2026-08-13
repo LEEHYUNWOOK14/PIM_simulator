@@ -1,0 +1,1570 @@
+
+-- Running command `read_liberty -lib -ignore_miss_func /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib; read_verilog -sv -I. rtl/bf16_to_fp32.sv rtl/fp32_to_bf16_rne.sv rtl/fp32_add.sv rtl/fp32_mul.sv rtl/fp32_add_pipe4.sv rtl/bf16_rsqrt_lut256.sv rtl/mixed_precision_bank_reducer4.sv rtl/mixed_precision_bank_reducer4_interleaved.sv rtl/mixed_precision_global_reducer16.sv rtl/mixed_precision_global_reducer16_pipe.sv rtl/mixed_precision_scalar_nr2.sv rtl/mixed_precision_bank_apply4.sv; hierarchy -check -top mixed_precision_global_reducer16_pipe; synth -noabc -top mixed_precision_global_reducer16_pipe; flatten; opt_clean; dfflibmap -liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib; abc -liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib; clean -purge; check -assert; stat -liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib; write_verilog -noattr reports/groot_normalization/results/mixed_precision_sky130/mixed_precision_global_reducer16_pipe.v' --
+
+1. Executing Liberty frontend: /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+Imported 428 cell types from liberty file.
+
+2. Executing Verilog-2005 frontend: rtl/bf16_to_fp32.sv
+Parsing SystemVerilog input from `rtl/bf16_to_fp32.sv' to AST representation.
+Generating RTLIL representation for module `\bf16_to_fp32'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: rtl/fp32_to_bf16_rne.sv
+Parsing SystemVerilog input from `rtl/fp32_to_bf16_rne.sv' to AST representation.
+Generating RTLIL representation for module `\fp32_to_bf16_rne'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: rtl/fp32_add.sv
+Parsing SystemVerilog input from `rtl/fp32_add.sv' to AST representation.
+Generating RTLIL representation for module `\fp32_add'.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: rtl/fp32_mul.sv
+Parsing SystemVerilog input from `rtl/fp32_mul.sv' to AST representation.
+Generating RTLIL representation for module `\fp32_mul'.
+Successfully finished Verilog frontend.
+
+6. Executing Verilog-2005 frontend: rtl/fp32_add_pipe4.sv
+Parsing SystemVerilog input from `rtl/fp32_add_pipe4.sv' to AST representation.
+Generating RTLIL representation for module `\fp32_add_pipe4'.
+Successfully finished Verilog frontend.
+
+7. Executing Verilog-2005 frontend: rtl/bf16_rsqrt_lut256.sv
+Parsing SystemVerilog input from `rtl/bf16_rsqrt_lut256.sv' to AST representation.
+Generating RTLIL representation for module `\bf16_rsqrt_lut256'.
+Successfully finished Verilog frontend.
+
+8. Executing Verilog-2005 frontend: rtl/mixed_precision_bank_reducer4.sv
+Parsing SystemVerilog input from `rtl/mixed_precision_bank_reducer4.sv' to AST representation.
+Generating RTLIL representation for module `\mixed_precision_bank_reducer4'.
+Successfully finished Verilog frontend.
+
+9. Executing Verilog-2005 frontend: rtl/mixed_precision_bank_reducer4_interleaved.sv
+Parsing SystemVerilog input from `rtl/mixed_precision_bank_reducer4_interleaved.sv' to AST representation.
+Generating RTLIL representation for module `\mixed_precision_bank_reducer4_interleaved'.
+Warning: Replacing memory \acc_slot_q with list of registers. See rtl/mixed_precision_bank_reducer4_interleaved.sv:47
+Warning: Replacing memory \slot_delay_q with list of registers. See rtl/mixed_precision_bank_reducer4_interleaved.sv:47
+Successfully finished Verilog frontend.
+
+10. Executing Verilog-2005 frontend: rtl/mixed_precision_global_reducer16.sv
+Parsing SystemVerilog input from `rtl/mixed_precision_global_reducer16.sv' to AST representation.
+Generating RTLIL representation for module `\mixed_precision_global_reducer16'.
+Successfully finished Verilog frontend.
+
+11. Executing Verilog-2005 frontend: rtl/mixed_precision_global_reducer16_pipe.sv
+Parsing SystemVerilog input from `rtl/mixed_precision_global_reducer16_pipe.sv' to AST representation.
+Generating RTLIL representation for module `\mixed_precision_global_reducer16_pipe'.
+Successfully finished Verilog frontend.
+
+12. Executing Verilog-2005 frontend: rtl/mixed_precision_scalar_nr2.sv
+Parsing SystemVerilog input from `rtl/mixed_precision_scalar_nr2.sv' to AST representation.
+Generating RTLIL representation for module `\mixed_precision_scalar_nr2'.
+Successfully finished Verilog frontend.
+
+13. Executing Verilog-2005 frontend: rtl/mixed_precision_bank_apply4.sv
+Parsing SystemVerilog input from `rtl/mixed_precision_bank_apply4.sv' to AST representation.
+Generating RTLIL representation for module `\mixed_precision_bank_apply4'.
+Successfully finished Verilog frontend.
+
+14. Executing HIERARCHY pass (managing design hierarchy).
+
+14.1. Analyzing design hierarchy..
+Top module:  \mixed_precision_global_reducer16_pipe
+Used module:     \fp32_add_pipe4
+
+14.2. Analyzing design hierarchy..
+Top module:  \mixed_precision_global_reducer16_pipe
+Used module:     \fp32_add_pipe4
+Removing unused module `\mixed_precision_bank_apply4'.
+Removing unused module `\mixed_precision_scalar_nr2'.
+Removing unused module `\mixed_precision_global_reducer16'.
+Removing unused module `\mixed_precision_bank_reducer4_interleaved'.
+Removing unused module `\mixed_precision_bank_reducer4'.
+Removing unused module `\bf16_rsqrt_lut256'.
+Removing unused module `\fp32_mul'.
+Removing unused module `\fp32_add'.
+Removing unused module `\fp32_to_bf16_rne'.
+Removing unused module `\bf16_to_fp32'.
+Removed 10 unused modules.
+
+15. Executing SYNTH pass.
+
+15.1. Executing HIERARCHY pass (managing design hierarchy).
+
+15.1.1. Analyzing design hierarchy..
+Top module:  \mixed_precision_global_reducer16_pipe
+Used module:     \fp32_add_pipe4
+
+15.1.2. Analyzing design hierarchy..
+Top module:  \mixed_precision_global_reducer16_pipe
+Used module:     \fp32_add_pipe4
+Removed 0 unused modules.
+
+15.2. Executing PROC pass (convert processes to netlists).
+
+15.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+15.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$rtl/mixed_precision_global_reducer16_pipe.sv:31$775 in module mixed_precision_global_reducer16_pipe.
+Marked 1 switch rules as full_case in process $proc$rtl/fp32_add_pipe4.sv:60$507 in module fp32_add_pipe4.
+Marked 7 switch rules as full_case in process $proc$rtl/fp32_add_pipe4.sv:49$494 in module fp32_add_pipe4.
+Marked 29 switch rules as full_case in process $proc$rtl/fp32_add_pipe4.sv:44$375 in module fp32_add_pipe4.
+Marked 2 switch rules as full_case in process $proc$rtl/fp32_add_pipe4.sv:37$369 in module fp32_add_pipe4.
+Marked 4 switch rules as full_case in process $proc$rtl/fp32_add_pipe4.sv:24$304 in module fp32_add_pipe4.
+Removed a total of 0 dead cases.
+
+15.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 39 assignments to connections.
+
+15.2.4. Executing PROC_INIT pass (extract init attributes).
+
+15.2.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_ni in `\mixed_precision_global_reducer16_pipe.$proc$rtl/mixed_precision_global_reducer16_pipe.sv:31$775'.
+Found async reset \rst_ni in `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+
+15.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~46 debug messages>
+
+15.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\mixed_precision_global_reducer16_pipe.$proc$rtl/mixed_precision_global_reducer16_pipe.sv:31$775'.
+     1/6: $0\sumsq_o[31:0]
+     2/6: $0\sum_o[31:0]
+     3/6: $0\output_tag_o[15:0]
+     4/6: $0\tag_q[15:0]
+     5/6: $0\busy_q[0:0]
+     6/6: $0\output_valid_o[0:0]
+Creating decoders for process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+     1/26: $0\valid_q[2:0] [2]
+     2/26: $0\valid_q[2:0] [1]
+     3/26: $0\valid_q[2:0] [0]
+     4/26: $0\invalid2_q[0:0]
+     5/26: $0\inf2_q[0:0]
+     6/26: $0\nan2_q[0:0]
+     7/26: $0\sign2_q[0:0]
+     8/26: $0\exp2_q[8:0]
+     9/26: $0\mag2_q[26:0]
+    10/26: $0\zeros1_q[0:0]
+    11/26: $0\invalid1_q[0:0]
+    12/26: $0\inf1_q[0:0]
+    13/26: $0\nan1_q[0:0]
+    14/26: $0\sign1_q[0:0]
+    15/26: $0\exp1_q[8:0]
+    16/26: $0\mag1_q[26:0]
+    17/26: $0\zeros0_q[0:0]
+    18/26: $0\invalid0_q[0:0]
+    19/26: $0\inf0_q[0:0]
+    20/26: $0\nan0_q[0:0]
+    21/26: $0\ssign_q[0:0]
+    22/26: $0\lsign_q[0:0]
+    23/26: $0\small_q[26:0]
+    24/26: $0\large_q[26:0]
+    25/26: $0\le_q[7:0]
+    26/26: $0\zeros2_q[0:0]
+Creating decoders for process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:49$494'.
+     1/8: $6\result3_d[31:0]
+     2/8: $5\result3_d[31:0]
+     3/8: $4\result3_d[31:0]
+     4/8: $3\result3_d[31:0]
+     5/8: $2\result3_d[31:0]
+     6/8: $1\result3_d[31:0]
+     7/8: $1\packed_exp_d[8:0]
+     8/8: $1\rounded3_d[24:0]
+Creating decoders for process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:44$375'.
+     1/56: $2\norm_shift_d[31:0]
+     2/56: $1\norm_shift_d[31:0]
+     3/56: $27\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$487
+     4/56: $27\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$486
+     5/56: $26\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$483
+     6/56: $26\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$482
+     7/56: $25\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$479
+     8/56: $25\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$478
+     9/56: $24\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$475
+    10/56: $24\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$474
+    11/56: $23\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$471
+    12/56: $23\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$470
+    13/56: $22\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$467
+    14/56: $22\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$466
+    15/56: $21\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$463
+    16/56: $21\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$462
+    17/56: $20\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$459
+    18/56: $20\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$458
+    19/56: $19\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$455
+    20/56: $19\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$454
+    21/56: $18\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$451
+    22/56: $18\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$450
+    23/56: $17\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$447
+    24/56: $17\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$446
+    25/56: $16\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$443
+    26/56: $16\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$442
+    27/56: $15\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$439
+    28/56: $15\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$438
+    29/56: $14\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$435
+    30/56: $14\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$434
+    31/56: $13\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$431
+    32/56: $13\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$430
+    33/56: $12\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$427
+    34/56: $12\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$426
+    35/56: $11\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$423
+    36/56: $11\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$422
+    37/56: $10\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$419
+    38/56: $10\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$418
+    39/56: $9\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$415
+    40/56: $9\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$414
+    41/56: $8\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$411
+    42/56: $8\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$410
+    43/56: $7\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$407
+    44/56: $7\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$406
+    45/56: $6\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$403
+    46/56: $6\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$402
+    47/56: $5\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$399
+    48/56: $5\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$398
+    49/56: $4\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$395
+    50/56: $4\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$394
+    51/56: $3\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$391
+    52/56: $3\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$390
+    53/56: $2\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$387
+    54/56: $2\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$386
+    55/56: $1\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.found[0:0]$383
+    56/56: $1\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$382
+Creating decoders for process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:37$369'.
+     1/6: $2\mag1_d[26:0] [26:1]
+     2/6: $2\exp1_d[8:0]
+     3/6: $2\mag1_d[26:0] [0]
+     4/6: $1\exp1_d[8:0]
+     5/6: $1\mag1_d[26:0]
+     6/6: $1\add1_d[27:0]
+Creating decoders for process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+     1/12: $2\lsign_d[0:0]
+     2/12: $2\shift_right_sticky$func$rtl/fp32_add_pipe4.sv:28$302.$result[26:0]$329 [26:1]
+     3/12: $2\shift_right_sticky$func$rtl/fp32_add_pipe4.sv:28$302.$result[26:0]$329 [0]
+     4/12: $2\shift_right_sticky$func$rtl/fp32_add_pipe4.sv:28$302.sticky[0:0]$330
+     5/12: $1\shift_right_sticky$func$rtl/fp32_add_pipe4.sv:28$302.$result[26:0]$326
+     6/12: $1\shift_right_sticky$func$rtl/fp32_add_pipe4.sv:28$302.sticky[0:0]$327
+     7/12: $1\ssign_d[0:0]
+     8/12: $1\lsign_d[0:0]
+     9/12: $1\ss_d[23:0]
+    10/12: $1\ls_d[23:0]
+    11/12: $1\se_d[7:0]
+    12/12: $1\le_d[7:0]
+
+15.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\fp32_add_pipe4.\round3_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:49$494'.
+No latch inferred for signal `\fp32_add_pipe4.\rounded3_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:49$494'.
+No latch inferred for signal `\fp32_add_pipe4.\packed_exp_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:49$494'.
+No latch inferred for signal `\fp32_add_pipe4.\result3_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:49$494'.
+No latch inferred for signal `\fp32_add_pipe4.\lz2_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:44$375'.
+No latch inferred for signal `\fp32_add_pipe4.\norm_shift_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:44$375'.
+No latch inferred for signal `\fp32_add_pipe4.\mag2_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:44$375'.
+No latch inferred for signal `\fp32_add_pipe4.\exp2_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:44$375'.
+No latch inferred for signal `\fp32_add_pipe4.\add1_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:37$369'.
+No latch inferred for signal `\fp32_add_pipe4.\mag1_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:37$369'.
+No latch inferred for signal `\fp32_add_pipe4.\exp1_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:37$369'.
+No latch inferred for signal `\fp32_add_pipe4.\sign1_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:37$369'.
+No latch inferred for signal `\fp32_add_pipe4.\le_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\se_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\ls_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\ss_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\large_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\small_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\lsign_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\ssign_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\nan_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\inf_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\invalid_inf_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\zeros_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\shift_d' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\lexp' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\rexp' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\lfrac' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\rfrac' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\lsig' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+No latch inferred for signal `\fp32_add_pipe4.\rsig' from process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+
+15.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\mixed_precision_global_reducer16_pipe.\output_valid_o' using process `\mixed_precision_global_reducer16_pipe.$proc$rtl/mixed_precision_global_reducer16_pipe.sv:31$775'.
+  created $adff cell `$procdff$1223' with positive edge clock and positive level reset.
+Creating register for signal `\mixed_precision_global_reducer16_pipe.\busy_q' using process `\mixed_precision_global_reducer16_pipe.$proc$rtl/mixed_precision_global_reducer16_pipe.sv:31$775'.
+  created $adff cell `$procdff$1228' with positive edge clock and positive level reset.
+Creating register for signal `\mixed_precision_global_reducer16_pipe.\tag_q' using process `\mixed_precision_global_reducer16_pipe.$proc$rtl/mixed_precision_global_reducer16_pipe.sv:31$775'.
+  created $adff cell `$procdff$1233' with positive edge clock and positive level reset.
+Creating register for signal `\mixed_precision_global_reducer16_pipe.\output_tag_o' using process `\mixed_precision_global_reducer16_pipe.$proc$rtl/mixed_precision_global_reducer16_pipe.sv:31$775'.
+  created $adff cell `$procdff$1238' with positive edge clock and positive level reset.
+Creating register for signal `\mixed_precision_global_reducer16_pipe.\sum_o' using process `\mixed_precision_global_reducer16_pipe.$proc$rtl/mixed_precision_global_reducer16_pipe.sv:31$775'.
+  created $adff cell `$procdff$1243' with positive edge clock and positive level reset.
+Creating register for signal `\mixed_precision_global_reducer16_pipe.\sumsq_o' using process `\mixed_precision_global_reducer16_pipe.$proc$rtl/mixed_precision_global_reducer16_pipe.sv:31$775'.
+  created $adff cell `$procdff$1248' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\valid_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1253' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\le_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1258' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\large_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1263' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\small_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1268' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\lsign_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1273' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\ssign_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1278' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\nan0_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1283' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\inf0_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1288' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\invalid0_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1293' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\zeros0_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1298' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\mag1_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1303' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\exp1_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1308' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\sign1_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1313' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\nan1_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1318' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\inf1_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1323' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\invalid1_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1328' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\zeros1_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1333' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\mag2_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1338' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\exp2_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1343' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\sign2_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1348' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\nan2_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1353' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\inf2_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1358' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\invalid2_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1363' with positive edge clock and positive level reset.
+Creating register for signal `\fp32_add_pipe4.\zeros2_q' using process `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+  created $adff cell `$procdff$1368' with positive edge clock and positive level reset.
+
+15.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+15.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 3 empty switches in `\mixed_precision_global_reducer16_pipe.$proc$rtl/mixed_precision_global_reducer16_pipe.sv:31$775'.
+Removing empty process `mixed_precision_global_reducer16_pipe.$proc$rtl/mixed_precision_global_reducer16_pipe.sv:31$775'.
+Found and cleaned up 1 empty switch in `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+Removing empty process `fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:60$507'.
+Found and cleaned up 7 empty switches in `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:49$494'.
+Removing empty process `fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:49$494'.
+Found and cleaned up 29 empty switches in `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:44$375'.
+Removing empty process `fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:44$375'.
+Found and cleaned up 2 empty switches in `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:37$369'.
+Removing empty process `fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:37$369'.
+Found and cleaned up 4 empty switches in `\fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+Removing empty process `fp32_add_pipe4.$proc$rtl/fp32_add_pipe4.sv:24$304'.
+Cleaned up 46 empty switches.
+
+15.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_global_reducer16_pipe.
+<suppressed ~12 debug messages>
+Optimizing module fp32_add_pipe4.
+<suppressed ~70 debug messages>
+
+15.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_global_reducer16_pipe.
+Optimizing module fp32_add_pipe4.
+
+15.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_global_reducer16_pipe..
+Finding unused cells or wires in module \fp32_add_pipe4..
+Removed 37 unused cells and 388 unused wires.
+<suppressed ~40 debug messages>
+
+15.5. Executing CHECK pass (checking for obvious problems).
+Checking module mixed_precision_global_reducer16_pipe...
+Checking module fp32_add_pipe4...
+Found and reported 0 problems.
+
+15.6. Executing OPT pass (performing simple optimizations).
+
+15.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_global_reducer16_pipe.
+Optimizing module fp32_add_pipe4.
+
+15.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mixed_precision_global_reducer16_pipe'.
+Computing hashes of 65 cells of `\mixed_precision_global_reducer16_pipe'.
+Finding duplicate cells in `\mixed_precision_global_reducer16_pipe'.
+Computing hashes of 57 cells of `\mixed_precision_global_reducer16_pipe'.
+Finding duplicate cells in `\mixed_precision_global_reducer16_pipe'.
+<suppressed ~24 debug messages>
+Finding identical cells in module `\fp32_add_pipe4'.
+Computing hashes of 278 cells of `\fp32_add_pipe4'.
+Finding duplicate cells in `\fp32_add_pipe4'.
+Computing hashes of 263 cells of `\fp32_add_pipe4'.
+Finding duplicate cells in `\fp32_add_pipe4'.
+Computing hashes of 262 cells of `\fp32_add_pipe4'.
+Finding duplicate cells in `\fp32_add_pipe4'.
+<suppressed ~48 debug messages>
+Removed a total of 24 cells.
+
+15.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mixed_precision_global_reducer16_pipe..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp32_add_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+      Replacing known input bits on port A of cell $procmux$977: $add$rtl/fp32_add_pipe4.sv:50$498_Y -> { 1'0 $add$rtl/fp32_add_pipe4.sv:50$498_Y [23:0] }
+      Replacing known input bits on port B of cell $procmux$977: { 1'0 $add$rtl/fp32_add_pipe4.sv:50$498_Y [24:1] } -> { 2'01 $add$rtl/fp32_add_pipe4.sv:50$498_Y [23:1] }
+      Replacing known input bits on port B of cell $procmux$1149: $add$rtl/fp32_add_pipe4.sv:39$371_Y [27:2] -> { 1'1 $add$rtl/fp32_add_pipe4.sv:39$371_Y [26:2] }
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$1187.
+    dead port 1/2 on $mux $procmux$1181.
+    dead port 2/2 on $mux $procmux$1163.
+    dead port 2/2 on $mux $procmux$1157.
+    dead port 2/2 on $mux $procmux$1151.
+    dead port 1/2 on $mux $procmux$968.
+    dead port 1/2 on $mux $procmux$962.
+    dead port 1/2 on $mux $procmux$959.
+    dead port 1/2 on $mux $procmux$953.
+    dead port 1/2 on $mux $procmux$950.
+    dead port 1/2 on $mux $procmux$947.
+    dead port 1/2 on $mux $procmux$941.
+    dead port 1/2 on $mux $procmux$938.
+    dead port 1/2 on $mux $procmux$935.
+    dead port 1/2 on $mux $procmux$932.
+    dead port 1/2 on $mux $procmux$926.
+    dead port 1/2 on $mux $procmux$923.
+    dead port 1/2 on $mux $procmux$920.
+    dead port 1/2 on $mux $procmux$917.
+    dead port 1/2 on $mux $procmux$914.
+Removed 20 multiplexer ports.
+<suppressed ~207 debug messages>
+
+15.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mixed_precision_global_reducer16_pipe.
+  Optimizing cells in module \fp32_add_pipe4.
+    New input vector for $reduce_or cell $reduce_or$rtl/fp32_add_pipe4.sv:12$331: \ss_d
+  Optimizing cells in module \fp32_add_pipe4.
+Performed a total of 1 changes.
+
+15.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mixed_precision_global_reducer16_pipe'.
+Computing hashes of 57 cells of `\mixed_precision_global_reducer16_pipe'.
+Finding duplicate cells in `\mixed_precision_global_reducer16_pipe'.
+Finding identical cells in module `\fp32_add_pipe4'.
+Computing hashes of 242 cells of `\fp32_add_pipe4'.
+Finding duplicate cells in `\fp32_add_pipe4'.
+Computing hashes of 238 cells of `\fp32_add_pipe4'.
+Finding duplicate cells in `\fp32_add_pipe4'.
+<suppressed ~12 debug messages>
+Removed a total of 4 cells.
+
+15.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+15.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_global_reducer16_pipe..
+Finding unused cells or wires in module \fp32_add_pipe4..
+Removed 0 unused cells and 48 unused wires.
+<suppressed ~2 debug messages>
+
+15.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_global_reducer16_pipe.
+Optimizing module fp32_add_pipe4.
+
+15.6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+15.6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mixed_precision_global_reducer16_pipe..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp32_add_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~183 debug messages>
+
+15.6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mixed_precision_global_reducer16_pipe.
+  Optimizing cells in module \fp32_add_pipe4.
+Performed a total of 0 changes.
+
+15.6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mixed_precision_global_reducer16_pipe'.
+Computing hashes of 57 cells of `\mixed_precision_global_reducer16_pipe'.
+Finding duplicate cells in `\mixed_precision_global_reducer16_pipe'.
+Finding identical cells in module `\fp32_add_pipe4'.
+Computing hashes of 238 cells of `\fp32_add_pipe4'.
+Finding duplicate cells in `\fp32_add_pipe4'.
+Removed a total of 0 cells.
+
+15.6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+15.6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_global_reducer16_pipe..
+Finding unused cells or wires in module \fp32_add_pipe4..
+
+15.6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_global_reducer16_pipe.
+Optimizing module fp32_add_pipe4.
+
+15.6.16. Finished fast OPT passes. (There is nothing left to do.)
+
+15.7. Executing FSM pass (extract and optimize FSM).
+
+15.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+15.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+15.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+15.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_global_reducer16_pipe..
+Finding unused cells or wires in module \fp32_add_pipe4..
+
+15.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+15.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+15.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+15.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+15.8. Executing OPT pass (performing simple optimizations).
+
+15.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_global_reducer16_pipe.
+Optimizing module fp32_add_pipe4.
+
+15.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mixed_precision_global_reducer16_pipe'.
+Computing hashes of 57 cells of `\mixed_precision_global_reducer16_pipe'.
+Finding duplicate cells in `\mixed_precision_global_reducer16_pipe'.
+Finding identical cells in module `\fp32_add_pipe4'.
+Computing hashes of 238 cells of `\fp32_add_pipe4'.
+Finding duplicate cells in `\fp32_add_pipe4'.
+Removed a total of 0 cells.
+
+15.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mixed_precision_global_reducer16_pipe..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp32_add_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~183 debug messages>
+
+15.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mixed_precision_global_reducer16_pipe.
+  Optimizing cells in module \fp32_add_pipe4.
+Performed a total of 0 changes.
+
+15.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mixed_precision_global_reducer16_pipe'.
+Computing hashes of 57 cells of `\mixed_precision_global_reducer16_pipe'.
+Finding duplicate cells in `\mixed_precision_global_reducer16_pipe'.
+Finding identical cells in module `\fp32_add_pipe4'.
+Computing hashes of 238 cells of `\fp32_add_pipe4'.
+Finding duplicate cells in `\fp32_add_pipe4'.
+Removed a total of 0 cells.
+
+15.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$1228 ($adff) from module mixed_precision_global_reducer16_pipe (D = $0\busy_q[0:0], Q = \busy_q).
+Adding EN signal on $procdff$1233 ($adff) from module mixed_precision_global_reducer16_pipe (D = \input_tag_i, Q = \tag_q).
+Adding EN signal on $procdff$1238 ($adff) from module mixed_precision_global_reducer16_pipe (D = \tag_q, Q = \output_tag_o).
+Adding EN signal on $procdff$1223 ($adff) from module mixed_precision_global_reducer16_pipe (D = $0\output_valid_o[0:0], Q = \output_valid_o).
+Adding EN signal on $procdff$1243 ($adff) from module mixed_precision_global_reducer16_pipe (D = \s3, Q = \sum_o).
+Adding EN signal on $procdff$1248 ($adff) from module mixed_precision_global_reducer16_pipe (D = \q3, Q = \sumsq_o).
+Adding EN signal on $procdff$1363 ($adff) from module fp32_add_pipe4 (D = \invalid1_q, Q = \invalid2_q).
+Adding EN signal on $procdff$1318 ($adff) from module fp32_add_pipe4 (D = \nan0_q, Q = \nan1_q).
+Adding EN signal on $procdff$1253 ($adff) from module fp32_add_pipe4 (D = { \valid_q [1:0] \valid_i }, Q = \valid_q).
+Adding EN signal on $procdff$1353 ($adff) from module fp32_add_pipe4 (D = \nan1_q, Q = \nan2_q).
+Adding EN signal on $procdff$1323 ($adff) from module fp32_add_pipe4 (D = \inf0_q, Q = \inf1_q).
+Adding EN signal on $procdff$1258 ($adff) from module fp32_add_pipe4 (D = \le_d, Q = \le_q).
+Adding EN signal on $procdff$1288 ($adff) from module fp32_add_pipe4 (D = \inf_d, Q = \inf0_q).
+Adding EN signal on $procdff$1333 ($adff) from module fp32_add_pipe4 (D = \zeros0_q, Q = \zeros1_q).
+Adding EN signal on $procdff$1263 ($adff) from module fp32_add_pipe4 (D = { \ls_d 3'000 }, Q = \large_q).
+Adding EN signal on $procdff$1298 ($adff) from module fp32_add_pipe4 (D = \zeros_d, Q = \zeros0_q).
+Adding EN signal on $procdff$1313 ($adff) from module fp32_add_pipe4 (D = \lsign_q, Q = \sign1_q).
+Adding EN signal on $procdff$1268 ($adff) from module fp32_add_pipe4 (D = \small_d, Q = \small_q).
+Adding EN signal on $procdff$1343 ($adff) from module fp32_add_pipe4 (D = \exp2_d, Q = \exp2_q).
+Adding EN signal on $procdff$1358 ($adff) from module fp32_add_pipe4 (D = \inf1_q, Q = \inf2_q).
+Adding EN signal on $procdff$1328 ($adff) from module fp32_add_pipe4 (D = \invalid0_q, Q = \invalid1_q).
+Adding EN signal on $procdff$1308 ($adff) from module fp32_add_pipe4 (D = \exp1_d, Q = \exp1_q).
+Adding EN signal on $procdff$1273 ($adff) from module fp32_add_pipe4 (D = \lsign_d, Q = \lsign_q).
+Adding EN signal on $procdff$1303 ($adff) from module fp32_add_pipe4 (D = \mag1_d, Q = \mag1_q).
+Adding EN signal on $procdff$1283 ($adff) from module fp32_add_pipe4 (D = \nan_d, Q = \nan0_q).
+Adding EN signal on $procdff$1368 ($adff) from module fp32_add_pipe4 (D = \zeros1_q, Q = \zeros2_q).
+Adding EN signal on $procdff$1278 ($adff) from module fp32_add_pipe4 (D = \ssign_d, Q = \ssign_q).
+Adding EN signal on $procdff$1338 ($adff) from module fp32_add_pipe4 (D = \mag2_d, Q = \mag2_q).
+Adding EN signal on $procdff$1293 ($adff) from module fp32_add_pipe4 (D = \invalid_inf_d, Q = \invalid0_q).
+Adding EN signal on $procdff$1348 ($adff) from module fp32_add_pipe4 (D = \sign1_q, Q = \sign2_q).
+Setting constant 0-bit at position 0 on $auto$ff.cc:337:slice$1387 ($adffe) from module fp32_add_pipe4.
+Setting constant 0-bit at position 1 on $auto$ff.cc:337:slice$1387 ($adffe) from module fp32_add_pipe4.
+Setting constant 0-bit at position 2 on $auto$ff.cc:337:slice$1387 ($adffe) from module fp32_add_pipe4.
+
+15.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_global_reducer16_pipe..
+Finding unused cells or wires in module \fp32_add_pipe4..
+Removed 30 unused cells and 28 unused wires.
+<suppressed ~32 debug messages>
+
+15.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_global_reducer16_pipe.
+<suppressed ~2 debug messages>
+Optimizing module fp32_add_pipe4.
+
+15.8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+15.8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mixed_precision_global_reducer16_pipe..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp32_add_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~129 debug messages>
+
+15.8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mixed_precision_global_reducer16_pipe.
+  Optimizing cells in module \fp32_add_pipe4.
+Performed a total of 0 changes.
+
+15.8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mixed_precision_global_reducer16_pipe'.
+Computing hashes of 55 cells of `\mixed_precision_global_reducer16_pipe'.
+Finding duplicate cells in `\mixed_precision_global_reducer16_pipe'.
+Finding identical cells in module `\fp32_add_pipe4'.
+Computing hashes of 212 cells of `\fp32_add_pipe4'.
+Finding duplicate cells in `\fp32_add_pipe4'.
+Removed a total of 0 cells.
+
+15.8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+15.8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_global_reducer16_pipe..
+Finding unused cells or wires in module \fp32_add_pipe4..
+
+15.8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_global_reducer16_pipe.
+Optimizing module fp32_add_pipe4.
+
+15.8.16. Finished fast OPT passes. (There is nothing left to do.)
+
+15.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 23 bits (of 32) from port Y of cell fp32_add_pipe4.$sub$rtl/fp32_add_pipe4.sv:28$324 ($sub).
+Removed top 23 bits (of 32) from port A of cell fp32_add_pipe4.$le$rtl/fp32_add_pipe4.sv:11$325 ($le).
+Removed top 31 bits (of 32) from port B of cell fp32_add_pipe4.$le$rtl/fp32_add_pipe4.sv:11$325 ($le).
+Removed top 23 bits (of 32) from port A of cell fp32_add_pipe4.$ge$rtl/fp32_add_pipe4.sv:12$328 ($ge).
+Removed top 26 bits (of 32) from port B of cell fp32_add_pipe4.$ge$rtl/fp32_add_pipe4.sv:12$328 ($ge).
+Removed top 26 bits (of 27) from port A of cell fp32_add_pipe4.$shl$rtl/fp32_add_pipe4.sv:13$332 ($shl).
+Removed top 1 bits (of 28) from port A of cell fp32_add_pipe4.$add$rtl/fp32_add_pipe4.sv:39$371 ($add).
+Removed top 1 bits (of 28) from port B of cell fp32_add_pipe4.$add$rtl/fp32_add_pipe4.sv:39$371 ($add).
+Removed top 1 bits (of 9) from port A of cell fp32_add_pipe4.$add$rtl/fp32_add_pipe4.sv:39$373 ($add).
+Removed top 27 bits (of 32) from port A of cell fp32_add_pipe4.$gt$rtl/fp32_add_pipe4.sv:45$489 ($gt).
+Removed top 31 bits (of 32) from port B of cell fp32_add_pipe4.$sub$rtl/fp32_add_pipe4.sv:45$490 ($sub).
+Removed top 22 bits (of 32) from port Y of cell fp32_add_pipe4.$sub$rtl/fp32_add_pipe4.sv:45$490 ($sub).
+Removed top 31 bits (of 32) from port B of cell fp32_add_pipe4.$lt$rtl/fp32_add_pipe4.sv:45$491 ($lt).
+Removed top 23 bits (of 32) from port Y of cell fp32_add_pipe4.$sub$rtl/fp32_add_pipe4.sv:46$493 ($sub).
+Removed top 23 bits (of 32) from port B of cell fp32_add_pipe4.$sub$rtl/fp32_add_pipe4.sv:46$493 ($sub).
+Removed top 1 bits (of 25) from port A of cell fp32_add_pipe4.$add$rtl/fp32_add_pipe4.sv:50$498 ($add).
+Removed top 24 bits (of 32) from port B of cell fp32_add_pipe4.$ge$rtl/fp32_add_pipe4.sv:57$503 ($ge).
+Removed top 31 bits (of 32) from port B of cell fp32_add_pipe4.$le$rtl/fp32_add_pipe4.sv:58$504 ($le).
+Removed top 1 bits (of 32) from mux cell fp32_add_pipe4.$procmux$911 ($mux).
+Removed top 1 bits (of 32) from mux cell fp32_add_pipe4.$procmux$929 ($mux).
+Removed top 1 bits (of 25) from mux cell fp32_add_pipe4.$procmux$977 ($mux).
+Removed top 1 bits (of 25) from wire fp32_add_pipe4.rounded3_d.
+
+15.10. Executing PEEPOPT pass (run peephole optimizers).
+
+15.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_global_reducer16_pipe..
+Finding unused cells or wires in module \fp32_add_pipe4..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~1 debug messages>
+
+15.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module mixed_precision_global_reducer16_pipe:
+  created 0 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module fp32_add_pipe4:
+  creating $macc model for $add$rtl/fp32_add_pipe4.sv:51$500 ($add).
+  creating $macc model for $add$rtl/fp32_add_pipe4.sv:50$498 ($add).
+  creating $macc model for $sub$rtl/fp32_add_pipe4.sv:46$493 ($sub).
+  creating $macc model for $sub$rtl/fp32_add_pipe4.sv:45$490 ($sub).
+  creating $macc model for $sub$rtl/fp32_add_pipe4.sv:40$374 ($sub).
+  creating $macc model for $add$rtl/fp32_add_pipe4.sv:39$373 ($add).
+  creating $macc model for $add$rtl/fp32_add_pipe4.sv:39$371 ($add).
+  creating $macc model for $sub$rtl/fp32_add_pipe4.sv:13$333 ($sub).
+  creating $macc model for $sub$rtl/fp32_add_pipe4.sv:28$324 ($sub).
+  creating $alu model for $macc $sub$rtl/fp32_add_pipe4.sv:28$324.
+  creating $alu model for $macc $sub$rtl/fp32_add_pipe4.sv:13$333.
+  creating $alu model for $macc $add$rtl/fp32_add_pipe4.sv:39$371.
+  creating $alu model for $macc $add$rtl/fp32_add_pipe4.sv:39$373.
+  creating $alu model for $macc $sub$rtl/fp32_add_pipe4.sv:40$374.
+  creating $alu model for $macc $sub$rtl/fp32_add_pipe4.sv:45$490.
+  creating $alu model for $macc $sub$rtl/fp32_add_pipe4.sv:46$493.
+  creating $alu model for $macc $add$rtl/fp32_add_pipe4.sv:50$498.
+  creating $alu model for $macc $add$rtl/fp32_add_pipe4.sv:51$500.
+  creating $alu model for $le$rtl/fp32_add_pipe4.sv:58$504 ($le): new $alu
+  creating $alu model for $ge$rtl/fp32_add_pipe4.sv:57$503 ($ge): new $alu
+  creating $alu model for $lt$rtl/fp32_add_pipe4.sv:45$491 ($lt): new $alu
+  creating $alu model for $gt$rtl/fp32_add_pipe4.sv:45$489 ($gt): new $alu
+  creating $alu model for $ge$rtl/fp32_add_pipe4.sv:12$328 ($ge): new $alu
+  creating $alu model for $le$rtl/fp32_add_pipe4.sv:11$325 ($le): new $alu
+  creating $alu model for $gt$rtl/fp32_add_pipe4.sv:27$319 ($gt): new $alu
+  creating $alu cell for $gt$rtl/fp32_add_pipe4.sv:27$319: $auto$alumacc.cc:548:replace_alu$1412
+  creating $alu cell for $le$rtl/fp32_add_pipe4.sv:11$325: $auto$alumacc.cc:548:replace_alu$1423
+  creating $alu cell for $ge$rtl/fp32_add_pipe4.sv:12$328: $auto$alumacc.cc:548:replace_alu$1434
+  creating $alu cell for $gt$rtl/fp32_add_pipe4.sv:45$489: $auto$alumacc.cc:548:replace_alu$1449
+  creating $alu cell for $lt$rtl/fp32_add_pipe4.sv:45$491: $auto$alumacc.cc:548:replace_alu$1460
+  creating $alu cell for $ge$rtl/fp32_add_pipe4.sv:57$503: $auto$alumacc.cc:548:replace_alu$1467
+  creating $alu cell for $le$rtl/fp32_add_pipe4.sv:58$504: $auto$alumacc.cc:548:replace_alu$1480
+  creating $alu cell for $add$rtl/fp32_add_pipe4.sv:51$500: $auto$alumacc.cc:548:replace_alu$1489
+  creating $alu cell for $add$rtl/fp32_add_pipe4.sv:50$498: $auto$alumacc.cc:548:replace_alu$1492
+  creating $alu cell for $sub$rtl/fp32_add_pipe4.sv:46$493: $auto$alumacc.cc:548:replace_alu$1495
+  creating $alu cell for $sub$rtl/fp32_add_pipe4.sv:45$490: $auto$alumacc.cc:548:replace_alu$1498
+  creating $alu cell for $add$rtl/fp32_add_pipe4.sv:39$373: $auto$alumacc.cc:548:replace_alu$1501
+  creating $alu cell for $sub$rtl/fp32_add_pipe4.sv:40$374: $auto$alumacc.cc:548:replace_alu$1504
+  creating $alu cell for $add$rtl/fp32_add_pipe4.sv:39$371: $auto$alumacc.cc:548:replace_alu$1507
+  creating $alu cell for $sub$rtl/fp32_add_pipe4.sv:13$333: $auto$alumacc.cc:548:replace_alu$1510
+  creating $alu cell for $sub$rtl/fp32_add_pipe4.sv:28$324: $auto$alumacc.cc:548:replace_alu$1513
+  created 16 $alu and 0 $macc cells.
+
+15.13. Executing SHARE pass (SAT-based resource sharing).
+Found 2 cells in module fp32_add_pipe4 that may be considered for resource sharing.
+  Analyzing resource sharing options for $shl$rtl/fp32_add_pipe4.sv:13$332 ($shl):
+    Found 1 activation_patterns using ctrl signal { $auto$rtlil.cc:3271:ReduceOr$1433 $auto$rtlil.cc:3271:ReduceOr$1448 }.
+    No candidates found.
+  Analyzing resource sharing options for $shr$rtl/fp32_add_pipe4.sv:13$336 ($shr):
+    Found 1 activation_patterns using ctrl signal { $auto$rtlil.cc:3271:ReduceOr$1433 $auto$rtlil.cc:3271:ReduceOr$1448 }.
+    No candidates found.
+
+15.14. Executing OPT pass (performing simple optimizations).
+
+15.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_global_reducer16_pipe.
+Optimizing module fp32_add_pipe4.
+<suppressed ~13 debug messages>
+
+15.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mixed_precision_global_reducer16_pipe'.
+Computing hashes of 55 cells of `\mixed_precision_global_reducer16_pipe'.
+Finding duplicate cells in `\mixed_precision_global_reducer16_pipe'.
+Finding identical cells in module `\fp32_add_pipe4'.
+Computing hashes of 238 cells of `\fp32_add_pipe4'.
+Finding duplicate cells in `\fp32_add_pipe4'.
+Removed a total of 0 cells.
+
+15.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mixed_precision_global_reducer16_pipe..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp32_add_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~129 debug messages>
+
+15.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mixed_precision_global_reducer16_pipe.
+  Optimizing cells in module \fp32_add_pipe4.
+Performed a total of 0 changes.
+
+15.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mixed_precision_global_reducer16_pipe'.
+Computing hashes of 55 cells of `\mixed_precision_global_reducer16_pipe'.
+Finding duplicate cells in `\mixed_precision_global_reducer16_pipe'.
+Finding identical cells in module `\fp32_add_pipe4'.
+Computing hashes of 238 cells of `\fp32_add_pipe4'.
+Finding duplicate cells in `\fp32_add_pipe4'.
+Removed a total of 0 cells.
+
+15.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+15.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_global_reducer16_pipe..
+Finding unused cells or wires in module \fp32_add_pipe4..
+Removed 3 unused cells and 20 unused wires.
+<suppressed ~6 debug messages>
+
+15.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_global_reducer16_pipe.
+Optimizing module fp32_add_pipe4.
+
+15.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+15.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mixed_precision_global_reducer16_pipe..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp32_add_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+      Replacing known input bits on port A of cell $procmux$980: $1\norm_shift_d[31:0] -> { 1'0 $1\norm_shift_d[31:0] [30:0] }
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~129 debug messages>
+
+15.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mixed_precision_global_reducer16_pipe.
+  Optimizing cells in module \fp32_add_pipe4.
+Performed a total of 0 changes.
+
+15.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mixed_precision_global_reducer16_pipe'.
+Computing hashes of 55 cells of `\mixed_precision_global_reducer16_pipe'.
+Finding duplicate cells in `\mixed_precision_global_reducer16_pipe'.
+Finding identical cells in module `\fp32_add_pipe4'.
+Computing hashes of 233 cells of `\fp32_add_pipe4'.
+Finding duplicate cells in `\fp32_add_pipe4'.
+Removed a total of 0 cells.
+
+15.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+15.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_global_reducer16_pipe..
+Finding unused cells or wires in module \fp32_add_pipe4..
+
+15.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_global_reducer16_pipe.
+Optimizing module fp32_add_pipe4.
+
+15.14.16. Finished fast OPT passes. (There is nothing left to do.)
+
+15.15. Executing MEMORY pass.
+
+15.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+15.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+15.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+15.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+15.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+15.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_global_reducer16_pipe..
+Finding unused cells or wires in module \fp32_add_pipe4..
+
+15.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+15.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+15.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_global_reducer16_pipe..
+Finding unused cells or wires in module \fp32_add_pipe4..
+
+15.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+15.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_global_reducer16_pipe..
+Finding unused cells or wires in module \fp32_add_pipe4..
+
+15.17. Executing OPT pass (performing simple optimizations).
+
+15.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_global_reducer16_pipe.
+<suppressed ~4 debug messages>
+Optimizing module fp32_add_pipe4.
+<suppressed ~36 debug messages>
+
+15.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mixed_precision_global_reducer16_pipe'.
+Computing hashes of 52 cells of `\mixed_precision_global_reducer16_pipe'.
+Finding duplicate cells in `\mixed_precision_global_reducer16_pipe'.
+Finding identical cells in module `\fp32_add_pipe4'.
+Computing hashes of 232 cells of `\fp32_add_pipe4'.
+Finding duplicate cells in `\fp32_add_pipe4'.
+Removed a total of 0 cells.
+
+15.17.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+15.17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_global_reducer16_pipe..
+Finding unused cells or wires in module \fp32_add_pipe4..
+Removed 0 unused cells and 6 unused wires.
+<suppressed ~2 debug messages>
+
+15.17.5. Finished fast OPT passes.
+
+15.18. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+15.19. Executing OPT pass (performing simple optimizations).
+
+15.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_global_reducer16_pipe.
+<suppressed ~1 debug messages>
+Optimizing module fp32_add_pipe4.
+
+15.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mixed_precision_global_reducer16_pipe'.
+Computing hashes of 52 cells of `\mixed_precision_global_reducer16_pipe'.
+Finding duplicate cells in `\mixed_precision_global_reducer16_pipe'.
+Finding identical cells in module `\fp32_add_pipe4'.
+Computing hashes of 232 cells of `\fp32_add_pipe4'.
+Finding duplicate cells in `\fp32_add_pipe4'.
+Removed a total of 0 cells.
+
+15.19.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mixed_precision_global_reducer16_pipe..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp32_add_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~71 debug messages>
+
+15.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mixed_precision_global_reducer16_pipe.
+  Optimizing cells in module \fp32_add_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$983:
+      Old ports: A={ $sub$rtl/fp32_add_pipe4.sv:45$488_Y [9] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [9] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [9] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [9] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [9] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [9] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [9] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [9] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [9] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [9] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [9] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [9] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [9] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [9] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [9] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [9] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [9] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [9] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [9] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [9] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [9] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [9] $sub$rtl/fp32_add_pipe4.sv:45$488_Y [9:0] }, B={ 27'000000000000000000000000000 \lz2_d }, Y=$1\norm_shift_d[31:0]
+      New ports: A=$sub$rtl/fp32_add_pipe4.sv:45$488_Y [9:0], B={ 5'00000 \lz2_d }, Y=$1\norm_shift_d[31:0] [9:0]
+      New connections: $1\norm_shift_d[31:0] [31:10] = { $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] $1\norm_shift_d[31:0] [9] }
+    Consolidated identical input bits for $mux cell $procmux$980:
+      Old ports: A={ 1'0 $1\norm_shift_d[31:0] [30:0] }, B=0, Y=\norm_shift_d
+      New ports: A=$1\norm_shift_d[31:0] [30:0], B=31'0000000000000000000000000000000, Y=\norm_shift_d [30:0]
+      New connections: \norm_shift_d [31] = 1'0
+    Consolidated identical input bits for $mux cell $procmux$911:
+      Old ports: A={ \packed_exp_d [7:0] \rounded3_d [22:0] }, B={ 8'00000000 \rounded3_d [22:0] }, Y=$6\result3_d[31:0] [30:0]
+      New ports: A=\packed_exp_d [7:0], B=8'00000000, Y=$6\result3_d[31:0] [30:23]
+      New connections: $6\result3_d[31:0] [22:0] = \rounded3_d [22:0]
+    Consolidated identical input bits for $mux cell $procmux$1145:
+      Old ports: A=5'11011, B=5'00000, Y=$1\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$382
+      New ports: A=1'1, B=1'0, Y=$1\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$382 [0]
+      New connections: $1\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$382 [4:1] = { $1\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$382 [0] $1\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$382 [0] 1'0 $1\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$382 [0] }
+  Optimizing cells in module \fp32_add_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$980:
+      Old ports: A=$1\norm_shift_d[31:0] [30:0], B=31'0000000000000000000000000000000, Y=\norm_shift_d [30:0]
+      New ports: A=$1\norm_shift_d[31:0] [9:0], B=10'0000000000, Y=\norm_shift_d [9:0]
+      New connections: \norm_shift_d [30:10] = { \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] \norm_shift_d [9] }
+    Consolidated identical input bits for $mux cell $procmux$1139:
+      Old ports: A=$1\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$382, B=5'00001, Y=$2\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$386
+      New ports: A={ $1\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$382 [0] $1\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$382 [0] }, B=2'01, Y=$2\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$386 [1:0]
+      New connections: $2\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$386 [4:2] = { $2\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$386 [1] $2\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$386 [1] 1'0 }
+  Optimizing cells in module \fp32_add_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1133:
+      Old ports: A=$2\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$386, B=5'00010, Y=$3\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$390
+      New ports: A={ $2\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$386 [1] $2\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$386 [1:0] }, B=3'010, Y={ $3\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$390 [3] $3\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$390 [1:0] }
+      New connections: { $3\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$390 [4] $3\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$390 [2] } = { $3\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$390 [3] 1'0 }
+  Optimizing cells in module \fp32_add_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1127:
+      Old ports: A=$3\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$390, B=5'00011, Y=$4\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$394
+      New ports: A={ $3\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$390 [3] $3\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$390 [1:0] }, B=3'011, Y={ $4\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$394 [3] $4\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$394 [1:0] }
+      New connections: { $4\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$394 [4] $4\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$394 [2] } = { $4\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$394 [3] 1'0 }
+  Optimizing cells in module \fp32_add_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1121:
+      Old ports: A=$4\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$394, B=5'00100, Y=$5\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$398
+      New ports: A={ $4\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$394 [3] 1'0 $4\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$394 [1:0] }, B=4'0100, Y=$5\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$398 [3:0]
+      New connections: $5\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$398 [4] = $5\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$398 [3]
+  Optimizing cells in module \fp32_add_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1115:
+      Old ports: A=$5\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$398, B=5'00101, Y=$6\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$402
+      New ports: A=$5\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$398 [3:0], B=4'0101, Y=$6\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$402 [3:0]
+      New connections: $6\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$402 [4] = $6\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$402 [3]
+  Optimizing cells in module \fp32_add_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1109:
+      Old ports: A=$6\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$402, B=5'00110, Y=$7\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$406
+      New ports: A=$6\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$402 [3:0], B=4'0110, Y=$7\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$406 [3:0]
+      New connections: $7\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$406 [4] = $7\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$406 [3]
+  Optimizing cells in module \fp32_add_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$1103:
+      Old ports: A=$7\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$406, B=5'00111, Y=$8\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$410
+      New ports: A=$7\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$406 [3:0], B=4'0111, Y=$8\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$410 [3:0]
+      New connections: $8\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$410 [4] = $8\leading_zeros27$func$rtl/fp32_add_pipe4.sv:45$303.$result[4:0]$410 [3]
+  Optimizing cells in module \fp32_add_pipe4.
+Performed a total of 12 changes.
+
+15.19.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mixed_precision_global_reducer16_pipe'.
+Computing hashes of 52 cells of `\mixed_precision_global_reducer16_pipe'.
+Finding duplicate cells in `\mixed_precision_global_reducer16_pipe'.
+Finding identical cells in module `\fp32_add_pipe4'.
+Computing hashes of 232 cells of `\fp32_add_pipe4'.
+Finding duplicate cells in `\fp32_add_pipe4'.
+Removed a total of 0 cells.
+
+15.19.6. Executing OPT_SHARE pass.
+
+15.19.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+15.19.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_global_reducer16_pipe..
+Finding unused cells or wires in module \fp32_add_pipe4..
+
+15.19.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_global_reducer16_pipe.
+Optimizing module fp32_add_pipe4.
+<suppressed ~1 debug messages>
+
+15.19.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+15.19.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mixed_precision_global_reducer16_pipe..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp32_add_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+      Replacing known input bits on port A of cell $procmux$980: $1\norm_shift_d[31:0] [9:0] -> { 1'0 $1\norm_shift_d[31:0] [8:0] }
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~70 debug messages>
+
+15.19.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mixed_precision_global_reducer16_pipe.
+  Optimizing cells in module \fp32_add_pipe4.
+    Consolidated identical input bits for $mux cell $procmux$980:
+      Old ports: A={ 1'0 $1\norm_shift_d[31:0] [8:0] }, B=10'0000000000, Y=\norm_shift_d [9:0]
+      New ports: A=$1\norm_shift_d[31:0] [8:0], B=9'000000000, Y=\norm_shift_d [8:0]
+      New connections: \norm_shift_d [9] = 1'0
+  Optimizing cells in module \fp32_add_pipe4.
+Performed a total of 1 changes.
+
+15.19.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mixed_precision_global_reducer16_pipe'.
+Computing hashes of 52 cells of `\mixed_precision_global_reducer16_pipe'.
+Finding duplicate cells in `\mixed_precision_global_reducer16_pipe'.
+Finding identical cells in module `\fp32_add_pipe4'.
+Computing hashes of 232 cells of `\fp32_add_pipe4'.
+Finding duplicate cells in `\fp32_add_pipe4'.
+Removed a total of 0 cells.
+
+15.19.14. Executing OPT_SHARE pass.
+
+15.19.15. Executing OPT_DFF pass (perform DFF optimizations).
+
+15.19.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_global_reducer16_pipe..
+Finding unused cells or wires in module \fp32_add_pipe4..
+
+15.19.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_global_reducer16_pipe.
+Optimizing module fp32_add_pipe4.
+
+15.19.18. Rerunning OPT passes. (Maybe there is more to do..)
+
+15.19.19. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mixed_precision_global_reducer16_pipe..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \fp32_add_pipe4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~70 debug messages>
+
+15.19.20. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mixed_precision_global_reducer16_pipe.
+  Optimizing cells in module \fp32_add_pipe4.
+Performed a total of 0 changes.
+
+15.19.21. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mixed_precision_global_reducer16_pipe'.
+Computing hashes of 52 cells of `\mixed_precision_global_reducer16_pipe'.
+Finding duplicate cells in `\mixed_precision_global_reducer16_pipe'.
+Finding identical cells in module `\fp32_add_pipe4'.
+Computing hashes of 232 cells of `\fp32_add_pipe4'.
+Finding duplicate cells in `\fp32_add_pipe4'.
+Removed a total of 0 cells.
+
+15.19.22. Executing OPT_SHARE pass.
+
+15.19.23. Executing OPT_DFF pass (perform DFF optimizations).
+
+15.19.24. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_global_reducer16_pipe..
+Finding unused cells or wires in module \fp32_add_pipe4..
+
+15.19.25. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_global_reducer16_pipe.
+Optimizing module fp32_add_pipe4.
+
+15.19.26. Finished fast OPT passes. (There is nothing left to do.)
+
+15.20. Executing TECHMAP pass (map to technology primitives).
+
+15.20.1. Executing Verilog-2005 frontend: /home/chandler/.local/oss-cad-suite/lib/../share/yosys/techmap.v
+Parsing Verilog input from `/home/chandler/.local/oss-cad-suite/lib/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+15.20.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $not.
+Using template $paramod$4ccbe221165818e15f326ddee3d1183c7924e12f\_90_alu for cells of type $alu.
+Using template $paramod$constmap:5940edc780409ab992c39c4a6181c93139038017$paramod$9584a26118f4bcb3033fe760387b4d0b650980eb\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shl.
+Using template $paramod$d90c3448203144d55644b597072d6cf1b3e54430\_90_alu for cells of type $alu.
+Using template $paramod$a7a1d5fc4563c49b9a54941942b1beedd64a98db\_90_alu for cells of type $alu.
+Using template $paramod$f02bbbf710bba6238f4bdfa41b3051acfe2064a8\_90_alu for cells of type $alu.
+Using template $paramod$a2af9b43308e3114c3b5dd3f4dc3329b2387395d\_90_alu for cells of type $alu.
+Using template $paramod$8d7f98f10ed0231647041eea72c2a8a293a33560\_90_alu for cells of type $alu.
+Using template $paramod$d2fa05d38998afabc6d4f34471305d0af4b8b2df\_90_alu for cells of type $alu.
+Using template $paramod$f137a8bfbd1456d75171dc760be33d0c1f0b83ab\_90_alu for cells of type $alu.
+Using template $paramod$53700bbee849b2010ad0b60a61ccd204a10e24ca\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $reduce_and.
+Using template $paramod$6f67705c43e5e94c02b6ebb52209ce5aa5ade4c1\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $or.
+Using template $paramod$cd54e322aa4265ca236096fe4bb634aaec4e39b4\_90_alu for cells of type $alu.
+Using template $paramod$b0777dc865134c8525a4aa84de8cfa938974cad1\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod$6f66f151d8048a3ab1c70205796615a945055b0d\_90_alu for cells of type $alu.
+Using template $paramod$fbc7873bff55778c0b3173955b7e4bce1d9d6834\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $adffe.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using template $paramod$constmap:1be8ac63e04f65aa7e5790e542000faa5701e3f9$paramod$d137e9f8c3237dc45a2f1807aeb7665ead8d1066\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shr.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $logic_or.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $ne.
+Using extmapper simplemap for cells of type $logic_not.
+Using template $paramod$constmap:f192db8dcac0180dfed48b1085fa76327043a06b$paramod$aa7405bf140bd41bfb0f52f8d4fd2da4fcb6d0f9\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shl.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000100000 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000001001 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001001 for cells of type $lcu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000011001 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000011001 for cells of type $lcu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000001010 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001010 for cells of type $lcu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000011011 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000011011 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~3735 debug messages>
+
+15.21. Executing OPT pass (performing simple optimizations).
+
+15.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mixed_precision_global_reducer16_pipe.
+Optimizing module fp32_add_pipe4.
+<suppressed ~1760 debug messages>
+
+15.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mixed_precision_global_reducer16_pipe'.
+Computing hashes of 160 cells of `\mixed_precision_global_reducer16_pipe'.
+Finding duplicate cells in `\mixed_precision_global_reducer16_pipe'.
+Finding identical cells in module `\fp32_add_pipe4'.
+Computing hashes of 2969 cells of `\fp32_add_pipe4'.
+Finding duplicate cells in `\fp32_add_pipe4'.
+Computing hashes of 2863 cells of `\fp32_add_pipe4'.
+Finding duplicate cells in `\fp32_add_pipe4'.
+Computing hashes of 2819 cells of `\fp32_add_pipe4'.
+Finding duplicate cells in `\fp32_add_pipe4'.
+Computing hashes of 2801 cells of `\fp32_add_pipe4'.
+Finding duplicate cells in `\fp32_add_pipe4'.
+Computing hashes of 2794 cells of `\fp32_add_pipe4'.
+Finding duplicate cells in `\fp32_add_pipe4'.
+Computing hashes of 2791 cells of `\fp32_add_pipe4'.
+Finding duplicate cells in `\fp32_add_pipe4'.
+<suppressed ~534 debug messages>
+Removed a total of 178 cells.
+
+15.21.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+15.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_global_reducer16_pipe..
+Finding unused cells or wires in module \fp32_add_pipe4..
+Removed 216 unused cells and 991 unused wires.
+<suppressed ~218 debug messages>
+
+15.21.5. Finished fast OPT passes.
+
+15.22. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `mixed_precision_global_reducer16_pipe'. Setting top module to mixed_precision_global_reducer16_pipe.
+
+15.22.1. Analyzing design hierarchy..
+Top module:  \mixed_precision_global_reducer16_pipe
+Used module:     \fp32_add_pipe4
+
+15.22.2. Analyzing design hierarchy..
+Top module:  \mixed_precision_global_reducer16_pipe
+Used module:     \fp32_add_pipe4
+Removed 0 unused modules.
+
+15.23. Printing statistics.
+
+=== mixed_precision_global_reducer16_pipe ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       51 wires
+     2164 wire bits
+       31 public wires
+     2134 public wire bits
+       12 ports
+     1126 port bits
+      130 cells
+       26   $_AND_
+       98   $_DFFE_PN0P_
+        3   $_NOT_
+        3   $_OR_
+       30 submodules
+       30   fp32_add_pipe4
+
+=== fp32_add_pipe4 ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      778 wires
+     3644 wire bits
+       68 public wires
+      816 public wire bits
+        8 ports
+      101 port bits
+     2575 cells
+      582   $_AND_
+      150   $_DFFE_PN0P_
+     1003   $_MUX_
+      195   $_NOT_
+      403   $_OR_
+      242   $_XOR_
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        | 
+    77380 mixed_precision_global_reducer16_pipe
+     2575 fp32_add_pipe4
+
+        +----------Count including submodules.
+        | 
+    23391 wires
+   111484 wire bits
+     2071 public wires
+    26614 public wire bits
+      252 ports
+     4156 port bits
+        - memories
+        - memory bits
+        - processes
+    77380 cells
+    17486   $_AND_
+     4598   $_DFFE_PN0P_
+    30090   $_MUX_
+     5853   $_NOT_
+    12093   $_OR_
+     7260   $_XOR_
+       30 submodules
+       30   fp32_add_pipe4
+
+15.24. Executing CHECK pass (checking for obvious problems).
+Checking module mixed_precision_global_reducer16_pipe...
+Checking module fp32_add_pipe4...
+Found and reported 0 problems.
+
+16. Executing FLATTEN pass (flatten design).
+Deleting now unused module fp32_add_pipe4.
+<suppressed ~30 debug messages>
+
+17. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mixed_precision_global_reducer16_pipe..
+Removed 0 unused cells and 6 unused wires.
+<suppressed ~1 debug messages>
+
+18. Executing DFFLIBMAP pass (mapping DFF cells to sequential cells from liberty file).
+  cell sky130_fd_sc_hd__dfxtp_1 (noninv, pins=3, area=20.02) is a direct match for cell type $_DFF_P_.
+  cell sky130_fd_sc_hd__dfrtn_1 (noninv, pins=4, area=25.02) is a direct match for cell type $_DFF_NN0_.
+  cell sky130_fd_sc_hd__dfrtp_1 (noninv, pins=4, area=25.02) is a direct match for cell type $_DFF_PN0_.
+  cell sky130_fd_sc_hd__dfstp_2 (noninv, pins=4, area=26.28) is a direct match for cell type $_DFF_PN1_.
+  cell sky130_fd_sc_hd__edfxtp_1 (noninv, pins=4, area=30.03) is a direct match for cell type $_DFFE_PP_.
+  cell sky130_fd_sc_hd__dfbbn_1 (noninv, pins=6, area=32.53) is a direct match for cell type $_DFFSR_NNN_.
+  cell sky130_fd_sc_hd__dfbbp_1 (noninv, pins=6, area=32.53) is a direct match for cell type $_DFFSR_PNN_.
+  final dff cell mappings:
+    unmapped dff cell: $_DFF_N_
+    \sky130_fd_sc_hd__dfxtp_1 _DFF_P_ (.CLK( C), .D( D), .Q( Q));
+    \sky130_fd_sc_hd__dfrtn_1 _DFF_NN0_ (.CLK_N( C), .D( D), .Q( Q), .RESET_B( R));
+    unmapped dff cell: $_DFF_NN1_
+    unmapped dff cell: $_DFF_NP0_
+    unmapped dff cell: $_DFF_NP1_
+    \sky130_fd_sc_hd__dfrtp_1 _DFF_PN0_ (.CLK( C), .D( D), .Q( Q), .RESET_B( R));
+    \sky130_fd_sc_hd__dfstp_2 _DFF_PN1_ (.CLK( C), .D( D), .Q( Q), .SET_B( R));
+    unmapped dff cell: $_DFF_PP0_
+    unmapped dff cell: $_DFF_PP1_
+    unmapped dff cell: $_DFFE_NN_
+    unmapped dff cell: $_DFFE_NP_
+    unmapped dff cell: $_DFFE_PN_
+    \sky130_fd_sc_hd__edfxtp_1 _DFFE_PP_ (.CLK( C), .D( D), .DE( E), .Q( Q));
+    \sky130_fd_sc_hd__dfbbn_1 _DFFSR_NNN_ (.CLK_N( C), .D( D), .Q( Q), .Q_N(~Q), .RESET_B( R), .SET_B( S));
+    unmapped dff cell: $_DFFSR_NNP_
+    unmapped dff cell: $_DFFSR_NPN_
+    unmapped dff cell: $_DFFSR_NPP_
+    \sky130_fd_sc_hd__dfbbp_1 _DFFSR_PNN_ (.CLK( C), .D( D), .Q( Q), .Q_N(~Q), .RESET_B( R), .SET_B( S));
+    unmapped dff cell: $_DFFSR_PNP_
+    unmapped dff cell: $_DFFSR_PPN_
+    unmapped dff cell: $_DFFSR_PPP_
+
+18.1. Executing DFFLEGALIZE pass (convert FFs to types supported by the target).
+<suppressed ~24 debug messages>
+Mapping DFF cells in module `\mixed_precision_global_reducer16_pipe':
+  mapped 4598 $_DFF_PN0_ cells to \sky130_fd_sc_hd__dfrtp_1 cells.
+
+19. Executing ABC pass (technology mapping using ABC).
+
+19.1. Extracting gate netlist of module `\mixed_precision_global_reducer16_pipe' to `<abc-temp-dir>/input.blif'..
+ABC: using cached merged SCL: /tmp/yosys-liberty-scl-cache/yosys_merged_d1704997.scl (1 files)
+
+19.1.1. Executed ABC.
+Extracted 77380 gates and 83022 wires to a netlist network with 5640 inputs and 4599 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled Aug 11 2026 02:40:08)
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_scl /tmp/yosys-liberty-scl-cache/yosys_merged_d1704997.scl 
+ABC: Warning: Detected 9 multi-output cells (for example, "sky130_fd_sc_hd__fa_1").
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+19.1.2. Re-integrating ABC results.
+ABC RESULTS:   sky130_fd_sc_hd__a2111o_1 cells:       10
+ABC RESULTS:   sky130_fd_sc_hd__a2111oi_0 cells:       94
+ABC RESULTS:   sky130_fd_sc_hd__a211o_1 cells:       44
+ABC RESULTS:   sky130_fd_sc_hd__a211oi_1 cells:      281
+ABC RESULTS:   sky130_fd_sc_hd__a21bo_1 cells:        7
+ABC RESULTS:   sky130_fd_sc_hd__a21boi_0 cells:       62
+ABC RESULTS:   sky130_fd_sc_hd__a21o_1 cells:      427
+ABC RESULTS:   sky130_fd_sc_hd__a21oi_1 cells:     2837
+ABC RESULTS:   sky130_fd_sc_hd__a221o_1 cells:       36
+ABC RESULTS:   sky130_fd_sc_hd__a221oi_1 cells:       86
+ABC RESULTS:   sky130_fd_sc_hd__a222oi_1 cells:       14
+ABC RESULTS:   sky130_fd_sc_hd__a22o_1 cells:       80
+ABC RESULTS:   sky130_fd_sc_hd__a22oi_1 cells:      294
+ABC RESULTS:   sky130_fd_sc_hd__a2bb2oi_1 cells:       27
+ABC RESULTS:   sky130_fd_sc_hd__a311o_1 cells:       11
+ABC RESULTS:   sky130_fd_sc_hd__a311oi_1 cells:       28
+ABC RESULTS:   sky130_fd_sc_hd__a31o_1 cells:       67
+ABC RESULTS:   sky130_fd_sc_hd__a31oi_1 cells:      298
+ABC RESULTS:   sky130_fd_sc_hd__a32o_1 cells:       31
+ABC RESULTS:   sky130_fd_sc_hd__a32oi_1 cells:       24
+ABC RESULTS:   sky130_fd_sc_hd__a41o_1 cells:       13
+ABC RESULTS:   sky130_fd_sc_hd__a41oi_1 cells:       39
+ABC RESULTS:   sky130_fd_sc_hd__and2_0 cells:      710
+ABC RESULTS:   sky130_fd_sc_hd__and3_1 cells:      302
+ABC RESULTS:   sky130_fd_sc_hd__and3b_1 cells:       16
+ABC RESULTS:   sky130_fd_sc_hd__and4_1 cells:      171
+ABC RESULTS:   sky130_fd_sc_hd__and4b_1 cells:       13
+ABC RESULTS:   sky130_fd_sc_hd__buf_1 cells:      360
+ABC RESULTS:   sky130_fd_sc_hd__clkinv_1 cells:     1438
+ABC RESULTS:   sky130_fd_sc_hd__lpflow_inputiso1p_1 cells:      412
+ABC RESULTS:   sky130_fd_sc_hd__lpflow_isobufsrc_1 cells:     1036
+ABC RESULTS:   sky130_fd_sc_hd__maj3_1 cells:      582
+ABC RESULTS:   sky130_fd_sc_hd__mux2_1 cells:      487
+ABC RESULTS:   sky130_fd_sc_hd__mux2i_1 cells:     2736
+ABC RESULTS:   sky130_fd_sc_hd__mux4_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__nand2_1 cells:     4744
+ABC RESULTS:   sky130_fd_sc_hd__nand2b_1 cells:      869
+ABC RESULTS:   sky130_fd_sc_hd__nand3_1 cells:      852
+ABC RESULTS:   sky130_fd_sc_hd__nand3b_1 cells:       95
+ABC RESULTS:   sky130_fd_sc_hd__nand4_1 cells:      530
+ABC RESULTS:   sky130_fd_sc_hd__nand4b_1 cells:       48
+ABC RESULTS:   sky130_fd_sc_hd__nand4bb_1 cells:        7
+ABC RESULTS:   sky130_fd_sc_hd__nor2_1 cells:     4476
+ABC RESULTS:   sky130_fd_sc_hd__nor2b_1 cells:      184
+ABC RESULTS:   sky130_fd_sc_hd__nor3_1 cells:      944
+ABC RESULTS:   sky130_fd_sc_hd__nor3b_1 cells:      130
+ABC RESULTS:   sky130_fd_sc_hd__nor4_1 cells:      787
+ABC RESULTS:   sky130_fd_sc_hd__nor4b_1 cells:       66
+ABC RESULTS:   sky130_fd_sc_hd__nor4bb_1 cells:       15
+ABC RESULTS:   sky130_fd_sc_hd__o2111a_1 cells:       13
+ABC RESULTS:   sky130_fd_sc_hd__o2111ai_1 cells:       67
+ABC RESULTS:   sky130_fd_sc_hd__o211a_1 cells:       17
+ABC RESULTS:   sky130_fd_sc_hd__o211ai_1 cells:      296
+ABC RESULTS:   sky130_fd_sc_hd__o21a_1 cells:      182
+ABC RESULTS:   sky130_fd_sc_hd__o21ai_0 cells:     3545
+ABC RESULTS:   sky130_fd_sc_hd__o21ba_1 cells:        7
+ABC RESULTS:   sky130_fd_sc_hd__o21bai_1 cells:       50
+ABC RESULTS:   sky130_fd_sc_hd__o221a_1 cells:       10
+ABC RESULTS:   sky130_fd_sc_hd__o221ai_1 cells:      344
+ABC RESULTS:   sky130_fd_sc_hd__o22a_1 cells:      216
+ABC RESULTS:   sky130_fd_sc_hd__o22ai_1 cells:      981
+ABC RESULTS:   sky130_fd_sc_hd__o2bb2a_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o2bb2ai_1 cells:       43
+ABC RESULTS:   sky130_fd_sc_hd__o311a_1 cells:       16
+ABC RESULTS:   sky130_fd_sc_hd__o311ai_0 cells:       50
+ABC RESULTS:   sky130_fd_sc_hd__o31a_1 cells:       29
+ABC RESULTS:   sky130_fd_sc_hd__o31ai_1 cells:      176
+ABC RESULTS:   sky130_fd_sc_hd__o32a_1 cells:       21
+ABC RESULTS:   sky130_fd_sc_hd__o32ai_1 cells:       68
+ABC RESULTS:   sky130_fd_sc_hd__o41a_1 cells:        5
+ABC RESULTS:   sky130_fd_sc_hd__o41ai_1 cells:       26
+ABC RESULTS:   sky130_fd_sc_hd__or3_1 cells:      291
+ABC RESULTS:   sky130_fd_sc_hd__or3b_1 cells:       29
+ABC RESULTS:   sky130_fd_sc_hd__or4_1 cells:      118
+ABC RESULTS:   sky130_fd_sc_hd__or4b_1 cells:       20
+ABC RESULTS:   sky130_fd_sc_hd__xnor2_1 cells:     1893
+ABC RESULTS:   sky130_fd_sc_hd__xor2_1 cells:     1113
+ABC RESULTS:        internal signals:    72783
+ABC RESULTS:           input signals:     5640
+ABC RESULTS:          output signals:     4599
+Removing temp directory.
+Removing global temp directory.
+Removed 30 unused cells and 32860 unused wires.
+
+20. Executing CHECK pass (checking for obvious problems).
+Checking module mixed_precision_global_reducer16_pipe...
+Found and reported 0 problems.
+
+21. Printing statistics.
+
+=== mixed_precision_global_reducer16_pipe ===
+
+        +----------Local Count, excluding submodules.
+        |        +-Local Area, excluding submodules.
+        |        | 
+    37211        - wires
+    42210        - wire bits
+      764        - public wires
+     5763        - public wire bits
+       12        - ports
+     1126        - port bits
+    41046 3.36E+05 cells
+       10  112.608   sky130_fd_sc_hd__a2111o_1
+       94   823.29   sky130_fd_sc_hd__a2111oi_0
+       44   385.37   sky130_fd_sc_hd__a211o_1
+      281 2.11E+03   sky130_fd_sc_hd__a211oi_1
+        7   70.067   sky130_fd_sc_hd__a21bo_1
+       62  465.446   sky130_fd_sc_hd__a21boi_0
+      427 3.21E+03   sky130_fd_sc_hd__a21o_1
+     2837 1.42E+04   sky130_fd_sc_hd__a21oi_1
+       36  360.346   sky130_fd_sc_hd__a221o_1
+       86  753.222   sky130_fd_sc_hd__a221oi_1
+       14  140.134   sky130_fd_sc_hd__a222oi_1
+       80  700.672   sky130_fd_sc_hd__a22o_1
+      294 2.21E+03   sky130_fd_sc_hd__a22oi_1
+       27  236.477   sky130_fd_sc_hd__a2bb2oi_1
+       11  110.106   sky130_fd_sc_hd__a311o_1
+       28  245.235   sky130_fd_sc_hd__a311oi_1
+       67  586.813   sky130_fd_sc_hd__a31o_1
+      298 1.86E+03   sky130_fd_sc_hd__a31oi_1
+       31  310.298   sky130_fd_sc_hd__a32o_1
+       24  210.202   sky130_fd_sc_hd__a32oi_1
+       13  130.125   sky130_fd_sc_hd__a41o_1
+       39  341.578   sky130_fd_sc_hd__a41oi_1
+      710  4441.76   sky130_fd_sc_hd__and2_0
+      302 1.89E+03   sky130_fd_sc_hd__and3_1
+       16  140.134   sky130_fd_sc_hd__and3b_1
+      171  1.5E+03   sky130_fd_sc_hd__and4_1
+       13  130.125   sky130_fd_sc_hd__and4b_1
+      360 1.35E+03   sky130_fd_sc_hd__buf_1
+     1438  5.4E+03   sky130_fd_sc_hd__clkinv_1
+     4598 1.15E+05   sky130_fd_sc_hd__dfrtp_1
+      412 2.58E+03   sky130_fd_sc_hd__lpflow_inputiso1p_1
+     1036 6.48E+03   sky130_fd_sc_hd__lpflow_isobufsrc_1
+      582 5.83E+03   sky130_fd_sc_hd__maj3_1
+      487  5484.01   sky130_fd_sc_hd__mux2_1
+     2736 2.74E+04   sky130_fd_sc_hd__mux2i_1
+        1   22.522   sky130_fd_sc_hd__mux4_2
+     4744 1.78E+04   sky130_fd_sc_hd__nand2_1
+      869 5.44E+03   sky130_fd_sc_hd__nand2b_1
+      852  4264.09   sky130_fd_sc_hd__nand3_1
+       95  713.184   sky130_fd_sc_hd__nand3b_1
+      530  3315.68   sky130_fd_sc_hd__nand4_1
+       48  420.403   sky130_fd_sc_hd__nand4b_1
+        7   78.826   sky130_fd_sc_hd__nand4bb_1
+     4476 1.68E+04   sky130_fd_sc_hd__nor2_1
+      184 1.15E+03   sky130_fd_sc_hd__nor2b_1
+      944 4.72E+03   sky130_fd_sc_hd__nor3_1
+      130  975.936   sky130_fd_sc_hd__nor3b_1
+      787 4.92E+03   sky130_fd_sc_hd__nor4_1
+       66  578.054   sky130_fd_sc_hd__nor4b_1
+       15  150.144   sky130_fd_sc_hd__nor4bb_1
+       13   146.39   sky130_fd_sc_hd__o2111a_1
+       67  586.813   sky130_fd_sc_hd__o2111ai_1
+       17  170.163   sky130_fd_sc_hd__o211a_1
+      296 2.22E+03   sky130_fd_sc_hd__o211ai_1
+      182  1366.31   sky130_fd_sc_hd__o21a_1
+     3545 1.77E+04   sky130_fd_sc_hd__o21ai_0
+        7   70.067   sky130_fd_sc_hd__o21ba_1
+       50   375.36   sky130_fd_sc_hd__o21bai_1
+       10  112.608   sky130_fd_sc_hd__o221a_1
+      344  3012.89   sky130_fd_sc_hd__o221ai_1
+      216 1.89E+03   sky130_fd_sc_hd__o22a_1
+      981 6.14E+03   sky130_fd_sc_hd__o22ai_1
+        1    10.01   sky130_fd_sc_hd__o2bb2a_1
+       43  376.611   sky130_fd_sc_hd__o2bb2ai_1
+       16  160.154   sky130_fd_sc_hd__o311a_1
+       50   437.92   sky130_fd_sc_hd__o311ai_0
+       29  253.994   sky130_fd_sc_hd__o31a_1
+      176 1.32E+03   sky130_fd_sc_hd__o31ai_1
+       21  210.202   sky130_fd_sc_hd__o32a_1
+       68  595.571   sky130_fd_sc_hd__o32ai_1
+        5   56.304   sky130_fd_sc_hd__o41a_1
+       26  227.718   sky130_fd_sc_hd__o41ai_1
+      291 1.82E+03   sky130_fd_sc_hd__or3_1
+       29  253.994   sky130_fd_sc_hd__or3b_1
+      118   885.85   sky130_fd_sc_hd__or4_1
+       20  200.192   sky130_fd_sc_hd__or4b_1
+     1893 1.66E+04   sky130_fd_sc_hd__xnor2_1
+     1113 9.75E+03   sky130_fd_sc_hd__xor2_1
+
+   Chip area for module '\mixed_precision_global_reducer16_pipe': 335564.332800
+     of which used for sequential elements: 115060.352000 (34.29%)
+
+22. Executing Verilog backend.
+
+22.1. Executing BMUXMAP pass.
+
+22.2. Executing DEMUXMAP pass.
+Dumping module `\mixed_precision_global_reducer16_pipe'.
+
+Warnings: 2 unique messages, 2 total
+End of script. Logfile hash: 46b161d0d6, time: 8.44s, user: 2.02s, system: 0.52s, MEM: 192.64 MB peak
+Yosys 0.68+48 (git sha1 ff5817c34-dirty, Release, Clang /usr/bin/clang++ 21.1.8)
+Time spent: 75% 1x abc (6 sec), 6% 23x opt_clean (0 sec), ...

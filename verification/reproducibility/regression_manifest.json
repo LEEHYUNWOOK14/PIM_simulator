@@ -1,0 +1,31 @@
+{
+  "manifest_version": 1,
+  "name": "STOB_PIM2 full regression gate",
+  "description": "Required, independent checks for simulator, RTL, normalization, and hardware-cost changes.",
+  "commands": [
+    {
+      "id": "rtl_to_3d_unit",
+      "category": "python_unit",
+      "command": ["python", "-m", "unittest", "verification.rtl_to_3d.test_rtl_to_3d"],
+      "required": true
+    },
+    {
+      "id": "hardware_cost_unit",
+      "category": "python_unit",
+      "command": ["python", "-m", "unittest", "verification.hardware_cost_regression.test_hardware_cost_regression"],
+      "required": true
+    },
+    {
+      "id": "normalization_foundation_tests",
+      "category": "rtl_tests",
+      "command": ["bash", "verification/groot_normalization/run_foundation_regression.sh", "--tests-only"],
+      "required": true
+    },
+    {
+      "id": "rtl_audit_regression",
+      "category": "rtl_audit",
+      "command": ["bash", "verification/rtl_audit/run_aud_001_008_regression.sh"],
+      "required": true
+    }
+  ]
+}

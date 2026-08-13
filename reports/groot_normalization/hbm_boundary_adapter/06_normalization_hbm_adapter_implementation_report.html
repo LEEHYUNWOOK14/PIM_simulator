@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Normalization HBM Boundary Adapter 구현 보고서</title>
+  <style>
+    :root{--bg:#08111f;--panel:#101c2e;--panel2:#15243a;--line:#29405d;--text:#e8f0fa;--muted:#9eb0c5;--cyan:#52d3d8;--blue:#70a5ff;--green:#69d39c;--amber:#f4c76b;--red:#ff7e88}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(145deg,#07101d 0%,#0b1728 55%,#07111f 100%);color:var(--text);font-family:Inter,"Noto Sans KR","Segoe UI",sans-serif;line-height:1.65}
+    .wrap{max-width:1180px;margin:auto;padding:28px}.hero{padding:54px 48px;border:1px solid var(--line);border-radius:24px;background:radial-gradient(circle at 85% 15%,rgba(82,211,216,.17),transparent 30%),linear-gradient(135deg,#12233b,#0d192a);box-shadow:0 24px 70px rgba(0,0,0,.28)}
+    .eyebrow{color:var(--cyan);font-size:.8rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.hero h1{font-size:clamp(2rem,5vw,3.8rem);line-height:1.12;margin:.4rem 0 1rem;max-width:900px}.lead{font-size:1.14rem;color:#c6d5e7;max-width:920px}.verdict{margin-top:24px;padding:18px 20px;border-left:4px solid var(--green);background:rgba(105,211,156,.08);border-radius:8px}
+    nav{position:sticky;top:0;z-index:5;margin:18px 0;padding:12px 18px;border:1px solid var(--line);border-radius:14px;background:rgba(8,17,31,.91);backdrop-filter:blur(12px);overflow:auto;white-space:nowrap}nav a{color:var(--muted);text-decoration:none;margin-right:22px;font-size:.9rem}nav a:hover{color:var(--cyan)}
+    section{margin:24px 0;padding:30px;border:1px solid var(--line);border-radius:20px;background:rgba(16,28,46,.88)}h2{margin:0 0 18px;font-size:1.65rem}h3{margin-top:26px;color:#dbe9f8}.muted{color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.card{grid-column:span 4;padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--panel2)}.card.wide{grid-column:span 6}.card strong{display:block;color:var(--cyan);font-size:1.35rem}.card small{color:var(--muted)}
+    table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.92rem}th,td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:#c6dcf3;background:#122238}td.num{text-align:right;font-variant-numeric:tabular-nums}.pass{color:var(--green);font-weight:800}.warn{color:var(--amber);font-weight:800}.fail{color:var(--red);font-weight:800}
+    code{font-family:"Cascadia Code",Consolas,monospace;background:#07101d;color:#b9e4ff;padding:.12em .35em;border-radius:5px}pre{overflow:auto;padding:18px;border:1px solid var(--line);border-radius:12px;background:#07101d;color:#cce7f5}
+    .flow{display:flex;align-items:stretch;gap:10px;overflow:auto;padding:8px 0 14px}.node{min-width:130px;padding:14px;text-align:center;border:1px solid var(--line);border-radius:12px;background:#14263e}.node b{display:block;color:var(--cyan)}.arrow{align-self:center;color:var(--blue);font-size:1.4rem}
+    .timeline{border-left:2px solid var(--line);margin-left:8px}.event{position:relative;margin:0 0 20px 22px;padding:16px 18px;background:#132238;border-radius:12px}.event:before{content:"";position:absolute;left:-29px;top:20px;width:12px;height:12px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 5px #101c2e}.event b{color:var(--cyan)}
+    .barrow{display:grid;grid-template-columns:160px 1fr 90px;align-items:center;gap:12px;margin:12px 0}.bar{height:16px;border-radius:20px;background:#213652;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,var(--cyan),var(--blue))}.fill.abstract{background:var(--green)}
+    .callout{padding:18px;border:1px solid var(--line);border-radius:12px;background:#0c1829}.callout.amber{border-color:#655735;background:rgba(244,199,107,.06)}.callout.red{border-color:#673943;background:rgba(255,126,136,.06)}
+    footer{text-align:center;color:var(--muted);padding:30px 0 45px}.tag{display:inline-block;margin:3px;padding:3px 9px;border-radius:99px;background:#1b3450;color:#bfe9f5;font-size:.78rem}
+    @media(max-width:760px){.wrap{padding:12px}.hero{padding:32px 24px}section{padding:22px}.card,.card.wide{grid-column:span 12}.barrow{grid-template-columns:105px 1fr 65px}}
+    @media print{body{background:white;color:#182334}.wrap{max-width:none}.hero,section,.card,nav{background:white;border-color:#cbd5e1;box-shadow:none}nav{display:none}.muted,.lead,footer{color:#536273}code,pre{background:#f1f5f9;color:#172033}}
+  </style>
+</head>
+<body>
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow">STOB PIM2 · Logic-die normalization PCU</div>
+    <h1>Normalization HBM Boundary Adapter 구현 보고서</h1>
+    <p class="lead">동결된 8-lane 정규화 PCU의 reduction·replay·write-back transaction을 기존 DRAM simulator의 ACT/RD/WR/PRE command와 연결하기 위해 새로 설계한 boundary adapter의 아이디어, 구현 과정, 디버깅, 최적화 및 검증 결과를 정리한다.</p>
+    <div class="verdict"><b>최종 판정:</b> 기존 bank-side PIM adapter는 직접 재사용하지 않는다. <b>DRAM timing/bank 모델만 재사용</b>하고 정규화 전용 command/credit adapter를 새로 구현하는 것이 맞다. simulator용 구현은 완료됐으며, production HBM 내부 규격이 확정되면 command/credit front-end를 교체한다.</div>
+  </header>
+
+  <nav><a href="#scope">설계 경계</a><a href="#contract">규격</a><a href="#ideas">핵심 아이디어</a><a href="#fsm">RTL 구조</a><a href="#process">구현 과정</a><a href="#bugs">디버깅</a><a href="#results">결과</a><a href="#decision">최종 판단</a></nav>
+
+  <section id="scope">
+    <h2>1. 왜 새로운 어댑터가 필요한가</h2>
+    <div class="grid">
+      <article class="card"><strong>재사용</strong><small><code>dram_bank_array_model</code></small><p>open-row 상태, command legality, tRCD/tCCD/tRAS/tRP/tWR 등의 timing rule과 read response 동작.</p></article>
+      <article class="card"><strong>신규 설계</strong><small><code>normalization_hbm_boundary_adapter</code></small><p>PCU transaction 패킹, 주소 매핑, command FSM, read-credit 관리, replay 공급, write coalescing.</p></article>
+      <article class="card"><strong>직접 재사용 불가</strong><small>기존 combinational PIM read 경로</small><p>response credit·backpressure·write-back이 없고 새 PCU의 all-bank transaction 구조와 맞지 않는다.</p></article>
+    </div>
+    <p class="muted">즉, PCU RTL을 바꿨기 때문에 DRAM 자체를 다시 만드는 것이 아니라, PCU와 DRAM 사이의 의미 변환 계층을 새로 만든 것이다.</p>
+  </section>
+
+  <section id="contract">
+    <h2>2. 확인한 simulator command/credit 계약</h2>
+    <table><thead><tr><th>항목</th><th>확정된 동작</th><th>Adapter 영향</th></tr></thead><tbody>
+      <tr><td>Command</td><td>NOP=0, ACT=1, RD=2, WR=3, PRE=4, REF=5</td><td>FSM이 ACT→RD→WR→PRE 순서를 생성</td></tr>
+      <tr><td>Command bus</td><td>channel당 candidate 하나</td><td>동시에 여러 bank command 발행 불가</td></tr>
+      <tr><td><code>ready</code></td><td>현재 command/address가 timing상 legal일 때 1</td><td>command field를 먼저 제시해 legality를 관찰</td></tr>
+      <tr><td><code>valid</code></td><td>illegal cycle에 올리면 timing error</td><td><code>valid = candidate &amp; ready</code> pulse 사용</td></tr>
+      <tr><td>Read credit</td><td>outstanding 1개</td><td>response 반환 전 다음 RD 금지</td></tr>
+      <tr><td>Read response</td><td>latency 2, valid/ready 유지</td><td>RED/REP/AFF별 WAIT state에서 수신</td></tr>
+      <tr><td>Write completion</td><td>별도 ACK 없음</td><td>WR acceptance를 retirement로 처리</td></tr>
+      <tr><td>Row state</td><td>bank당 open row 하나</td><td>x/affine/output을 같은 row에 배치</td></tr>
+    </tbody></table>
+    <div class="callout amber"><b>특수한 handshake:</b> 일반적인 decoupled ready/valid처럼 valid를 유지하며 기다리면 이 모델은 오류를 낸다. 그래서 adapter는 command/address를 조합적으로 제시하고 <code>cmd_ready_i</code>가 1인 cycle에만 <code>cmd_valid_o</code>를 pulse한다.</div>
+  </section>
+
+  <section id="ideas">
+    <h2>3. 핵심 설계 아이디어</h2>
+    <div class="grid">
+      <article class="card wide"><strong>128↔256-bit 패킹</strong><p>PCU bank vector는 8×BF16=128 bit, DRAM word는 256 bit다. 짝수 vector는 lower half, 홀수 vector는 upper half에 저장해 word 하나를 두 번 활용한다.</p></article>
+      <article class="card wide"><strong>Open-row column layout</strong><p>x, affine, output을 서로 다른 row가 아니라 같은 physical row의 column 구간에 배치해 phase마다 PRE/ACT하는 비용을 제거한다.</p></article>
+      <article class="card"><strong>X slice reuse</strong><p>한 번 읽은 256-bit x word를 연속 두 reduction/replay vector에 사용한다.</p></article>
+      <article class="card"><strong>Affine packing</strong><p>gamma는 [127:0], beta는 [255:128]에 저장해 operand 두 개를 RD 하나로 공급한다.</p></article>
+      <article class="card"><strong>Write coalescing</strong><p>PCU output 두 개를 256-bit word로 조립한 뒤 WR 하나로 기록한다. 홀수 개의 마지막 vector는 byte mask로 나머지 절반을 보존한다.</p></article>
+      <article class="card"><strong>All-bank atomicity</strong><p>16개 bank가 모두 valid/ready일 때만 PCU vector를 이동시켜 row alignment와 tag 일관성을 보존한다.</p></article>
+      <article class="card"><strong>Credit-aware issue</strong><p>read acceptance부터 response retirement까지 outstanding을 1로 제한하고 테스트에서도 peak=1, final=0을 assertion한다.</p></article>
+      <article class="card"><strong>Held replay request</strong><p>PCU의 scalar 계산 완료 후 replay 요청을 backpressure 아래에서도 잃지 않고 수락한다.</p></article>
+    </div>
+
+    <h3>2048 hidden의 column map</h3>
+    <table><thead><tr><th>구간</th><th>Columns</th><th>내용</th><th>규모</th></tr></thead><tbody>
+      <tr><td>X</td><td>0–7</td><td>16 PCU vectors, word당 2 vectors</td><td>8 words/bank</td></tr>
+      <tr><td>Affine</td><td>8–23</td><td>vector별 gamma+beta packed word</td><td>16 words/bank</td></tr>
+      <tr><td>Output</td><td>24–31</td><td>word당 output 2 vectors</td><td>8 words/bank</td></tr>
+    </tbody></table>
+  </section>
+
+  <section id="fsm">
+    <h2>4. RTL 구조와 상태 흐름</h2>
+    <div class="flow" aria-label="adapter state flow">
+      <div class="node"><b>IDLE</b>descriptor</div><div class="arrow">→</div>
+      <div class="node"><b>ACT</b>16 banks</div><div class="arrow">→</div>
+      <div class="node"><b>RED RD/WAIT</b>x fetch</div><div class="arrow">→</div>
+      <div class="node"><b>RED SEND</b>PCU reduce</div><div class="arrow">→</div>
+      <div class="node"><b>WAIT REPLAY</b>scalar ready</div><div class="arrow">→</div>
+      <div class="node"><b>REP X/AFF</b>two reads</div><div class="arrow">→</div>
+      <div class="node"><b>REP SEND</b>apply input</div><div class="arrow">→</div>
+      <div class="node"><b>WAIT WB/WR</b>coalesce</div><div class="arrow">→</div>
+      <div class="node"><b>PRE/DONE</b>close row</div>
+    </div>
+    <table><thead><tr><th>내부 저장소</th><th>크기</th><th>역할</th></tr></thead><tbody>
+      <tr><td><code>x_word_q[16]</code></td><td>4,096 bits</td><td>각 bank의 현재 256-bit activation word</td></tr>
+      <tr><td><code>affine_word_q[16]</code></td><td>4,096 bits</td><td>각 bank의 gamma/beta packed word</td></tr>
+      <tr><td><code>wb_word_q[16]</code></td><td>4,096 bits</td><td>두 output slice를 합치는 write buffer</td></tr>
+      <tr><td>합계</td><td><b>12,288 bits</b></td><td>데이터 조립 및 all-bank lockstep 유지</td></tr>
+    </tbody></table>
+    <pre><code>// simulator legality contract
+assign cmd_valid_o = command_candidate &amp;&amp; cmd_ready_i;
+
+// two 128-bit vectors per 256-bit word
+x_col   = x_base     + floor(vector / 2);
+aff_col = affine_base + vector;
+out_col = output_base + floor(vector / 2);</code></pre>
+  </section>
+
+  <section id="process">
+    <h2>5. 구현 과정</h2>
+    <div class="timeline">
+      <div class="event"><b>1단계 · 기존 구조 감사</b><br>DRAM command encoding, timing legality, response hold, PIM combinational read path를 조사했다. 기존 PIM adapter에는 정규화 replay/write-back과 credit 계약이 없음을 확인했다.</div>
+      <div class="event"><b>2단계 · 인터페이스와 주소 매핑 확정</b><br>PCU의 reduction/replay/write-back 포트를 직접 연결하고, descriptor에 row와 x/affine/output base column을 넣었다. 2048 hidden이 정확히 32 columns에 들어가는 layout을 정했다.</div>
+      <div class="event"><b>3단계 · command FSM 구현</b><br>ACT, reduction fetch, replay fetch, output assembly/WR, PRE를 직렬화하고 DRAM legality-ready 방식에 맞춘 valid pulse를 구현했다.</div>
+      <div class="event"><b>4단계 · 실제 PCU–DRAM 통합</b><br>산술 PCU와 DRAM 모델을 동시에 instantiation한 testbench를 만들고 LayerNorm/RMSNorm의 output memory를 직접 검사했다.</div>
+      <div class="event"><b>5단계 · 오류 수정</b><br>write-back 조합 순환과 output column off-by-one을 발견해 ready 생성과 completed-vector 주소 계산을 수정했다.</div>
+      <div class="event"><b>6단계 · command 최적화</b><br>queue depth를 늘리는 대신 x word reuse, affine packing, write coalescing, same-row layout으로 실질적인 command 수를 절반으로 줄였다.</div>
+      <div class="event"><b>7단계 · 완료 감사</b><br>4개 통합 case, 4개 abstract baseline, timing/credit assertions, command count, memory output, Yosys check를 자동 대조했다.</div>
+    </div>
+  </section>
+
+  <section id="bugs">
+    <h2>6. 구현 중 발견한 핵심 버그와 교훈</h2>
+    <table><thead><tr><th>문제</th><th>증상/원인</th><th>수정</th><th>설계 교훈</th></tr></thead><tbody>
+      <tr><td>Write-back 조합 순환</td><td>adapter ready가 PCU valid를 기다리고, PCU scheduler valid가 sink ready를 기다려 simulation deadlock 발생</td><td><code>writeback_ready</code>를 valid가 아니라 buffer availability만으로 생성</td><td>ready는 가능하면 자원 상태만 반영하고 상대 valid에 의존하지 않아야 한다.</td></tr>
+      <tr><td>Output word 주소 +1 오류</td><td>두 번째 slice capture 후 증가된 <code>wb_vector_q</code>로 WR column을 계산해 첫 word가 untouched</td><td><code>((wb_vector_q - 1) &gt;&gt; 1)</code>로 방금 완성된 vector 기준 주소 계산</td><td>producer index와 committed index를 구분해야 한다.</td></tr>
+      <tr><td>Credit 증설 착시</td><td>adapter queue를 늘려도 DRAM outstanding credit이 1이라 추가 RD 불가</td><td>queue depth 1 유지, command 수 절감에 집중</td><td>queue 용량보다 downstream service contract가 실제 처리량을 결정한다.</td></tr>
+      <tr><td>Host bus와 내부 fabric 혼동 위험</td><td>shared command port의 낮은 공급률을 PCU lane 자체의 문제로 오판 가능</td><td>scheduler freeze 유지, production HBM 규격 확정 전 구조 변경 보류</td><td>병목 수치에는 항상 측정한 topology의 경계를 명시해야 한다.</td></tr>
+    </tbody></table>
+  </section>
+
+  <section id="results">
+    <h2>7. 검증 및 성능 결과</h2>
+    <div class="grid">
+      <article class="card"><strong>4 / 4 PASS</strong><small>LayerNorm/RMSNorm × hidden 128/2048</small></article>
+      <article class="card"><strong>0 errors</strong><small>timing 및 PCU/adapter protocol</small></article>
+      <article class="card"><strong>1 → 0</strong><small>peak → final outstanding read credit</small></article>
+      <article class="card"><strong>50% 감소</strong><small>2048 data commands: 1,280 → 640</small></article>
+      <article class="card"><strong>1,644 cells</strong><small>Yosys generic process/opt 결과</small></article>
+      <article class="card"><strong>0 problems</strong><small>Yosys hierarchy/check</small></article>
+    </div>
+    <table><thead><tr><th>Mode</th><th>Hidden</th><th>Abstract PCU</th><th>HBM-connected</th><th>Slowdown</th><th>ACT/RD/WR/PRE</th><th>결과</th></tr></thead><tbody>
+      <tr><td>LayerNorm</td><td class="num">128</td><td class="num">130</td><td class="num">523</td><td class="num">4.02×</td><td>16 / 48 / 16 / 16</td><td class="pass">PASS</td></tr>
+      <tr><td>LayerNorm</td><td class="num">2048</td><td class="num">167</td><td class="num">3,509</td><td class="num">21.01×</td><td>16 / 512 / 128 / 16</td><td class="pass">PASS</td></tr>
+      <tr><td>RMSNorm</td><td class="num">128</td><td class="num">118</td><td class="num">511</td><td class="num">4.33×</td><td>16 / 48 / 16 / 16</td><td class="pass">PASS</td></tr>
+      <tr><td>RMSNorm</td><td class="num">2048</td><td class="num">155</td><td class="num">3,497</td><td class="num">22.56×</td><td>16 / 512 / 128 / 16</td><td class="pass">PASS</td></tr>
+    </tbody></table>
+
+    <h3>2048 LayerNorm cycle 규모</h3>
+    <div class="barrow"><span>Abstract PCU</span><div class="bar"><div class="fill abstract" style="width:4.76%"></div></div><b>167</b></div>
+    <div class="barrow"><span>tCCD command 하한</span><div class="bar"><div class="fill" style="width:72.87%"></div></div><b>2,557</b></div>
+    <div class="barrow"><span>HBM-connected</span><div class="bar"><div class="fill" style="width:100%"></div></div><b>3,509</b></div>
+    <p class="muted">최적화 후 실제 cycle은 data-command 하한의 1.37배다. 완벽한 queue/arbitration으로 제거할 수 있는 최대 여지는 약 27.1%이며, 추상 PCU와의 21배 차이는 shared channel topology 없이는 해소할 수 없다.</p>
+  </section>
+
+  <section id="decision">
+    <h2>8. 최종 구조 판단</h2>
+    <div class="callout red"><b>현재 병목:</b> PCU arithmetic 또는 adapter queue depth가 아니라, 단일 shared command/data path와 outstanding read credit 1이다. 2048 LayerNorm에서 channel payload는 약 46.7 bit/cycle로 tCCD 기반 64 bit/cycle 상한의 약 73%를 사용하지만, 이를 16 banks가 직렬로 나눠 가진다.</div>
+    <h3>PCU scheduler를 바꾸지 않은 이유</h3>
+    <ol>
+      <li>8-lane 선정 기준은 active bank transfer cycle에서 128-bit slice를 소비하는 것이며 adapter도 해당 폭을 정확히 전달한다.</li>
+      <li>현재 DRAM port는 host-style shared channel이지 목표로 하는 logic-die 내부 bank-to-PCU fabric의 확정 규격이 아니다.</li>
+      <li>기존 GR00T trace에서 8-lane은 4-lane보다 약 1.9배 빠르고, 16-lane은 비용과 timing 손실이 과다했다.</li>
+      <li>shared host bus만 보고 lane을 줄이면 향후 bank-parallel 내부 fabric에서 계산 성능을 잃는다.</li>
+    </ol>
+    <p><span class="tag">8 lanes 유지</span><span class="tag">4 scalar engines 유지</span><span class="tag">split-R/W 유지</span><span class="tag">contexts 8 유지</span></p>
+    <h3>Production 규격 확정 후 교체할 부분</h3>
+    <table><thead><tr><th>확정 필요 항목</th><th>현재 prototype</th><th>향후 작업</th></tr></thead><tbody>
+      <tr><td>독립 command channel 수</td><td>1 shared channel</td><td>bank/bank-group 병렬 issuer와 arbitration</td></tr>
+      <tr><td>Read credit와 response ID</td><td>credit 1, in-order</td><td>credit counter, ID scoreboard, out-of-order retirement</td></tr>
+      <tr><td>Return data width</td><td>256 bit</td><td>실제 TSV/logic-die fabric 폭에 맞춘 gearbox</td></tr>
+      <tr><td>Write response</td><td>acceptance=completion</td><td>ACK/error/poison 처리</td></tr>
+      <tr><td>Refresh/bank-group timing</td><td>model 내부 legality</td><td>controller 노출 규격과 scheduling 정책 반영</td></tr>
+      <tr><td>Multi-row operation</td><td>한 row 소유</td><td>address interleave, row context queue, fairness</td></tr>
+    </tbody></table>
+  </section>
+
+  <section>
+    <h2>9. 구현 및 검증 산출물</h2>
+    <table><thead><tr><th>파일</th><th>역할</th></tr></thead><tbody>
+      <tr><td><code>rtl/normalization_hbm_boundary_adapter.sv</code></td><td>어댑터 RTL</td></tr>
+      <tr><td><code>verification/groot_normalization/normalization_hbm_boundary_integration_tb.sv</code></td><td>PCU–DRAM 실연동 테스트</td></tr>
+      <tr><td><code>verification/groot_normalization/run_normalization_hbm_boundary_test.sh</code></td><td>4개 timing/credit 회귀</td></tr>
+      <tr><td><code>verification/groot_normalization/audit_normalization_hbm_boundary.py</code></td><td>요구사항별 자동 완료 감사</td></tr>
+      <tr><td><code>reports/groot_normalization/hbm_boundary_adapter/completion_audit.json</code></td><td>최종 8개 감사 항목 PASS 증거</td></tr>
+    </tbody></table>
+  </section>
+
+  <footer>Normalization HBM Boundary Adapter · Implementation Report · 2026-08-12</footer>
+</main>
+</body>
+</html>

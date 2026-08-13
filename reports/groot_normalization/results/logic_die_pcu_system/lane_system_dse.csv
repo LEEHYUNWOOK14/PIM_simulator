@@ -1,0 +1,4 @@
+lanes,scalar_engines,single_shared_weighted_cycles,split_rw_weighted_cycles,independent_pcu_ports_weighted_cycles,split_rw_speedup_vs_lane4,single_shared_speedup_vs_lane4,fp32_adders,fp32_multipliers,rsqrt_units,estimated_state_bits,relative_cost_units,external_bytes_saved,external_bytes_saved_per_cost_unit,trace_accuracy_evidence
+4,4,1010525,676188,371253,1.0,1.0,372,208,4,29440,848.75,86204000,101565.83210603829,EXISTING_FULL_RTL_MODEL_BIT_EXACT_6_OF_6
+8,4,506594,339708,231756,1.9904977215726447,1.9947433250295108,628,400,4,45824,1504.75,86204000,57287.92158165808,EXISTING_FULL_RTL_MODEL_BIT_EXACT_6_OF_6
+16,4,256583,228408,226599,2.960439214038037,3.9383942038248834,1140,784,4,78592,2816.75,86204000,30604.064968492057,EXISTING_FULL_RTL_MODEL_BIT_EXACT_6_OF_6

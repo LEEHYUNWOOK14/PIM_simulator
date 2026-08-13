@@ -68,19 +68,19 @@ multi-row cycles      = rows × vectors_per_row + tree_levels
 
 | 구조 | projected Hierarchical latency |
 |---|---:|
-| non-pipelined 4-lane | 33.789 ms |
-| single-row pipelined 4-lane | 39.967 ms |
-| multi-row pipelined 4-lane | 33.796 ms |
+| non-pipelined 4-lane | 80.097 ms |
+| single-row pipelined 4-lane | 86.274 ms |
+| multi-row pipelined 4-lane | 80.104 ms |
 | assumed GPU full | 36.773 ms |
 
-multi-row 구조는 pipeline timing boundary를 유지하면서 non-pipeline 처리량에 거의 복귀한다. 실제 Logic engine의 bank-partial 직렬 수신과 16-engine 복제를 반영한 analytical model에서 assumed GPU full보다 1.088배 빠르다. GPU 값이 실측이 아니므로 실제 GPU speedup 주장은 할 수 없다.
+multi-row 구조는 pipeline timing boundary를 유지하면서 non-pipeline 처리량에 거의 복귀한다. 그러나 shared partial input 1-port를 반영하면 assumed GPU full보다 느리다. 33.8 ms 상한은 engine당 독립 partial input이 있을 때만 성립한다.
 
 ## 아키텍처 의미
 
 - 작은 hidden/많은 row workload의 핵심은 lane 수보다 row overlap이다.
 - 4→8 lanes 확장보다 4-lane multi-row scheduling이 훨씬 면적 효율적이다.
 - 16-bank 복제 시 raw reducer proxy는 688,128 generic cells다.
-- 16개 Logic normalization engine array 440,400 cells를 더한 Hierarchical lower-bound proxy는 1,128,528 cells다.
+- 16-engine shared dispatcher top 445,337 cells를 더한 Hierarchical lower-bound proxy는 1,133,465 cells다.
 - 기존 Bank-PCU apply datapath를 재사용하므로 dedicated apply engine 복제는 제외한다.
 
 ## 남은 한계

@@ -1,0 +1,117 @@
+Running the sky130hd RTL-to-GDS flow in Ubuntu...
+/home/chandler/OpenROAD-flow-scripts/flow/scripts/flow.sh 4_1_cts cts
+Running cts.tcl, stage 4_1_cts
+read_liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_db ./results/sky130hd/stob_pim2/base/3_place.odb
+read_sdc ./results/sky130hd/stob_pim2/base/3_place.sdc
+source /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/setRC.tcl
+clock_tree_synthesis -sink_clustering_enable
+[INFO CTS-0050] Root buffer is sky130_fd_sc_hd__clkbuf_16.
+[INFO CTS-0051] Sink buffer is sky130_fd_sc_hd__clkbuf_16.
+[INFO CTS-0052] The following clock buffers will be used for CTS:
+                    sky130_fd_sc_hd__clkbuf_16
+[INFO CTS-0049] Characterization buffer is sky130_fd_sc_hd__clkbuf_16.
+[INFO CTS-0007] Net "clk_i" found for clock "clk".
+[INFO CTS-0010]  Clock net "clk_i" has 14459 sinks.
+[INFO CTS-0008] TritonCTS found 1 clock nets.
+[INFO CTS-0097] Characterization used 1 buffer(s) types.
+[INFO CTS-0201] 0 blockages from hard placement blockages and placed macros will be used.
+[INFO CTS-0027] Generating H-Tree topology for net clk_i.
+[INFO CTS-0028]  Total number of sinks: 14459.
+[INFO CTS-0090]  Sinks will be clustered based on buffer max cap.
+[INFO CTS-0030]  Number of static layers: 0.
+[INFO CTS-0020]  Wire segment unit: 13600  dbu (13 um).
+[INFO CTS-0206] Best clustering solution was found from max clustering size of 13 and max clustering diameter of 300.
+[INFO CTS-0019]  Total number of sinks after clustering: 1545.
+[INFO CTS-0024]  Normalized sink region: [(0.358088, 0.832843), (122.267, 122.281)].
+[INFO CTS-0025]     Width:  121.9086.
+[INFO CTS-0026]     Height: 121.4486.
+ Level 1
+    Direction: Horizontal
+    Sinks per sub-region: 773
+    Sub-region size: 60.9543 X 121.4486
+[INFO CTS-0034]     Segment length (rounded): 30.
+ Level 2
+    Direction: Vertical
+    Sinks per sub-region: 387
+    Sub-region size: 60.9543 X 60.7243
+[INFO CTS-0034]     Segment length (rounded): 30.
+ Level 3
+    Direction: Horizontal
+    Sinks per sub-region: 194
+    Sub-region size: 30.4772 X 60.7243
+[INFO CTS-0034]     Segment length (rounded): 16.
+ Level 4
+    Direction: Vertical
+    Sinks per sub-region: 97
+    Sub-region size: 30.4772 X 30.3621
+[INFO CTS-0034]     Segment length (rounded): 16.
+ Level 5
+    Direction: Horizontal
+    Sinks per sub-region: 49
+    Sub-region size: 15.2386 X 30.3621
+[INFO CTS-0034]     Segment length (rounded): 8.
+ Level 6
+    Direction: Vertical
+    Sinks per sub-region: 25
+    Sub-region size: 15.2386 X 15.1811
+[INFO CTS-0034]     Segment length (rounded): 8.
+ Level 7
+    Direction: Horizontal
+    Sinks per sub-region: 13
+    Sub-region size: 7.6193 X 15.1811
+[INFO CTS-0034]     Segment length (rounded): 4.
+[INFO CTS-0038]  Stop criterion found. Sink region hpwl is smaller than max wirelength (1911.535 um) and max number of sinks is 15.
+[INFO CTS-0035]  Number of sinks covered: 1545.
+[INFO CTS-0018]     Created 1696 clock buffers.
+[INFO CTS-0012]     Minimum number of buffers in the clock path: 6.
+[INFO CTS-0013]     Maximum number of buffers in the clock path: 6.
+[INFO CTS-0015]     Created 1696 clock nets.
+[INFO CTS-0016]     Fanout distribution for the current clock = 2:8, 3:9, 4:17, 5:31, 6:63, 7:95, 8:187, 9:346, 10:434, 11:311, 12:105, 13:20, 14:9, 15:7, 16:3, 17:13, 18:5, 19:3, 20:1, 21:2, 22:2, 23:1, 28:1..
+[INFO CTS-0017]     Max level of the clock tree: 7.
+[INFO CTS-0098] Clock net "clk_i"
+[INFO CTS-0099]  Sinks 15874
+[INFO CTS-0100]  Leaf buffers 1545
+[INFO CTS-0101]  Average sink wire length 3039.94 um
+[INFO CTS-0102]  Path depth 5 - 6
+[INFO CTS-0207]  Dummy loads inserted 1415
+[INFO CTS-0500] Runtime: 3.60s
+estimate_parasitics -placement
+detailed_placement
+[INFO DPL-0006] Core area: 2782623.76 um^2
+[INFO DPL-0007] Movable instances area: 1111842.60 um^2
+[INFO DPL-0008] Fixed instances area within core: 46169.28 um^2
+[INFO DPL-0009] Utilization: 41.6%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 139404 cells
+          |      Total |  Illegal |  Illegal
+Iteration | Violations |    Cells |    Sites
+---------------------------------------------
+        0 |        134 |        32 |       102
+        1 |         20 |         4 |        16
+        2 |          0 |         0 |         0
+Negotiation phase 1 converged at iteration 2.
+[INFO DPL-0500] Runtime: 1.31s
+Placement Analysis
+---------------------------------
+total displacement     127301.7 u
+average displacement        0.9 u
+max displacement           27.4 u
+original HPWL         4953738.9 u
+legalized HPWL        5021966.4 u
+delta HPWL                    1 %
+
+estimate_parasitics -placement
+write_db ./results/sky130hd/stob_pim2/base/4_1_cts.odb
+write_sdc -no_timestamp ./results/sky130hd/stob_pim2/base/4_cts.sdc
+Elapsed time: 0:10.60[h:]min:sec. CPU time: user 9.96 sys 0.64 (99%). Peak memory: 811492KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+4_1_cts                   .odb           10            792 c047810c41da0632a23b
+cp ./results/sky130hd/stob_pim2/base/4_1_cts.odb ./results/sky130hd/stob_pim2/base/4_cts.odb
+OpenROAD-flow-scripts target 'do-cts' completed; GDS export was intentionally skipped.

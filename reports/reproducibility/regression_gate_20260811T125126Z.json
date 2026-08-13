@@ -1,0 +1,70 @@
+{
+  "gate_version": 1,
+  "run_id": "20260811T125126Z",
+  "started_at": "2026-08-11T12:51:26.004724+00:00",
+  "overall_status": "FAIL",
+  "manifest": "verification/reproducibility/regression_manifest.json",
+  "results": [
+    {
+      "id": "rtl_to_3d_unit",
+      "category": "python_unit",
+      "required": true,
+      "status": "PASS",
+      "command": [
+        "C:\\Program Files\\Python313\\python.exe",
+        "-m",
+        "unittest",
+        "verification.rtl_to_3d.test_rtl_to_3d"
+      ],
+      "started_at": "2026-08-11T12:51:26.004724+00:00",
+      "duration_s": 0.75,
+      "exit_code": 0,
+      "output": ".......\n----------------------------------------------------------------------\nRan 7 tests in 0.015s\n\nOK\nCollected 5 blocks into C:\\Users\\Admin\\AppData\\Local\\Temp\\tmpc0cmnbex\\normalized.json\n"
+    },
+    {
+      "id": "hardware_cost_unit",
+      "category": "python_unit",
+      "required": true,
+      "status": "PASS",
+      "command": [
+        "C:\\Program Files\\Python313\\python.exe",
+        "-m",
+        "unittest",
+        "verification.hardware_cost_regression.test_hardware_cost_regression"
+      ],
+      "started_at": "2026-08-11T12:51:26.754702+00:00",
+      "duration_s": 3.295,
+      "exit_code": 0,
+      "output": "......\n----------------------------------------------------------------------\nRan 6 tests in 2.991s\n\nOK\nHARDWARE_COST_SNAPSHOT PASS revision=provisional_baseline_2026_08_11 output=C:\\Users\\Admin\\AppData\\Local\\Temp\\tmpy11di0y6\\baseline.json\nHARDWARE_COST_SNAPSHOT PASS revision=provisional_baseline_2026_08_11 output=C:\\Users\\Admin\\AppData\\Local\\Temp\\tmpntzxjtp8\\baseline.json\nHARDWARE_COST_SNAPSHOT PASS revision=provisional_baseline_2026_08_11 output=C:\\Users\\Admin\\AppData\\Local\\Temp\\tmpc5eevc6n\\snapshot.json\nHARDWARE_COST_SNAPSHOT PASS revision=provisional_baseline_2026_08_11 output=C:\\Users\\Admin\\AppData\\Local\\Temp\\tmpaju13oxn\\baseline.json\n{\n  \"status\": \"PASS\",\n  \"baseline\": \"provisional_baseline_2026_08_11\",\n  \"revision_count\": 2,\n  \"final_architecture_parameters_selected\": false,\n  \"outputs\": [\n    \"paper_revision_table.csv\",\n    \"paper_category_table.csv\",\n    \"paper_delta_table.csv\",\n    \"paper_regression_report.md\",\n    \"paper_revision_overview.png\",\n    \"paper_category_power.png\"\n  ]\n}\nHARDWARE_COST_SNAPSHOT PASS revision=provisional_baseline_2026_08_11 output=C:\\Users\\Admin\\AppData\\Local\\Temp\\tmprcz0op4m\\baseline.json\n"
+    },
+    {
+      "id": "normalization_foundation_tests",
+      "category": "rtl_tests",
+      "required": true,
+      "status": "FAIL",
+      "command": [
+        "bash",
+        "verification/groot_normalization/run_foundation_regression.sh",
+        "--tests-only"
+      ],
+      "started_at": "2026-08-11T12:51:30.049502+00:00",
+      "duration_s": 629.66,
+      "exit_code": 1,
+      "output": "FOUNDATION test: run_bank_normalization_microprogram_adapter_test\nBANK_NORMALIZATION_MICROPROGRAM_ADAPTER_TB PASS transactions=2 commands=6 lanes=16\nverification/groot_normalization/bank_normalization_microprogram_adapter_tb.sv:44: $finish called at 210 (1s)\nFOUNDATION test: run_bank_normalization_multirow_vector_reducer_test\nrtl/bank_normalization_multirow_vector_reducer.sv:103: warning: A for statement must compare against a constant value to be synthesized in an always_ff process.\nBANK_NORMALIZATION_MULTIROW_VECTOR_REDUCER_TB PASS rows=4 row_II=1 first_result_before_last=0\nverification/groot_normalization/bank_normalization_multirow_vector_reducer_tb.sv:59: $finish called at 150 (1s)\nrtl/bank_normalization_multirow_vector_reducer.sv:103: warning: A for statement must compare against a constant value to be synthesized in an always_ff process.\nBANK_NORMALIZATION_MULTIROW_VECTOR_REDUCER_TB PASS rows=8 row_II=1 first_result_before_last=1\nverification/groot_normalization/bank_normalization_multirow_vector_reducer_tb.sv:59: $finish called at 230 (1s)\nFOUNDATION test: run_bank_normalization_pipelined_vector_reducer_test\nrtl/bank_normalization_pipelined_vector_reducer.sv:107: warning: A for statement must compare against a constant value to be synthesized in an always_ff process.\nBANK_NORMALIZATION_PIPELINED_VECTOR_REDUCER_TB PASS format=0 lanes=2 II=1 latency_from_last=2\nverification/groot_normalization/bank_normalization_pipelined_vector_reducer_tb.sv:62: $finish called at 110 (1s)\nrtl/bank_normalization_pipelined_vector_reducer.sv:107: warning: A for statement must compare against a constant value to be synthesized in an always_ff process.\nBANK_NORMALIZATION_PIPELINED_VECTOR_REDUCER_TB PASS format=0 lanes=4 II=1 latency_from_last=3\nverification/groot_normalization/bank_normalization_pipelined_vector_reducer_tb.sv:62: $finish called at 120 (1s)\nrtl/bank_normalization_pipelined_vector_reducer.sv:107: warning: A for statement must compare against a constant value to be synthesized in an always_ff process.\nBANK_NORMALIZATION_PIPELINED_VECTOR_REDUCER_TB PASS format=0 lanes=8 II=1 latency_from_last=4\nverification/groot_normalization/bank_normalization_pipelined_vector_reducer_tb.sv:62: $finish called at 130 (1s)\nrtl/bank_normalization_pipelined_vector_reducer.sv:107: warning: A for statement must compare against a constant value to be synthesized in an always_ff process.\nBANK_NORMALIZATION_PIPELINED_VECTOR_REDUCER_TB PASS format=0 lanes=16 II=1 latency_from_last=5\nverification/groot_normalization/bank_normalization_pipelined_vector_reducer_tb.sv:62: $finish called at 140 (1s)\nrtl/bank_normalization_pipelined_vector_reducer.sv:107: warning: A for statement must compare against a constant value to be synthesized in an always_ff process.\nBANK_NORMALIZATION_PIPELINED_VECTOR_REDUCER_TB PASS format=1 lanes=2 II=1 latency_from_last=2\nverification/groot_normalization/bank_normalization_pipelined_vector_reducer_tb.sv:62: $finish called at 110 (1s)\nrtl/bank_normalization_pipelined_vector_reducer.sv:107: warning: A for statement must compare against a constant value to be synthesized in an always_ff process.\nBANK_NORMALIZATION_PIPELINED_VECTOR_REDUCER_TB PASS format=1 lanes=4 II=1 latency_from_last=3\nverification/groot_normalization/bank_normalization_pipelined_vector_reducer_tb.sv:62: $finish called at 120 (1s)\nrtl/bank_normalization_pipelined_vector_reducer.sv:107: warning: A for statement must compare against a constant value to be synthesized in an always_ff process.\nBANK_NORMALIZATION_PIPELINED_VECTOR_REDUCER_TB PASS format=1 lanes=8 II=1 latency_from_last=4\nverification/groot_normalization/bank_normalization_pipelined_vector_reducer_tb.sv:62: $finish called at 130 (1s)\nrtl/bank_normalization_pipelined_vector_reducer.sv:107: warning: A for statement must compare against a constant value to be synthesized in an always_ff process.\nBANK_NORMALIZATION_PIPELINED_VECTOR_REDUCER_TB PASS format=1 lanes=16 II=1 latency_from_last=5\nverification/groot_normalization/bank_normalization_pipelined_vector_reducer_tb.sv:62: $finish called at 140 (1s)\nFOUNDATION test: run_bank_normalization_test\nWROTE bank_normalization_rows=128 elements=2048\nBANK_NORMALIZATION_ENGINES_TB PASS rows=128 logical_elements=1088\nverification/groot_normalization/bank_normalization_engines_tb.sv:54: $finish called at 39090 (1s)\nFOUNDATION test: run_bank_normalization_vector_reducer_test\nBANK_NORMALIZATION_VECTOR_REDUCER_TB PASS lanes=16 vectors=2 cycles=6\nverification/groot_normalization/bank_normalization_vector_reducer_tb.sv:54: $finish called at 90 (1s)\nFOUNDATION test: run_bank_pim_normalization_microprogram_test\nBANK_PIM_NORMALIZATION_MICROPROGRAM_TB PASS commands=6 cycles=20 lanes=16\nverification/groot_normalization/bank_pim_normalization_microprogram_tb.sv:202: $finish called at 230 (1s)\nFOUNDATION test: run_bf16_arithmetic_random_test\nWROTE bf16_arithmetic_vectors=20256\nBF16_ARITHMETIC_RANDOM_TB PASS vectors=20256\nverification/groot_normalization/bf16_arithmetic_random_tb.sv:24: $finish called at 20256 (1s)\nFOUNDATION test: run_bf16_normalization_test\nBF16_NORMALIZATION_TB PASS primitive reducer apply special_values backpressure\nverification/groot_normalization/bf16_normalization_tb.sv:90: $finish called at 140 (1s)\nFOUNDATION test: run_bf16_rsqrt_test\nWROTE bf16_lut_entries=256 exhaustive_vectors=65536\nBF16_RSQRT_LUT256_TB PASS vectors=65536 cycles=76459 latency=1 II=1\nverification/groot_normalization/bf16_rsqrt_lut256_tb.sv:28: $finish called at 764610 (1s)\nFOUNDATION test: run_fp16_rsqrt_test\nWROTE lut_entries=256 exhaustive_vectors=65536\nFP16_RSQRT_LUT256_TB PASS vectors=65536 cycles=76459 latency=1 II=1\nverification/groot_normalization/fp16_rsqrt_lut256_tb.sv:57: $finish called at 764610 (1s)\nFOUNDATION test: run_fp32_mixed_precision_primitives_test\nWROTE fp32_mixed_precision_vectors=20225\nFP32_MIXED_PRECISION_PRIMITIVES_TB PASS vectors=20225\nverification/groot_normalization/fp32_mixed_precision_primitives_tb.sv:32: $finish called at 20225 (1s)\nFOUNDATION test: run_groot_actual_trace_bf16_test\nGROOT_RTL_ACCURACY_VECTORS PASS cases=6\nGROOT_ACTUAL_TRACE_BF16_TB PASS profile=action_vlln hidden=2048 outputs=2048 exact_mismatches=983 mean=3aa2 inv=3f7c cycles=538\nverification/groot_normalization/groot_actual_trace_bf16_tb.sv:80: $finish called at 5410 (1s)\nGROOT_ACTUAL_TRACE_BF16_TB PASS profile=action_vl_self_attention_norm1 hidden=2048 outputs=2048 exact_mismatches=1986 mean=b900 inv=3f7a cycles=538\nverification/groot_normalization/groot_actual_trace_bf16_tb.sv:80: $finish called at 5410 (1s)\nGROOT_ACTUAL_TRACE_BF16_TB PASS profile=action_vl_self_attention_norm3 hidden=2048 outputs=2048 exact_mismatches=1228 mean=bb23 inv=3f75 cycles=538\nverification/groot_normalization/groot_actual_trace_bf16_tb.sv:80: $finish called at 5410 (1s)\nGROOT_ACTUAL_TRACE_BF16_TB PASS profile=action_dit_adaln_norm1 hidden=1536 outputs=1536 exact_mismatches=470 mean=bc38 inv=3f80 cycles=410\nverification/groot_normalization/groot_actual_trace_bf16_tb.sv:80: $finish called at 4130 (1s)\nGROOT_ACTUAL_TRACE_BF16_TB PASS profile=action_dit_norm3 hidden=1536 outputs=1536 exact_mismatches=1340 mean=bc33 inv=3f7e cycles=410\nverification/groot_normalization/groot_actual_trace_bf16_tb.sv:80: $finish called at 4130 (1s)\nGROOT_ACTUAL_TRACE_BF16_TB PASS profile=action_dit_norm_out hidden=1536 outputs=1536 exact_mismatches=1289 mean=3fde inv=3d11 cycles=410\nverification/groot_normalization/groot_actual_trace_bf16_tb.sv:80: $finish called at 4130 (1s)\nGROOT_RTL_ACCURACY_ANALYSIS result=FAIL passed=1 failed=5 threshold=0.025\nGROOT_ACTUAL_TRACE_BF16_REGRESSION PASS cases=6\nFOUNDATION test: run_groot_mixed_precision_trace_test\nGROOT_MIXED_PRECISION_RTL_VECTORS PASS cases=6\nGROOT_MIXED_PRECISION_TRACE_TB PASS profile=action_vlln rows=280 hidden=2048 elements=573440 mixed_mismatches=0 pytorch_bit_mismatches=5 cycles=43961\nverification/groot_normalization/groot_mixed_precision_trace_tb.sv:77: $finish called at 439640 (1s)\nGROOT_MIXED_PRECISION_TRACE_TB PASS profile=action_vl_self_attention_norm1 rows=280 hidden=2048 elements=573440 mixed_mismatches=0 pytorch_bit_mismatches=8 cycles=43961\nverification/groot_normalization/groot_mixed_precision_trace_tb.sv:77: $finish called at 439640 (1s)\nGROOT_MIXED_PRECISION_TRACE_TB PASS profile=action_vl_self_attention_norm3 rows=280 hidden=2048 elements=573440 mixed_mismatches=0 pytorch_bit_mismatches=21 cycles=26601\nverification/groot_normalization/groot_mixed_precision_trace_tb.sv:83: $finish called at 266040 (1s)\nGROOT_MIXED_PRECISION_TRACE_TB PASS profile=action_dit_adaln_norm1 rows=41 hidden=1536 elements=62976 mixed_mismatches=0 pytorch_bit_mismatches=6 cycles=3240\nverification/groot_normalization/groot_mixed_precision_trace_tb.sv:83: $finish called at 32430 (1s)\nGROOT_MIXED_PRECISION_TRACE_TB PASS profile=action_dit_norm3 rows=41 hidden=1536 elements=62976 mixed_mismatches=0 pytorch_bit_mismatches=0 cycles=3240\nverification/groot_normalization/groot_mixed_precision_trace_tb.sv:83: $finish called at 32430 (1s)\nGROOT_MIXED_PRECISION_TRACE_TB PASS profile=action_dit_norm_out rows=41 hidden=1536 elements=62976 mixed_mismatches=0 pytorch_bit_mismatches=4 cycles=3240\nverification/groot_normalization/groot_mixed_precision_trace_tb.sv:83: $finish called at 32430 (1s)\nverification/groot_normalization/run_groot_mixed_precision_trace_test.sh: line 16: unexpected EOF while looking for matching `\"'\n"
+    },
+    {
+      "id": "rtl_audit_regression",
+      "category": "rtl_audit",
+      "required": true,
+      "status": "PASS",
+      "command": [
+        "bash",
+        "verification/rtl_audit/run_aud_001_008_regression.sh"
+      ],
+      "started_at": "2026-08-11T13:01:59.709799+00:00",
+      "duration_s": 2.038,
+      "exit_code": 0,
+      "output": "FP16_MUL_AUDIT vectors=4217 mismatches=0\nverification/rtl_audit/fp16_mul_random_audit_tb.sv:20: $finish called at 4217 (1s)\nAUDIT_FIX PASS: bank command remained blocked while referenced operands were invalid\nverification/rtl_audit/bank_operand_validity_repro_tb.sv:45: $finish called at 155 (1s)\nAUDIT_FIX PASS: illegal CRF word reported an error and retired\nverification/rtl_audit/invalid_crf_deadlock_repro_tb.sv:37: $finish called at 105 (1s)\nAUDIT_FIX PASS: stalled DRAM response stayed stable and blocked overwrite\nverification/rtl_audit/dram_read_backpressure_repro_tb.sv:29: $finish called at 146 (1s)\nAUDIT_FIX PASS: tWR/tCCD/tRRD/tFAW/tRFC/turnaround enforced\nverification/rtl_audit/dram_extended_timing_tb.sv:41: $finish called at 440 (1s)\nAUDIT_FIX PASS: finite JUMP completed; accepted=5\nverification/rtl_audit/crf_jump_repro_tb.sv:25: $finish called at 155 (1s)\nAUDIT_FIX PASS: CRF NOP/FILL/AUTO repeat semantics match C++\nverification/rtl_audit/crf_repeat_semantics_tb.sv:38: $finish called at 335 (1s)\nAUDIT_FIX PASS: epoch gated dispatch and independent source channel metadata\nverification/rtl_audit/logic_tag_channel_repro_tb.sv:47: $finish called at 166 (1s)\n"
+    }
+  ]
+}

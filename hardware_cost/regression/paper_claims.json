@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "physical_feasibility": "reports/hardware_cost_physical_feasibility/physical_feasibility.json",
+  "scan_paths": [
+    "reports/hardware_cost_physical_feasibility/physical_feasibility_report.md"
+  ],
+  "results": [
+    {
+      "id": "R-RTL-01",
+      "result": "HBM boundary-adapter behavior, protocol, and backpressure checks",
+      "basis": "rtl_simulation",
+      "required_gate": "PF-0",
+      "evidence": ["reports/groot_normalization/hbm_boundary_adapter/05_completion_audit.md"],
+      "allowed_claim": "The boundary adapter passed the reported RTL-level functional checks.",
+      "boundary": "This does not establish synthesis, timing closure, placement, or routing."
+    },
+    {
+      "id": "R-SYN-01",
+      "result": "Standalone adapter Sky130 mapping and constrained-path audit",
+      "basis": "technology_mapping",
+      "required_gate": "PF-1",
+      "evidence": [
+        "reports/groot_normalization/physical_feasibility/normalization_hbm_boundary_adapter_sky130_yosys.log",
+        "reports/groot_normalization/physical_feasibility/normalization_hbm_boundary_adapter_sky130_sta.log"
+      ],
+      "allowed_claim": "The standalone adapter was synthesized and technology-mapped with the reported proxy area and constrained STA result.",
+      "boundary": "The 40 ns project timing target is not met; no timing-closure claim is allowed."
+    },
+    {
+      "id": "R-SYN-02",
+      "result": "Integrated PCU plus adapter Sky130 mapping",
+      "basis": "technology_mapping",
+      "required_gate": "PF-2",
+      "evidence": [
+        "reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_sky130_yosys.log",
+        "reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_sky130_sta.log"
+      ],
+      "allowed_claim": "The integrated PCU plus adapter was synthesized and technology-mapped in the public Sky130 proxy flow.",
+      "boundary": "This is proxy technology mapping, not production-process PPA or timing closure."
+    },
+    {
+      "id": "R-PLC-01",
+      "result": "Integrated mapped-netlist legal coarse placement",
+      "basis": "legal_placement",
+      "required_gate": "PF-3",
+      "evidence": ["reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_v2_repair_legalize.log"],
+      "allowed_claim": "The current mapped netlist reached legal coarse placement with zero final legalization violations.",
+      "boundary": "Legal placement does not establish routability, detailed-route completion, or signoff."
+    },
+    {
+      "id": "R-RTE-01",
+      "result": "Global-routing feasibility",
+      "basis": "global_routing",
+      "required_gate": "PF-4",
+      "evidence": [
+        "reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_v4_route.log",
+        "reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_v4.congestion.rpt"
+      ],
+      "allowed_claim": "The v4 full-net CUGR measurement produced a complete guide and congestion report, but residual severe congestion remains, the process did not emit a clean exit marker, and PF-4 failed.",
+      "boundary": "Routing feasibility remains unestablished; routability and congestion closure cannot be claimed, and RTL freeze remains blocked."
+    },
+    {
+      "id": "R-MOD-01",
+      "result": "Architectural latency, throughput, power, and thermal projections",
+      "basis": "computational_model",
+      "required_gate": null,
+      "evidence": ["output/hbm2_hardware_cost/integrated_metrics.json"],
+      "allowed_claim": "These values are outputs of the stated architectural models under their documented inputs.",
+      "boundary": "They are not RTL measurements, post-route results, or silicon measurements."
+    },
+    {
+      "id": "R-EST-01",
+      "result": "Manufacturing, yield, geometry, and cost assumptions",
+      "basis": "engineering_estimate",
+      "required_gate": null,
+      "evidence": ["hardware_cost/config.json"],
+      "allowed_claim": "These values are engineering estimates used for sensitivity analysis.",
+      "boundary": "They are not vendor disclosures, quotes, or measured manufacturing data."
+    },
+    {
+      "id": "R-ILL-01",
+      "result": "HBM2 package and floorplan visualizations",
+      "basis": "illustration",
+      "required_gate": null,
+      "evidence": ["design/hbm2_architecture.json"],
+      "allowed_claim": "The figures illustrate the modeled architecture and relative organization.",
+      "boundary": "Shape placement and dimensions do not establish a manufacturable layout or routed connectivity."
+    }
+  ]
+}

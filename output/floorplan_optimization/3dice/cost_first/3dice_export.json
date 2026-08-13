@@ -1,0 +1,19 @@
+{
+  "status": "EXPORTED",
+  "source": "output/floorplan_optimization/thermal/cost_first/mapped_power.json",
+  "input_power_W": 4.0,
+  "dram_dies": 8,
+  "grid": [
+    32,
+    16
+  ],
+  "solver": "3D-ICE 4.0 commit 4953952a1ef6d38807ff307212a6f15e5b2ef935",
+  "classification": "modeled",
+  "signoff": false,
+  "limitations": [
+    "effective bump material",
+    "top convection only",
+    "estimated block power",
+    "not calibrated"
+  ]
+}

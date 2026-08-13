@@ -1,0 +1,119 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "three candidates and fifteen adapters present",
+      "pass": true,
+      "detail": {
+        "candidates": [
+          "synthetic_low_area",
+          "synthetic_balanced",
+          "synthetic_high_performance"
+        ],
+        "adapters": 15
+      }
+    },
+    {
+      "name": "all adapter schemas, calibration gates, hashes, and conservation rules pass",
+      "pass": true,
+      "detail": {
+        "synthetic_low_area:area": [],
+        "synthetic_low_area:timing": [],
+        "synthetic_low_area:power": [],
+        "synthetic_low_area:workload": [],
+        "synthetic_low_area:thermal": [],
+        "synthetic_balanced:area": [],
+        "synthetic_balanced:timing": [],
+        "synthetic_balanced:power": [],
+        "synthetic_balanced:workload": [],
+        "synthetic_balanced:thermal": [],
+        "synthetic_high_performance:area": [],
+        "synthetic_high_performance:timing": [],
+        "synthetic_high_performance:power": [],
+        "synthetic_high_performance:workload": [],
+        "synthetic_high_performance:thermal": []
+      }
+    },
+    {
+      "name": "three Evidence Contract v2 snapshots pass",
+      "pass": true,
+      "detail": {
+        "synthetic_low_area": [],
+        "synthetic_balanced": [],
+        "synthetic_high_performance": []
+      }
+    },
+    {
+      "name": "each snapshot retains all five adapter sources",
+      "pass": true,
+      "detail": "five unique adapter roles per snapshot"
+    },
+    {
+      "name": "architecture remains provisional",
+      "pass": true,
+      "detail": [
+        "synthetic_low_area",
+        "synthetic_balanced",
+        "synthetic_high_performance"
+      ]
+    },
+    {
+      "name": "synthetic power does not produce Energy/op",
+      "pass": true,
+      "detail": "Energy/op is N/A"
+    },
+    {
+      "name": "comparison covers all three candidates",
+      "pass": true,
+      "detail": [
+        "synthetic_low_area",
+        "synthetic_balanced",
+        "synthetic_high_performance"
+      ]
+    },
+    {
+      "name": "comparison table exposes all five axes",
+      "pass": true,
+      "detail": [
+        "mapped_area_um2",
+        "critical_path_ns",
+        "total_power_W",
+        "throughput_ops_s",
+        "peak_temperature_K"
+      ]
+    },
+    {
+      "name": "known synthetic deltas reproduced",
+      "pass": true,
+      "detail": {
+        "area_vs_baseline_pct": "25.0",
+        "critical_path_vs_baseline_pct": "-25.0",
+        "throughput_vs_baseline_pct": "80.0"
+      }
+    },
+    {
+      "name": "Energy/op comparison is unavailable",
+      "pass": true,
+      "detail": {
+        "value": "",
+        "policy": "unavailable"
+      }
+    },
+    {
+      "name": "all comparison and validation artifacts exist",
+      "pass": true,
+      "detail": [
+        "paper_revision_table.csv",
+        "paper_category_table.csv",
+        "paper_delta_table.csv",
+        "paper_regression_report.md",
+        "paper_revision_overview.png",
+        "paper_category_power.png",
+        "paper_timing_throughput.png",
+        "regression_summary.json",
+        "validation_report.json"
+      ]
+    }
+  ],
+  "scope": "Synthetic five-adapter integration and comparison plumbing; no physical or architecture signoff."
+}

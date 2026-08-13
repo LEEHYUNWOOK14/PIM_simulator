@@ -1,25 +1,114 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "STOB hardware-cost revision snapshot",
+  "$id": "https://stob-pim.local/schemas/hardware-cost-evidence-contract-v2.json",
+  "title": "STOB hardware-cost Evidence Contract v2 snapshot",
   "type": "object",
-  "required": ["schema_version", "revision", "parameter_status", "calibration", "observations", "block_metrics", "physical_totals", "thermal", "workload", "categories", "source_files"],
-  "properties": {
-    "schema_version": {"const": 1},
-    "revision": {
+  "additionalProperties": false,
+  "required": ["schema_version", "evidence_contract", "revision", "parameter_status", "calibration", "observations", "block_metrics", "physical_totals", "physical_feasibility", "thermal", "workload", "categories", "source_files", "notes"],
+  "$defs": {
+    "nullableNumber": {"type": ["number", "null"]},
+    "nonnegativeNullableNumber": {"type": ["number", "null"], "minimum": 0},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "claimClass": {"enum": ["measured", "derived", "modeled", "assumed"]},
+    "observationCalibration": {"enum": ["synthesis_generic", "technology_mapped", "placed", "post_route", "measured"]},
+    "source": {
       "type": "object",
-      "required": ["id", "label", "git_commit", "working_tree_dirty", "captured_at"]
+      "additionalProperties": false,
+      "required": ["role", "path", "sha256", "bytes", "claim_class"],
+      "properties": {
+        "role": {"type": "string", "minLength": 1},
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "bytes": {"type": "integer", "minimum": 1},
+        "claim_class": {"$ref": "#/$defs/claimClass"},
+        "tool": {"type": ["string", "null"]},
+        "tool_version": {"type": ["string", "null"]}
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {"const": 2},
+    "evidence_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contract_version", "status", "claim_boundary", "candidate_parameters", "toolchain", "operating_point"],
+      "properties": {
+        "contract_version": {"const": 2},
+        "status": {"const": "PROVISIONAL"},
+        "claim_boundary": {"type": "string", "minLength": 1},
+        "candidate_parameters": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["lanes", "bank_port_mode", "scheduler_policy", "context_depth"],
+          "properties": {
+            "lanes": {"type": ["integer", "null"], "minimum": 1},
+            "bank_port_mode": {"type": ["string", "null"]},
+            "scheduler_policy": {"type": ["string", "null"]},
+            "context_depth": {"type": ["integer", "null"], "minimum": 1}
+          }
+        },
+        "toolchain": {
+          "type": "object",
+          "additionalProperties": {"type": ["string", "null"]},
+          "required": ["capture_tool", "capture_tool_version", "synthesis_tool", "synthesis_tool_version", "physical_tool", "physical_tool_version", "power_tool", "power_tool_version", "thermal_tool", "thermal_tool_version"]
+        },
+        "operating_point": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["pdk", "library", "process_corner", "voltage_V", "temperature_C", "clock_constraint_ns", "workload_trace_id"],
+          "properties": {
+            "pdk": {"type": ["string", "null"]}, "library": {"type": ["string", "null"]},
+            "process_corner": {"type": ["string", "null"]}, "voltage_V": {"$ref": "#/$defs/nonnegativeNullableNumber"},
+            "temperature_C": {"$ref": "#/$defs/nullableNumber"}, "clock_constraint_ns": {"$ref": "#/$defs/nonnegativeNullableNumber"},
+            "workload_trace_id": {"type": ["string", "null"]}
+          }
+        }
+      }
+    },
+    "revision": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "label", "git_commit", "working_tree_dirty", "captured_at"],
+      "properties": {"id": {"type": "string", "minLength": 1}, "label": {"type": "string", "minLength": 1}, "git_commit": {"type": "string", "pattern": "^[0-9a-f]{40,64}$"}, "working_tree_dirty": {"type": "boolean"}, "captured_at": {"type": "string", "format": "date-time"}}
     },
     "parameter_status": {
-      "type": "object",
-      "required": ["final_architecture_parameters_selected", "reason"],
-      "properties": {"final_architecture_parameters_selected": {"const": false}}
+      "type": "object", "additionalProperties": false, "required": ["final_architecture_parameters_selected", "reason"],
+      "properties": {"final_architecture_parameters_selected": {"const": false}, "reason": {"type": "string", "minLength": 1}}
     },
-    "observations": {"type": "array"},
-    "block_metrics": {"type": "array"},
-    "categories": {"type": "object"},
-    "physical_totals": {"type": "object"},
-    "thermal": {"type": "object"},
-    "workload": {"type": "object"},
-    "source_files": {"type": "array"}
+    "calibration": {
+      "type": "object", "additionalProperties": false, "required": ["synthesis", "physical", "power", "thermal", "timing", "workload"],
+      "properties": {
+        "synthesis": {"enum": ["synthesis_generic", "technology_mapped", "placed", "post_route", "measured"]},
+        "physical": {"enum": ["synthetic", "technology_mapped", "placed", "post_route", "measured"]},
+        "power": {"enum": ["synthetic", "activity_based", "post_route", "measured"]},
+        "thermal": {"enum": ["synthetic_architectural", "activity_based", "post_route", "measured"]},
+        "timing": {"enum": ["not_available", "synthetic", "technology_mapped", "placed", "post_route", "measured"]},
+        "workload": {"enum": ["pending", "workload_model", "measured"]}
+      }
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["name", "precision", "category", "generic_cells", "generic_topological_path_length", "technology_mapped_area_um2", "critical_path_ns", "slack_ns", "calibration", "claim_class", "evidence", "upstream_evidence", "warning"],
+        "properties": {
+          "name": {"type": "string"}, "precision": {"type": "string"}, "category": {"type": "string"},
+          "generic_cells": {"type": "integer", "minimum": 0}, "generic_topological_path_length": {"type": "integer", "minimum": 0},
+          "technology_mapped_area_um2": {"$ref": "#/$defs/nonnegativeNullableNumber"}, "critical_path_ns": {"$ref": "#/$defs/nonnegativeNullableNumber"},
+          "slack_ns": {"$ref": "#/$defs/nullableNumber"}, "calibration": {"$ref": "#/$defs/observationCalibration"}, "claim_class": {"$ref": "#/$defs/claimClass"},
+          "evidence": {"type": "string"}, "upstream_evidence": {"type": "object"}, "warning": {"type": "string"}
+        }
+      }
+    },
+    "block_metrics": {"type": "array", "items": {"type": "object", "required": ["instance", "module", "category", "target", "mapped_area_um2", "dynamic_power_W", "leakage_power_W", "total_power_W", "power_density_W_mm2", "calibration", "claim_class"]}},
+    "physical_totals": {"type": "object", "required": ["primary_observation", "generic_cells", "technology_mapped_area_um2", "mapped_floorplan_area_um2", "dynamic_power_W", "leakage_power_W", "total_power_W", "critical_path_ns", "slack_ns", "note"]},
+    "physical_feasibility": {
+      "type": "object",
+      "required": ["schema_version", "status", "rtl_freeze_allowed", "production_signoff", "claim_boundary", "calibration", "toolchain", "gates", "adapter_mapping", "integrated_mapping", "placement", "global_routing", "wide_interface", "buffer_implementation", "logic_die_budget", "evidence", "blockers", "notes"]
+    },
+    "thermal": {"type": "object", "required": ["peak_temperature_K", "peak_delta_K", "hotspot", "calibration", "claim_class"]},
+    "workload": {"type": "object", "required": ["status", "name", "precision", "operation_count", "latency_cycles", "clock_period_ns", "throughput_ops_s", "energy_per_op_J", "calibration", "claim_class", "note"]},
+    "categories": {"type": "object", "minProperties": 5},
+    "source_files": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/source"}},
+    "notes": {"type": "array", "items": {"type": "string"}}
   }
 }

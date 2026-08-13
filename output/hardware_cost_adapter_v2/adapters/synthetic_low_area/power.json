@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "adapter_contract_version": 1,
+  "status": "PASS",
+  "candidate": {
+    "id": "synthetic_low_area",
+    "label": "Synthetic low-area candidate",
+    "parameters": {
+      "lanes": null,
+      "bank_port_mode": null,
+      "scheduler_policy": null,
+      "context_depth": null
+    }
+  },
+  "claim_class": "assumed",
+  "operating_point": {
+    "pdk": null,
+    "library": null,
+    "process_corner": null,
+    "voltage_V": null,
+    "temperature_C": 26.85,
+    "clock_constraint_ns": 10.0,
+    "workload_trace_id": "fixture:synthetic_low_area"
+  },
+  "source_evidence": [
+    {
+      "path": "hardware_cost/regression/synthetic_candidate_definitions.json",
+      "sha256": "25788f3a97948467c0b0cacc4786f60b2a9fc2dd0ee590c317e3aa1c1821b820",
+      "bytes": 2365
+    }
+  ],
+  "notes": [
+    "Deterministic synthetic fixture; not physical evidence."
+  ],
+  "axis": "power",
+  "calibration": "synthetic",
+  "tool": {
+    "name": "synthetic-power-fixture",
+    "version": "1"
+  },
+  "metrics": {
+    "dynamic_power_W": 2.64,
+    "leakage_power_W": 0.36,
+    "total_power_W": 3.0,
+    "categories": {
+      "bf16_fp16": {
+        "mapped_area_um2": 2560000.0,
+        "dynamic_power_W": 1.0032,
+        "leakage_power_W": 0.1368,
+        "total_power_W": 1.1400000000000001
+      },
+      "normalization_rounding": {
+        "mapped_area_um2": 1920000.0,
+        "dynamic_power_W": 0.5808,
+        "leakage_power_W": 0.0792,
+        "total_power_W": 0.66
+      },
+      "accumulator_reduction": {
+        "mapped_area_um2": 1440000.0,
+        "dynamic_power_W": 0.47520000000000007,
+        "leakage_power_W": 0.0648,
+        "total_power_W": 0.54
+      },
+      "buffer_register": {
+        "mapped_area_um2": 1280000.0,
+        "dynamic_power_W": 0.31679999999999997,
+        "leakage_power_W": 0.043199999999999995,
+        "total_power_W": 0.36
+      },
+      "control_routing": {
+        "mapped_area_um2": 800000.0,
+        "dynamic_power_W": 0.264,
+        "leakage_power_W": 0.036000000000000004,
+        "total_power_W": 0.30000000000000004
+      }
+    },
+    "blocks": [
+      {
+        "instance": "top.bf16_fp16",
+        "module": "synthetic_bf16_fp16",
+        "category": "bf16_fp16",
+        "target": {
+          "stack": 0,
+          "layer": "logic",
+          "die": -1,
+          "channel": -1,
+          "bank": -1
+        },
+        "mapped_area_um2": 2560000.0,
+        "dynamic_power_W": 1.0032,
+        "leakage_power_W": 0.1368,
+        "total_power_W": 1.1400000000000001
+      },
+      {
+        "instance": "top.normalization_rounding",
+        "module": "synthetic_normalization_rounding",
+        "category": "normalization_rounding",
+        "target": {
+          "stack": 0,
+          "layer": "logic",
+          "die": -1,
+          "channel": -1,
+          "bank": -1
+        },
+        "mapped_area_um2": 1920000.0,
+        "dynamic_power_W": 0.5808,
+        "leakage_power_W": 0.0792,
+        "total_power_W": 0.66
+      },
+      {
+        "instance": "top.accumulator_reduction",
+        "module": "synthetic_accumulator_reduction",
+        "category": "accumulator_reduction",
+        "target": {
+          "stack": 0,
+          "layer": "logic",
+          "die": -1,
+          "channel": -1,
+          "bank": -1
+        },
+        "mapped_area_um2": 1440000.0,
+        "dynamic_power_W": 0.47520000000000007,
+        "leakage_power_W": 0.0648,
+        "total_power_W": 0.54
+      },
+      {
+        "instance": "top.buffer_register",
+        "module": "synthetic_buffer_register",
+        "category": "buffer_register",
+        "target": {
+          "stack": 0,
+          "layer": "logic",
+          "die": -1,
+          "channel": -1,
+          "bank": -1
+        },
+        "mapped_area_um2": 1280000.0,
+        "dynamic_power_W": 0.31679999999999997,
+        "leakage_power_W": 0.043199999999999995,
+        "total_power_W": 0.36
+      },
+      {
+        "instance": "top.control_routing",
+        "module": "synthetic_control_routing",
+        "category": "control_routing",
+        "target": {
+          "stack": 0,
+          "layer": "logic",
+          "die": -1,
+          "channel": -1,
+          "bank": -1
+        },
+        "mapped_area_um2": 800000.0,
+        "dynamic_power_W": 0.264,
+        "leakage_power_W": 0.036000000000000004,
+        "total_power_W": 0.30000000000000004
+      }
+    ]
+  }
+}

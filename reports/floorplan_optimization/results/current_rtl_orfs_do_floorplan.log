@@ -1,0 +1,109 @@
+Running the sky130hd RTL-to-GDS flow in Ubuntu...
+/home/chandler/OpenROAD-flow-scripts/flow/scripts/flow.sh 2_1_floorplan floorplan
+Running floorplan.tcl, stage 2_1_floorplan
+read_liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_db ./results/sky130hd/stob_pim2/base/1_synth.odb
+read_sdc ./results/sky130hd/stob_pim2/base/1_synth.sdc
+source /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/setRC.tcl
+source /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/flow/designs/sky130hd/stob_pim2/openroad_compat.tcl
+Master sky130_ef_sc_hd__decap_12 is loaded but not used in the design
+
+==========================================================================
+Floorplan check_setup
+--------------------------------------------------------------------------
+Warning: There are 554 input ports missing set_input_delay.
+Warning: There are 407 output ports missing set_output_delay.
+Warning: There are 13481 unconstrained endpoints.
+number instances in verilog is 75925
+[INFO IFP-0107] Defining die area using utilization: 30.00% and aspect ratio: 1.
+[WARNING IFP-0028] Core area lower left (2.000, 2.000) snapped to (2.300, 2.720).
+[INFO IFP-0001] Added 613 rows of 3628 site unithd.
+[INFO IFP-0100] Die BBox:  (  0.000  0.000 ) ( 1673.530 1673.530 ) um
+[INFO IFP-0101] Core BBox: (  2.300  2.720 ) ( 1671.180 1670.080 ) um
+[INFO IFP-0102] Core area:                      2782623.757 um^2
+[INFO IFP-0103] Total instances area:            836200.733 um^2
+[INFO IFP-0104] Effective utilization:                0.301
+[INFO IFP-0105] Number of instances:                  75925
+source /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/make_tracks.tcl
+source /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/fastroute.tcl
+Repair tie lo fanout...
+[INFO RSZ-0042] Inserted 97 tie sky130_fd_sc_hd__conb_1 instances.
+Repair tie hi fanout...
+[INFO RSZ-0042] Inserted 97 tie sky130_fd_sc_hd__conb_1 instances.
+[INFO RSZ-0026] Removed 4397 buffers.
+Default units for flow
+ time 1ns
+ capacitance 1pF
+ resistance 1kohm
+ voltage 1v
+ current 1mA
+ power 1nW
+ distance 1um
+   Layer   | Unit Resistance | Unit Capacitance 
+           |       (kohm/um) |          (pF/um)
+------------------------------------------------
+       li1 |        7.18e-02 |         1.50e-04
+      met1 |        1.21e-03 |         1.72e-04
+      met2 |        1.22e-03 |         1.36e-04
+      met3 |        1.66e-04 |         2.15e-04
+      met4 |        1.68e-04 |         1.48e-04
+      met5 |        1.84e-05 |         1.54e-04
+------------------------------------------------
+
+   Layer   | Via Resistance 
+           |         (kohm) 
+----------------------------
+      mcon |       9.25e-03 
+       via |       4.50e-03 
+      via2 |       3.37e-03 
+      via3 |       3.77e-04 
+      via4 |       5.80e-06 
+----------------------------
+write_db ./results/sky130hd/stob_pim2/base/2_1_floorplan.odb
+write_sdc -no_timestamp ./results/sky130hd/stob_pim2/base/2_1_floorplan.sdc
+Elapsed time: 0:02.96[h:]min:sec. CPU time: user 3.38 sys 0.81 (141%). Peak memory: 454072KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+2_1_floorplan             .odb            2            443 1be964600076548ac4e5
+2_1_floorplan             .sdc                             5969b4f742c8fcfba542
+/home/chandler/OpenROAD-flow-scripts/flow/scripts/flow.sh 2_2_floorplan_macro macro_place
+Running macro_place.tcl, stage 2_2_floorplan_macro
+read_liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_db ./results/sky130hd/stob_pim2/base/2_1_floorplan.odb
+read_sdc ./results/sky130hd/stob_pim2/base/2_1_floorplan.sdc
+source /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/setRC.tcl
+No macros found: Skipping macro_placement
+Design area 818822 um^2 29% utilization.
+write_db ./results/sky130hd/stob_pim2/base/2_2_floorplan_macro.odb
+Elapsed time: 0:00.83[h:]min:sec. CPU time: user 0.61 sys 0.21 (99%). Peak memory: 256100KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+2_2_floorplan_macro       .odb            0            250 1be964600076548ac4e5
+/home/chandler/OpenROAD-flow-scripts/flow/scripts/flow.sh 2_3_floorplan_tapcell tapcell
+Running tapcell.tcl, stage 2_3_floorplan_tapcell
+read_liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_db ./results/sky130hd/stob_pim2/base/2_2_floorplan_macro.odb
+read_sdc ./results/sky130hd/stob_pim2/base/2_1_floorplan.sdc
+source /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/setRC.tcl
+[INFO TAP-0005] Inserted 36900 tapcells.
+Design area 864991 um^2 31% utilization.
+write_db ./results/sky130hd/stob_pim2/base/2_3_floorplan_tapcell.odb
+Elapsed time: 0:00.74[h:]min:sec. CPU time: user 0.56 sys 0.18 (99%). Peak memory: 230880KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+2_3_floorplan_tapcell     .odb            0            225 1e0d4d64059ba8c0ffad
+/home/chandler/OpenROAD-flow-scripts/flow/scripts/flow.sh 2_4_floorplan_pdn pdn
+Running pdn.tcl, stage 2_4_floorplan_pdn
+read_liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_db ./results/sky130hd/stob_pim2/base/2_3_floorplan_tapcell.odb
+read_sdc ./results/sky130hd/stob_pim2/base/2_1_floorplan.sdc
+source /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/setRC.tcl
+[WARNING PDN-1051] No instances found for grid (CORE_macro_grid_1).
+[WARNING PDN-1051] No instances found for grid (CORE_macro_grid_2).
+[INFO PDN-0001] Inserting grid: grid
+[INFO PDN-0500] Runtime: 0.84s
+Design area 864991 um^2 31% utilization.
+write_db ./results/sky130hd/stob_pim2/base/2_4_floorplan_pdn.odb
+Elapsed time: 0:02.57[h:]min:sec. CPU time: user 2.20 sys 0.37 (99%). Peak memory: 396192KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+2_4_floorplan_pdn         .odb            2            386 b63ad3bd84cd77726e2e
+cp ./results/sky130hd/stob_pim2/base/2_4_floorplan_pdn.odb ./results/sky130hd/stob_pim2/base/2_floorplan.odb
+cp ./results/sky130hd/stob_pim2/base/2_1_floorplan.sdc ./results/sky130hd/stob_pim2/base/2_floorplan.sdc
+OpenROAD-flow-scripts target 'do-floorplan' completed; GDS export was intentionally skipped.

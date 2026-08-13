@@ -1,0 +1,2112 @@
+
+-- Running command `read_verilog -sv rtl/fp16_add.sv rtl/fp16_mul.sv rtl/pim_vector_alu.sv rtl/logic_pcu.sv rtl/logic_pcu_scheduler.sv; chparam -set PCUS 2 -set ISSUE_PORTS 2 -set DATA_WIDTH 32 logic_pcu_scheduler; hierarchy -check -top logic_pcu_scheduler; synth -top logic_pcu_scheduler; check; stat' --
+
+1. Executing Verilog-2005 frontend: rtl/fp16_add.sv
+Parsing SystemVerilog input from `rtl/fp16_add.sv' to AST representation.
+Generating RTLIL representation for module `\fp16_add'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: rtl/fp16_mul.sv
+Parsing SystemVerilog input from `rtl/fp16_mul.sv' to AST representation.
+Generating RTLIL representation for module `\fp16_mul'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: rtl/pim_vector_alu.sv
+Parsing SystemVerilog input from `rtl/pim_vector_alu.sv' to AST representation.
+Generating RTLIL representation for module `\pim_vector_alu'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: rtl/logic_pcu.sv
+Parsing SystemVerilog input from `rtl/logic_pcu.sv' to AST representation.
+Generating RTLIL representation for module `\logic_pcu'.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: rtl/logic_pcu_scheduler.sv
+Parsing SystemVerilog input from `rtl/logic_pcu_scheduler.sv' to AST representation.
+Generating RTLIL representation for module `\logic_pcu_scheduler'.
+Successfully finished Verilog frontend.
+Parameter \PCUS = 2
+Parameter \ISSUE_PORTS = 2
+Parameter \DATA_WIDTH = 32
+
+6. Executing AST frontend in derive mode using pre-parsed AST for module `\logic_pcu_scheduler'.
+Parameter \PCUS = 2
+Parameter \ISSUE_PORTS = 2
+Parameter \DATA_WIDTH = 32
+Generating RTLIL representation for module `$paramod$78abccd2f36a5e3a5854e8bbb0cd854c0ef9e197\logic_pcu_scheduler'.
+
+7. Executing HIERARCHY pass (managing design hierarchy).
+
+7.1. Analyzing design hierarchy..
+Top module:  \logic_pcu_scheduler
+Used module:     \logic_pcu
+Used module:         \pim_vector_alu
+Used module:             \fp16_add
+Used module:             \fp16_mul
+Parameter \DATA_WIDTH = 256
+
+7.2. Executing AST frontend in derive mode using pre-parsed AST for module `\pim_vector_alu'.
+Parameter \DATA_WIDTH = 256
+Generating RTLIL representation for module `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000100000000'.
+Parameter \DATA_WIDTH = 32
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+
+7.3. Executing AST frontend in derive mode using pre-parsed AST for module `\logic_pcu'.
+Parameter \DATA_WIDTH = 32
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+Generating RTLIL representation for module `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu'.
+Parameter \DATA_WIDTH = 32
+Parameter \TAG_WIDTH = 64
+Parameter \LATENCY = 2
+Found cached RTLIL representation for module `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu'.
+
+7.4. Analyzing design hierarchy..
+Top module:  \logic_pcu_scheduler
+Used module:     $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu
+Used module:         \pim_vector_alu
+Used module:             \fp16_add
+Used module:             \fp16_mul
+Parameter \DATA_WIDTH = 32
+
+7.5. Executing AST frontend in derive mode using pre-parsed AST for module `\pim_vector_alu'.
+Parameter \DATA_WIDTH = 32
+Generating RTLIL representation for module `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000'.
+
+7.6. Analyzing design hierarchy..
+Top module:  \logic_pcu_scheduler
+Used module:     $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu
+Used module:         $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000
+Used module:             \fp16_add
+Used module:             \fp16_mul
+
+7.7. Analyzing design hierarchy..
+Top module:  \logic_pcu_scheduler
+Used module:     $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu
+Used module:         $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000
+Used module:             \fp16_add
+Used module:             \fp16_mul
+Removing unused module `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000100000000'.
+Removing unused module `\logic_pcu'.
+Removing unused module `\pim_vector_alu'.
+Removed 3 unused modules.
+
+8. Executing SYNTH pass.
+
+8.1. Executing HIERARCHY pass (managing design hierarchy).
+
+8.1.1. Analyzing design hierarchy..
+Top module:  \logic_pcu_scheduler
+Used module:     $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu
+Used module:         $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000
+Used module:             \fp16_add
+Used module:             \fp16_mul
+
+8.1.2. Analyzing design hierarchy..
+Top module:  \logic_pcu_scheduler
+Used module:     $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu
+Used module:         $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000
+Used module:             \fp16_add
+Used module:             \fp16_mul
+Removed 0 unused modules.
+
+8.2. Executing PROC pass (convert processes to netlists).
+
+8.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+8.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 2 switch rules as full_case in process $proc$rtl/logic_pcu.sv:30$631 in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+Marked 2 switch rules as full_case in process $proc$rtl/pim_vector_alu.sv:21$657 in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+Marked 2 switch rules as full_case in process $proc$rtl/pim_vector_alu.sv:21$652 in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+Marked 6 switch rules as full_case in process $proc$rtl/pim_vector_alu.sv:33$637 in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+Marked 18 switch rules as full_case in process $proc$rtl/fp16_mul.sv:16$143 in module fp16_mul.
+Marked 26 switch rules as full_case in process $proc$rtl/fp16_add.sv:28$3 in module fp16_add.
+Removed a total of 0 dead cases.
+
+8.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 50 assignments to connections.
+
+8.2.4. Executing PROC_INIT pass (extract init attributes).
+
+8.2.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_ni in `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.$proc$rtl/logic_pcu.sv:30$631'.
+
+8.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~55 debug messages>
+
+8.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.$proc$rtl/logic_pcu.sv:30$631'.
+     1/8: $2$fordecl_block$417.stage[31:0]$635
+     2/8: $0\data_q[63:0] [63:32]
+     3/8: $0\data_q[63:0] [31:0]
+     4/8: $0\tag_q[127:0] [63:0]
+     5/8: $0\valid_q[1:0] [0]
+     6/8: $0\tag_q[127:0] [127:64]
+     7/8: $0\valid_q[1:0] [1]
+     8/8: $1$fordecl_block$417.stage[31:0]$634
+Creating decoders for process `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$proc$rtl/pim_vector_alu.sv:21$657'.
+     1/2: $2\fp_add_rhs[31:16]
+     2/2: $1\fp_add_rhs[31:16]
+Creating decoders for process `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$proc$rtl/pim_vector_alu.sv:21$652'.
+     1/2: $2\fp_add_rhs[15:0]
+     2/2: $1\fp_add_rhs[15:0]
+Creating decoders for process `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$proc$rtl/pim_vector_alu.sv:33$637'.
+     1/7: $6\result_o[31:0]
+     2/7: $5\result_o[31:0]
+     3/7: $4\result_o[31:0]
+     4/7: $3\result_o[31:0]
+     5/7: $2\result_o[31:0]
+     6/7: $1\result_o[31:0]
+     7/7: $1$fordecl_block$250.lane[31:0]$640
+Creating decoders for process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+     1/30: $7\result_o[15:0]
+     2/30: $6\result_o[15:0]
+     3/30: $5\result_o[15:0]
+     4/30: $4\result_o[15:0]
+     5/30: $3\result_o[15:0]
+     6/30: $2\result_o[15:0]
+     7/30: $1\result_o[15:0]
+     8/30: $11\exponent[31:0]
+     9/30: $11\shifted[21:0]
+    10/30: $10\exponent[31:0]
+    11/30: $10\shifted[21:0]
+    12/30: $9\exponent[31:0]
+    13/30: $9\shifted[21:0]
+    14/30: $8\exponent[31:0]
+    15/30: $8\shifted[21:0]
+    16/30: $7\exponent[31:0]
+    17/30: $7\shifted[21:0]
+    18/30: $6\exponent[31:0]
+    19/30: $6\shifted[21:0]
+    20/30: $5\exponent[31:0]
+    21/30: $5\shifted[21:0]
+    22/30: $4\exponent[31:0]
+    23/30: $4\shifted[21:0]
+    24/30: $3\exponent[31:0]
+    25/30: $3\shifted[21:0]
+    26/30: $2\exponent[31:0]
+    27/30: $2\shifted[21:0]
+    28/30: $1\exponent[31:0]
+    29/30: $1\shifted[21:0]
+    30/30: $1$fordecl_block$141.n[31:0]$157
+Creating decoders for process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+     1/53: $7\result_o[15:0]
+     2/53: $6\result_o[15:0]
+     3/53: $5\result_o[15:0]
+     4/53: $4\result_o[15:0]
+     5/53: $3\result_o[15:0]
+     6/53: $2\result_o[15:0]
+     7/53: $1\result_o[15:0]
+     8/53: $16\result_exp[31:0]
+     9/53: $1\rounded_sig[11:0]
+    10/53: $15\result_exp[31:0]
+    11/53: $15\magnitude_ext[13:0]
+    12/53: $14\result_exp[31:0]
+    13/53: $14\magnitude_ext[13:0]
+    14/53: $13\result_exp[31:0]
+    15/53: $13\magnitude_ext[13:0]
+    16/53: $12\result_exp[31:0]
+    17/53: $12\magnitude_ext[13:0]
+    18/53: $11\result_exp[31:0]
+    19/53: $11\magnitude_ext[13:0]
+    20/53: $10\result_exp[31:0]
+    21/53: $10\magnitude_ext[13:0]
+    22/53: $9\result_exp[31:0]
+    23/53: $9\magnitude_ext[13:0]
+    24/53: $8\result_exp[31:0]
+    25/53: $8\magnitude_ext[13:0]
+    26/53: $7\result_exp[31:0]
+    27/53: $7\magnitude_ext[13:0]
+    28/53: $6\result_exp[31:0]
+    29/53: $6\magnitude_ext[13:0]
+    30/53: $5\result_exp[31:0]
+    31/53: $5\magnitude_ext[13:0]
+    32/53: $4\result_exp[31:0]
+    33/53: $4\magnitude_ext[13:0]
+    34/53: $3\result_exp[31:0]
+    35/53: $3\magnitude_ext[13:0]
+    36/53: $2\magnitude_ext[13:0] [13:1]
+    37/53: $2\result_exp[31:0]
+    38/53: $2\magnitude_ext[13:0] [0]
+    39/53: $1\result_exp[31:0]
+    40/53: $1\magnitude_ext[13:0]
+    41/53: $1\add_ext[14:0]
+    42/53: $1\normalize_step[31:0]
+    43/53: $2\shift_right_sticky$func$rtl/fp16_add.sv:47$2.$result[13:0]$28 [13:1]
+    44/53: $2\shift_right_sticky$func$rtl/fp16_add.sv:47$2.$result[13:0]$28 [0]
+    45/53: $2\shift_right_sticky$func$rtl/fp16_add.sv:47$2.sticky[0:0]$29
+    46/53: $1\shift_right_sticky$func$rtl/fp16_add.sv:47$2.$result[13:0]$25
+    47/53: $1\shift_right_sticky$func$rtl/fp16_add.sv:47$2.sticky[0:0]$26
+    48/53: $1\small_sig[10:0]
+    49/53: $1\large_sig[10:0]
+    50/53: $1\small_exp[4:0]
+    51/53: $1\large_exp[4:0]
+    52/53: $1\small_sign[0:0]
+    53/53: $1\large_sign[0:0]
+
+8.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.\fp_add_rhs [31:16]' from process `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$proc$rtl/pim_vector_alu.sv:21$657'.
+No latch inferred for signal `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.\fp_add_rhs [15:0]' from process `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$proc$rtl/pim_vector_alu.sv:21$652'.
+No latch inferred for signal `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.\result_o' from process `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$proc$rtl/pim_vector_alu.sv:33$637'.
+Latch inferred for signal `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$fordecl_block$250.lane' from process `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$proc$rtl/pim_vector_alu.sv:33$637': $auto$proc_dlatch.cc:432:proc_dlatch$1294
+No latch inferred for signal `\fp16_mul.\result_o' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\round_up' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\lhs_exp' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\rhs_exp' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\lhs_frac' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\rhs_frac' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\lhs_sig' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\rhs_sig' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\sign' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\product' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\shifted' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\rounded' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\guard' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\sticky' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+No latch inferred for signal `\fp16_mul.\exponent' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+Latch inferred for signal `\fp16_mul.$fordecl_block$141.n' from process `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143': $auto$proc_dlatch.cc:432:proc_dlatch$1303
+No latch inferred for signal `\fp16_add.\result_o' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\lhs_sign' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\rhs_sign' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\large_sign' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\small_sign' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\result_sign' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\round_up' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\lhs_exp' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\rhs_exp' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\large_exp' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\small_exp' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\lhs_frac' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\rhs_frac' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\lhs_sig' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\rhs_sig' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\large_sig' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\small_sig' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\large_ext' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\small_ext' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\magnitude_ext' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\add_ext' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\rounded_sig' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\result_exp' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\shift_amount' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\normalize_step' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\shift_right_sticky$func$rtl/fp16_add.sv:47$2.$result' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\shift_right_sticky$func$rtl/fp16_add.sv:47$2.value' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\shift_right_sticky$func$rtl/fp16_add.sv:47$2.amount' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+No latch inferred for signal `\fp16_add.\shift_right_sticky$func$rtl/fp16_add.sv:47$2.sticky' from process `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+
+8.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.\valid_q' using process `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.$proc$rtl/logic_pcu.sv:30$631'.
+  created $adff cell `$procdff$1308' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.\tag_q' using process `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.$proc$rtl/logic_pcu.sv:30$631'.
+  created $dff cell `$procdff$1315' with positive edge clock.
+Creating register for signal `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.\data_q' using process `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.$proc$rtl/logic_pcu.sv:30$631'.
+  created $dff cell `$procdff$1322' with positive edge clock.
+Creating register for signal `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.$fordecl_block$417.stage' using process `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.$proc$rtl/logic_pcu.sv:30$631'.
+  created $dff cell `$procdff$1329' with positive edge clock.
+
+8.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+8.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 1 empty switch in `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.$proc$rtl/logic_pcu.sv:30$631'.
+Removing empty process `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.$proc$rtl/logic_pcu.sv:30$631'.
+Found and cleaned up 2 empty switches in `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$proc$rtl/pim_vector_alu.sv:21$657'.
+Removing empty process `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$proc$rtl/pim_vector_alu.sv:21$657'.
+Found and cleaned up 2 empty switches in `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$proc$rtl/pim_vector_alu.sv:21$652'.
+Removing empty process `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$proc$rtl/pim_vector_alu.sv:21$652'.
+Found and cleaned up 6 empty switches in `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$proc$rtl/pim_vector_alu.sv:33$637'.
+Removing empty process `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$proc$rtl/pim_vector_alu.sv:33$637'.
+Found and cleaned up 18 empty switches in `\fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+Removing empty process `fp16_mul.$proc$rtl/fp16_mul.sv:16$143'.
+Found and cleaned up 26 empty switches in `\fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+Removing empty process `fp16_add.$proc$rtl/fp16_add.sv:28$3'.
+Cleaned up 55 empty switches.
+
+8.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module logic_pcu_scheduler.
+Optimizing module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+<suppressed ~8 debug messages>
+Optimizing module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+<suppressed ~6 debug messages>
+Optimizing module fp16_mul.
+<suppressed ~31 debug messages>
+Optimizing module fp16_add.
+<suppressed ~29 debug messages>
+
+8.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module logic_pcu_scheduler.
+Optimizing module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+Optimizing module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+Optimizing module fp16_mul.
+Optimizing module fp16_add.
+
+8.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \logic_pcu_scheduler..
+Finding unused cells or wires in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+Finding unused cells or wires in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \fp16_add..
+Removed 17 unused cells and 449 unused wires.
+<suppressed ~26 debug messages>
+
+8.5. Executing CHECK pass (checking for obvious problems).
+Checking module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu...
+Checking module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000...
+Checking module fp16_add...
+Checking module fp16_mul...
+Checking module logic_pcu_scheduler...
+Found and reported 0 problems.
+
+8.6. Executing OPT pass (performing simple optimizations).
+
+8.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+Optimizing module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+Optimizing module fp16_add.
+Optimizing module fp16_mul.
+Optimizing module logic_pcu_scheduler.
+
+8.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu'.
+Finding identical cells in module `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000'.
+<suppressed ~27 debug messages>
+Finding identical cells in module `\fp16_add'.
+<suppressed ~30 debug messages>
+Finding identical cells in module `\fp16_mul'.
+<suppressed ~42 debug messages>
+Finding identical cells in module `\logic_pcu_scheduler'.
+Removed a total of 33 cells.
+
+8.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$687.
+    dead port 1/2 on $mux $procmux$696.
+    dead port 1/2 on $mux $procmux$705.
+    dead port 1/2 on $mux $procmux$708.
+    dead port 1/2 on $mux $procmux$711.
+    dead port 1/2 on $mux $procmux$714.
+    dead port 1/2 on $mux $procmux$720.
+    dead port 1/2 on $mux $procmux$723.
+    dead port 1/2 on $mux $procmux$726.
+    dead port 1/2 on $mux $procmux$732.
+    dead port 1/2 on $mux $procmux$735.
+    dead port 1/2 on $mux $procmux$741.
+    dead port 2/2 on $mux $procmux$747.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+      Replacing known input bits on port A of cell $procmux$1056: $add$rtl/fp16_add.sv:69$110_Y -> { 1'0 $add$rtl/fp16_add.sv:69$110_Y [10:0] }
+      Replacing known input bits on port B of cell $procmux$1056: { 1'0 $add$rtl/fp16_add.sv:69$110_Y [11:1] } -> { 2'01 $add$rtl/fp16_add.sv:69$110_Y [10:1] }
+      Replacing known input bits on port B of cell $procmux$1216: $add$rtl/fp16_add.sv:52$38_Y [14:2] -> { 1'1 $add$rtl/fp16_add.sv:52$38_Y [13:2] }
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$1002.
+    dead port 1/2 on $mux $procmux$1005.
+    dead port 1/2 on $mux $procmux$1011.
+    dead port 1/2 on $mux $procmux$1014.
+    dead port 1/2 on $mux $procmux$1017.
+    dead port 1/2 on $mux $procmux$1020.
+    dead port 1/2 on $mux $procmux$1026.
+    dead port 1/2 on $mux $procmux$1029.
+    dead port 1/2 on $mux $procmux$1032.
+    dead port 1/2 on $mux $procmux$1038.
+    dead port 1/2 on $mux $procmux$1041.
+    dead port 1/2 on $mux $procmux$1047.
+    dead port 1/2 on $mux $procmux$1062.
+    dead port 1/2 on $mux $procmux$1068.
+    dead port 2/2 on $mux $procmux$1218.
+    dead port 2/2 on $mux $procmux$1224.
+    dead port 2/2 on $mux $procmux$1230.
+    dead port 1/2 on $mux $procmux$1248.
+    dead port 1/2 on $mux $procmux$1254.
+    dead port 1/2 on $mux $procmux$972.
+    dead port 1/2 on $mux $procmux$975.
+    dead port 1/2 on $mux $procmux$978.
+    dead port 1/2 on $mux $procmux$981.
+    dead port 1/2 on $mux $procmux$984.
+    dead port 1/2 on $mux $procmux$987.
+    dead port 1/2 on $mux $procmux$993.
+    dead port 1/2 on $mux $procmux$996.
+    dead port 1/2 on $mux $procmux$999.
+Running muxtree optimizer on module \fp16_mul..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+      Replacing known input bits on port A of cell $procmux$954: \product -> { 1'0 \product [20:0] }
+      Replacing known input bits on port B of cell $procmux$963: { 1'0 \product [21:1] } -> { 2'01 \product [20:1] }
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$759.
+    dead port 1/2 on $mux $procmux$762.
+    dead port 1/2 on $mux $procmux$765.
+    dead port 1/2 on $mux $procmux$768.
+    dead port 1/2 on $mux $procmux$771.
+    dead port 1/2 on $mux $procmux$774.
+    dead port 1/2 on $mux $procmux$780.
+    dead port 1/2 on $mux $procmux$783.
+    dead port 1/2 on $mux $procmux$786.
+    dead port 1/2 on $mux $procmux$789.
+    dead port 1/2 on $mux $procmux$792.
+    dead port 1/2 on $mux $procmux$798.
+    dead port 1/2 on $mux $procmux$801.
+    dead port 1/2 on $mux $procmux$804.
+    dead port 1/2 on $mux $procmux$807.
+    dead port 1/2 on $mux $procmux$813.
+    dead port 1/2 on $mux $procmux$816.
+    dead port 1/2 on $mux $procmux$819.
+    dead port 1/2 on $mux $procmux$825.
+    dead port 1/2 on $mux $procmux$828.
+    dead port 1/2 on $mux $procmux$834.
+    dead port 1/2 on $mux $procmux$843.
+    dead port 1/2 on $mux $procmux$849.
+Running muxtree optimizer on module \logic_pcu_scheduler..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 64 multiplexer ports.
+<suppressed ~70 debug messages>
+
+8.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+  Optimizing cells in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+  Optimizing cells in module \fp16_add.
+    New input vector for $reduce_or cell $reduce_or$rtl/fp16_add.sv:10$30: \small_sig
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \fp16_mul.
+  Optimizing cells in module \logic_pcu_scheduler.
+Performed a total of 1 changes.
+
+8.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu'.
+Finding identical cells in module `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000'.
+Finding identical cells in module `\fp16_add'.
+<suppressed ~12 debug messages>
+Finding identical cells in module `\fp16_mul'.
+Finding identical cells in module `\logic_pcu_scheduler'.
+Removed a total of 4 cells.
+
+8.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+Finding unused cells or wires in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \logic_pcu_scheduler..
+Removed 0 unused cells and 101 unused wires.
+<suppressed ~3 debug messages>
+
+8.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+Optimizing module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+Optimizing module fp16_add.
+Optimizing module fp16_mul.
+Optimizing module logic_pcu_scheduler.
+
+8.6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_mul..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \logic_pcu_scheduler..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~70 debug messages>
+
+8.6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+  Optimizing cells in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \fp16_mul.
+  Optimizing cells in module \logic_pcu_scheduler.
+Performed a total of 0 changes.
+
+8.6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu'.
+Finding identical cells in module `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_mul'.
+Finding identical cells in module `\logic_pcu_scheduler'.
+Removed a total of 0 cells.
+
+8.6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+Finding unused cells or wires in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \logic_pcu_scheduler..
+
+8.6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+Optimizing module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+Optimizing module fp16_add.
+Optimizing module fp16_mul.
+Optimizing module logic_pcu_scheduler.
+
+8.6.16. Finished OPT passes. (There is nothing left to do.)
+
+8.7. Executing FSM pass (extract and optimize FSM).
+
+8.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+8.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+8.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+8.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+Finding unused cells or wires in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \logic_pcu_scheduler..
+
+8.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+8.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+8.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+8.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+8.8. Executing OPT pass (performing simple optimizations).
+
+8.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+Optimizing module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+Optimizing module fp16_add.
+Optimizing module fp16_mul.
+Optimizing module logic_pcu_scheduler.
+
+8.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu'.
+Finding identical cells in module `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_mul'.
+Finding identical cells in module `\logic_pcu_scheduler'.
+Removed a total of 0 cells.
+
+8.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_mul..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \logic_pcu_scheduler..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~70 debug messages>
+
+8.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+  Optimizing cells in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \fp16_mul.
+  Optimizing cells in module \logic_pcu_scheduler.
+Performed a total of 0 changes.
+
+8.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu'.
+Finding identical cells in module `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_mul'.
+Finding identical cells in module `\logic_pcu_scheduler'.
+Removed a total of 0 cells.
+
+8.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$1322 ($dff) from module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu (D = { \data_q [31:0] \alu_result }, Q = \data_q).
+Adding EN signal on $procdff$1315 ($dff) from module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu (D = { \tag_q [63:0] \tag_i }, Q = \tag_q).
+Adding EN signal on $procdff$1308 ($adff) from module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu (D = { \valid_q [0] $logic_and$rtl/logic_pcu.sv:39$636_Y }, Q = \valid_q).
+
+8.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+Finding unused cells or wires in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \logic_pcu_scheduler..
+Removed 8 unused cells and 5 unused wires.
+<suppressed ~9 debug messages>
+
+8.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+Optimizing module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+Optimizing module fp16_add.
+Optimizing module fp16_mul.
+Optimizing module logic_pcu_scheduler.
+
+8.8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_mul..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \logic_pcu_scheduler..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~66 debug messages>
+
+8.8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+  Optimizing cells in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \fp16_mul.
+  Optimizing cells in module \logic_pcu_scheduler.
+Performed a total of 0 changes.
+
+8.8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_mul'.
+Finding identical cells in module `\logic_pcu_scheduler'.
+Removed a total of 1 cells.
+
+8.8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+Finding unused cells or wires in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \logic_pcu_scheduler..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+8.8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+Optimizing module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+Optimizing module fp16_add.
+Optimizing module fp16_mul.
+Optimizing module logic_pcu_scheduler.
+
+8.8.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.8.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_mul..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \logic_pcu_scheduler..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~66 debug messages>
+
+8.8.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+  Optimizing cells in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \fp16_mul.
+  Optimizing cells in module \logic_pcu_scheduler.
+Performed a total of 0 changes.
+
+8.8.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu'.
+Finding identical cells in module `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_mul'.
+Finding identical cells in module `\logic_pcu_scheduler'.
+Removed a total of 0 cells.
+
+8.8.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.8.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+Finding unused cells or wires in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \logic_pcu_scheduler..
+
+8.8.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+Optimizing module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+Optimizing module fp16_add.
+Optimizing module fp16_mul.
+Optimizing module logic_pcu_scheduler.
+
+8.8.23. Finished OPT passes. (There is nothing left to do.)
+
+8.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 2 bits (of 4) from port B of cell $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$eq$rtl/pim_vector_alu.sv:36$641 ($eq).
+Converting cell $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$mul$rtl/pim_vector_alu.sv:45$645 ($mul) from unsigned to signed.
+Removed top 24 bits (of 32) from port A of cell $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$mul$rtl/pim_vector_alu.sv:45$645 ($mul).
+Removed top 24 bits (of 32) from port B of cell $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$mul$rtl/pim_vector_alu.sv:45$645 ($mul).
+Removed top 16 bits (of 32) from port Y of cell $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$mul$rtl/pim_vector_alu.sv:45$645 ($mul).
+Removed top 16 bits (of 32) from port A of cell $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$add$rtl/pim_vector_alu.sv:48$648 ($add).
+Removed top 1 bits (of 4) from port B of cell $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$eq$rtl/pim_vector_alu.sv:50$649 ($eq).
+Removed top 16 bits (of 32) from port A of cell $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$add$rtl/pim_vector_alu.sv:52$651 ($add).
+Removed top 3 bits (of 4) from port B of cell $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$eq$rtl/pim_vector_alu.sv:22$653 ($eq).
+Removed top 2 bits (of 4) from port B of cell $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$eq$rtl/pim_vector_alu.sv:23$654 ($eq).
+Removed top 26 bits (of 32) from port Y of cell fp16_add.$sub$rtl/fp16_add.sv:46$23 ($sub).
+Removed top 26 bits (of 32) from port A of cell fp16_add.$le$rtl/fp16_add.sv:9$24 ($le).
+Removed top 31 bits (of 32) from port B of cell fp16_add.$le$rtl/fp16_add.sv:9$24 ($le).
+Removed top 26 bits (of 32) from port A of cell fp16_add.$ge$rtl/fp16_add.sv:10$27 ($ge).
+Removed top 27 bits (of 32) from port B of cell fp16_add.$ge$rtl/fp16_add.sv:10$27 ($ge).
+Removed top 13 bits (of 14) from port A of cell fp16_add.$shl$rtl/fp16_add.sv:12$31 ($shl).
+Removed top 1 bits (of 15) from port A of cell fp16_add.$add$rtl/fp16_add.sv:52$38 ($add).
+Removed top 1 bits (of 15) from port B of cell fp16_add.$add$rtl/fp16_add.sv:52$38 ($add).
+Removed top 26 bits (of 32) from port A of cell fp16_add.$add$rtl/fp16_add.sv:56$40 ($add).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$add$rtl/fp16_add.sv:56$40 ($add).
+Converting cell fp16_add.$add$rtl/fp16_add.sv:56$40 ($add) from signed to unsigned.
+Removed top 25 bits (of 32) from port Y of cell fp16_add.$add$rtl/fp16_add.sv:56$40 ($add).
+Removed top 1 bits (of 6) from port A of cell fp16_add.$add$rtl/fp16_add.sv:56$40 ($add).
+Removed top 1 bits (of 2) from port B of cell fp16_add.$add$rtl/fp16_add.sv:56$40 ($add).
+Removed top 1 bits (of 7) from port Y of cell fp16_add.$add$rtl/fp16_add.sv:56$40 ($add).
+Removed top 26 bits (of 32) from port A of cell fp16_add.$gt$rtl/fp16_add.sv:62$43 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$43 ($gt).
+Converting cell fp16_add.$gt$rtl/fp16_add.sv:62$43 ($gt) from signed to unsigned.
+Removed top 1 bits (of 6) from port A of cell fp16_add.$gt$rtl/fp16_add.sv:62$43 ($gt).
+Removed top 1 bits (of 2) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$43 ($gt).
+Removed top 26 bits (of 32) from port A of cell fp16_add.$sub$rtl/fp16_add.sv:64$46 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$46 ($sub).
+Converting cell fp16_add.$sub$rtl/fp16_add.sv:64$46 ($sub) from signed to unsigned.
+Removed top 25 bits (of 32) from port Y of cell fp16_add.$sub$rtl/fp16_add.sv:64$46 ($sub).
+Removed top 1 bits (of 6) from port A of cell fp16_add.$sub$rtl/fp16_add.sv:64$46 ($sub).
+Removed top 1 bits (of 2) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$46 ($sub).
+Removed top 1 bits (of 7) from port Y of cell fp16_add.$sub$rtl/fp16_add.sv:64$46 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$48 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$51 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$53 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$56 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$58 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$61 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$63 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$66 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$68 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$71 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$73 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$76 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$78 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$81 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$83 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$86 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$88 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$91 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$93 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$96 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$98 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$101 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$gt$rtl/fp16_add.sv:62$103 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$sub$rtl/fp16_add.sv:64$106 ($sub).
+Removed top 1 bits (of 12) from port A of cell fp16_add.$add$rtl/fp16_add.sv:69$110 ($add).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$add$rtl/fp16_add.sv:72$112 ($add).
+Removed top 26 bits (of 32) from port B of cell fp16_add.$ge$rtl/fp16_add.sv:85$137 ($ge).
+Removed top 30 bits (of 32) from port B of cell fp16_add.$le$rtl/fp16_add.sv:86$138 ($le).
+Removed top 1 bits (of 12) from mux cell fp16_add.$procmux$1056 ($mux).
+Removed top 1 bits (of 16) from mux cell fp16_add.$procmux$969 ($mux).
+Removed top 26 bits (of 32) from mux cell fp16_add.$procmux$1222 ($mux).
+Removed top 1 bits (of 16) from mux cell fp16_add.$procmux$990 ($mux).
+Removed top 26 bits (of 32) from wire fp16_add.$2\result_exp[31:0].
+Removed top 26 bits (of 32) from wire fp16_add.$add$rtl/fp16_add.sv:56$40_Y.
+Removed top 1 bits (of 14) from wire fp16_add.$sub$rtl/fp16_add.sv:59$41_Y.
+Removed top 1 bits (of 12) from wire fp16_add.rounded_sig.
+Removed top 27 bits (of 32) from mux cell fp16_mul.$ternary$rtl/fp16_mul.sv:23$151 ($mux).
+Removed top 27 bits (of 32) from mux cell fp16_mul.$ternary$rtl/fp16_mul.sv:24$154 ($mux).
+Removed top 27 bits (of 32) from port A of cell fp16_mul.$add$rtl/fp16_mul.sv:23$155 ($add).
+Removed top 27 bits (of 32) from port B of cell fp16_mul.$add$rtl/fp16_mul.sv:23$155 ($add).
+Removed top 26 bits (of 32) from port Y of cell fp16_mul.$add$rtl/fp16_mul.sv:23$155 ($add).
+Removed top 26 bits (of 32) from port A of cell fp16_mul.$sub$rtl/fp16_mul.sv:23$156 ($sub).
+Removed top 28 bits (of 32) from port B of cell fp16_mul.$sub$rtl/fp16_mul.sv:23$156 ($sub).
+Removed top 25 bits (of 32) from port Y of cell fp16_mul.$sub$rtl/fp16_mul.sv:23$156 ($sub).
+Converting cell fp16_mul.$add$rtl/fp16_mul.sv:28$159 ($add) from unsigned to signed.
+Removed top 25 bits (of 32) from port A of cell fp16_mul.$add$rtl/fp16_mul.sv:28$159 ($add).
+Removed top 30 bits (of 32) from port B of cell fp16_mul.$add$rtl/fp16_mul.sv:28$159 ($add).
+Removed top 24 bits (of 32) from port Y of cell fp16_mul.$add$rtl/fp16_mul.sv:28$159 ($add).
+Removed top 25 bits (of 32) from port A of cell fp16_mul.$gt$rtl/fp16_mul.sv:31$161 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_mul.$gt$rtl/fp16_mul.sv:31$161 ($gt).
+Converting cell fp16_mul.$sub$rtl/fp16_mul.sv:33$164 ($sub) from unsigned to signed.
+Removed top 25 bits (of 32) from port A of cell fp16_mul.$sub$rtl/fp16_mul.sv:33$164 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_mul.$sub$rtl/fp16_mul.sv:33$164 ($sub).
+Removed top 24 bits (of 32) from port Y of cell fp16_mul.$sub$rtl/fp16_mul.sv:33$164 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_mul.$gt$rtl/fp16_mul.sv:31$166 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_mul.$sub$rtl/fp16_mul.sv:33$169 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_mul.$gt$rtl/fp16_mul.sv:31$171 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_mul.$sub$rtl/fp16_mul.sv:33$174 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_mul.$gt$rtl/fp16_mul.sv:31$176 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_mul.$sub$rtl/fp16_mul.sv:33$179 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_mul.$gt$rtl/fp16_mul.sv:31$181 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_mul.$sub$rtl/fp16_mul.sv:33$184 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_mul.$gt$rtl/fp16_mul.sv:31$186 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_mul.$sub$rtl/fp16_mul.sv:33$189 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_mul.$gt$rtl/fp16_mul.sv:31$191 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_mul.$sub$rtl/fp16_mul.sv:33$194 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_mul.$gt$rtl/fp16_mul.sv:31$196 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_mul.$sub$rtl/fp16_mul.sv:33$199 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_mul.$gt$rtl/fp16_mul.sv:31$201 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_mul.$sub$rtl/fp16_mul.sv:33$204 ($sub).
+Removed top 30 bits (of 32) from port B of cell fp16_mul.$gt$rtl/fp16_mul.sv:31$206 ($gt).
+Removed top 30 bits (of 32) from port B of cell fp16_mul.$sub$rtl/fp16_mul.sv:33$209 ($sub).
+Removed top 26 bits (of 32) from port B of cell fp16_mul.$ge$rtl/fp16_mul.sv:50$244 ($ge).
+Removed top 31 bits (of 32) from port B of cell fp16_mul.$le$rtl/fp16_mul.sv:51$245 ($le).
+Removed top 27 bits (of 32) from port B of cell fp16_mul.$lt$rtl/fp16_mul.sv:52$246 ($lt).
+Removed top 30 bits (of 32) from port A of cell fp16_mul.$sub$rtl/fp16_mul.sv:53$247 ($sub).
+Removed top 6 bits (of 16) from mux cell fp16_mul.$procmux$757 ($mux).
+Removed top 1 bits (of 22) from mux cell fp16_mul.$procmux$963 ($mux).
+Removed top 1 bits (of 22) from mux cell fp16_mul.$procmux$846 ($mux).
+Removed top 1 bits (of 16) from mux cell fp16_mul.$procmux$777 ($mux).
+Removed top 1 bits (of 22) from mux cell fp16_mul.$procmux$861 ($mux).
+Removed top 1 bits (of 16) from mux cell fp16_mul.$procmux$795 ($mux).
+Removed top 1 bits (of 22) from mux cell fp16_mul.$procmux$858 ($mux).
+Removed top 1 bits (of 16) from mux cell fp16_mul.$procmux$810 ($mux).
+Removed top 1 bits (of 22) from mux cell fp16_mul.$procmux$873 ($mux).
+Removed top 1 bits (of 16) from mux cell fp16_mul.$procmux$822 ($mux).
+Removed top 1 bits (of 22) from mux cell fp16_mul.$procmux$870 ($mux).
+Removed top 1 bits (of 16) from mux cell fp16_mul.$procmux$831 ($mux).
+Removed top 1 bits (of 22) from mux cell fp16_mul.$procmux$885 ($mux).
+Removed top 1 bits (of 22) from mux cell fp16_mul.$procmux$882 ($mux).
+Removed top 1 bits (of 22) from mux cell fp16_mul.$procmux$897 ($mux).
+Removed top 1 bits (of 22) from mux cell fp16_mul.$procmux$894 ($mux).
+Removed top 1 bits (of 22) from mux cell fp16_mul.$procmux$909 ($mux).
+Removed top 1 bits (of 22) from mux cell fp16_mul.$procmux$906 ($mux).
+Removed top 1 bits (of 22) from mux cell fp16_mul.$procmux$921 ($mux).
+Removed top 1 bits (of 22) from mux cell fp16_mul.$procmux$918 ($mux).
+Removed top 1 bits (of 22) from mux cell fp16_mul.$procmux$933 ($mux).
+Removed top 1 bits (of 22) from mux cell fp16_mul.$procmux$930 ($mux).
+Removed top 1 bits (of 22) from mux cell fp16_mul.$procmux$945 ($mux).
+Removed top 1 bits (of 22) from mux cell fp16_mul.$procmux$942 ($mux).
+Removed top 1 bits (of 22) from mux cell fp16_mul.$procmux$957 ($mux).
+Removed top 1 bits (of 22) from mux cell fp16_mul.$procmux$954 ($mux).
+Removed top 1 bits (of 22) from wire fp16_mul.$10\shifted[21:0].
+Removed top 1 bits (of 22) from wire fp16_mul.$11\shifted[21:0].
+Removed top 1 bits (of 22) from wire fp16_mul.$2\shifted[21:0].
+Removed top 1 bits (of 22) from wire fp16_mul.$3\shifted[21:0].
+Removed top 1 bits (of 22) from wire fp16_mul.$4\shifted[21:0].
+Removed top 1 bits (of 22) from wire fp16_mul.$5\shifted[21:0].
+Removed top 1 bits (of 22) from wire fp16_mul.$6\shifted[21:0].
+Removed top 1 bits (of 22) from wire fp16_mul.$7\shifted[21:0].
+Removed top 1 bits (of 22) from wire fp16_mul.$8\shifted[21:0].
+Removed top 1 bits (of 22) from wire fp16_mul.$9\shifted[21:0].
+Removed top 26 bits (of 32) from wire fp16_mul.$add$rtl/fp16_mul.sv:23$155_Y.
+Removed top 1 bits (of 22) from wire fp16_mul.$procmux$858_Y.
+Removed top 1 bits (of 22) from wire fp16_mul.$procmux$870_Y.
+Removed top 4 bits (of 32) from wire fp16_mul.$procmux$876_Y.
+Removed top 2 bits (of 22) from wire fp16_mul.$procmux$882_Y.
+Removed top 1 bits (of 22) from wire fp16_mul.$procmux$894_Y.
+Removed top 4 bits (of 32) from wire fp16_mul.$procmux$900_Y.
+Removed top 2 bits (of 22) from wire fp16_mul.$procmux$906_Y.
+Removed top 4 bits (of 32) from wire fp16_mul.$procmux$912_Y.
+Removed top 2 bits (of 22) from wire fp16_mul.$procmux$918_Y.
+Removed top 1 bits (of 22) from wire fp16_mul.$procmux$930_Y.
+Removed top 4 bits (of 32) from wire fp16_mul.$procmux$936_Y.
+Removed top 2 bits (of 22) from wire fp16_mul.$procmux$942_Y.
+Removed top 4 bits (of 32) from wire fp16_mul.$procmux$948_Y.
+Removed top 2 bits (of 22) from wire fp16_mul.$procmux$954_Y.
+Removed top 4 bits (of 10) from wire fp16_mul.$shr$rtl/fp16_mul.sv:53$248_Y.
+Removed top 27 bits (of 32) from wire fp16_mul.$ternary$rtl/fp16_mul.sv:23$151_Y.
+Removed top 27 bits (of 32) from wire fp16_mul.$ternary$rtl/fp16_mul.sv:24$154_Y.
+Removed top 1 bits (of 22) from wire fp16_mul.shifted.
+
+8.10. Executing PEEPOPT pass (run peephole optimizers).
+
+8.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+Finding unused cells or wires in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \logic_pcu_scheduler..
+Removed 0 unused cells and 34 unused wires.
+<suppressed ~2 debug messages>
+
+8.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu:
+  created 0 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000:
+  creating $macc model for $add$rtl/pim_vector_alu.sv:42$643 ($add).
+  creating $macc model for $add$rtl/pim_vector_alu.sv:48$648 ($add).
+  creating $macc model for $add$rtl/pim_vector_alu.sv:52$651 ($add).
+  creating $macc model for $mul$rtl/pim_vector_alu.sv:45$645 ($mul).
+  creating $alu model for $macc $add$rtl/pim_vector_alu.sv:52$651.
+  creating $alu model for $macc $add$rtl/pim_vector_alu.sv:48$648.
+  creating $alu model for $macc $add$rtl/pim_vector_alu.sv:42$643.
+  creating $macc cell for $mul$rtl/pim_vector_alu.sv:45$645: $auto$alumacc.cc:365:replace_macc$1370
+  creating $alu cell for $add$rtl/pim_vector_alu.sv:42$643: $auto$alumacc.cc:495:replace_alu$1371
+  creating $alu cell for $add$rtl/pim_vector_alu.sv:48$648: $auto$alumacc.cc:495:replace_alu$1374
+  creating $alu cell for $add$rtl/pim_vector_alu.sv:52$651: $auto$alumacc.cc:495:replace_alu$1377
+  created 3 $alu and 1 $macc cells.
+Extracting $alu and $macc cells in module fp16_add:
+  creating $macc model for $add$rtl/fp16_add.sv:52$38 ($add).
+  creating $macc model for $add$rtl/fp16_add.sv:56$40 ($add).
+  creating $macc model for $add$rtl/fp16_add.sv:69$110 ($add).
+  creating $macc model for $add$rtl/fp16_add.sv:72$112 ($add).
+  creating $macc model for $sub$rtl/fp16_add.sv:12$32 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:46$23 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:59$41 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:64$101 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:64$106 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:64$46 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:64$51 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:64$56 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:64$61 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:64$66 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:64$71 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:64$76 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:64$81 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:64$86 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:64$91 ($sub).
+  creating $macc model for $sub$rtl/fp16_add.sv:64$96 ($sub).
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:64$96.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:64$91.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:64$86.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:64$81.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:64$76.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:64$71.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:64$66.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:64$61.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:64$56.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:64$51.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:64$46.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:64$106.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:64$101.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:59$41.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:46$23.
+  creating $alu model for $macc $sub$rtl/fp16_add.sv:12$32.
+  creating $alu model for $macc $add$rtl/fp16_add.sv:72$112.
+  creating $alu model for $macc $add$rtl/fp16_add.sv:69$110.
+  creating $alu model for $macc $add$rtl/fp16_add.sv:56$40.
+  creating $alu model for $macc $add$rtl/fp16_add.sv:52$38.
+  creating $alu model for $ge$rtl/fp16_add.sv:10$27 ($ge): new $alu
+  creating $alu model for $ge$rtl/fp16_add.sv:85$137 ($ge): new $alu
+  creating $alu model for $gt$rtl/fp16_add.sv:38$18 ($gt): new $alu
+  creating $alu model for $gt$rtl/fp16_add.sv:62$103 ($gt): merged with $sub$rtl/fp16_add.sv:64$106.
+  creating $alu model for $gt$rtl/fp16_add.sv:62$43 ($gt): merged with $sub$rtl/fp16_add.sv:64$46.
+  creating $alu model for $gt$rtl/fp16_add.sv:62$48 ($gt): merged with $sub$rtl/fp16_add.sv:64$51.
+  creating $alu model for $gt$rtl/fp16_add.sv:62$53 ($gt): merged with $sub$rtl/fp16_add.sv:64$56.
+  creating $alu model for $gt$rtl/fp16_add.sv:62$58 ($gt): merged with $sub$rtl/fp16_add.sv:64$61.
+  creating $alu model for $gt$rtl/fp16_add.sv:62$63 ($gt): merged with $sub$rtl/fp16_add.sv:64$66.
+  creating $alu model for $gt$rtl/fp16_add.sv:62$68 ($gt): merged with $sub$rtl/fp16_add.sv:64$71.
+  creating $alu model for $gt$rtl/fp16_add.sv:62$73 ($gt): merged with $sub$rtl/fp16_add.sv:64$76.
+  creating $alu model for $gt$rtl/fp16_add.sv:62$78 ($gt): merged with $sub$rtl/fp16_add.sv:64$81.
+  creating $alu model for $gt$rtl/fp16_add.sv:62$83 ($gt): merged with $sub$rtl/fp16_add.sv:64$86.
+  creating $alu model for $gt$rtl/fp16_add.sv:62$88 ($gt): merged with $sub$rtl/fp16_add.sv:64$91.
+  creating $alu model for $gt$rtl/fp16_add.sv:62$93 ($gt): merged with $sub$rtl/fp16_add.sv:64$96.
+  creating $alu model for $gt$rtl/fp16_add.sv:62$98 ($gt): merged with $sub$rtl/fp16_add.sv:64$101.
+  creating $alu model for $le$rtl/fp16_add.sv:86$138 ($le): new $alu
+  creating $alu model for $le$rtl/fp16_add.sv:9$24 ($le): new $alu
+  creating $alu cell for $le$rtl/fp16_add.sv:9$24: $auto$alumacc.cc:495:replace_alu$1385
+  creating $alu cell for $le$rtl/fp16_add.sv:86$138: $auto$alumacc.cc:495:replace_alu$1396
+  creating $alu cell for $gt$rtl/fp16_add.sv:38$18: $auto$alumacc.cc:495:replace_alu$1407
+  creating $alu cell for $ge$rtl/fp16_add.sv:85$137: $auto$alumacc.cc:495:replace_alu$1418
+  creating $alu cell for $ge$rtl/fp16_add.sv:10$27: $auto$alumacc.cc:495:replace_alu$1433
+  creating $alu cell for $add$rtl/fp16_add.sv:52$38: $auto$alumacc.cc:495:replace_alu$1448
+  creating $alu cell for $add$rtl/fp16_add.sv:56$40: $auto$alumacc.cc:495:replace_alu$1451
+  creating $alu cell for $add$rtl/fp16_add.sv:69$110: $auto$alumacc.cc:495:replace_alu$1454
+  creating $alu cell for $add$rtl/fp16_add.sv:72$112: $auto$alumacc.cc:495:replace_alu$1457
+  creating $alu cell for $sub$rtl/fp16_add.sv:12$32: $auto$alumacc.cc:495:replace_alu$1460
+  creating $alu cell for $sub$rtl/fp16_add.sv:46$23: $auto$alumacc.cc:495:replace_alu$1463
+  creating $alu cell for $sub$rtl/fp16_add.sv:59$41: $auto$alumacc.cc:495:replace_alu$1466
+  creating $alu cell for $sub$rtl/fp16_add.sv:64$101, $gt$rtl/fp16_add.sv:62$98: $auto$alumacc.cc:495:replace_alu$1469
+  creating $alu cell for $sub$rtl/fp16_add.sv:64$106, $gt$rtl/fp16_add.sv:62$103: $auto$alumacc.cc:495:replace_alu$1482
+  creating $alu cell for $sub$rtl/fp16_add.sv:64$46, $gt$rtl/fp16_add.sv:62$43: $auto$alumacc.cc:495:replace_alu$1495
+  creating $alu cell for $sub$rtl/fp16_add.sv:64$51, $gt$rtl/fp16_add.sv:62$48: $auto$alumacc.cc:495:replace_alu$1506
+  creating $alu cell for $sub$rtl/fp16_add.sv:64$56, $gt$rtl/fp16_add.sv:62$53: $auto$alumacc.cc:495:replace_alu$1519
+  creating $alu cell for $sub$rtl/fp16_add.sv:64$61, $gt$rtl/fp16_add.sv:62$58: $auto$alumacc.cc:495:replace_alu$1532
+  creating $alu cell for $sub$rtl/fp16_add.sv:64$66, $gt$rtl/fp16_add.sv:62$63: $auto$alumacc.cc:495:replace_alu$1545
+  creating $alu cell for $sub$rtl/fp16_add.sv:64$71, $gt$rtl/fp16_add.sv:62$68: $auto$alumacc.cc:495:replace_alu$1558
+  creating $alu cell for $sub$rtl/fp16_add.sv:64$76, $gt$rtl/fp16_add.sv:62$73: $auto$alumacc.cc:495:replace_alu$1571
+  creating $alu cell for $sub$rtl/fp16_add.sv:64$81, $gt$rtl/fp16_add.sv:62$78: $auto$alumacc.cc:495:replace_alu$1584
+  creating $alu cell for $sub$rtl/fp16_add.sv:64$86, $gt$rtl/fp16_add.sv:62$83: $auto$alumacc.cc:495:replace_alu$1597
+  creating $alu cell for $sub$rtl/fp16_add.sv:64$91, $gt$rtl/fp16_add.sv:62$88: $auto$alumacc.cc:495:replace_alu$1610
+  creating $alu cell for $sub$rtl/fp16_add.sv:64$96, $gt$rtl/fp16_add.sv:62$93: $auto$alumacc.cc:495:replace_alu$1623
+  created 25 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module fp16_mul:
+  creating $macc model for $add$rtl/fp16_mul.sv:23$155 ($add).
+  creating $macc model for $add$rtl/fp16_mul.sv:28$159 ($add).
+  creating $macc model for $add$rtl/fp16_mul.sv:39$213 ($add).
+  creating $macc model for $mul$rtl/fp16_mul.sv:22$148 ($mul).
+  creating $macc model for $sub$rtl/fp16_mul.sv:23$156 ($sub).
+  creating $macc model for $sub$rtl/fp16_mul.sv:33$164 ($sub).
+  creating $macc model for $sub$rtl/fp16_mul.sv:33$169 ($sub).
+  creating $macc model for $sub$rtl/fp16_mul.sv:33$174 ($sub).
+  creating $macc model for $sub$rtl/fp16_mul.sv:33$179 ($sub).
+  creating $macc model for $sub$rtl/fp16_mul.sv:33$184 ($sub).
+  creating $macc model for $sub$rtl/fp16_mul.sv:33$189 ($sub).
+  creating $macc model for $sub$rtl/fp16_mul.sv:33$194 ($sub).
+  creating $macc model for $sub$rtl/fp16_mul.sv:33$199 ($sub).
+  creating $macc model for $sub$rtl/fp16_mul.sv:33$204 ($sub).
+  creating $macc model for $sub$rtl/fp16_mul.sv:33$209 ($sub).
+  creating $macc model for $sub$rtl/fp16_mul.sv:53$247 ($sub).
+  merging $macc model for $add$rtl/fp16_mul.sv:23$155 into $sub$rtl/fp16_mul.sv:23$156.
+  creating $alu model for $macc $sub$rtl/fp16_mul.sv:33$209.
+  creating $alu model for $macc $sub$rtl/fp16_mul.sv:33$204.
+  creating $alu model for $macc $sub$rtl/fp16_mul.sv:33$199.
+  creating $alu model for $macc $sub$rtl/fp16_mul.sv:33$194.
+  creating $alu model for $macc $sub$rtl/fp16_mul.sv:33$189.
+  creating $alu model for $macc $sub$rtl/fp16_mul.sv:33$184.
+  creating $alu model for $macc $sub$rtl/fp16_mul.sv:33$179.
+  creating $alu model for $macc $sub$rtl/fp16_mul.sv:33$174.
+  creating $alu model for $macc $sub$rtl/fp16_mul.sv:33$169.
+  creating $alu model for $macc $sub$rtl/fp16_mul.sv:33$164.
+  creating $alu model for $macc $add$rtl/fp16_mul.sv:39$213.
+  creating $alu model for $macc $add$rtl/fp16_mul.sv:28$159.
+  creating $alu model for $macc $sub$rtl/fp16_mul.sv:53$247.
+  creating $macc cell for $mul$rtl/fp16_mul.sv:22$148: $auto$alumacc.cc:365:replace_macc$1636
+  creating $macc cell for $sub$rtl/fp16_mul.sv:23$156: $auto$alumacc.cc:365:replace_macc$1637
+  creating $alu model for $ge$rtl/fp16_mul.sv:50$244 ($ge): new $alu
+  creating $alu model for $gt$rtl/fp16_mul.sv:31$161 ($gt): merged with $sub$rtl/fp16_mul.sv:33$164.
+  creating $alu model for $gt$rtl/fp16_mul.sv:31$166 ($gt): merged with $sub$rtl/fp16_mul.sv:33$169.
+  creating $alu model for $gt$rtl/fp16_mul.sv:31$171 ($gt): merged with $sub$rtl/fp16_mul.sv:33$174.
+  creating $alu model for $gt$rtl/fp16_mul.sv:31$176 ($gt): merged with $sub$rtl/fp16_mul.sv:33$179.
+  creating $alu model for $gt$rtl/fp16_mul.sv:31$181 ($gt): merged with $sub$rtl/fp16_mul.sv:33$184.
+  creating $alu model for $gt$rtl/fp16_mul.sv:31$186 ($gt): merged with $sub$rtl/fp16_mul.sv:33$189.
+  creating $alu model for $gt$rtl/fp16_mul.sv:31$191 ($gt): merged with $sub$rtl/fp16_mul.sv:33$194.
+  creating $alu model for $gt$rtl/fp16_mul.sv:31$196 ($gt): merged with $sub$rtl/fp16_mul.sv:33$199.
+  creating $alu model for $gt$rtl/fp16_mul.sv:31$201 ($gt): merged with $sub$rtl/fp16_mul.sv:33$204.
+  creating $alu model for $gt$rtl/fp16_mul.sv:31$206 ($gt): merged with $sub$rtl/fp16_mul.sv:33$209.
+  creating $alu model for $le$rtl/fp16_mul.sv:51$245 ($le): new $alu
+  creating $alu model for $lt$rtl/fp16_mul.sv:52$246 ($lt): new $alu
+  creating $alu cell for $lt$rtl/fp16_mul.sv:52$246: $auto$alumacc.cc:495:replace_alu$1641
+  creating $alu cell for $le$rtl/fp16_mul.sv:51$245: $auto$alumacc.cc:495:replace_alu$1648
+  creating $alu cell for $ge$rtl/fp16_mul.sv:50$244: $auto$alumacc.cc:495:replace_alu$1659
+  creating $alu cell for $sub$rtl/fp16_mul.sv:53$247: $auto$alumacc.cc:495:replace_alu$1674
+  creating $alu cell for $add$rtl/fp16_mul.sv:28$159: $auto$alumacc.cc:495:replace_alu$1677
+  creating $alu cell for $add$rtl/fp16_mul.sv:39$213: $auto$alumacc.cc:495:replace_alu$1680
+  creating $alu cell for $sub$rtl/fp16_mul.sv:33$164, $gt$rtl/fp16_mul.sv:31$161: $auto$alumacc.cc:495:replace_alu$1683
+  creating $alu cell for $sub$rtl/fp16_mul.sv:33$169, $gt$rtl/fp16_mul.sv:31$166: $auto$alumacc.cc:495:replace_alu$1696
+  creating $alu cell for $sub$rtl/fp16_mul.sv:33$174, $gt$rtl/fp16_mul.sv:31$171: $auto$alumacc.cc:495:replace_alu$1709
+  creating $alu cell for $sub$rtl/fp16_mul.sv:33$179, $gt$rtl/fp16_mul.sv:31$176: $auto$alumacc.cc:495:replace_alu$1722
+  creating $alu cell for $sub$rtl/fp16_mul.sv:33$184, $gt$rtl/fp16_mul.sv:31$181: $auto$alumacc.cc:495:replace_alu$1735
+  creating $alu cell for $sub$rtl/fp16_mul.sv:33$189, $gt$rtl/fp16_mul.sv:31$186: $auto$alumacc.cc:495:replace_alu$1748
+  creating $alu cell for $sub$rtl/fp16_mul.sv:33$194, $gt$rtl/fp16_mul.sv:31$191: $auto$alumacc.cc:495:replace_alu$1761
+  creating $alu cell for $sub$rtl/fp16_mul.sv:33$199, $gt$rtl/fp16_mul.sv:31$196: $auto$alumacc.cc:495:replace_alu$1774
+  creating $alu cell for $sub$rtl/fp16_mul.sv:33$204, $gt$rtl/fp16_mul.sv:31$201: $auto$alumacc.cc:495:replace_alu$1787
+  creating $alu cell for $sub$rtl/fp16_mul.sv:33$209, $gt$rtl/fp16_mul.sv:31$206: $auto$alumacc.cc:495:replace_alu$1800
+  created 16 $alu and 2 $macc cells.
+Extracting $alu and $macc cells in module logic_pcu_scheduler:
+  created 0 $alu and 0 $macc cells.
+
+8.13. Executing SHARE pass (SAT-based resource sharing).
+Found 2 cells in module fp16_add that may be considered for resource sharing.
+  Analyzing resource sharing options for $shr$rtl/fp16_add.sv:13$35 ($shr):
+    Found 4 activation_patterns using ctrl signal { $auto$rtlil.cc:2783:ReduceOr$1395 $auto$rtlil.cc:2783:ReduceOr$1447 $logic_and$rtl/fp16_add.sv:86$140_Y $eq$rtl/fp16_add.sv:84$136_Y $logic_and$rtl/fp16_add.sv:81$134_Y $auto$rtlil.cc:2783:ReduceOr$1432 $logic_or$rtl/fp16_add.sv:75$125_Y $eq$rtl/fp16_add.sv:76$116_Y $eq$rtl/fp16_add.sv:75$113_Y }.
+    No candidates found.
+  Analyzing resource sharing options for $shl$rtl/fp16_add.sv:12$31 ($shl):
+    Found 4 activation_patterns using ctrl signal { $auto$rtlil.cc:2783:ReduceOr$1395 $auto$rtlil.cc:2783:ReduceOr$1447 $logic_and$rtl/fp16_add.sv:86$140_Y $eq$rtl/fp16_add.sv:84$136_Y $logic_and$rtl/fp16_add.sv:81$134_Y $auto$rtlil.cc:2783:ReduceOr$1432 $logic_or$rtl/fp16_add.sv:75$125_Y $eq$rtl/fp16_add.sv:76$116_Y $eq$rtl/fp16_add.sv:75$113_Y }.
+    No candidates found.
+
+8.14. Executing OPT pass (performing simple optimizations).
+
+8.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+Optimizing module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+Optimizing module fp16_add.
+<suppressed ~9 debug messages>
+Optimizing module fp16_mul.
+<suppressed ~3 debug messages>
+Optimizing module logic_pcu_scheduler.
+
+8.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu'.
+Finding identical cells in module `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_mul'.
+Finding identical cells in module `\logic_pcu_scheduler'.
+Removed a total of 0 cells.
+
+8.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_mul..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \logic_pcu_scheduler..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~66 debug messages>
+
+8.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+  Optimizing cells in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \fp16_mul.
+  Optimizing cells in module \logic_pcu_scheduler.
+Performed a total of 0 changes.
+
+8.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu'.
+Finding identical cells in module `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_mul'.
+Finding identical cells in module `\logic_pcu_scheduler'.
+Removed a total of 0 cells.
+
+8.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+Finding unused cells or wires in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \logic_pcu_scheduler..
+Removed 2 unused cells and 43 unused wires.
+<suppressed ~6 debug messages>
+
+8.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+Optimizing module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+Optimizing module fp16_add.
+Optimizing module fp16_mul.
+Optimizing module logic_pcu_scheduler.
+
+8.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_mul..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \logic_pcu_scheduler..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~66 debug messages>
+
+8.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+  Optimizing cells in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \fp16_mul.
+  Optimizing cells in module \logic_pcu_scheduler.
+Performed a total of 0 changes.
+
+8.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu'.
+Finding identical cells in module `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_mul'.
+Finding identical cells in module `\logic_pcu_scheduler'.
+Removed a total of 0 cells.
+
+8.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+Finding unused cells or wires in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \logic_pcu_scheduler..
+
+8.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+Optimizing module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+Optimizing module fp16_add.
+Optimizing module fp16_mul.
+Optimizing module logic_pcu_scheduler.
+
+8.14.16. Finished OPT passes. (There is nothing left to do.)
+
+8.15. Executing MEMORY pass.
+
+8.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+8.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+8.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+8.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+8.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+8.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+Finding unused cells or wires in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \logic_pcu_scheduler..
+
+8.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+8.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+8.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+Finding unused cells or wires in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \logic_pcu_scheduler..
+
+8.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+8.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+Finding unused cells or wires in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \logic_pcu_scheduler..
+
+8.17. Executing OPT pass (performing simple optimizations).
+
+8.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+Optimizing module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+Optimizing module fp16_add.
+<suppressed ~35 debug messages>
+Optimizing module fp16_mul.
+<suppressed ~20 debug messages>
+Optimizing module logic_pcu_scheduler.
+
+8.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu'.
+Finding identical cells in module `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_mul'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `\logic_pcu_scheduler'.
+Removed a total of 1 cells.
+
+8.17.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+Finding unused cells or wires in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \logic_pcu_scheduler..
+Removed 0 unused cells and 47 unused wires.
+<suppressed ~2 debug messages>
+
+8.17.5. Finished fast OPT passes.
+
+8.18. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+8.19. Executing OPT pass (performing simple optimizations).
+
+8.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+Optimizing module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+Optimizing module fp16_add.
+Optimizing module fp16_mul.
+Optimizing module logic_pcu_scheduler.
+
+8.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu'.
+Finding identical cells in module `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_mul'.
+Finding identical cells in module `\logic_pcu_scheduler'.
+Removed a total of 0 cells.
+
+8.19.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_mul..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \logic_pcu_scheduler..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~66 debug messages>
+
+8.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+  Optimizing cells in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+  Optimizing cells in module \fp16_add.
+    Consolidated identical input bits for $mux cell $procmux$1203:
+      Old ports: A={ 27'000000000000000000000000000 \large_exp }, B={ $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [4:0] }, Y=$3\result_exp[31:0]
+      New ports: A={ 1'0 \large_exp }, B={ $sub$rtl/fp16_add.sv:64$46_Y [31] $sub$rtl/fp16_add.sv:64$46_Y [4:0] }, Y=$3\result_exp[31:0] [5:0]
+      New connections: $3\result_exp[31:0] [31:6] = { $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] $3\result_exp[31:0] [5] }
+    Consolidated identical input bits for $mux cell $procmux$969:
+      Old ports: A={ \result_exp [4:0] \rounded_sig [9:0] }, B={ 5'00000 \rounded_sig [9:0] }, Y=$7\result_o[15:0] [14:0]
+      New ports: A=\result_exp [4:0], B=5'00000, Y=$7\result_o[15:0] [14:10]
+      New connections: $7\result_o[15:0] [9:0] = \rounded_sig [9:0]
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \fp16_mul.
+    Consolidated identical input bits for $mux cell $procmux$948:
+      Old ports: A={ $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [5:0] }, B={ $sub$rtl/fp16_mul.sv:33$164_Y [31] $sub$rtl/fp16_mul.sv:33$164_Y [31] $sub$rtl/fp16_mul.sv:33$164_Y [31] $sub$rtl/fp16_mul.sv:33$164_Y [31] $sub$rtl/fp16_mul.sv:33$164_Y [31] $sub$rtl/fp16_mul.sv:33$164_Y [31] $sub$rtl/fp16_mul.sv:33$164_Y [31] $sub$rtl/fp16_mul.sv:33$164_Y [31] $sub$rtl/fp16_mul.sv:33$164_Y [31] $sub$rtl/fp16_mul.sv:33$164_Y [31] $sub$rtl/fp16_mul.sv:33$164_Y [31] $sub$rtl/fp16_mul.sv:33$164_Y [31] $sub$rtl/fp16_mul.sv:33$164_Y [31] $sub$rtl/fp16_mul.sv:33$164_Y [31] $sub$rtl/fp16_mul.sv:33$164_Y [31] $sub$rtl/fp16_mul.sv:33$164_Y [31] $sub$rtl/fp16_mul.sv:33$164_Y [31] $sub$rtl/fp16_mul.sv:33$164_Y [31] $sub$rtl/fp16_mul.sv:33$164_Y [31] $sub$rtl/fp16_mul.sv:33$164_Y [31] $sub$rtl/fp16_mul.sv:33$164_Y [31] $sub$rtl/fp16_mul.sv:33$164_Y [31] $sub$rtl/fp16_mul.sv:33$164_Y [31] $sub$rtl/fp16_mul.sv:33$164_Y [31] $sub$rtl/fp16_mul.sv:33$164_Y [31] $sub$rtl/fp16_mul.sv:33$164_Y [6:0] }, Y=$2\exponent[31:0]
+      New ports: A={ $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [31] $sub$rtl/fp16_mul.sv:23$156_Y [5:0] }, B={ $sub$rtl/fp16_mul.sv:33$164_Y [31] $sub$rtl/fp16_mul.sv:33$164_Y [6:0] }, Y=$2\exponent[31:0] [7:0]
+      New connections: $2\exponent[31:0] [31:8] = { $2\exponent[31:0] [7] $2\exponent[31:0] [7] $2\exponent[31:0] [7] $2\exponent[31:0] [7] $2\exponent[31:0] [7] $2\exponent[31:0] [7] $2\exponent[31:0] [7] $2\exponent[31:0] [7] $2\exponent[31:0] [7] $2\exponent[31:0] [7] $2\exponent[31:0] [7] $2\exponent[31:0] [7] $2\exponent[31:0] [7] $2\exponent[31:0] [7] $2\exponent[31:0] [7] $2\exponent[31:0] [7] $2\exponent[31:0] [7] $2\exponent[31:0] [7] $2\exponent[31:0] [7] $2\exponent[31:0] [7] $2\exponent[31:0] [7] $2\exponent[31:0] [7] $2\exponent[31:0] [7] $2\exponent[31:0] [7] }
+  Optimizing cells in module \fp16_mul.
+  Optimizing cells in module \logic_pcu_scheduler.
+Performed a total of 3 changes.
+
+8.19.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu'.
+Finding identical cells in module `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_mul'.
+Finding identical cells in module `\logic_pcu_scheduler'.
+Removed a total of 0 cells.
+
+8.19.6. Executing OPT_SHARE pass.
+
+8.19.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.19.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+Finding unused cells or wires in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \logic_pcu_scheduler..
+
+8.19.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+Optimizing module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+Optimizing module fp16_add.
+Optimizing module fp16_mul.
+Optimizing module logic_pcu_scheduler.
+
+8.19.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.19.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \fp16_mul..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \logic_pcu_scheduler..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~66 debug messages>
+
+8.19.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+  Optimizing cells in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+  Optimizing cells in module \fp16_add.
+  Optimizing cells in module \fp16_mul.
+  Optimizing cells in module \logic_pcu_scheduler.
+Performed a total of 0 changes.
+
+8.19.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu'.
+Finding identical cells in module `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000'.
+Finding identical cells in module `\fp16_add'.
+Finding identical cells in module `\fp16_mul'.
+Finding identical cells in module `\logic_pcu_scheduler'.
+Removed a total of 0 cells.
+
+8.19.14. Executing OPT_SHARE pass.
+
+8.19.15. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.19.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+Finding unused cells or wires in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \logic_pcu_scheduler..
+
+8.19.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+Optimizing module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+Optimizing module fp16_add.
+Optimizing module fp16_mul.
+Optimizing module logic_pcu_scheduler.
+
+8.19.18. Finished OPT passes. (There is nothing left to do.)
+
+8.20. Executing TECHMAP pass (map to technology primitives).
+
+8.20.1. Executing Verilog-2005 frontend: /home/chandler/.local/yosys/usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/home/chandler/.local/yosys/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+8.20.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $logic_or.
+Using extmapper maccmap for cells of type $macc_v2.
+  add { \lhs_sig [10] \lhs_i [9:0] } * { \rhs_sig [10] \rhs_i [9:0] } (11x11 bits, unsigned)
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $reduce_bool.
+  add $auto$wreduce.cc:514:run$1367 [4:0] (5 bits, unsigned)
+  add $auto$wreduce.cc:514:run$1368 [4:0] (5 bits, unsigned)
+  add 7'1110001 (7 bits, unsigned)
+Using extmapper simplemap for cells of type $mux.
+Using template $paramod$2f5fb04daf2da94d981bf9455fa4454c6ec8b705\_90_alu for cells of type $alu.
+Using template $paramod$050f15daba5036a0512adf25d3c6631f629623f7\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $reduce_or.
+Using template $paramod$5bb97a85ff79c5fa4d33b3bfeccb5ec3c5771dfa\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $eq.
+Using template $paramod$06a9a25e193457b564e50ab7b7ad40e176246e9c\_90_alu for cells of type $alu.
+Using template $paramod$1e402e64350f17d7d96d4d19397585e7730f3657\_90_alu for cells of type $alu.
+Using template $paramod$07bccfa11557fd469d230b134a5ca37ea58b7850\_90_alu for cells of type $alu.
+Using template $paramod$constmap:12ab2820be2987ec26df2ff211b7215c965341dd$paramod$7289a30738bad799d1cca22d4e39790b6e912a71\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shr.
+Using extmapper simplemap for cells of type $reduce_and.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $not.
+Using template $paramod$41a7072a3a69aace0ef26ba45fb12d6fa3718bdb\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001011 for cells of type $lcu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000010110 for cells of type $fa.
+Using template $paramod$e161c1674351796cd6dd381e70ff05458bfe7755\_90_alu for cells of type $alu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000111 for cells of type $fa.
+Using template $paramod$dbcdc7e8aa1a4080cea2deda6fdc8772064f4d90\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001000 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000011111 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000010110 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000111 for cells of type $lcu.
+Using template $paramod$091610cd349a68bd5539cffd7126f0d76e9bca00\_90_alu for cells of type $alu.
+Using template $paramod$546f3f62de618651dd3a8b3f9e661fb34b30a603\_90_alu for cells of type $alu.
+Using template $paramod$719aadea7a94d31a13cd25a777432aacb0e462b5\_90_alu for cells of type $alu.
+Using template $paramod$constmap:84ecb1fe6cf6c7774af1e6015b4db447afa6c0b1$paramod$419a913ed38c2513939b18df9044de3e442bc66c\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shl.
+Using template $paramod$constmap:b99037b5251b430096ae8426664393d6ae79f5d4$paramod$10d34890fc0a590416fb0bd5f2405603d3bc2a8b\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shr.
+Using template $paramod$5e23d2e0f07f5403e3d2c5b606bab0c16e4174c1\_90_alu for cells of type $alu.
+Using template $paramod$92a1f7a016bf58d33db5a47145e66dde1cbc3210\_90_alu for cells of type $alu.
+Using template $paramod$332fab4e157f868977379756d21fa99887c3c6c4\_90_alu for cells of type $alu.
+Using template $paramod$6412f7f13655de512a17af2c71a87b50b4a57324\_90_alu for cells of type $alu.
+Using template $paramod$1ed7ec530b1ba361931392f2f8504f82ccdfecaa\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $ne.
+Using template $paramod$15650b5f68527c2737f08685d9884042e045002a\_90_alu for cells of type $alu.
+Using template $paramod$6df0329addda9228fcc2546de2aaf14ad26c98e1\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001110 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001100 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000110 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000101 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000010000 for cells of type $lcu.
+  add \src0_i [7:0] * \src1_i [7:0] (8x8 bits, signed)
+Using template $paramod$bee2d9b174e5d569acba3e70eed4e815564102b5\_90_alu for cells of type $alu.
+Using template $paramod$2653f68ddb8eab7b1907b4a20767b72a824a7a36\_90_alu for cells of type $alu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000010000 for cells of type $fa.
+Using extmapper simplemap for cells of type $dffe.
+Using extmapper simplemap for cells of type $adffe.
+No more expansions possible.
+<suppressed ~8426 debug messages>
+
+8.21. Executing OPT pass (performing simple optimizations).
+
+8.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+Optimizing module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+<suppressed ~685 debug messages>
+Optimizing module fp16_add.
+<suppressed ~2525 debug messages>
+Optimizing module fp16_mul.
+<suppressed ~2669 debug messages>
+Optimizing module logic_pcu_scheduler.
+
+8.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu'.
+Finding identical cells in module `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000'.
+<suppressed ~396 debug messages>
+Finding identical cells in module `\fp16_add'.
+<suppressed ~1779 debug messages>
+Finding identical cells in module `\fp16_mul'.
+<suppressed ~1353 debug messages>
+Finding identical cells in module `\logic_pcu_scheduler'.
+Removed a total of 1176 cells.
+
+8.21.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+Finding unused cells or wires in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \logic_pcu_scheduler..
+Removed 603 unused cells and 3570 unused wires.
+<suppressed ~607 debug messages>
+
+8.21.5. Finished fast OPT passes.
+
+8.22. Executing ABC pass (technology mapping using ABC).
+
+8.22.1. Extracting gate netlist of module `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu' to `<abc-temp-dir>/input.blif'..
+Extracted 4 gates and 8 wires to a netlist network with 4 inputs and 3 outputs.
+
+8.22.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+8.22.1.2. Re-integrating ABC results.
+ABC RESULTS:            ANDNOT cells:        3
+ABC RESULTS:             ORNOT cells:        1
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:        4
+ABC RESULTS:          output signals:        3
+Removing temp directory.
+
+8.22.2. Extracting gate netlist of module `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000' to `<abc-temp-dir>/input.blif'..
+Extracted 1379 gates and 1578 wires to a netlist network with 198 inputs and 96 outputs.
+
+8.22.2.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+8.22.2.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       62
+ABC RESULTS:            ANDNOT cells:      353
+ABC RESULTS:               MUX cells:      256
+ABC RESULTS:              NAND cells:       47
+ABC RESULTS:               NOR cells:      112
+ABC RESULTS:               NOT cells:       47
+ABC RESULTS:                OR cells:      147
+ABC RESULTS:             ORNOT cells:       61
+ABC RESULTS:              XNOR cells:       85
+ABC RESULTS:               XOR cells:      245
+ABC RESULTS:        internal signals:     1284
+ABC RESULTS:           input signals:      198
+ABC RESULTS:          output signals:       96
+Removing temp directory.
+
+8.22.3. Extracting gate netlist of module `\fp16_add' to `<abc-temp-dir>/input.blif'..
+Extracted 4245 gates and 4279 wires to a netlist network with 32 inputs and 16 outputs.
+
+8.22.3.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+8.22.3.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       77
+ABC RESULTS:            ANDNOT cells:     1194
+ABC RESULTS:               MUX cells:      692
+ABC RESULTS:              NAND cells:       45
+ABC RESULTS:               NOR cells:      200
+ABC RESULTS:               NOT cells:      204
+ABC RESULTS:                OR cells:      315
+ABC RESULTS:             ORNOT cells:      187
+ABC RESULTS:              XNOR cells:      150
+ABC RESULTS:               XOR cells:      358
+ABC RESULTS:        internal signals:     4231
+ABC RESULTS:           input signals:       32
+ABC RESULTS:          output signals:       16
+Removing temp directory.
+
+8.22.4. Extracting gate netlist of module `\fp16_mul' to `<abc-temp-dir>/input.blif'..
+Extracted 3755 gates and 3789 wires to a netlist network with 32 inputs and 16 outputs.
+
+8.22.4.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+8.22.4.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:      171
+ABC RESULTS:            ANDNOT cells:     1031
+ABC RESULTS:               MUX cells:      568
+ABC RESULTS:              NAND cells:       54
+ABC RESULTS:               NOR cells:      194
+ABC RESULTS:               NOT cells:      195
+ABC RESULTS:                OR cells:      271
+ABC RESULTS:             ORNOT cells:      165
+ABC RESULTS:              XNOR cells:      158
+ABC RESULTS:               XOR cells:      411
+ABC RESULTS:        internal signals:     3741
+ABC RESULTS:           input signals:       32
+ABC RESULTS:          output signals:       16
+Removing temp directory.
+
+8.22.5. Extracting gate netlist of module `\logic_pcu_scheduler' to `<abc-temp-dir>/input.blif'..
+Extracted 4 gates and 8 wires to a netlist network with 4 inputs and 2 outputs.
+
+8.22.5.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+8.22.5.2. Re-integrating ABC results.
+ABC RESULTS:             ORNOT cells:        2
+ABC RESULTS:        internal signals:        2
+ABC RESULTS:           input signals:        4
+ABC RESULTS:          output signals:        2
+Removing temp directory.
+
+8.23. Executing OPT pass (performing simple optimizations).
+
+8.23.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu.
+Optimizing module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.
+Optimizing module fp16_add.
+<suppressed ~10 debug messages>
+Optimizing module fp16_mul.
+<suppressed ~9 debug messages>
+Optimizing module logic_pcu_scheduler.
+
+8.23.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu'.
+Finding identical cells in module `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000'.
+Finding identical cells in module `\fp16_add'.
+<suppressed ~588 debug messages>
+Finding identical cells in module `\fp16_mul'.
+<suppressed ~216 debug messages>
+Finding identical cells in module `\logic_pcu_scheduler'.
+Removed a total of 268 cells.
+
+8.23.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.23.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu..
+Finding unused cells or wires in module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000..
+Finding unused cells or wires in module \fp16_add..
+Finding unused cells or wires in module \fp16_mul..
+Finding unused cells or wires in module \logic_pcu_scheduler..
+Removed 0 unused cells and 3789 unused wires.
+<suppressed ~24 debug messages>
+
+8.23.5. Finished fast OPT passes.
+
+8.24. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `logic_pcu_scheduler'. Setting top module to logic_pcu_scheduler.
+
+8.24.1. Analyzing design hierarchy..
+Top module:  \logic_pcu_scheduler
+Used module:     $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu
+Used module:         $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000
+Used module:             \fp16_add
+Used module:             \fp16_mul
+
+8.24.2. Analyzing design hierarchy..
+Top module:  \logic_pcu_scheduler
+Used module:     $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu
+Used module:         $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000
+Used module:             \fp16_add
+Used module:             \fp16_mul
+Removed 0 unused modules.
+
+8.25. Printing statistics.
+
+=== $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu ===
+
+   Number of wires:                 23
+   Number of wire bits:            530
+   Number of public wires:          20
+   Number of public wire bits:     527
+   Number of ports:                 15
+   Number of port bits:            300
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                199
+     $_ANDNOT_                       3
+     $_DFFE_PN0P_                    2
+     $_DFFE_PP_                    192
+     $_ORNOT_                        1
+     $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000      1
+
+=== $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000 ===
+
+   Number of wires:               1361
+   Number of wire bits:           1613
+   Number of public wires:          10
+   Number of public wire bits:     262
+   Number of ports:                  7
+   Number of port bits:            166
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               1419
+     $_ANDNOT_                     353
+     $_AND_                         62
+     $_MUX_                        256
+     $_NAND_                        47
+     $_NOR_                        112
+     $_NOT_                         47
+     $_ORNOT_                       61
+     $_OR_                         147
+     $_XNOR_                        85
+     $_XOR_                        245
+     fp16_add                        2
+     fp16_mul                        2
+
+=== fp16_add ===
+
+   Number of wires:               3227
+   Number of wire bits:           3416
+   Number of public wires:          17
+   Number of public wire bits:     206
+   Number of ports:                  3
+   Number of port bits:             48
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               3226
+     $_ANDNOT_                    1082
+     $_AND_                         70
+     $_MUX_                        678
+     $_NAND_                        45
+     $_NOR_                        200
+     $_NOT_                        196
+     $_ORNOT_                      182
+     $_OR_                         287
+     $_XNOR_                       141
+     $_XOR_                        345
+
+=== fp16_mul ===
+
+   Number of wires:               3139
+   Number of wire bits:           3230
+   Number of public wires:           9
+   Number of public wire bits:     100
+   Number of ports:                  3
+   Number of port bits:             48
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               3146
+     $_ANDNOT_                     972
+     $_AND_                        169
+     $_MUX_                        565
+     $_NAND_                        54
+     $_NOR_                        191
+     $_NOT_                        195
+     $_ORNOT_                      164
+     $_OR_                         267
+     $_XNOR_                       158
+     $_XOR_                        411
+
+=== logic_pcu_scheduler ===
+
+   Number of wires:                 18
+   Number of wire bits:            604
+   Number of public wires:          18
+   Number of public wire bits:     604
+   Number of ports:                 17
+   Number of port bits:            602
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  4
+     $_ORNOT_                        2
+     $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu      2
+
+=== design hierarchy ===
+
+   logic_pcu_scheduler               1
+     $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu      2
+       $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000      1
+         fp16_add                    2
+         fp16_mul                    2
+
+   Number of wires:              28250
+   Number of wire bits:          31474
+   Number of public wires:         182
+   Number of public wire bits:    3406
+   Number of ports:                 85
+   Number of port bits:           1918
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:              28716
+     $_ANDNOT_                    8928
+     $_AND_                       1080
+     $_DFFE_PN0P_                    4
+     $_DFFE_PP_                    384
+     $_MUX_                       5484
+     $_NAND_                       490
+     $_NOR_                       1788
+     $_NOT_                       1658
+     $_ORNOT_                     1510
+     $_OR_                        2510
+     $_XNOR_                      1366
+     $_XOR_                       3514
+
+8.26. Executing CHECK pass (checking for obvious problems).
+Checking module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu...
+Checking module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000...
+Checking module fp16_add...
+Checking module fp16_mul...
+Checking module logic_pcu_scheduler...
+Found and reported 0 problems.
+
+9. Executing CHECK pass (checking for obvious problems).
+Checking module $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu...
+Checking module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000...
+Checking module fp16_add...
+Checking module fp16_mul...
+Checking module logic_pcu_scheduler...
+Found and reported 0 problems.
+
+10. Printing statistics.
+
+=== $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu ===
+
+   Number of wires:                 23
+   Number of wire bits:            530
+   Number of public wires:          20
+   Number of public wire bits:     527
+   Number of ports:                 15
+   Number of port bits:            300
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                199
+     $_ANDNOT_                       3
+     $_DFFE_PN0P_                    2
+     $_DFFE_PP_                    192
+     $_ORNOT_                        1
+     $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000      1
+
+=== $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000 ===
+
+   Number of wires:               1361
+   Number of wire bits:           1613
+   Number of public wires:          10
+   Number of public wire bits:     262
+   Number of ports:                  7
+   Number of port bits:            166
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               1419
+     $_ANDNOT_                     353
+     $_AND_                         62
+     $_MUX_                        256
+     $_NAND_                        47
+     $_NOR_                        112
+     $_NOT_                         47
+     $_ORNOT_                       61
+     $_OR_                         147
+     $_XNOR_                        85
+     $_XOR_                        245
+     fp16_add                        2
+     fp16_mul                        2
+
+=== fp16_add ===
+
+   Number of wires:               3227
+   Number of wire bits:           3416
+   Number of public wires:          17
+   Number of public wire bits:     206
+   Number of ports:                  3
+   Number of port bits:             48
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               3226
+     $_ANDNOT_                    1082
+     $_AND_                         70
+     $_MUX_                        678
+     $_NAND_                        45
+     $_NOR_                        200
+     $_NOT_                        196
+     $_ORNOT_                      182
+     $_OR_                         287
+     $_XNOR_                       141
+     $_XOR_                        345
+
+=== fp16_mul ===
+
+   Number of wires:               3139
+   Number of wire bits:           3230
+   Number of public wires:           9
+   Number of public wire bits:     100
+   Number of ports:                  3
+   Number of port bits:             48
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               3146
+     $_ANDNOT_                     972
+     $_AND_                        169
+     $_MUX_                        565
+     $_NAND_                        54
+     $_NOR_                        191
+     $_NOT_                        195
+     $_ORNOT_                      164
+     $_OR_                         267
+     $_XNOR_                       158
+     $_XOR_                        411
+
+=== logic_pcu_scheduler ===
+
+   Number of wires:                 18
+   Number of wire bits:            604
+   Number of public wires:          18
+   Number of public wire bits:     604
+   Number of ports:                 17
+   Number of port bits:            602
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  4
+     $_ORNOT_                        2
+     $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu      2
+
+=== design hierarchy ===
+
+   logic_pcu_scheduler               1
+     $paramod$b222f1e2b34e410579545e1d4cf49a084047606d\logic_pcu      2
+       $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000      1
+         fp16_add                    2
+         fp16_mul                    2
+
+   Number of wires:              28250
+   Number of wire bits:          31474
+   Number of public wires:         182
+   Number of public wire bits:    3406
+   Number of ports:                 85
+   Number of port bits:           1918
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:              28716
+     $_ANDNOT_                    8928
+     $_AND_                       1080
+     $_DFFE_PN0P_                    4
+     $_DFFE_PP_                    384
+     $_MUX_                       5484
+     $_NAND_                       490
+     $_NOR_                       1788
+     $_NOT_                       1658
+     $_ORNOT_                     1510
+     $_OR_                        2510
+     $_XNOR_                      1366
+     $_XOR_                       3514
+
+End of script. Logfile hash: 746ce1d064, CPU: user 1.14s system 0.07s, MEM: 59.44 MB peak
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+Time spent: 39% 1x abc (0 sec), 14% 46x opt_expr (0 sec), ...

@@ -1,0 +1,102 @@
+{
+  "purpose": "check whether the action-head-selected 8-lane PCU remains a sound choice after accounting for every GR00T normalization family",
+  "model": "nvidia/GR00T-N1.7-3B",
+  "model_revision": "2fc962b973bccdd5d8ce4f67cc63b264d6886495",
+  "isaac_groot_revision": "b9955401d50c92a29258732e3ad6ccd579f1bdc0",
+  "inventory_profile_families": 13,
+  "profile_family_coverage": "13_OF_13",
+  "known_static_invocations": 382,
+  "runtime_confirmed_action_invocations": 269,
+  "runtime_confirmed_action_profile_families": 6,
+  "representative_or_runtime_weighted_elements_excluding_vision": 54220800,
+  "unique_hidden_sizes": [
+    128,
+    1024,
+    1536,
+    2048
+  ],
+  "normalization_types": [
+    "AdaLayerNorm",
+    "LayerNorm",
+    "RMSNorm"
+  ],
+  "unresolved_runtime_rows": [
+    "backbone_visual_block_norm1",
+    "backbone_visual_block_norm2"
+  ],
+  "unresolved_count": 2,
+  "static_runtime_discrepancies": 1,
+  "full_model_inference_executed": false,
+  "why_full_inference_not_required": "the inventory question needs module families, multiplicities, dimensions, and representative shape sensitivity; arithmetic RTL replay remains a separate task",
+  "scenario_lane_decisions": {
+    "known_profiles_no_vision": {
+      "lane4_to_lane8_cycle_reduction": 0.15720326519768615,
+      "lane8_to_lane16_cycle_reduction": 0.04279965575644769,
+      "lane4_to_lane8_relative_cost_increase": 0.772901325478645,
+      "lane8_to_lane16_relative_cost_increase": 0.8719056321648115,
+      "balanced_knee_lanes": 8,
+      "minimum_hardware_cost_lanes": 4
+    },
+    "vision_rows_1024": {
+      "lane4_to_lane8_cycle_reduction": 0.12975907081965896,
+      "lane8_to_lane16_cycle_reduction": 0.029588031304425107,
+      "lane4_to_lane8_relative_cost_increase": 0.772901325478645,
+      "lane8_to_lane16_relative_cost_increase": 0.8719056321648115,
+      "balanced_knee_lanes": 8,
+      "minimum_hardware_cost_lanes": 4
+    },
+    "vision_rows_256": {
+      "lane4_to_lane8_cycle_reduction": 0.1486544028760942,
+      "lane8_to_lane16_cycle_reduction": 0.03874148769282068,
+      "lane4_to_lane8_relative_cost_increase": 0.772901325478645,
+      "lane8_to_lane16_relative_cost_increase": 0.8719056321648115,
+      "balanced_knee_lanes": 8,
+      "minimum_hardware_cost_lanes": 4
+    },
+    "vision_rows_4096": {
+      "lane4_to_lane8_cycle_reduction": 0.09832798337134362,
+      "lane8_to_lane16_cycle_reduction": 0.015211725640194261,
+      "lane4_to_lane8_relative_cost_increase": 0.772901325478645,
+      "lane8_to_lane16_relative_cost_increase": 0.8719056321648115,
+      "balanced_knee_lanes": 8,
+      "minimum_hardware_cost_lanes": 4
+    }
+  },
+  "architecture_conclusion": "8 lanes remains the balanced throughput/cost knee in the known-profile case and all tested visual-row sensitivity scenarios, while 4 lanes is the minimum-cost choice when no throughput floor is imposed; 16 lanes is not justified",
+  "freeze_impact": "keep the parameterized RTL and 8-lane balanced default; retain 4-lane as the cost-minimum configuration until a system throughput requirement is fixed",
+  "claim_boundary": "vision rows and backbone activations are not runtime captured; exact full-model traffic/cycle totals remain unclaimed",
+  "source_evidence": [
+    {
+      "artifact": "gr00t/model/gr00t_n1d7/gr00t_n1d7.py",
+      "status": "PINNED_SOURCE_RECHECKED",
+      "revision": "b9955401d50c92a29258732e3ad6ccd579f1bdc0",
+      "path": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM_pure_layornorm\\references\\Isaac-GR00T\\gr00t\\model\\gr00t_n1d7\\gr00t_n1d7.py",
+      "sha256": "cfd2a140c4be85b5467542dc78722668188bf0a6447e7ffdb9c0ca71103470a5",
+      "purpose": "normalization construction/call-path evidence"
+    },
+    {
+      "artifact": "gr00t/model/modules/dit.py",
+      "status": "PINNED_SOURCE_RECHECKED",
+      "revision": "b9955401d50c92a29258732e3ad6ccd579f1bdc0",
+      "path": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM_pure_layornorm\\references\\Isaac-GR00T\\gr00t\\model\\modules\\dit.py",
+      "sha256": "66c19364ad9e907455c6a621886fb87f9bf524de69df9b37bdc662c96f01baff",
+      "purpose": "normalization construction/call-path evidence"
+    },
+    {
+      "artifact": "gr00t/model/modules/qwen3_backbone.py",
+      "status": "PINNED_SOURCE_RECHECKED",
+      "revision": "b9955401d50c92a29258732e3ad6ccd579f1bdc0",
+      "path": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM_pure_layornorm\\references\\Isaac-GR00T\\gr00t\\model\\modules\\qwen3_backbone.py",
+      "sha256": "cd2549cd8718513b9efe9cc1b0c73b1ec654a9f01a572beb0be3760155b40bb0",
+      "purpose": "normalization construction/call-path evidence"
+    },
+    {
+      "artifact": "gr00t/configs/model/gr00t_n1d7.py",
+      "status": "PINNED_SOURCE_RECHECKED",
+      "revision": "b9955401d50c92a29258732e3ad6ccd579f1bdc0",
+      "path": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM_pure_layornorm\\references\\Isaac-GR00T\\gr00t\\configs\\model\\gr00t_n1d7.py",
+      "sha256": "c2052451257106712fc16cb0093578a6fa52dd030d217ebf980936185ff17cdf",
+      "purpose": "normalization construction/call-path evidence"
+    }
+  ]
+}

@@ -1,0 +1,955 @@
+
+-- Running command `read_verilog -sv rtl/normalization_row_context_table.sv; chparam -set BANKS 16 -set ENTRIES 16 normalization_row_context_table; hierarchy -check -top normalization_row_context_table; synth -top normalization_row_context_table; stat; check -assert' --
+
+1. Executing Verilog-2005 frontend: rtl/normalization_row_context_table.sv
+Parsing SystemVerilog input from `rtl/normalization_row_context_table.sv' to AST representation.
+Generating RTLIL representation for module `\normalization_row_context_table'.
+Successfully finished Verilog frontend.
+Parameter \BANKS = 16
+Parameter \ENTRIES = 16
+
+2. Executing AST frontend in derive mode using pre-parsed AST for module `\normalization_row_context_table'.
+Parameter \BANKS = 16
+Parameter \ENTRIES = 16
+Generating RTLIL representation for module `$paramod$0f4fd52ed08671025fb4f6e020e40ab96de786b5\normalization_row_context_table'.
+
+3. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1. Analyzing design hierarchy..
+Top module:  \normalization_row_context_table
+
+3.2. Analyzing design hierarchy..
+Top module:  \normalization_row_context_table
+Removed 0 unused modules.
+
+4. Executing SYNTH pass.
+
+4.1. Executing HIERARCHY pass (managing design hierarchy).
+
+4.1.1. Analyzing design hierarchy..
+Top module:  \normalization_row_context_table
+
+4.1.2. Analyzing design hierarchy..
+Top module:  \normalization_row_context_table
+Removed 0 unused modules.
+
+4.2. Executing PROC pass (convert processes to netlists).
+
+4.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 48 switch rules as full_case in process $proc$rtl/normalization_row_context_table.sv:0$222 in module normalization_row_context_table.
+Marked 3 switch rules as full_case in process $proc$rtl/normalization_row_context_table.sv:31$373 in module normalization_row_context_table.
+Removed a total of 0 dead cases.
+
+4.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 18 assignments to connections.
+
+4.2.4. Executing PROC_INIT pass (extract init attributes).
+
+4.2.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_ni in `\normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:31$373'.
+
+4.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~52 debug messages>
+
+4.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:0$222'.
+     1/96: $16\lookup_target_mask_o[15:0]
+     2/96: $16\lookup_idx[31:0]
+     3/96: $16\lookup_hit_o[0:0]
+     4/96: $16\free_idx[31:0]
+     5/96: $16\free_found[0:0]
+     6/96: $16\duplicate[0:0]
+     7/96: $15\lookup_target_mask_o[15:0]
+     8/96: $15\lookup_idx[31:0]
+     9/96: $15\lookup_hit_o[0:0]
+    10/96: $15\free_idx[31:0]
+    11/96: $15\free_found[0:0]
+    12/96: $15\duplicate[0:0]
+    13/96: $14\lookup_target_mask_o[15:0]
+    14/96: $14\lookup_idx[31:0]
+    15/96: $14\lookup_hit_o[0:0]
+    16/96: $14\free_idx[31:0]
+    17/96: $14\free_found[0:0]
+    18/96: $14\duplicate[0:0]
+    19/96: $13\lookup_target_mask_o[15:0]
+    20/96: $13\lookup_idx[31:0]
+    21/96: $13\lookup_hit_o[0:0]
+    22/96: $13\free_idx[31:0]
+    23/96: $13\free_found[0:0]
+    24/96: $13\duplicate[0:0]
+    25/96: $12\lookup_target_mask_o[15:0]
+    26/96: $12\lookup_idx[31:0]
+    27/96: $12\lookup_hit_o[0:0]
+    28/96: $12\free_idx[31:0]
+    29/96: $12\free_found[0:0]
+    30/96: $12\duplicate[0:0]
+    31/96: $11\lookup_target_mask_o[15:0]
+    32/96: $11\lookup_idx[31:0]
+    33/96: $11\lookup_hit_o[0:0]
+    34/96: $11\free_idx[31:0]
+    35/96: $11\free_found[0:0]
+    36/96: $11\duplicate[0:0]
+    37/96: $10\lookup_target_mask_o[15:0]
+    38/96: $10\lookup_idx[31:0]
+    39/96: $10\lookup_hit_o[0:0]
+    40/96: $10\free_idx[31:0]
+    41/96: $10\free_found[0:0]
+    42/96: $10\duplicate[0:0]
+    43/96: $9\lookup_target_mask_o[15:0]
+    44/96: $9\lookup_idx[31:0]
+    45/96: $9\lookup_hit_o[0:0]
+    46/96: $9\free_idx[31:0]
+    47/96: $9\free_found[0:0]
+    48/96: $9\duplicate[0:0]
+    49/96: $8\lookup_target_mask_o[15:0]
+    50/96: $8\lookup_idx[31:0]
+    51/96: $8\lookup_hit_o[0:0]
+    52/96: $8\free_idx[31:0]
+    53/96: $8\free_found[0:0]
+    54/96: $8\duplicate[0:0]
+    55/96: $7\lookup_target_mask_o[15:0]
+    56/96: $7\lookup_idx[31:0]
+    57/96: $7\lookup_hit_o[0:0]
+    58/96: $7\free_idx[31:0]
+    59/96: $7\free_found[0:0]
+    60/96: $7\duplicate[0:0]
+    61/96: $6\lookup_target_mask_o[15:0]
+    62/96: $6\lookup_idx[31:0]
+    63/96: $6\lookup_hit_o[0:0]
+    64/96: $6\free_idx[31:0]
+    65/96: $6\free_found[0:0]
+    66/96: $6\duplicate[0:0]
+    67/96: $5\lookup_target_mask_o[15:0]
+    68/96: $5\lookup_idx[31:0]
+    69/96: $5\lookup_hit_o[0:0]
+    70/96: $5\free_idx[31:0]
+    71/96: $5\free_found[0:0]
+    72/96: $5\duplicate[0:0]
+    73/96: $4\lookup_target_mask_o[15:0]
+    74/96: $4\lookup_idx[31:0]
+    75/96: $4\lookup_hit_o[0:0]
+    76/96: $4\free_idx[31:0]
+    77/96: $4\free_found[0:0]
+    78/96: $4\duplicate[0:0]
+    79/96: $3\lookup_target_mask_o[15:0]
+    80/96: $3\lookup_idx[31:0]
+    81/96: $3\lookup_hit_o[0:0]
+    82/96: $3\free_idx[31:0]
+    83/96: $3\free_found[0:0]
+    84/96: $3\duplicate[0:0]
+    85/96: $2\lookup_target_mask_o[15:0]
+    86/96: $2\lookup_idx[31:0]
+    87/96: $2\lookup_hit_o[0:0]
+    88/96: $2\free_idx[31:0]
+    89/96: $2\free_found[0:0]
+    90/96: $2\duplicate[0:0]
+    91/96: $1\lookup_target_mask_o[15:0]
+    92/96: $1\lookup_idx[31:0]
+    93/96: $1\lookup_hit_o[0:0]
+    94/96: $1\free_idx[31:0]
+    95/96: $1\free_found[0:0]
+    96/96: $1\duplicate[0:0]
+Creating decoders for process `\normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:31$373'.
+     1/17: $2$lookahead\mask_q$372[255:0]$409
+     2/17: $2$bitselwrite$pos$rtl/normalization_row_context_table.sv:38$221[31:0]$406
+     3/17: $2$lookahead\tag_q$371[255:0]$408
+     4/17: $2$bitselwrite$pos$rtl/normalization_row_context_table.sv:38$220[31:0]$405
+     5/17: $3$lookahead\valid_q$370[15:0]$407
+     6/17: $2$bitselwrite$pos$rtl/normalization_row_context_table.sv:38$219[31:0]$404
+     7/17: $2$lookahead\valid_q$370[15:0]$395
+     8/17: $2$bitselwrite$pos$rtl/normalization_row_context_table.sv:36$218[31:0]$394
+     9/17: $1$lookahead\mask_q$372[255:0]$388
+    10/17: $1$lookahead\tag_q$371[255:0]$387
+    11/17: $1$lookahead\valid_q$370[15:0]$386
+    12/17: $1$bitselwrite$pos$rtl/normalization_row_context_table.sv:38$221[31:0]$385
+    13/17: $1$bitselwrite$pos$rtl/normalization_row_context_table.sv:38$220[31:0]$384
+    14/17: $1$bitselwrite$pos$rtl/normalization_row_context_table.sv:38$219[31:0]$383
+    15/17: $1$bitselwrite$pos$rtl/normalization_row_context_table.sv:36$218[31:0]$382
+    16/17: $0\lookup_miss_error_o[0:0]
+    17/17: $0\duplicate_tag_error_o[0:0]
+
+4.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\normalization_row_context_table.\allocate_ready_o' from process `\normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:0$222'.
+No latch inferred for signal `\normalization_row_context_table.\lookup_hit_o' from process `\normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:0$222'.
+No latch inferred for signal `\normalization_row_context_table.\lookup_target_mask_o' from process `\normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:0$222'.
+No latch inferred for signal `\normalization_row_context_table.\duplicate' from process `\normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:0$222'.
+No latch inferred for signal `\normalization_row_context_table.\free_found' from process `\normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:0$222'.
+No latch inferred for signal `\normalization_row_context_table.\free_idx' from process `\normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:0$222'.
+No latch inferred for signal `\normalization_row_context_table.\lookup_idx' from process `\normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:0$222'.
+No latch inferred for signal `\normalization_row_context_table.$fordecl_block$1.e' from process `\normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:0$222'.
+
+4.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\normalization_row_context_table.\duplicate_tag_error_o' using process `\normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:31$373'.
+  created $adff cell `$procdff$751' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_row_context_table.\lookup_miss_error_o' using process `\normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:31$373'.
+  created $adff cell `$procdff$756' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_row_context_table.\valid_q' using process `\normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:31$373'.
+  created $adff cell `$procdff$761' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_row_context_table.\tag_q' using process `\normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:31$373'.
+  created $adff cell `$procdff$766' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_row_context_table.\mask_q' using process `\normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:31$373'.
+  created $adff cell `$procdff$771' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_row_context_table.$bitselwrite$pos$rtl/normalization_row_context_table.sv:36$218' using process `\normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:31$373'.
+  created $adff cell `$procdff$776' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_row_context_table.$bitselwrite$pos$rtl/normalization_row_context_table.sv:38$219' using process `\normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:31$373'.
+  created $adff cell `$procdff$781' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_row_context_table.$bitselwrite$pos$rtl/normalization_row_context_table.sv:38$220' using process `\normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:31$373'.
+  created $adff cell `$procdff$786' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_row_context_table.$bitselwrite$pos$rtl/normalization_row_context_table.sv:38$221' using process `\normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:31$373'.
+  created $adff cell `$procdff$791' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_row_context_table.$lookahead\valid_q$370' using process `\normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:31$373'.
+  created $adff cell `$procdff$796' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_row_context_table.$lookahead\tag_q$371' using process `\normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:31$373'.
+  created $adff cell `$procdff$801' with positive edge clock and positive level reset.
+Creating register for signal `\normalization_row_context_table.$lookahead\mask_q$372' using process `\normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:31$373'.
+  created $adff cell `$procdff$806' with positive edge clock and positive level reset.
+
+4.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+4.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 48 empty switches in `\normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:0$222'.
+Removing empty process `normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:0$222'.
+Found and cleaned up 4 empty switches in `\normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:31$373'.
+Removing empty process `normalization_row_context_table.$proc$rtl/normalization_row_context_table.sv:31$373'.
+Cleaned up 52 empty switches.
+
+4.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_row_context_table.
+<suppressed ~30 debug messages>
+
+4.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_row_context_table.
+<suppressed ~4 debug messages>
+
+4.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_row_context_table..
+Removed 25 unused cells and 287 unused wires.
+<suppressed ~26 debug messages>
+
+4.5. Executing CHECK pass (checking for obvious problems).
+Checking module normalization_row_context_table...
+Found and reported 0 problems.
+
+4.6. Executing OPT pass (performing simple optimizations).
+
+4.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_row_context_table.
+
+4.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_row_context_table'.
+<suppressed ~24 debug messages>
+Removed a total of 8 cells.
+
+4.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \normalization_row_context_table..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~41 debug messages>
+
+4.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \normalization_row_context_table.
+Performed a total of 0 changes.
+
+4.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_row_context_table'.
+Removed a total of 0 cells.
+
+4.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_row_context_table..
+Removed 0 unused cells and 8 unused wires.
+<suppressed ~1 debug messages>
+
+4.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_row_context_table.
+
+4.6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \normalization_row_context_table..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~41 debug messages>
+
+4.6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \normalization_row_context_table.
+Performed a total of 0 changes.
+
+4.6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_row_context_table'.
+Removed a total of 0 cells.
+
+4.6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_row_context_table..
+
+4.6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_row_context_table.
+
+4.6.16. Finished OPT passes. (There is nothing left to do.)
+
+4.7. Executing FSM pass (extract and optimize FSM).
+
+4.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+4.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+4.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+4.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_row_context_table..
+
+4.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+4.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+4.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+4.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+4.8. Executing OPT pass (performing simple optimizations).
+
+4.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_row_context_table.
+
+4.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_row_context_table'.
+Removed a total of 0 cells.
+
+4.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \normalization_row_context_table..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~41 debug messages>
+
+4.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \normalization_row_context_table.
+Performed a total of 0 changes.
+
+4.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_row_context_table'.
+Removed a total of 0 cells.
+
+4.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$771 ($adff) from module normalization_row_context_table (D = $or$rtl/normalization_row_context_table.sv:0$432_Y, Q = \mask_q).
+Adding EN signal on $procdff$766 ($adff) from module normalization_row_context_table (D = $or$rtl/normalization_row_context_table.sv:0$424_Y, Q = \tag_q).
+Adding EN signal on $procdff$756 ($adff) from module normalization_row_context_table (D = 1'1, Q = \lookup_miss_error_o).
+Adding EN signal on $procdff$751 ($adff) from module normalization_row_context_table (D = 1'1, Q = \duplicate_tag_error_o).
+
+4.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_row_context_table..
+Removed 4 unused cells and 4 unused wires.
+<suppressed ~5 debug messages>
+
+4.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_row_context_table.
+
+4.8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \normalization_row_context_table..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~37 debug messages>
+
+4.8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \normalization_row_context_table.
+Performed a total of 0 changes.
+
+4.8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_row_context_table'.
+Removed a total of 0 cells.
+
+4.8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_row_context_table..
+
+4.8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_row_context_table.
+
+4.8.16. Finished OPT passes. (There is nothing left to do.)
+
+4.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 31 bits (of 32) from mux cell normalization_row_context_table.$procmux$695 ($mux).
+Removed top 31 bits (of 32) from mux cell normalization_row_context_table.$procmux$689 ($mux).
+Removed top 30 bits (of 32) from mux cell normalization_row_context_table.$procmux$677 ($mux).
+Removed top 30 bits (of 32) from mux cell normalization_row_context_table.$procmux$671 ($mux).
+Removed top 30 bits (of 32) from mux cell normalization_row_context_table.$procmux$659 ($mux).
+Removed top 30 bits (of 32) from mux cell normalization_row_context_table.$procmux$653 ($mux).
+Removed top 1 bits (of 33) from port A of cell normalization_row_context_table.$neg$rtl/normalization_row_context_table.sv:0$396 ($neg).
+Removed top 16 bits (of 32) from port Y of cell normalization_row_context_table.$or$rtl/normalization_row_context_table.sv:0$402 ($or).
+Removed top 16 bits (of 32) from port A of cell normalization_row_context_table.$or$rtl/normalization_row_context_table.sv:0$402 ($or).
+Removed top 16 bits (of 32) from port B of cell normalization_row_context_table.$or$rtl/normalization_row_context_table.sv:0$402 ($or).
+Removed top 1 bits (of 33) from port A of cell normalization_row_context_table.$neg$rtl/normalization_row_context_table.sv:0$410 ($neg).
+Removed top 16 bits (of 32) from port Y of cell normalization_row_context_table.$or$rtl/normalization_row_context_table.sv:0$416 ($or).
+Removed top 16 bits (of 32) from port A of cell normalization_row_context_table.$or$rtl/normalization_row_context_table.sv:0$416 ($or).
+Removed top 16 bits (of 32) from port B of cell normalization_row_context_table.$or$rtl/normalization_row_context_table.sv:0$416 ($or).
+Removed top 1 bits (of 33) from port A of cell normalization_row_context_table.$neg$rtl/normalization_row_context_table.sv:0$418 ($neg).
+Removed top 16 bits (of 32) from port Y of cell normalization_row_context_table.$and$rtl/normalization_row_context_table.sv:0$399 ($and).
+Removed top 16 bits (of 32) from port B of cell normalization_row_context_table.$and$rtl/normalization_row_context_table.sv:0$399 ($and).
+Removed top 16 bits (of 32) from port Y of cell normalization_row_context_table.$shift$rtl/normalization_row_context_table.sv:0$401 ($shift).
+Removed top 16 bits (of 32) from port Y of cell normalization_row_context_table.$and$rtl/normalization_row_context_table.sv:0$413 ($and).
+Removed top 16 bits (of 32) from port B of cell normalization_row_context_table.$and$rtl/normalization_row_context_table.sv:0$413 ($and).
+Removed top 16 bits (of 32) from port Y of cell normalization_row_context_table.$not$rtl/normalization_row_context_table.sv:0$398 ($not).
+Removed top 16 bits (of 32) from port A of cell normalization_row_context_table.$not$rtl/normalization_row_context_table.sv:0$398 ($not).
+Removed top 16 bits (of 32) from port Y of cell normalization_row_context_table.$not$rtl/normalization_row_context_table.sv:0$412 ($not).
+Removed top 16 bits (of 32) from port A of cell normalization_row_context_table.$not$rtl/normalization_row_context_table.sv:0$412 ($not).
+Removed top 16 bits (of 32) from port Y of cell normalization_row_context_table.$shift$rtl/normalization_row_context_table.sv:0$397 ($shift).
+Removed top 16 bits (of 32) from port Y of cell normalization_row_context_table.$shift$rtl/normalization_row_context_table.sv:0$411 ($shift).
+Removed top 31 bits (of 32) from wire normalization_row_context_table.$2\free_idx[31:0].
+Removed top 31 bits (of 32) from wire normalization_row_context_table.$2\lookup_idx[31:0].
+Removed top 30 bits (of 32) from wire normalization_row_context_table.$3\free_idx[31:0].
+Removed top 30 bits (of 32) from wire normalization_row_context_table.$3\lookup_idx[31:0].
+Removed top 30 bits (of 32) from wire normalization_row_context_table.$4\free_idx[31:0].
+Removed top 30 bits (of 32) from wire normalization_row_context_table.$4\lookup_idx[31:0].
+Removed top 16 bits (of 32) from wire normalization_row_context_table.$and$rtl/normalization_row_context_table.sv:0$399_Y.
+Removed top 16 bits (of 32) from wire normalization_row_context_table.$and$rtl/normalization_row_context_table.sv:0$413_Y.
+Removed top 20 bits (of 32) from wire normalization_row_context_table.$not$rtl/normalization_row_context_table.sv:0$398_Y.
+Removed top 20 bits (of 32) from wire normalization_row_context_table.$not$rtl/normalization_row_context_table.sv:0$412_Y.
+Removed top 16 bits (of 32) from wire normalization_row_context_table.$or$rtl/normalization_row_context_table.sv:0$402_Y.
+Removed top 16 bits (of 32) from wire normalization_row_context_table.$or$rtl/normalization_row_context_table.sv:0$416_Y.
+Removed top 16 bits (of 32) from wire normalization_row_context_table.$shift$rtl/normalization_row_context_table.sv:0$397_Y.
+Removed top 16 bits (of 32) from wire normalization_row_context_table.$shift$rtl/normalization_row_context_table.sv:0$401_Y.
+
+4.10. Executing PEEPOPT pass (run peephole optimizers).
+
+4.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_row_context_table..
+Removed 0 unused cells and 14 unused wires.
+<suppressed ~1 debug messages>
+
+4.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module normalization_row_context_table:
+  creating $macc model for $neg$rtl/normalization_row_context_table.sv:0$396 ($neg).
+  creating $macc model for $neg$rtl/normalization_row_context_table.sv:0$410 ($neg).
+  creating $macc model for $neg$rtl/normalization_row_context_table.sv:0$418 ($neg).
+  creating $macc cell for $neg$rtl/normalization_row_context_table.sv:0$418: $auto$alumacc.cc:365:replace_macc$825
+  creating $macc cell for $neg$rtl/normalization_row_context_table.sv:0$410: $auto$alumacc.cc:365:replace_macc$826
+  creating $macc cell for $neg$rtl/normalization_row_context_table.sv:0$396: $auto$alumacc.cc:365:replace_macc$827
+  created 0 $alu and 3 $macc cells.
+
+4.13. Executing SHARE pass (SAT-based resource sharing).
+
+4.14. Executing OPT pass (performing simple optimizations).
+
+4.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_row_context_table.
+
+4.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_row_context_table'.
+Removed a total of 0 cells.
+
+4.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \normalization_row_context_table..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~37 debug messages>
+
+4.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \normalization_row_context_table.
+Performed a total of 0 changes.
+
+4.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_row_context_table'.
+Removed a total of 0 cells.
+
+4.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_row_context_table..
+
+4.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_row_context_table.
+
+4.14.9. Finished OPT passes. (There is nothing left to do.)
+
+4.15. Executing MEMORY pass.
+
+4.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+4.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+4.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+4.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+4.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+4.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_row_context_table..
+
+4.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+4.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+4.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_row_context_table..
+
+4.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+4.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_row_context_table..
+
+4.17. Executing OPT pass (performing simple optimizations).
+
+4.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_row_context_table.
+<suppressed ~50 debug messages>
+
+4.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_row_context_table'.
+Removed a total of 0 cells.
+
+4.17.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_row_context_table..
+Removed 0 unused cells and 4 unused wires.
+<suppressed ~1 debug messages>
+
+4.17.5. Finished fast OPT passes.
+
+4.18. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+4.19. Executing OPT pass (performing simple optimizations).
+
+4.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_row_context_table.
+
+4.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_row_context_table'.
+Removed a total of 0 cells.
+
+4.19.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \normalization_row_context_table..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~5 debug messages>
+
+4.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \normalization_row_context_table.
+    Consolidated identical input bits for $mux cell $procmux$635:
+      Old ports: A={ 30'000000000000000000000000000000 $4\lookup_idx[31:0] }, B=4, Y=$5\lookup_idx[31:0]
+      New ports: A={ 1'0 $4\lookup_idx[31:0] }, B=3'100, Y=$5\lookup_idx[31:0] [2:0]
+      New connections: $5\lookup_idx[31:0] [31:3] = 29'00000000000000000000000000000
+    Consolidated identical input bits for $mux cell $procmux$641:
+      Old ports: A={ 30'000000000000000000000000000000 $4\free_idx[31:0] }, B=4, Y=$5\free_idx[31:0]
+      New ports: A={ 1'0 $4\free_idx[31:0] }, B=3'100, Y=$5\free_idx[31:0] [2:0]
+      New connections: $5\free_idx[31:0] [31:3] = 29'00000000000000000000000000000
+  Optimizing cells in module \normalization_row_context_table.
+    Consolidated identical input bits for $mux cell $procmux$617:
+      Old ports: A=$5\lookup_idx[31:0], B=5, Y=$6\lookup_idx[31:0]
+      New ports: A=$5\lookup_idx[31:0] [2:0], B=3'101, Y=$6\lookup_idx[31:0] [2:0]
+      New connections: $6\lookup_idx[31:0] [31:3] = 29'00000000000000000000000000000
+    Consolidated identical input bits for $mux cell $procmux$623:
+      Old ports: A=$5\free_idx[31:0], B=5, Y=$6\free_idx[31:0]
+      New ports: A=$5\free_idx[31:0] [2:0], B=3'101, Y=$6\free_idx[31:0] [2:0]
+      New connections: $6\free_idx[31:0] [31:3] = 29'00000000000000000000000000000
+  Optimizing cells in module \normalization_row_context_table.
+    Consolidated identical input bits for $mux cell $procmux$599:
+      Old ports: A=$6\lookup_idx[31:0], B=6, Y=$7\lookup_idx[31:0]
+      New ports: A=$6\lookup_idx[31:0] [2:0], B=3'110, Y=$7\lookup_idx[31:0] [2:0]
+      New connections: $7\lookup_idx[31:0] [31:3] = 29'00000000000000000000000000000
+    Consolidated identical input bits for $mux cell $procmux$605:
+      Old ports: A=$6\free_idx[31:0], B=6, Y=$7\free_idx[31:0]
+      New ports: A=$6\free_idx[31:0] [2:0], B=3'110, Y=$7\free_idx[31:0] [2:0]
+      New connections: $7\free_idx[31:0] [31:3] = 29'00000000000000000000000000000
+  Optimizing cells in module \normalization_row_context_table.
+    Consolidated identical input bits for $mux cell $procmux$581:
+      Old ports: A=$7\lookup_idx[31:0], B=7, Y=$8\lookup_idx[31:0]
+      New ports: A=$7\lookup_idx[31:0] [2:0], B=3'111, Y=$8\lookup_idx[31:0] [2:0]
+      New connections: $8\lookup_idx[31:0] [31:3] = 29'00000000000000000000000000000
+    Consolidated identical input bits for $mux cell $procmux$587:
+      Old ports: A=$7\free_idx[31:0], B=7, Y=$8\free_idx[31:0]
+      New ports: A=$7\free_idx[31:0] [2:0], B=3'111, Y=$8\free_idx[31:0] [2:0]
+      New connections: $8\free_idx[31:0] [31:3] = 29'00000000000000000000000000000
+  Optimizing cells in module \normalization_row_context_table.
+    Consolidated identical input bits for $mux cell $procmux$563:
+      Old ports: A=$8\lookup_idx[31:0], B=8, Y=$9\lookup_idx[31:0]
+      New ports: A={ 1'0 $8\lookup_idx[31:0] [2:0] }, B=4'1000, Y=$9\lookup_idx[31:0] [3:0]
+      New connections: $9\lookup_idx[31:0] [31:4] = 28'0000000000000000000000000000
+    Consolidated identical input bits for $mux cell $procmux$569:
+      Old ports: A=$8\free_idx[31:0], B=8, Y=$9\free_idx[31:0]
+      New ports: A={ 1'0 $8\free_idx[31:0] [2:0] }, B=4'1000, Y=$9\free_idx[31:0] [3:0]
+      New connections: $9\free_idx[31:0] [31:4] = 28'0000000000000000000000000000
+  Optimizing cells in module \normalization_row_context_table.
+    Consolidated identical input bits for $mux cell $procmux$545:
+      Old ports: A=$9\lookup_idx[31:0], B=9, Y=$10\lookup_idx[31:0]
+      New ports: A=$9\lookup_idx[31:0] [3:0], B=4'1001, Y=$10\lookup_idx[31:0] [3:0]
+      New connections: $10\lookup_idx[31:0] [31:4] = 28'0000000000000000000000000000
+    Consolidated identical input bits for $mux cell $procmux$551:
+      Old ports: A=$9\free_idx[31:0], B=9, Y=$10\free_idx[31:0]
+      New ports: A=$9\free_idx[31:0] [3:0], B=4'1001, Y=$10\free_idx[31:0] [3:0]
+      New connections: $10\free_idx[31:0] [31:4] = 28'0000000000000000000000000000
+  Optimizing cells in module \normalization_row_context_table.
+    Consolidated identical input bits for $mux cell $procmux$527:
+      Old ports: A=$10\lookup_idx[31:0], B=10, Y=$11\lookup_idx[31:0]
+      New ports: A=$10\lookup_idx[31:0] [3:0], B=4'1010, Y=$11\lookup_idx[31:0] [3:0]
+      New connections: $11\lookup_idx[31:0] [31:4] = 28'0000000000000000000000000000
+    Consolidated identical input bits for $mux cell $procmux$533:
+      Old ports: A=$10\free_idx[31:0], B=10, Y=$11\free_idx[31:0]
+      New ports: A=$10\free_idx[31:0] [3:0], B=4'1010, Y=$11\free_idx[31:0] [3:0]
+      New connections: $11\free_idx[31:0] [31:4] = 28'0000000000000000000000000000
+  Optimizing cells in module \normalization_row_context_table.
+    Consolidated identical input bits for $mux cell $procmux$509:
+      Old ports: A=$11\lookup_idx[31:0], B=11, Y=$12\lookup_idx[31:0]
+      New ports: A=$11\lookup_idx[31:0] [3:0], B=4'1011, Y=$12\lookup_idx[31:0] [3:0]
+      New connections: $12\lookup_idx[31:0] [31:4] = 28'0000000000000000000000000000
+    Consolidated identical input bits for $mux cell $procmux$515:
+      Old ports: A=$11\free_idx[31:0], B=11, Y=$12\free_idx[31:0]
+      New ports: A=$11\free_idx[31:0] [3:0], B=4'1011, Y=$12\free_idx[31:0] [3:0]
+      New connections: $12\free_idx[31:0] [31:4] = 28'0000000000000000000000000000
+  Optimizing cells in module \normalization_row_context_table.
+    Consolidated identical input bits for $mux cell $procmux$491:
+      Old ports: A=$12\lookup_idx[31:0], B=12, Y=$13\lookup_idx[31:0]
+      New ports: A=$12\lookup_idx[31:0] [3:0], B=4'1100, Y=$13\lookup_idx[31:0] [3:0]
+      New connections: $13\lookup_idx[31:0] [31:4] = 28'0000000000000000000000000000
+    Consolidated identical input bits for $mux cell $procmux$497:
+      Old ports: A=$12\free_idx[31:0], B=12, Y=$13\free_idx[31:0]
+      New ports: A=$12\free_idx[31:0] [3:0], B=4'1100, Y=$13\free_idx[31:0] [3:0]
+      New connections: $13\free_idx[31:0] [31:4] = 28'0000000000000000000000000000
+  Optimizing cells in module \normalization_row_context_table.
+    Consolidated identical input bits for $mux cell $procmux$473:
+      Old ports: A=$13\lookup_idx[31:0], B=13, Y=$14\lookup_idx[31:0]
+      New ports: A=$13\lookup_idx[31:0] [3:0], B=4'1101, Y=$14\lookup_idx[31:0] [3:0]
+      New connections: $14\lookup_idx[31:0] [31:4] = 28'0000000000000000000000000000
+    Consolidated identical input bits for $mux cell $procmux$479:
+      Old ports: A=$13\free_idx[31:0], B=13, Y=$14\free_idx[31:0]
+      New ports: A=$13\free_idx[31:0] [3:0], B=4'1101, Y=$14\free_idx[31:0] [3:0]
+      New connections: $14\free_idx[31:0] [31:4] = 28'0000000000000000000000000000
+  Optimizing cells in module \normalization_row_context_table.
+    Consolidated identical input bits for $mux cell $procmux$455:
+      Old ports: A=$14\lookup_idx[31:0], B=14, Y=$15\lookup_idx[31:0]
+      New ports: A=$14\lookup_idx[31:0] [3:0], B=4'1110, Y=$15\lookup_idx[31:0] [3:0]
+      New connections: $15\lookup_idx[31:0] [31:4] = 28'0000000000000000000000000000
+    Consolidated identical input bits for $mux cell $procmux$461:
+      Old ports: A=$14\free_idx[31:0], B=14, Y=$15\free_idx[31:0]
+      New ports: A=$14\free_idx[31:0] [3:0], B=4'1110, Y=$15\free_idx[31:0] [3:0]
+      New connections: $15\free_idx[31:0] [31:4] = 28'0000000000000000000000000000
+  Optimizing cells in module \normalization_row_context_table.
+    Consolidated identical input bits for $mux cell $procmux$437:
+      Old ports: A=$15\lookup_idx[31:0], B=15, Y=\lookup_idx
+      New ports: A=$15\lookup_idx[31:0] [3:0], B=4'1111, Y=\lookup_idx [3:0]
+      New connections: \lookup_idx [31:4] = 28'0000000000000000000000000000
+    Consolidated identical input bits for $mux cell $procmux$443:
+      Old ports: A=$15\free_idx[31:0], B=15, Y=\free_idx
+      New ports: A=$15\free_idx[31:0] [3:0], B=4'1111, Y=\free_idx [3:0]
+      New connections: \free_idx [31:4] = 28'0000000000000000000000000000
+  Optimizing cells in module \normalization_row_context_table.
+Performed a total of 24 changes.
+
+4.19.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_row_context_table'.
+Removed a total of 0 cells.
+
+4.19.6. Executing OPT_SHARE pass.
+
+4.19.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.19.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_row_context_table..
+
+4.19.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_row_context_table.
+
+4.19.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.19.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \normalization_row_context_table..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~5 debug messages>
+
+4.19.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \normalization_row_context_table.
+Performed a total of 0 changes.
+
+4.19.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_row_context_table'.
+Removed a total of 0 cells.
+
+4.19.14. Executing OPT_SHARE pass.
+
+4.19.15. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.19.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_row_context_table..
+
+4.19.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_row_context_table.
+
+4.19.18. Finished OPT passes. (There is nothing left to do.)
+
+4.20. Executing TECHMAP pass (map to technology primitives).
+
+4.20.1. Executing Verilog-2005 frontend: /home/chandler/.local/yosys/usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/home/chandler/.local/yosys/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+4.20.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $adffe.
+Using extmapper simplemap for cells of type $adff.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $logic_not.
+Using template $paramod$constmap:c47a025e68eca44acec5c4b3c436aff29a128f4e$paramod$bea5f16d923b4c4f84c7ce092d892400f41c6d61\_90_shift_shiftx for cells of type $shift.
+Using extmapper simplemap for cells of type $and.
+Analyzing pattern of constant bits for this cell:
+  Constant input on bit 0 of port A: 1'0
+Creating constmapped module `$paramod$constmap:2e640526f63aed33d7cd51bc5b4769f861b247cc$paramod$bea5f16d923b4c4f84c7ce092d892400f41c6d61\_90_shift_shiftx'.
+
+4.20.8. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$constmap:2e640526f63aed33d7cd51bc5b4769f861b247cc$paramod$bea5f16d923b4c4f84c7ce092d892400f41c6d61\_90_shift_shiftx..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$3088.
+    dead port 2/2 on $mux $procmux$3082.
+    dead port 2/2 on $mux $procmux$3076.
+    dead port 2/2 on $mux $procmux$3070.
+    dead port 2/2 on $mux $procmux$3064.
+Removed 5 multiplexer ports.
+<suppressed ~560 debug messages>
+
+4.20.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$constmap:2e640526f63aed33d7cd51bc5b4769f861b247cc$paramod$bea5f16d923b4c4f84c7ce092d892400f41c6d61\_90_shift_shiftx.
+<suppressed ~36 debug messages>
+Removed 53 unused cells and 71 unused wires.
+Using template $paramod$constmap:2e640526f63aed33d7cd51bc5b4769f861b247cc$paramod$bea5f16d923b4c4f84c7ce092d892400f41c6d61\_90_shift_shiftx for cells of type $shift.
+Using extmapper maccmap for cells of type $macc_v2.
+  sub { 24'000000000000000000000000 \free_idx [3:0] 4'0000 } (32 bits, signed)
+  sub { 28'0000000000000000000000000000 \lookup_idx [3:0] } (32 bits, signed)
+  sub { 28'0000000000000000000000000000 \free_idx [3:0] } (32 bits, signed)
+Using template $paramod$constmap:199cc55341b192322a9d97363288dc7551b743f9$paramod$9634bc79663c441c173a4b51215ed56bdf55e55b\_90_shift_shiftx for cells of type $shift.
+Analyzing pattern of constant bits for this cell:
+Creating constmapped module `$paramod$constmap:8421d45c08a39787b824b8b8940a2d672dba710a$paramod$9634bc79663c441c173a4b51215ed56bdf55e55b\_90_shift_shiftx'.
+
+4.20.15. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$constmap:8421d45c08a39787b824b8b8940a2d672dba710a$paramod$9634bc79663c441c173a4b51215ed56bdf55e55b\_90_shift_shiftx..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$3629.
+    dead port 2/2 on $mux $procmux$3623.
+    dead port 2/2 on $mux $procmux$3617.
+    dead port 2/2 on $mux $procmux$3611.
+    dead port 2/2 on $mux $procmux$3605.
+    dead port 2/2 on $mux $procmux$3599.
+    dead port 2/2 on $mux $procmux$3593.
+    dead port 2/2 on $mux $procmux$3587.
+    dead port 2/2 on $mux $procmux$3581.
+Removed 9 multiplexer ports.
+<suppressed ~296 debug messages>
+
+4.20.16. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$constmap:8421d45c08a39787b824b8b8940a2d672dba710a$paramod$9634bc79663c441c173a4b51215ed56bdf55e55b\_90_shift_shiftx.
+<suppressed ~25 debug messages>
+Removed 0 unused cells and 14 unused wires.
+Using template $paramod$constmap:8421d45c08a39787b824b8b8940a2d672dba710a$paramod$9634bc79663c441c173a4b51215ed56bdf55e55b\_90_shift_shiftx for cells of type $shift.
+Using extmapper simplemap for cells of type $ne.
+Using template $paramod$cc6a978c1b57cdb49efcec348c88d8e28bf1a01f\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100001 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+No more expansions possible.
+<suppressed ~912 debug messages>
+
+4.21. Executing OPT pass (performing simple optimizations).
+
+4.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_row_context_table.
+<suppressed ~25374 debug messages>
+
+4.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_row_context_table'.
+<suppressed ~4707 debug messages>
+Removed a total of 1569 cells.
+
+4.21.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_row_context_table..
+Removed 630 unused cells and 987 unused wires.
+<suppressed ~631 debug messages>
+
+4.21.5. Finished fast OPT passes.
+
+4.22. Executing ABC pass (technology mapping using ABC).
+
+4.22.1. Extracting gate netlist of module `\normalization_row_context_table' to `<abc-temp-dir>/input.blif'..
+Extracted 4580 gates and 5161 wires to a netlist network with 579 inputs and 549 outputs.
+
+4.22.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+4.22.1.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       13
+ABC RESULTS:            ANDNOT cells:     1131
+ABC RESULTS:               MUX cells:      272
+ABC RESULTS:              NAND cells:       39
+ABC RESULTS:               NOR cells:       66
+ABC RESULTS:               NOT cells:       17
+ABC RESULTS:                OR cells:     1970
+ABC RESULTS:             ORNOT cells:      274
+ABC RESULTS:              XNOR cells:        1
+ABC RESULTS:               XOR cells:      517
+ABC RESULTS:        internal signals:     4033
+ABC RESULTS:           input signals:      579
+ABC RESULTS:          output signals:      549
+Removing temp directory.
+
+4.23. Executing OPT pass (performing simple optimizations).
+
+4.23.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module normalization_row_context_table.
+<suppressed ~16 debug messages>
+
+4.23.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\normalization_row_context_table'.
+<suppressed ~3 debug messages>
+Removed a total of 1 cells.
+
+4.23.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.23.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \normalization_row_context_table..
+Removed 1 unused cells and 1111 unused wires.
+<suppressed ~4 debug messages>
+
+4.23.5. Finished fast OPT passes.
+
+4.24. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `normalization_row_context_table'. Setting top module to normalization_row_context_table.
+
+4.24.1. Analyzing design hierarchy..
+Top module:  \normalization_row_context_table
+
+4.24.2. Analyzing design hierarchy..
+Top module:  \normalization_row_context_table
+Removed 0 unused modules.
+
+4.25. Printing statistics.
+
+=== normalization_row_context_table ===
+
+   Number of wires:               4283
+   Number of wire bits:           4945
+   Number of public wires:          18
+   Number of public wire bits:     665
+   Number of ports:                 13
+   Number of port bits:             73
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               4828
+     $_ANDNOT_                    1130
+     $_AND_                         13
+     $_DFFE_PN0P_                  514
+     $_DFF_PN0_                     16
+     $_MUX_                        272
+     $_NAND_                        39
+     $_NOR_                         66
+     $_NOT_                         16
+     $_ORNOT_                      274
+     $_OR_                        1970
+     $_XNOR_                         1
+     $_XOR_                        517
+
+4.26. Executing CHECK pass (checking for obvious problems).
+Checking module normalization_row_context_table...
+Found and reported 0 problems.
+
+5. Printing statistics.
+
+=== normalization_row_context_table ===
+
+   Number of wires:               4283
+   Number of wire bits:           4945
+   Number of public wires:          18
+   Number of public wire bits:     665
+   Number of ports:                 13
+   Number of port bits:             73
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               4828
+     $_ANDNOT_                    1130
+     $_AND_                         13
+     $_DFFE_PN0P_                  514
+     $_DFF_PN0_                     16
+     $_MUX_                        272
+     $_NAND_                        39
+     $_NOR_                         66
+     $_NOT_                         16
+     $_ORNOT_                      274
+     $_OR_                        1970
+     $_XNOR_                         1
+     $_XOR_                        517
+
+6. Executing CHECK pass (checking for obvious problems).
+Checking module normalization_row_context_table...
+Found and reported 0 problems.
+
+End of script. Logfile hash: f5803f66f8, CPU: user 1.46s system 0.14s, MEM: 75.88 MB peak
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+Time spent: 24% 24x opt_expr (0 sec), 21% 1x abc (0 sec), ...

@@ -1,0 +1,11 @@
+gate,status,result
+G0,PASS_WITH_DEFECT,계획 구성·툴·제약 고정; 계획 축소 구성의 RTL 계약 충돌 발견
+G1,PASS,Logic-die hierarchy present; normalization hierarchy absent
+G2,PASS,generic synthesis 101095 cells
+G3,FAIL_EXACT_CONFIG,계획 구성은 assertion 실패; 수정된 유효 최소 구성과 회귀·formal은 통과
+G4,PASS_REPORT_FAIL_TIMING,"Sky130 mapping 56097 cells, unmapped 0; WNS -48.76 ns"
+G5,PASS,floorplan/place/legalization 완료
+G6,PARTIAL,CTS와 post-CTS STA 완료; 별도 skew query는 자원 한계로 미완료
+G7,FAIL_RESOURCE,"global route 완료; detailed route 40%에서 OOM, DRC/antenna/GDS 없음"
+G8,PARTIAL_ESTIMATE,"공통 work trace 확보; 직접 mapped VCD annotation 0, 파생 activity 전력만 제공"
+G9,NOT_APPROVED,정확 구성 기능 실패·timing 미달·route 미완료·동일 조건 B0 부재

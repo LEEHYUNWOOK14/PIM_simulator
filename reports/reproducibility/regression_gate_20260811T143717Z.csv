@@ -1,0 +1,5 @@
+id,category,required,status,duration_s,exit_code
+rtl_to_3d_unit,python_unit,True,PASS,0.497,0
+hardware_cost_unit,python_unit,True,PASS,2.124,0
+normalization_foundation_tests,rtl_tests,True,FAIL,720.858,1
+rtl_audit_regression,rtl_audit,True,PASS,1.092,0

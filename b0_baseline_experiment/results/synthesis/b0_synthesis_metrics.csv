@@ -1,0 +1,7 @@
+metric,value,unit,evidence
+generic_cells,15086,cells,MEASURED_YOSYS
+mapped_cells,11459,cells,MEASURED_YOSYS_SKY130HD
+mapped_chip_area,101596.188800,um2,MEASURED_YOSYS_SKY130HD
+prelayout_worst_slack,-31.87,ns,MEASURED_OPENROAD_STA
+prelayout_critical_path,41.870,ns,DERIVED_PERIOD_MINUS_SLACK
+unmapped_internal_cell_tokens,0,count,MEASURED_NETLIST_GREP

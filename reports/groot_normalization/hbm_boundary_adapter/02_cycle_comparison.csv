@@ -1,0 +1,5 @@
+mode,hidden,vectors_per_bank,abstract_pcu_cycles,hbm_connected_cycles,slowdown,act,read,write,pre,command_wait_cycles,timing_errors
+LayerNorm,128,1,130,523,4.0231,16,48,16,16,166,0
+LayerNorm,2048,16,167,3509,21.0120,16,512,128,16,1056,0
+RMSNorm,128,1,118,511,4.3305,16,48,16,16,166,0
+RMSNorm,2048,16,155,3497,22.5613,16,512,128,16,1056,0

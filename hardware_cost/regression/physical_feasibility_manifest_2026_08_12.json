@@ -1,0 +1,79 @@
+{
+  "schema_version": 2,
+  "revision_id": "physical_feasibility_2026_08_12",
+  "label": "Adapter plus PCU lightweight physical-feasibility revision",
+  "captured_at": "2026-08-12T21:35:00+09:00",
+  "parameter_status": {
+    "final_architecture_parameters_selected": false,
+    "reason": "Physical-feasibility evidence is provisional and RTL freeze conditions are not yet met."
+  },
+  "evidence_contract": {
+    "contract_version": 2,
+    "claim_boundary": "Sky130 lightweight mapping and coarse-placement feasibility; not detailed-route, timing-closure, power, thermal, manufacturing, or silicon signoff.",
+    "candidate_parameters": {
+      "lanes": 8,
+      "bank_port_mode": "memory_bound_boundary_adapter",
+      "scheduler_policy": "current_rtl",
+      "context_depth": null
+    },
+    "toolchain": {
+      "capture_tool": "capture_hardware_cost_revision.py",
+      "capture_tool_version": "2",
+      "synthesis_tool": "Yosys",
+      "synthesis_tool_version": "0.68+48",
+      "physical_tool": "OpenROAD",
+      "physical_tool_version": "2.0-17598-ga008522d8",
+      "power_tool": null,
+      "power_tool_version": null,
+      "thermal_tool": "STOB finite-volume thermal model",
+      "thermal_tool_version": null
+    },
+    "operating_point": {
+      "pdk": "sky130",
+      "library": "sky130_fd_sc_hd",
+      "process_corner": "tt",
+      "voltage_V": 1.8,
+      "temperature_C": 25.0,
+      "clock_constraint_ns": 40.0,
+      "workload_trace_id": null
+    }
+  },
+  "calibration": {
+    "synthesis": "synthesis_generic",
+    "physical": "synthetic",
+    "power": "synthetic",
+    "thermal": "synthetic_architectural",
+    "timing": "not_available",
+    "workload": "pending"
+  },
+  "physical_feasibility_json": "reports/hardware_cost_physical_feasibility/physical_feasibility.json",
+  "mapped_power_json": "output/rtl_to_3d/mapped_power.json",
+  "thermal_summary_json": "output/hbm2_thermal/rtl_mapped/summary.json",
+  "gr00t_workload_json": "hardware_cost/regression/gr00t_pending.json",
+  "synthesis_observations": [
+    {
+      "name": "hierarchical_normalization_fp16_candidate",
+      "precision": "FP16",
+      "category": "normalization_rounding",
+      "metrics_file": "hardware_cost/regression/baseline_synthesis_observations.json"
+    },
+    {
+      "name": "hierarchical_normalization_bf16_candidate",
+      "precision": "BF16",
+      "category": "normalization_rounding",
+      "metrics_file": "hardware_cost/regression/baseline_synthesis_observations.json"
+    }
+  ],
+  "block_category_overrides": {
+    "top.logic_pcu": "bf16_fp16",
+    "top.logic_shared_buffer": "buffer_register",
+    "top.logic_die_link_arbiter": "control_routing",
+    "top.bank_pim_core_ch0_bank0": "accumulator_reduction",
+    "top.bank_local_reduction_buffer_ch7_bank15": "buffer_register"
+  },
+  "notes": [
+    "Physical-feasibility evidence is first-class but remains independent of the synthetic area/power/thermal totals in this revision.",
+    "No technology-mapped delta is emitted against the synthetic baseline.",
+    "Final architecture selection and RTL freeze remain external until all physical gates pass."
+  ]
+}

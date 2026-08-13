@@ -2,12 +2,13 @@
 
 ## Verdict
 
-**PARTIAL PASS.** The existing FP16 normalization regressions remain green. A
+**SUPERSEDED PARTIAL PASS.** The existing FP16 normalization regressions remain green. A
 ready/valid backpressure defect in the bank apply path was repaired, BF16
 arithmetic and bank reducer/apply support were added, and deterministic
 regression/synthesis gates were introduced. Full BF16 scalar/RSQRT/hierarchical
 integration and technology-mapped timing/power remain open, so the foundation
-goal is not complete.
+goal was not complete at this checkpoint. BF16 full-path progress after this
+checkpoint is recorded in `16_bf16_fullpath_foundation_report.md`.
 
 ## Implemented in this step
 
@@ -61,8 +62,8 @@ bash verification/groot_normalization/run_bf16_normalization_synthesis.sh
 
 ## Remaining workload-independent work
 
-- Add BF16 vector SUM/SUMSQ, scalar finalize, RSQRT, and hierarchical full-top
-  integration; prohibit mixed-format contexts explicitly.
+- BF16 vector SUM/SUMSQ, scalar finalize, RSQRT, and hierarchical integration
+  were subsequently completed; see report 16.
 - Expand FP16/BF16 stage-by-stage normalization vectors to zero variance,
   epsilon-near, large offset, overflow/underflow, NaN, and infinity policies.
 - Add reset/backpressure tests to reducer, scalar engine, reduction engine, and

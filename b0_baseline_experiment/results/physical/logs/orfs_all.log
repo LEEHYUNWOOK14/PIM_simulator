@@ -1,0 +1,1856 @@
+mkdir -p /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/
+echo 10.0 > /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/clock_period.txt
+/home/chandler/OpenROAD-flow-scripts/flow/scripts/synth.sh /home/chandler/OpenROAD-flow-scripts/flow/scripts/synth_canonicalize.tcl /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/logs/sky130hd/b0_bank_only_baseline/base/1_1_yosys_canonicalize.log
+Using ABC speed script.
+Extracting clock period from SDC file: /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/clock_period.txt
+Setting clock period to 10.0
+1. Executing Liberty frontend: /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+2. Executing Liberty frontend: /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+3. Executing Verilog-2005 frontend: /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/pim_command_decoder.sv
+4. Executing Verilog-2005 frontend: /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/fp16_add.sv
+5. Executing Verilog-2005 frontend: /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/fp16_mul.sv
+6. Executing Verilog-2005 frontend: /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/fp16_vector_add.sv
+7. Executing Verilog-2005 frontend: /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/pim_vector_alu.sv
+8. Executing Verilog-2005 frontend: /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/pim_crf.sv
+9. Executing Verilog-2005 frontend: /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/dram_bank_array_model.sv
+10. Executing Verilog-2005 frontend: /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv
+11. Executing Verilog-2005 frontend: /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_side_pim_subsystem.sv
+12. Executing Verilog-2005 frontend: /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/logic_die_link_arbiter.sv
+13. Executing Verilog-2005 frontend: /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/channel_tsv_interconnect.sv
+14. Executing Verilog-2005 frontend: /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/logic_epoch_barrier.sv
+15. Executing Verilog-2005 frontend: /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/logic_shared_buffer.sv
+16. Executing Verilog-2005 frontend: /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/logic_pcu.sv
+17. Executing Verilog-2005 frontend: /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/logic_pcu_scheduler.sv
+18. Executing Verilog-2005 frontend: /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/logic_command_coalescer.sv
+19. Executing Verilog-2005 frontend: /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/logic_operand_context_buffer.sv
+20. Executing Verilog-2005 frontend: /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/cross_channel_reduction_network.sv
+21. Executing Verilog-2005 frontend: /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/logic_result_router.sv
+22. Executing Verilog-2005 frontend: /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/logic_die_pim_top.sv
+23. Executing Verilog-2005 frontend: /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/fp16_rsqrt_lut256.sv
+24. Executing Verilog-2005 frontend: /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/logic_normalization_scalar_engine.sv
+25. Executing Verilog-2005 frontend: /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/logic_normalization_reduction_engine.sv
+26. Executing Verilog-2005 frontend: /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/full_pim_system_top.sv
+27. Executing Verilog-2005 frontend: /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/cells_clkgate_hd.v
+28. Executing AST frontend in derive mode using pre-parsed AST for module `\full_pim_system_top'.
+29. Executing AST frontend in derive mode using pre-parsed AST for module `\full_pim_system_top'.
+30. Executing AST frontend in derive mode using pre-parsed AST for module `\full_pim_system_top'.
+31. Executing AST frontend in derive mode using pre-parsed AST for module `\full_pim_system_top'.
+32. Executing AST frontend in derive mode using pre-parsed AST for module `\full_pim_system_top'.
+33. Executing AST frontend in derive mode using pre-parsed AST for module `\full_pim_system_top'.
+34. Executing AST frontend in derive mode using pre-parsed AST for module `\full_pim_system_top'.
+35. Executing AST frontend in derive mode using pre-parsed AST for module `\full_pim_system_top'.
+36. Executing AST frontend in derive mode using pre-parsed AST for module `\full_pim_system_top'.
+37. Executing AST frontend in derive mode using pre-parsed AST for module `\full_pim_system_top'.
+38. Executing AST frontend in derive mode using pre-parsed AST for module `\full_pim_system_top'.
+39. Executing HIERARCHY pass (managing design hierarchy).
+40. Executing AST frontend in derive mode using pre-parsed AST for module `\full_pim_system_top'.
+40.1. Analyzing design hierarchy..
+40.2. Executing AST frontend in derive mode using pre-parsed AST for module `\logic_die_link_arbiter'.
+40.3. Executing AST frontend in derive mode using pre-parsed AST for module `\bank_side_pim_subsystem'.
+40.4. Executing AST frontend in derive mode using pre-parsed AST for module `\logic_result_router'.
+40.5. Executing AST frontend in derive mode using pre-parsed AST for module `\channel_tsv_interconnect'.
+40.6. Executing AST frontend in derive mode using pre-parsed AST for module `\logic_die_link_arbiter'.
+40.7. Analyzing design hierarchy..
+40.8. Analyzing design hierarchy..
+40.9. Executing AST frontend in derive mode using pre-parsed AST for module `\bank_pim_core'.
+Warning: Replacing memory \grf_a with list of registers. See /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:124
+Warning: Replacing memory \grf_b with list of registers. See /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:123
+40.10. Executing AST frontend in derive mode using pre-parsed AST for module `\pim_command_decoder'.
+40.11. Executing AST frontend in derive mode using pre-parsed AST for module `\pim_crf'.
+Warning: Replacing memory \memory with list of registers. See /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/pim_crf.sv:53
+40.12. Executing AST frontend in derive mode using pre-parsed AST for module `\dram_bank_array_model'.
+Warning: Replacing memory \memory with list of registers. See /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/dram_bank_array_model.sv:172
+40.13. Analyzing design hierarchy..
+40.14. Executing AST frontend in derive mode using pre-parsed AST for module `\pim_vector_alu'.
+40.15. Analyzing design hierarchy..
+40.16. Executing AST frontend in derive mode using pre-parsed AST for module `\fp16_add'.
+40.17. Executing AST frontend in derive mode using pre-parsed AST for module `\fp16_mul'.
+40.18. Analyzing design hierarchy..
+40.19. Analyzing design hierarchy..
+41. Executing OPT_CLEAN pass (remove unused cells and wires).
+Warning: Ignoring module $paramod$38cc8cfd979a4686c4b6fe79fd4e8baa209dc084\logic_die_link_arbiter because it contains processes (run 'proc' command first).
+Warning: Ignoring module fp16_mul because it contains processes (run 'proc' command first).
+Warning: Ignoring module fp16_add because it contains processes (run 'proc' command first).
+Warning: Ignoring module $paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000 because it contains processes (run 'proc' command first).
+Warning: Ignoring module $paramod$61365ca0009d0569f40be737c6397d3d3cde3e46\dram_bank_array_model because it contains processes (run 'proc' command first).
+Warning: Ignoring module $paramod\pim_crf\DEPTH=32'00000000000000000000000000000010 because it contains processes (run 'proc' command first).
+Warning: Ignoring module pim_command_decoder because it contains processes (run 'proc' command first).
+Warning: Ignoring module $paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core because it contains processes (run 'proc' command first).
+Warning: Ignoring module $paramod$e856492873a4968db8f653430de9122ae2b4f02e\channel_tsv_interconnect because it contains processes (run 'proc' command first).
+Warning: Ignoring module $paramod$c768e45bf9a720775a46d47fd69db7493d689a05\logic_result_router because it contains processes (run 'proc' command first).
+Warning: Ignoring module $paramod$9de78dcdad28258aaabb27ec79f4b184e87b3b1b\logic_die_link_arbiter because it contains processes (run 'proc' command first).
+42. Executing RTLIL backend.
+Warnings: 15 unique messages, 15 total
+End of script. Logfile hash: b08d2cfad3, time: 0.90s, user: 0.28s, system: 0.11s, MEM: 49.63 MB peak
+Yosys 0.68+48 (git sha1 ff5817c34-dirty, Release, Clang /usr/bin/clang++ 21.1.8)
+Time spent: 36% 4x read_liberty (0 sec), 26% 1x hierarchy (0 sec), ...
+Elapsed time: 0:00.96[h:]min:sec. CPU time: user 0.32 sys 0.12 (46%). Peak memory: 52884KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+1_1_yosys_canonicalize    .rtlil          0             51 b0b45a9e9ef9b8cfb377
+/home/chandler/OpenROAD-flow-scripts/flow/scripts/synth.sh /home/chandler/OpenROAD-flow-scripts/flow/scripts/synth.tcl /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/logs/sky130hd/b0_bank_only_baseline/base/1_2_yosys.log
+Using ABC speed script.
+Extracting clock period from SDC file: /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/clock_period.txt
+Setting clock period to 10.0
+1. Executing RTLIL frontend.
+2. Executing HIERARCHY pass (managing design hierarchy).
+2.1. Analyzing design hierarchy..
+2.2. Analyzing design hierarchy..
+3. Executing SYNTH pass.
+3.1. Executing HIERARCHY pass (managing design hierarchy).
+3.1.1. Analyzing design hierarchy..
+3.1.2. Analyzing design hierarchy..
+3.2. Executing PROC pass (convert processes to netlists).
+3.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+3.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+3.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+3.2.4. Executing PROC_INIT pass (extract init attributes).
+3.2.5. Executing PROC_ARST pass (detect async resets in processes).
+3.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+3.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+3.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+Warning: Latch inferred for signal `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$fordecl_block$5599.lane [0]' from process `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/pim_vector_alu.sv:33$6915': $auto$proc_dlatch.cc:545:proc_dlatch$11280
+Warning: Latch inferred for signal `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$fordecl_block$5599.lane [31:1]' from process `$paramod\pim_vector_alu\DATA_WIDTH=32'00000000000000000000000000100000.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/pim_vector_alu.sv:33$6915': $auto$proc_dlatch.cc:543:proc_dlatch$11291
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.\operand_value$func$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:86$6141.$fordecl_block$5611.lane [0]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:543:proc_dlatch$11296
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.\operand_value$func$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:86$6141.$fordecl_block$5611.lane [1]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:545:proc_dlatch$11305
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.\operand_value$func$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:86$6141.$fordecl_block$5611.lane [31:2]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:543:proc_dlatch$11308
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.\operand_value$func$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:86$6141.$fordecl_block$5613.lane [0]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:543:proc_dlatch$11341
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.\operand_value$func$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:86$6141.$fordecl_block$5613.lane [1]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:545:proc_dlatch$11388
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.\operand_value$func$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:86$6141.$fordecl_block$5613.lane [31:2]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:543:proc_dlatch$11391
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.\operand_value$func$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:87$6142.$fordecl_block$5611.lane [0]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:543:proc_dlatch$11394
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.\operand_value$func$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:87$6142.$fordecl_block$5611.lane [1]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:545:proc_dlatch$11403
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.\operand_value$func$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:87$6142.$fordecl_block$5611.lane [31:2]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:543:proc_dlatch$11406
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.\operand_value$func$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:87$6142.$fordecl_block$5613.lane [0]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:543:proc_dlatch$11439
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.\operand_value$func$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:87$6142.$fordecl_block$5613.lane [1]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:545:proc_dlatch$11486
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.\operand_value$func$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:87$6142.$fordecl_block$5613.lane [31:2]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:543:proc_dlatch$11489
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.\operand_value$func$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:88$6143.$fordecl_block$5611.lane [0]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:543:proc_dlatch$11492
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.\operand_value$func$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:88$6143.$fordecl_block$5611.lane [1]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:545:proc_dlatch$11501
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.\operand_value$func$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:88$6143.$fordecl_block$5611.lane [31:2]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:543:proc_dlatch$11504
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.\operand_value$func$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:88$6143.$fordecl_block$5613.lane [0]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:543:proc_dlatch$11537
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.\operand_value$func$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:88$6143.$fordecl_block$5613.lane [1]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:545:proc_dlatch$11584
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.\operand_value$func$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:88$6143.$fordecl_block$5613.lane [31:2]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:543:proc_dlatch$11587
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.\operand_value$func$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:89$6144.$fordecl_block$5611.lane [0]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:543:proc_dlatch$11590
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.\operand_value$func$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:89$6144.$fordecl_block$5611.lane [1]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:545:proc_dlatch$11599
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.\operand_value$func$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:89$6144.$fordecl_block$5611.lane [31:2]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:543:proc_dlatch$11602
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.\operand_value$func$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:89$6144.$fordecl_block$5613.lane [0]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:543:proc_dlatch$11635
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.\operand_value$func$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:89$6144.$fordecl_block$5613.lane [1]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:545:proc_dlatch$11682
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.\operand_value$func$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:89$6144.$fordecl_block$5613.lane [31:2]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:543:proc_dlatch$11685
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$fordecl_block$5615.lane [0]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:543:proc_dlatch$11688
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$fordecl_block$5615.lane [1]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:545:proc_dlatch$11697
+Warning: Latch inferred for signal `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$fordecl_block$5615.lane [31:2]' from process `$paramod$5fb2a5f2564647929f0c351d13f07504930c9f2c\bank_pim_core.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/bank_pim_core.sv:85$6159': $auto$proc_dlatch.cc:543:proc_dlatch$11700
+Warning: Latch inferred for signal `$paramod$e856492873a4968db8f653430de9122ae2b4f02e\channel_tsv_interconnect.$unnamed_block$5626.$fordecl_block$5620.$for_loop$5621[0].$unnamed_block$5625.$fordecl_block$5622.offset [0]' from process `$paramod$e856492873a4968db8f653430de9122ae2b4f02e\channel_tsv_interconnect.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/channel_tsv_interconnect.sv:27$5963': $auto$proc_dlatch.cc:545:proc_dlatch$11705
+Warning: Latch inferred for signal `$paramod$e856492873a4968db8f653430de9122ae2b4f02e\channel_tsv_interconnect.$unnamed_block$5626.$fordecl_block$5620.$for_loop$5621[0].$unnamed_block$5625.$fordecl_block$5622.offset [31:1]' from process `$paramod$e856492873a4968db8f653430de9122ae2b4f02e\channel_tsv_interconnect.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/channel_tsv_interconnect.sv:27$5963': $auto$proc_dlatch.cc:543:proc_dlatch$11714
+Warning: Latch inferred for signal `$paramod$e856492873a4968db8f653430de9122ae2b4f02e\channel_tsv_interconnect.$unnamed_block$5626.$fordecl_block$5620.$for_loop$5621[0].$unnamed_block$5625.$fordecl_block$5622.$for_loop$5623[0].$unnamed_block$5624.candidate' from process `$paramod$e856492873a4968db8f653430de9122ae2b4f02e\channel_tsv_interconnect.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/channel_tsv_interconnect.sv:27$5963': $auto$proc_dlatch.cc:547:proc_dlatch$11725
+Warning: Latch inferred for signal `$paramod$e856492873a4968db8f653430de9122ae2b4f02e\channel_tsv_interconnect.$unnamed_block$5626.$fordecl_block$5620.$for_loop$5621[1].$unnamed_block$5625.$fordecl_block$5622.offset [0]' from process `$paramod$e856492873a4968db8f653430de9122ae2b4f02e\channel_tsv_interconnect.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/channel_tsv_interconnect.sv:27$5963': $auto$proc_dlatch.cc:545:proc_dlatch$11728
+Warning: Latch inferred for signal `$paramod$e856492873a4968db8f653430de9122ae2b4f02e\channel_tsv_interconnect.$unnamed_block$5626.$fordecl_block$5620.$for_loop$5621[1].$unnamed_block$5625.$fordecl_block$5622.offset [31:1]' from process `$paramod$e856492873a4968db8f653430de9122ae2b4f02e\channel_tsv_interconnect.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/channel_tsv_interconnect.sv:27$5963': $auto$proc_dlatch.cc:543:proc_dlatch$11737
+Warning: Latch inferred for signal `$paramod$e856492873a4968db8f653430de9122ae2b4f02e\channel_tsv_interconnect.$unnamed_block$5626.$fordecl_block$5620.$for_loop$5621[1].$unnamed_block$5625.$fordecl_block$5622.$for_loop$5623[0].$unnamed_block$5624.candidate' from process `$paramod$e856492873a4968db8f653430de9122ae2b4f02e\channel_tsv_interconnect.$proc$/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/rtl/channel_tsv_interconnect.sv:27$5963': $auto$proc_dlatch.cc:547:proc_dlatch$11748
+3.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+3.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+3.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+3.2.12. Executing OPT_EXPR pass (perform const folding).
+3.3. Executing CHECK pass (checking for obvious problems).
+3.4. Executing FLATTEN pass (flatten design).
+3.5. Executing OPT_EXPR pass (perform const folding).
+3.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.7. Executing CHECK pass (checking for obvious problems).
+3.8. Executing OPT pass (performing simple optimizations).
+3.8.1. Executing OPT_EXPR pass (perform const folding).
+3.8.2. Executing OPT_MERGE pass (detect identical cells).
+3.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.8.5. Executing OPT_MERGE pass (detect identical cells).
+3.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+3.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.8.8. Executing OPT_EXPR pass (perform const folding).
+3.8.9. Rerunning OPT passes. (Maybe there is more to do..)
+3.8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.8.12. Executing OPT_MERGE pass (detect identical cells).
+3.8.13. Executing OPT_DFF pass (perform DFF optimizations).
+3.8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.8.15. Executing OPT_EXPR pass (perform const folding).
+3.8.16. Finished fast OPT passes. (There is nothing left to do.)
+3.9. Executing FSM pass (extract and optimize FSM).
+3.9.1. Executing FSM_DETECT pass (finding FSMs in design).
+3.9.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+3.9.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+3.9.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.9.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+3.9.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+3.9.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+3.9.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+3.10. Executing OPT pass (performing simple optimizations).
+3.10.1. Executing OPT_EXPR pass (perform const folding).
+3.10.2. Executing OPT_MERGE pass (detect identical cells).
+3.10.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.10.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.10.5. Executing OPT_MERGE pass (detect identical cells).
+3.10.6. Executing OPT_DFF pass (perform DFF optimizations).
+3.10.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.10.8. Executing OPT_EXPR pass (perform const folding).
+3.10.9. Rerunning OPT passes. (Maybe there is more to do..)
+3.10.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.10.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.10.12. Executing OPT_MERGE pass (detect identical cells).
+3.10.13. Executing OPT_DFF pass (perform DFF optimizations).
+3.10.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.10.15. Executing OPT_EXPR pass (perform const folding).
+3.10.16. Rerunning OPT passes. (Maybe there is more to do..)
+3.10.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.10.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.10.19. Executing OPT_MERGE pass (detect identical cells).
+3.10.20. Executing OPT_DFF pass (perform DFF optimizations).
+3.10.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.10.22. Executing OPT_EXPR pass (perform const folding).
+3.10.23. Finished fast OPT passes. (There is nothing left to do.)
+3.11. Executing WREDUCE pass (reducing word size of cells).
+3.12. Executing PEEPOPT pass (run peephole optimizers).
+3.13. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.14. Executing ALUMACC pass (create $alu and $macc cells).
+3.15. Executing SHARE pass (SAT-based resource sharing).
+3.16. Executing OPT pass (performing simple optimizations).
+3.16.1. Executing OPT_EXPR pass (perform const folding).
+3.16.2. Executing OPT_MERGE pass (detect identical cells).
+3.16.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.16.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.16.5. Executing OPT_MERGE pass (detect identical cells).
+3.16.6. Executing OPT_DFF pass (perform DFF optimizations).
+3.16.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.16.8. Executing OPT_EXPR pass (perform const folding).
+3.16.9. Rerunning OPT passes. (Maybe there is more to do..)
+3.16.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.16.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.16.12. Executing OPT_MERGE pass (detect identical cells).
+3.16.13. Executing OPT_DFF pass (perform DFF optimizations).
+3.16.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.16.15. Executing OPT_EXPR pass (perform const folding).
+3.16.16. Rerunning OPT passes. (Maybe there is more to do..)
+3.16.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.16.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.16.19. Executing OPT_MERGE pass (detect identical cells).
+3.16.20. Executing OPT_DFF pass (perform DFF optimizations).
+3.16.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.16.22. Executing OPT_EXPR pass (perform const folding).
+3.16.23. Rerunning OPT passes. (Maybe there is more to do..)
+3.16.24. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.16.25. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.16.26. Executing OPT_MERGE pass (detect identical cells).
+3.16.27. Executing OPT_DFF pass (perform DFF optimizations).
+3.16.28. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.16.29. Executing OPT_EXPR pass (perform const folding).
+3.16.30. Finished fast OPT passes. (There is nothing left to do.)
+3.17. Executing MEMORY pass.
+3.17.1. Executing OPT_MEM pass (optimize memories).
+3.17.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+3.17.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+3.17.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+3.17.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+3.17.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.17.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+3.17.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+3.17.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.17.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+3.18. Executing OPT_CLEAN pass (remove unused cells and wires).
+4. Executing SYNTH pass.
+4.1. Executing OPT pass (performing simple optimizations).
+4.1.1. Executing OPT_EXPR pass (perform const folding).
+4.1.2. Executing OPT_MERGE pass (detect identical cells).
+4.1.3. Executing OPT_DFF pass (perform DFF optimizations).
+4.1.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+4.1.5. Finished fast OPT passes.
+4.2. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+4.3. Executing OPT pass (performing simple optimizations).
+4.3.1. Executing OPT_EXPR pass (perform const folding).
+4.3.2. Executing OPT_MERGE pass (detect identical cells).
+4.3.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+4.3.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+4.3.5. Executing OPT_MERGE pass (detect identical cells).
+4.3.6. Executing OPT_SHARE pass.
+4.3.7. Executing OPT_DFF pass (perform DFF optimizations).
+4.3.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+4.3.9. Executing OPT_EXPR pass (perform const folding).
+4.3.10. Rerunning OPT passes. (Maybe there is more to do..)
+4.3.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+4.3.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+4.3.13. Executing OPT_MERGE pass (detect identical cells).
+4.3.14. Executing OPT_SHARE pass.
+4.3.15. Executing OPT_DFF pass (perform DFF optimizations).
+4.3.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+4.3.17. Executing OPT_EXPR pass (perform const folding).
+4.3.18. Rerunning OPT passes. (Maybe there is more to do..)
+4.3.19. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+4.3.20. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+4.3.21. Executing OPT_MERGE pass (detect identical cells).
+4.3.22. Executing OPT_SHARE pass.
+4.3.23. Executing OPT_DFF pass (perform DFF optimizations).
+4.3.24. Executing OPT_CLEAN pass (remove unused cells and wires).
+4.3.25. Executing OPT_EXPR pass (perform const folding).
+4.3.26. Rerunning OPT passes. (Maybe there is more to do..)
+4.3.27. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+4.3.28. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+4.3.29. Executing OPT_MERGE pass (detect identical cells).
+4.3.30. Executing OPT_SHARE pass.
+4.3.31. Executing OPT_DFF pass (perform DFF optimizations).
+4.3.32. Executing OPT_CLEAN pass (remove unused cells and wires).
+4.3.33. Executing OPT_EXPR pass (perform const folding).
+4.3.34. Finished fast OPT passes. (There is nothing left to do.)
+4.4. Executing TECHMAP pass (map to technology primitives).
+4.4.1. Executing Verilog-2005 frontend: /home/chandler/.local/oss-cad-suite/lib/../share/yosys/techmap.v
+4.4.2. Executing Verilog-2005 frontend: /home/chandler/OpenROAD-flow-scripts/flow/platforms/common/lcu_kogge_stone.v
+4.4.3. Continuing TECHMAP pass.
+4.4.119. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+4.4.120. Executing OPT_EXPR pass (perform const folding).
+4.4.131. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+4.4.132. Executing OPT_EXPR pass (perform const folding).
+4.5. Executing OPT pass (performing simple optimizations).
+4.5.1. Executing OPT_EXPR pass (perform const folding).
+4.5.2. Executing OPT_MERGE pass (detect identical cells).
+4.5.3. Executing OPT_DFF pass (perform DFF optimizations).
+4.5.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+4.5.5. Rerunning OPT passes. (Removed registers in this run.)
+4.5.6. Executing OPT_EXPR pass (perform const folding).
+4.5.7. Executing OPT_MERGE pass (detect identical cells).
+4.5.8. Executing OPT_DFF pass (perform DFF optimizations).
+4.5.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+4.5.10. Finished fast OPT passes.
+4.6. Executing HIERARCHY pass (managing design hierarchy).
+4.6.1. Analyzing design hierarchy..
+4.6.2. Analyzing design hierarchy..
+4.7. Printing statistics.
+4.8. Executing CHECK pass (checking for obvious problems).
+5. Executing OPT pass (performing simple optimizations).
+5.1. Executing OPT_EXPR pass (perform const folding).
+5.2. Executing OPT_MERGE pass (detect identical cells).
+5.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+5.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+5.5. Executing OPT_MERGE pass (detect identical cells).
+5.6. Executing OPT_DFF pass (perform DFF optimizations).
+5.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+5.8. Executing OPT_EXPR pass (perform const folding).
+5.9. Rerunning OPT passes. (Maybe there is more to do..)
+5.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+5.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+5.12. Executing OPT_MERGE pass (detect identical cells).
+5.13. Executing OPT_DFF pass (perform DFF optimizations).
+5.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+5.15. Executing OPT_EXPR pass (perform const folding).
+5.16. Finished fast OPT passes. (There is nothing left to do.)
+6. Executing EXTRACT_FA pass (find and extract full/half adders).
+7. Executing TECHMAP pass (map to technology primitives).
+7.1. Executing Verilog-2005 frontend: /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/cells_adders_hd.v
+7.2. Continuing TECHMAP pass.
+8. Executing TECHMAP pass (map to technology primitives).
+8.1. Executing Verilog-2005 frontend: /home/chandler/.local/oss-cad-suite/lib/../share/yosys/techmap.v
+8.2. Continuing TECHMAP pass.
+9. Executing OPT pass (performing simple optimizations).
+9.1. Executing OPT_EXPR pass (perform const folding).
+9.2. Executing OPT_MERGE pass (detect identical cells).
+9.3. Executing OPT_DFF pass (perform DFF optimizations).
+9.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+9.5. Finished fast OPT passes.
+10. Executing DFFLEGALIZE pass (convert FFs to types supported by the target).
+11. Executing TECHMAP pass (map to technology primitives).
+11.1. Executing Verilog-2005 frontend: /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/cells_latch_hd.v
+11.2. Continuing TECHMAP pass.
+12. Executing DFFLIBMAP pass (mapping DFF cells to sequential cells from liberty file).
+12.1. Executing DFFLEGALIZE pass (convert FFs to types supported by the target).
+13. Executing OPT pass (performing simple optimizations).
+13.1. Executing OPT_EXPR pass (perform const folding).
+13.2. Executing OPT_MERGE pass (detect identical cells).
+13.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+13.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+13.5. Executing OPT_MERGE pass (detect identical cells).
+13.6. Executing OPT_DFF pass (perform DFF optimizations).
+13.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+13.8. Executing OPT_EXPR pass (perform const folding).
+13.9. Finished fast OPT passes. (There is nothing left to do.)
+14. Executing SETUNDEF pass (replace undef values with defined constants).
+abc -script /home/chandler/OpenROAD-flow-scripts/flow/scripts/abc_speed.script -liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib -dont_use sky130_fd_sc_hd__probe_p_8 -dont_use sky130_fd_sc_hd__probec_p_8 -dont_use sky130_fd_sc_hd__lpflow_bleeder_1 -dont_use sky130_fd_sc_hd__lpflow_clkbufkapwr_1 -dont_use sky130_fd_sc_hd__lpflow_clkbufkapwr_16 -dont_use sky130_fd_sc_hd__lpflow_clkbufkapwr_2 -dont_use sky130_fd_sc_hd__lpflow_clkbufkapwr_4 -dont_use sky130_fd_sc_hd__lpflow_clkbufkapwr_8 -dont_use sky130_fd_sc_hd__lpflow_clkinvkapwr_1 -dont_use sky130_fd_sc_hd__lpflow_clkinvkapwr_16 -dont_use sky130_fd_sc_hd__lpflow_clkinvkapwr_2 -dont_use sky130_fd_sc_hd__lpflow_clkinvkapwr_4 -dont_use sky130_fd_sc_hd__lpflow_clkinvkapwr_8 -dont_use sky130_fd_sc_hd__lpflow_decapkapwr_12 -dont_use sky130_fd_sc_hd__lpflow_decapkapwr_3 -dont_use sky130_fd_sc_hd__lpflow_decapkapwr_4 -dont_use sky130_fd_sc_hd__lpflow_decapkapwr_6 -dont_use sky130_fd_sc_hd__lpflow_decapkapwr_8 -dont_use sky130_fd_sc_hd__lpflow_inputiso0n_1 -dont_use sky130_fd_sc_hd__lpflow_inputiso0p_1 -dont_use sky130_fd_sc_hd__lpflow_inputiso1n_1 -dont_use sky130_fd_sc_hd__lpflow_inputiso1p_1 -dont_use sky130_fd_sc_hd__lpflow_inputisolatch_1 -dont_use sky130_fd_sc_hd__lpflow_isobufsrc_1 -dont_use sky130_fd_sc_hd__lpflow_isobufsrc_16 -dont_use sky130_fd_sc_hd__lpflow_isobufsrc_2 -dont_use sky130_fd_sc_hd__lpflow_isobufsrc_4 -dont_use sky130_fd_sc_hd__lpflow_isobufsrc_8 -dont_use sky130_fd_sc_hd__lpflow_isobufsrckapwr_16 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_hl_isowell_tap_1 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_hl_isowell_tap_2 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_hl_isowell_tap_4 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_isowell_4 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_isowell_tap_1 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_isowell_tap_2 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_isowell_tap_4 -constr /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/objects/sky130hd/b0_bank_only_baseline/base/abc.constr -D 10.0
+15. Executing ABC pass (technology mapping using ABC).
+15.1. Extracting gate netlist of module `\full_pim_system_top' to `<abc-temp-dir>/input.blif'..
+15.1.1. Executed ABC.
+15.1.2. Re-integrating ABC results.
+Took 78 seconds: abc -script /home/chandler/OpenROAD-flow-scripts/flow/scripts/abc_speed.script -liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib -dont_use sky130_fd_sc_hd__probe_p_8 -dont_use sky130_fd_sc_hd__probec_p_8 -dont_use sky130_fd_sc_hd__lpflow_bleeder_1 -dont_use sky130_fd_sc_hd__lpflow_clkbufkapwr_1 -dont_use sky130_fd_sc_hd__lpflow_clkbufkapwr_16 -dont_use sky130_fd_sc_hd__lpflow_clkbufkapwr_2 -dont_use sky130_fd_sc_hd__lpflow_clkbufkapwr_4 -dont_use sky130_fd_sc_hd__lpflow_clkbufkapwr_8 -dont_use sky130_fd_sc_hd__lpflow_clkinvkapwr_1 -dont_use sky130_fd_sc_hd__lpflow_clkinvkapwr_16 -dont_use sky130_fd_sc_hd__lpflow_clkinvkapwr_2 -dont_use sky130_fd_sc_hd__lpflow_clkinvkapwr_4 -dont_use sky130_fd_sc_hd__lpflow_clkinvkapwr_8 -dont_use sky130_fd_sc_hd__lpflow_decapkapwr_12 -dont_use sky130_fd_sc_hd__lpflow_decapkapwr_3 -dont_use sky130_fd_sc_hd__lpflow_decapkapwr_4 -dont_use sky130_fd_sc_hd__lpflow_decapkapwr_6 -dont_use sky130_fd_sc_hd__lpflow_decapkapwr_8 -dont_use sky130_fd_sc_hd__lpflow_inputiso0n_1 -dont_use sky130_fd_sc_hd__lpflow_inputiso0p_1 -dont_use sky130_fd_sc_hd__lpflow_inputiso1n_1 -dont_use sky130_fd_sc_hd__lpflow_inputiso1p_1 -dont_use sky130_fd_sc_hd__lpflow_inputisolatch_1 -dont_use sky130_fd_sc_hd__lpflow_isobufsrc_1 -dont_use sky130_fd_sc_hd__lpflow_isobufsrc_16 -dont_use sky130_fd_sc_hd__lpflow_isobufsrc_2 -dont_use sky130_fd_sc_hd__lpflow_isobufsrc_4 -dont_use sky130_fd_sc_hd__lpflow_isobufsrc_8 -dont_use sky130_fd_sc_hd__lpflow_isobufsrckapwr_16 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_hl_isowell_tap_1 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_hl_isowell_tap_2 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_hl_isowell_tap_4 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_isowell_4 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_isowell_tap_1 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_isowell_tap_2 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_isowell_tap_4 -constr /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/objects/sky130hd/b0_bank_only_baseline/base/abc.constr -D 10.0
+16. Executing SPLITNETS pass (splitting up multi-bit signals).
+17. Executing OPT_CLEAN pass (remove unused cells and wires).
+18. Executing HILOMAP pass (mapping to constant drivers).
+19. Executing INSBUF pass (insert buffer cells for connected wires).
+20. Executing CHECK pass (checking for obvious problems).
+21. Printing statistics.
+22. Executing CHECK pass (checking for obvious problems).
+23. Executing Verilog backend.
+23.1. Executing BMUXMAP pass.
+23.2. Executing DEMUXMAP pass.
+Warnings: 35 unique messages, 35 total
+End of script. Logfile hash: 2554a40f9d, time: 154.17s, user: 73.27s, system: 1.13s, MEM: 282.54 MB peak
+Yosys 0.68+48 (git sha1 ff5817c34-dirty, Release, Clang /usr/bin/clang++ 21.1.8)
+Time spent: 49% 1x abc (71 sec), 38% 1x extract_fa (55 sec), ...
+Elapsed time: 2:34.26[h:]min:sec. CPU time: user 144.96 sys 1.32 (94%). Peak memory: 289316KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+1_2_yosys                 .v            154            282 0e6810a11e961fc72376
+cp /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/config/constraint.sdc /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/1_2_yosys.sdc
+touch -r /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/config/constraint.sdc /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/1_2_yosys.sdc
+OpenROAD 26Q3-1080-gab6fd26351 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 4 thread(s).
+mkdir -p /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/objects/sky130hd/b0_bank_only_baseline/base
+/home/chandler/OpenROAD-flow-scripts/flow/scripts/flow.sh 1_synth synth_odb
+Running synth_odb.tcl, stage 1_synth
+read_liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+[INFO ODB-0227] LEF file: /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lef/sky130_fd_sc_hd.tlef, created 13 layers, 25 vias
+[INFO ODB-0227] LEF file: /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lef/sky130_fd_sc_hd_merged.lef, created 441 library cells
+link_design full_pim_system_top
+read_sdc /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/1_2_yosys.sdc
+source /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/setRC.tcl
+source /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/flow/designs/sky130hd/stob_pim2/openroad_compat.tcl
+eliminate_dead_logic
+Removed 0 unused instances and 0 unused nets.
+Design area 175442 um^2 100% utilization.
+write_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/1_synth.odb
+write_sdc -no_timestamp /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/1_synth.sdc
+Elapsed time: 0:02.39[h:]min:sec. CPU time: user 0.71 sys 0.36 (44%). Peak memory: 189520KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+1_synth                   .odb            2            185 a3df9df83c74cc2d0165
+1_synth                   .sdc                             5969b4f742c8fcfba542
+/home/chandler/OpenROAD-flow-scripts/flow/scripts/flow.sh 2_1_floorplan floorplan
+Running floorplan.tcl, stage 2_1_floorplan
+read_liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/1_synth.odb
+read_sdc /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/1_synth.sdc
+source /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/setRC.tcl
+source /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/flow/designs/sky130hd/stob_pim2/openroad_compat.tcl
+Master sky130_ef_sc_hd__decap_12 is loaded but not used in the design
+
+==========================================================================
+Floorplan check_setup
+--------------------------------------------------------------------------
+Warning: There are 669 input ports missing set_input_delay.
+Warning: There are 169 output ports missing set_output_delay.
+Warning: There are 873 unconstrained endpoints.
+number instances in verilog is 23045
+[INFO IFP-0107] Defining die area using utilization: 30.00% and aspect ratio: 1.
+[WARNING IFP-0028] Core area lower left (2.000, 2.000) snapped to (2.300, 2.720).
+[INFO IFP-0001] Added 280 rows of 1661 site unithd.
+[INFO IFP-0100] Die BBox:  (  0.000  0.000 ) ( 768.725 768.725 ) um
+[INFO IFP-0101] Core BBox: (  2.300  2.720 ) ( 766.360 764.320 ) um
+[INFO IFP-0102] Core area:                       581908.096 um^2
+[INFO IFP-0103] Total instances area:            175442.013 um^2
+[INFO IFP-0104] Effective utilization:                0.301
+[INFO IFP-0105] Number of instances:                  23045
+source /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/make_tracks.tcl
+source /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/fastroute.tcl
+Repair tie lo fanout...
+[INFO RSZ-0042] Inserted 448 tie sky130_fd_sc_hd__conb_1 instances.
+Repair tie hi fanout...
+[INFO RSZ-0042] Inserted 38 tie sky130_fd_sc_hd__conb_1 instances.
+[INFO RSZ-0026] Removed 1881 buffers.
+Default units for flow
+ time 1ns
+ capacitance 1pF
+ resistance 1kohm
+ voltage 1v
+ current 1mA
+ power 1nW
+ distance 1um
+   Layer   | Unit Resistance | Unit Capacitance 
+           |       (kohm/um) |          (pF/um)
+------------------------------------------------
+       li1 |        7.18e-02 |         1.50e-04
+      met1 |        1.21e-03 |         1.72e-04
+      met2 |        1.22e-03 |         1.36e-04
+      met3 |        1.66e-04 |         2.15e-04
+      met4 |        1.68e-04 |         1.48e-04
+      met5 |        1.84e-05 |         1.54e-04
+------------------------------------------------
+
+   Layer   | Via Resistance 
+           |         (kohm) 
+----------------------------
+      mcon |       9.25e-03 
+       via |       4.50e-03 
+      via2 |       3.37e-03 
+      via3 |       3.77e-04 
+      via4 |       5.80e-06 
+----------------------------
+write_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/2_1_floorplan.odb
+write_sdc -no_timestamp /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/2_1_floorplan.sdc
+Elapsed time: 0:03.95[h:]min:sec. CPU time: user 1.03 sys 0.41 (36%). Peak memory: 227340KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+2_1_floorplan             .odb            3            222 d876f4c1600506890763
+2_1_floorplan             .sdc                             5969b4f742c8fcfba542
+/home/chandler/OpenROAD-flow-scripts/flow/scripts/flow.sh 2_2_floorplan_macro macro_place
+Running macro_place.tcl, stage 2_2_floorplan_macro
+read_liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/2_1_floorplan.odb
+read_sdc /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/2_1_floorplan.sdc
+source /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/setRC.tcl
+No macros found: Skipping macro_placement
+Design area 168141 um^2 29% utilization.
+write_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/2_2_floorplan_macro.odb
+Elapsed time: 0:01.81[h:]min:sec. CPU time: user 0.50 sys 0.21 (39%). Peak memory: 162328KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+2_2_floorplan_macro       .odb            1            158 d876f4c1600506890763
+/home/chandler/OpenROAD-flow-scripts/flow/scripts/flow.sh 2_3_floorplan_tapcell tapcell
+Running tapcell.tcl, stage 2_3_floorplan_tapcell
+read_liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/2_2_floorplan_macro.odb
+read_sdc /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/2_1_floorplan.sdc
+source /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/setRC.tcl
+[INFO TAP-0005] Inserted 7755 tapcells.
+Design area 177844 um^2 31% utilization.
+write_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/2_3_floorplan_tapcell.odb
+Elapsed time: 0:01.94[h:]min:sec. CPU time: user 0.39 sys 0.20 (30%). Peak memory: 152992KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+2_3_floorplan_tapcell     .odb            1            149 950584592324cbbb21ea
+/home/chandler/OpenROAD-flow-scripts/flow/scripts/flow.sh 2_4_floorplan_pdn pdn
+Running pdn.tcl, stage 2_4_floorplan_pdn
+read_liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/2_3_floorplan_tapcell.odb
+read_sdc /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/2_1_floorplan.sdc
+source /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/setRC.tcl
+[WARNING PDN-1051] No instances found for grid (CORE_macro_grid_1).
+[WARNING PDN-1051] No instances found for grid (CORE_macro_grid_2).
+[INFO PDN-0001] Inserting grid: grid
+[INFO PDN-0500] Runtime: 0.32s
+Design area 177844 um^2 31% utilization.
+write_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/2_4_floorplan_pdn.odb
+Elapsed time: 0:03.21[h:]min:sec. CPU time: user 0.93 sys 0.19 (34%). Peak memory: 192408KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+2_4_floorplan_pdn         .odb            3            187 8e20508063df0181fc22
+cp /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/2_4_floorplan_pdn.odb /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/2_floorplan.odb
+cp /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/2_1_floorplan.sdc /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/2_floorplan.sdc
+/home/chandler/OpenROAD-flow-scripts/flow/scripts/flow.sh 3_1_place_gp_skip_io global_place_skip_io
+Running global_place_skip_io.tcl, stage 3_1_place_gp_skip_io
+read_liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/2_floorplan.odb
+read_sdc /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/2_floorplan.sdc
+source /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/setRC.tcl
+source /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/flow/designs/sky130hd/stob_pim2/openroad_compat.tcl
+global_placement -skip_io -density 0.35 -pad_left 0 -pad_right 0
+[INFO GPL-0001] ---- Initialize GPL Main Data Structures
+[INFO GPL-0002] DBU: 1000
+[INFO GPL-0003] SiteSize: (  0.460  2.720 ) um
+[INFO GPL-0004] CoreBBox: (  2.300  2.720 ) ( 766.360 764.320 ) um
+[INFO GPL-0016] Core area:                  581908.096 um^2
+[INFO GPL-0036] Movable instances area:     168141.261 um^2
+[INFO GPL-0037] Total instances area:       177844.317 um^2
+[INFO GPL-0035] Pin density area adjust:     22182.928 um^2
+[INFO GPL-0032] ---- Initialize Region: Top-level
+[INFO GPL-0006] Number of instances:             29403
+[INFO GPL-0007] Movable instances:               21648
+[INFO GPL-0008] Fixed instances:                  7755
+[INFO GPL-0009] Dummy instances:                     0
+[INFO GPL-0010] Number of nets:                  23320
+[INFO GPL-0011] Number of pins:                  81844
+[INFO GPL-0012] Die BBox:       (  0.000  0.000 ) ( 768.725 768.725 ) um
+[INFO GPL-0013] Placement BBox: (  2.300  2.720 ) ( 766.360 764.320 ) um
+[INFO GPL-0014] Region name: top-level.
+[INFO GPL-0015] Region area:                581908.096 um^2
+[INFO GPL-0017] Fixed instances area:         9703.056 um^2
+[INFO GPL-0018] Movable instances area:     190324.189 um^2
+[INFO GPL-0019] Utilization:                    33.262 %
+[INFO GPL-0020] Standard cells area:        190324.189 um^2
+[INFO GPL-0021] Large instances area:            0.000 um^2
+[INFO GPL-0005] ---- Execute Conjugate Gradient Initial Placement.
+[INFO GPL-0051] Source of initial instance position counters:
+	Odb location = 0	Core center = 21648	Region center = 0
+[INFO GPL-0033] ---- Initialize Nesterov Region: Top-level
+[INFO GPL-0023] Placement target density:       0.3500
+[INFO GPL-0024] Movable insts average area:      8.792 um^2
+[INFO GPL-0025] Ideal bin area:                 25.119 um^2
+[INFO GPL-0026] Ideal bin count:                 23165
+[INFO GPL-0027] Total bin area:             581908.096 um^2
+[INFO GPL-0028] Bin count (X, Y):         128 ,    128
+[INFO GPL-0029] Bin size (W * H):       5.969 *  5.950 um
+[INFO GPL-0030] Number of bins:                  16384
+[INFO GPL-0084] ---- Execute Nesterov Global Placement.
+[INFO GPL-0031] HPWL: Half-Perimeter Wirelength
+Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
+---------------------------------------------------------------
+        0 |   0.9995 |  4.035705e+04 |   +0.00% |  8.23e-16 |      
+       10 |   0.9992 |  3.161475e+04 |  -21.66% |  1.34e-15 |      
+       20 |   0.9992 |  3.139074e+04 |   -0.71% |  2.18e-15 |      
+       30 |   0.9991 |  3.130297e+04 |   -0.28% |  3.56e-15 |      
+       40 |   0.9991 |  3.127567e+04 |   -0.09% |  5.80e-15 |      
+       50 |   0.9992 |  3.126750e+04 |   -0.03% |  9.44e-15 |      
+       60 |   0.9992 |  3.127919e+04 |   +0.04% |  1.54e-14 |      
+       70 |   0.9991 |  3.132697e+04 |   +0.15% |  2.51e-14 |      
+       80 |   0.9991 |  3.146685e+04 |   +0.45% |  4.08e-14 |      
+       90 |   0.9988 |  3.189876e+04 |   +1.37% |  6.65e-14 |      
+      100 |   0.9984 |  3.324776e+04 |   +4.23% |  1.08e-13 |      
+      110 |   0.9965 |  3.639094e+04 |   +9.45% |  1.76e-13 |      
+      120 |   0.9921 |  4.195533e+04 |  +15.29% |  2.87e-13 |      
+      130 |   0.9873 |  5.125698e+04 |  +22.17% |  4.67e-13 |      
+      140 |   0.9825 |  6.391829e+04 |  +24.70% |  7.60e-13 |      
+      150 |   0.9774 |  7.917975e+04 |  +23.88% |  1.24e-12 |      
+      160 |   0.9709 |  9.630020e+04 |  +21.62% |  2.01e-12 |      
+      170 |   0.9631 |  1.159218e+05 |  +20.38% |  3.26e-12 |      
+      180 |   0.9522 |  1.409980e+05 |  +21.63% |  5.30e-12 |      
+      190 |   0.9374 |  1.717171e+05 |  +21.79% |  8.61e-12 |      
+      200 |   0.9181 |  2.079543e+05 |  +21.10% |  1.40e-11 |      
+      210 |   0.8926 |  2.471249e+05 |  +18.84% |  2.27e-11 |      
+      220 |   0.8647 |  2.859262e+05 |  +15.70% |  3.68e-11 |      
+      230 |   0.8346 |  3.244939e+05 |  +13.49% |  5.96e-11 |      
+      240 |   0.8041 |  3.631057e+05 |  +11.90% |  9.67e-11 |      
+      250 |   0.7697 |  4.002547e+05 |  +10.23% |  1.57e-10 |      
+      260 |   0.7329 |  4.313705e+05 |   +7.77% |  2.55e-10 |      
+      270 |   0.6973 |  4.613568e+05 |   +6.95% |  4.13e-10 |      
+      280 |   0.6560 |  4.926504e+05 |   +6.78% |  6.71e-10 |      
+      290 |   0.6150 |  5.207817e+05 |   +5.71% |  1.09e-09 |      
+      300 |   0.5741 |  5.413666e+05 |   +3.95% |  1.77e-09 |      
+      310 |   0.5394 |  5.562449e+05 |   +2.75% |  2.88e-09 |      
+      320 |   0.5017 |  5.647987e+05 |   +1.54% |  4.69e-09 |      
+      330 |   0.4615 |  5.755727e+05 |   +1.91% |  7.63e-09 |      
+      340 |   0.4180 |  5.839808e+05 |   +1.46% |  1.24e-08 |      
+      350 |   0.3734 |  5.934333e+05 |   +1.62% |  2.02e-08 |      
+      360 |   0.3319 |  5.998031e+05 |   +1.07% |  3.19e-08 |      
+      370 |   0.2983 |  6.042161e+05 |   +0.74% |  4.70e-08 |      
+      380 |   0.2666 |  6.092372e+05 |   +0.83% |  6.92e-08 |      
+      390 |   0.2361 |  6.130257e+05 |   +0.62% |  1.02e-07 |      
+      400 |   0.2093 |  6.166859e+05 |   +0.60% |  1.50e-07 |      
+      410 |   0.1829 |  6.199371e+05 |   +0.53% |  2.21e-07 |      
+      420 |   0.1605 |  6.226902e+05 |   +0.44% |  3.25e-07 |      
+      430 |   0.1407 |  6.249656e+05 |   +0.37% |  4.79e-07 |      
+      440 |   0.1224 |  6.273446e+05 |   +0.38% |  7.06e-07 |      
+      450 |   0.1056 |  6.292753e+05 |   +0.31% |  1.04e-06 |      
+      454 |   0.0998 |  6.301019e+05 |          |  1.26e-06 |      
+---------------------------------------------------------------
+[INFO GPL-1001] Global placement finished at iteration 454
+[INFO GPL-1002] Placed Cell Area            190324.1888
+[INFO GPL-1003] Available Free Area         572205.0400
+[INFO GPL-1004] Minimum Feasible Density        0.3400 (cell_area / free_area)
+[INFO GPL-1006]   Suggested Target Densities:
+[INFO GPL-1007]     - For 90% usage of free space: 0.3696
+[INFO GPL-1008]     - For 80% usage of free space: 0.4158
+[INFO GPL-1009]     - For 50% usage of free space: 0.6652
+[INFO GPL-1014] Final placement area: 190324.19 (+0.00%)
+Took 35 seconds: global_placement -skip_io -density 0.35 -pad_left 0 -pad_right 0
+Design area 177844 um^2 31% utilization.
+write_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/3_1_place_gp_skip_io.odb
+Elapsed time: 0:37.02[h:]min:sec. CPU time: user 52.65 sys 0.82 (144%). Peak memory: 198388KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_1_place_gp_skip_io      .odb           37            193 dda2e5f0ce1969a54586
+/home/chandler/OpenROAD-flow-scripts/flow/scripts/flow.sh 3_2_place_iop io_placement
+Running io_placement.tcl, stage 3_2_place_iop
+read_liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/3_1_place_gp_skip_io.odb
+read_sdc /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/2_floorplan.sdc
+source /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/setRC.tcl
+place_pins -hor_layers met3 -ver_layers met2
+Found 0 macro blocks.
+Using 2 tracks default min distance between IO pins.
+[INFO PPL-0001] Number of available slots 2790
+[INFO PPL-0002] Number of I/O             1287
+[INFO PPL-0003] Number of I/O w/sink      808
+[INFO PPL-0004] Number of I/O w/o sink    479
+[INFO PPL-0005] Slots per section         200
+[INFO PPL-0008] Successfully assigned pins to sections.
+[INFO PPL-0012] I/O nets HPWL: 62232.14 um.
+Design area 177844 um^2 31% utilization.
+write_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/3_2_place_iop.odb
+Elapsed time: 0:02.08[h:]min:sec. CPU time: user 0.52 sys 0.20 (34%). Peak memory: 175220KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_2_place_iop             .odb            2            171 bad26bf624b92d828837
+/home/chandler/OpenROAD-flow-scripts/flow/scripts/flow.sh 3_3_place_gp global_place
+Running global_place.tcl, stage 3_3_place_gp
+read_liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/3_2_place_iop.odb
+read_sdc /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/2_floorplan.sdc
+source /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/setRC.tcl
+source /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/flow/designs/sky130hd/stob_pim2/openroad_compat.tcl
+[INFO RSZ-0026] Removed 0 buffers.
+Perform port buffering...
+[INFO RSZ-0027] Inserted 190 sky130_fd_sc_hd__clkdlybuf4s50_1 input buffers.
+[INFO RSZ-0028] Inserted 169 sky130_fd_sc_hd__clkdlybuf4s50_1 output buffers.
+global_placement -density 0.35 -pad_left 0 -pad_right 0 -routability_driven -timing_driven -force_center_initial_place -min_phi_coef 0.95 -max_phi_coef 1.05
+[INFO GPL-0001] ---- Initialize GPL Main Data Structures
+[INFO GPL-0002] DBU: 1000
+[INFO GPL-0003] SiteSize: (  0.460  2.720 ) um
+[INFO GPL-0004] CoreBBox: (  2.300  2.720 ) ( 766.360 764.320 ) um
+[INFO GPL-0016] Core area:                  581908.096 um^2
+[INFO GPL-0036] Movable instances area:     171734.707 um^2
+[INFO GPL-0037] Total instances area:       181437.763 um^2
+[INFO GPL-0035] Pin density area adjust:     22726.916 um^2
+[INFO GPL-0032] ---- Initialize Region: Top-level
+[INFO GPL-0006] Number of instances:             29762
+[INFO GPL-0007] Movable instances:               22007
+[INFO GPL-0008] Fixed instances:                  7755
+[INFO GPL-0009] Dummy instances:                     0
+[INFO GPL-0010] Number of nets:                  23679
+[INFO GPL-0011] Number of pins:                  83849
+[INFO GPL-0012] Die BBox:       (  0.000  0.000 ) ( 768.725 768.725 ) um
+[INFO GPL-0013] Placement BBox: (  2.300  2.720 ) ( 766.360 764.320 ) um
+[INFO GPL-0014] Region name: top-level.
+[INFO GPL-0015] Region area:                581908.096 um^2
+[INFO GPL-0017] Fixed instances area:         9703.056 um^2
+[INFO GPL-0018] Movable instances area:     194461.624 um^2
+[INFO GPL-0019] Utilization:                    33.985 %
+[INFO GPL-0020] Standard cells area:        194461.624 um^2
+[INFO GPL-0021] Large instances area:            0.000 um^2
+[INFO GPL-0005] ---- Execute Conjugate Gradient Initial Placement.
+[INFO GPL-0051] Source of initial instance position counters:
+	Odb location = 22007	Core center = 0	Region center = 0
+[InitialPlace]  Iter: 1 conjugate gradient residual: 0.00050272 HPWL: 825309130
+[InitialPlace]  Iter: 2 conjugate gradient residual: 0.00021484 HPWL: 447272211
+[InitialPlace]  Iter: 3 conjugate gradient residual: 0.00017335 HPWL: 343991708
+[InitialPlace]  Iter: 4 conjugate gradient residual: 0.00012152 HPWL: 309519414
+[InitialPlace]  Iter: 5 conjugate gradient residual: 0.00009525 HPWL: 290479110
+[InitialPlace]  Iter: 6 conjugate gradient residual: 0.00007786 HPWL: 281642433
+[InitialPlace]  Iter: 7 conjugate gradient residual: 0.00005481 HPWL: 278215070
+[InitialPlace]  Iter: 8 conjugate gradient residual: 0.00005833 HPWL: 276450142
+[InitialPlace]  Iter: 9 conjugate gradient residual: 0.00004938 HPWL: 275284264
+[InitialPlace]  Iter: 10 conjugate gradient residual: 0.00308908 HPWL: 274497404
+[InitialPlace]  Iter: 11 conjugate gradient residual: 0.00015442 HPWL: 293175253
+[InitialPlace]  Iter: 12 conjugate gradient residual: 0.00004641 HPWL: 278790850
+[InitialPlace]  Iter: 13 conjugate gradient residual: 0.00003472 HPWL: 275307008
+[InitialPlace]  Iter: 14 conjugate gradient residual: 0.00003086 HPWL: 274356798
+[InitialPlace]  Iter: 15 conjugate gradient residual: 0.00002764 HPWL: 273813845
+[InitialPlace]  Iter: 16 conjugate gradient residual: 0.00003388 HPWL: 273606482
+[InitialPlace]  Iter: 17 conjugate gradient residual: 0.00002607 HPWL: 273289617
+[InitialPlace]  Iter: 18 conjugate gradient residual: 0.00003471 HPWL: 273040164
+[InitialPlace]  Iter: 19 conjugate gradient residual: 0.00002705 HPWL: 272913554
+[InitialPlace]  Iter: 20 conjugate gradient residual: 0.00002856 HPWL: 272716333
+[INFO GPL-0033] ---- Initialize Nesterov Region: Top-level
+[INFO GPL-0023] Placement target density:       0.3500
+[INFO GPL-0024] Movable insts average area:      8.836 um^2
+[INFO GPL-0025] Ideal bin area:                 25.247 um^2
+[INFO GPL-0026] Ideal bin count:                 23048
+[INFO GPL-0027] Total bin area:             581908.096 um^2
+[INFO GPL-0028] Bin count (X, Y):         128 ,    128
+[INFO GPL-0029] Bin size (W * H):       5.969 *  5.950 um
+[INFO GPL-0030] Number of bins:                  16384
+[INFO GPL-0084] ---- Execute Nesterov Global Placement.
+[INFO GPL-0031] HPWL: Half-Perimeter Wirelength
+Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
+---------------------------------------------------------------
+        0 |   0.9539 |  1.487048e+05 |   +0.00% |  4.11e-16 |      
+       10 |   0.9321 |  1.805993e+05 |  +21.45% |  6.67e-16 |      
+       20 |   0.9276 |  1.867676e+05 |   +3.42% |  1.09e-15 |      
+       30 |   0.9260 |  1.915498e+05 |   +2.56% |  1.77e-15 |      
+       40 |   0.9259 |  1.967700e+05 |   +2.73% |  2.88e-15 |      
+       50 |   0.9253 |  2.034082e+05 |   +3.37% |  4.69e-15 |      
+       60 |   0.9264 |  2.104139e+05 |   +3.44% |  7.63e-15 |      
+       70 |   0.9257 |  2.169435e+05 |   +3.10% |  1.24e-14 |      
+       80 |   0.9254 |  2.219277e+05 |   +2.30% |  2.02e-14 |      
+       90 |   0.9256 |  2.246833e+05 |   +1.24% |  3.29e-14 |      
+      100 |   0.9251 |  2.253025e+05 |   +0.28% |  5.36e-14 |      
+      110 |   0.9249 |  2.241010e+05 |   -0.53% |  8.73e-14 |      
+      120 |   0.9250 |  2.214623e+05 |   -1.18% |  1.42e-13 |      
+      130 |   0.9257 |  2.179750e+05 |   -1.57% |  2.32e-13 |      
+      140 |   0.9259 |  2.146344e+05 |   -1.53% |  3.77e-13 |      
+      150 |   0.9252 |  2.125024e+05 |   -0.99% |  6.15e-13 |      
+      160 |   0.9240 |  2.125097e+05 |   +0.00% |  1.00e-12 |      
+      170 |   0.9214 |  2.158554e+05 |   +1.57% |  1.63e-12 |      
+      180 |   0.9186 |  2.240261e+05 |   +3.79% |  2.65e-12 |      
+      190 |   0.9135 |  2.380598e+05 |   +6.26% |  4.31e-12 |      
+      200 |   0.9048 |  2.586795e+05 |   +8.66% |  7.01e-12 |      
+      210 |   0.8919 |  2.861412e+05 |  +10.62% |  1.14e-11 |      
+      220 |   0.8751 |  3.195473e+05 |  +11.67% |  1.85e-11 |      
+      230 |   0.8514 |  3.566185e+05 |  +11.60% |  3.00e-11 |      
+      240 |   0.8232 |  3.978572e+05 |  +11.56% |  4.86e-11 |      
+      250 |   0.7930 |  4.417451e+05 |  +11.03% |  7.88e-11 |      
+      260 |   0.7601 |  4.793976e+05 |   +8.52% |  1.28e-10 |      
+      270 |   0.7348 |  5.049490e+05 |   +5.33% |  2.08e-10 |      
+      280 |   0.7001 |  5.272404e+05 |   +4.41% |  3.38e-10 |      
+      290 |   0.6614 |  5.520353e+05 |   +4.70% |  5.48e-10 |      
+[INFO GPL-0100] Timing-driven iteration 1/2, virtual: false.
+[INFO GPL-0101]    Iter: 299, overflow: 0.633, keep resizer changes at: 1, HPWL: 566976216
+Iteration |   Area    | Resized | Buffers | Nets repaired | Remaining
+---------------------------------------------------------------------
+        0 |     +0.0% |       0 |       0 |             0 |     24165
+    final |     +3.8% |     223 |     320 |           230 |         0
+---------------------------------------------------------------------
+[INFO RSZ-0034] Found 229 slew violations.
+[INFO RSZ-0036] Found 69 capacitance violations.
+[INFO RSZ-0039] Resized 223 instances.
+[INFO RSZ-0038] Inserted 320 buffers in 230 nets.
+   Iter   |    Area   | Removed | Inserted |   Pins
+          |           | Buffers | Buffers  | Remaining
+-------------------------------------------------------
+        0 |     +0.0% |       0 |        0 |     22523
+     2200 |     +2.7% |      24 |      684 |     20323
+     4400 |     +7.1% |      32 |     1782 |     18123
+     6600 |    +11.1% |      40 |     2805 |     15923
+     8800 |    +14.4% |      43 |     3638 |     13723
+    11000 |    +17.9% |      60 |     4552 |     11523
+    13200 |    +21.3% |      67 |     5420 |      9323
+    15400 |    +22.4% |      88 |     5747 |      7123
+    17600 |    +23.8% |     155 |     6168 |      4923
+    19800 |    +24.1% |     212 |     6385 |      2723
+    22000 |    +26.5% |     304 |     7160 |       523
+    final |    +27.4% |     320 |     7434 |         0
+-------------------------------------------------------
+[INFO GPL-0106] Timing-driven: worst slack -4.0251315e-08
+[INFO GPL-0107] Timing-driven: repair_design delta area: 58254.109 um^2 (+29.96%)
+[INFO GPL-0108] Timing-driven: repair_design, gpl delta gcells: 7434 (+33.78%)
+[INFO GPL-0109] Timing-driven: repair_design, gcells created: 7754, deleted: 320
+[INFO GPL-0110] Timing-driven: new target density: 0.45180637
+Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
+---------------------------------------------------------------
+      300 |   0.6215 |  6.613867e+05 |  +19.81% |  8.83e-10 |      
+[INFO GPL-0038] Routability snapshot saved at iter = 306
+      305 |   0.5981 |  6.882786e+05 |          |           |      
+      310 |   0.5784 |  6.926452e+05 |   +4.73% |  1.43e-09 |      
+      320 |   0.5443 |  7.151700e+05 |   +3.25% |  2.33e-09 |      
+      330 |   0.5007 |  7.500617e+05 |   +4.88% |  3.78e-09 |      
+      340 |   0.4578 |  7.789505e+05 |   +3.85% |  6.13e-09 |      
+      350 |   0.4197 |  7.938603e+05 |   +1.91% |  9.97e-09 |      
+      360 |   0.3806 |  8.012714e+05 |   +0.93% |  1.62e-08 |      
+      370 |   0.3367 |  8.137349e+05 |   +1.56% |  2.59e-08 |      
+      380 |   0.3057 |  8.226785e+05 |   +1.10% |  3.81e-08 |      
+[INFO GPL-0040] Routability iteration: 1
+[WARNING GRT-0281] Net clk_i has a large fanout of 1330 terminals.
+[INFO GPL-0041] Total routing overflow: 56.6211
+[INFO GPL-0042] Number of overflowed tiles: 606 (4.92%)
+[INFO GPL-0043] Average top 0.5% routing congestion: 1.2988
+[INFO GPL-0044] Average top 1.0% routing congestion: 1.2341
+[INFO GPL-0045] Average top 2.0% routing congestion: 1.1735
+[INFO GPL-0046] Average top 5.0% routing congestion: 1.0917
+[INFO GPL-0047] Routability iteration weighted routing congestion: 1.2664
+[INFO GPL-0048] Routing congestion (1.2664) lower than previous minimum (1e+30). Updating minimum.
+[INFO GPL-0086] Inflated area:                7259.931 um^2 (+2.87%)
+[INFO GPL-0052] Placement target density:       0.4518
+[INFO GPL-0076] Removing fillers, count: Before: 700, After: 0 (-100.00%)
+[INFO GPL-0077] Filler area (um^2)     : Before: 5810.134, After: 0.000 (-100.00%)
+[INFO GPL-0078] Removed fillers count: 700, area removed: 5810.085 um^2. Remaining area to be compensated by modifying density: 1449.846 um^2
+[INFO GPL-0079] New target density: 0.45434004
+[INFO GPL-0058] White space area:           572205.040 um^2 (+0.00%)
+[INFO GPL-0059] Movable instances area:     259975.660 um^2 (+0.56%)
+[INFO GPL-0060] Total filler area:               0.000 um^2 (-100.00%)
+[INFO GPL-0061] Total non-inflated area:    259975.663 um^2 (+0.56%)
+[INFO GPL-0062] Total inflated area:        267235.594 um^2 (+0.55%)
+[INFO GPL-0063] New Target Density:             0.4543
+[INFO GPL-0087] Routability end iteration: increase inflation and revert back to snapshot.
+Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
+---------------------------------------------------------------
+      390 |   0.5727 |  7.039803e+05 |  -14.43% |  1.54e-09 |      
+      400 |   0.5415 |  7.328836e+05 |   +4.11% |  2.27e-09 |      
+      410 |   0.5078 |  7.644033e+05 |   +4.30% |  3.33e-09 |      
+      420 |   0.4807 |  7.853221e+05 |   +2.74% |  4.90e-09 |      
+      430 |   0.4494 |  7.943771e+05 |   +1.15% |  7.21e-09 |      
+      440 |   0.4192 |  7.993248e+05 |   +0.62% |  1.06e-08 |      
+      450 |   0.3854 |  8.114670e+05 |   +1.52% |  1.56e-08 |      
+      460 |   0.3508 |  8.208065e+05 |   +1.15% |  2.30e-08 |      
+      470 |   0.3147 |  8.335237e+05 |   +1.55% |  3.39e-08 |      
+[INFO GPL-0040] Routability iteration: 2
+[INFO GPL-0041] Total routing overflow: 24.0849
+[INFO GPL-0042] Number of overflowed tiles: 396 (3.21%)
+[INFO GPL-0043] Average top 0.5% routing congestion: 1.1539
+[INFO GPL-0044] Average top 1.0% routing congestion: 1.1245
+[INFO GPL-0045] Average top 2.0% routing congestion: 1.0895
+[INFO GPL-0046] Average top 5.0% routing congestion: 1.0321
+[INFO GPL-0047] Routability iteration weighted routing congestion: 1.1392
+[INFO GPL-0048] Routing congestion (1.1392) lower than previous minimum (1.266). Updating minimum.
+[INFO GPL-0086] Inflated area:                2207.420 um^2 (+0.85%)
+[INFO GPL-0052] Placement target density:       0.4543
+[INFO GPL-0076] Removing fillers, count: Before: 0, After: 0 (+0.00%)
+[INFO GPL-0077] Filler area (um^2)     : Before: 0.000, After: 0.000 (+0.00%)
+[INFO GPL-0078] Removed fillers count: 0, area removed: 0.000 um^2. Remaining area to be compensated by modifying density: 2207.420 um^2
+[INFO GPL-0079] New target density: 0.45819777
+[INFO GPL-0058] White space area:           572205.040 um^2 (+0.00%)
+[INFO GPL-0059] Movable instances area:     262183.076 um^2 (+0.85%)
+[INFO GPL-0060] Total filler area:               0.000 um^2 (+0.00%)
+[INFO GPL-0061] Total non-inflated area:    262183.083 um^2 (+0.85%)
+[INFO GPL-0062] Total inflated area:        264390.503 um^2 (+0.84%)
+[INFO GPL-0063] New Target Density:             0.4582
+[INFO GPL-0087] Routability end iteration: increase inflation and revert back to snapshot.
+Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
+---------------------------------------------------------------
+      480 |   0.5908 |  6.931731e+05 |  -16.84% |  1.32e-09 |      
+      490 |   0.5540 |  7.226322e+05 |   +4.25% |  1.94e-09 |      
+      500 |   0.5213 |  7.554297e+05 |   +4.54% |  2.86e-09 |      
+      510 |   0.4904 |  7.809361e+05 |   +3.38% |  4.20e-09 |      
+      520 |   0.4628 |  7.950759e+05 |   +1.81% |  6.18e-09 |      
+      530 |   0.4319 |  7.984491e+05 |   +0.42% |  9.10e-09 |      
+      540 |   0.3981 |  8.095006e+05 |   +1.38% |  1.34e-08 |      
+      550 |   0.3639 |  8.185717e+05 |   +1.12% |  1.97e-08 |      
+      560 |   0.3271 |  8.347016e+05 |   +1.97% |  2.90e-08 |      
+      570 |   0.2967 |  8.363657e+05 |   +0.20% |  4.27e-08 |      
+[INFO GPL-0040] Routability iteration: 3
+[INFO GPL-0041] Total routing overflow: 18.2463
+[INFO GPL-0042] Number of overflowed tiles: 340 (2.76%)
+[INFO GPL-0043] Average top 0.5% routing congestion: 1.1324
+[INFO GPL-0044] Average top 1.0% routing congestion: 1.1030
+[INFO GPL-0045] Average top 2.0% routing congestion: 1.0703
+[INFO GPL-0046] Average top 5.0% routing congestion: 1.0209
+[INFO GPL-0047] Routability iteration weighted routing congestion: 1.1177
+[INFO GPL-0048] Routing congestion (1.1177) lower than previous minimum (1.139). Updating minimum.
+[INFO GPL-0086] Inflated area:                1588.416 um^2 (+0.61%)
+[INFO GPL-0052] Placement target density:       0.4582
+[INFO GPL-0076] Removing fillers, count: Before: 0, After: 0 (+0.00%)
+[INFO GPL-0077] Filler area (um^2)     : Before: 0.000, After: 0.000 (+0.00%)
+[INFO GPL-0078] Removed fillers count: 0, area removed: 0.000 um^2. Remaining area to be compensated by modifying density: 1588.416 um^2
+[INFO GPL-0079] New target density: 0.46097374
+[INFO GPL-0058] White space area:           572205.040 um^2 (+0.00%)
+[INFO GPL-0059] Movable instances area:     263771.505 um^2 (+0.61%)
+[INFO GPL-0060] Total filler area:               0.000 um^2 (+0.00%)
+[INFO GPL-0061] Total non-inflated area:    263771.499 um^2 (+0.61%)
+[INFO GPL-0062] Total inflated area:        265359.914 um^2 (+0.60%)
+[INFO GPL-0063] New Target Density:             0.4610
+[INFO GPL-0087] Routability end iteration: increase inflation and revert back to snapshot.
+Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
+---------------------------------------------------------------
+      580 |   0.5656 |  7.119750e+05 |  -14.87% |  1.67e-09 |      
+      590 |   0.5348 |  7.437126e+05 |   +4.46% |  2.45e-09 |      
+      600 |   0.5012 |  7.747188e+05 |   +4.17% |  3.60e-09 |      
+      610 |   0.4740 |  7.929262e+05 |   +2.35% |  5.29e-09 |      
+      620 |   0.4433 |  7.985896e+05 |   +0.71% |  7.79e-09 |      
+      630 |   0.4117 |  8.062342e+05 |   +0.96% |  1.15e-08 |      
+      640 |   0.3763 |  8.174001e+05 |   +1.38% |  1.69e-08 |      
+      650 |   0.3441 |  8.301855e+05 |   +1.56% |  2.48e-08 |      
+      660 |   0.3086 |  8.375836e+05 |   +0.89% |  3.66e-08 |      
+[INFO GPL-0040] Routability iteration: 4
+[INFO GPL-0041] Total routing overflow: 17.6362
+[INFO GPL-0042] Number of overflowed tiles: 365 (2.96%)
+[INFO GPL-0043] Average top 0.5% routing congestion: 1.1203
+[INFO GPL-0044] Average top 1.0% routing congestion: 1.0962
+[INFO GPL-0045] Average top 2.0% routing congestion: 1.0665
+[INFO GPL-0046] Average top 5.0% routing congestion: 1.0201
+[INFO GPL-0047] Routability iteration weighted routing congestion: 1.1082
+[INFO GPL-0048] Routing congestion (1.1082) lower than previous minimum (1.118). Updating minimum.
+[INFO GPL-0086] Inflated area:                1639.839 um^2 (+0.62%)
+[INFO GPL-0052] Placement target density:       0.4610
+[INFO GPL-0076] Removing fillers, count: Before: 0, After: 0 (+0.00%)
+[INFO GPL-0077] Filler area (um^2)     : Before: 0.000, After: 0.000 (+0.00%)
+[INFO GPL-0078] Removed fillers count: 0, area removed: 0.000 um^2. Remaining area to be compensated by modifying density: 1639.839 um^2
+[INFO GPL-0079] New target density: 0.46383956
+[INFO GPL-0058] White space area:           572205.040 um^2 (+0.00%)
+[INFO GPL-0059] Movable instances area:     265411.330 um^2 (+0.62%)
+[INFO GPL-0060] Total filler area:               0.000 um^2 (+0.00%)
+[INFO GPL-0061] Total non-inflated area:    265411.338 um^2 (+0.62%)
+[INFO GPL-0062] Total inflated area:        267051.177 um^2 (+0.62%)
+[INFO GPL-0063] New Target Density:             0.4638
+[INFO GPL-0087] Routability end iteration: increase inflation and revert back to snapshot.
+Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
+---------------------------------------------------------------
+      670 |   0.5767 |  7.039654e+05 |  -15.95% |  1.49e-09 |      
+      680 |   0.5432 |  7.357797e+05 |   +4.52% |  2.18e-09 |      
+      690 |   0.5107 |  7.694318e+05 |   +4.57% |  3.21e-09 |      
+      700 |   0.4828 |  7.907618e+05 |   +2.77% |  4.71e-09 |      
+      710 |   0.4515 |  8.001923e+05 |   +1.19% |  6.94e-09 |      
+      720 |   0.4217 |  8.049649e+05 |   +0.60% |  1.02e-08 |      
+      730 |   0.3869 |  8.170702e+05 |   +1.50% |  1.50e-08 |      
+      740 |   0.3543 |  8.263154e+05 |   +1.13% |  2.21e-08 |      
+      750 |   0.3172 |  8.406822e+05 |   +1.74% |  3.25e-08 |      
+[INFO GPL-0040] Routability iteration: 5
+[INFO GPL-0041] Total routing overflow: 18.1085
+[INFO GPL-0042] Number of overflowed tiles: 353 (2.87%)
+[INFO GPL-0043] Average top 0.5% routing congestion: 1.1270
+[INFO GPL-0044] Average top 1.0% routing congestion: 1.1004
+[INFO GPL-0045] Average top 2.0% routing congestion: 1.0693
+[INFO GPL-0046] Average top 5.0% routing congestion: 1.0205
+[INFO GPL-0047] Routability iteration weighted routing congestion: 1.1137
+[INFO GPL-0049] Routing congestion (1.1137) higher than minimum (1.1082). Consecutive non-improvement count: 1.
+[INFO GPL-0086] Inflated area:                1618.444 um^2 (+0.61%)
+[INFO GPL-0052] Placement target density:       0.4638
+[INFO GPL-0076] Removing fillers, count: Before: 0, After: 0 (+0.00%)
+[INFO GPL-0077] Filler area (um^2)     : Before: 0.000, After: 0.000 (+0.00%)
+[INFO GPL-0078] Removed fillers count: 0, area removed: 0.000 um^2. Remaining area to be compensated by modifying density: 1618.444 um^2
+[INFO GPL-0079] New target density: 0.46666798
+[INFO GPL-0058] White space area:           572205.040 um^2 (+0.00%)
+[INFO GPL-0059] Movable instances area:     267029.774 um^2 (+0.61%)
+[INFO GPL-0060] Total filler area:               0.000 um^2 (+0.00%)
+[INFO GPL-0061] Total non-inflated area:    267029.781 um^2 (+0.61%)
+[INFO GPL-0062] Total inflated area:        268648.225 um^2 (+0.61%)
+[INFO GPL-0063] New Target Density:             0.4667
+[INFO GPL-0087] Routability end iteration: increase inflation and revert back to snapshot.
+Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
+---------------------------------------------------------------
+      760 |   0.5917 |  6.941903e+05 |  -17.43% |  1.32e-09 |      
+      770 |   0.5525 |  7.274312e+05 |   +4.79% |  1.94e-09 |      
+      780 |   0.5209 |  7.617699e+05 |   +4.72% |  2.86e-09 |      
+      790 |   0.4897 |  7.876642e+05 |   +3.40% |  4.20e-09 |      
+      800 |   0.4611 |  8.005803e+05 |   +1.64% |  6.17e-09 |      
+      810 |   0.4316 |  8.042335e+05 |   +0.46% |  9.09e-09 |      
+      820 |   0.3977 |  8.153497e+05 |   +1.38% |  1.34e-08 |      
+      830 |   0.3623 |  8.242015e+05 |   +1.09% |  1.97e-08 |      
+      840 |   0.3261 |  8.413908e+05 |   +2.09% |  2.90e-08 |      
+[INFO GPL-0040] Routability iteration: 6
+[INFO GPL-0041] Total routing overflow: 17.5585
+[INFO GPL-0042] Number of overflowed tiles: 353 (2.87%)
+[INFO GPL-0043] Average top 0.5% routing congestion: 1.1238
+[INFO GPL-0044] Average top 1.0% routing congestion: 1.0970
+[INFO GPL-0045] Average top 2.0% routing congestion: 1.0671
+[INFO GPL-0046] Average top 5.0% routing congestion: 1.0190
+[INFO GPL-0047] Routability iteration weighted routing congestion: 1.1104
+[INFO GPL-0049] Routing congestion (1.1104) higher than minimum (1.1082). Consecutive non-improvement count: 2.
+[INFO GPL-0086] Inflated area:                1587.042 um^2 (+0.59%)
+[INFO GPL-0052] Placement target density:       0.4667
+[INFO GPL-0076] Removing fillers, count: Before: 0, After: 0 (+0.00%)
+[INFO GPL-0077] Filler area (um^2)     : Before: 0.000, After: 0.000 (+0.00%)
+[INFO GPL-0078] Removed fillers count: 0, area removed: 0.000 um^2. Remaining area to be compensated by modifying density: 1587.041 um^2
+[INFO GPL-0079] New target density: 0.46944156
+[INFO GPL-0058] White space area:           572205.040 um^2 (+0.00%)
+[INFO GPL-0059] Movable instances area:     268616.827 um^2 (+0.59%)
+[INFO GPL-0060] Total filler area:               0.000 um^2 (+0.00%)
+[INFO GPL-0061] Total non-inflated area:    268616.823 um^2 (+0.59%)
+[INFO GPL-0062] Total inflated area:        270203.864 um^2 (+0.59%)
+[INFO GPL-0063] New Target Density:             0.4694
+[INFO GPL-0087] Routability end iteration: increase inflation and revert back to snapshot.
+Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
+---------------------------------------------------------------
+      850 |   0.6067 |  6.855148e+05 |  -18.53% |  1.18e-09 |      
+      860 |   0.5618 |  7.188122e+05 |   +4.86% |  1.73e-09 |      
+      870 |   0.5301 |  7.533336e+05 |   +4.80% |  2.54e-09 |      
+      880 |   0.4976 |  7.840526e+05 |   +4.08% |  3.74e-09 |      
+      890 |   0.4703 |  8.000626e+05 |   +2.04% |  5.50e-09 |      
+      900 |   0.4405 |  8.044966e+05 |   +0.55% |  8.10e-09 |      
+      910 |   0.4083 |  8.135271e+05 |   +1.12% |  1.19e-08 |      
+      920 |   0.3718 |  8.234313e+05 |   +1.22% |  1.75e-08 |      
+      930 |   0.3387 |  8.386895e+05 |   +1.85% |  2.58e-08 |      
+      940 |   0.3042 |  8.432443e+05 |   +0.54% |  3.80e-08 |      
+[INFO GPL-0040] Routability iteration: 7
+[INFO GPL-0041] Total routing overflow: 17.9435
+[INFO GPL-0042] Number of overflowed tiles: 360 (2.92%)
+[INFO GPL-0043] Average top 0.5% routing congestion: 1.1279
+[INFO GPL-0044] Average top 1.0% routing congestion: 1.0987
+[INFO GPL-0045] Average top 2.0% routing congestion: 1.0679
+[INFO GPL-0046] Average top 5.0% routing congestion: 1.0196
+[INFO GPL-0047] Routability iteration weighted routing congestion: 1.1133
+[INFO GPL-0049] Routing congestion (1.1133) higher than minimum (1.1082). Consecutive non-improvement count: 3.
+[INFO GPL-0086] Inflated area:                1614.775 um^2 (+0.60%)
+[INFO GPL-0052] Placement target density:       0.4694
+[INFO GPL-0076] Removing fillers, count: Before: 0, After: 0 (+0.00%)
+[INFO GPL-0077] Filler area (um^2)     : Before: 0.000, After: 0.000 (+0.00%)
+[INFO GPL-0078] Removed fillers count: 0, area removed: 0.000 um^2. Remaining area to be compensated by modifying density: 1614.775 um^2
+[INFO GPL-0079] New target density: 0.47226357
+[INFO GPL-0054] No improvement in routing congestion for 3 consecutive iterations (limit is 3).
+[INFO GPL-0055] Reverting inflation values and target density from the iteration with minimum observed routing congestion.
+[INFO GPL-0056] Minimum observed routing congestion: 1.1082
+[INFO GPL-0057] Target density at minimum routing congestion: 0.4610
+[INFO GPL-0080] Restoring 0 previously removed fillers.
+[INFO GPL-0089] Routability finished. Reverting to minimal observed routing congestion, could not reach target.
+Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
+---------------------------------------------------------------
+      950 |   0.5653 |  7.023394e+05 |  -16.71% |  1.54e-09 |      
+      960 |   0.5364 |  7.320279e+05 |   +4.23% |  2.27e-09 |      
+      970 |   0.5024 |  7.650691e+05 |   +4.51% |  3.33e-09 |      
+      980 |   0.4748 |  7.866670e+05 |   +2.82% |  4.90e-09 |      
+      990 |   0.4450 |  7.964786e+05 |   +1.25% |  7.21e-09 |      
+     1000 |   0.4124 |  8.022277e+05 |   +0.72% |  1.06e-08 |      
+     1010 |   0.3799 |  8.141517e+05 |   +1.49% |  1.56e-08 |      
+     1020 |   0.3456 |  8.237441e+05 |   +1.18% |  2.30e-08 |      
+     1030 |   0.3107 |  8.376450e+05 |   +1.69% |  3.38e-08 |      
+     1040 |   0.2786 |  8.411291e+05 |   +0.42% |  4.98e-08 |      
+     1050 |   0.2492 |  8.450237e+05 |   +0.46% |  7.34e-08 |      
+     1060 |   0.2186 |  8.481468e+05 |   +0.37% |  1.08e-07 |      
+     1070 |   0.1925 |  8.514570e+05 |   +0.39% |  1.59e-07 |      
+[INFO GPL-0100] Timing-driven iteration 2/2, virtual: false.
+[INFO GPL-0101]    Iter: 1071, overflow: 0.193, keep resizer changes at: 1, HPWL: 851457037
+Iteration |   Area    | Resized | Buffers | Nets repaired | Remaining
+---------------------------------------------------------------------
+        0 |     +0.0% |       0 |       0 |             0 |     31599
+    final |     +0.0% |       5 |       4 |             6 |         0
+---------------------------------------------------------------------
+[INFO RSZ-0034] Found 5 slew violations.
+[INFO RSZ-0036] Found 1 capacitance violations.
+[INFO RSZ-0039] Resized 5 instances.
+[INFO RSZ-0038] Inserted 4 buffers in 6 nets.
+   Iter   |    Area   | Removed | Inserted |   Pins
+          |           | Buffers | Buffers  | Remaining
+-------------------------------------------------------
+        0 |     +0.0% |       0 |        0 |     22523
+     2200 |     +0.2% |     684 |      755 |     20323
+     4400 |     +0.8% |    1782 |     2018 |     18123
+     6600 |     +1.1% |    2805 |     3153 |     15923
+     8800 |     +1.5% |    3639 |     4108 |     13723
+    11000 |     +2.1% |    4553 |     5190 |     11523
+    13200 |     +2.6% |    5421 |     6204 |      9323
+    15400 |     +2.7% |    5749 |     6547 |      7123
+    17600 |     +3.0% |    6171 |     7045 |      4923
+    19800 |     +3.1% |    6388 |     7285 |      2723
+    22000 |     +2.9% |    7164 |     8015 |       523
+    final |     +3.0% |    7438 |     8300 |         0
+-------------------------------------------------------
+[INFO GPL-0106] Timing-driven: worst slack -4.0684164e-08
+[INFO GPL-0107] Timing-driven: repair_design delta area: 5004.350 um^2 (+1.86%)
+[INFO GPL-0108] Timing-driven: repair_design, gpl delta gcells: 866 (+2.94%)
+[INFO GPL-0109] Timing-driven: repair_design, gcells created: 8304, deleted: 7438
+[INFO GPL-0110] Timing-driven: new target density: 0.4781873
+Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
+---------------------------------------------------------------
+     1080 |   0.1666 |  8.776725e+05 |   +3.08% |  2.33e-07 |      
+     1090 |   0.1463 |  8.720697e+05 |   -0.64% |  3.44e-07 |      
+     1100 |   0.1254 |  8.694270e+05 |   -0.30% |  5.07e-07 |      
+     1110 |   0.1066 |  8.666541e+05 |   -0.32% |  7.46e-07 |      
+     1114 |   0.0994 |  8.659971e+05 |          |  9.06e-07 |      
+---------------------------------------------------------------
+[INFO GPL-1001] Global placement finished at iteration 1114
+[INFO GPL-1017] Routability mode iteration count: 721
+[INFO GPL-1005] Routability final weighted congestion: 1.0618
+[INFO GPL-1002] Placed Cell Area            268775.8488
+[INFO GPL-1003] Available Free Area         572205.0400
+[INFO GPL-1004] Minimum Feasible Density        0.3400 (cell_area / free_area)
+[INFO GPL-1006]   Suggested Target Densities:
+[INFO GPL-1007]     - For 90% usage of free space: 0.5219
+[INFO GPL-1008]     - For 80% usage of free space: 0.5871
+[INFO GPL-1009]     - For 50% usage of free space: 0.9394
+[INFO GPL-1011] Original area (um^2): 194461.62
+[INFO GPL-1012] Total routability artificial inflation: 11055.77 (+5.69%)
+[INFO GPL-1013] Total timing-driven delta area: 63258.46 (+32.53%)
+[INFO GPL-1014] Final placement area: 268775.85 (+38.22%)
+Took 167 seconds: global_placement -density 0.35 -pad_left 0 -pad_right 0 -routability_driven -timing_driven -force_center_initial_place -min_phi_coef 0.95 -max_phi_coef 1.05
+estimate_parasitics -placement
+write_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/3_3_place_gp.odb
+Elapsed time: 2:51.18[h:]min:sec. CPU time: user 282.77 sys 5.76 (168%). Peak memory: 527460KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_3_place_gp              .odb          171            515 ea6ba6e290b92332c7ac
+/home/chandler/OpenROAD-flow-scripts/flow/scripts/flow.sh 3_4_place_resized resize
+Running resize.tcl, stage 3_4_place_resized
+read_liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/3_3_place_gp.odb
+read_sdc /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/2_floorplan.sdc
+source /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/setRC.tcl
+estimate_parasitics -placement
+Perform buffer insertion and gate resizing...
+repair_design -verbose
+Iteration |   Area    | Resized | Buffers | Nets repaired | Remaining
+---------------------------------------------------------------------
+        0 |     +0.0% |       0 |       0 |             0 |     32465
+     1000 |     +0.0% |       0 |       0 |             0 |     31465
+     2000 |     +0.0% |       0 |       0 |             0 |     30465
+     3000 |     +0.0% |       0 |       0 |             0 |     29465
+     4000 |     +0.0% |       0 |       0 |             0 |     28465
+     5000 |     +0.0% |       0 |       0 |             0 |     27465
+     6000 |     +0.0% |       0 |       0 |             0 |     26465
+     7000 |     +0.0% |       0 |       0 |             0 |     25465
+     8000 |     +0.0% |       0 |       0 |             0 |     24465
+     9000 |     +0.0% |       0 |       0 |             0 |     23465
+    10000 |     +0.0% |       0 |       0 |             0 |     22465
+    11000 |     +0.0% |       0 |       0 |             0 |     21465
+    12000 |     +0.0% |       0 |       0 |             0 |     20465
+    13000 |     +0.0% |       0 |       0 |             0 |     19465
+    14000 |     +0.0% |       0 |       0 |             0 |     18465
+    15000 |     +0.0% |       0 |       0 |             0 |     17465
+    16000 |     +0.0% |       0 |       0 |             0 |     16465
+    17000 |     +0.0% |       0 |       0 |             0 |     15465
+    18000 |     +0.0% |       0 |       0 |             0 |     14465
+    19000 |     +0.0% |       0 |       0 |             0 |     13465
+    20000 |     +0.0% |       0 |       0 |             0 |     12465
+    21000 |     +0.0% |       0 |       0 |             0 |     11465
+    22000 |     +0.0% |       0 |       0 |             0 |     10465
+    23000 |     +0.0% |       0 |       0 |             0 |      9465
+    24000 |     +0.0% |       0 |       0 |             0 |      8465
+    25000 |     +0.0% |       0 |       0 |             0 |      7465
+    26000 |     +0.0% |       0 |       0 |             0 |      6465
+    27000 |     +0.0% |       0 |       0 |             0 |      5465
+    28000 |     +0.0% |       0 |       0 |             0 |      4465
+    29000 |     +0.0% |       0 |       0 |             0 |      3465
+    30000 |     +0.0% |       0 |       0 |             0 |      2465
+    31000 |     +0.0% |       0 |       0 |             0 |      1465
+    32000 |     +0.0% |       0 |       0 |             0 |       465
+    final |     +0.0% |       0 |       0 |             0 |         0
+---------------------------------------------------------------------
+[INFO RSZ-0504] Runtime: 2.03s
+Floating nets: 
+Instance count before 38062, after 38062
+Pin count before 99648, after 99648
+write_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/3_4_place_resized.odb
+Elapsed time: 0:05.20[h:]min:sec. CPU time: user 3.46 sys 0.65 (78%). Peak memory: 274868KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_4_place_resized         .odb            5            268 ea6ba6e290b92332c7ac
+/home/chandler/OpenROAD-flow-scripts/flow/scripts/flow.sh 3_5_place_dp detail_place
+Running detail_place.tcl, stage 3_5_place_dp
+read_liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/3_4_place_resized.odb
+read_sdc /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/2_floorplan.sdc
+source /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/setRC.tcl
+detailed_placement
+[INFO DPL-0006] Core area: 581908.10 um^2
+[INFO DPL-0007] Movable instances area: 237470.25 um^2
+[INFO DPL-0008] Fixed instances area within core: 9703.06 um^2
+[INFO DPL-0009] Utilization: 42.5%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 38062 cells
+          |      Total |  Illegal |  Illegal
+Iteration | Violations |    Cells |    Sites
+---------------------------------------------
+        0 |         72 |        24 |        48
+        1 |          0 |         0 |         0
+Negotiation phase 1 converged at iteration 1.
+[INFO DPL-0500] Runtime: 0.39s
+Placement Analysis
+---------------------------------
+total displacement      82813.8 u
+average displacement        2.2 u
+max displacement           20.2 u
+original HPWL          866661.2 u
+legalized HPWL         914964.6 u
+delta HPWL                    6 %
+
+optimize_mirroring
+[INFO DPL-0020] Mirrored 11447 instances
+[INFO DPL-0021] HPWL before          914964.6 u
+[INFO DPL-0022] HPWL after           898471.2 u
+[INFO DPL-0023] HPWL delta               -1.8 %
+[INFO FLW-0012] Placement violations .
+estimate_parasitics -placement
+write_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/3_5_place_dp.odb
+write_sdc -no_timestamp /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/3_place.sdc
+Elapsed time: 0:03.54[h:]min:sec. CPU time: user 1.73 sys 0.37 (59%). Peak memory: 268648KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_5_place_dp              .odb            3            262 ee7244ca773547b66d5e
+cp /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/3_5_place_dp.odb /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/3_place.odb
+/home/chandler/OpenROAD-flow-scripts/flow/scripts/flow.sh 4_1_cts cts
+Running cts.tcl, stage 4_1_cts
+read_liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/3_place.odb
+read_sdc /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/3_place.sdc
+source /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/setRC.tcl
+clock_tree_synthesis -sink_clustering_enable
+[INFO CTS-0050] Root buffer is sky130_fd_sc_hd__clkbuf_16.
+[INFO CTS-0051] Sink buffer is sky130_fd_sc_hd__clkbuf_16.
+[INFO CTS-0052] The following clock buffers will be used for CTS:
+                    sky130_fd_sc_hd__clkbuf_16
+[INFO CTS-0049] Characterization buffer is sky130_fd_sc_hd__clkbuf_16.
+[INFO CTS-0007] Net "clk_i" found for clock "clk".
+[INFO CTS-0010]  Clock net "clk_i" has 1329 sinks.
+[INFO CTS-0008] TritonCTS found 1 clock nets.
+[INFO CTS-0097] Characterization used 1 buffer(s) types.
+[INFO CTS-0201] 0 blockages from hard placement blockages and placed macros will be used.
+[INFO CTS-0027] Generating H-Tree topology for net clk_i.
+[INFO CTS-0028]  Total number of sinks: 1329.
+[INFO CTS-0090]  Sinks will be clustered based on buffer max cap.
+[INFO CTS-0030]  Number of static layers: 0.
+[INFO CTS-0020]  Wire segment unit: 13600  dbu (13 um).
+[INFO CTS-0206] Best clustering solution was found from max clustering size of 14 and max clustering diameter of 116.
+[INFO CTS-0019]  Total number of sinks after clustering: 138.
+[INFO CTS-0024]  Normalized sink region: [(0.618783, 0.495588), (34.021, 55.4)].
+[INFO CTS-0025]     Width:  33.4022.
+[INFO CTS-0026]     Height: 54.9044.
+ Level 1
+    Direction: Vertical
+    Sinks per sub-region: 69
+    Sub-region size: 33.4022 X 27.4522
+[INFO CTS-0034]     Segment length (rounded): 14.
+ Level 2
+    Direction: Horizontal
+    Sinks per sub-region: 35
+    Sub-region size: 16.7011 X 27.4522
+[INFO CTS-0034]     Segment length (rounded): 8.
+ Level 3
+    Direction: Vertical
+    Sinks per sub-region: 18
+    Sub-region size: 16.7011 X 13.7261
+[INFO CTS-0034]     Segment length (rounded): 6.
+ Level 4
+    Direction: Horizontal
+    Sinks per sub-region: 9
+    Sub-region size: 8.3506 X 13.7261
+[INFO CTS-0034]     Segment length (rounded): 4.
+[INFO CTS-0038]  Stop criterion found. Sink region hpwl is smaller than max wirelength (1911.535 um) and max number of sinks is 15.
+[INFO CTS-0035]  Number of sinks covered: 138.
+[INFO CTS-0018]     Created 163 clock buffers.
+[INFO CTS-0012]     Minimum number of buffers in the clock path: 4.
+[INFO CTS-0013]     Maximum number of buffers in the clock path: 4.
+[INFO CTS-0015]     Created 163 clock nets.
+[INFO CTS-0016]     Fanout distribution for the current clock = 2:1, 4:2, 5:2, 6:6, 7:14, 8:19, 9:26, 10:28, 11:34, 12:16, 13:4, 14:1, 15:1..
+[INFO CTS-0017]     Max level of the clock tree: 4.
+[INFO CTS-0098] Clock net "clk_i"
+[INFO CTS-0099]  Sinks 1455
+[INFO CTS-0100]  Leaf buffers 138
+[INFO CTS-0101]  Average sink wire length 1089.33 um
+[INFO CTS-0102]  Path depth 3 - 4
+[INFO CTS-0207]  Dummy loads inserted 126
+[INFO CTS-0500] Runtime: 1.18s
+estimate_parasitics -placement
+detailed_placement
+[INFO DPL-0006] Core area: 581908.10 um^2
+[INFO DPL-0007] Movable instances area: 242767.83 um^2
+[INFO DPL-0008] Fixed instances area within core: 9703.06 um^2
+[INFO DPL-0009] Utilization: 43.4%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 38351 cells
+          |      Total |  Illegal |  Illegal
+Iteration | Violations |    Cells |    Sites
+---------------------------------------------
+        0 |         30 |         4 |        26
+        1 |          0 |         0 |         0
+Negotiation phase 1 converged at iteration 1.
+[INFO DPL-0500] Runtime: 0.24s
+Placement Analysis
+---------------------------------
+total displacement      30762.0 u
+average displacement        0.8 u
+max displacement           24.5 u
+original HPWL          913971.6 u
+legalized HPWL         931068.2 u
+delta HPWL                    2 %
+
+estimate_parasitics -placement
+write_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/4_1_cts.odb
+write_sdc -no_timestamp /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/4_cts.sdc
+Elapsed time: 0:04.79[h:]min:sec. CPU time: user 2.94 sys 0.37 (69%). Peak memory: 288496KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+4_1_cts                   .odb            4            281 a2f56b89147213fc2809
+cp /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/4_1_cts.odb /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/4_cts.odb
+/home/chandler/OpenROAD-flow-scripts/flow/scripts/flow.sh 5_1_grt global_route
+Running global_route.tcl, stage 5_1_grt
+read_liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/4_cts.odb
+read_sdc /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/4_cts.sdc
+source /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/setRC.tcl
+pin_access
+[INFO DRT-0149] Reading tech and libs.
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer mcon
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer mcon
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via2
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via2
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via3
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via3
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via4
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via4
+
+Units:                1000
+Number of layers:     13
+Number of macros:     441
+Number of vias:       29
+Number of viarulegen: 25
+
+[INFO DRT-0150] Reading design.
+[WARNING DRT-0120] Large net net641 has 125 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net15156 has 123 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net16891 has 161 pins which may impact routing performance. Consider optimization.
+
+Design:                   full_pim_system_top
+Die area:                 ( 0 0 ) ( 768725 768725 )
+Number of track patterns: 12
+Number of DEF vias:       0
+Number of components:     38351
+Number of terminals:      1289
+Number of snets:          2
+Number of nets:           32142
+
+[INFO DRT-0167] List of default vias:
+  Layer via
+    default via: M1M2_PR
+  Layer via2
+    default via: M2M3_PR
+  Layer via3
+    default via: M3M4_PR
+  Layer via4
+    default via: M4M5_PR
+[INFO DRT-0162] Library cell analysis.
+[INFO DRT-0163] Instance analysis.
+[INFO DRT-0164] Number of unique instances = 334.
+[INFO DRT-0168] Init region query.
+[INFO DRT-0024]   Complete FR_MASTERSLICE.
+[INFO DRT-0024]   Complete Fr_VIA.
+[INFO DRT-0024]   Complete li1.
+[INFO DRT-0024]   Complete mcon.
+[INFO DRT-0024]   Complete met1.
+[INFO DRT-0024]   Complete via.
+[INFO DRT-0024]   Complete met2.
+[INFO DRT-0024]   Complete via2.
+[INFO DRT-0024]   Complete met3.
+[INFO DRT-0024]   Complete via3.
+[INFO DRT-0024]   Complete met4.
+[INFO DRT-0024]   Complete via4.
+[INFO DRT-0024]   Complete met5.
+[INFO DRT-0033] FR_MASTERSLICE shape region query size = 0.
+[INFO DRT-0033] FR_VIA shape region query size = 0.
+[INFO DRT-0033] li1 shape region query size = 772998.
+[INFO DRT-0033] mcon shape region query size = 419095.
+[INFO DRT-0033] met1 shape region query size = 109436.
+[INFO DRT-0033] via shape region query size = 39340.
+[INFO DRT-0033] met2 shape region query size = 24492.
+[INFO DRT-0033] via2 shape region query size = 31472.
+[INFO DRT-0033] met3 shape region query size = 24003.
+[INFO DRT-0033] via3 shape region query size = 31472.
+[INFO DRT-0033] met4 shape region query size = 9492.
+[INFO DRT-0033] via4 shape region query size = 1568.
+[INFO DRT-0033] met5 shape region query size = 1680.
+[INFO DRT-0165] Start pin access.
+[INFO DRT-0076]   Complete 1000 pins.
+[INFO DRT-0076]   Complete 2000 pins.
+[INFO DRT-0078]   Complete 2799 pins.
+[INFO DRT-0079]   Complete 100 unique inst patterns.
+[INFO DRT-0079]   Complete 200 unique inst patterns.
+[INFO DRT-0079]   Complete 300 unique inst patterns.
+[INFO DRT-0081]   Complete 334 unique inst patterns.
+[INFO DRT-0082]   Complete 10000 groups.
+[INFO DRT-0082]   Complete 20000 groups.
+[INFO DRT-0084]   Complete 25555 groups.
+#scanned instances     = 38351
+#unique  instances     = 334
+#stdCellGenAp          = 11705
+#stdCellValidPlanarAp  = 129
+#stdCellValidViaAp     = 8276
+#stdCellPinNoAp        = 6
+#stdCellPinCnt         = 99614
+#instTermValidViaApCnt = 0
+#macroGenAp            = 0
+#macroValidPlanarAp    = 0
+#macroValidViaAp       = 0
+#macroNoAp             = 0
+[INFO DRT-0166] Complete pin access.
+[INFO DRT-0267] cpu time = 00:02:39, elapsed time = 00:00:51, memory = 307.77 (MB), peak = 322.74 (MB)
+Took 52 seconds: pin_access
+global_route -congestion_report_file /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/reports/sky130hd/b0_bank_only_baseline/base/congestion.rpt -congestion_iterations 30 -congestion_report_iter_step 5 -verbose
+[INFO GRT-0020] Min routing layer: met1
+[INFO GRT-0021] Max routing layer: met5
+[INFO GRT-0022] Global adjustment: 0%
+[INFO GRT-0023] Grid origin: (0, 0)
+[INFO GRT-0088] Layer li1     Track-Pitch = 0.4600  line-2-Via Pitch: 0.3400
+[INFO GRT-0088] Layer met1    Track-Pitch = 0.3400  line-2-Via Pitch: 0.3400
+[INFO GRT-0088] Layer met2    Track-Pitch = 0.4600  line-2-Via Pitch: 0.3500
+[INFO GRT-0088] Layer met3    Track-Pitch = 0.6800  line-2-Via Pitch: 0.6150
+[INFO GRT-0088] Layer met4    Track-Pitch = 0.9200  line-2-Via Pitch: 1.0400
+[INFO GRT-0088] Layer met5    Track-Pitch = 3.4000  line-2-Via Pitch: 3.1100
+[INFO GRT-0003] Macros: 0
+[INFO GRT-0004] Blockages: 27879
+[INFO GRT-0019] Found 164 clock nets.
+[INFO GRT-0001] Minimum degree: 2
+[INFO GRT-0002] Maximum degree: 161
+
+[INFO GRT-0053] Routing resources analysis:
+          Routing      Original      Derated      Resource
+Layer     Direction    Resources     Resources    Reduction (%)
+---------------------------------------------------------------
+li1        Vertical            0             0          0.00%
+met1       Horizontal     172148        133285          22.58%
+met2       Vertical       158290        121550          23.21%
+met3       Horizontal     116187         90777          21.87%
+met4       Vertical        78210         56430          27.85%
+met5       Horizontal      16940         12320          27.27%
+---------------------------------------------------------------
+
+[INFO GRT-0101] Running extra iterations to remove congestion.
+[INFO GRT-0102] Start extra iteration 1/30
+[INFO GRT-0102] Start extra iteration 2/30
+[INFO GRT-0197] Via related to pin nodes: 172615
+[INFO GRT-0198] Via related Steiner nodes: 4185
+[INFO GRT-0199] Via filling finished.
+[INFO GRT-0111] Final number of vias: 220908
+[INFO GRT-0112] Final usage 3D: 817993
+
+[INFO GRT-0096] Final congestion report:
+Layer         Resource        Demand        Usage (%)    Max H / Max V / Total Congestion
+---------------------------------------------------------------------------------------
+li1                  0             0            0.00%             0 /  0 /  0
+met1            133285         67285           50.48%             0 /  0 /  0
+met2            121550         68837           56.63%             0 /  0 /  0
+met3             90777          9578           10.55%             0 /  0 /  0
+met4             56430          9440           16.73%             0 /  0 /  0
+met5             12320           129            1.05%             0 /  0 /  0
+---------------------------------------------------------------------------------------
+Total           414362        155269           37.47%             0 /  0 /  0
+
+[INFO GRT-0018] Total wirelength: 1577312 um
+[INFO GRT-0014] Routed nets: 31322
+[INFO GRT-0303] Global routing runtime = 00:00:01
+estimate_parasitics -global_routing
+global_route -start_incremental
+global_route -end_incremental -congestion_report_file /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/reports/sky130hd/b0_bank_only_baseline/base/congestion_post_recover_power.rpt
+Estimate parasitics...
+estimate_parasitics -global_routing
+[INFO FLW-0007] clock clk period 10.000000
+[INFO FLW-0008] Clock clk period 53.826
+[INFO FLW-0009] Clock clk slack -46.658
+write_sdc -no_timestamp /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/updated_clks.sdc
+[INFO FLW-0011] Path endpoint path count 3294
+write_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/5_1_grt.odb
+write_sdc -no_timestamp /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/5_1_grt.sdc
+Elapsed time: 0:59.75[h:]min:sec. CPU time: user 164.76 sys 1.21 (277%). Peak memory: 712876KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+5_1_grt                   .odb           59            696 e1882a7cb27aba486804
+5_1_grt                   .sdc                             8f2c27ad25435332d359
+/home/chandler/OpenROAD-flow-scripts/flow/scripts/flow.sh 5_2_route detail_route
+Running detail_route.tcl, stage 5_2_route
+read_liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/5_1_grt.odb
+read_sdc /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/5_1_grt.sdc
+source /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/setRC.tcl
+source /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/flow/designs/sky130hd/stob_pim2/openroad_compat.tcl
+detailed_route -output_drc /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/reports/sky130hd/b0_bank_only_baseline/base/5_route_drc.rpt -output_maze /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/maze.log -droute_end_iter 0 -verbose 1 -drc_report_iter_step 5
+[INFO DRT-0149] Reading tech and libs.
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer mcon
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer mcon
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via2
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via2
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via3
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via3
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via4
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via4
+
+Units:                1000
+Number of layers:     13
+Number of macros:     441
+Number of vias:       29
+Number of viarulegen: 25
+
+[INFO DRT-0150] Reading design.
+[WARNING DRT-0120] Large net net641 has 125 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net15156 has 123 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net16891 has 161 pins which may impact routing performance. Consider optimization.
+
+Design:                   full_pim_system_top
+Die area:                 ( 0 0 ) ( 768725 768725 )
+Number of track patterns: 12
+Number of DEF vias:       0
+Number of components:     38351
+Number of terminals:      1289
+Number of snets:          2
+Number of nets:           32142
+
+[INFO DRT-0167] List of default vias:
+  Layer via
+    default via: M1M2_PR
+  Layer via2
+    default via: M2M3_PR
+  Layer via3
+    default via: M3M4_PR
+  Layer via4
+    default via: M4M5_PR
+[INFO DRT-0162] Library cell analysis.
+[INFO DRT-0163] Instance analysis.
+[INFO DRT-0164] Number of unique instances = 334.
+[INFO DRT-0168] Init region query.
+[INFO DRT-0024]   Complete FR_MASTERSLICE.
+[INFO DRT-0024]   Complete Fr_VIA.
+[INFO DRT-0024]   Complete li1.
+[INFO DRT-0024]   Complete mcon.
+[INFO DRT-0024]   Complete met1.
+[INFO DRT-0024]   Complete via.
+[INFO DRT-0024]   Complete met2.
+[INFO DRT-0024]   Complete via2.
+[INFO DRT-0024]   Complete met3.
+[INFO DRT-0024]   Complete via3.
+[INFO DRT-0024]   Complete met4.
+[INFO DRT-0024]   Complete via4.
+[INFO DRT-0024]   Complete met5.
+[INFO DRT-0033] FR_MASTERSLICE shape region query size = 0.
+[INFO DRT-0033] FR_VIA shape region query size = 0.
+[INFO DRT-0033] li1 shape region query size = 772998.
+[INFO DRT-0033] mcon shape region query size = 419095.
+[INFO DRT-0033] met1 shape region query size = 109436.
+[INFO DRT-0033] via shape region query size = 39340.
+[INFO DRT-0033] met2 shape region query size = 24492.
+[INFO DRT-0033] via2 shape region query size = 31472.
+[INFO DRT-0033] met3 shape region query size = 24003.
+[INFO DRT-0033] via3 shape region query size = 31472.
+[INFO DRT-0033] met4 shape region query size = 9492.
+[INFO DRT-0033] via4 shape region query size = 1568.
+[INFO DRT-0033] met5 shape region query size = 1680.
+[INFO DRT-0165] Start pin access.
+[INFO DRT-0076]   Complete 1000 pins.
+[INFO DRT-0076]   Complete 2000 pins.
+[INFO DRT-0078]   Complete 2799 pins.
+[INFO DRT-0079]   Complete 100 unique inst patterns.
+[INFO DRT-0079]   Complete 200 unique inst patterns.
+[INFO DRT-0079]   Complete 300 unique inst patterns.
+[INFO DRT-0081]   Complete 334 unique inst patterns.
+[INFO DRT-0082]   Complete 10000 groups.
+[INFO DRT-0082]   Complete 20000 groups.
+[INFO DRT-0084]   Complete 25555 groups.
+#scanned instances     = 38351
+#unique  instances     = 334
+#stdCellGenAp          = 11705
+#stdCellValidPlanarAp  = 129
+#stdCellValidViaAp     = 8276
+#stdCellPinNoAp        = 6
+#stdCellPinCnt         = 99614
+#instTermValidViaApCnt = 0
+#macroGenAp            = 0
+#macroValidPlanarAp    = 0
+#macroValidViaAp       = 0
+#macroNoAp             = 0
+[INFO DRT-0166] Complete pin access.
+[INFO DRT-0267] cpu time = 00:02:44, elapsed time = 00:00:51, memory = 502.89 (MB), peak = 519.84 (MB)
+[INFO DRT-0156] guideIn read 100000 guides.
+[INFO DRT-0156] guideIn read 200000 guides.
+
+[INFO DRT-0157] Number of guides:     236393
+
+[INFO DRT-0169] Post process guides.
+[INFO DRT-0176] GCELLGRID X 0 DO 111 STEP 6900 ;
+[INFO DRT-0177] GCELLGRID Y 0 DO 111 STEP 6900 ;
+[INFO DRT-0026]   Complete 100000 origin guides.
+[INFO DRT-0026]   Complete 200000 origin guides.
+[INFO DRT-0028]   Complete FR_MASTERSLICE.
+[INFO DRT-0028]   Complete Fr_VIA.
+[INFO DRT-0028]   Complete li1.
+[INFO DRT-0028]   Complete mcon.
+[INFO DRT-0028]   Complete met1.
+[INFO DRT-0028]   Complete via.
+[INFO DRT-0028]   Complete met2.
+[INFO DRT-0028]   Complete via2.
+[INFO DRT-0028]   Complete met3.
+[INFO DRT-0028]   Complete via3.
+[INFO DRT-0028]   Complete met4.
+[INFO DRT-0028]   Complete via4.
+[INFO DRT-0028]   Complete met5.
+[INFO DRT-0178] Init guide query.
+[INFO DRT-0035]   Complete FR_MASTERSLICE (guide).
+[INFO DRT-0035]   Complete Fr_VIA (guide).
+[INFO DRT-0035]   Complete li1 (guide).
+[INFO DRT-0035]   Complete mcon (guide).
+[INFO DRT-0035]   Complete met1 (guide).
+[INFO DRT-0035]   Complete via (guide).
+[INFO DRT-0035]   Complete met2 (guide).
+[INFO DRT-0035]   Complete via2 (guide).
+[INFO DRT-0035]   Complete met3 (guide).
+[INFO DRT-0035]   Complete via3 (guide).
+[INFO DRT-0035]   Complete met4 (guide).
+[INFO DRT-0035]   Complete via4 (guide).
+[INFO DRT-0035]   Complete met5 (guide).
+[INFO DRT-0036] FR_MASTERSLICE guide region query size = 0.
+[INFO DRT-0036] FR_VIA guide region query size = 0.
+[INFO DRT-0036] li1 guide region query size = 82082.
+[INFO DRT-0036] mcon guide region query size = 0.
+[INFO DRT-0036] met1 guide region query size = 72301.
+[INFO DRT-0036] via guide region query size = 0.
+[INFO DRT-0036] met2 guide region query size = 37578.
+[INFO DRT-0036] via2 guide region query size = 0.
+[INFO DRT-0036] met3 guide region query size = 2626.
+[INFO DRT-0036] via3 guide region query size = 0.
+[INFO DRT-0036] met4 guide region query size = 952.
+[INFO DRT-0036] via4 guide region query size = 0.
+[INFO DRT-0036] met5 guide region query size = 4.
+[INFO DRT-0179] Init gr pin query.
+[INFO DRT-0267] cpu time = 00:00:00, elapsed time = 00:00:00, memory = 588.57 (MB), peak = 588.00 (MB)
+[INFO DRT-0245] skipped writing guide updates to database.
+[INFO DRT-0181] Start track assignment.
+[INFO DRT-0184] Done with 120612 vertical wires in 3 frboxes and 74931 horizontal wires in 3 frboxes.
+[INFO DRT-0186] Done with 15352 vertical wires in 3 frboxes and 21478 horizontal wires in 3 frboxes.
+[INFO DRT-0182] Complete track assignment.
+[INFO DRT-0267] cpu time = 00:00:08, elapsed time = 00:00:04, memory = 860.73 (MB), peak = 912.66 (MB)
+[INFO DRT-0187] Start routing data preparation.
+[INFO DRT-0267] cpu time = 00:00:00, elapsed time = 00:00:00, memory = 860.79 (MB), peak = 912.66 (MB)
+[INFO DRT-0194] Start detail routing.
+[INFO DRT-0195] Start 0th optimization iteration.
+    Completing 10% with 0 violations.
+    elapsed time = 00:00:18, memory = 1200.22 (MB).
+    Completing 20% with 0 violations.
+    elapsed time = 00:00:31, memory = 1514.82 (MB).
+    Completing 30% with 3655 violations.
+    elapsed time = 00:00:43, memory = 1744.16 (MB).
+    Completing 40% with 3655 violations.
+    elapsed time = 00:01:04, memory = 1696.79 (MB).
+    Completing 50% with 3655 violations.
+    elapsed time = 00:01:13, memory = 1796.30 (MB).
+    Completing 60% with 7355 violations.
+    elapsed time = 00:01:37, memory = 1870.57 (MB).
+    Completing 70% with 7355 violations.
+    elapsed time = 00:01:51, memory = 1877.94 (MB).
+    Completing 80% with 11382 violations.
+    elapsed time = 00:02:08, memory = 1931.15 (MB).
+    Completing 90% with 11382 violations.
+    elapsed time = 00:02:30, memory = 1933.57 (MB).
+    Completing 100% with 14863 violations.
+    elapsed time = 00:02:42, memory = 1860.71 (MB).
+[INFO DRT-0199]   Number of violations = 16720.
+Viol/Layer         li1   mcon   met1    via   met2   met3   via3   met4   met5
+Cut Spacing          0     26      0      0      0      0      0      0      0
+Metal Spacing        0      0   2756      0    725     41      0      1      0
+Min Hole             0      0      6      0      0      0      0      0      0
+Recheck             23      0   1243      0    544     22      0     14     11
+Short                0      4   9743     14   1482     39      1     14     11
+[INFO DRT-0267] cpu time = 00:08:32, elapsed time = 00:02:43, memory = 1938.75 (MB), peak = 1999.10 (MB)
+Total wire length = 1119227 um.
+Total wire length on LAYER li1 = 0 um.
+Total wire length on LAYER met1 = 499167 um.
+Total wire length on LAYER met2 = 487773 um.
+Total wire length on LAYER met3 = 69620 um.
+Total wire length on LAYER met4 = 61793 um.
+Total wire length on LAYER met5 = 872 um.
+Total number of vias = 218388.
+Up-via summary (total 218388):
+
+-------------------------
+ FR_MASTERSLICE         0
+            li1     99050
+           met1    113532
+           met2      4088
+           met3      1710
+           met4         8
+-------------------------
+               218388
+
+
+[INFO DRT-0198] Complete detail routing.
+Total wire length = 1119227 um.
+Total wire length on LAYER li1 = 0 um.
+Total wire length on LAYER met1 = 499167 um.
+Total wire length on LAYER met2 = 487773 um.
+Total wire length on LAYER met3 = 69620 um.
+Total wire length on LAYER met4 = 61793 um.
+Total wire length on LAYER met5 = 872 um.
+Total number of vias = 218388.
+Up-via summary (total 218388):
+
+-------------------------
+ FR_MASTERSLICE         0
+            li1     99050
+           met1    113532
+           met2      4088
+           met3      1710
+           met4         8
+-------------------------
+               218388
+
+
+[INFO DRT-0267] cpu time = 00:08:32, elapsed time = 00:02:43, memory = 1939.00 (MB), peak = 1999.10 (MB)
+
+[INFO DRT-0180] Post processing.
+[INFO DRT-0501] Runtime: 220.44s
+Took 221 seconds: detailed_route -output_drc /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/reports/sky130hd/b0_bank_only_baseline/base/5_route_drc.rpt -output_maze /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/maze.log -droute_end_iter 0 -verbose 1 -drc_report_iter_step 5
+[INFO ANT-0002] Found 68 net violations.
+[INFO ANT-0001] Found 74 pin violations.
+Design area 252471 um^2 43% utilization.
+write_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/5_2_route.odb
+Elapsed time: 3:49.49[h:]min:sec. CPU time: user 699.84 sys 3.44 (306%). Peak memory: 2047076KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+5_2_route                 .odb          229           1999 ea7c25e5ed25840e1f8e
+/home/chandler/OpenROAD-flow-scripts/flow/scripts/flow.sh 5_3_fillcell fillcell
+Running fillcell.tcl, stage 5_3_fillcell
+read_liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/5_2_route.odb
+read_sdc /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/5_1_grt.sdc
+source /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/setRC.tcl
+filler_placement "sky130_fd_sc_hd__fill_1 sky130_fd_sc_hd__fill_2 sky130_fd_sc_hd__fill_4 sky130_fd_sc_hd__fill_8"
+[INFO DPL-0001] Placed 65498 filler instances.
+Design area 252471 um^2 43% utilization.
+write_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/5_3_fillcell.odb
+Elapsed time: 0:05.62[h:]min:sec. CPU time: user 1.16 sys 0.72 (33%). Peak memory: 310428KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+5_3_fillcell              .odb            5            303 3ee49361e48476768df0
+cp /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/5_3_fillcell.odb /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/5_route.odb
+cp /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/5_1_grt.sdc /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/5_route.sdc
+/home/chandler/OpenROAD-flow-scripts/flow/scripts/flow.sh 6_1_fill density_fill
+Running density_fill.tcl, stage 6_1_fill
+read_liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/5_route.odb
+read_sdc /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/5_route.sdc
+source /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/setRC.tcl
+exec cp /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/5_route.odb /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/6_1_fill.odb
+Elapsed time: 0:03.23[h:]min:sec. CPU time: user 0.53 sys 0.57 (34%). Peak memory: 244136KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+6_1_fill                  .odb            3            238 3ee49361e48476768df0
+cp /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/5_route.sdc /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/6_1_fill.sdc
+/home/chandler/OpenROAD-flow-scripts/flow/scripts/flow.sh 6_report final_report
+Running final_report.tcl, stage 6_report
+read_liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/6_1_fill.odb
+read_sdc /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/6_1_fill.sdc
+source /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/setRC.tcl
+write_db /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/6_final.odb
+write_sdc -no_timestamp /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/6_final.sdc
+Deleted 0 routing obstructions
+Warning: master sky130_ef_sc_hd__decap_12 has signal pins but no liberty cell
+[INFO RCX-0431] Defined process_corner X with ext_model_index 0
+[INFO RCX-0029] Defined extraction corner X
+[WARNING RCX-0514] The ext_model_file option is deprecated. Use set_extraction_rules_file command instead.
+[INFO RCX-0435] Reading extraction model file /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/rcx_patterns.rules ...
+[INFO RCX-0436] RC segment generation full_pim_system_top (max_merge_res 50.0) ...
+[INFO RCX-0040] Final 118508 rc segments
+[INFO RCX-0439] Coupling Cap extraction full_pim_system_top ...
+[INFO RCX-0440] Coupling threshhold is 0.1000 fF, coupling capacitance less than 0.1000 fF will be grounded.
+[INFO RCX-0442] 53% of 250689 wires extracted
+[INFO RCX-0442] 100% of 250689 wires extracted
+[INFO RCX-0045] Extract 32142 nets, 149820 rsegs, 149820 caps, 282311 ccs
+[INFO RCX-0443] 32142 nets finished
+[INFO PSM-0040] All shapes on net VDD are connected.
+########## IR report #################
+Net              : VDD
+Corner           : default
+Total power      : 1.30e+00 W
+Supply voltage   : 1.80e+00 V
+Worstcase voltage: 1.80e+00 V
+Average voltage  : 1.80e+00 V
+Average IR drop  : 4.50e-04 V
+Worstcase IR drop: 4.84e-03 V
+Percentage drop  : 0.27 %
+######################################
+[INFO PSM-0040] All shapes on net VSS are connected.
+########## IR report #################
+Net              : VSS
+Corner           : default
+Total power      : 1.30e+00 W
+Supply voltage   : 0.00e+00 V
+Worstcase voltage: 5.44e-03 V
+Average voltage  : 4.60e-04 V
+Average IR drop  : 4.60e-04 V
+Worstcase IR drop: 5.44e-03 V
+Percentage drop  : 0.30 %
+######################################
+Cell type report:                       Count       Area
+  Fill cell                             65498  329437.21
+  Tap cell                               7755    9703.06
+  Clock buffer                            231    4640.70
+  Timing Repair Buffer                   8659   67772.50
+  Inverter                                590    2214.62
+  Clock inverter                           58     656.88
+  Sequential cell                        1329   37606.07
+  Multi-Input combinational cell        19729  129877.06
+  Total                                103849  581908.10
+source /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/flow/designs/sky130hd/stob_pim2/openroad_compat.tcl
+Elapsed time: 0:36.46[h:]min:sec. CPU time: user 20.71 sys 6.26 (73%). Peak memory: 1131388KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+6_report                                 36           1104                  N/A
+cp /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lef/sky130_fd_sc_hd.tlef /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/objects/sky130hd/b0_bank_only_baseline/base/klayout_tech.lef
+/usr/bin/python3 /home/chandler/OpenROAD-flow-scripts/flow/util/generate_klayout_tech.py \
+	--template /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/sky130hd.lyt \
+	--output /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/objects/sky130hd/b0_bank_only_baseline/base/klayout.lyt \
+	--lef-files /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/objects/sky130hd/b0_bank_only_baseline/base/klayout_tech.lef /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lef/sky130_fd_sc_hd_merged.lef   \
+	--map-files 
+/usr/bin/python3 /home/chandler/OpenROAD-flow-scripts/flow/scripts/run_command.py --log /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/logs/sky130hd/b0_bank_only_baseline/base/6_1_merge.log --tee -- \
+        /home/chandler/OpenROAD-flow-scripts/flow/scripts/klayout.sh -zz -rd design_name=full_pim_system_top \
+        -rd in_def=/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/6_final.def \
+        -rd in_files="/home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/gds/sky130_fd_sc_hd.gds  " \
+        -rd seal_file="" \
+        -rd out_file=/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/6_1_merged.gds \
+        -rd tech_file=/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/objects/sky130hd/b0_bank_only_baseline/base/klayout.lyt \
+        -rd layer_map= \
+        -r /home/chandler/OpenROAD-flow-scripts/flow/util/def2stream.py
+KLayout 0.30.0
+[INFO] Reporting cells prior to loading DEF ...
+	/home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/gds/sky130_fd_sc_hd.gds
+[INFO] All LEF cells have matching GDS/OAS cells
+[INFO] No orphan cells in the final layout
+Elapsed time: 0:04.71[h:]min:sec. CPU time: user 2.90 sys 0.58 (73%). Peak memory: 566884KB.
+cp /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/6_1_merged.gds /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/6_final.gds
+/mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/logs/sky130hd/b0_bank_only_baseline/base
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+1_1_yosys_canonicalize    .rtlil          0             51 b0b45a9e9ef9b8cfb377
+1_2_yosys                 .v            154            282 0e6810a11e961fc72376
+1_2_yosys                 .sdc                             38fadfb576c8f3e235db
+1_synth                   .odb            2            185 a3df9df83c74cc2d0165
+1_synth                   .sdc                             5969b4f742c8fcfba542
+2_1_floorplan             .odb            3            222 d876f4c1600506890763
+2_1_floorplan             .sdc                             5969b4f742c8fcfba542
+2_2_floorplan_macro       .odb            1            158 d876f4c1600506890763
+2_3_floorplan_tapcell     .odb            1            149 950584592324cbbb21ea
+2_4_floorplan_pdn         .odb            3            187 8e20508063df0181fc22
+3_1_place_gp_skip_io      .odb           37            193 dda2e5f0ce1969a54586
+3_2_place_iop             .odb            2            171 bad26bf624b92d828837
+3_3_place_gp              .odb          171            515 ea6ba6e290b92332c7ac
+3_4_place_resized         .odb            5            268 ea6ba6e290b92332c7ac
+3_5_place_dp              .odb            3            262 ee7244ca773547b66d5e
+4_1_cts                   .odb            4            281 a2f56b89147213fc2809
+5_1_grt                   .odb           59            696 e1882a7cb27aba486804
+5_1_grt                   .sdc                             8f2c27ad25435332d359
+5_2_route                 .odb          229           1999 ea7c25e5ed25840e1f8e
+5_3_fillcell              .odb            5            303 3ee49361e48476768df0
+6_1_fill                  .odb            3            238 3ee49361e48476768df0
+6_1_fill                  .sdc                             8f2c27ad25435332d359
+6_1_merge                                 4            553                  N/A
+6_report                                 36           1104                  N/A
+Total                                   722           1999                     

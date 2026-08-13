@@ -1,0 +1,82 @@
+{
+  "status": "PASS",
+  "top_cell": "STOB_LOGIC_DIE_FLOORPLAN_NOT_SIGNOFF",
+  "manifest": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2\\output\\floorplan_optimization\\exploration\\candidates\\wirelength_first.json",
+  "gds": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2\\output\\floorplan_optimization\\visualization\\wirelength_first\\logic_die_floorplan.gds",
+  "lyp": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2\\output\\floorplan_optimization\\visualization\\wirelength_first\\logic_die_floorplan.lyp",
+  "counts": {
+    "blocks": 8,
+    "tsv_bundles": 48,
+    "tsv_shapes": 320,
+    "micro_bump_bundles": 48,
+    "micro_bump_shapes": 320,
+    "reserved_regions": 4,
+    "routing_corridors": 8,
+    "thermal_bins": 512
+  },
+  "layer_map": {
+    "die": 100,
+    "blocks": 110,
+    "tsv_signal_classes": {
+      "data": 120,
+      "command_address": 121,
+      "clock": 122,
+      "power": 123,
+      "ground": 124,
+      "spare": 125,
+      "unknown": 126
+    },
+    "tsv_keepout": 130,
+    "micro_bump_signal_classes": {
+      "data": 140,
+      "command_address": 141,
+      "clock": 142,
+      "power": 143,
+      "ground": 144,
+      "spare": 145,
+      "unknown": 146
+    },
+    "reserved_regions": {
+      "phy": 150,
+      "pdn": 151,
+      "clock": 152,
+      "decap": 153,
+      "routing": 154,
+      "pad": 155,
+      "package": 156,
+      "thermal": 157,
+      "other": 158
+    },
+    "connectivity": 170,
+    "labels": 199,
+    "thermal_bins_low_to_high": [
+      200,
+      201,
+      202,
+      203,
+      204,
+      205,
+      206,
+      207,
+      208,
+      209,
+      210,
+      211,
+      212,
+      213,
+      214,
+      215
+    ]
+  },
+  "thermal_overlay": {
+    "source": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2\\output\\floorplan_optimization\\thermal\\wirelength_first\\temperature_field.npz",
+    "range_K": [
+      306.7160673793149,
+      313.7350421066808
+    ],
+    "classification": "modeled",
+    "signoff": false
+  },
+  "traceability": "block, TSV bundle and micro-bump bundle IDs are encoded as child-cell names and labels",
+  "scope": "Manifest-driven research visualization; not a manufacturing mask set or signoff layout."
+}

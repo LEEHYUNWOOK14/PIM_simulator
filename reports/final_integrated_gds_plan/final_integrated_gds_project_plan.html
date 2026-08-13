@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STOB PIM2 최종 통합 GDS 프로젝트 계획서</title>
+  <style>
+    :root {
+      --ink:#172033; --muted:#5d687b; --navy:#123b66; --blue:#2868c7;
+      --paper:#fff; --bg:#f3f6fa; --line:#d9e2ec;
+      --green:#117952; --green-bg:#e8f7ef;
+      --amber:#986000; --amber-bg:#fff2d4;
+      --red:#aa3838; --red-bg:#ffeded;
+      --gray-bg:#f2f4f7;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:Pretendard,"Noto Sans KR","Malgun Gothic",system-ui,sans-serif;line-height:1.65;word-break:keep-all}
+    .page{max-width:1180px;margin:0 auto;padding:28px 22px 76px}
+    header{padding:46px 48px;border-radius:22px;color:white;background:linear-gradient(135deg,#102d4e,#1f5f9f 70%,#3a7fc0);box-shadow:0 18px 44px #183b6627}
+    .eyebrow{margin:0 0 8px;color:#cce5ff;font-weight:800;letter-spacing:.08em}
+    h1{margin:0;font-size:clamp(2rem,5vw,3.25rem);line-height:1.16;letter-spacing:-.04em}
+    header .lead{max-width:850px;margin:18px 0 0;color:#edf6ff;font-size:1.12rem}
+    header .meta{margin:22px 0 0;color:#cce5ff;font-size:.9rem}
+    section{margin-top:24px;padding:32px 34px;background:var(--paper);border:1px solid var(--line);border-radius:18px;box-shadow:0 7px 22px #173b6610}
+    h2{margin:0 0 17px;color:var(--navy);font-size:1.5rem;letter-spacing:-.025em}
+    h3{margin:0 0 7px;font-size:1.05rem}
+    p{margin:7px 0}
+    code{padding:2px 5px;border-radius:5px;background:#edf2f7;font-size:.9em}
+    .decision{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+    .target{padding:23px;border-radius:14px;background:#eaf4ff;border-left:6px solid var(--blue)}
+    .target strong{display:block;color:var(--navy);font-size:1.3rem;margin-bottom:5px}
+    .scope-out{padding:23px;border-radius:14px;background:var(--gray-bg);border:1px solid var(--line)}
+    .scope-out strong{display:block;color:#4c5667;font-size:1.1rem;margin-bottom:5px}
+    .status-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+    .status-card{padding:17px;border-radius:13px;border:1px solid var(--line)}
+    .status-card b{display:block;margin-bottom:5px;font-size:1.1rem}
+    .pass{background:var(--green-bg);border-color:#abdcc8}.pass b{color:var(--green)}
+    .active{background:var(--amber-bg);border-color:#ebc773}.active b{color:var(--amber)}
+    .fail{background:var(--red-bg);border-color:#ecb8b8}.fail b{color:var(--red)}
+    .pending{background:var(--gray-bg)}.pending b{color:#526075}
+    .callout{margin-top:17px;padding:16px 18px;border-radius:12px;background:var(--amber-bg);border-left:5px solid #e1a12b}
+    .pipeline{display:flex;gap:8px;align-items:stretch;overflow-x:auto;padding:8px 0 3px}
+    .pipe-step{min-width:133px;flex:1;padding:16px 12px;border-radius:12px;text-align:center;border:1px solid var(--line);background:#fafbfd}
+    .pipe-step.done{background:var(--green-bg);border-color:#abdcc8}
+    .pipe-step.now{background:var(--amber-bg);border:2px solid #d7981d}
+    .pipe-step small{display:block;color:var(--muted);margin-top:5px;line-height:1.4}
+    .arrow{display:grid;place-items:center;color:#8290a4;font-weight:900}
+    table{width:100%;border-collapse:collapse;font-size:.91rem}
+    th,td{padding:12px 10px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+    th{color:var(--navy);background:#edf3f9}
+    tr:last-child td{border-bottom:0}
+    .badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:.75rem;font-weight:900;white-space:nowrap}
+    .b-done{color:#086541;background:#d5f0e3}.b-now{color:#805000;background:#ffe0a0}.b-block{color:#963434;background:#f6d4d4}.b-wait{color:#586579;background:#e5e9ef}
+    .phase{margin-top:16px;padding:21px;border:1px solid var(--line);border-radius:14px;background:#fcfdff}
+    .phase-head{display:flex;justify-content:space-between;gap:12px;align-items:start}
+    .phase ul{margin:10px 0 0;padding-left:21px}
+    .phase li+li{margin-top:5px}
+    .criteria{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
+    .criterion{padding:17px;border-radius:12px;background:#f7f9fc;border:1px solid var(--line)}
+    .criterion strong{color:var(--navy)}
+    .risk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
+    .risk{padding:18px;border-radius:13px;border:1px solid #ecd0a0;background:#fff9ed}
+    .files a{color:var(--blue);text-decoration:none;border-bottom:1px solid #afcaf1}
+    .boundary{padding:18px 20px;border-radius:12px;color:#4c5667;background:#f4f5f7;border:1px solid #dfe3e8}
+    footer{padding:27px 6px 0;text-align:center;color:var(--muted);font-size:.84rem}
+    @media(max-width:800px){header{padding:36px 25px}section{padding:25px 20px}.decision,.criteria,.risk-grid{grid-template-columns:1fr}.status-grid{grid-template-columns:1fr 1fr}.pipeline{display:grid}.arrow{transform:rotate(90deg)}.table-wrap{overflow-x:auto}table{min-width:820px}}
+    @media print{body{background:white}.page{max-width:none;padding:0}header,section{box-shadow:none;break-inside:avoid}.phase{break-inside:avoid}}
+  </style>
+</head>
+<body>
+<main class="page">
+  <header>
+    <p class="eyebrow">PROJECT EXECUTION PLAN</p>
+    <h1>최종 통합 GDS<br>프로젝트 계획서</h1>
+    <p class="lead">현재 진행 중인 전역 배선 개선부터 통합 RTL GDS 생성, TSV·micro-bump overlay 병합, 독립 검증과 최종 evidence 동결까지의 실행 계획입니다.</p>
+    <p class="meta">STOB PIM2 · 기준 시각 2026-08-13 18:27 KST · 목표 산출물: 최종 통합 연구용 GDS</p>
+  </header>
+
+  <section>
+    <h2>1. 프로젝트 목표 재정의</h2>
+    <div class="decision">
+      <div class="target">
+        <strong>최종 목표: 최종 통합 GDS</strong>
+        통합 normalization RTL을 실제 표준셀로 배치·배선한 GDS와 TSV, micro-bump, HBM floorplan overlay를 동일 좌표계에서 병합한 단일 결과물을 만든다. 결과는 논문 그림, 구조 검토, 재현성 검증과 후속 열·비용 분석에 사용한다.
+      </div>
+      <div class="scope-out">
+        <strong>제조용 signoff 목표 제거</strong>
+        Tape-out 승인, foundry signoff와 제조 인계는 이 계획의 작업·완료 조건·일정에서 제외한다. 단, 최종 파일이 제조용이 아니라는 표시는 오해 방지를 위해 유지한다.
+      </div>
+    </div>
+    <div class="boundary"><strong>최종 파일의 권장 명칭:</strong> <code>STOB_PIM2_FINAL_INTEGRATED_RESEARCH_GDS</code><br>“Final”은 이 연구 프로젝트의 최종 산출물이라는 뜻이며, 제조 승인 또는 tape-out 준비 완료를 뜻하지 않는다.</div>
+  </section>
+
+  <section>
+    <h2>2. 현재 작업 상황</h2>
+    <div class="status-grid">
+      <div class="status-card pass"><b>RTL·합성 PASS</b>PF-0~PF-2 완료</div>
+      <div class="status-card pass"><b>배치 PASS</b>PF-3, 최종 위반 0</div>
+      <div class="status-card fail"><b>전역 배선 FAIL</b>PF-4, v4 혼잡 잔존</div>
+      <div class="status-card active"><b>v5 실행 중</b>bank-aware 재배치 기반</div>
+    </div>
+    <div class="callout"><strong>현재 병목:</strong> v4 전역 배선은 route guide와 congestion report를 생성했지만 상세 혼잡 위반 5,998건과 CuGR 잔여 혼잡 2,620이 남았다. v5는 4×4 bank-aware 배치와 분산 패드를 적용해 이를 낮추는 중이다. OpenROAD는 확인 시점에 약 23.7GB RSS와 WSL 메모리 약 82.5%를 사용했다.</div>
+    <p>v5 입력 배치는 약 484만 개 movable cell을 합법화했으며 최종 배치 위반은 0건이다. 다만 현재 v5 스크립트는 전역 배선 guide와 congestion report만 생성하고 상세 배선 DB나 GDS는 생성하지 않는다.</p>
+  </section>
+
+  <section>
+    <h2>3. 시작점에서 종료점까지</h2>
+    <div class="pipeline" aria-label="프로젝트 단계">
+      <div class="pipe-step done"><strong>RTL 검증</strong><small>완료</small></div><div class="arrow">→</div>
+      <div class="pipe-step done"><strong>합성</strong><small>완료</small></div><div class="arrow">→</div>
+      <div class="pipe-step done"><strong>배치</strong><small>완료</small></div><div class="arrow">→</div>
+      <div class="pipe-step now"><strong>전역 배선</strong><small>현재 작업</small></div><div class="arrow">→</div>
+      <div class="pipe-step"><strong>클록·상세 배선</strong><small>대기</small></div><div class="arrow">→</div>
+      <div class="pipe-step"><strong>RTL GDS</strong><small>대기</small></div><div class="arrow">→</div>
+      <div class="pipe-step"><strong>Overlay 병합</strong><small>대기</small></div><div class="arrow">→</div>
+      <div class="pipe-step"><strong>최종 검증</strong><small>프로젝트 종료</small></div>
+    </div>
+    <p>단계 수 기준으로 앞의 3개 단계는 완료됐고 4번째 단계가 진행 중이다. 다만 전역·상세 배선은 반복과 메모리 위험이 가장 큰 구간이므로, 단순 단계 비율을 일정 완료율로 해석해서는 안 된다.</p>
+  </section>
+
+  <section>
+    <h2>4. 마일스톤과 통과 조건</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>ID</th><th>마일스톤</th><th>현재 상태</th><th>필수 완료 조건</th><th>주요 산출물</th></tr></thead>
+        <tbody>
+          <tr><td>M0</td><td>근거 기준선 고정</td><td><span class="badge b-done">완료</span></td><td>PF-0~PF-3 근거와 v4 실패 수치 보존</td><td>physical feasibility JSON/MD</td></tr>
+          <tr><td>M1</td><td>v5 전역 배선 평가</td><td><span class="badge b-now">실행 중</span></td><td>프로세스 정상 종료, guide/report 생성, 혼잡 수치 확보</td><td>v5 log, route guide, congestion report</td></tr>
+          <tr><td>M2</td><td>PF-4 closure</td><td><span class="badge b-block">차단</span></td><td>overflow 0, severe congestion 없음, 허용되지 않은 skipped net 없음, 현재 revision과 해시 일치</td><td>PF-4 PASS 판정</td></tr>
+          <tr><td>M3</td><td>재사용 가능한 physical checkpoint</td><td><span class="badge b-wait">대기</span></td><td>배치·전역 배선 결과를 ODB/SDC로 저장하고 해시·툴 버전 기록</td><td>routed checkpoint ODB, SDC, manifest</td></tr>
+          <tr><td>M4</td><td>클록 및 상세 배선</td><td><span class="badge b-wait">대기</span></td><td>거대 단일 clock fanout을 그대로 건너뛰지 않고 클록 구조 반영, detailed route terminal completion, output ODB 존재</td><td>detailed-route ODB, route/violation reports</td></tr>
+          <tr><td>M5</td><td>통합 RTL GDS 생성</td><td><span class="badge b-wait">대기</span></td><td>GDS stream-out 성공, top cell·bbox·metal/via 계층 readback 확인</td><td>integrated RTL GDS, DEF, netlist, metrics</td></tr>
+          <tr><td>M6</td><td>TSV·bump overlay 동결</td><td><span class="badge b-wait">대기</span></td><td>canonical manifest, overlay GDS/LYP, 최소 2개 물리 anchor, 단위·방향·레이어 정책 확정</td><td>overlay GDS/LYP, merge recipe</td></tr>
+          <tr><td>M7</td><td>최종 통합 GDS 병합</td><td><span class="badge b-wait">대기</span></td><td>RTL과 overlay 병합, 레이어 충돌 없음, anchor 오차 허용치 이내, die 경계 내부</td><td><code>merged_final_physical.gds</code>, LYP</td></tr>
+          <tr><td>M8</td><td>독립 검증과 프로젝트 종료</td><td><span class="badge b-wait">대기</span></td><td>재열기 검증, SHA-256, 재현 명령, known limitations, evidence matrix와 최종 HTML 보고서 동결</td><td>검증 JSON, hash manifest, 최종 보고서</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>5. 단계별 실행 계획</h2>
+
+    <article class="phase">
+      <div class="phase-head"><h3>Phase A — v5 결과 판정과 PF-4 해결</h3><span class="badge b-now">현재</span></div>
+      <ul>
+        <li>실행 중인 v5를 중복 실행하지 않고 종료 상태, peak memory, exit code를 수집한다.</li>
+        <li>v5 congestion report에서 총 위반, 잔여 혼잡, 최대 overuse, hotspot을 v4와 동일 정의로 비교한다.</li>
+        <li>0이 아니면 bank region, pin 분산, utilization, routing layer와 high-fanout 예외를 한 변수씩 변경한다.</li>
+        <li>PF-4 validator가 자동으로 새 revision을 선택하고 해시 일관성을 확인하도록 collector를 갱신한다.</li>
+      </ul>
+    </article>
+
+    <article class="phase">
+      <div class="phase-head"><h3>Phase B — GDS로 이어지는 physical flow 고정</h3><span class="badge b-wait">PF-4 이후</span></div>
+      <ul>
+        <li>현재 전역 배선 스크립트에 routed ODB 저장과 재시작 지점을 추가한다.</li>
+        <li>315,739 terminal의 <code>clk_i</code>를 단순 skip한 상태로 최종화하지 않고, CTS 또는 명시적 연구용 clock distribution 모델을 적용한다.</li>
+        <li>클록 반영 후 placement legality와 global-route overflow를 다시 확인한다.</li>
+        <li>모든 입력 RTL, Liberty, LEF, SDC, ODB의 SHA-256을 하나의 revision manifest에 고정한다.</li>
+      </ul>
+    </article>
+
+    <article class="phase">
+      <div class="phase-head"><h3>Phase C — 상세 배선과 RTL GDS</h3><span class="badge b-wait">대기</span></div>
+      <ul>
+        <li>상세 배선 전 WSL memory/swap과 출력 경로 여유 공간을 사전 점검한다.</li>
+        <li>checkpoint 기반으로 detailed route를 실행하고 중간 진행률, 메모리, violation 수를 보존한다.</li>
+        <li>상세 배선이 terminal completion에 도달해야 RTL GDS 생성 단계로 진행한다.</li>
+        <li>남은 DRC·antenna·timing 수치는 숨기지 않고 최종 보고서에 정량 기록하되, 제조 signoff closure 작업으로 확장하지 않는다.</li>
+        <li>OpenROAD stream-out 후 KLayout으로 top cell, hierarchy, bbox, 사용 layer와 non-empty geometry를 독립 확인한다.</li>
+      </ul>
+    </article>
+
+    <article class="phase">
+      <div class="phase-head"><h3>Phase D — TSV·micro-bump 통합</h3><span class="badge b-wait">대기</span></div>
+      <ul>
+        <li>기존 floorplan manifest와 overlay GDS를 최신 RTL revision에 맞춰 재생성한다.</li>
+        <li>RTL GDS와 overlay의 DBU, 방향, 원점, die bbox를 확인하고 두 개 이상의 anchor로 변환을 결정한다.</li>
+        <li>레이어 충돌은 자동 remap하되 recipe에 명시하고 사람이 검토할 수 있도록 남긴다.</li>
+        <li>입력 해시가 바뀌면 병합을 거부하는 hash-pinned recipe로 최종 GDS를 생성한다.</li>
+      </ul>
+    </article>
+
+    <article class="phase">
+      <div class="phase-head"><h3>Phase E — 최종 감사와 종료</h3><span class="badge b-wait">마지막</span></div>
+      <ul>
+        <li>새 프로세스에서 최종 GDS를 다시 열어 top, cell 수, layer, bbox, RTL/overlay shape 존재를 확인한다.</li>
+        <li>고정 카메라 KLayout PNG와 구조 요약을 만들어 사람이 육안으로 좌표·방향을 검토한다.</li>
+        <li>모든 입력·출력의 SHA-256, 생성 명령, tool version과 결과 분류를 manifest에 기록한다.</li>
+        <li>evidence matrix에서 RTL GDS는 <code>placed/routed research artifact</code>, overlay는 <code>illustrative</code>로 분리한다.</li>
+        <li>M0~M8 결과와 알려진 제한을 최종 HTML에 기록하고 프로젝트를 종료한다.</li>
+      </ul>
+    </article>
+  </section>
+
+  <section>
+    <h2>6. 프로젝트 완료 정의</h2>
+    <div class="criteria">
+      <div class="criterion"><strong>① 통합 RTL GDS 존재</strong><br>현재 통합 normalization revision에서 생성되고 독립적으로 다시 열리는 GDS가 있다.</div>
+      <div class="criterion"><strong>② 물리 배선 추적 가능</strong><br>상세 배선 완료 ODB, route report와 GDS가 같은 revision hash로 연결된다.</div>
+      <div class="criterion"><strong>③ Overlay 정렬 검증</strong><br>TSV·bump overlay가 최소 2개 anchor와 단위 변환 검사를 통과한다.</div>
+      <div class="criterion"><strong>④ 단일 최종 파일</strong><br>RTL과 overlay geometry가 모두 존재하는 <code>merged_final_physical.gds</code>가 생성된다.</div>
+      <div class="criterion"><strong>⑤ 재현 가능</strong><br>깨끗한 출력 폴더에서 문서화된 명령으로 recipe·GDS·검증 보고서를 다시 만들 수 있다.</div>
+      <div class="criterion"><strong>⑥ 주장 경계 일치</strong><br>남은 timing/DRC/antenna 제한과 illustrative overlay가 evidence matrix와 최종 보고서에 동일하게 기록된다.</div>
+    </div>
+    <p class="callout"><strong>완료를 막지 않는 항목:</strong> 제조용 foundry signoff, tape-out 승인, proprietary HBM PHY 검증은 프로젝트 완료 조건이 아니다. 그러나 detailed route 자체의 terminal completion과 최종 GDS의 구조적 유효성은 반드시 충족해야 한다.</p>
+  </section>
+
+  <section>
+    <h2>7. 주요 위험과 대응</h2>
+    <div class="risk-grid">
+      <div class="risk"><h3>메모리 부족</h3><p>전역 배선만으로 약 23.7GB를 사용 중이다. 중복 OpenROAD 실행 금지, 충분한 swap 확보, checkpoint 저장, 상세 배선 단독 실행으로 대응한다.</p></div>
+      <div class="risk"><h3>혼잡이 0으로 내려가지 않음</h3><p>단순 router 반복보다 bank locality, pad 분산, utilization과 wide-interface 구조를 우선 수정한다. 변경 변수와 효과를 한 번에 하나씩 기록한다.</p></div>
+      <div class="risk"><h3>클록이 실제 배선에서 제외됨</h3><p>현재 high-fanout clock skip은 최종 GDS 조건으로 인정하지 않는다. CTS/clock distribution 이후 전체 배선 결과를 다시 생성한다.</p></div>
+      <div class="risk"><h3>RTL과 overlay 좌표 불일치</h3><p>눈대중 이동·확대는 금지한다. DBU=물리 스케일을 분리하고 최소 2개 anchor와 die-boundary 검사를 사용한다.</p></div>
+      <div class="risk"><h3>오래된 산출물 혼입</h3><p>B0 GDS, 과거 <code>output/output.gds</code>, historical merge stress 결과를 현재 최종 입력으로 재사용하지 않는다. 입력은 hash-pinned current revision만 허용한다.</p></div>
+      <div class="risk"><h3>“최종” 표현의 오해</h3><p>파일명과 보고서에 <code>RESEARCH</code> 및 <code>NOT_FOR_FABRICATION</code> 표식을 넣고 evidence 등급을 함께 제공한다.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>8. 최종 폴더 구조</h2>
+    <pre><code>output/final_integrated_gds/
+├─ inputs/
+│  ├─ integrated_rtl_routed.gds
+│  ├─ tsv_bump_overlay.gds
+│  └─ floorplan_manifest.json
+├─ recipe/
+│  └─ final_gds_merge_recipe.json
+├─ final/
+│  ├─ merged_final_physical.gds
+│  └─ merged_final_physical.lyp
+├─ validation/
+│  ├─ merged_final_physical_report.json
+│  ├─ hash_manifest.json
+│  └─ klayout_fixed_camera.png
+└─ reports/
+   └─ final_integrated_gds_completion_report.html</code></pre>
+    <p>중간 ODB·로그처럼 큰 구현 산출물은 기존 physical-feasibility 결과 폴더에 보존하고, 위 최종 폴더에는 동결된 입력·recipe·최종 파일·검증 결과만 모은다.</p>
+  </section>
+
+  <section class="files">
+    <h2>9. 현재 근거와 실행 도구</h2>
+    <p><a href="../hardware_cost_physical_feasibility/physical_feasibility_report.md">현재 Physical Feasibility 보고서</a></p>
+    <p><a href="../paper_evidence_matrix/evidence_matrix.md">논문 Evidence Matrix</a></p>
+    <p><a href="../floorplan_optimization/rtl_refresh_handoff.md">최종 RTL 교체 Handoff</a></p>
+    <p>병합 도구: <code>tools/prepare_final_gds_merge_recipe.py</code>, <code>tools/merge_final_rtl_gds.py</code>, <code>tools/run_final_rtl_gds_merge.ps1</code></p>
+  </section>
+
+  <footer>STOB PIM2 · 최종 통합 GDS 프로젝트 계획 · 제조 signoff는 실행 범위에서 제외</footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,12 @@
+GROOT_ACTUAL_TRACE_BF16_TB PASS profile=action_vlln hidden=2048 outputs=2048 exact_mismatches=983 mean=3aa2 inv=3f7c cycles=538
+verification/groot_normalization/groot_actual_trace_bf16_tb.sv:80: $finish called at 5410 (1s)
+GROOT_ACTUAL_TRACE_BF16_TB PASS profile=action_vl_self_attention_norm1 hidden=2048 outputs=2048 exact_mismatches=1986 mean=b900 inv=3f7a cycles=538
+verification/groot_normalization/groot_actual_trace_bf16_tb.sv:80: $finish called at 5410 (1s)
+GROOT_ACTUAL_TRACE_BF16_TB PASS profile=action_vl_self_attention_norm3 hidden=2048 outputs=2048 exact_mismatches=1228 mean=bb23 inv=3f75 cycles=538
+verification/groot_normalization/groot_actual_trace_bf16_tb.sv:80: $finish called at 5410 (1s)
+GROOT_ACTUAL_TRACE_BF16_TB PASS profile=action_dit_adaln_norm1 hidden=1536 outputs=1536 exact_mismatches=470 mean=bc38 inv=3f80 cycles=410
+verification/groot_normalization/groot_actual_trace_bf16_tb.sv:80: $finish called at 4130 (1s)
+GROOT_ACTUAL_TRACE_BF16_TB PASS profile=action_dit_norm3 hidden=1536 outputs=1536 exact_mismatches=1340 mean=bc33 inv=3f7e cycles=410
+verification/groot_normalization/groot_actual_trace_bf16_tb.sv:80: $finish called at 4130 (1s)
+GROOT_ACTUAL_TRACE_BF16_TB PASS profile=action_dit_norm_out hidden=1536 outputs=1536 exact_mismatches=1289 mean=3fde inv=3d11 cycles=410
+verification/groot_normalization/groot_actual_trace_bf16_tb.sv:80: $finish called at 4130 (1s)

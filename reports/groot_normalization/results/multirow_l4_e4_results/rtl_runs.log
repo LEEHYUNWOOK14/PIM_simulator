@@ -1,0 +1,12 @@
+MULTIROW_TRACE PASS profile=action_vlln lanes=4 engines=4 rows=280 hidden=2048 elements=573440 mixed_mismatches=0 pytorch_bit_mismatches=5 cycles=9663 max_contexts=2
+verification/groot_normalization/groot_multirow_trace_tb.sv:35: $finish called at 96660 (1s)
+MULTIROW_TRACE PASS profile=action_vl_self_attention_norm1 lanes=4 engines=4 rows=280 hidden=2048 elements=573440 mixed_mismatches=0 pytorch_bit_mismatches=7 cycles=9663 max_contexts=2
+verification/groot_normalization/groot_multirow_trace_tb.sv:35: $finish called at 96660 (1s)
+MULTIROW_TRACE PASS profile=action_vl_self_attention_norm3 lanes=4 engines=4 rows=280 hidden=2048 elements=573440 mixed_mismatches=0 pytorch_bit_mismatches=17 cycles=9663 max_contexts=2
+verification/groot_normalization/groot_multirow_trace_tb.sv:35: $finish called at 96660 (1s)
+MULTIROW_TRACE PASS profile=action_dit_adaln_norm1 lanes=4 engines=4 rows=41 hidden=1536 elements=62976 mixed_mismatches=0 pytorch_bit_mismatches=4 cycles=1201 max_contexts=3
+verification/groot_normalization/groot_multirow_trace_tb.sv:35: $finish called at 12040 (1s)
+MULTIROW_TRACE PASS profile=action_dit_norm3 lanes=4 engines=4 rows=41 hidden=1536 elements=62976 mixed_mismatches=0 pytorch_bit_mismatches=0 cycles=1201 max_contexts=3
+verification/groot_normalization/groot_multirow_trace_tb.sv:35: $finish called at 12040 (1s)
+MULTIROW_TRACE PASS profile=action_dit_norm_out lanes=4 engines=4 rows=41 hidden=1536 elements=62976 mixed_mismatches=0 pytorch_bit_mismatches=4 cycles=1201 max_contexts=3
+verification/groot_normalization/groot_multirow_trace_tb.sv:35: $finish called at 12040 (1s)

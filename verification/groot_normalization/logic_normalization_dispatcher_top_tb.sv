@@ -17,13 +17,12 @@ module logic_normalization_dispatcher_top_tb;
       .response_variance_clamped_o(clamp),.duplicate_begin_error_o(dup),
       .unmatched_partial_error_o(unmatched),.engine_protocol_error_o(eperr));
     task automatic send_begin(input[15:0]tag);
-      begin @(negedge clk);btag=tag;bv=1;while(!br)begin @(negedge clk);
-        if(cycles%20==0)$display("wait begin tag=%h active=%b ebr=%b rr=%0d",tag,dut.active_q,dut.e_br,dut.begin_rr_q);end @(negedge clk);bv=0;
-        $display("sent begin %h cycle=%0d",tag,cycles);end
+      begin @(negedge clk);btag=tag;bv=1;@(posedge clk);while(!br)@(posedge clk);
+        @(negedge clk);bv=0;end
     endtask
     task automatic send_partial(input[15:0]tag,input bit bank);
-      begin @(negedge clk);ptag=tag;pbank=bank;pv=1;while(!pr)@(negedge clk);@(negedge clk);pv=0;
-        $display("sent partial %h bank=%0d cycle=%0d",tag,bank,cycles);end
+      begin @(negedge clk);ptag=tag;pbank=bank;pv=1;@(posedge clk);while(!pr)@(posedge clk);
+        @(negedge clk);pv=0;end
     endtask
     initial begin
       bv=0;btag=0;mode=1;mask='1;invh=16'h3800;eps=0;pv=0;ptag=0;pbank=0;
@@ -48,7 +47,6 @@ module logic_normalization_dispatcher_top_tb;
           if(index<0||index>=ROWS||seen[index])$fatal(1,"bad/duplicate tag %h",rtag);
           if(!rmode||mean!==0||inv!==16'h3bfa)$fatal(1,"bad scalar response");
           seen[index]=1;responses=responses+1;
-          $display("dispatcher response tag=%h responses=%0d",rtag,responses);
         end
       end
       if(seen!=='1||dup||unmatched||eperr)$fatal(1,"coverage/error flags bad seen=%b",seen);

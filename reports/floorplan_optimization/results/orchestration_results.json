@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-08-12T00:00:18.6609682+09:00",
+  "status": "PASS",
+  "seed": 235,
+  "samples": 400,
+  "current_rtl_physical_included": false,
+  "current_rtl_detailed_route_included": false,
+  "steps": [
+    {
+      "name": "01_architecture",
+      "status": "PASS",
+      "started_at": "2026-08-11T23:59:05.5361532+09:00",
+      "duration_s": 4.653,
+      "log": "reports/floorplan_optimization/results/orchestration_logs/01_architecture.log"
+    },
+    {
+      "name": "02_rtl_to_3d",
+      "status": "PASS",
+      "started_at": "2026-08-11T23:59:10.2015552+09:00",
+      "duration_s": 2.963,
+      "log": "reports/floorplan_optimization/results/orchestration_logs/02_rtl_to_3d.log"
+    },
+    {
+      "name": "03_hardware_cost",
+      "status": "PASS",
+      "started_at": "2026-08-11T23:59:13.1649629+09:00",
+      "duration_s": 5.514,
+      "log": "reports/floorplan_optimization/results/orchestration_logs/03_hardware_cost.log"
+    },
+    {
+      "name": "04_floorplan_manifest",
+      "status": "PASS",
+      "started_at": "2026-08-11T23:59:18.6789591+09:00",
+      "duration_s": 0.848,
+      "log": "reports/floorplan_optimization/results/orchestration_logs/04_floorplan_manifest.log"
+    },
+    {
+      "name": "05_candidate_exploration",
+      "status": "PASS",
+      "started_at": "2026-08-11T23:59:19.5276573+09:00",
+      "duration_s": 2.077,
+      "log": "reports/floorplan_optimization/results/orchestration_logs/05_candidate_exploration.log"
+    },
+    {
+      "name": "06_openroad_macro_proxies",
+      "status": "PASS",
+      "started_at": "2026-08-11T23:59:21.6053857+09:00",
+      "duration_s": 5.598,
+      "log": "reports/floorplan_optimization/results/orchestration_logs/06_openroad_macro_proxies.log"
+    },
+    {
+      "name": "07_reference_thermal",
+      "status": "PASS",
+      "started_at": "2026-08-11T23:59:27.2039895+09:00",
+      "duration_s": 15.314,
+      "log": "reports/floorplan_optimization/results/orchestration_logs/07_reference_thermal.log"
+    },
+    {
+      "name": "08_hotspot",
+      "status": "PASS",
+      "started_at": "2026-08-11T23:59:42.5178923+09:00",
+      "duration_s": 2.157,
+      "log": "reports/floorplan_optimization/results/orchestration_logs/08_hotspot.log"
+    },
+    {
+      "name": "09_3dice",
+      "status": "PASS",
+      "started_at": "2026-08-11T23:59:44.6750796+09:00",
+      "duration_s": 3.255,
+      "log": "reports/floorplan_optimization/results/orchestration_logs/09_3dice.log"
+    },
+    {
+      "name": "10_candidate_comparison",
+      "status": "PASS",
+      "started_at": "2026-08-11T23:59:47.9306290+09:00",
+      "duration_s": 0.182,
+      "log": "reports/floorplan_optimization/results/orchestration_logs/10_candidate_comparison.log"
+    },
+    {
+      "name": "11_candidate_visualization",
+      "status": "PASS",
+      "started_at": "2026-08-11T23:59:48.1131187+09:00",
+      "duration_s": 27.401,
+      "log": "reports/floorplan_optimization/results/orchestration_logs/11_candidate_visualization.log"
+    },
+    {
+      "name": "13_floorplan_regression",
+      "status": "PASS",
+      "started_at": "2026-08-12T00:00:16.4631707+09:00",
+      "duration_s": 2.194,
+      "log": "reports/floorplan_optimization/results/orchestration_logs/13_floorplan_regression.log"
+    }
+  ]
+}

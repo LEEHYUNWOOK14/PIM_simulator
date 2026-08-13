@@ -2,7 +2,7 @@
 
 > **HBM2 PIM architectural visualization - not signoff layout**
 
-Generated: 2026-08-06T07:56:39.609508+00:00
+Generated: 2026-08-11T14:59:05.803504+00:00
 
 ## Structure
 

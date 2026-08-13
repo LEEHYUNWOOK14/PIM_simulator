@@ -1,0 +1,37 @@
+{
+  "date": "2026-08-12",
+  "status": "PASS_RTL_FROZEN",
+  "configuration": {
+    "bank_policy": "split_rw",
+    "read_arbitration": "round_robin",
+    "lanes": 8,
+    "scalar_engines": 4,
+    "contexts": 8,
+    "local_reduction_contexts": 2,
+    "apply_fifo_depth": 16,
+    "traffic_counter_width": 32
+  },
+  "throughput_floor": {
+    "bank_word_bits": 256,
+    "minimum_consumed_bits_per_active_bank_cycle": 128,
+    "minimum_fraction": 0.5,
+    "lane4": "FAIL_0.25",
+    "lane8": "PASS_0.50",
+    "lane16": "PASS_BUT_EXCLUDED_BY_COST"
+  },
+  "gates": {
+    "layernorm": "PASS",
+    "rmsnorm_128_2048": "PASS",
+    "adalayernorm": "PASS",
+    "lane4_lane8": "PASS",
+    "random_backpressure": "PASS",
+    "bank_skew_conflict": "PASS",
+    "context_full_tag_wrap": "PASS",
+    "reset_mid_transaction": "PASS",
+    "cycle_model_max_error_percent": 3.0,
+    "traffic_counters": "PASS",
+    "verilator_lint": "PASS_REVIEWED_WARNINGS",
+    "yosys_generic_check_problems": 0
+  },
+  "required_work_remaining_in_scope": []
+}

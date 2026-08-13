@@ -26,6 +26,7 @@ module bf16_mul (
             if (product[bit_index]) msb_index = bit_index;
         exponent = lhs_unbiased + rhs_unbiased - 14 + msb_index;
         rounded_wide = '0; low_mask = '0; round_up = 0; result_exp_field = '0;
+        shift_amount = 0;
         if ((lhs_exp == 8'hff && lhs_frac != 0) ||
             (rhs_exp == 8'hff && rhs_frac != 0) ||
             ((lhs_exp == 8'hff || rhs_exp == 8'hff) &&

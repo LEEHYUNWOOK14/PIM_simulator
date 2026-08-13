@@ -1,0 +1,103 @@
+{
+  "top_cell": "HBM2_PIM_ARCHITECTURE_NOT_SIGNOFF",
+  "stack_count": 1,
+  "dram_dies": 8,
+  "total_dram_die_instances": 8,
+  "physical_channels_per_stack": 8,
+  "pseudo_channels_per_stack": 0,
+  "banks_per_channel": 16,
+  "pim_blocks_per_channel": 8,
+  "bank_to_pim_mapping": [
+    {
+      "pim_block": 0,
+      "banks": [
+        0,
+        8
+      ]
+    },
+    {
+      "pim_block": 1,
+      "banks": [
+        1,
+        9
+      ]
+    },
+    {
+      "pim_block": 2,
+      "banks": [
+        2,
+        10
+      ]
+    },
+    {
+      "pim_block": 3,
+      "banks": [
+        3,
+        11
+      ]
+    },
+    {
+      "pim_block": 4,
+      "banks": [
+        4,
+        12
+      ]
+    },
+    {
+      "pim_block": 5,
+      "banks": [
+        5,
+        13
+      ]
+    },
+    {
+      "pim_block": 6,
+      "banks": [
+        6,
+        14
+      ]
+    },
+    {
+      "pim_block": 7,
+      "banks": [
+        7,
+        15
+      ]
+    }
+  ],
+  "tsv_groups": 8,
+  "tsv_shapes": 64,
+  "microbump_shapes": 768,
+  "rtl_blocks": [
+    "bank_local_fp16_reduction",
+    "bank_local_reduction_buffer",
+    "hierarchical_reduction_path",
+    "logic_die_64ch_reduction_top",
+    "logic_die_dual_link_arbiter",
+    "logic_die_link_arbiter",
+    "shared_fp16_pipeline_fabric",
+    "shared_fp16_reduction_cluster"
+  ],
+  "cell_names": [
+    "HBM2_CHANNEL_BANK_ARRAY_16BANKS",
+    "DRAM_DIE_00_8PHYSICAL_CHANNELS",
+    "DRAM_DIE_01_8PHYSICAL_CHANNELS",
+    "DRAM_DIE_02_8PHYSICAL_CHANNELS",
+    "DRAM_DIE_03_8PHYSICAL_CHANNELS",
+    "DRAM_DIE_04_8PHYSICAL_CHANNELS",
+    "DRAM_DIE_05_8PHYSICAL_CHANNELS",
+    "DRAM_DIE_06_8PHYSICAL_CHANNELS",
+    "DRAM_DIE_07_8PHYSICAL_CHANNELS",
+    "HBM2_BASE_LOGIC_DIE",
+    "HBM2_PIM_ARCHITECTURE_NOT_SIGNOFF"
+  ],
+  "disclaimer": "HBM2 PIM architectural visualization - not signoff layout",
+  "config": "C:/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/design/hbm2_architecture.json",
+  "missing_requested_rtl_modules": [],
+  "logical_channel_mapping": {
+    "type": "simulator_only_logical_partition",
+    "logical_channels": 64,
+    "description": "The experiment exposes 64 logical simulator partitions over one illustrative 8-channel HBM2 stack; these are not 64 physical HBM2 channels."
+  },
+  "gds": "C:/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/output/floorplan_optimization/baseline/hbm2_arch/hbm2_pim_architecture.gds"
+}

@@ -39,3 +39,36 @@ tags
 .sconsign.dblite
 bin
 
+# Local editor and Python caches
+.vscode/
+.clangd
+**/__pycache__/
+*.pyc
+
+# Regenerable EDA checkpoints and high-volume traces
+*.odb
+*.route_guide
+*.route_guide.*
+*.vcd
+b0_baseline_experiment/orfs/
+b1_logic_die_experiment/orfs/
+openroad-flow-scripts/
+openroad-flow-scripts.partial/
+output/output.gds
+
+# Large generated netlists, vectors, and physical reports.  Their collectors,
+# compact metrics, and manifests remain versioned; raw artifacts stay local.
+reports/groot_normalization/physical_feasibility/*.log
+reports/groot_normalization/physical_feasibility/*.rpt
+reports/groot_normalization/physical_feasibility/*.rpt.*
+reports/groot_normalization/physical_feasibility/*.v
+reports/groot_normalization/results/**/*.v
+reports/groot_normalization/results/**/*.hex
+experiment/results/ppa_matrix/*.v
+b0_baseline_experiment/artifacts/
+b1_logic_die_experiment/artifacts/
+
+# Local scratch files
+test_file.txt
+yosys_top.log
+

@@ -3,6 +3,11 @@ export PLATFORM               = sky130hd
 export DESIGN_NICKNAME        = stob_pim2
 export DESIGN_NAME            = full_pim_system_top
 
+# The repository path is supplied by flow/run_flow.ps1.  Keep the historical
+# /mnt/c/orfs default for direct ORFS invocations made by older scripts.
+STOB_REPO_ROOT ?= /mnt/c/orfs
+export STOB_REPO_ROOT
+
 # The submitted physical instance is a reduced, fully integrated Full-PIM
 # configuration. It retains bank-side PIM, logic PCU, shared weight buffer,
 # epoch/coalescing control, cross-channel reduction, and result routing.
@@ -10,17 +15,19 @@ export VERILOG_TOP_PARAMS     = CHANNELS 1 BANKS 1 PIM_BLOCKS 1 PCUS 1 \
                                 ROWS 1 COLS 1 DATA_WIDTH 16 CRF_DEPTH 2 \
                                 WEIGHT_BUFFER_BYTES 16
 
-export VERILOG_FILES = \
-    $(sort $(wildcard /mnt/c/orfs/rtl/*.sv))
-export VERILOG_INCLUDE_DIRS   = /mnt/c/orfs
+STOB_RTL_SOURCES := $(sort $(wildcard $(STOB_REPO_ROOT)/rtl/*.sv))
+# Ignore OneDrive conflict copies.  They define the same module under a host-
+# suffixed filename and are not authoritative RTL inputs.
+export VERILOG_FILES          = $(foreach file,$(STOB_RTL_SOURCES),$(if $(findstring -DESKTOP-,$(notdir $(file))),,$(file)))
+export VERILOG_INCLUDE_DIRS   = $(STOB_REPO_ROOT)
 
-export SDC_FILE               = /mnt/c/orfs/flow/designs/sky130hd/stob_pim2/constraint.sdc
-export PRE_SYNTH_TCL          = /mnt/c/orfs/flow/designs/sky130hd/stob_pim2/openroad_compat.tcl
-export PRE_FLOORPLAN_TCL      = /mnt/c/orfs/flow/designs/sky130hd/stob_pim2/openroad_compat.tcl
-export PRE_GLOBAL_PLACE_SKIP_IO_TCL = /mnt/c/orfs/flow/designs/sky130hd/stob_pim2/openroad_compat.tcl
-export PRE_GLOBAL_PLACE_TCL    = /mnt/c/orfs/flow/designs/sky130hd/stob_pim2/openroad_compat.tcl
-export PRE_DETAIL_ROUTE_TCL    = /mnt/c/orfs/flow/designs/sky130hd/stob_pim2/openroad_compat.tcl
-export POST_FINAL_REPORT_TCL   = /mnt/c/orfs/flow/designs/sky130hd/stob_pim2/openroad_compat.tcl
+export SDC_FILE               = $(STOB_REPO_ROOT)/flow/designs/sky130hd/stob_pim2/constraint.sdc
+export PRE_SYNTH_TCL          = $(STOB_REPO_ROOT)/flow/designs/sky130hd/stob_pim2/openroad_compat.tcl
+export PRE_FLOORPLAN_TCL      = $(STOB_REPO_ROOT)/flow/designs/sky130hd/stob_pim2/openroad_compat.tcl
+export PRE_GLOBAL_PLACE_SKIP_IO_TCL = $(STOB_REPO_ROOT)/flow/designs/sky130hd/stob_pim2/openroad_compat.tcl
+export PRE_GLOBAL_PLACE_TCL    = $(STOB_REPO_ROOT)/flow/designs/sky130hd/stob_pim2/openroad_compat.tcl
+export PRE_DETAIL_ROUTE_TCL    = $(STOB_REPO_ROOT)/flow/designs/sky130hd/stob_pim2/openroad_compat.tcl
+export POST_FINAL_REPORT_TCL   = $(STOB_REPO_ROOT)/flow/designs/sky130hd/stob_pim2/openroad_compat.tcl
 
 export CORE_UTILIZATION       = 30
 export CORE_ASPECT_RATIO      = 1

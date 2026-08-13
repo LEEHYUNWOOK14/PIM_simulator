@@ -1,0 +1,5 @@
+data_format,lanes,clock_period_ns,mapped_area_um2,critical_path_ns,worst_slack_ns,timing_met,corner,evidence
+FP16,2,10.0,30335.344,19.61,-9.74,False,sky130hd_tt_025C_1v80,YOSYS_ABC_OPENROAD_PRELAYOUT_STA
+FP16,4,10.0,57617.76,20.28,-10.41,False,sky130hd_tt_025C_1v80,YOSYS_ABC_OPENROAD_PRELAYOUT_STA
+BF16,2,10.0,25552.0064,19.97,-10.1,False,sky130hd_tt_025C_1v80,YOSYS_ABC_OPENROAD_PRELAYOUT_STA
+BF16,4,10.0,48305.0784,21.48,-11.61,False,sky130hd_tt_025C_1v80,YOSYS_ABC_OPENROAD_PRELAYOUT_STA

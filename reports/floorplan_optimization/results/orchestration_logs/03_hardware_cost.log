@@ -1,0 +1,380 @@
+{
+  "status": "PASS",
+  "output": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2\\output\\hbm2_hardware_cost",
+  "scenarios": [
+    {
+      "scenario": "hbm2_4hi_1stack",
+      "area_index": 0.5580110497237569,
+      "package_index": 0.725,
+      "yield_cost_index": 0.671639076014902,
+      "energy_index": 0.7500000000000001,
+      "thermal_index": 0.61875,
+      "combined_cost_index": 0.6609044061581876,
+      "normalized_performance": 1.0,
+      "performance_per_cost": 1.5130781254931591,
+      "thermal_feasible": true,
+      "capacity_feasible": false,
+      "overall_feasible": false,
+      "pareto_optimal": false
+    },
+    {
+      "scenario": "hbm2_8hi_1stack",
+      "area_index": 1.0,
+      "package_index": 1.0,
+      "yield_cost_index": 1.0,
+      "energy_index": 1.0,
+      "thermal_index": 1.0,
+      "combined_cost_index": 1.0,
+      "normalized_performance": 1.0,
+      "performance_per_cost": 1.0,
+      "thermal_feasible": true,
+      "capacity_feasible": true,
+      "overall_feasible": true,
+      "pareto_optimal": true
+    },
+    {
+      "scenario": "hbm2_12hi_1stack",
+      "area_index": 1.441988950276243,
+      "package_index": 1.275,
+      "yield_cost_index": 1.4888949075646285,
+      "energy_index": 1.2500000000000002,
+      "thermal_index": 1.46875,
+      "combined_cost_index": 1.3811435222928024,
+      "normalized_performance": 1.0,
+      "performance_per_cost": 0.7240377150232183,
+      "thermal_feasible": true,
+      "capacity_feasible": true,
+      "overall_feasible": true,
+      "pareto_optimal": false
+    },
+    {
+      "scenario": "hbm2_8hi_2stack",
+      "area_index": 2.0,
+      "package_index": 2.0,
+      "yield_cost_index": 2.735314472936077,
+      "energy_index": 1.0,
+      "thermal_index": 2.0,
+      "combined_cost_index": 1.853614636538505,
+      "normalized_performance": 2.0,
+      "performance_per_cost": 1.0789729216504567,
+      "thermal_feasible": true,
+      "capacity_feasible": true,
+      "overall_feasible": true,
+      "pareto_optimal": true
+    },
+    {
+      "scenario": "hbm2_8hi_no_pim",
+      "area_index": 0.994475138121547,
+      "package_index": 1.0,
+      "yield_cost_index": 0.9910314438118207,
+      "energy_index": 1.5652173913043481,
+      "thermal_index": 0.8695652173913044,
+      "combined_cost_index": 1.0605023561968878,
+      "normalized_performance": 0.5555555555555556,
+      "performance_per_cost": 0.5238607460975917,
+      "thermal_feasible": true,
+      "capacity_feasible": true,
+      "overall_feasible": true,
+      "pareto_optimal": true
+    }
+  ],
+  "uncertainty": [
+    {
+      "scenario": "hbm2_4hi_1stack",
+      "p05": 1.4413874905241968,
+      "p50": 1.58295001864285,
+      "p95": 1.769086999690303,
+      "best_rank_probability": 0.0,
+      "no_feasible_probability": 0.0,
+      "samples": 2000
+    },
+    {
+      "scenario": "hbm2_8hi_1stack",
+      "p05": 1.0,
+      "p50": 1.0,
+      "p95": 1.0,
+      "best_rank_probability": 0.561,
+      "no_feasible_probability": 0.0,
+      "samples": 2000
+    },
+    {
+      "scenario": "hbm2_12hi_1stack",
+      "p05": 0.62059973734796,
+      "p50": 0.6918069237379679,
+      "p95": 0.7588892795043178,
+      "best_rank_probability": 0.0,
+      "no_feasible_probability": 0.0,
+      "samples": 2000
+    },
+    {
+      "scenario": "hbm2_8hi_2stack",
+      "p05": 0.7816718662963362,
+      "p50": 0.962626914797886,
+      "p95": 1.1733855650724303,
+      "best_rank_probability": 0.4,
+      "no_feasible_probability": 0.0,
+      "samples": 2000
+    },
+    {
+      "scenario": "hbm2_8hi_no_pim",
+      "p05": 0.3751081987689367,
+      "p50": 0.571176238936531,
+      "p95": 1.0117441752519263,
+      "best_rank_probability": 0.039,
+      "no_feasible_probability": 0.0,
+      "samples": 2000
+    }
+  ]
+}
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "poisson analytic",
+      "pass": true,
+      "detail": 0.8187307530779818
+    },
+    {
+      "name": "negative-binomial analytic",
+      "pass": true,
+      "detail": 0.823974609375
+    },
+    {
+      "name": "Samsung HBM2 bandwidth identity",
+      "pass": true,
+      "detail": "307.2 GB/s"
+    },
+    {
+      "name": "cumulative silicon monotonic",
+      "pass": true,
+      "detail": [
+        484.8,
+        868.8,
+        1252.8
+      ]
+    },
+    {
+      "name": "bond count monotonic",
+      "pass": true,
+      "detail": [
+        4,
+        8,
+        12
+      ]
+    },
+    {
+      "name": "stack yield nonincreasing",
+      "pass": true,
+      "detail": [
+        0.5443231198080322,
+        0.3655886772414155,
+        0.24554364138393456
+      ]
+    },
+    {
+      "name": "all yields valid",
+      "pass": true,
+      "detail": "0 < Y <= 1"
+    },
+    {
+      "name": "baseline normalized",
+      "pass": true,
+      "detail": {
+        "area": 1.0,
+        "package": 1.0,
+        "yield": 1.0,
+        "energy": 1.0,
+        "thermal": 1.0
+      }
+    },
+    {
+      "name": "physical/logical channels separated",
+      "pass": true,
+      "detail": "8 physical, 64 logical simulator partitions"
+    },
+    {
+      "name": "capacity gate rejects 4Hi for 8GB workload",
+      "pass": true,
+      "detail": {
+        "4Hi_GB": 4.0,
+        "required_GB": 8.0
+      }
+    },
+    {
+      "name": "thermal burden monotonic across 4/8/12Hi",
+      "pass": true,
+      "detail": [
+        0.11187474107616352,
+        0.18080766234531476,
+        0.26556125406968106
+      ]
+    },
+    {
+      "name": "thermal metrics physically ordered",
+      "pass": true,
+      "detail": "Tpeak >= Tambient and headroom identity"
+    },
+    {
+      "name": "perfect inputs yield one",
+      "pass": true,
+      "detail": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "all parameter sources resolve",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "invalid probability rejected",
+      "pass": true,
+      "detail": "assembly_yield=1.5"
+    },
+    {
+      "name": "all pipeline READMEs exist",
+      "pass": true,
+      "detail": [
+        "hardware_cost/README.md",
+        "hardware_cost/area/README.md",
+        "hardware_cost/package/README.md",
+        "hardware_cost/yield/README.md",
+        "hardware_cost/power_performance/README.md",
+        "hardware_cost/thermal/README.md",
+        "hardware_cost/integration/README.md"
+      ]
+    },
+    {
+      "name": "required outputs exist",
+      "pass": true,
+      "detail": [
+        "integrated_metrics.json",
+        "design_comparison.csv",
+        "pareto_frontier.csv",
+        "uncertainty_summary.csv",
+        "uncertainty_samples.csv",
+        "hardware_cost_report.md",
+        "parameter_provenance.json",
+        "source_traceability.md",
+        "cost_indices.png",
+        "uncertainty_performance_per_cost.png",
+        "area/area_report.md",
+        "package/package_report.md",
+        "yield/yield_report.md",
+        "power_performance/power_performance_report.md",
+        "thermal/thermal_metrics.json",
+        "thermal/thermal_report.md"
+      ]
+    },
+    {
+      "name": "seeded uncertainty reproducible",
+      "pass": true,
+      "detail": [
+        {
+          "scenario": "hbm2_4hi_1stack",
+          "p05": 1.4413874905241968,
+          "p50": 1.58295001864285,
+          "p95": 1.769086999690303,
+          "best_rank_probability": 0.0,
+          "no_feasible_probability": 0.0,
+          "samples": 2000
+        },
+        {
+          "scenario": "hbm2_8hi_1stack",
+          "p05": 1.0,
+          "p50": 1.0,
+          "p95": 1.0,
+          "best_rank_probability": 0.561,
+          "no_feasible_probability": 0.0,
+          "samples": 2000
+        },
+        {
+          "scenario": "hbm2_12hi_1stack",
+          "p05": 0.62059973734796,
+          "p50": 0.6918069237379679,
+          "p95": 0.7588892795043178,
+          "best_rank_probability": 0.0,
+          "no_feasible_probability": 0.0,
+          "samples": 2000
+        },
+        {
+          "scenario": "hbm2_8hi_2stack",
+          "p05": 0.7816718662963362,
+          "p50": 0.962626914797886,
+          "p95": 1.1733855650724303,
+          "best_rank_probability": 0.4,
+          "no_feasible_probability": 0.0,
+          "samples": 2000
+        },
+        {
+          "scenario": "hbm2_8hi_no_pim",
+          "p05": 0.3751081987689367,
+          "p50": 0.571176238936531,
+          "p95": 1.0117441752519263,
+          "best_rank_probability": 0.039,
+          "no_feasible_probability": 0.0,
+          "samples": 2000
+        }
+      ]
+    },
+    {
+      "name": "rank and no-feasible probabilities sum to one",
+      "pass": true,
+      "detail": {
+        "rank": [
+          0.0,
+          0.561,
+          0.0,
+          0.4,
+          0.039
+        ],
+        "no_feasible": 0.0
+      }
+    }
+  ],
+  "scope": "Architectural model verification; not validation against proprietary HBM2 manufacturing data."
+}
+test_baseline_freezes_required_metrics_without_false_timing (verification.hardware_cost_regression.test_hardware_cost_regression.HardwareCostRegressionTests.test_baseline_freezes_required_metrics_without_false_timing) ... ok
+test_categories_are_exclusive_and_conserve_power (verification.hardware_cost_regression.test_hardware_cost_regression.HardwareCostRegressionTests.test_categories_are_exclusive_and_conserve_power) ... ok
+test_final_architecture_selection_is_rejected (verification.hardware_cost_regression.test_hardware_cost_regression.HardwareCostRegressionTests.test_final_architecture_selection_is_rejected) ... ok
+test_real_metric_slots_and_energy_per_op_are_collected (verification.hardware_cost_regression.test_hardware_cost_regression.HardwareCostRegressionTests.test_real_metric_slots_and_energy_per_op_are_collected) ... ok
+test_revision_delta_and_paper_outputs (verification.hardware_cost_regression.test_hardware_cost_regression.HardwareCostRegressionTests.test_revision_delta_and_paper_outputs) ... C:\Users\Admin\OneDrive\2026-summer\STOB_semiconductor_pim\STOB_PIM2\.venv\Lib\site-packages\matplotlib\_fontconfig_pattern.py:64: PyparsingDeprecationWarning: 'oneOf' deprecated - use 'one_of'
+  prop = Group((name + Suppress("=") + comma_separated(value)) | oneOf(_CONSTANTS))
+C:\Users\Admin\OneDrive\2026-summer\STOB_semiconductor_pim\STOB_PIM2\.venv\Lib\site-packages\matplotlib\_fontconfig_pattern.py:85: PyparsingDeprecationWarning: 'parseString' deprecated - use 'parse_string'
+  parse = parser.parseString(pattern)
+C:\Users\Admin\OneDrive\2026-summer\STOB_semiconductor_pim\STOB_PIM2\.venv\Lib\site-packages\matplotlib\_fontconfig_pattern.py:89: PyparsingDeprecationWarning: 'resetCache' deprecated - use 'reset_cache'
+  parser.resetCache()
+C:\Users\Admin\OneDrive\2026-summer\STOB_semiconductor_pim\STOB_PIM2\.venv\Lib\site-packages\matplotlib\_mathtext.py:45: PyparsingDeprecationWarning: 'enablePackrat' deprecated - use 'enable_packrat'
+  ParserElement.enablePackrat()
+In C:\Users\Admin\OneDrive\2026-summer\STOB_semiconductor_pim\STOB_PIM2\.venv\Lib\site-packages\matplotlib\mpl-data\stylelib\classic.mplstyle: 'parseString' deprecated - use 'parse_string'
+In C:\Users\Admin\OneDrive\2026-summer\STOB_semiconductor_pim\STOB_PIM2\.venv\Lib\site-packages\matplotlib\mpl-data\stylelib\classic.mplstyle: 'resetCache' deprecated - use 'reset_cache'
+ok
+test_source_files_are_hashed (verification.hardware_cost_regression.test_hardware_cost_regression.HardwareCostRegressionTests.test_source_files_are_hashed) ... ok
+HARDWARE_COST_SNAPSHOT PASS revision=provisional_baseline_2026_08_11 output=C:\Users\Admin\AppData\Local\Temp\tmpkupxagdy\baseline.json
+HARDWARE_COST_SNAPSHOT PASS revision=provisional_baseline_2026_08_11 output=C:\Users\Admin\AppData\Local\Temp\tmp3j0zzvqo\baseline.json
+HARDWARE_COST_SNAPSHOT PASS revision=provisional_baseline_2026_08_11 output=C:\Users\Admin\AppData\Local\Temp\tmps44k_4zr\snapshot.json
+HARDWARE_COST_SNAPSHOT PASS revision=provisional_baseline_2026_08_11 output=C:\Users\Admin\AppData\Local\Temp\tmp4vb2acou\baseline.json
+{
+  "status": "PASS",
+  "baseline": "provisional_baseline_2026_08_11",
+  "revision_count": 2,
+  "final_architecture_parameters_selected": false,
+  "outputs": [
+    "paper_revision_table.csv",
+    "paper_category_table.csv",
+    "paper_delta_table.csv",
+    "paper_regression_report.md",
+    "paper_revision_overview.png",
+    "paper_category_power.png"
+  ]
+}
+
+----------------------------------------------------------------------
+Ran 6 tests in 2.117s
+
+OK
+HARDWARE_COST_SNAPSHOT PASS revision=provisional_baseline_2026_08_11 output=C:\Users\Admin\AppData\Local\Temp\tmpvrsnyag5\baseline.json

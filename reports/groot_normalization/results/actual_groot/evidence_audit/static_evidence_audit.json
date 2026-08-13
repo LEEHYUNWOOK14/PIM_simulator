@@ -1,0 +1,298 @@
+{
+  "audit": "GR00T_STATIC_TRACE_PROVENANCE_AND_ROUNDTRIP",
+  "audit_date": "2026-08-13",
+  "overall_status": "PARTIAL_EVIDENCE",
+  "actual_full_inference_trace": false,
+  "trace_classification": "PRETRAINED_ACTION_HEAD_SYNTHETIC_BOUNDARY_INPUT",
+  "scope": "static audit of existing artifacts; no GR00T execution",
+  "inputs": {
+    "workload_manifest": "reports/groot_normalization/results/actual_groot/groot_actual_workload_manifest.json",
+    "trace_manifest": "reports/groot_normalization/results/actual_groot/action_head_trace/trace_manifest.json",
+    "trace_summary_manifest": "reports/groot_normalization/results/groot_bf16_trace_manifest.json",
+    "mapping_manifest": "reports/groot_normalization/results/actual_groot/rtl_mapping/mapping_manifest.json",
+    "invocations": "reports/groot_normalization/results/actual_groot/action_head_trace/invocations.csv"
+  },
+  "summary": {
+    "workload_profiles": 13,
+    "captured_profiles": 6,
+    "captured_invocations": 269,
+    "persisted_packets_read_back": 477312,
+    "persisted_roundtrip_mismatches": 0,
+    "check_status_counts": {
+      "FAIL": 2,
+      "NOT_EVIDENCED": 1,
+      "PARTIAL": 2,
+      "PASS": 8
+    }
+  },
+  "checks": [
+    {
+      "id": "trace_scope_classification",
+      "status": "PASS",
+      "evidence": "classification=PRETRAINED_ACTION_HEAD_SYNTHETIC_BOUNDARY_INPUT, not_full_groot_inference=True"
+    },
+    {
+      "id": "workload_runtime_scope",
+      "status": "PASS",
+      "evidence": "runtime_status=NO_PRETRAINED_INFERENCE_CAPTURE"
+    },
+    {
+      "id": "trace_summary_copy",
+      "status": "PASS",
+      "evidence": "summary manifest contains the same trace core fields"
+    },
+    {
+      "id": "model_revision_chain",
+      "status": "PASS",
+      "evidence": "model=nvidia/GR00T-N1.7-3B, revision=2fc962b973bccdd5d8ce4f67cc63b264d6886495"
+    },
+    {
+      "id": "workload_profile_coverage",
+      "status": "PARTIAL",
+      "evidence": "trace covers 6/13 workload profiles; uncaptured=['backbone_language_final_rmsnorm', 'backbone_language_input_rmsnorm', 'backbone_language_k_rmsnorm', 'backbone_language_post_attention_rmsnorm', 'backbone_language_q_rmsnorm', 'backbone_visual_block_norm1', 'backbone_visual_block_norm2']"
+    },
+    {
+      "id": "invocation_shape_dtype_epsilon",
+      "status": "PASS",
+      "evidence": "all six captured action-head profiles agree across workload, invocation CSV, and trace files"
+    },
+    {
+      "id": "trace_input_output_checksums",
+      "status": "PASS",
+      "evidence": "input/output BF16 HEX hashes agree with sample and invocation metadata"
+    },
+    {
+      "id": "gamma_beta_provenance",
+      "status": "FAIL",
+      "evidence": "gamma/beta files have no manifest checksums or checkpoint tensor names; AdaLayerNorm dynamic modulation is represented by identity/zero placeholders"
+    },
+    {
+      "id": "bf16_trace_to_workload_manifest_link",
+      "status": "PARTIAL",
+      "evidence": "profile_id joins 6 profiles, but explicit link fields are absent: ['invocation_id', 'trace_id', 'workload_manifest_sha256', 'workload_profile_tag']"
+    },
+    {
+      "id": "persisted_trace_to_rtl_roundtrip",
+      "status": "PASS",
+      "evidence": "independent readback of 477,312 persisted packets; mismatches=0"
+    },
+    {
+      "id": "rtl_tag_consistency",
+      "status": "PASS",
+      "evidence": "tag conflicts across profile/row owners=0; tags identify representative rows, not invocations"
+    },
+    {
+      "id": "mapping_manifest_sealing",
+      "status": "FAIL",
+      "evidence": "mapping manifest omits packet-file SHA-256, source trace-manifest SHA-256, workload-manifest SHA-256, and converter revision"
+    },
+    {
+      "id": "reduction_apply_roundtrip_contract",
+      "status": "NOT_EVIDENCED",
+      "evidence": "only one logical input packet set exists; separate reduction/apply manifests or production replay consumption evidence are absent"
+    }
+  ],
+  "profiles": [
+    {
+      "profile_id": "action_vlln",
+      "module_path": "action_head.vlln",
+      "shape": [
+        1,
+        280,
+        2048
+      ],
+      "shape_match": true,
+      "workload_shape_status": "LEGACY_280_REPRESENTATIVE_RUNTIME_UNVERIFIED",
+      "invocation_count_match": true,
+      "module_path_match": true,
+      "captured_invocations": 1,
+      "dtype_match": true,
+      "epsilon_match": true,
+      "input_output_hash_match": true,
+      "gamma_words": 2048,
+      "beta_words": 2048,
+      "gamma_sha256_computed_by_audit": "8365833f76a152a14fc529044c4fc46d784961bbb007f4e2ffae249b76c8a690",
+      "beta_sha256_computed_by_audit": "22d295ca9ffa824db3b1371febe33b1332e890fd2c8f72e70001fb909de56054",
+      "gamma_beta_provenance": "PRETRAINED_PARAMETER_IMPLIED_BY_CAPTURE_CODE_NOT_HASHED_IN_MANIFEST"
+    },
+    {
+      "profile_id": "action_vl_self_attention_norm1",
+      "module_path": "action_head.vl_self_attention.transformer_blocks.0.norm1",
+      "shape": [
+        1,
+        280,
+        2048
+      ],
+      "shape_match": true,
+      "workload_shape_status": "LEGACY_280_REPRESENTATIVE_RUNTIME_UNVERIFIED",
+      "invocation_count_match": true,
+      "module_path_match": true,
+      "captured_invocations": 4,
+      "dtype_match": true,
+      "epsilon_match": true,
+      "input_output_hash_match": true,
+      "gamma_words": 2048,
+      "beta_words": 2048,
+      "gamma_sha256_computed_by_audit": "002a0a0355c010423581a86da1944206b4156ce3038616568632da56e5fa926f",
+      "beta_sha256_computed_by_audit": "4f6b4256f7b166d880d64481e4f52419df9c23c6c9f1d16cef054d4152f1a0c3",
+      "gamma_beta_provenance": "PRETRAINED_PARAMETER_IMPLIED_BY_CAPTURE_CODE_NOT_HASHED_IN_MANIFEST"
+    },
+    {
+      "profile_id": "action_vl_self_attention_norm3",
+      "module_path": "action_head.vl_self_attention.transformer_blocks.0.norm3",
+      "shape": [
+        1,
+        280,
+        2048
+      ],
+      "shape_match": true,
+      "workload_shape_status": "LEGACY_280_REPRESENTATIVE_RUNTIME_UNVERIFIED",
+      "invocation_count_match": true,
+      "module_path_match": true,
+      "captured_invocations": 4,
+      "dtype_match": true,
+      "epsilon_match": true,
+      "input_output_hash_match": true,
+      "gamma_words": 2048,
+      "beta_words": 2048,
+      "gamma_sha256_computed_by_audit": "0906fb499de07ca23917b3af536dda31331df292efab12d198e506940bd2d8fb",
+      "beta_sha256_computed_by_audit": "9a231f47a3bd5b697e1cbf220462891280a33767274c7f18a983527cff77606f",
+      "gamma_beta_provenance": "PRETRAINED_PARAMETER_IMPLIED_BY_CAPTURE_CODE_NOT_HASHED_IN_MANIFEST"
+    },
+    {
+      "profile_id": "action_dit_adaln_norm1",
+      "module_path": "action_head.model.transformer_blocks.0.norm1.norm",
+      "shape": [
+        1,
+        41,
+        1536
+      ],
+      "shape_match": true,
+      "workload_shape_status": "CODE_AND_CHECKPOINT_DERIVED_FOR_BATCH1",
+      "invocation_count_match": true,
+      "module_path_match": true,
+      "captured_invocations": 128,
+      "dtype_match": true,
+      "epsilon_match": true,
+      "input_output_hash_match": true,
+      "gamma_words": 1536,
+      "beta_words": 1536,
+      "gamma_sha256_computed_by_audit": "cdeeb4b0a640eec9bd80cda4d22bb076db3224559bdec74a31bd447decd0dd3d",
+      "beta_sha256_computed_by_audit": "e80232b4d18d0bb7e794be263ba937626f383f9917d4b8a737ba893a8f752293",
+      "gamma_beta_provenance": "PLACEHOLDER_NOT_DYNAMIC_MODULATION"
+    },
+    {
+      "profile_id": "action_dit_norm3",
+      "module_path": "action_head.model.transformer_blocks.0.norm3",
+      "shape": [
+        1,
+        41,
+        1536
+      ],
+      "shape_match": true,
+      "workload_shape_status": "CODE_AND_CHECKPOINT_DERIVED_FOR_BATCH1",
+      "invocation_count_match": true,
+      "module_path_match": true,
+      "captured_invocations": 128,
+      "dtype_match": true,
+      "epsilon_match": true,
+      "input_output_hash_match": true,
+      "gamma_words": 1536,
+      "beta_words": 1536,
+      "gamma_sha256_computed_by_audit": "cdeeb4b0a640eec9bd80cda4d22bb076db3224559bdec74a31bd447decd0dd3d",
+      "beta_sha256_computed_by_audit": "e80232b4d18d0bb7e794be263ba937626f383f9917d4b8a737ba893a8f752293",
+      "gamma_beta_provenance": "PRETRAINED_PARAMETER_IMPLIED_BY_CAPTURE_CODE_NOT_HASHED_IN_MANIFEST"
+    },
+    {
+      "profile_id": "action_dit_norm_out",
+      "module_path": "action_head.model.norm_out",
+      "shape": [
+        1,
+        41,
+        1536
+      ],
+      "shape_match": true,
+      "workload_shape_status": "CODE_AND_CHECKPOINT_DERIVED_FOR_BATCH1",
+      "invocation_count_match": true,
+      "module_path_match": true,
+      "captured_invocations": 4,
+      "dtype_match": true,
+      "epsilon_match": true,
+      "input_output_hash_match": true,
+      "gamma_words": 1536,
+      "beta_words": 1536,
+      "gamma_sha256_computed_by_audit": "cdeeb4b0a640eec9bd80cda4d22bb076db3224559bdec74a31bd447decd0dd3d",
+      "beta_sha256_computed_by_audit": "e80232b4d18d0bb7e794be263ba937626f383f9917d4b8a737ba893a8f752293",
+      "gamma_beta_provenance": "SYNTHESIZED_IDENTITY_FOR_NON_AFFINE_LAYER"
+    }
+  ],
+  "persisted_roundtrip": [
+    {
+      "profile_id": "action_vlln",
+      "packet_rows": 143360,
+      "manifest_packets": 143360,
+      "csv_hex_metadata_errors": 0,
+      "reconstructed_mismatches": 0,
+      "reconstructed_sha256": "fed1a9111ab1b995d05838cc5d2d2767d87b8cf6d6e46a51ec025ab0ec93ac88",
+      "manifest_roundtrip_sha256": "fed1a9111ab1b995d05838cc5d2d2767d87b8cf6d6e46a51ec025ab0ec93ac88"
+    },
+    {
+      "profile_id": "action_vl_self_attention_norm1",
+      "packet_rows": 143360,
+      "manifest_packets": 143360,
+      "csv_hex_metadata_errors": 0,
+      "reconstructed_mismatches": 0,
+      "reconstructed_sha256": "d14a46c68a37984b690fe05b2732c45636014d61f83fc302912492d56866effc",
+      "manifest_roundtrip_sha256": "d14a46c68a37984b690fe05b2732c45636014d61f83fc302912492d56866effc"
+    },
+    {
+      "profile_id": "action_vl_self_attention_norm3",
+      "packet_rows": 143360,
+      "manifest_packets": 143360,
+      "csv_hex_metadata_errors": 0,
+      "reconstructed_mismatches": 0,
+      "reconstructed_sha256": "648a77ebef0a1bc6b7aa71b6724e7427e082bc818b5fe65f6de842049ee8f9a2",
+      "manifest_roundtrip_sha256": "648a77ebef0a1bc6b7aa71b6724e7427e082bc818b5fe65f6de842049ee8f9a2"
+    },
+    {
+      "profile_id": "action_dit_adaln_norm1",
+      "packet_rows": 15744,
+      "manifest_packets": 15744,
+      "csv_hex_metadata_errors": 0,
+      "reconstructed_mismatches": 0,
+      "reconstructed_sha256": "a15b94232d5eb6a3bbcd2c135ffaa2914a8824f08bc023f80add56204ea728a6",
+      "manifest_roundtrip_sha256": "a15b94232d5eb6a3bbcd2c135ffaa2914a8824f08bc023f80add56204ea728a6"
+    },
+    {
+      "profile_id": "action_dit_norm3",
+      "packet_rows": 15744,
+      "manifest_packets": 15744,
+      "csv_hex_metadata_errors": 0,
+      "reconstructed_mismatches": 0,
+      "reconstructed_sha256": "d4776086c5371681f1079b01ce903ce77f87b6a3c3b88f79d97291a0ed8ed251",
+      "manifest_roundtrip_sha256": "d4776086c5371681f1079b01ce903ce77f87b6a3c3b88f79d97291a0ed8ed251"
+    },
+    {
+      "profile_id": "action_dit_norm_out",
+      "packet_rows": 15744,
+      "manifest_packets": 15744,
+      "csv_hex_metadata_errors": 0,
+      "reconstructed_mismatches": 0,
+      "reconstructed_sha256": "0a605eebf397a3fd177515ffea3bd7faae29b6ffc307659ed2089df39b21ec03",
+      "manifest_roundtrip_sha256": "0a605eebf397a3fd177515ffea3bd7faae29b6ffc307659ed2089df39b21ec03"
+    }
+  ],
+  "verdict": {
+    "supported": [
+      "The artifacts are a pretrained action-head execution with deterministic synthetic boundary inputs.",
+      "Six action-head profiles have consistent invocation counts, shapes, BF16 dtype, and epsilon metadata.",
+      "The persisted 477,312 packet CSV/HEX records independently reconstruct to the source BF16 inputs with zero mismatch."
+    ],
+    "not_supported": [
+      "A full GR00T inference trace or robot-dataset activation trace was captured.",
+      "The BF16 samples are explicitly linked to workload invocation IDs by a sealed manifest tag.",
+      "AdaLayerNorm runtime gamma/beta modulation was captured.",
+      "Reduction and apply replay consumed the same production manifest/address stream."
+    ]
+  }
+}

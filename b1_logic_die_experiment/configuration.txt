@@ -1,0 +1,19 @@
+experiment=B1 hierarchical logic-die baseline
+top=full_pim_system_top
+ENABLE_LOGIC_DIE_PCU=1
+ENABLE_NORMALIZATION_ENGINE=0
+physical_scale=CHANNELS:1 BANKS:1 PIM_BLOCKS:1 PCUS:1 ROWS:1 COLS:1 DATA_WIDTH:16 CRF_DEPTH:2 WEIGHT_BUFFER_BYTES:16
+functional_valid_scale=CHANNELS:1 BANKS:2 PIM_BLOCKS:1 PCUS:1 ROWS:1 COLS:1 DATA_WIDTH:32 CRF_DEPTH:2 WEIGHT_BUFFER_BYTES:16
+technology=sky130hd
+corner=sky130_fd_sc_hd__tt_025C_1v80
+clock_period_ns=10.0
+clock_uncertainty_ns=0.2
+core_utilization_pct=30
+core_aspect_ratio=1.0
+core_margin_um=2
+place_density=0.35
+
+The physical scale is the exact plan contract.  The functional-valid scale is
+also tested because the physical scale violates two RTL elaboration contracts:
+BANKS must equal 2*PIM_BLOCKS and DATA_WIDTH must be divisible by 32.
+

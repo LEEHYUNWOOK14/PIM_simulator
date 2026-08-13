@@ -1,0 +1,1403 @@
+
+-- Running command `read_verilog -sv -I. rtl/bf16_to_fp32.sv rtl/fp32_to_bf16_rne.sv rtl/fp32_add.sv rtl/fp32_mul.sv rtl/bf16_rsqrt_lut256.sv rtl/mixed_precision_bank_reducer4.sv rtl/mixed_precision_global_reducer16.sv rtl/mixed_precision_scalar_nr2.sv rtl/mixed_precision_bank_apply4.sv rtl/mixed_precision_normalization_datapath.sv; hierarchy -check -top fp32_mul; synth -top fp32_mul; check -assert; stat; flatten; opt; ltp -noff' --
+
+1. Executing Verilog-2005 frontend: rtl/bf16_to_fp32.sv
+Parsing SystemVerilog input from `rtl/bf16_to_fp32.sv' to AST representation.
+Generating RTLIL representation for module `\bf16_to_fp32'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: rtl/fp32_to_bf16_rne.sv
+Parsing SystemVerilog input from `rtl/fp32_to_bf16_rne.sv' to AST representation.
+Generating RTLIL representation for module `\fp32_to_bf16_rne'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: rtl/fp32_add.sv
+Parsing SystemVerilog input from `rtl/fp32_add.sv' to AST representation.
+Generating RTLIL representation for module `\fp32_add'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: rtl/fp32_mul.sv
+Parsing SystemVerilog input from `rtl/fp32_mul.sv' to AST representation.
+Generating RTLIL representation for module `\fp32_mul'.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: rtl/bf16_rsqrt_lut256.sv
+Parsing SystemVerilog input from `rtl/bf16_rsqrt_lut256.sv' to AST representation.
+Generating RTLIL representation for module `\bf16_rsqrt_lut256'.
+Successfully finished Verilog frontend.
+
+6. Executing Verilog-2005 frontend: rtl/mixed_precision_bank_reducer4.sv
+Parsing SystemVerilog input from `rtl/mixed_precision_bank_reducer4.sv' to AST representation.
+Generating RTLIL representation for module `\mixed_precision_bank_reducer4'.
+Successfully finished Verilog frontend.
+
+7. Executing Verilog-2005 frontend: rtl/mixed_precision_global_reducer16.sv
+Parsing SystemVerilog input from `rtl/mixed_precision_global_reducer16.sv' to AST representation.
+Generating RTLIL representation for module `\mixed_precision_global_reducer16'.
+Successfully finished Verilog frontend.
+
+8. Executing Verilog-2005 frontend: rtl/mixed_precision_scalar_nr2.sv
+Parsing SystemVerilog input from `rtl/mixed_precision_scalar_nr2.sv' to AST representation.
+Generating RTLIL representation for module `\mixed_precision_scalar_nr2'.
+Successfully finished Verilog frontend.
+
+9. Executing Verilog-2005 frontend: rtl/mixed_precision_bank_apply4.sv
+Parsing SystemVerilog input from `rtl/mixed_precision_bank_apply4.sv' to AST representation.
+Generating RTLIL representation for module `\mixed_precision_bank_apply4'.
+Successfully finished Verilog frontend.
+
+10. Executing Verilog-2005 frontend: rtl/mixed_precision_normalization_datapath.sv
+Parsing SystemVerilog input from `rtl/mixed_precision_normalization_datapath.sv' to AST representation.
+Generating RTLIL representation for module `\mixed_precision_normalization_datapath'.
+Successfully finished Verilog frontend.
+
+11. Executing HIERARCHY pass (managing design hierarchy).
+
+11.1. Analyzing design hierarchy..
+Top module:  \fp32_mul
+
+11.2. Analyzing design hierarchy..
+Top module:  \fp32_mul
+Removing unused module `\mixed_precision_normalization_datapath'.
+Removing unused module `\mixed_precision_bank_apply4'.
+Removing unused module `\mixed_precision_scalar_nr2'.
+Removing unused module `\mixed_precision_global_reducer16'.
+Removing unused module `\mixed_precision_bank_reducer4'.
+Removing unused module `\bf16_rsqrt_lut256'.
+Removing unused module `\fp32_add'.
+Removing unused module `\fp32_to_bf16_rne'.
+Removing unused module `\bf16_to_fp32'.
+Removed 9 unused modules.
+
+12. Executing SYNTH pass.
+
+12.1. Executing HIERARCHY pass (managing design hierarchy).
+
+12.1.1. Analyzing design hierarchy..
+Top module:  \fp32_mul
+
+12.1.2. Analyzing design hierarchy..
+Top module:  \fp32_mul
+Removed 0 unused modules.
+
+12.2. Executing PROC pass (convert processes to netlists).
+
+12.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+12.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 59 switch rules as full_case in process $proc$rtl/fp32_mul.sv:14$216 in module fp32_mul.
+Removed a total of 0 dead cases.
+
+12.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 20 assignments to connections.
+
+12.2.4. Executing PROC_INIT pass (extract init attributes).
+
+12.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+12.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~59 debug messages>
+
+12.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\fp32_mul.$proc$rtl/fp32_mul.sv:14$216'.
+     1/97: $7\result_o[31:0]
+     2/97: $9\rounded_wide[127:0]
+     3/97: $8\round_up[0:0]
+     4/97: $8\low_mask[127:0]
+     5/97: $8\rounded_wide[127:0]
+     6/97: $7\low_mask[127:0]
+     7/97: $7\round_up[0:0]
+     8/97: $6\result_o[31:0]
+     9/97: $6\result_exp_field[7:0]
+    10/97: $6\exponent[31:0]
+    11/97: $7\rounded_wide[127:0]
+    12/97: $6\rounded_wide[127:0]
+    13/97: $6\round_up[0:0]
+    14/97: $6\low_mask[127:0]
+    15/97: $5\result_exp_field[7:0]
+    16/97: $5\result_o[31:0]
+    17/97: $5\exponent[31:0]
+    18/97: $5\rounded_wide[127:0]
+    19/97: $5\low_mask[127:0]
+    20/97: $5\round_up[0:0]
+    21/97: $5\shift_amount[31:0]
+    22/97: $4\result_o[31:0]
+    23/97: $4\exponent[31:0]
+    24/97: $4\low_mask[127:0]
+    25/97: $4\rounded_wide[127:0]
+    26/97: $4\result_exp_field[7:0]
+    27/97: $4\shift_amount[31:0]
+    28/97: $4\round_up[0:0]
+    29/97: $3\result_o[31:0]
+    30/97: $3\exponent[31:0]
+    31/97: $3\low_mask[127:0]
+    32/97: $3\rounded_wide[127:0]
+    33/97: $3\result_exp_field[7:0]
+    34/97: $3\shift_amount[31:0]
+    35/97: $3\round_up[0:0]
+    36/97: $2\result_o[31:0]
+    37/97: $2\exponent[31:0]
+    38/97: $2\low_mask[127:0]
+    39/97: $2\rounded_wide[127:0]
+    40/97: $2\result_exp_field[7:0]
+    41/97: $2\shift_amount[31:0]
+    42/97: $2\round_up[0:0]
+    43/97: $1\result_o[31:0]
+    44/97: $1\exponent[31:0]
+    45/97: $1\low_mask[127:0]
+    46/97: $1\rounded_wide[127:0]
+    47/97: $1\result_exp_field[7:0]
+    48/97: $1\shift_amount[31:0]
+    49/97: $1\round_up[0:0]
+    50/97: $48\msb_index[31:0]
+    51/97: $47\msb_index[31:0]
+    52/97: $46\msb_index[31:0]
+    53/97: $45\msb_index[31:0]
+    54/97: $44\msb_index[31:0]
+    55/97: $43\msb_index[31:0]
+    56/97: $42\msb_index[31:0]
+    57/97: $41\msb_index[31:0]
+    58/97: $40\msb_index[31:0]
+    59/97: $39\msb_index[31:0]
+    60/97: $38\msb_index[31:0]
+    61/97: $37\msb_index[31:0]
+    62/97: $36\msb_index[31:0]
+    63/97: $35\msb_index[31:0]
+    64/97: $34\msb_index[31:0]
+    65/97: $33\msb_index[31:0]
+    66/97: $32\msb_index[31:0]
+    67/97: $31\msb_index[31:0]
+    68/97: $30\msb_index[31:0]
+    69/97: $29\msb_index[31:0]
+    70/97: $28\msb_index[31:0]
+    71/97: $27\msb_index[31:0]
+    72/97: $26\msb_index[31:0]
+    73/97: $25\msb_index[31:0]
+    74/97: $24\msb_index[31:0]
+    75/97: $23\msb_index[31:0]
+    76/97: $22\msb_index[31:0]
+    77/97: $21\msb_index[31:0]
+    78/97: $20\msb_index[31:0]
+    79/97: $19\msb_index[31:0]
+    80/97: $18\msb_index[31:0]
+    81/97: $17\msb_index[31:0]
+    82/97: $16\msb_index[31:0]
+    83/97: $15\msb_index[31:0]
+    84/97: $14\msb_index[31:0]
+    85/97: $13\msb_index[31:0]
+    86/97: $12\msb_index[31:0]
+    87/97: $11\msb_index[31:0]
+    88/97: $10\msb_index[31:0]
+    89/97: $9\msb_index[31:0]
+    90/97: $8\msb_index[31:0]
+    91/97: $7\msb_index[31:0]
+    92/97: $6\msb_index[31:0]
+    93/97: $5\msb_index[31:0]
+    94/97: $4\msb_index[31:0]
+    95/97: $3\msb_index[31:0]
+    96/97: $2\msb_index[31:0]
+    97/97: $1\msb_index[31:0]
+
+12.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\fp32_mul.\round_up' from process `\fp32_mul.$proc$rtl/fp32_mul.sv:14$216'.
+No latch inferred for signal `\fp32_mul.\result_o' from process `\fp32_mul.$proc$rtl/fp32_mul.sv:14$216'.
+No latch inferred for signal `\fp32_mul.\lhs_exp' from process `\fp32_mul.$proc$rtl/fp32_mul.sv:14$216'.
+No latch inferred for signal `\fp32_mul.\rhs_exp' from process `\fp32_mul.$proc$rtl/fp32_mul.sv:14$216'.
+No latch inferred for signal `\fp32_mul.\lhs_frac' from process `\fp32_mul.$proc$rtl/fp32_mul.sv:14$216'.
+No latch inferred for signal `\fp32_mul.\rhs_frac' from process `\fp32_mul.$proc$rtl/fp32_mul.sv:14$216'.
+No latch inferred for signal `\fp32_mul.\lhs_sig' from process `\fp32_mul.$proc$rtl/fp32_mul.sv:14$216'.
+No latch inferred for signal `\fp32_mul.\rhs_sig' from process `\fp32_mul.$proc$rtl/fp32_mul.sv:14$216'.
+No latch inferred for signal `\fp32_mul.\shift_amount' from process `\fp32_mul.$proc$rtl/fp32_mul.sv:14$216'.
+No latch inferred for signal `\fp32_mul.\sign' from process `\fp32_mul.$proc$rtl/fp32_mul.sv:14$216'.
+No latch inferred for signal `\fp32_mul.\result_exp_field' from process `\fp32_mul.$proc$rtl/fp32_mul.sv:14$216'.
+No latch inferred for signal `\fp32_mul.\product' from process `\fp32_mul.$proc$rtl/fp32_mul.sv:14$216'.
+No latch inferred for signal `\fp32_mul.\magnitude' from process `\fp32_mul.$proc$rtl/fp32_mul.sv:14$216'.
+No latch inferred for signal `\fp32_mul.\rounded_wide' from process `\fp32_mul.$proc$rtl/fp32_mul.sv:14$216'.
+No latch inferred for signal `\fp32_mul.\low_mask' from process `\fp32_mul.$proc$rtl/fp32_mul.sv:14$216'.
+No latch inferred for signal `\fp32_mul.\lhs_unbiased' from process `\fp32_mul.$proc$rtl/fp32_mul.sv:14$216'.
+No latch inferred for signal `\fp32_mul.\rhs_unbiased' from process `\fp32_mul.$proc$rtl/fp32_mul.sv:14$216'.
+No latch inferred for signal `\fp32_mul.\exponent' from process `\fp32_mul.$proc$rtl/fp32_mul.sv:14$216'.
+No latch inferred for signal `\fp32_mul.\msb_index' from process `\fp32_mul.$proc$rtl/fp32_mul.sv:14$216'.
+No latch inferred for signal `\fp32_mul.$fordecl_block$214.bit_index' from process `\fp32_mul.$proc$rtl/fp32_mul.sv:14$216'.
+
+12.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+12.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+12.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 59 empty switches in `\fp32_mul.$proc$rtl/fp32_mul.sv:14$216'.
+Removing empty process `fp32_mul.$proc$rtl/fp32_mul.sv:14$216'.
+Cleaned up 59 empty switches.
+
+12.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp32_mul.
+<suppressed ~15 debug messages>
+
+12.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp32_mul.
+
+12.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp32_mul..
+Removed 134 unused cells and 506 unused wires.
+<suppressed ~141 debug messages>
+
+12.5. Executing CHECK pass (checking for obvious problems).
+Checking module fp32_mul...
+Found and reported 0 problems.
+
+12.6. Executing OPT pass (performing simple optimizations).
+
+12.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp32_mul.
+
+12.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp32_mul'.
+<suppressed ~51 debug messages>
+Removed a total of 17 cells.
+
+12.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fp32_mul..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$1025.
+    dead port 1/2 on $mux $procmux$1028.
+    dead port 1/2 on $mux $procmux$1088.
+    dead port 1/2 on $mux $procmux$575.
+    dead port 1/2 on $mux $procmux$578.
+    dead port 1/2 on $mux $procmux$581.
+    dead port 1/2 on $mux $procmux$584.
+    dead port 1/2 on $mux $procmux$587.
+    dead port 1/2 on $mux $procmux$593.
+    dead port 1/2 on $mux $procmux$596.
+    dead port 1/2 on $mux $procmux$599.
+    dead port 1/2 on $mux $procmux$602.
+    dead port 1/2 on $mux $procmux$605.
+    dead port 1/2 on $mux $procmux$608.
+    dead port 2/2 on $mux $procmux$710.
+    dead port 1/2 on $mux $procmux$713.
+    dead port 1/2 on $mux $procmux$716.
+    dead port 1/2 on $mux $procmux$719.
+    dead port 1/2 on $mux $procmux$722.
+    dead port 2/2 on $mux $procmux$764.
+    dead port 1/2 on $mux $procmux$767.
+    dead port 1/2 on $mux $procmux$770.
+    dead port 1/2 on $mux $procmux$773.
+    dead port 1/2 on $mux $procmux$776.
+    dead port 1/2 on $mux $procmux$851.
+    dead port 1/2 on $mux $procmux$854.
+    dead port 1/2 on $mux $procmux$857.
+    dead port 1/2 on $mux $procmux$860.
+    dead port 1/2 on $mux $procmux$941.
+    dead port 1/2 on $mux $procmux$944.
+    dead port 1/2 on $mux $procmux$947.
+Removed 31 multiplexer ports.
+<suppressed ~7 debug messages>
+
+12.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fp32_mul.
+Performed a total of 0 changes.
+
+12.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp32_mul'.
+Removed a total of 0 cells.
+
+12.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp32_mul..
+Removed 0 unused cells and 48 unused wires.
+<suppressed ~1 debug messages>
+
+12.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp32_mul.
+
+12.6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+12.6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fp32_mul..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~7 debug messages>
+
+12.6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fp32_mul.
+Performed a total of 0 changes.
+
+12.6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp32_mul'.
+Removed a total of 0 cells.
+
+12.6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp32_mul..
+
+12.6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp32_mul.
+
+12.6.16. Finished OPT passes. (There is nothing left to do.)
+
+12.7. Executing FSM pass (extract and optimize FSM).
+
+12.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+12.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+12.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+12.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp32_mul..
+
+12.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+12.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+12.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+12.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+12.8. Executing OPT pass (performing simple optimizations).
+
+12.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp32_mul.
+
+12.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp32_mul'.
+Removed a total of 0 cells.
+
+12.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fp32_mul..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~7 debug messages>
+
+12.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fp32_mul.
+Performed a total of 0 changes.
+
+12.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp32_mul'.
+Removed a total of 0 cells.
+
+12.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp32_mul..
+
+12.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp32_mul.
+
+12.8.9. Finished OPT passes. (There is nothing left to do.)
+
+12.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 8 bits (of 32) from mux cell fp32_mul.$procmux$572 ($mux).
+Removed top 105 bits (of 128) from mux cell fp32_mul.$procmux$762 ($mux).
+Removed top 1 bits (of 32) from mux cell fp32_mul.$procmux$708 ($mux).
+Removed top 25 bits (of 32) from port B of cell fp32_mul.$sub$rtl/fp32_mul.sv:22$223 ($sub).
+Removed top 23 bits (of 32) from port Y of cell fp32_mul.$sub$rtl/fp32_mul.sv:22$223 ($sub).
+Removed top 25 bits (of 32) from port B of cell fp32_mul.$sub$rtl/fp32_mul.sv:23$226 ($sub).
+Removed top 23 bits (of 32) from port Y of cell fp32_mul.$sub$rtl/fp32_mul.sv:23$226 ($sub).
+Removed top 25 bits (of 32) from port B of cell fp32_mul.$sub$rtl/fp32_mul.sv:27$229 ($sub).
+Removed top 23 bits (of 32) from port B of cell fp32_mul.$ge$rtl/fp32_mul.sv:39$260 ($ge).
+Removed top 24 bits (of 32) from port B of cell fp32_mul.$ge$rtl/fp32_mul.sv:40$261 ($ge).
+Removed top 26 bits (of 32) from port B of cell fp32_mul.$sub$rtl/fp32_mul.sv:41$262 ($sub).
+Removed top 31 bits (of 32) from port B of cell fp32_mul.$gt$rtl/fp32_mul.sv:42$263 ($gt).
+Removed top 80 bits (of 128) from port A of cell fp32_mul.$shr$rtl/fp32_mul.sv:43$264 ($shr).
+Removed top 30 bits (of 32) from port B of cell fp32_mul.$sub$rtl/fp32_mul.sv:44$265 ($sub).
+Removed top 127 bits (of 128) from port A of cell fp32_mul.$shl$rtl/fp32_mul.sv:44$266 ($shl).
+Removed top 80 bits (of 128) from port A of cell fp32_mul.$and$rtl/fp32_mul.sv:46$270 ($and).
+Removed top 80 bits (of 128) from port A of cell fp32_mul.$shl$rtl/fp32_mul.sv:48$276 ($shl).
+Removed top 103 bits (of 128) from port B of cell fp32_mul.$ge$rtl/fp32_mul.sv:49$277 ($ge).
+Removed top 30 bits (of 32) from port B of cell fp32_mul.$add$rtl/fp32_mul.sv:51$279 ($add).
+Removed top 23 bits (of 32) from port B of cell fp32_mul.$ge$rtl/fp32_mul.sv:53$280 ($ge).
+Removed top 24 bits (of 32) from port B of cell fp32_mul.$add$rtl/fp32_mul.sv:55$281 ($add).
+Removed top 24 bits (of 32) from port Y of cell fp32_mul.$add$rtl/fp32_mul.sv:55$281 ($add).
+Removed top 24 bits (of 32) from port A of cell fp32_mul.$add$rtl/fp32_mul.sv:55$281 ($add).
+Removed top 24 bits (of 32) from port B of cell fp32_mul.$add$rtl/fp32_mul.sv:59$283 ($add).
+Removed top 23 bits (of 32) from port B of cell fp32_mul.$ge$rtl/fp32_mul.sv:60$285 ($ge).
+Removed top 31 bits (of 32) from port B of cell fp32_mul.$gt$rtl/fp32_mul.sv:61$286 ($gt).
+Removed top 80 bits (of 128) from port A of cell fp32_mul.$shr$rtl/fp32_mul.sv:62$287 ($shr).
+Removed top 30 bits (of 32) from port B of cell fp32_mul.$sub$rtl/fp32_mul.sv:63$288 ($sub).
+Removed top 127 bits (of 128) from port A of cell fp32_mul.$shl$rtl/fp32_mul.sv:63$289 ($shl).
+Removed top 80 bits (of 128) from port A of cell fp32_mul.$and$rtl/fp32_mul.sv:65$293 ($and).
+Removed top 80 bits (of 128) from port A of cell fp32_mul.$shl$rtl/fp32_mul.sv:67$299 ($shl).
+Removed top 104 bits (of 128) from port B of cell fp32_mul.$ge$rtl/fp32_mul.sv:68$300 ($ge).
+Removed top 31 bits (of 32) from mux cell fp32_mul.$procmux$1286 ($mux).
+Removed top 30 bits (of 32) from mux cell fp32_mul.$procmux$1283 ($mux).
+Removed top 30 bits (of 32) from mux cell fp32_mul.$procmux$1280 ($mux).
+Removed top 29 bits (of 32) from mux cell fp32_mul.$procmux$1277 ($mux).
+Removed top 29 bits (of 32) from mux cell fp32_mul.$procmux$1274 ($mux).
+Removed top 29 bits (of 32) from mux cell fp32_mul.$procmux$1271 ($mux).
+Removed top 29 bits (of 32) from mux cell fp32_mul.$procmux$1268 ($mux).
+Removed top 1 bits (of 32) from mux cell fp32_mul.$procmux$848 ($mux).
+Removed top 1 bits (of 32) from mux cell fp32_mul.$procmux$938 ($mux).
+Removed top 1 bits (of 32) from mux cell fp32_mul.$procmux$1022 ($mux).
+Removed top 1 bits (of 32) from mux cell fp32_mul.$procmux$1085 ($mux).
+Removed top 31 bits (of 32) from wire fp32_mul.$2\msb_index[31:0].
+Removed top 30 bits (of 32) from wire fp32_mul.$3\msb_index[31:0].
+Removed top 29 bits (of 32) from wire fp32_mul.$7\msb_index[31:0].
+Removed top 105 bits (of 128) from wire fp32_mul.$7\rounded_wide[127:0].
+Removed top 24 bits (of 32) from wire fp32_mul.$add$rtl/fp32_mul.sv:55$281_Y.
+Removed top 9 bits (of 128) from wire fp32_mul.$shl$rtl/fp32_mul.sv:48$276_Y.
+
+12.10. Executing PEEPOPT pass (run peephole optimizers).
+
+12.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp32_mul..
+Removed 0 unused cells and 6 unused wires.
+<suppressed ~1 debug messages>
+
+12.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module fp32_mul:
+  creating $macc model for $add$rtl/fp32_mul.sv:27$228 ($add).
+  creating $macc model for $add$rtl/fp32_mul.sv:27$230 ($add).
+  creating $macc model for $add$rtl/fp32_mul.sv:47$274 ($add).
+  creating $macc model for $add$rtl/fp32_mul.sv:51$279 ($add).
+  creating $macc model for $add$rtl/fp32_mul.sv:55$281 ($add).
+  creating $macc model for $add$rtl/fp32_mul.sv:59$283 ($add).
+  creating $macc model for $add$rtl/fp32_mul.sv:66$297 ($add).
+  creating $macc model for $mul$rtl/fp32_mul.sv:20$221 ($mul).
+  creating $macc model for $neg$rtl/fp32_mul.sv:48$275 ($neg).
+  creating $macc model for $neg$rtl/fp32_mul.sv:59$284 ($neg).
+  creating $macc model for $neg$rtl/fp32_mul.sv:67$298 ($neg).
+  creating $macc model for $sub$rtl/fp32_mul.sv:22$223 ($sub).
+  creating $macc model for $sub$rtl/fp32_mul.sv:23$226 ($sub).
+  creating $macc model for $sub$rtl/fp32_mul.sv:27$229 ($sub).
+  creating $macc model for $sub$rtl/fp32_mul.sv:41$262 ($sub).
+  creating $macc model for $sub$rtl/fp32_mul.sv:44$265 ($sub).
+  creating $macc model for $sub$rtl/fp32_mul.sv:44$267 ($sub).
+  creating $macc model for $sub$rtl/fp32_mul.sv:63$288 ($sub).
+  creating $macc model for $sub$rtl/fp32_mul.sv:63$290 ($sub).
+  merging $macc model for $add$rtl/fp32_mul.sv:59$283 into $neg$rtl/fp32_mul.sv:59$284.
+  merging $macc model for $sub$rtl/fp32_mul.sv:27$229 into $add$rtl/fp32_mul.sv:27$230.
+  creating $alu model for $macc $sub$rtl/fp32_mul.sv:44$267.
+  creating $alu model for $macc $sub$rtl/fp32_mul.sv:44$265.
+  creating $alu model for $macc $sub$rtl/fp32_mul.sv:41$262.
+  creating $alu model for $macc $sub$rtl/fp32_mul.sv:63$290.
+  creating $alu model for $macc $sub$rtl/fp32_mul.sv:23$226.
+  creating $alu model for $macc $sub$rtl/fp32_mul.sv:22$223.
+  creating $alu model for $macc $neg$rtl/fp32_mul.sv:67$298.
+  creating $alu model for $macc $neg$rtl/fp32_mul.sv:48$275.
+  creating $alu model for $macc $add$rtl/fp32_mul.sv:66$297.
+  creating $alu model for $macc $sub$rtl/fp32_mul.sv:63$288.
+  creating $alu model for $macc $add$rtl/fp32_mul.sv:55$281.
+  creating $alu model for $macc $add$rtl/fp32_mul.sv:51$279.
+  creating $alu model for $macc $add$rtl/fp32_mul.sv:47$274.
+  creating $alu model for $macc $add$rtl/fp32_mul.sv:27$228.
+  creating $macc cell for $neg$rtl/fp32_mul.sv:59$284: $auto$alumacc.cc:365:replace_macc$1296
+  creating $macc cell for $add$rtl/fp32_mul.sv:27$230: $auto$alumacc.cc:365:replace_macc$1297
+  creating $macc cell for $mul$rtl/fp32_mul.sv:20$221: $auto$alumacc.cc:365:replace_macc$1298
+  creating $alu model for $ge$rtl/fp32_mul.sv:39$260 ($ge): new $alu
+  creating $alu model for $ge$rtl/fp32_mul.sv:40$261 ($ge): new $alu
+  creating $alu model for $ge$rtl/fp32_mul.sv:49$277 ($ge): new $alu
+  creating $alu model for $ge$rtl/fp32_mul.sv:53$280 ($ge): new $alu
+  creating $alu model for $ge$rtl/fp32_mul.sv:60$285 ($ge): new $alu
+  creating $alu model for $ge$rtl/fp32_mul.sv:68$300 ($ge): new $alu
+  creating $alu model for $gt$rtl/fp32_mul.sv:42$263 ($gt): new $alu
+  creating $alu model for $gt$rtl/fp32_mul.sv:61$286 ($gt): new $alu
+  creating $alu cell for $gt$rtl/fp32_mul.sv:61$286: $auto$alumacc.cc:495:replace_alu$1307
+  creating $alu cell for $gt$rtl/fp32_mul.sv:42$263: $auto$alumacc.cc:495:replace_alu$1320
+  creating $alu cell for $ge$rtl/fp32_mul.sv:68$300: $auto$alumacc.cc:495:replace_alu$1333
+  creating $alu cell for $ge$rtl/fp32_mul.sv:60$285: $auto$alumacc.cc:495:replace_alu$1346
+  creating $alu cell for $ge$rtl/fp32_mul.sv:53$280: $auto$alumacc.cc:495:replace_alu$1361
+  creating $alu cell for $ge$rtl/fp32_mul.sv:49$277: $auto$alumacc.cc:495:replace_alu$1376
+  creating $alu cell for $ge$rtl/fp32_mul.sv:40$261: $auto$alumacc.cc:495:replace_alu$1389
+  creating $alu cell for $ge$rtl/fp32_mul.sv:39$260: $auto$alumacc.cc:495:replace_alu$1404
+  creating $alu cell for $add$rtl/fp32_mul.sv:27$228: $auto$alumacc.cc:495:replace_alu$1419
+  creating $alu cell for $add$rtl/fp32_mul.sv:47$274: $auto$alumacc.cc:495:replace_alu$1422
+  creating $alu cell for $add$rtl/fp32_mul.sv:51$279: $auto$alumacc.cc:495:replace_alu$1425
+  creating $alu cell for $add$rtl/fp32_mul.sv:55$281: $auto$alumacc.cc:495:replace_alu$1428
+  creating $alu cell for $sub$rtl/fp32_mul.sv:63$288: $auto$alumacc.cc:495:replace_alu$1431
+  creating $alu cell for $add$rtl/fp32_mul.sv:66$297: $auto$alumacc.cc:495:replace_alu$1434
+  creating $alu cell for $neg$rtl/fp32_mul.sv:48$275: $auto$alumacc.cc:495:replace_alu$1437
+  creating $alu cell for $neg$rtl/fp32_mul.sv:67$298: $auto$alumacc.cc:495:replace_alu$1440
+  creating $alu cell for $sub$rtl/fp32_mul.sv:22$223: $auto$alumacc.cc:495:replace_alu$1443
+  creating $alu cell for $sub$rtl/fp32_mul.sv:23$226: $auto$alumacc.cc:495:replace_alu$1446
+  creating $alu cell for $sub$rtl/fp32_mul.sv:63$290: $auto$alumacc.cc:495:replace_alu$1449
+  creating $alu cell for $sub$rtl/fp32_mul.sv:41$262: $auto$alumacc.cc:495:replace_alu$1452
+  creating $alu cell for $sub$rtl/fp32_mul.sv:44$265: $auto$alumacc.cc:495:replace_alu$1455
+  creating $alu cell for $sub$rtl/fp32_mul.sv:44$267: $auto$alumacc.cc:495:replace_alu$1458
+  created 22 $alu and 3 $macc cells.
+
+12.13. Executing SHARE pass (SAT-based resource sharing).
+Found 6 cells in module fp32_mul that may be considered for resource sharing.
+  Analyzing resource sharing options for $shr$rtl/fp32_mul.sv:62$287 ($shr):
+    Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2783:ReduceOr$1403 $auto$rtlil.cc:2783:ReduceOr$1418 $logic_or$rtl/fp32_mul.sv:30$249_Y $logic_or$rtl/fp32_mul.sv:33$247_Y $logic_or$rtl/fp32_mul.sv:32$240_Y $auto$rtlil.cc:2783:ReduceOr$1345 $auto$rtlil.cc:2783:ReduceOr$1360 $auto$rtlil.cc:2779:Not$1319 }.
+    Found 1 candidates: $shr$rtl/fp32_mul.sv:43$264
+    Analyzing resource sharing with $shr$rtl/fp32_mul.sv:43$264 ($shr):
+      Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2783:ReduceOr$1403 $auto$rtlil.cc:2783:ReduceOr$1418 $logic_or$rtl/fp32_mul.sv:30$249_Y $logic_or$rtl/fp32_mul.sv:33$247_Y $logic_or$rtl/fp32_mul.sv:32$240_Y $auto$rtlil.cc:2779:Not$1332 $auto$rtlil.cc:2783:ReduceOr$1375 }.
+      Forbidden control signals for this pair of cells: { $ge$rtl/fp32_mul.sv:68$300_Y $ge$rtl/fp32_mul.sv:53$280_Y $ge$rtl/fp32_mul.sv:49$277_Y }
+      Activation pattern for cell $shr$rtl/fp32_mul.sv:62$287: { $auto$rtlil.cc:2783:ReduceOr$1403 $auto$rtlil.cc:2783:ReduceOr$1418 $logic_or$rtl/fp32_mul.sv:30$249_Y $logic_or$rtl/fp32_mul.sv:33$247_Y $logic_or$rtl/fp32_mul.sv:32$240_Y $auto$rtlil.cc:2783:ReduceOr$1345 $auto$rtlil.cc:2783:ReduceOr$1360 $auto$rtlil.cc:2779:Not$1319 } = 8'00000001
+      Activation pattern for cell $shr$rtl/fp32_mul.sv:62$287: { $auto$rtlil.cc:2783:ReduceOr$1403 $auto$rtlil.cc:2783:ReduceOr$1418 $logic_or$rtl/fp32_mul.sv:30$249_Y $logic_or$rtl/fp32_mul.sv:33$247_Y $logic_or$rtl/fp32_mul.sv:32$240_Y $auto$rtlil.cc:2783:ReduceOr$1360 $auto$rtlil.cc:2779:Not$1319 } = 7'0000001
+      Activation pattern for cell $shr$rtl/fp32_mul.sv:43$264: { $auto$rtlil.cc:2783:ReduceOr$1403 $auto$rtlil.cc:2783:ReduceOr$1418 $logic_or$rtl/fp32_mul.sv:30$249_Y $logic_or$rtl/fp32_mul.sv:33$247_Y $logic_or$rtl/fp32_mul.sv:32$240_Y $auto$rtlil.cc:2779:Not$1332 $auto$rtlil.cc:2783:ReduceOr$1375 } = 7'1000010
+      Activation pattern for cell $shr$rtl/fp32_mul.sv:43$264: { $auto$rtlil.cc:2783:ReduceOr$1403 $auto$rtlil.cc:2783:ReduceOr$1418 $logic_or$rtl/fp32_mul.sv:30$249_Y $logic_or$rtl/fp32_mul.sv:33$247_Y $logic_or$rtl/fp32_mul.sv:32$240_Y $auto$rtlil.cc:2779:Not$1332 } = 6'100001
+      Size of SAT problem: 149 cells, 39820 variables, 105323 clauses
+      According to the SAT solver this pair of cells can be shared.
+      Activation signal for $shr$rtl/fp32_mul.sv:43$264: $auto$share.cc:1015:make_cell_activation_logic$1464
+      New cell: $auto$share.cc:669:make_supercell$1471 ($shr)
+      New topology contains loops! Rolling back..
+  Analyzing resource sharing options for $shr$rtl/fp32_mul.sv:43$264 ($shr):
+    Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2783:ReduceOr$1403 $auto$rtlil.cc:2783:ReduceOr$1418 $logic_or$rtl/fp32_mul.sv:30$249_Y $logic_or$rtl/fp32_mul.sv:33$247_Y $logic_or$rtl/fp32_mul.sv:32$240_Y $auto$rtlil.cc:2779:Not$1332 $auto$rtlil.cc:2783:ReduceOr$1375 }.
+    No candidates found.
+  Analyzing resource sharing options for $shl$rtl/fp32_mul.sv:67$299 ($shl):
+    Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2783:ReduceOr$1403 $auto$rtlil.cc:2783:ReduceOr$1418 $logic_or$rtl/fp32_mul.sv:30$249_Y $logic_or$rtl/fp32_mul.sv:33$247_Y $logic_or$rtl/fp32_mul.sv:32$240_Y $auto$rtlil.cc:2783:ReduceOr$1345 $auto$rtlil.cc:2783:ReduceOr$1360 $auto$rtlil.cc:2779:Not$1319 }.
+    Found 1 candidates: $shl$rtl/fp32_mul.sv:48$276
+    Analyzing resource sharing with $shl$rtl/fp32_mul.sv:48$276 ($shl):
+      Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2783:ReduceOr$1403 $auto$rtlil.cc:2783:ReduceOr$1418 $logic_or$rtl/fp32_mul.sv:30$249_Y $logic_or$rtl/fp32_mul.sv:33$247_Y $logic_or$rtl/fp32_mul.sv:32$240_Y $auto$rtlil.cc:2779:Not$1332 $auto$rtlil.cc:2783:ReduceOr$1375 }.
+      Forbidden control signals for this pair of cells: { $ge$rtl/fp32_mul.sv:68$300_Y $ge$rtl/fp32_mul.sv:53$280_Y $ge$rtl/fp32_mul.sv:49$277_Y }
+      Activation pattern for cell $shl$rtl/fp32_mul.sv:67$299: { $auto$rtlil.cc:2783:ReduceOr$1403 $auto$rtlil.cc:2783:ReduceOr$1418 $logic_or$rtl/fp32_mul.sv:30$249_Y $logic_or$rtl/fp32_mul.sv:33$247_Y $logic_or$rtl/fp32_mul.sv:32$240_Y $auto$rtlil.cc:2783:ReduceOr$1360 $auto$rtlil.cc:2779:Not$1319 } = 7'0000000
+      Activation pattern for cell $shl$rtl/fp32_mul.sv:67$299: { $auto$rtlil.cc:2783:ReduceOr$1403 $auto$rtlil.cc:2783:ReduceOr$1418 $logic_or$rtl/fp32_mul.sv:30$249_Y $logic_or$rtl/fp32_mul.sv:33$247_Y $logic_or$rtl/fp32_mul.sv:32$240_Y $auto$rtlil.cc:2783:ReduceOr$1345 $auto$rtlil.cc:2783:ReduceOr$1360 $auto$rtlil.cc:2779:Not$1319 } = 8'00000000
+      Activation pattern for cell $shl$rtl/fp32_mul.sv:48$276: { $auto$rtlil.cc:2783:ReduceOr$1403 $auto$rtlil.cc:2783:ReduceOr$1418 $logic_or$rtl/fp32_mul.sv:30$249_Y $logic_or$rtl/fp32_mul.sv:33$247_Y $logic_or$rtl/fp32_mul.sv:32$240_Y $auto$rtlil.cc:2779:Not$1332 } = 6'100000
+      Activation pattern for cell $shl$rtl/fp32_mul.sv:48$276: { $auto$rtlil.cc:2783:ReduceOr$1403 $auto$rtlil.cc:2783:ReduceOr$1418 $logic_or$rtl/fp32_mul.sv:30$249_Y $logic_or$rtl/fp32_mul.sv:33$247_Y $logic_or$rtl/fp32_mul.sv:32$240_Y $auto$rtlil.cc:2779:Not$1332 $auto$rtlil.cc:2783:ReduceOr$1375 } = 7'1000000
+      Size of SAT problem: 149 cells, 39820 variables, 105323 clauses
+      According to the SAT solver this pair of cells can be shared.
+      Activation signal for $shl$rtl/fp32_mul.sv:48$276: $auto$share.cc:1015:make_cell_activation_logic$1477
+      New cell: $auto$share.cc:669:make_supercell$1484 ($shl)
+      New topology contains loops! Rolling back..
+  Analyzing resource sharing options for $shl$rtl/fp32_mul.sv:48$276 ($shl):
+    Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2783:ReduceOr$1403 $auto$rtlil.cc:2783:ReduceOr$1418 $logic_or$rtl/fp32_mul.sv:30$249_Y $logic_or$rtl/fp32_mul.sv:33$247_Y $logic_or$rtl/fp32_mul.sv:32$240_Y $auto$rtlil.cc:2779:Not$1332 $auto$rtlil.cc:2783:ReduceOr$1375 }.
+    No candidates found.
+  Analyzing resource sharing options for $shl$rtl/fp32_mul.sv:63$289 ($shl):
+    Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2783:ReduceOr$1403 $auto$rtlil.cc:2783:ReduceOr$1418 $logic_or$rtl/fp32_mul.sv:30$249_Y $logic_or$rtl/fp32_mul.sv:33$247_Y $logic_or$rtl/fp32_mul.sv:32$240_Y $auto$rtlil.cc:2783:ReduceOr$1345 $auto$rtlil.cc:2783:ReduceOr$1360 $auto$rtlil.cc:2779:Not$1319 }.
+    Found 1 candidates: $shl$rtl/fp32_mul.sv:44$266
+    Analyzing resource sharing with $shl$rtl/fp32_mul.sv:44$266 ($shl):
+      Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2783:ReduceOr$1403 $auto$rtlil.cc:2783:ReduceOr$1418 $logic_or$rtl/fp32_mul.sv:30$249_Y $logic_or$rtl/fp32_mul.sv:33$247_Y $logic_or$rtl/fp32_mul.sv:32$240_Y $auto$rtlil.cc:2779:Not$1332 $auto$rtlil.cc:2783:ReduceOr$1375 }.
+      Forbidden control signals for this pair of cells: { $ge$rtl/fp32_mul.sv:68$300_Y $ge$rtl/fp32_mul.sv:53$280_Y $ge$rtl/fp32_mul.sv:49$277_Y }
+      Activation pattern for cell $shl$rtl/fp32_mul.sv:63$289: { $auto$rtlil.cc:2783:ReduceOr$1403 $auto$rtlil.cc:2783:ReduceOr$1418 $logic_or$rtl/fp32_mul.sv:30$249_Y $logic_or$rtl/fp32_mul.sv:33$247_Y $logic_or$rtl/fp32_mul.sv:32$240_Y $auto$rtlil.cc:2783:ReduceOr$1360 $auto$rtlil.cc:2779:Not$1319 } = 7'0000001
+      Activation pattern for cell $shl$rtl/fp32_mul.sv:63$289: { $auto$rtlil.cc:2783:ReduceOr$1403 $auto$rtlil.cc:2783:ReduceOr$1418 $logic_or$rtl/fp32_mul.sv:30$249_Y $logic_or$rtl/fp32_mul.sv:33$247_Y $logic_or$rtl/fp32_mul.sv:32$240_Y $auto$rtlil.cc:2783:ReduceOr$1345 $auto$rtlil.cc:2783:ReduceOr$1360 $auto$rtlil.cc:2779:Not$1319 } = 8'00000001
+      Activation pattern for cell $shl$rtl/fp32_mul.sv:44$266: { $auto$rtlil.cc:2783:ReduceOr$1403 $auto$rtlil.cc:2783:ReduceOr$1418 $logic_or$rtl/fp32_mul.sv:30$249_Y $logic_or$rtl/fp32_mul.sv:33$247_Y $logic_or$rtl/fp32_mul.sv:32$240_Y $auto$rtlil.cc:2779:Not$1332 } = 6'100001
+      Activation pattern for cell $shl$rtl/fp32_mul.sv:44$266: { $auto$rtlil.cc:2783:ReduceOr$1403 $auto$rtlil.cc:2783:ReduceOr$1418 $logic_or$rtl/fp32_mul.sv:30$249_Y $logic_or$rtl/fp32_mul.sv:33$247_Y $logic_or$rtl/fp32_mul.sv:32$240_Y $auto$rtlil.cc:2779:Not$1332 $auto$rtlil.cc:2783:ReduceOr$1375 } = 7'1000010
+      Size of SAT problem: 149 cells, 39820 variables, 105323 clauses
+      According to the SAT solver this pair of cells can be shared.
+      Activation signal for $shl$rtl/fp32_mul.sv:44$266: $auto$share.cc:1015:make_cell_activation_logic$1490
+      New cell: $auto$share.cc:669:make_supercell$1497 ($shl)
+      New topology contains loops! Rolling back..
+  Analyzing resource sharing options for $shl$rtl/fp32_mul.sv:44$266 ($shl):
+    Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2783:ReduceOr$1403 $auto$rtlil.cc:2783:ReduceOr$1418 $logic_or$rtl/fp32_mul.sv:30$249_Y $logic_or$rtl/fp32_mul.sv:33$247_Y $logic_or$rtl/fp32_mul.sv:32$240_Y $auto$rtlil.cc:2779:Not$1332 $auto$rtlil.cc:2783:ReduceOr$1375 }.
+    No candidates found.
+
+12.14. Executing OPT pass (performing simple optimizations).
+
+12.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp32_mul.
+<suppressed ~8 debug messages>
+
+12.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp32_mul'.
+Removed a total of 0 cells.
+
+12.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fp32_mul..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~7 debug messages>
+
+12.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fp32_mul.
+Performed a total of 0 changes.
+
+12.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp32_mul'.
+Removed a total of 0 cells.
+
+12.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp32_mul..
+Removed 4 unused cells and 37 unused wires.
+<suppressed ~7 debug messages>
+
+12.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp32_mul.
+
+12.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+12.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fp32_mul..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~7 debug messages>
+
+12.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fp32_mul.
+Performed a total of 0 changes.
+
+12.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp32_mul'.
+Removed a total of 0 cells.
+
+12.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp32_mul..
+
+12.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp32_mul.
+
+12.14.16. Finished OPT passes. (There is nothing left to do.)
+
+12.15. Executing MEMORY pass.
+
+12.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+12.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+12.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+12.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+12.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+12.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp32_mul..
+
+12.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+12.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+12.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp32_mul..
+
+12.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+12.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp32_mul..
+
+12.17. Executing OPT pass (performing simple optimizations).
+
+12.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp32_mul.
+<suppressed ~40 debug messages>
+
+12.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp32_mul'.
+<suppressed ~3 debug messages>
+Removed a total of 1 cells.
+
+12.17.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp32_mul..
+Removed 0 unused cells and 89 unused wires.
+<suppressed ~1 debug messages>
+
+12.17.5. Finished fast OPT passes.
+
+12.18. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+12.19. Executing OPT pass (performing simple optimizations).
+
+12.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp32_mul.
+
+12.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp32_mul'.
+Removed a total of 0 cells.
+
+12.19.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fp32_mul..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~7 debug messages>
+
+12.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1265:
+      Old ports: A={ 29'00000000000000000000000000000 $8\msb_index[31:0] [2:0] }, B=8, Y=$9\msb_index[31:0]
+      New ports: A={ 1'0 $8\msb_index[31:0] [2:0] }, B=4'1000, Y=$9\msb_index[31:0] [3:0]
+      New connections: $9\msb_index[31:0] [31:4] = 28'0000000000000000000000000000
+    Consolidated identical input bits for $mux cell $ternary$rtl/fp32_mul.sv:22$224:
+      Old ports: A={ $sub$rtl/fp32_mul.sv:22$223_Y [31] $sub$rtl/fp32_mul.sv:22$223_Y [31] $sub$rtl/fp32_mul.sv:22$223_Y [31] $sub$rtl/fp32_mul.sv:22$223_Y [31] $sub$rtl/fp32_mul.sv:22$223_Y [31] $sub$rtl/fp32_mul.sv:22$223_Y [31] $sub$rtl/fp32_mul.sv:22$223_Y [31] $sub$rtl/fp32_mul.sv:22$223_Y [31] $sub$rtl/fp32_mul.sv:22$223_Y [31] $sub$rtl/fp32_mul.sv:22$223_Y [31] $sub$rtl/fp32_mul.sv:22$223_Y [31] $sub$rtl/fp32_mul.sv:22$223_Y [31] $sub$rtl/fp32_mul.sv:22$223_Y [31] $sub$rtl/fp32_mul.sv:22$223_Y [31] $sub$rtl/fp32_mul.sv:22$223_Y [31] $sub$rtl/fp32_mul.sv:22$223_Y [31] $sub$rtl/fp32_mul.sv:22$223_Y [31] $sub$rtl/fp32_mul.sv:22$223_Y [31] $sub$rtl/fp32_mul.sv:22$223_Y [31] $sub$rtl/fp32_mul.sv:22$223_Y [31] $sub$rtl/fp32_mul.sv:22$223_Y [31] $sub$rtl/fp32_mul.sv:22$223_Y [31] $sub$rtl/fp32_mul.sv:22$223_Y [31] $sub$rtl/fp32_mul.sv:22$223_Y [31] $sub$rtl/fp32_mul.sv:22$223_Y [7:0] }, B=32'11111111111111111111111110000010, Y=\lhs_unbiased
+      New ports: A={ $sub$rtl/fp32_mul.sv:22$223_Y [31] $sub$rtl/fp32_mul.sv:22$223_Y [7:0] }, B=9'110000010, Y=\lhs_unbiased [8:0]
+      New connections: \lhs_unbiased [31:9] = { \lhs_unbiased [8] \lhs_unbiased [8] \lhs_unbiased [8] \lhs_unbiased [8] \lhs_unbiased [8] \lhs_unbiased [8] \lhs_unbiased [8] \lhs_unbiased [8] \lhs_unbiased [8] \lhs_unbiased [8] \lhs_unbiased [8] \lhs_unbiased [8] \lhs_unbiased [8] \lhs_unbiased [8] \lhs_unbiased [8] \lhs_unbiased [8] \lhs_unbiased [8] \lhs_unbiased [8] \lhs_unbiased [8] \lhs_unbiased [8] \lhs_unbiased [8] \lhs_unbiased [8] \lhs_unbiased [8] }
+    Consolidated identical input bits for $mux cell $ternary$rtl/fp32_mul.sv:23$227:
+      Old ports: A={ $sub$rtl/fp32_mul.sv:23$226_Y [31] $sub$rtl/fp32_mul.sv:23$226_Y [31] $sub$rtl/fp32_mul.sv:23$226_Y [31] $sub$rtl/fp32_mul.sv:23$226_Y [31] $sub$rtl/fp32_mul.sv:23$226_Y [31] $sub$rtl/fp32_mul.sv:23$226_Y [31] $sub$rtl/fp32_mul.sv:23$226_Y [31] $sub$rtl/fp32_mul.sv:23$226_Y [31] $sub$rtl/fp32_mul.sv:23$226_Y [31] $sub$rtl/fp32_mul.sv:23$226_Y [31] $sub$rtl/fp32_mul.sv:23$226_Y [31] $sub$rtl/fp32_mul.sv:23$226_Y [31] $sub$rtl/fp32_mul.sv:23$226_Y [31] $sub$rtl/fp32_mul.sv:23$226_Y [31] $sub$rtl/fp32_mul.sv:23$226_Y [31] $sub$rtl/fp32_mul.sv:23$226_Y [31] $sub$rtl/fp32_mul.sv:23$226_Y [31] $sub$rtl/fp32_mul.sv:23$226_Y [31] $sub$rtl/fp32_mul.sv:23$226_Y [31] $sub$rtl/fp32_mul.sv:23$226_Y [31] $sub$rtl/fp32_mul.sv:23$226_Y [31] $sub$rtl/fp32_mul.sv:23$226_Y [31] $sub$rtl/fp32_mul.sv:23$226_Y [31] $sub$rtl/fp32_mul.sv:23$226_Y [31] $sub$rtl/fp32_mul.sv:23$226_Y [7:0] }, B=32'11111111111111111111111110000010, Y=\rhs_unbiased
+      New ports: A={ $sub$rtl/fp32_mul.sv:23$226_Y [31] $sub$rtl/fp32_mul.sv:23$226_Y [7:0] }, B=9'110000010, Y=\rhs_unbiased [8:0]
+      New connections: \rhs_unbiased [31:9] = { \rhs_unbiased [8] \rhs_unbiased [8] \rhs_unbiased [8] \rhs_unbiased [8] \rhs_unbiased [8] \rhs_unbiased [8] \rhs_unbiased [8] \rhs_unbiased [8] \rhs_unbiased [8] \rhs_unbiased [8] \rhs_unbiased [8] \rhs_unbiased [8] \rhs_unbiased [8] \rhs_unbiased [8] \rhs_unbiased [8] \rhs_unbiased [8] \rhs_unbiased [8] \rhs_unbiased [8] \rhs_unbiased [8] \rhs_unbiased [8] \rhs_unbiased [8] \rhs_unbiased [8] \rhs_unbiased [8] }
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1262:
+      Old ports: A=$9\msb_index[31:0], B=9, Y=$10\msb_index[31:0]
+      New ports: A=$9\msb_index[31:0] [3:0], B=4'1001, Y=$10\msb_index[31:0] [3:0]
+      New connections: $10\msb_index[31:0] [31:4] = 28'0000000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1259:
+      Old ports: A=$10\msb_index[31:0], B=10, Y=$11\msb_index[31:0]
+      New ports: A=$10\msb_index[31:0] [3:0], B=4'1010, Y=$11\msb_index[31:0] [3:0]
+      New connections: $11\msb_index[31:0] [31:4] = 28'0000000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1256:
+      Old ports: A=$11\msb_index[31:0], B=11, Y=$12\msb_index[31:0]
+      New ports: A=$11\msb_index[31:0] [3:0], B=4'1011, Y=$12\msb_index[31:0] [3:0]
+      New connections: $12\msb_index[31:0] [31:4] = 28'0000000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1253:
+      Old ports: A=$12\msb_index[31:0], B=12, Y=$13\msb_index[31:0]
+      New ports: A=$12\msb_index[31:0] [3:0], B=4'1100, Y=$13\msb_index[31:0] [3:0]
+      New connections: $13\msb_index[31:0] [31:4] = 28'0000000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1250:
+      Old ports: A=$13\msb_index[31:0], B=13, Y=$14\msb_index[31:0]
+      New ports: A=$13\msb_index[31:0] [3:0], B=4'1101, Y=$14\msb_index[31:0] [3:0]
+      New connections: $14\msb_index[31:0] [31:4] = 28'0000000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1247:
+      Old ports: A=$14\msb_index[31:0], B=14, Y=$15\msb_index[31:0]
+      New ports: A=$14\msb_index[31:0] [3:0], B=4'1110, Y=$15\msb_index[31:0] [3:0]
+      New connections: $15\msb_index[31:0] [31:4] = 28'0000000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1244:
+      Old ports: A=$15\msb_index[31:0], B=15, Y=$16\msb_index[31:0]
+      New ports: A=$15\msb_index[31:0] [3:0], B=4'1111, Y=$16\msb_index[31:0] [3:0]
+      New connections: $16\msb_index[31:0] [31:4] = 28'0000000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1241:
+      Old ports: A=$16\msb_index[31:0], B=16, Y=$17\msb_index[31:0]
+      New ports: A={ 1'0 $16\msb_index[31:0] [3:0] }, B=5'10000, Y=$17\msb_index[31:0] [4:0]
+      New connections: $17\msb_index[31:0] [31:5] = 27'000000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1238:
+      Old ports: A=$17\msb_index[31:0], B=17, Y=$18\msb_index[31:0]
+      New ports: A=$17\msb_index[31:0] [4:0], B=5'10001, Y=$18\msb_index[31:0] [4:0]
+      New connections: $18\msb_index[31:0] [31:5] = 27'000000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1235:
+      Old ports: A=$18\msb_index[31:0], B=18, Y=$19\msb_index[31:0]
+      New ports: A=$18\msb_index[31:0] [4:0], B=5'10010, Y=$19\msb_index[31:0] [4:0]
+      New connections: $19\msb_index[31:0] [31:5] = 27'000000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1232:
+      Old ports: A=$19\msb_index[31:0], B=19, Y=$20\msb_index[31:0]
+      New ports: A=$19\msb_index[31:0] [4:0], B=5'10011, Y=$20\msb_index[31:0] [4:0]
+      New connections: $20\msb_index[31:0] [31:5] = 27'000000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1229:
+      Old ports: A=$20\msb_index[31:0], B=20, Y=$21\msb_index[31:0]
+      New ports: A=$20\msb_index[31:0] [4:0], B=5'10100, Y=$21\msb_index[31:0] [4:0]
+      New connections: $21\msb_index[31:0] [31:5] = 27'000000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1226:
+      Old ports: A=$21\msb_index[31:0], B=21, Y=$22\msb_index[31:0]
+      New ports: A=$21\msb_index[31:0] [4:0], B=5'10101, Y=$22\msb_index[31:0] [4:0]
+      New connections: $22\msb_index[31:0] [31:5] = 27'000000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1223:
+      Old ports: A=$22\msb_index[31:0], B=22, Y=$23\msb_index[31:0]
+      New ports: A=$22\msb_index[31:0] [4:0], B=5'10110, Y=$23\msb_index[31:0] [4:0]
+      New connections: $23\msb_index[31:0] [31:5] = 27'000000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1220:
+      Old ports: A=$23\msb_index[31:0], B=23, Y=$24\msb_index[31:0]
+      New ports: A=$23\msb_index[31:0] [4:0], B=5'10111, Y=$24\msb_index[31:0] [4:0]
+      New connections: $24\msb_index[31:0] [31:5] = 27'000000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1217:
+      Old ports: A=$24\msb_index[31:0], B=24, Y=$25\msb_index[31:0]
+      New ports: A=$24\msb_index[31:0] [4:0], B=5'11000, Y=$25\msb_index[31:0] [4:0]
+      New connections: $25\msb_index[31:0] [31:5] = 27'000000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1214:
+      Old ports: A=$25\msb_index[31:0], B=25, Y=$26\msb_index[31:0]
+      New ports: A=$25\msb_index[31:0] [4:0], B=5'11001, Y=$26\msb_index[31:0] [4:0]
+      New connections: $26\msb_index[31:0] [31:5] = 27'000000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1211:
+      Old ports: A=$26\msb_index[31:0], B=26, Y=$27\msb_index[31:0]
+      New ports: A=$26\msb_index[31:0] [4:0], B=5'11010, Y=$27\msb_index[31:0] [4:0]
+      New connections: $27\msb_index[31:0] [31:5] = 27'000000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1208:
+      Old ports: A=$27\msb_index[31:0], B=27, Y=$28\msb_index[31:0]
+      New ports: A=$27\msb_index[31:0] [4:0], B=5'11011, Y=$28\msb_index[31:0] [4:0]
+      New connections: $28\msb_index[31:0] [31:5] = 27'000000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1205:
+      Old ports: A=$28\msb_index[31:0], B=28, Y=$29\msb_index[31:0]
+      New ports: A=$28\msb_index[31:0] [4:0], B=5'11100, Y=$29\msb_index[31:0] [4:0]
+      New connections: $29\msb_index[31:0] [31:5] = 27'000000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1202:
+      Old ports: A=$29\msb_index[31:0], B=29, Y=$30\msb_index[31:0]
+      New ports: A=$29\msb_index[31:0] [4:0], B=5'11101, Y=$30\msb_index[31:0] [4:0]
+      New connections: $30\msb_index[31:0] [31:5] = 27'000000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1199:
+      Old ports: A=$30\msb_index[31:0], B=30, Y=$31\msb_index[31:0]
+      New ports: A=$30\msb_index[31:0] [4:0], B=5'11110, Y=$31\msb_index[31:0] [4:0]
+      New connections: $31\msb_index[31:0] [31:5] = 27'000000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1196:
+      Old ports: A=$31\msb_index[31:0], B=31, Y=$32\msb_index[31:0]
+      New ports: A=$31\msb_index[31:0] [4:0], B=5'11111, Y=$32\msb_index[31:0] [4:0]
+      New connections: $32\msb_index[31:0] [31:5] = 27'000000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1193:
+      Old ports: A=$32\msb_index[31:0], B=32, Y=$33\msb_index[31:0]
+      New ports: A={ 1'0 $32\msb_index[31:0] [4:0] }, B=6'100000, Y=$33\msb_index[31:0] [5:0]
+      New connections: $33\msb_index[31:0] [31:6] = 26'00000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1190:
+      Old ports: A=$33\msb_index[31:0], B=33, Y=$34\msb_index[31:0]
+      New ports: A=$33\msb_index[31:0] [5:0], B=6'100001, Y=$34\msb_index[31:0] [5:0]
+      New connections: $34\msb_index[31:0] [31:6] = 26'00000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1187:
+      Old ports: A=$34\msb_index[31:0], B=34, Y=$35\msb_index[31:0]
+      New ports: A=$34\msb_index[31:0] [5:0], B=6'100010, Y=$35\msb_index[31:0] [5:0]
+      New connections: $35\msb_index[31:0] [31:6] = 26'00000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1184:
+      Old ports: A=$35\msb_index[31:0], B=35, Y=$36\msb_index[31:0]
+      New ports: A=$35\msb_index[31:0] [5:0], B=6'100011, Y=$36\msb_index[31:0] [5:0]
+      New connections: $36\msb_index[31:0] [31:6] = 26'00000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1181:
+      Old ports: A=$36\msb_index[31:0], B=36, Y=$37\msb_index[31:0]
+      New ports: A=$36\msb_index[31:0] [5:0], B=6'100100, Y=$37\msb_index[31:0] [5:0]
+      New connections: $37\msb_index[31:0] [31:6] = 26'00000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1178:
+      Old ports: A=$37\msb_index[31:0], B=37, Y=$38\msb_index[31:0]
+      New ports: A=$37\msb_index[31:0] [5:0], B=6'100101, Y=$38\msb_index[31:0] [5:0]
+      New connections: $38\msb_index[31:0] [31:6] = 26'00000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1175:
+      Old ports: A=$38\msb_index[31:0], B=38, Y=$39\msb_index[31:0]
+      New ports: A=$38\msb_index[31:0] [5:0], B=6'100110, Y=$39\msb_index[31:0] [5:0]
+      New connections: $39\msb_index[31:0] [31:6] = 26'00000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1172:
+      Old ports: A=$39\msb_index[31:0], B=39, Y=$40\msb_index[31:0]
+      New ports: A=$39\msb_index[31:0] [5:0], B=6'100111, Y=$40\msb_index[31:0] [5:0]
+      New connections: $40\msb_index[31:0] [31:6] = 26'00000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1169:
+      Old ports: A=$40\msb_index[31:0], B=40, Y=$41\msb_index[31:0]
+      New ports: A=$40\msb_index[31:0] [5:0], B=6'101000, Y=$41\msb_index[31:0] [5:0]
+      New connections: $41\msb_index[31:0] [31:6] = 26'00000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1166:
+      Old ports: A=$41\msb_index[31:0], B=41, Y=$42\msb_index[31:0]
+      New ports: A=$41\msb_index[31:0] [5:0], B=6'101001, Y=$42\msb_index[31:0] [5:0]
+      New connections: $42\msb_index[31:0] [31:6] = 26'00000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1163:
+      Old ports: A=$42\msb_index[31:0], B=42, Y=$43\msb_index[31:0]
+      New ports: A=$42\msb_index[31:0] [5:0], B=6'101010, Y=$43\msb_index[31:0] [5:0]
+      New connections: $43\msb_index[31:0] [31:6] = 26'00000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1160:
+      Old ports: A=$43\msb_index[31:0], B=43, Y=$44\msb_index[31:0]
+      New ports: A=$43\msb_index[31:0] [5:0], B=6'101011, Y=$44\msb_index[31:0] [5:0]
+      New connections: $44\msb_index[31:0] [31:6] = 26'00000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1157:
+      Old ports: A=$44\msb_index[31:0], B=44, Y=$45\msb_index[31:0]
+      New ports: A=$44\msb_index[31:0] [5:0], B=6'101100, Y=$45\msb_index[31:0] [5:0]
+      New connections: $45\msb_index[31:0] [31:6] = 26'00000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1154:
+      Old ports: A=$45\msb_index[31:0], B=45, Y=$46\msb_index[31:0]
+      New ports: A=$45\msb_index[31:0] [5:0], B=6'101101, Y=$46\msb_index[31:0] [5:0]
+      New connections: $46\msb_index[31:0] [31:6] = 26'00000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1151:
+      Old ports: A=$46\msb_index[31:0], B=46, Y=$47\msb_index[31:0]
+      New ports: A=$46\msb_index[31:0] [5:0], B=6'101110, Y=$47\msb_index[31:0] [5:0]
+      New connections: $47\msb_index[31:0] [31:6] = 26'00000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+    Consolidated identical input bits for $mux cell $procmux$1148:
+      Old ports: A=$47\msb_index[31:0], B=47, Y=\msb_index
+      New ports: A=$47\msb_index[31:0] [5:0], B=6'101111, Y=\msb_index [5:0]
+      New connections: \msb_index [31:6] = 26'00000000000000000000000000
+  Optimizing cells in module \fp32_mul.
+Performed a total of 42 changes.
+
+12.19.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp32_mul'.
+Removed a total of 0 cells.
+
+12.19.6. Executing OPT_SHARE pass.
+
+12.19.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.19.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp32_mul..
+
+12.19.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp32_mul.
+
+12.19.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+12.19.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fp32_mul..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~7 debug messages>
+
+12.19.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fp32_mul.
+Performed a total of 0 changes.
+
+12.19.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp32_mul'.
+Removed a total of 0 cells.
+
+12.19.14. Executing OPT_SHARE pass.
+
+12.19.15. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.19.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp32_mul..
+
+12.19.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp32_mul.
+
+12.19.18. Finished OPT passes. (There is nothing left to do.)
+
+12.20. Executing TECHMAP pass (map to technology primitives).
+
+12.20.1. Executing Verilog-2005 frontend: /home/chandler/.local/yosys/usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/home/chandler/.local/yosys/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+12.20.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $reduce_and.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $logic_not.
+Using template $paramod$7d345e38ed17d1b9b7ad574498fe053cc5e778a7\_90_alu for cells of type $alu.
+Using template $paramod$050f15daba5036a0512adf25d3c6631f629623f7\_90_alu for cells of type $alu.
+Using template $paramod$constmap:a9dc5027c4ae08c8c308181005e1d842f3bb08f2$paramod$506728be27b17cf84830d0c29bd9b5a8031852be\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shl.
+Using template $paramod$e26d116fb6e49e9fa71e2c64a3b20d24d7f283ce\_90_alu for cells of type $alu.
+Using template $paramod$1e402e64350f17d7d96d4d19397585e7730f3657\_90_alu for cells of type $alu.
+Using template $paramod$constmap:d90154e95b755f1cae9f0be78fcddcf2b08a4f8f$paramod$8bfcd9b01472435c243f7394772a1d3bbf787759\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shr.
+Using template $paramod$2fff7390d0c2bf21f9d4a24170e0e0160f5d0249\_90_alu for cells of type $alu.
+Using extmapper maccmap for cells of type $macc_v2.
+  add { \lhs_sig [23] \lhs_i [22:0] } * { \rhs_sig [23] \rhs_i [22:0] } (24x24 bits, unsigned)
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $logic_or.
+Using template $paramod$2653f68ddb8eab7b1907b4a20767b72a824a7a36\_90_alu for cells of type $alu.
+Using template $paramod$2fbcb34684f6679eb93572499327a47617602411\_90_alu for cells of type $alu.
+Using template $paramod$3e7722abe950e04e12cedc7f7cd260127415126a\_90_alu for cells of type $alu.
+Using template $paramod$constmap:6039f161a1d67346475e21b7eb9561817b0209f7$paramod$a931737973063d92b37d1be3a891970e3bc94d97\_90_shift_shiftx for cells of type $shiftx.
+Using template $paramod$6412f7f13655de512a17af2c71a87b50b4a57324\_90_alu for cells of type $alu.
+Using template $paramod$c6baa65225090ac0a120feab1b920965244aa496\_90_alu for cells of type $alu.
+Using template $paramod$constmap:d90154e95b755f1cae9f0be78fcddcf2b08a4f8f$paramod$b75f1a4efb43e3427ffff3051f0fd9c104726ccb\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shl.
+  sub $add$rtl/fp32_mul.sv:27$228_Y (32 bits, signed)
+  add 32'11111111111111111111111110011001 (32 bits, unsigned)
+Using template $paramod$b16c091220a54d065399fa81598f13f540b26341\_90_alu for cells of type $alu.
+Using template $paramod$08c2d337fba0d8fba53e35b89be96dd105931d9e\_90_alu for cells of type $alu.
+Using template $paramod$db292a57f5fa7061d10e7d3c328a8b8f0fb72da6\_90_alu for cells of type $alu.
+  add $add$rtl/fp32_mul.sv:27$228_Y (32 bits, signed)
+  add { 26'00000000000000000000000000 \msb_index [5:0] } (32 bits, signed)
+  add 32'11111111111111111111111111010010 (32 bits, unsigned)
+Using extmapper simplemap for cells of type $and.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001001 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000010000000 for cells of type $lcu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000110000 for cells of type $fa.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000101111 for cells of type $fa.
+Using template $paramod$88aad6f8473fb7e4e5fbfb8335ddebad03429eaa\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000011001 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000001101001 for cells of type $lcu.
+Using template $paramod$fbc7873bff55778c0b3173955b7e4bce1d9d6834\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000011111 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001000 for cells of type $lcu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000100000 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000001101000 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000110000 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~14358 debug messages>
+
+12.21. Executing OPT pass (performing simple optimizations).
+
+12.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp32_mul.
+<suppressed ~11502 debug messages>
+
+12.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp32_mul'.
+<suppressed ~7467 debug messages>
+Removed a total of 2489 cells.
+
+12.21.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp32_mul..
+Removed 5953 unused cells and 4301 unused wires.
+<suppressed ~5954 debug messages>
+
+12.21.5. Finished fast OPT passes.
+
+12.22. Executing ABC pass (technology mapping using ABC).
+
+12.22.1. Extracting gate netlist of module `\fp32_mul' to `<abc-temp-dir>/input.blif'..
+Replacing 100 occurrences of constant undef bits with constant zero bits
+Extracted 10967 gates and 11034 wires to a netlist network with 64 inputs and 32 outputs.
+
+12.22.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+12.22.1.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:      614
+ABC RESULTS:            ANDNOT cells:     2317
+ABC RESULTS:               MUX cells:     1377
+ABC RESULTS:              NAND cells:      324
+ABC RESULTS:               NOR cells:      631
+ABC RESULTS:               NOT cells:      230
+ABC RESULTS:                OR cells:     2646
+ABC RESULTS:             ORNOT cells:      473
+ABC RESULTS:              XNOR cells:      563
+ABC RESULTS:               XOR cells:     1063
+ABC RESULTS:        internal signals:    10938
+ABC RESULTS:           input signals:       64
+ABC RESULTS:          output signals:       32
+Removing temp directory.
+
+12.23. Executing OPT pass (performing simple optimizations).
+
+12.23.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp32_mul.
+<suppressed ~165 debug messages>
+
+12.23.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp32_mul'.
+<suppressed ~798 debug messages>
+Removed a total of 266 cells.
+
+12.23.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.23.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp32_mul..
+Removed 0 unused cells and 2466 unused wires.
+<suppressed ~2 debug messages>
+
+12.23.5. Finished fast OPT passes.
+
+12.24. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `fp32_mul'. Setting top module to fp32_mul.
+
+12.24.1. Analyzing design hierarchy..
+Top module:  \fp32_mul
+
+12.24.2. Analyzing design hierarchy..
+Top module:  \fp32_mul
+Removed 0 unused modules.
+
+12.25. Printing statistics.
+
+=== fp32_mul ===
+
+   Number of wires:               9954
+   Number of wire bits:          10418
+   Number of public wires:          14
+   Number of public wire bits:     478
+   Number of ports:                  3
+   Number of port bits:             96
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               9972
+     $_ANDNOT_                    2225
+     $_AND_                        603
+     $_MUX_                       1377
+     $_NAND_                       314
+     $_NOR_                        587
+     $_NOT_                        222
+     $_ORNOT_                      429
+     $_OR_                        2622
+     $_XNOR_                       563
+     $_XOR_                       1030
+
+12.26. Executing CHECK pass (checking for obvious problems).
+Checking module fp32_mul...
+Found and reported 0 problems.
+
+13. Executing CHECK pass (checking for obvious problems).
+Checking module fp32_mul...
+Found and reported 0 problems.
+
+14. Printing statistics.
+
+=== fp32_mul ===
+
+   Number of wires:               9954
+   Number of wire bits:          10418
+   Number of public wires:          14
+   Number of public wire bits:     478
+   Number of ports:                  3
+   Number of port bits:             96
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               9972
+     $_ANDNOT_                    2225
+     $_AND_                        603
+     $_MUX_                       1377
+     $_NAND_                       314
+     $_NOR_                        587
+     $_NOT_                        222
+     $_ORNOT_                      429
+     $_OR_                        2622
+     $_XNOR_                       563
+     $_XOR_                       1030
+
+15. Executing FLATTEN pass (flatten design).
+
+16. Executing OPT pass (performing simple optimizations).
+
+16.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp32_mul.
+<suppressed ~21 debug messages>
+
+16.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp32_mul'.
+Removed a total of 0 cells.
+
+16.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fp32_mul..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+16.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fp32_mul.
+Performed a total of 0 changes.
+
+16.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp32_mul'.
+Removed a total of 0 cells.
+
+16.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+16.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp32_mul..
+Removed 0 unused cells and 21 unused wires.
+<suppressed ~1 debug messages>
+
+16.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp32_mul.
+
+16.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+16.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fp32_mul..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+16.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fp32_mul.
+Performed a total of 0 changes.
+
+16.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fp32_mul'.
+Removed a total of 0 cells.
+
+16.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+16.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fp32_mul..
+
+16.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp32_mul.
+
+16.16. Finished OPT passes. (There is nothing left to do.)
+
+17. Executing LTP pass (find longest path).
+
+Longest topological path in fp32_mul (length=132):
+    0: \rhs_i [3]
+    1: $abc$40660$new_n544 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41108)
+    2: $abc$40660$new_n547 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41111)
+    3: $abc$40660$new_n549 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41113)
+    4: $abc$40660$new_n550 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41114)
+    5: $abc$40660$new_n551 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41115)
+    6: $abc$40660$new_n680 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41244)
+    7: $abc$40660$new_n681 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41245)
+    8: $abc$40660$new_n683 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41247)
+    9: $abc$40660$new_n692 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41256)
+   10: $abc$40660$new_n693 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41257)
+   11: $abc$40660$new_n694 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41258)
+   12: $abc$40660$new_n841 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41405)
+   13: $abc$40660$new_n842 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41406)
+   14: $abc$40660$new_n844 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41408)
+   15: $abc$40660$new_n846 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41410)
+   16: $abc$40660$new_n847 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41411)
+   17: $abc$40660$new_n848 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41412)
+   18: $abc$40660$new_n853 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41417)
+   19: $abc$40660$new_n1029 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41593)
+   20: $abc$40660$new_n1030 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41594)
+   21: $abc$40660$new_n1033 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41597)
+   22: $abc$40660$new_n1034 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41598)
+   23: $abc$40660$new_n1035 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41599)
+   24: $abc$40660$new_n1213 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41777)
+   25: $abc$40660$new_n1214 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41778)
+   26: $abc$40660$new_n1215 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41779)
+   27: $abc$40660$new_n1216 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41780)
+   28: $abc$40660$new_n1217 (via $abc$40660$auto$blifparse.cc:396:parse_blif$41781)
+   29: $abc$40660$new_n7147 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47711)
+   30: $abc$40660$new_n7148 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47712)
+   31: $abc$40660$new_n7149 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47713)
+   32: $abc$40660$new_n7150 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47714)
+   33: $abc$40660$new_n7151 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47715)
+   34: $abc$40660$new_n7152 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47716)
+   35: $abc$40660$new_n7153 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47717)
+   36: $abc$40660$new_n7154 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47718)
+   37: $abc$40660$new_n7155 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47719)
+   38: $abc$40660$new_n7156 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47720)
+   39: $abc$40660$new_n7157 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47721)
+   40: $abc$40660$new_n7158 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47722)
+   41: $abc$40660$new_n7159 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47723)
+   42: $abc$40660$new_n7160 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47724)
+   43: $abc$40660$new_n7161 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47725)
+   44: $abc$40660$new_n7162 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47726)
+   45: $abc$40660$new_n7163 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47727)
+   46: $abc$40660$new_n7164 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47728)
+   47: $abc$40660$new_n7165 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47729)
+   48: $abc$40660$new_n7166 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47730)
+   49: $abc$40660$new_n7167 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47731)
+   50: $abc$40660$new_n7168 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47732)
+   51: $abc$40660$new_n7169 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47733)
+   52: $abc$40660$new_n7170 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47734)
+   53: $abc$40660$new_n7171 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47735)
+   54: $abc$40660$new_n7172 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47736)
+   55: $abc$40660$new_n7173 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47737)
+   56: $abc$40660$new_n7174 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47738)
+   57: $abc$40660$new_n7175 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47739)
+   58: $abc$40660$new_n7176 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47740)
+   59: $abc$40660$new_n7177 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47741)
+   60: $abc$40660$new_n7178 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47742)
+   61: $abc$40660$new_n7179 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47743)
+   62: $abc$40660$new_n7430 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47994)
+   63: $abc$40660$new_n7431 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47995)
+   64: $abc$40660$new_n7432 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47996)
+   65: $abc$40660$new_n7435 (via $abc$40660$auto$blifparse.cc:396:parse_blif$47999)
+   66: $abc$40660$new_n7436 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48000)
+   67: $abc$40660$new_n7537 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48101)
+   68: $abc$40660$new_n7538 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48102)
+   69: $abc$40660$new_n7546 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48110)
+   70: $abc$40660$new_n7547 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48111)
+   71: $abc$40660$new_n7657 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48221)
+   72: $abc$40660$new_n7667 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48231)
+   73: $abc$40660$new_n7688 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48252)
+   74: $abc$40660$new_n7689 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48253)
+   75: $abc$40660$new_n7690 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48254)
+   76: $abc$40660$new_n7691 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48255)
+   77: $abc$40660$new_n7692 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48256)
+   78: $abc$40660$new_n7693 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48257)
+   79: $abc$40660$new_n7694 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48258)
+   80: $abc$40660$new_n7706 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48270)
+   81: $abc$40660$new_n7708 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48272)
+   82: $abc$40660$new_n7709 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48273)
+   83: $abc$40660$new_n7756 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48320)
+   84: $abc$40660$new_n7757 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48321)
+   85: $abc$40660$new_n7848 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48412)
+   86: $abc$40660$new_n7849 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48413)
+   87: $abc$40660$new_n8020 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48584)
+   88: $abc$40660$new_n8021 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48585)
+   89: $abc$40660$new_n8096 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48660)
+   90: $abc$40660$new_n8097 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48661)
+   91: $abc$40660$new_n8132 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48696)
+   92: $abc$40660$new_n8133 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48697)
+   93: $abc$40660$new_n8148 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48712)
+   94: $abc$40660$new_n8149 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48713)
+   95: $abc$40660$new_n8155 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48719)
+   96: $abc$40660$new_n8156 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48720)
+   97: $abc$40660$new_n8157 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48721)
+   98: $abc$40660$new_n8158 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48722)
+   99: $abc$40660$new_n8159 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48723)
+  100: $abc$40660$new_n8160 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48724)
+  101: $abc$40660$new_n8161 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48725)
+  102: $abc$40660$new_n8162 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48726)
+  103: $abc$40660$new_n8163 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48727)
+  104: $abc$40660$new_n8164 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48728)
+  105: $abc$40660$new_n8165 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48729)
+  106: $abc$40660$new_n8189 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48753)
+  107: $abc$40660$new_n8254 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48818)
+  108: $abc$40660$new_n8330 (via $abc$40660$auto$blifparse.cc:396:parse_blif$48894)
+  109: $abc$40660$new_n8436 (via $abc$40660$auto$blifparse.cc:396:parse_blif$49000)
+  110: $abc$40660$new_n8602 (via $abc$40660$auto$blifparse.cc:396:parse_blif$49166)
+  111: $abc$40660$new_n8873 (via $abc$40660$auto$blifparse.cc:396:parse_blif$49437)
+  112: $abc$40660$new_n9260 (via $abc$40660$auto$blifparse.cc:396:parse_blif$49824)
+  113: $abc$40660$new_n9580 (via $abc$40660$auto$blifparse.cc:396:parse_blif$50144)
+  114: $abc$40660$new_n9742 (via $abc$40660$auto$blifparse.cc:396:parse_blif$50306)
+  115: $abc$40660$new_n9793 (via $abc$40660$auto$blifparse.cc:396:parse_blif$50357)
+  116: $abc$40660$new_n9933 (via $abc$40660$auto$blifparse.cc:396:parse_blif$50497)
+  117: $abc$40660$new_n9936 (via $abc$40660$auto$blifparse.cc:396:parse_blif$50500)
+  118: $abc$40660$new_n9937 (via $abc$40660$auto$blifparse.cc:396:parse_blif$50501)
+  119: $abc$40660$new_n9938 (via $abc$40660$auto$blifparse.cc:396:parse_blif$50502)
+  120: $abc$40660$new_n9939 (via $abc$40660$auto$blifparse.cc:396:parse_blif$50503)
+  121: $abc$40660$new_n9940 (via $abc$40660$auto$blifparse.cc:396:parse_blif$50504)
+  122: $abc$40660$new_n9941 (via $abc$40660$auto$blifparse.cc:396:parse_blif$50505)
+  123: $abc$40660$new_n9942 (via $abc$40660$auto$blifparse.cc:396:parse_blif$50506)
+  124: $abc$40660$new_n9943 (via $abc$40660$auto$blifparse.cc:396:parse_blif$50507)
+  125: $abc$40660$new_n9944 (via $abc$40660$auto$blifparse.cc:396:parse_blif$50508)
+  126: $abc$40660$new_n9945 (via $abc$40660$auto$blifparse.cc:396:parse_blif$50509)
+  127: $abc$40660$new_n10327 (via $abc$40660$auto$blifparse.cc:396:parse_blif$50891)
+  128: $abc$40660$new_n10328 (via $abc$40660$auto$blifparse.cc:396:parse_blif$50892)
+  129: $abc$40660$new_n10329 (via $abc$40660$auto$blifparse.cc:396:parse_blif$50893)
+  130: $abc$40660$new_n10330 (via $abc$40660$auto$blifparse.cc:396:parse_blif$50894)
+  131: $abc$40660$new_n10331 (via $abc$40660$auto$blifparse.cc:396:parse_blif$50895)
+  132: \result_o [30] (via $abc$40660$auto$blifparse.cc:396:parse_blif$50896)
+
+End of script. Logfile hash: 60b58027bf, CPU: user 7.33s system 0.30s, MEM: 106.53 MB peak
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+Time spent: 20% 45x opt_expr (1 sec), 18% 1x abc (1 sec), ...

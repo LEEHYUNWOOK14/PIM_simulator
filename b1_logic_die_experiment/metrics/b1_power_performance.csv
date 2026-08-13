@@ -1,0 +1,10 @@
+metric,value,unit,evidence
+work_latency,41,cycles,direct RTL VCD/testbench
+target_clock,10.0,ns,constraint
+target_clock_latency,410.0,ns/work,derived; timing not closed
+target_clock_throughput,2.4390243902439024,Mwork/s,derived; timing not closed
+mapped_total_power,0.742,W,VCD-derived aggregate input activity propagated
+logic_die_leaf_subset_power,0.059789229999991075,W,leaf subset; excludes shared/top clock
+target_clock_energy,304.21999999999997,nJ/work,estimated; timing not closed
+logic_die_leaf_subset_energy,24.513584299996342,nJ/work,estimated subset; timing not closed
+direct_mapped_vcd_annotation,0,pins,direct annotation attempt

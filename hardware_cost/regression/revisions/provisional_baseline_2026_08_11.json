@@ -1,9 +1,41 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
+  "evidence_contract": {
+    "contract_version": 2,
+    "status": "PROVISIONAL",
+    "claim_boundary": "Provisional research evidence; not silicon, package, thermal, or manufacturing signoff.",
+    "candidate_parameters": {
+      "lanes": null,
+      "bank_port_mode": null,
+      "scheduler_policy": null,
+      "context_depth": null
+    },
+    "toolchain": {
+      "capture_tool": "capture_hardware_cost_revision.py",
+      "capture_tool_version": "2",
+      "synthesis_tool": "Yosys",
+      "synthesis_tool_version": null,
+      "physical_tool": null,
+      "physical_tool_version": null,
+      "power_tool": null,
+      "power_tool_version": null,
+      "thermal_tool": "STOB finite-volume thermal model",
+      "thermal_tool_version": null
+    },
+    "operating_point": {
+      "pdk": null,
+      "library": null,
+      "process_corner": null,
+      "voltage_V": null,
+      "temperature_C": null,
+      "clock_constraint_ns": null,
+      "workload_trace_id": null
+    }
+  },
   "revision": {
     "id": "provisional_baseline_2026_08_11",
     "label": "Temporary RTL plus synthetic physical baseline",
-    "git_commit": "3beb9c33a4c172be3b0546aeb8af799dc6d42048",
+    "git_commit": "14dd245dbfc8d53177f73526ade4f0b72d2b7f6b",
     "working_tree_dirty": true,
     "captured_at": "2026-08-11T00:00:00+09:00"
   },
@@ -30,6 +62,7 @@
       "critical_path_ns": null,
       "slack_ns": null,
       "calibration": "synthesis_generic",
+      "claim_class": "derived",
       "evidence": "hardware_cost/regression/baseline_synthesis_observations.json",
       "upstream_evidence": {
         "source_log": "reports/groot_normalization/results/hierarchical_normalization_datapath_fp16_yosys.log",
@@ -47,6 +80,7 @@
       "critical_path_ns": null,
       "slack_ns": null,
       "calibration": "synthesis_generic",
+      "claim_class": "derived",
       "evidence": "hardware_cost/regression/baseline_synthesis_observations.json",
       "upstream_evidence": {
         "source_log": "reports/groot_normalization/results/hierarchical_normalization_datapath_bf16_yosys.log",
@@ -72,7 +106,8 @@
       "leakage_power_W": 0.2,
       "total_power_W": 2.0,
       "power_density_W_mm2": 0.4166666666666667,
-      "calibration": "synthetic"
+      "calibration": "synthetic",
+      "claim_class": "modeled"
     },
     {
       "instance": "top.logic_shared_buffer",
@@ -90,7 +125,8 @@
       "leakage_power_W": 0.08,
       "total_power_W": 0.7999999999999999,
       "power_density_W_mm2": 0.22222222222222218,
-      "calibration": "synthetic"
+      "calibration": "synthetic",
+      "claim_class": "modeled"
     },
     {
       "instance": "top.logic_die_link_arbiter",
@@ -108,7 +144,8 @@
       "leakage_power_W": 0.05,
       "total_power_W": 0.2,
       "power_density_W_mm2": 0.2,
-      "calibration": "synthetic"
+      "calibration": "synthetic",
+      "claim_class": "modeled"
     },
     {
       "instance": "top.bank_pim_core_ch0_bank0",
@@ -126,7 +163,8 @@
       "leakage_power_W": 0.07,
       "total_power_W": 0.7,
       "power_density_W_mm2": 0.9333333333333333,
-      "calibration": "synthetic"
+      "calibration": "synthetic",
+      "claim_class": "modeled"
     },
     {
       "instance": "top.bank_local_reduction_buffer_ch7_bank15",
@@ -144,7 +182,8 @@
       "leakage_power_W": 0.03,
       "total_power_W": 0.30000000000000004,
       "power_density_W_mm2": 0.4,
-      "calibration": "synthetic"
+      "calibration": "synthetic",
+      "claim_class": "modeled"
     }
   ],
   "physical_totals": {
@@ -159,15 +198,253 @@
     "slack_ns": null,
     "note": "Alternative synthesis observations are not summed. primary_observation selects only the revision-under-test and does not finalize system architecture."
   },
+  "physical_feasibility": {
+    "schema_version": 1,
+    "status": "PENDING",
+    "rtl_freeze_allowed": false,
+    "production_signoff": "NOT_TARGETED",
+    "status_matrix": {
+      "RTL_FEASIBILITY": "PENDING",
+      "LOGICAL_SYNTHESIS": "PENDING",
+      "ADAPTER_TECH_MAPPING": "PENDING",
+      "INTEGRATED_TECH_MAPPING": "PENDING",
+      "COARSE_PLACEMENT": "PENDING",
+      "GLOBAL_ROUTING": "PENDING",
+      "PHYSICAL_FEASIBILITY": "PENDING",
+      "PRODUCTION_SIGNOFF": "NOT_TARGETED"
+    },
+    "claim_boundary": "No physical-feasibility claim is available for this revision.",
+    "calibration": "unavailable",
+    "claim_class": "assumed",
+    "toolchain": {
+      "pdk": null,
+      "library": null,
+      "process_corner": null,
+      "voltage_V": null,
+      "temperature_C": null,
+      "yosys": null,
+      "openroad": null
+    },
+    "revision_coherence": {
+      "status": "PENDING",
+      "integrated_netlist_sha256": null,
+      "integrated_sta_matches_netlist": null,
+      "placement_log_sha256": null,
+      "placement_newer_than_mapping": null,
+      "postrepair_fanout_matches_placement": null,
+      "global_route_matches_placement": null,
+      "global_route_newer_than_mapping": null,
+      "stale_evidence": []
+    },
+    "gates": {
+      "PF-0": {
+        "status": "PENDING",
+        "criterion": "RTL feasibility evidence is required.",
+        "evidence": [],
+        "blockers": [
+          "Physical-feasibility evidence has not been attached to this revision."
+        ]
+      },
+      "PF-1": {
+        "status": "PENDING",
+        "criterion": "Standalone adapter technology mapping is required.",
+        "evidence": [],
+        "blockers": [
+          "Physical-feasibility evidence has not been attached to this revision."
+        ]
+      },
+      "PF-2": {
+        "status": "PENDING",
+        "criterion": "Integrated PCU plus adapter mapping and STA are required.",
+        "evidence": [],
+        "blockers": [
+          "Physical-feasibility evidence has not been attached to this revision."
+        ]
+      },
+      "PF-3": {
+        "status": "PENDING",
+        "criterion": "Coarse legal placement is required.",
+        "evidence": [],
+        "blockers": [
+          "Physical-feasibility evidence has not been attached to this revision."
+        ]
+      },
+      "PF-4": {
+        "status": "PENDING",
+        "criterion": "Global routing and congestion evidence are required.",
+        "evidence": [],
+        "blockers": [
+          "Physical-feasibility evidence has not been attached to this revision."
+        ]
+      }
+    },
+    "adapter_mapping": {
+      "status": "PENDING",
+      "calibration": "unavailable",
+      "top": null,
+      "completed": false,
+      "mapped_cells": null,
+      "mapped_area_um2": null,
+      "sequential_area_um2": null,
+      "unmapped_cells": null,
+      "blackboxes": null,
+      "inferred_latches": null,
+      "combinational_loops": null,
+      "clock_period_ns": null,
+      "critical_path_ns": null,
+      "worst_slack_ns": null,
+      "timing_target_met": null,
+      "reference_clock_period_ns": null,
+      "reference_timing_target_met": null,
+      "unconstrained_path_count": null,
+      "critical_startpoint": null,
+      "critical_endpoint": null
+    },
+    "integrated_mapping": {
+      "status": "PENDING",
+      "calibration": "unavailable",
+      "top": null,
+      "completed": false,
+      "mapped_cells": null,
+      "mapped_area_um2": null,
+      "sequential_area_um2": null,
+      "unmapped_cells": null,
+      "blackboxes": null,
+      "inferred_latches": null,
+      "combinational_loops": null,
+      "clock_period_ns": null,
+      "critical_path_ns": null,
+      "worst_slack_ns": null,
+      "timing_target_met": null,
+      "reference_clock_period_ns": null,
+      "reference_timing_target_met": null,
+      "unconstrained_path_count": null,
+      "critical_startpoint": null,
+      "critical_endpoint": null
+    },
+    "placement": {
+      "status": "PENDING",
+      "calibration": "unavailable",
+      "completed": false,
+      "core_area_um2": null,
+      "movable_area_um2": null,
+      "fixed_area_um2": null,
+      "utilization_pct": null,
+      "initial_violations": null,
+      "final_violations": null,
+      "average_displacement_um": null,
+      "max_displacement_um": null
+    },
+    "global_routing": {
+      "status": "PENDING",
+      "calibration": "unavailable",
+      "completed": false,
+      "route_revision": null,
+      "pin_model": null,
+      "signal_layers": null,
+      "congestion_iterations": null,
+      "global_router": null,
+      "openroad_exit_code": null,
+      "execution_clean": null,
+      "prior_route_comparison": {
+        "revision": null,
+        "congestion_remaining": null,
+        "congestion_violation_count": null,
+        "residual_reduction_pct": null
+      },
+      "overflow_count": null,
+      "max_layer_usage_pct": null,
+      "congestion_violation_count": null,
+      "max_local_overuse": null,
+      "congestion_remaining": null,
+      "routed_nets": null,
+      "severe_congestion": null,
+      "congestion_report_available": false,
+      "guide_available": false,
+      "fanout_skip_threshold": null,
+      "skipped_large_fanout_nets": [],
+      "all_skipped_nets_allowlisted": null,
+      "max_observed_fanout": null,
+      "high_fanout_nets": [],
+      "congestion_hotspots": {
+        "analysis_scope": "captured_congestion_report",
+        "captured_violation_blocks": 0,
+        "direction_block_counts": {},
+        "layer_block_counts": {},
+        "category_block_counts": {},
+        "top_bank_source_mentions": [],
+        "top_500um_tiles": []
+      }
+    },
+    "structural": {
+      "status": "PENDING",
+      "unmapped_cells": null,
+      "unresolved_blackboxes": null,
+      "unintended_latches": null,
+      "combinational_loops": null,
+      "unconstrained_paths": null
+    },
+    "fanout": {
+      "status": "PENDING",
+      "max_fanout": null,
+      "max_fanout_net": null,
+      "source_stage": null,
+      "repair_area_increase_pct": null,
+      "repair_resized_instances": null,
+      "repair_inserted_buffers": null,
+      "repair_repaired_nets": null,
+      "remaining_slew_violations": null,
+      "remaining_fanout_violations": null,
+      "remaining_capacitance_violations": null
+    },
+    "wide_interface": {
+      "adapter_port_bits": null,
+      "generic_wire_bits": null,
+      "generic_wire_bits_is_direct_congestion_metric": false,
+      "largest_interface_bits": null,
+      "largest_interface_name": null,
+      "maximum_fanin": null,
+      "critical_cone_cell_count": null,
+      "logic_depth": null,
+      "critical_path_cell_sequence": [],
+      "risk": "UNAVAILABLE"
+    },
+    "buffer_implementation": {
+      "logical_bits": null,
+      "implementation_type": null,
+      "memory_macro_inferred": null,
+      "mapped_register_count": null,
+      "top_sequential_cells": null,
+      "mapped_area_um2": null,
+      "share_of_adapter_area_pct": null,
+      "share_of_integrated_area_pct": null,
+      "risk": "UNAVAILABLE"
+    },
+    "logic_die_budget": {
+      "assumed_usable_area_um2": null,
+      "mapped_area_um2": null,
+      "mapped_utilization_pct": null,
+      "placed_core_area_um2": null,
+      "placed_footprint_utilization_pct": null,
+      "within_budget": null
+    },
+    "evidence": [],
+    "blockers": [
+      "Physical-feasibility evidence has not been attached to this revision."
+    ],
+    "risks": [],
+    "notes": []
+  },
   "thermal": {
-    "peak_temperature_K": 322.58181130666975,
-    "peak_delta_K": 22.58181130666975,
+    "peak_temperature_K": 322.58181130667003,
+    "peak_delta_K": 22.581811306670033,
     "hotspot": {
       "layer": "dram_0",
       "x_index": 0,
       "y_index": 1
     },
-    "calibration": "synthetic_architectural"
+    "calibration": "synthetic_architectural",
+    "claim_class": "modeled"
   },
   "workload": {
     "status": "pending",
@@ -179,7 +456,8 @@
     "throughput_ops_s": null,
     "energy_per_op_J": null,
     "calibration": "pending",
-    "note": "Energy/op remains null until throughput or equivalent completed-work timing is supplied."
+    "claim_class": "assumed",
+    "note": "Energy/op remains null until activity-based or stronger power and throughput are both supplied."
   },
   "categories": {
     "bf16_fp16": {
@@ -193,7 +471,8 @@
       "synthesis_observations": [],
       "power_density_W_mm2": 0.4166666666666667,
       "physical_data_available": true,
-      "physical_calibration": "synthetic"
+      "physical_calibration": "synthetic",
+      "power_calibration": "synthetic"
     },
     "normalization_rounding": {
       "mapped_area_um2": 0.0,
@@ -219,7 +498,8 @@
       ],
       "power_density_W_mm2": null,
       "physical_data_available": false,
-      "physical_calibration": "not_available"
+      "physical_calibration": "not_available",
+      "power_calibration": "not_available"
     },
     "accumulator_reduction": {
       "mapped_area_um2": 750000.0,
@@ -232,7 +512,8 @@
       "synthesis_observations": [],
       "power_density_W_mm2": 0.9333333333333332,
       "physical_data_available": true,
-      "physical_calibration": "synthetic"
+      "physical_calibration": "synthetic",
+      "power_calibration": "synthetic"
     },
     "buffer_register": {
       "mapped_area_um2": 4350000.0,
@@ -246,7 +527,8 @@
       "synthesis_observations": [],
       "power_density_W_mm2": 0.25287356321839083,
       "physical_data_available": true,
-      "physical_calibration": "synthetic"
+      "physical_calibration": "synthetic",
+      "power_calibration": "synthetic"
     },
     "control_routing": {
       "mapped_area_um2": 1000000.0,
@@ -259,45 +541,64 @@
       "synthesis_observations": [],
       "power_density_W_mm2": 0.2,
       "physical_data_available": true,
-      "physical_calibration": "synthetic"
+      "physical_calibration": "synthetic",
+      "power_calibration": "synthetic"
     }
   },
   "source_files": [
     {
       "role": "manifest",
       "path": "hardware_cost/regression/baseline_manifest.json",
-      "sha256": "a628190b690205502fc73c23a75e64019813741e058eca661990536c22f690a4",
-      "bytes": 1630
+      "sha256": "7d297144be2ad12ababbbd996d096c477818deb2180cd61d434a144161fb8e95",
+      "bytes": 2798,
+      "claim_class": "assumed",
+      "tool": "capture_hardware_cost_revision.py",
+      "tool_version": "2"
     },
     {
       "role": "mapped_power",
       "path": "output/rtl_to_3d/mapped_power.json",
-      "sha256": "4d28bed40751f4d8e498c30d067e2ff2bf53725aa2523cb596a05cc1ed0242f8",
-      "bytes": 5426
+      "sha256": "5c1f86e27536350767bdeb78bca3a716d023d95d915b2ff6c8f1581b80dfba01",
+      "bytes": 5286,
+      "claim_class": "modeled",
+      "tool": null,
+      "tool_version": null
     },
     {
       "role": "thermal",
       "path": "output/hbm2_thermal/rtl_mapped/summary.json",
-      "sha256": "96441903a049f5b4c88722761a0ce645d8ff6fc0f5b56f6738ae7fb70aa14d28",
-      "bytes": 4014
+      "sha256": "bac4cc46a120c613233fa0289793300289805b866eee34ab6c92269f8c15a27b",
+      "bytes": 4011,
+      "claim_class": "modeled",
+      "tool": "STOB finite-volume thermal model",
+      "tool_version": null
     },
     {
       "role": "gr00t_contract",
       "path": "hardware_cost/regression/gr00t_pending.json",
       "sha256": "30d9012e77dd930a690a28b786c1a1b21a3a032f75e63d1ab10aeab0ec4a8e73",
-      "bytes": 592
+      "bytes": 592,
+      "claim_class": "assumed",
+      "tool": null,
+      "tool_version": null
     },
     {
       "role": "yosys:hierarchical_normalization_fp16_candidate",
       "path": "hardware_cost/regression/baseline_synthesis_observations.json",
       "sha256": "dd60a7c80fc5b8ae6f3b6bb94ac31b1fb515a8c038bd9383ce733c94997e02b3",
-      "bytes": 1186
+      "bytes": 1186,
+      "claim_class": "derived",
+      "tool": "Yosys",
+      "tool_version": null
     },
     {
       "role": "yosys:hierarchical_normalization_bf16_candidate",
       "path": "hardware_cost/regression/baseline_synthesis_observations.json",
       "sha256": "dd60a7c80fc5b8ae6f3b6bb94ac31b1fb515a8c038bd9383ce733c94997e02b3",
-      "bytes": 1186
+      "bytes": 1186,
+      "claim_class": "derived",
+      "tool": "Yosys",
+      "tool_version": null
     }
   ],
   "notes": [
