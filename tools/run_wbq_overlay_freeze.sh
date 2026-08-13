@@ -2,6 +2,7 @@
 set -euo pipefail
 
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+python_exe="${STOB_FLOORPLAN_PYTHON:-$root/.venv/bin/python}"
 manifest="$root/output/final_integrated_gds/inputs/floorplan_manifest.json"
 tsv_csv="$root/output/final_integrated_gds/inputs/tsv_connectivity.csv"
 transform="$root/output/final_integrated_gds/inputs/floorplan_transform.json"
@@ -23,12 +24,14 @@ for output in "$manifest" "$tsv_csv" "$transform" "$gds" "$lyp" "$vis" \
     exit 4
   fi
 done
+test -x "$python_exe"
+"$python_exe" -c 'import gdstk, jsonschema'
 
-python3 "$root/tools/prepare_wbq_overlay_manifest.py"
-python3 "$root/tools/validate_logic_die_floorplan.py" \
+"$python_exe" "$root/tools/prepare_wbq_overlay_manifest.py"
+"$python_exe" "$root/tools/validate_logic_die_floorplan.py" \
   --manifest "$manifest" --schema "$schema" --tsv-csv "$tsv_csv" \
   --output "$validation"
-python3 - "$transform" "$rtl_manifest" <<'PY'
+"$python_exe" - "$transform" "$rtl_manifest" <<'PY'
 import json
 import sys
 from pathlib import Path
@@ -45,7 +48,7 @@ if transform.get("target_rtl_gds_bbox_um") != rtl.get("geometry", {}).get("bbox_
 print("WBQ_OVERLAY_ANCHOR_GATE PASS anchors=2 max_error_um=0")
 PY
 
-python3 "$root/tools/export_logic_die_floorplan_gds.py" \
+"$python_exe" "$root/tools/export_logic_die_floorplan_gds.py" \
   --manifest "$manifest" --output "$build_dir"
 STOB_FLOORPLAN_GDS="$gds" STOB_FLOORPLAN_VIS_MANIFEST="$vis" \
   klayout -zz -r "$root/tools/check_logic_die_floorplan_gds.py"
@@ -55,7 +58,7 @@ cp -- "$lyp" "$canonical_lyp"
 test "$(sha256sum "$gds" | awk '{print $1}')" = "$(sha256sum "$canonical_gds" | awk '{print $1}')"
 test "$(sha256sum "$lyp" | awk '{print $1}')" = "$(sha256sum "$canonical_lyp" | awk '{print $1}')"
 
-python3 - "$manifest" "$tsv_csv" "$transform" "$vis" "$validation" "$canonical_gds" "$canonical_lyp" "$report" <<'PY'
+"$python_exe" - "$manifest" "$tsv_csv" "$transform" "$vis" "$validation" "$canonical_gds" "$canonical_lyp" "$report" <<'PY'
 import hashlib
 import html
 import json
