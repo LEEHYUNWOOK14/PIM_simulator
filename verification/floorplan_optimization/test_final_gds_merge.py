@@ -98,6 +98,11 @@ class FinalGdsMergeTests(unittest.TestCase):
         self.assertIsNotNone(layout.cell("STOB_FINAL_PHYSICAL_MERGED_NOT_SIGNOFF"))
         self.assertIn("10/0", report["output"]["layers"])
         self.assertIn("120/0", report["output"]["layers"])
+        self.assertEqual(report["cell_namespace"]["output_top_instance_count"], 2)
+        self.assertEqual(report["geometry"]["post_readback_shapes"], {
+            "rtl": 2, "rtl_expected": 2, "overlay": 1, "overlay_expected": 1,
+        })
+        self.assertIn("RESEARCH ARTIFACT — NOT FOR FABRICATION", report["claim_boundary"])
         self.assertEqual(self.recursive_bbox_um(report["output"]["gds"], "STOB_FINAL_PHYSICAL_MERGED_NOT_SIGNOFF", 10, 0), [1000.0, 2000.0, 1100.0, 2050.0])
 
     def test_all_eight_orientations_align_two_anchors(self) -> None:

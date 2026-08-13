@@ -299,6 +299,23 @@ def merge(recipe_path: str | Path, force: bool = False) -> dict[str, Any]:
     if checked_top is None: raise MergeError("independent output readback lost top cell")
     output_layers = used_layers(checked, checked_top)
     if not output_layers: raise MergeError("independent output readback found no shapes")
+    expected_rtl_shapes = sum(rtl_after.values())
+    expected_overlay_shapes = sum(overlay_layers.values())
+    readback_rtl_shapes = sum(output_layers.get(pair, 0) for pair in rtl_after)
+    readback_overlay_shapes = sum(output_layers.get(pair, 0) for pair in overlay_layers)
+    if recipe["verification"]["require_rtl_shapes"] and readback_rtl_shapes != expected_rtl_shapes:
+        raise MergeError(
+            "independent output readback RTL shape mismatch: "
+            f"{readback_rtl_shapes} != {expected_rtl_shapes}"
+        )
+    if recipe["verification"]["require_overlay_shapes"] and readback_overlay_shapes != expected_overlay_shapes:
+        raise MergeError(
+            "independent output readback overlay shape mismatch: "
+            f"{readback_overlay_shapes} != {expected_overlay_shapes}"
+        )
+    top_instance_count = sum(1 for _ in checked_top.each_inst())
+    if top_instance_count != 2:
+        raise MergeError(f"independent output readback expected two top instances, found {top_instance_count}")
     bbox = checked_top.bbox()
     report = {
         "status": "PASS", "generated_at": datetime.now(timezone.utc).isoformat(), "signoff": False,
@@ -311,11 +328,18 @@ def merge(recipe_path: str | Path, force: bool = False) -> dict[str, Any]:
         "normalization": {"output_dbu_um": dbu, "method": "KLayout copy_tree cross-layout DBU conversion; references do not repeat the DBU ratio", "orientation": recipe["placement"]["orientation"], "physical_scale": recipe["placement"]["physical_scale"], "translation_um": [tx,ty], "rtl_reference_magnification": rtl_mag, "overlay_reference_magnification": overlay_mag},
         "anchors": anchors, "minimum_anchor_count": minimum_anchors, "max_anchor_residual_um": max((a["residual_um"] for a in anchors), default=None),
         "layer_mapping": {"rules": recipe["layer_mapping"]["rules"], "rtl_layers_after": {f"{a}/{b}": n for (a,b),n in sorted(rtl_after.items())}, "overlay_collisions": [f"{a}/{b}" for a,b in collisions]},
-        "cell_namespace": {"rtl": rtl_names, "overlay": overlay_names, "output_top": checked_top.name, "output_cell_count": checked.cells()},
+        "cell_namespace": {"rtl": rtl_names, "overlay": overlay_names, "output_top": checked_top.name,
+                           "output_cell_count": checked.cells(), "output_top_instance_count": top_instance_count},
         "geometry": {"manifest_die_bbox_um": die_bbox, "transformed_rtl_bbox_um": rtl_bbox, "rtl_within_manifest_die": within_die,
-                     "merged_bbox_um": [bbox.left*checked.dbu,bbox.bottom*checked.dbu,bbox.right*checked.dbu,bbox.top*checked.dbu]},
+                     "merged_bbox_um": [bbox.left*checked.dbu,bbox.bottom*checked.dbu,bbox.right*checked.dbu,bbox.top*checked.dbu],
+                     "post_readback_shapes": {
+                         "rtl": readback_rtl_shapes,
+                         "rtl_expected": expected_rtl_shapes,
+                         "overlay": readback_overlay_shapes,
+                         "overlay_expected": expected_overlay_shapes,
+                     }},
         "output": {"gds": str(output_gds), "gds_sha256": sha256(output_gds), "bytes": output_gds.stat().st_size, "lyp": str(output_lyp), "layers": {f"{a}/{b}": n for (a,b),n in sorted(output_layers.items())}},
-        "claim_boundary": "Geometry integration only; does not establish DRC/LVS, timing, IR-drop, SI/PI, package, thermal, or silicon signoff."
+        "claim_boundary": "RESEARCH ARTIFACT — NOT FOR FABRICATION. Geometry integration only; does not establish DRC/LVS, timing, IR-drop, SI/PI, package, thermal, or silicon signoff."
     }
     report_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
     print(f"FINAL_RTL_GDS_MERGE PASS top={checked_top.name} cells={checked.cells()} anchors={len(anchors)} output={output_gds}")
