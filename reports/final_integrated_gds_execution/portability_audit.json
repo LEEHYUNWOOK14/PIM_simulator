@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "active_files": [
+    "verification/groot_normalization/run_normalization_hbm_top_sky130_mapping.sh",
+    "verification/groot_normalization/eda_environment.sh",
+    "verification/groot_normalization/preflight_final_gds_environment.sh",
+    "flow/designs/sky130hd/normalization_hbm_adapter_feasibility/config.mk",
+    "flow/designs/sky130hd/normalization_hbm_feasibility/config.mk",
+    "flow/designs/sky130hd/normalization_hbm_feasibility_v2/config.mk",
+    "flow/designs/sky130hd/stob_pim2/config.mk"
+  ],
+  "blocking_count": 0,
+  "historical_count": 0,
+  "findings": [],
+  "scope": "Active Phase 0-2 entry points and ORFS design configs; historical experiment scripts are audited separately before reuse."
+}

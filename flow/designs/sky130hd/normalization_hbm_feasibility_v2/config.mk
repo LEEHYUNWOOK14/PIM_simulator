@@ -2,7 +2,7 @@ export PLATFORM = sky130hd
 export DESIGN_NICKNAME = normalization_hbm_feasibility_v2
 export DESIGN_NAME = logic_die_normalization_hbm_top
 
-STOB_REPO_ROOT ?= /mnt/c/orfs
+STOB_REPO_ROOT ?= $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../../..)
 export STOB_REPO_ROOT
 
 # Reuse the dedicated, fully technology-mapped PCU + HBM-adapter netlist.

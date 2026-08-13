@@ -2,9 +2,10 @@
 set -euo pipefail
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "$root"
-platform=/home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd
-lib="$platform/lib/sky130_fd_sc_hd__tt_025C_1v80.lib"
-yosys=/home/chandler/.local/oss-cad-suite/bin/yosys
+source "$root/verification/groot_normalization/eda_environment.sh"
+platform="$sky130hd_platform"
+lib="$sky130hd_liberty"
+yosys="$yosys_exe"
 results=reports/groot_normalization/physical_feasibility
 mkdir -p "$results"
 top=logic_die_normalization_hbm_top

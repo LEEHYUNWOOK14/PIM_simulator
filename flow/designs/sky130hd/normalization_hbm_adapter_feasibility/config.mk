@@ -2,7 +2,7 @@ export PLATFORM = sky130hd
 export DESIGN_NICKNAME = normalization_hbm_adapter_feasibility
 export DESIGN_NAME = normalization_hbm_boundary_adapter
 
-STOB_REPO_ROOT ?= /mnt/c/orfs
+STOB_REPO_ROOT ?= $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../../..)
 export STOB_REPO_ROOT
 export VERILOG_FILES = $(STOB_REPO_ROOT)/reports/groot_normalization/physical_feasibility/normalization_hbm_boundary_adapter_sky130.v
 export SYNTH_NETLIST_FILES = $(VERILOG_FILES)

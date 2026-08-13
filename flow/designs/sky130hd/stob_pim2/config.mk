@@ -4,8 +4,8 @@ export DESIGN_NICKNAME        = stob_pim2
 export DESIGN_NAME            = full_pim_system_top
 
 # The repository path is supplied by flow/run_flow.ps1.  Keep the historical
-# /mnt/c/orfs default for direct ORFS invocations made by older scripts.
-STOB_REPO_ROOT ?= /mnt/c/orfs
+# Resolve the repository from this config; callers may still override it.
+STOB_REPO_ROOT ?= $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../../..)
 export STOB_REPO_ROOT
 
 # The submitted physical instance is a reduced, fully integrated Full-PIM

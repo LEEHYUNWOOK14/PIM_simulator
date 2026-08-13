@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>최종 통합 GDS Phase 0 환경 기준선</title>
+<style>body{font-family:system-ui,sans-serif;max-width:1100px;margin:32px auto;padding:0 20px;color:#182235}h1,h2{color:#173f6b}.verdict{padding:18px;border-radius:12px;background:#e7f6ed;border-left:6px solid #168154}table{width:100%;border-collapse:collapse;margin:14px 0}th,td{text-align:left;vertical-align:top;padding:9px;border-bottom:1px solid #dce3eb}th{background:#eef3f8}code{word-break:break-all}.boundary{background:#f2f4f7;padding:14px;border-radius:10px}</style></head>
+<body><h1>Phase 0 — 서버 환경과 기준선 동결</h1>
+<div class="verdict"><strong>PASS</strong><br>캡처 시각: 2026-08-13T13:42:24.275524+00:00<br>Git: <code>1d7c869f6c6f413098740ad6dcf8dafb9c7e5afb</code></div>
+<h2>목표</h2><p>GCP 서버의 ORFS/OpenROAD/Sky130HD provenance와 portable 실행 경로를 고정하여 이후 wbq 물리 실험의 재현 가능한 기준선을 만든다.</p>
+<h2>도구 버전</h2><table><tr><th>gcc</th><td><code>gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0</code></td></tr><tr><th>g++</th><td><code>g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0</code></td></tr><tr><th>python</th><td><code>Python 3.12.3</code></td></tr><tr><th>scons</th><td><code>SCons by Steven Knight et al.:</code></td></tr><tr><th>iverilog</th><td><code>Icarus Verilog version 12.0 (stable) ()</code></td></tr><tr><th>verilator</th><td><code>Verilator 5.020 2024-01-01 rev (Debian 5.020-1)</code></td></tr><tr><th>yosys</th><td><code>Yosys 0.33 (git sha1 2584903a060)</code></td></tr><tr><th>openroad</th><td><code>26Q3-1080-gab6fd26351</code></td></tr><tr><th>klayout</th><td><code>KLayout 0.30.7</code></td></tr></table>
+<h2>입력 해시</h2><table><tr><th>sky130hd_liberty_sha256</th><td><code>ec0e1067a35c8bf20b11e58d1e8ac53326067e4dac84a125cc1b917a3518d0d9</code></td></tr><tr><th>sky130hd_merged_lef_sha256</th><td><code>44180aaa0068b1fcb0789f128b090304c01ad48f511d3f7afa66c90b3e176ec5</code></td></tr></table>
+<h2>Git 및 EDA provenance</h2><table>
+<tr><th>Project branch/SHA</th><td>PIM_Simulator / <code>1d7c869f6c6f413098740ad6dcf8dafb9c7e5afb</code></td></tr>
+<tr><th>ORFS SHA</th><td><code>56496f3980fb6e9e58f10c8aea4a98949c0fe5f2</code></td></tr>
+<tr><th>OpenROAD SHA</th><td><code>ab6fd26351dc449e69059684dc6aa9ae9046eb36</code></td></tr>
+<tr><th>Environment gate</th><td>True</td></tr></table>
+<h2>Portability 감사</h2><p>차단 항목: 0, 기록 전용 항목: 0</p>
+<table><tr><th>파일</th><th>행</th><th>분류</th></tr><tr><td colspan="3">활성 물리 실행 경로에 차단성 하드코딩 없음</td></tr></table>
+<h2>서버 자원</h2><pre>total        used        free      shared  buff/cache   available
+Mem:           125Gi       9.3Gi        93Gi       1.1Mi        24Gi       116Gi
+Swap:             0B          0B          0B
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root       193G   25G  169G  13% /
+</pre>
+<h2>재현 명령</h2><pre>bash verification/groot_normalization/preflight_final_gds_environment.sh
+python3 tools/generate_final_gds_phase_report.py --environment reports/final_integrated_gds_execution/environment_manifest.json --portability reports/final_integrated_gds_execution/portability_audit.json --output reports/final_integrated_gds_execution/00_environment_and_baseline_report.html</pre>
+<p class="boundary"><strong>Claim boundary:</strong> 이 보고서는 공개 Sky130HD 연구용 환경과 도구 provenance만 증명한다. 제조 signoff, timing closure 또는 routability를 증명하지 않는다. RESEARCH ARTIFACT — NOT FOR FABRICATION.</p>
+</body></html>

@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "captured_at_utc": "2026-08-13T13:42:24.275524+00:00",
+  "classification": "measured",
+  "host": {
+    "platform": "Linux-6.17.0-1022-gcp-x86_64-with-glibc2.39",
+    "kernel": "6.17.0-1022-gcp",
+    "cpu_count": 16,
+    "memory": "total        used        free      shared  buff/cache   available\nMem:           125Gi       9.3Gi        93Gi       1.1Mi        24Gi       116Gi\nSwap:             0B          0B          0B",
+    "disk": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/root       193G   25G  169G  13% /",
+    "swap": ""
+  },
+  "git": {
+    "repository": "/home/forstobpim/PIM_simulator",
+    "branch": "PIM_Simulator",
+    "sha": "1d7c869f6c6f413098740ad6dcf8dafb9c7e5afb",
+    "dirty": true,
+    "orfs_sha": "56496f3980fb6e9e58f10c8aea4a98949c0fe5f2",
+    "openroad_sha": "ab6fd26351dc449e69059684dc6aa9ae9046eb36"
+  },
+  "paths": {
+    "ORFS_ROOT": "/home/forstobpim/OpenROAD-flow-scripts",
+    "ORFS_FLOW_ROOT": "/home/forstobpim/OpenROAD-flow-scripts/flow",
+    "SKY130HD_PLATFORM": "/home/forstobpim/OpenROAD-flow-scripts/flow/platforms/sky130hd",
+    "SKY130HD_LIBERTY": "/home/forstobpim/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib",
+    "OPENROAD_EXE": "/home/forstobpim/OpenROAD-flow-scripts/tools/install/OpenROAD/bin/openroad",
+    "YOSYS_EXE": "/usr/bin/yosys",
+    "PHYSICAL_REPORT_ROOT": "/home/forstobpim/PIM_simulator/reports/groot_normalization/physical_feasibility"
+  },
+  "hashes": {
+    "sky130hd_liberty_sha256": "ec0e1067a35c8bf20b11e58d1e8ac53326067e4dac84a125cc1b917a3518d0d9",
+    "sky130hd_merged_lef_sha256": "44180aaa0068b1fcb0789f128b090304c01ad48f511d3f7afa66c90b3e176ec5"
+  },
+  "tools": {
+    "gcc": "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "g++": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "python": "Python 3.12.3",
+    "scons": "SCons by Steven Knight et al.:",
+    "iverilog": "Icarus Verilog version 12.0 (stable) ()",
+    "verilator": "Verilator 5.020 2024-01-01 rev (Debian 5.020-1)",
+    "yosys": "Yosys 0.33 (git sha1 2584903a060)",
+    "openroad": "26Q3-1080-gab6fd26351",
+    "klayout": "KLayout 0.30.7"
+  },
+  "expected": {
+    "orfs_sha": "56496f3980fb6e9e58f10c8aea4a98949c0fe5f2",
+    "openroad_sha": "ab6fd26351dc449e69059684dc6aa9ae9046eb36",
+    "sky130hd_liberty_sha256": "ec0e1067a35c8bf20b11e58d1e8ac53326067e4dac84a125cc1b917a3518d0d9"
+  },
+  "gate_pass": true
+}
