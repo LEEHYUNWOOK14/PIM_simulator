@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "captured_at_utc": "2026-08-13T13:43:25.695415+00:00",
+  "classification": "rtl_simulated",
+  "git_sha": "1c95640265b428b35ad1ffb2c98e8f74f01a67a0",
+  "top": "logic_die_normalization_hbm_top",
+  "unit_pass": true,
+  "integration_pass_count": 4,
+  "cases": [
+    {
+      "width": 128,
+      "rms": 0,
+      "vectors": 1,
+      "wall": 524,
+      "adapter": 522,
+      "act": 16,
+      "read": 48,
+      "write": 16,
+      "pre": 16,
+      "wait": 166,
+      "credit_peak": 1,
+      "credit_final": 0,
+      "timing_errors": 0
+    },
+    {
+      "width": 2048,
+      "rms": 0,
+      "vectors": 16,
+      "wall": 3517,
+      "adapter": 3515,
+      "act": 16,
+      "read": 512,
+      "write": 128,
+      "pre": 16,
+      "wait": 1056,
+      "credit_peak": 1,
+      "credit_final": 0,
+      "timing_errors": 0
+    },
+    {
+      "width": 128,
+      "rms": 1,
+      "vectors": 1,
+      "wall": 512,
+      "adapter": 510,
+      "act": 16,
+      "read": 48,
+      "write": 16,
+      "pre": 16,
+      "wait": 166,
+      "credit_peak": 1,
+      "credit_final": 0,
+      "timing_errors": 0
+    },
+    {
+      "width": 2048,
+      "rms": 1,
+      "vectors": 16,
+      "wall": 3505,
+      "adapter": 3503,
+      "act": 16,
+      "read": 512,
+      "write": 128,
+      "pre": 16,
+      "wait": 1056,
+      "credit_peak": 1,
+      "credit_final": 0,
+      "timing_errors": 0
+    }
+  ],
+  "source_sha256": {
+    "rtl/bf16_to_fp32.sv": "ac957f00dc2448f88345ece4ea5b3f8b331893d21e5b4a98d220e53865b3912d",
+    "rtl/fp32_to_bf16_rne.sv": "f013eb8829e2469a1b2f1f76064076f9c39a612a69b0b7b1d447b60d9228778c",
+    "rtl/fp32_add.sv": "f7aa9a3eee4ec7823af39cbf4cce3b08f6144d77ff78ad8954134c4aea009e07",
+    "rtl/fp32_mul.sv": "c5f8e7825f5f675cecd13b7a814cd689f1708ce62cc074b8fbe99625e19875a0",
+    "rtl/fp32_add_pipe4.sv": "a3693a88c3ea9fa9e8b4a5e450186e8d28954137f70518536aa4b5f40d282856",
+    "rtl/fp32_mul_pipe4.sv": "a0dad981484ca37d653a889d5e02b43ee05b3498827de23e3c07107b79c6e90a",
+    "rtl/bf16_rsqrt_lut256.sv": "78b11847767b3f15698ce3c4cad29b31418f16a081edc31d244330481c5870b8",
+    "rtl/mixed_precision_bank_reducer_pingpong.sv": "6f134cf1dc3b5f4738c19d0a29ca062fc7dcf844af155e6309424bedfb2e2ef0",
+    "rtl/mixed_precision_global_reducer16_pipe.sv": "5354e3232b3d9537df339ad138a6aab4917dcc2dc30ce53a9ef4da54b967ff74",
+    "rtl/mixed_precision_scalar_nr2_pipe.sv": "ecf04c99a86bcd2b967208b0bad80b64edc95ab5c5e803f2891052744830c232",
+    "rtl/mixed_precision_scalar_engine_array.sv": "4daeac52645fae7eed7ad56485db92ee12dbcd973f8350c53699de3705ca7cde",
+    "rtl/mixed_precision_bank_apply_pipe.sv": "e70cb3fa88c949e5171a18ddeae725b4ed0ad39a55aacfe923e954602eccec30",
+    "rtl/mixed_precision_row_context_table.sv": "60c45116088476bea0ea8587bbcf63f92bbf975edacbd38f0b75912515cf5d9f",
+    "rtl/mixed_precision_multirow_datapath.sv": "d9626ab9ec68135d3ec59c4b7dd6384f95c6b1688fd0800cfe94c9f35f4b65b5",
+    "rtl/normalization_bank_scheduler.sv": "93969764ff09559c4f4cf16ceb5c22c3e1a78dd7a9582244a978da3659baf6da",
+    "rtl/logic_die_normalization_pcu_top.sv": "6db39e5307d3af700b5d1580dd07a7b98f8bbfafb4ff9b3a8492eb1ad0fea7a6",
+    "rtl/normalization_hbm_boundary_adapter.sv": "ff73b72639df80ff7226c96b857c4c2193d696487fe5738dc41344dec64d142a",
+    "rtl/normalization_writeback_quad_slice.sv": "7c18c47670533e73078483262a73261ed27707ce48f70d04e0b4858379df20db",
+    "rtl/logic_die_normalization_hbm_top.sv": "6d89452e0f13eef7fa215e636c39d666b9c72960159fb9087ded544171b17526",
+    "rtl/dram_bank_array_model.sv": "573e4281c01bd797a023b6145a418b86ecd5781d7b8730cc8be7c2e29c354a9c",
+    "verification/groot_normalization/normalization_writeback_quad_slice_tb.sv": "08bbe1b2b50ce21ccbb7c99fbe8c3b7e7a07e3f45f66325bb11dd4d115c5d587",
+    "verification/groot_normalization/normalization_hbm_boundary_integration_tb.sv": "e0c969bdfcfba1986bab4da25021cbf739d938253b56c48aa1b2841ea922e816"
+  },
+  "logs": {
+    "reports/groot_normalization/physical_feasibility/writeback_quad_slice_unit_regression.log": "6de0405e86336c2b2f42ae4239f347320a04c41c05be99831482160666838eba",
+    "reports/groot_normalization/physical_feasibility/writeback_quad_slice_integration_regression.log": "893abcc73428a82583315bfb237f8603dafa6ca7eea350d229ef83a6b2ddbf93"
+  },
+  "warnings": [
+    "Icarus constant-select sensitivity limitation warnings were emitted; all functional, credit, and timing-error gates passed."
+  ],
+  "gate_pass": true
+}

@@ -1,0 +1,11 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>WBQ 기능 회귀 보고서</title>
+<style>body{font-family:system-ui,sans-serif;max-width:1100px;margin:32px auto;color:#182235}h1,h2{color:#173f6b}table{border-collapse:collapse;width:100%}th,td{padding:9px;border-bottom:1px solid #ddd;text-align:left}th{background:#eef3f8}.pass{padding:16px;background:#e7f6ed;border-left:6px solid #168154}code{word-break:break-all}</style></head><body>
+<h1>Phase 1 — 최신 wbq RTL 기능 기준선</h1><div class="pass"><strong>PASS</strong><br>Git <code>1c95640265b428b35ad1ffb2c98e8f74f01a67a0</code></div>
+<h2>결과</h2><p>writeback quad slice unit test: True; integration: 4/4.</p>
+<table><tr><th>width</th><th>RMS</th><th>vectors</th><th>wall</th><th>adapter</th><th>ACT</th><th>READ</th><th>WRITE</th><th>PRE</th><th>credit final</th><th>timing errors</th></tr><tr><td>128</td><td>0</td><td>1</td><td>524</td><td>522</td><td>16</td><td>48</td><td>16</td><td>16</td><td>0</td><td>0</td></tr><tr><td>2048</td><td>0</td><td>16</td><td>3517</td><td>3515</td><td>16</td><td>512</td><td>128</td><td>16</td><td>0</td><td>0</td></tr><tr><td>128</td><td>1</td><td>1</td><td>512</td><td>510</td><td>16</td><td>48</td><td>16</td><td>16</td><td>0</td><td>0</td></tr><tr><td>2048</td><td>1</td><td>16</td><td>3505</td><td>3503</td><td>16</td><td>512</td><td>128</td><td>16</td><td>0</td><td>0</td></tr></table>
+<h2>재현 명령</h2><pre>bash verification/groot_normalization/run_normalization_writeback_quad_slice_test.sh
+bash verification/groot_normalization/run_normalization_hbm_boundary_test.sh
+python3 tools/collect_wbq_functional_evidence.py</pre>
+<h2>검증 범위</h2><p>LayerNorm/RMSNorm width 128/2048의 expected output 및 DRAM command count, read-credit drain, timing error를 검증했다. Source SHA-256과 raw-log SHA-256은 <code>wbq_functional_manifest.json</code>에 기록했다.</p>
+<p><strong>Claim boundary:</strong> RTL 기능 회귀 결과이며 Sky130 mapping, placement, routability 또는 제조 signoff를 증명하지 않는다. RESEARCH ARTIFACT — NOT FOR FABRICATION.</p>
+</body></html>
