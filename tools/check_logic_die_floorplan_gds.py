@@ -1,4 +1,5 @@
 import json
+import math
 import os
 import pya
 
@@ -33,4 +34,41 @@ if bumps != expected["counts"]["micro_bump_shapes"]:
     raise RuntimeError(f"micro-bump shape mismatch: {bumps} != {expected['counts']['micro_bump_shapes']}")
 if top.bbox().empty():
     raise RuntimeError("floorplan top bbox is empty")
-print(f"KLAYOUT_FLOORPLAN_GDS PASS top={top.name} tsv={tsv} bumps={bumps} bbox={top.bbox()}", flush=True)
+
+# The overlay is only usable for final integration when its independently read
+# geometry occupies the exact coordinate frame declared by the canonical
+# manifest.  Older visualization manifests did not cache this value, so derive
+# it from their referenced canonical manifest while keeping the check strict.
+geometry = expected.get("geometry", {})
+expected_bbox_um = geometry.get("expected_top_bbox_um")
+if expected_bbox_um is None:
+    with open(expected["manifest"], "r", encoding="utf-8-sig") as stream:
+        canonical = json.load(stream)
+    die = canonical["die"]
+    expected_bbox_um = [
+        float(die["x_um"]),
+        float(die["y_um"]),
+        float(die["x_um"]) + float(die["width_um"]),
+        float(die["y_um"]) + float(die["height_um"]),
+    ]
+bbox = top.bbox()
+actual_bbox_um = [
+    bbox.left * layout.dbu,
+    bbox.bottom * layout.dbu,
+    bbox.right * layout.dbu,
+    bbox.top * layout.dbu,
+]
+tolerance_um = max(float(layout.dbu), 1e-9)
+if any(
+    not math.isclose(float(actual), float(wanted), rel_tol=0.0, abs_tol=tolerance_um)
+    for actual, wanted in zip(actual_bbox_um, expected_bbox_um)
+):
+    raise RuntimeError(
+        f"floorplan top bbox mismatch: actual_um={actual_bbox_um} "
+        f"expected_um={expected_bbox_um} tolerance_um={tolerance_um}"
+    )
+print(
+    f"KLAYOUT_FLOORPLAN_GDS PASS top={top.name} tsv={tsv} bumps={bumps} "
+    f"bbox_um={actual_bbox_um}",
+    flush=True,
+)

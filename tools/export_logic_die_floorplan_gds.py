@@ -148,9 +148,20 @@ def export(manifest_path: str, output_dir: str, thermal_field: str | None = None
     lyp_path = output / "logic_die_floorplan.lyp"
     library.write_gds(gds_path)
     write_lyp(lyp_path)
+    die = manifest["die"]
+    expected_bbox_um = [
+        float(die["x_um"]),
+        float(die["y_um"]),
+        float(die["x_um"]) + float(die["width_um"]),
+        float(die["y_um"]) + float(die["height_um"]),
+    ]
     report = {
         "status": "PASS", "top_cell": TOP, "manifest": str(absolute(manifest_path)),
         "gds": str(gds_path), "lyp": str(lyp_path),
+        "geometry": {
+            "expected_top_bbox_um": expected_bbox_um,
+            "bbox_source": "manifest.die",
+        },
         "counts": {"blocks": len(manifest["blocks"]), "tsv_bundles": len(manifest["tsv_bundles"]), "tsv_shapes": tsv_shapes, "micro_bump_bundles": len(manifest["micro_bump_bundles"]), "micro_bump_shapes": bump_shapes, "reserved_regions": len(manifest["reserved_regions"]), "routing_corridors": len(manifest["routing_corridors"]), "thermal_bins": thermal_bins},
         "layer_map": {"die": 100, "blocks": 110, "tsv_signal_classes": SIGNAL_LAYERS, "tsv_keepout": 130, "micro_bump_signal_classes": BUMPLAYERS, "reserved_regions": REGION_LAYERS, "connectivity": 170, "labels": 199, "thermal_bins_low_to_high": THERMAL_LAYERS},
         "thermal_overlay": {"source": str(absolute(thermal_field)) if thermal_field else None, "range_K": thermal_range_K, "classification": "modeled", "signoff": False},
