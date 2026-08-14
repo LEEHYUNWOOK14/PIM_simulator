@@ -18,6 +18,61 @@ set net_count [llength [$block getNets]]
 set bterm_count [llength [$block getBTerms]]
 set violations [check_placement -verbose]
 
+# Preserve physical evidence for the hierarchy that motivated this wbq run.
+# Yosys/OpenROAD flatten hierarchy into instance names, so measure every placed
+# standard cell carrying a generated bank/quad scope rather than inferring
+# locality from the RTL alone.
+proc report_locality {block kind pattern expected_groups} {
+  array set count {}
+  array set sum_x {}
+  array set sum_y {}
+  array set min_x {}
+  array set min_y {}
+  array set max_x {}
+  array set max_y {}
+  set dbu_per_um [$block getDbUnitsPerMicron]
+
+  foreach inst [$block getInsts] {
+    set clean_name [string map {"\\" ""} [$inst getName]]
+    if {![regexp $pattern $clean_name -> group]} {
+      continue
+    }
+    set bbox [$inst getBBox]
+    set x [expr {([$bbox xMin] + [$bbox xMax]) / 2.0}]
+    set y [expr {([$bbox yMin] + [$bbox yMax]) / 2.0}]
+    if {![info exists count($group)]} {
+      set count($group) 0
+      set sum_x($group) 0.0
+      set sum_y($group) 0.0
+      set min_x($group) $x
+      set min_y($group) $y
+      set max_x($group) $x
+      set max_y($group) $y
+    }
+    incr count($group)
+    set sum_x($group) [expr {$sum_x($group) + $x}]
+    set sum_y($group) [expr {$sum_y($group) + $y}]
+    if {$x < $min_x($group)} { set min_x($group) $x }
+    if {$y < $min_y($group)} { set min_y($group) $y }
+    if {$x > $max_x($group)} { set max_x($group) $x }
+    if {$y > $max_y($group)} { set max_y($group) $y }
+  }
+
+  set groups [lsort -integer [array names count]]
+  puts "WBQ_PLACE_AUDIT_LOCALITY_SUMMARY $kind [llength $groups] $expected_groups"
+  foreach group $groups {
+    puts [format "WBQ_PLACE_AUDIT_LOCALITY %s %d %d %.3f %.3f %.3f %.3f %.3f %.3f" \
+      $kind $group $count($group) \
+      [expr {$sum_x($group) / $count($group) / $dbu_per_um}] \
+      [expr {$sum_y($group) / $count($group) / $dbu_per_um}] \
+      [expr {$min_x($group) / $dbu_per_um}] [expr {$min_y($group) / $dbu_per_um}] \
+      [expr {$max_x($group) / $dbu_per_um}] [expr {$max_y($group) / $dbu_per_um}]]
+  }
+}
+
+report_locality $block BANK {g_bank\[([0-9]+)\]} 16
+report_locality $block QUAD {g_quad\[([0-9]+)\]} 4
+
 puts "WBQ_PLACE_AUDIT_TOP [$block getName]"
 puts "WBQ_PLACE_AUDIT_DIE_AREA [$block getDieArea]"
 puts "WBQ_PLACE_AUDIT_CORE_AREA [$block getCoreArea]"

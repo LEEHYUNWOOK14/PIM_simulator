@@ -27,6 +27,10 @@ CONFIG = ROOT / "flow/designs/sky130hd/normalization_hbm_wbq/config.mk"
 ODB = RESULTS / "3_place.odb"
 SDC = RESULTS / "3_place.sdc"
 DP_LOG = LOGS / "3_5_place_dp.log"
+FLOORPLAN_LOG = LOGS / "2_1_floorplan.log"
+IOP_LOG = LOGS / "3_2_place_iop.log"
+PLATFORM_CONFIG = ORFS_FLOW / "platforms/sky130hd/config.mk"
+FASTROUTE_TCL = ORFS_FLOW / "platforms/sky130hd/fastroute.tcl"
 
 
 def sha256(path: Path) -> str:
@@ -50,7 +54,11 @@ def kv(text: str, key: str) -> str | None:
 
 
 def main() -> int:
-    required = [RUN_LOG, AUDIT_LOG, NETLIST, CONFIG, ODB, SDC, DP_LOG]
+    required = [
+        RUN_LOG, AUDIT_LOG, NETLIST, CONFIG, ODB, SDC, DP_LOG,
+        FLOORPLAN_LOG, IOP_LOG,
+        PLATFORM_CONFIG, FASTROUTE_TCL,
+    ]
     missing = [str(path) for path in required if not path.is_file() or path.stat().st_size == 0]
     if missing:
         raise SystemExit("missing/non-empty Phase-3 artifacts:\n" + "\n".join(missing))
@@ -59,6 +67,9 @@ def main() -> int:
     audit = AUDIT_LOG.read_text(encoding="utf-8", errors="replace")
     fanout = FANOUT_LOG.read_text(encoding="utf-8", errors="replace") if FANOUT_LOG.is_file() else ""
     dp = DP_LOG.read_text(encoding="utf-8", errors="replace")
+    floorplan = FLOORPLAN_LOG.read_text(encoding="utf-8", errors="replace")
+    iop = IOP_LOG.read_text(encoding="utf-8", errors="replace")
+    platform_config = PLATFORM_CONFIG.read_text(encoding="utf-8", errors="replace")
     actual_hashes = {
         "mapped_netlist": sha256(NETLIST),
         "placement_config": sha256(CONFIG),
@@ -67,6 +78,10 @@ def main() -> int:
         "run_log": sha256(RUN_LOG),
         "detail_place_log": sha256(DP_LOG),
         "independent_audit_log": sha256(AUDIT_LOG),
+        "floorplan_log": sha256(FLOORPLAN_LOG),
+        "io_placement_log": sha256(IOP_LOG),
+        "sky130hd_platform_config": sha256(PLATFORM_CONFIG),
+        "sky130hd_fastroute_tcl": sha256(FASTROUTE_TCL),
     }
     launch_hashes = {
         "mapped_netlist": kv(run, "WBQ_PLACE_NETLIST_SHA256"),
@@ -108,6 +123,32 @@ def main() -> int:
         and audit_hashes_match
     )
     hashes_match = all(launch_hashes[name] == actual_hashes[name] for name in launch_hashes)
+    locality_rows = {"BANK": [], "QUAD": []}
+    for kind, group, cells, cx, cy, x0, y0, x1, y1 in re.findall(
+        r"^WBQ_PLACE_AUDIT_LOCALITY (BANK|QUAD) (\d+) (\d+) "
+        r"([0-9.]+) ([0-9.]+) ([0-9.]+) ([0-9.]+) ([0-9.]+) ([0-9.]+)$",
+        audit,
+        flags=re.MULTILINE,
+    ):
+        locality_rows[kind].append({
+            "id": int(group), "cell_count": int(cells),
+            "centroid_um": [float(cx), float(cy)],
+            "bbox_um": [float(x0), float(y0), float(x1), float(y1)],
+        })
+    locality_complete = (
+        len(locality_rows["BANK"]) == 16
+        and len(locality_rows["QUAD"]) == 4
+        and all(row["cell_count"] > 0 for rows in locality_rows.values() for row in rows)
+    )
+    io_pin_count = one(r"Number of I/O\s+(\d+)$", iop, int)
+    pin_placement_complete = "Successfully assigned pins to sections." in iop
+    signal_min_layer = one(r"^export MIN_ROUTING_LAYER\s*\?=\s*(\S+)", platform_config)
+    signal_max_layer = one(r"^export MAX_ROUTING_LAYER\s*\?=\s*(\S+)", platform_config)
+    routing_layer_setup_complete = (
+        signal_min_layer == "met1"
+        and signal_max_layer == "met5"
+        and "/platforms/sky130hd/fastroute.tcl" in floorplan
+    )
 
     payload = {
         "schema_version": 1,
@@ -130,6 +171,30 @@ def main() -> int:
         "core_area_um2": one(r"Core area:\s*([0-9.]+) um\^2", run, float),
         "initial_instance_area_um2": one(r"Total instances area:\s*([0-9.]+) um\^2", run, float),
         "effective_utilization": one(r"Effective utilization:\s*([0-9.]+)", run, float),
+        "routing_layers": {
+            "signal_min": signal_min_layer,
+            "signal_max": signal_max_layer,
+            "source": "hash-pinned Sky130HD config.mk and fastroute.tcl sourced by floorplan log",
+            "setup_complete": routing_layer_setup_complete,
+        },
+        "pin_placement": {
+            "method": "OpenROAD place_pins section assignment",
+            "horizontal_layer": one(r"place_pins -hor_layers (\S+)", iop),
+            "vertical_layer": one(r"-ver_layers (\S+)", iop),
+            "io_count": io_pin_count,
+            "successful_section_assignment": pin_placement_complete,
+        },
+        "bank_quad_locality": {
+            "method": "measured placed-cell centroids and bounding boxes from independently reopened ODB",
+            "physical_regions_constrained": False,
+            "banks": locality_rows["BANK"],
+            "quads": locality_rows["QUAD"],
+            "complete": locality_complete,
+        },
+        "clock_high_fanout_policy": {
+            "placement": "clock is not repaired as a signal high-fanout net during pre-CTS placement",
+            "final_flow": "clock is not silently skipped; Phase 6 performs explicit CTS and post-CTS legality/routing recheck",
+        },
         "mapped_instance_count": one(r"number instances in verilog is (\d+)", run, int),
         "placed_instance_count": one(r"^WBQ_PLACE_AUDIT_INSTANCE_COUNT (\d+)$", audit, int),
         "placed_net_count": one(r"^WBQ_PLACE_AUDIT_NET_COUNT (\d+)$", audit, int),
@@ -165,6 +230,10 @@ def main() -> int:
                 "run_log": RUN_LOG,
                 "detail_place_log": DP_LOG,
                 "independent_audit_log": AUDIT_LOG,
+                "floorplan_log": FLOORPLAN_LOG,
+                "io_placement_log": IOP_LOG,
+                "sky130hd_platform_config": PLATFORM_CONFIG,
+                "sky130hd_fastroute_tcl": FASTROUTE_TCL,
             }.items()
         },
         "reproduction_commands": [
@@ -186,6 +255,10 @@ def main() -> int:
         and hashes_match
         and repair is not None
         and repair["remaining_driver_vertices"] == 0
+        and locality_complete
+        and pin_placement_complete
+        and io_pin_count is not None
+        and routing_layer_setup_complete
     )
 
     OUT.mkdir(parents=True, exist_ok=True)
@@ -207,6 +280,11 @@ def main() -> int:
 <tr><th>terminal completion</th><td>{esc(placement_complete)}</td></tr>
 <tr><th>독립 ODB 재개방</th><td>{esc(audit_complete)}</td></tr><tr><th>audit top / current ODB·SDC hash</th><td>{esc(audit_top)} / {esc(audit_hashes_match)}</td></tr>
 <tr><th>legalization violations</th><td>{esc(violations)}</td></tr></table>
+<h2>Routing, pin placement, bank/quad locality</h2><table>
+<tr><th>Signal routing layers</th><td>{esc(signal_min_layer)}–{esc(signal_max_layer)}; hash-pinned Sky130HD fastroute setup {esc(routing_layer_setup_complete)}</td></tr>
+<tr><th>I/O pin placement</th><td>{esc(io_pin_count)} pins; horizontal {esc(payload['pin_placement']['horizontal_layer'])}, vertical {esc(payload['pin_placement']['vertical_layer'])}; section assignment {esc(pin_placement_complete)}</td></tr>
+<tr><th>Measured hierarchy locality</th><td>{len(locality_rows['BANK'])}/16 banks and {len(locality_rows['QUAD'])}/4 quads measured from final ODB; no explicit physical regions constrained</td></tr>
+<tr><th>Clock policy</th><td>pre-CTS signal repair 제외; Phase 6에서 명시적 CTS 및 post-CTS legality/routing 재검사</td></tr></table>
 <h2>물리·자원 결과</h2><table>
 <tr><th>Die BBox</th><td>{esc(payload['die_bbox_um'])} µm</td></tr><tr><th>Core BBox</th><td>{esc(payload['core_bbox_um'])} µm</td></tr>
 <tr><th>Core area / utilization</th><td>{payload['core_area_um2']:,.3f} µm² / {payload['effective_utilization']:.3f}</td></tr>
