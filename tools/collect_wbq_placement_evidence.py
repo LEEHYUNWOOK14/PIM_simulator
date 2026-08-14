@@ -21,6 +21,7 @@ LOGS = ORFS_FLOW / "logs/sky130hd/normalization_hbm_wbq/base"
 RAW = ROOT / "reports/groot_normalization/physical_feasibility"
 OUT = ROOT / "reports/final_integrated_gds_execution"
 RUN_LOG = RAW / "logic_die_normalization_hbm_top_wbq_orfs_place.log"
+RECOVERY_LOG = RAW / "logic_die_normalization_hbm_top_wbq_place_recovery.log"
 AUDIT_LOG = RAW / "logic_die_normalization_hbm_top_wbq_place_audit.log"
 FANOUT_LOG = RAW / "logic_die_normalization_hbm_top_wbq_net_fanout_audit.log"
 NETLIST = RAW / "logic_die_normalization_hbm_top_wbq_sky130.v"
@@ -78,6 +79,7 @@ def main() -> int:
         raise SystemExit("missing/non-empty Phase-3 artifacts:\n" + "\n".join(missing))
 
     run = RUN_LOG.read_text(encoding="utf-8", errors="replace")
+    recovery = RECOVERY_LOG.read_text(encoding="utf-8", errors="replace") if RECOVERY_LOG.is_file() else ""
     audit = AUDIT_LOG.read_text(encoding="utf-8", errors="replace")
     fanout = FANOUT_LOG.read_text(encoding="utf-8", errors="replace") if FANOUT_LOG.is_file() else ""
     dp = DP_LOG.read_text(encoding="utf-8", errors="replace")
@@ -105,6 +107,8 @@ def main() -> int:
         "orfs_resize_tcl": sha256(RESIZE_TCL),
         "orfs_cts_tcl": sha256(CTS_TCL),
     }
+    if recovery:
+        actual_hashes["recovery_log"] = sha256(RECOVERY_LOG)
     placement_run_git_sha = kv(run, "WBQ_PLACE_GIT_SHA")
     launch_orfs_sha = kv(run, "WBQ_PLACE_ORFS_SHA")
     current_orfs_sha = subprocess.check_output(
@@ -138,8 +142,13 @@ def main() -> int:
             "remaining_driver_vertices": int(remaining),
         }
 
-    overall_elapsed = one(r"Elapsed \(wall clock\) time .*?: (.+)$", run, last=True)
-    overall_rss = one(r"Maximum resident set size \(kbytes\): (\d+)", run, int, last=True)
+    recovery_success = (
+        kv(recovery, "WBQ_PLACE_RECOVERY_EXIT_CODE") == "0"
+        and "NORMALIZATION_HBM_WBQ_PLACE_AUDIT PASS" in recovery
+    )
+    timing_source = recovery if recovery else run
+    overall_elapsed = one(r"Elapsed \(wall clock\) time .*?: (.+)$", timing_source, last=True)
+    overall_rss = one(r"Maximum resident set size \(kbytes\): (\d+)", timing_source, int, last=True)
     violations = one(r"^WBQ_PLACE_AUDIT_VIOLATIONS (\d+)$", audit, int)
     audit_top = one(r"^WBQ_PLACE_AUDIT_TOP (\S+)$", audit)
     audit_hashes_match = (
@@ -147,10 +156,12 @@ def main() -> int:
         and kv(audit, "WBQ_PLACE_AUDIT_SDC_SHA256") == actual_hashes["placed_sdc"]
     )
     placement_complete = (
-        kv(run, "WBQ_PLACE_EXIT_CODE") == "0"
-        and "NORMALIZATION_HBM_WBQ_PLACE PASS" in run
-        and "Placement Analysis" in dp
-    )
+        (
+            kv(run, "WBQ_PLACE_EXIT_CODE") == "0"
+            and "NORMALIZATION_HBM_WBQ_PLACE PASS" in run
+        )
+        or recovery_success
+    ) and "Placement Analysis" in dp
     audit_complete = (
         "WBQ_PLACE_AUDIT_PASS" in audit
         and violations == 0
@@ -205,7 +216,11 @@ def main() -> int:
         "fresh_wbq_floorplan_from_wbq_synthesis": fresh_wbq_floorplan,
         "independent_reopen_and_legality": audit_complete,
         "launch_input_hashes_match_current": hashes_match,
-        "repair_completed": repair is not None and repair["remaining_driver_vertices"] == 0,
+        "repair_completed": (
+            not recovery
+            and repair is not None
+            and repair["remaining_driver_vertices"] == 0
+        ),
         "bank_quad_locality_16_4": locality_complete,
         "pin_placement_completed": pin_placement_complete and io_pin_count is not None,
         "routing_layer_setup": routing_layer_setup_complete,
@@ -218,7 +233,7 @@ def main() -> int:
     payload = {
         "schema_version": 1,
         "captured_at_utc": datetime.now(timezone.utc).isoformat(),
-        "classification": "placed",
+        "classification": "placed_partial" if recovery else "placed",
         "top": "logic_die_normalization_hbm_top",
         "variant": "wbq",
         "placement_run_git_sha": placement_run_git_sha,
@@ -233,8 +248,8 @@ def main() -> int:
         "orfs_commit_match": launch_orfs_sha == current_orfs_sha,
         "current_orfs_dirty": current_orfs_dirty,
         "openroad_version": kv(run, "WBQ_PLACE_OPENROAD_VERSION"),
-        "start_utc": kv(run, "WBQ_PLACE_START_UTC"),
-        "end_utc": kv(run, "WBQ_PLACE_END_UTC"),
+        "start_utc": kv(recovery, "WBQ_PLACE_RECOVERY_START_UTC") if recovery else kv(run, "WBQ_PLACE_START_UTC"),
+        "end_utc": kv(recovery, "WBQ_PLACE_RECOVERY_END_UTC") if recovery else kv(run, "WBQ_PLACE_END_UTC"),
         "elapsed_wall": overall_elapsed,
         "maximum_rss_kbytes": overall_rss,
         "die_bbox_um": one(r"Die BBox:\s*\(\s*([^\n]+?)\s*\) um", run),
@@ -280,6 +295,17 @@ def main() -> int:
         "boundary_terminal_count": one(r"^WBQ_PLACE_AUDIT_BTERM_COUNT (\d+)$", audit, int),
         "legalization_violations": violations,
         "repair": repair,
+        "recovery": {
+            "used": bool(recovery),
+            "classification": kv(recovery, "WBQ_PLACE_RECOVERY_CLASSIFICATION"),
+            "reason": kv(recovery, "WBQ_PLACE_RECOVERY_REASON"),
+            "repair_completed": kv(recovery, "WBQ_PLACE_RECOVERY_REPAIR_COMPLETED") == "true",
+            "source_odb": kv(recovery, "WBQ_PLACE_RECOVERY_SOURCE_ODB"),
+            "source_odb_sha256": kv(recovery, "WBQ_PLACE_RECOVERY_SOURCE_ODB_SHA256"),
+            "partial_log_sha256": kv(recovery, "WBQ_PLACE_RECOVERY_PARTIAL_LOG_SHA256"),
+            "last_repair_row": kv(recovery, "WBQ_PLACE_RECOVERY_LAST_REPAIR_ROW"),
+            "legalization_completed": recovery_success,
+        },
         "pre_repair_fanout_audit": {
             "scanned_nets": one(r"^WBQ_FANOUT_AUDIT_SCANNED (\d+)$", fanout, int),
             "nets_over_1000_terminals": one(r"^WBQ_FANOUT_AUDIT_OVER_1000 (\d+)$", fanout, int),
@@ -321,7 +347,11 @@ def main() -> int:
             }.items()
         },
         "reproduction_commands": [
-            "bash verification/groot_normalization/run_normalization_hbm_wbq_place.sh",
+            (
+                "bash verification/groot_normalization/run_normalization_hbm_wbq_place_recovery.sh"
+                if recovery
+                else "bash verification/groot_normalization/run_normalization_hbm_wbq_place.sh"
+            ),
             "bash verification/groot_normalization/run_normalization_hbm_wbq_place_audit.sh",
             "python3 tools/collect_wbq_placement_evidence.py",
         ],
@@ -329,7 +359,11 @@ def main() -> int:
             "status": "not_applicable_to_phase3_gate",
             "reason": "Pre-slice placement checkpoints are historical only and cannot prove latest-wbq placement; same-definition congestion comparison is deferred to Phase 4.",
         },
-        "next_stage": "CLI-owned Phase 4 reuses this legal ODB for same-definition global-route comparison against historical residual congestion 2,620.",
+        "next_stage": (
+            "Phase 3 repair gate is incomplete; CLI-owned Phase 4 must not start from this PARTIAL checkpoint without an explicit architecture/recovery decision."
+            if recovery
+            else "CLI-owned Phase 4 reuses this legal ODB for same-definition global-route comparison against historical residual congestion 2,620."
+        ),
         "gate_checks": gate_checks,
         "failed_gates": [name for name, passed in gate_checks.items() if not passed],
         "claim_boundary": "Placed Sky130HD research artifact; routing, timing closure, and manufacturing signoff are not established.",
@@ -339,6 +373,12 @@ def main() -> int:
             "path": str(FANOUT_LOG),
             "bytes": FANOUT_LOG.stat().st_size,
             "sha256": sha256(FANOUT_LOG),
+        }
+    if recovery:
+        payload["artifacts"]["recovery_log"] = {
+            "path": str(RECOVERY_LOG),
+            "bytes": RECOVERY_LOG.stat().st_size,
+            "sha256": actual_hashes["recovery_log"],
         }
     payload["gate_pass"] = all(gate_checks.values())
 
@@ -366,7 +406,7 @@ def main() -> int:
     report = f"""<!doctype html><html lang=\"ko\"><head><meta charset=\"utf-8\"><title>WBQ 배치·legalization 보고서</title>
 <style>body{{font-family:system-ui,sans-serif;max-width:1080px;margin:32px auto;color:#182235}}h1,h2{{color:#173f6b}}table{{border-collapse:collapse;width:100%}}th,td{{padding:10px;border-bottom:1px solid #ddd;text-align:left;vertical-align:top}}th{{background:#eef3f8}}.verdict{{padding:16px;background:{'#e7f6ed' if payload['gate_pass'] else '#fff0df'};border-left:6px solid {'#168154' if payload['gate_pass'] else '#b66a00'}}}code{{word-break:break-all}}pre{{white-space:pre-wrap}}</style></head><body>
 <h1>Phase 3 — wbq floorplan, repair, placement, legalization</h1>
-<div class=\"verdict\"><strong>{verdict}</strong><br>분류: placed<br>실행 Git <code>{esc(payload['placement_run_git_sha'])}</code><br>보고 시각 {esc(payload['captured_at_utc'])}<br>실패 게이트: {esc(failure_summary)}</div>
+<div class=\"verdict\"><strong>{verdict}</strong><br>분류: {esc(payload['classification'])}<br>실행 Git <code>{esc(payload['placement_run_git_sha'])}</code><br>보고 시각 {esc(payload['captured_at_utc'])}<br>실패 게이트: {esc(failure_summary)}</div>
 <h2>게이트</h2><table>
 <tr><th>latest wbq input hash</th><td>{esc(hashes_match)}</td></tr>
 <tr><th>Fresh wbq floorplan</th><td>{esc(fresh_wbq_floorplan)}; source <code>normalization_hbm_wbq/base/1_synth.odb</code>; pre-slice ODB reused: false</td></tr>
@@ -382,7 +422,7 @@ def main() -> int:
 <tr><th>Die BBox</th><td>{esc(payload['die_bbox_um'])} µm</td></tr><tr><th>Core BBox</th><td>{esc(payload['core_bbox_um'])} µm</td></tr>
 <tr><th>Core area / utilization</th><td>{payload['core_area_um2']:,.3f} µm² / {payload['effective_utilization']:.3f}</td></tr>
 <tr><th>Instances / nets / BTerms</th><td>{payload['placed_instance_count']:,} / {payload['placed_net_count']:,} / {payload['boundary_terminal_count']:,}</td></tr>
-<tr><th>Repair</th><td>{esc(repair_html)}</td></tr><tr><th>Wall / peak RSS</th><td>{esc(overall_elapsed)} / {overall_rss / 1024 / 1024:.2f} GiB</td></tr></table>
+<tr><th>Repair</th><td>{esc(repair_html)}; completed {esc(gate_checks['repair_completed'])}</td></tr><tr><th>Recovery</th><td>used {esc(bool(recovery))}; {esc(payload['recovery']['reason'])}; source <code>{esc(payload['recovery']['source_odb'])}</code></td></tr><tr><th>Recovery wall / peak RSS</th><td>{esc(overall_elapsed)} / {esc('unknown' if overall_rss is None else f'{overall_rss / 1024 / 1024:.2f} GiB')}</td></tr></table>
 <h2>Provenance와 입력·출력 해시</h2><table>
 <tr><th>Evidence Git / dirty</th><td><code>{esc(payload['evidence_git_parent_sha'])}</code> / {esc(payload['evidence_git_dirty'])} ({payload['evidence_git_status_entry_count']} status entries)</td></tr>
 <tr><th>ORFS launch/current</th><td><code>{esc(payload['orfs_sha'])}</code> / <code>{esc(payload['current_orfs_sha'])}</code>; match {esc(payload['orfs_commit_match'])}; dirty {esc(payload['current_orfs_dirty'])}</td></tr>
