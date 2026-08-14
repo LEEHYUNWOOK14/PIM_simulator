@@ -31,6 +31,9 @@ FLOORPLAN_LOG = LOGS / "2_1_floorplan.log"
 IOP_LOG = LOGS / "3_2_place_iop.log"
 PLATFORM_CONFIG = ORFS_FLOW / "platforms/sky130hd/config.mk"
 FASTROUTE_TCL = ORFS_FLOW / "platforms/sky130hd/fastroute.tcl"
+INPUT_SDC = ROOT / "flow/designs/sky130hd/normalization_hbm_feasibility/constraint.sdc"
+RESIZE_TCL = ORFS_FLOW / "scripts/resize.tcl"
+CTS_TCL = ORFS_FLOW / "scripts/cts.tcl"
 
 
 def sha256(path: Path) -> str:
@@ -58,6 +61,7 @@ def main() -> int:
         RUN_LOG, AUDIT_LOG, NETLIST, CONFIG, ODB, SDC, DP_LOG,
         FLOORPLAN_LOG, IOP_LOG,
         PLATFORM_CONFIG, FASTROUTE_TCL,
+        INPUT_SDC, RESIZE_TCL, CTS_TCL,
     ]
     missing = [str(path) for path in required if not path.is_file() or path.stat().st_size == 0]
     if missing:
@@ -70,6 +74,9 @@ def main() -> int:
     floorplan = FLOORPLAN_LOG.read_text(encoding="utf-8", errors="replace")
     iop = IOP_LOG.read_text(encoding="utf-8", errors="replace")
     platform_config = PLATFORM_CONFIG.read_text(encoding="utf-8", errors="replace")
+    input_sdc = INPUT_SDC.read_text(encoding="utf-8", errors="replace")
+    resize_tcl = RESIZE_TCL.read_text(encoding="utf-8", errors="replace")
+    cts_tcl = CTS_TCL.read_text(encoding="utf-8", errors="replace")
     actual_hashes = {
         "mapped_netlist": sha256(NETLIST),
         "placement_config": sha256(CONFIG),
@@ -82,6 +89,9 @@ def main() -> int:
         "io_placement_log": sha256(IOP_LOG),
         "sky130hd_platform_config": sha256(PLATFORM_CONFIG),
         "sky130hd_fastroute_tcl": sha256(FASTROUTE_TCL),
+        "input_sdc": sha256(INPUT_SDC),
+        "orfs_resize_tcl": sha256(RESIZE_TCL),
+        "orfs_cts_tcl": sha256(CTS_TCL),
     }
     launch_hashes = {
         "mapped_netlist": kv(run, "WBQ_PLACE_NETLIST_SHA256"),
@@ -149,6 +159,14 @@ def main() -> int:
         and signal_max_layer == "met5"
         and "/platforms/sky130hd/fastroute.tcl" in floorplan
     )
+    clock_name = one(r"create_clock\s+-name\s+(\S+)", input_sdc)
+    clock_period_ns = one(r"create_clock.*?-period\s+([0-9.]+)", input_sdc, float)
+    clock_policy_complete = (
+        clock_name == "clk"
+        and clock_period_ns == 40.0
+        and "repair_design_helper" in resize_tcl
+        and "-repair_clock_nets" in cts_tcl
+    )
 
     payload = {
         "schema_version": 1,
@@ -192,8 +210,11 @@ def main() -> int:
             "complete": locality_complete,
         },
         "clock_high_fanout_policy": {
-            "placement": "clock is not repaired as a signal high-fanout net during pre-CTS placement",
-            "final_flow": "clock is not silently skipped; Phase 6 performs explicit CTS and post-CTS legality/routing recheck",
+            "clock_name": clock_name,
+            "period_ns": clock_period_ns,
+            "placement": "ORFS repair_design runs pre-CTS without an explicit clock-skip override; pre-CTS clock topology is not claimed as final clock distribution",
+            "final_flow": "Phase 6 ORFS cts.tcl explicitly uses -repair_clock_nets, followed by post-CTS legality and routing rechecks",
+            "evidence_complete": clock_policy_complete,
         },
         "mapped_instance_count": one(r"number instances in verilog is (\d+)", run, int),
         "placed_instance_count": one(r"^WBQ_PLACE_AUDIT_INSTANCE_COUNT (\d+)$", audit, int),
@@ -234,6 +255,9 @@ def main() -> int:
                 "io_placement_log": IOP_LOG,
                 "sky130hd_platform_config": PLATFORM_CONFIG,
                 "sky130hd_fastroute_tcl": FASTROUTE_TCL,
+                "input_sdc": INPUT_SDC,
+                "orfs_resize_tcl": RESIZE_TCL,
+                "orfs_cts_tcl": CTS_TCL,
             }.items()
         },
         "reproduction_commands": [
@@ -259,6 +283,7 @@ def main() -> int:
         and pin_placement_complete
         and io_pin_count is not None
         and routing_layer_setup_complete
+        and clock_policy_complete
     )
 
     OUT.mkdir(parents=True, exist_ok=True)
@@ -284,7 +309,7 @@ def main() -> int:
 <tr><th>Signal routing layers</th><td>{esc(signal_min_layer)}–{esc(signal_max_layer)}; hash-pinned Sky130HD fastroute setup {esc(routing_layer_setup_complete)}</td></tr>
 <tr><th>I/O pin placement</th><td>{esc(io_pin_count)} pins; horizontal {esc(payload['pin_placement']['horizontal_layer'])}, vertical {esc(payload['pin_placement']['vertical_layer'])}; section assignment {esc(pin_placement_complete)}</td></tr>
 <tr><th>Measured hierarchy locality</th><td>{len(locality_rows['BANK'])}/16 banks and {len(locality_rows['QUAD'])}/4 quads measured from final ODB; no explicit physical regions constrained</td></tr>
-<tr><th>Clock policy</th><td>pre-CTS signal repair 제외; Phase 6에서 명시적 CTS 및 post-CTS legality/routing 재검사</td></tr></table>
+<tr><th>Clock policy</th><td>{esc(clock_name)} {esc(clock_period_ns)} ns; pre-CTS topology는 최종 clock distribution으로 주장하지 않으며 Phase 6에서 <code>-repair_clock_nets</code> CTS 및 post-CTS legality/routing을 재검사한다. Evidence {esc(clock_policy_complete)}</td></tr></table>
 <h2>물리·자원 결과</h2><table>
 <tr><th>Die BBox</th><td>{esc(payload['die_bbox_um'])} µm</td></tr><tr><th>Core BBox</th><td>{esc(payload['core_bbox_um'])} µm</td></tr>
 <tr><th>Core area / utilization</th><td>{payload['core_area_um2']:,.3f} µm² / {payload['effective_utilization']:.3f}</td></tr>
