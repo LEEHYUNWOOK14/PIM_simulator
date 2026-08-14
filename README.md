@@ -231,6 +231,9 @@ Phase 3 — WBQ floorplan / repair / placement / legalization
 
 Phase 3 실행과 Phase 4 이후 작업은 소유권 gate로 분리되어 있습니다. 동일한 OpenROAD 작업을 중복 실행하거나 다른 채팅이 생성 중인 checkpoint를 덮어쓰지 않습니다.
 
+> **왜 V1~V8 이후 WBQ로 구조를 바꿨나요?**
+> 각 물리 실험에서 바꾼 조건, V4가 비교 기준인 이유, 중앙 집중형 wide-bus 병목과 WBQ 전환 과정을 [`V1~V8 물리 실험과 WBQ 구조 전환`](design/wbq_routing_evolution_v1_v8.md)에서 쉽게 설명합니다.
+
 ## 앞으로의 구체적인 방향
 
 1. Phase 3 legal placement와 독립 ODB audit를 끝냅니다.
@@ -271,6 +274,7 @@ RESEARCH ARTIFACT — NOT FOR FABRICATION
 | `rtl/` | bank-side·logic-die·normalization SystemVerilog RTL |
 | `verification/groot_normalization/` | RTL 회귀, 합성, OpenROAD 실행·감사 스크립트 |
 | `experiment/` | architecture/workload 실험과 결과 |
+| [`design/wbq_routing_evolution_v1_v8.md`](design/wbq_routing_evolution_v1_v8.md) | V1~V8 물리 실험, V4 비교 기준과 WBQ 구조 전환 근거 |
 | `flow/designs/sky130hd/` | ORFS Sky130HD design configuration |
 | `reports/final_integrated_gds_execution/` | Phase별 manifest와 HTML evidence |
 | `hardware_cost/` | source-traceable area/power/yield/cost 모델 |
