@@ -1,5 +1,21 @@
 # STOB PIM2 최종 통합 연구용 GDS 장기 실행 골 프롬프트
 
+### 현재 실행 소유권
+
+- VS Code는 Phase 3 OpenROAD 완료, audit, evidence, 보고서, commit/push까지만 수행한다.
+- VS Code는 Phase 4를 시작하지 않는다.
+- Phase 4~10의 실행 소유자는 CLI다.
+- `reports/final_integrated_gds_execution/CLI_OWNS_PHASE4` 파일을 삭제하거나 우회하지 않는다.
+- Phase 4 이후 watcher를 생성하거나 재생성하지 않는다.
+
+CLI 실행 전략:
+
+- Phase 4는 Phase 3 legal ODB를 재사용한다.
+- Phase 5 후보는 fast placement/route로 선별하고 최종 후보만 full resize한다.
+- Phase 6은 CTS/post-CTS checkpoint를 재사용한다.
+- Phase 7은 fast DRT로 수렴성을 확인한 뒤 최종 후보만 full DRT를 수행한다.
+- 최종 후보에는 전체 기능·합성·배치·CTS·배선·GDS 검증을 수행한다.
+
 ## 0. 이 문서의 지위와 사용법
 
 이 문서는 `STOB_PIM2`의 장시간 자율 작업을 위한 최상위 실행 계약이다. 작업자는 서버에서 작업을 시작할 때, 각 Phase를 시작할 때, 장시간 도구 실행이 끝났을 때, 실패 후 방향을 바꿀 때 반드시 이 파일을 다시 읽는다.
@@ -576,4 +592,3 @@ RESEARCH ARTIFACT — NOT FOR FABRICATION
 11. PF-4 실패 시 evidence 기반 quad-local reduction/replay/writeback 계층화를 반복한다.
 12. PF-4 통과 후 clock, detailed route, RTL GDS, overlay, merge, independent validation으로 진행한다.
 13. 각 큰 단계마다 HTML 보고서와 compact evidence를 저장하고 커밋·푸시한다.
-

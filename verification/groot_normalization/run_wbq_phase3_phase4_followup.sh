@@ -2,6 +2,17 @@
 set -euo pipefail
 
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+cli_handoff_gate="$root/reports/final_integrated_gds_execution/CLI_OWNS_PHASE4"
+
+stop_for_cli_handoff() {
+  if test -f "$cli_handoff_gate"; then
+    echo "WBQ_PHASE4_STOPPED_FOR_CLI_HANDOFF gate=$cli_handoff_gate"
+    exit 0
+  fi
+}
+
+stop_for_cli_handoff
+
 phase3_watcher_pid="${1:?usage: $0 PHASE3_WATCHER_PID}"
 placement_json_rel="reports/final_integrated_gds_execution/wbq_placement_manifest.json"
 placement_html_rel="reports/final_integrated_gds_execution/03_wbq_placement_report.html"
@@ -42,6 +53,7 @@ commit_reports() {
 
 echo "WBQ_PHASE3_PHASE4_FOLLOWUP_START_UTC=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 wait_for_pid_exit "$phase3_watcher_pid"
+stop_for_cli_handoff
 
 python3 - "$placement_json" <<'PY'
 import json
