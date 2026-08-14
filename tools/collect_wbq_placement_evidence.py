@@ -7,6 +7,7 @@ import hashlib
 import html
 import json
 import os
+import platform
 import re
 import subprocess
 from datetime import datetime, timezone
@@ -167,6 +168,19 @@ def main() -> int:
         and "repair_design_helper" in resize_tcl
         and "-repair_clock_nets" in cts_tcl
     )
+    git_status_paths = subprocess.check_output(
+        ["git", "-C", str(ROOT), "status", "--porcelain"], text=True
+    ).splitlines()
+    gate_checks = {
+        "terminal_completion": placement_complete,
+        "independent_reopen_and_legality": audit_complete,
+        "launch_input_hashes_match_current": hashes_match,
+        "repair_completed": repair is not None and repair["remaining_driver_vertices"] == 0,
+        "bank_quad_locality_16_4": locality_complete,
+        "pin_placement_completed": pin_placement_complete and io_pin_count is not None,
+        "routing_layer_setup": routing_layer_setup_complete,
+        "clock_policy_evidence": clock_policy_complete,
+    }
 
     payload = {
         "schema_version": 1,
@@ -178,6 +192,9 @@ def main() -> int:
         "evidence_git_parent_sha": subprocess.check_output(
             ["git", "-C", str(ROOT), "rev-parse", "HEAD"], text=True
         ).strip(),
+        "evidence_git_dirty": bool(git_status_paths),
+        "evidence_git_status_entry_count": len(git_status_paths),
+        "host_os": platform.platform(),
         "orfs_sha": kv(run, "WBQ_PLACE_ORFS_SHA"),
         "openroad_version": kv(run, "WBQ_PLACE_OPENROAD_VERSION"),
         "start_utc": kv(run, "WBQ_PLACE_START_UTC"),
@@ -265,6 +282,13 @@ def main() -> int:
             "bash verification/groot_normalization/run_normalization_hbm_wbq_place_audit.sh",
             "python3 tools/collect_wbq_placement_evidence.py",
         ],
+        "historical_comparison": {
+            "status": "not_applicable_to_phase3_gate",
+            "reason": "Pre-slice placement checkpoints are historical only and cannot prove latest-wbq placement; same-definition congestion comparison is deferred to Phase 4.",
+        },
+        "next_stage": "CLI-owned Phase 4 reuses this legal ODB for same-definition global-route comparison against historical residual congestion 2,620.",
+        "gate_checks": gate_checks,
+        "failed_gates": [name for name, passed in gate_checks.items() if not passed],
         "claim_boundary": "Placed Sky130HD research artifact; routing, timing closure, and manufacturing signoff are not established.",
     }
     if FANOUT_LOG.is_file() and FANOUT_LOG.stat().st_size:
@@ -273,18 +297,7 @@ def main() -> int:
             "bytes": FANOUT_LOG.stat().st_size,
             "sha256": sha256(FANOUT_LOG),
         }
-    payload["gate_pass"] = bool(
-        placement_complete
-        and audit_complete
-        and hashes_match
-        and repair is not None
-        and repair["remaining_driver_vertices"] == 0
-        and locality_complete
-        and pin_placement_complete
-        and io_pin_count is not None
-        and routing_layer_setup_complete
-        and clock_policy_complete
-    )
+    payload["gate_pass"] = all(gate_checks.values())
 
     OUT.mkdir(parents=True, exist_ok=True)
     manifest = OUT / "wbq_placement_manifest.json"
@@ -296,10 +309,21 @@ def main() -> int:
         f"{repair['resized_cells']:,} resized, {repair['inserted_buffers']:,} buffers, "
         f"{repair['nets_repaired']:,} nets, {repair['area_growth_percent']:+.1f}% area"
     )
+    artifact_rows = "".join(
+        f"<tr><td>{esc(name)}</td><td><code>{esc(item['path'])}</code></td>"
+        f"<td>{item['bytes']:,}</td><td><code>{esc(item['sha256'])}</code></td></tr>"
+        for name, item in payload["artifacts"].items()
+    )
+    failure_summary = "none" if not payload["failed_gates"] else ", ".join(payload["failed_gates"])
+    placement_claim = (
+        "공개 Sky130HD에서 독립 재개방·legalization 검사를 통과한 placed 연구 산출물이다."
+        if payload["gate_pass"]
+        else "Phase 3 gate를 통과하지 못한 불완전 placement 시도이며 placed 성공 산출물로 주장하지 않는다."
+    )
     report = f"""<!doctype html><html lang=\"ko\"><head><meta charset=\"utf-8\"><title>WBQ 배치·legalization 보고서</title>
 <style>body{{font-family:system-ui,sans-serif;max-width:1080px;margin:32px auto;color:#182235}}h1,h2{{color:#173f6b}}table{{border-collapse:collapse;width:100%}}th,td{{padding:10px;border-bottom:1px solid #ddd;text-align:left;vertical-align:top}}th{{background:#eef3f8}}.verdict{{padding:16px;background:{'#e7f6ed' if payload['gate_pass'] else '#fff0df'};border-left:6px solid {'#168154' if payload['gate_pass'] else '#b66a00'}}}code{{word-break:break-all}}pre{{white-space:pre-wrap}}</style></head><body>
 <h1>Phase 3 — wbq floorplan, repair, placement, legalization</h1>
-<div class=\"verdict\"><strong>{verdict}</strong><br>분류: placed<br>실행 Git <code>{esc(payload['placement_run_git_sha'])}</code></div>
+<div class=\"verdict\"><strong>{verdict}</strong><br>분류: placed<br>실행 Git <code>{esc(payload['placement_run_git_sha'])}</code><br>보고 시각 {esc(payload['captured_at_utc'])}<br>실패 게이트: {esc(failure_summary)}</div>
 <h2>게이트</h2><table>
 <tr><th>latest wbq input hash</th><td>{esc(hashes_match)}</td></tr>
 <tr><th>terminal completion</th><td>{esc(placement_complete)}</td></tr>
@@ -315,8 +339,16 @@ def main() -> int:
 <tr><th>Core area / utilization</th><td>{payload['core_area_um2']:,.3f} µm² / {payload['effective_utilization']:.3f}</td></tr>
 <tr><th>Instances / nets / BTerms</th><td>{payload['placed_instance_count']:,} / {payload['placed_net_count']:,} / {payload['boundary_terminal_count']:,}</td></tr>
 <tr><th>Repair</th><td>{esc(repair_html)}</td></tr><tr><th>Wall / peak RSS</th><td>{esc(overall_elapsed)} / {overall_rss / 1024 / 1024:.2f} GiB</td></tr></table>
+<h2>Provenance와 입력·출력 해시</h2><table>
+<tr><th>Evidence Git / dirty</th><td><code>{esc(payload['evidence_git_parent_sha'])}</code> / {esc(payload['evidence_git_dirty'])} ({payload['evidence_git_status_entry_count']} status entries)</td></tr>
+<tr><th>ORFS / OpenROAD</th><td><code>{esc(payload['orfs_sha'])}</code> / {esc(payload['openroad_version'])}</td></tr>
+<tr><th>OS</th><td>{esc(payload['host_os'])}</td></tr></table>
+<table><tr><th>Artifact</th><th>Path</th><th>Bytes</th><th>SHA-256</th></tr>{artifact_rows}</table>
+<h2>비교 경계·다음 단계</h2>
+<p>Historical comparison: {esc(payload['historical_comparison']['reason'])}</p>
+<p>Next: {esc(payload['next_stage'])}</p>
 <h2>재현 명령</h2><pre>{esc(chr(10).join(payload['reproduction_commands']))}</pre>
-<p><strong>Claim boundary:</strong> 공개 Sky130HD에서 독립 재개방·legalization 검사를 통과한 placed 연구 산출물이다. Routing, timing closure, 제조용 DRC/LVS 또는 fabrication readiness를 증명하지 않는다. <strong>RESEARCH ARTIFACT — NOT FOR FABRICATION.</strong></p>
+<p><strong>Claim boundary:</strong> {esc(placement_claim)} Routing, timing closure, 제조용 DRC/LVS 또는 fabrication readiness를 증명하지 않는다. <strong>RESEARCH ARTIFACT — NOT FOR FABRICATION.</strong></p>
 </body></html>"""
     (OUT / "03_wbq_placement_report.html").write_text(report, encoding="utf-8")
     print(f"WBQ_PLACEMENT_EVIDENCE {verdict} violations={violations} odb={actual_hashes['placed_odb']}")
