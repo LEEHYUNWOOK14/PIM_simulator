@@ -1,0 +1,13 @@
+net	terminals_or_points	alpha	result	elapsed
+clk_i	318060	0.3	timeout	>180 s
+rst_ni	318060	0.3	timeout	>180 s
+clk_i	318060	0.0	pass	4.133 s
+rst_ni	318060	0.0	pass	4.027 s
+u_adapter/_14518_	6151	0.3	pass	18 s including ODB load
+u_adapter/_14521_	6147	0.3	pass	17 s including ODB load
+u_writeback_slice/capture	2321	0.3	pass	17 s including ODB load
+reduction_valid[0]	2197	0.3	pass	17 s including ODB load
+replay_valid[0]	2196	0.3	pass	18 s including ODB load
+u_adapter/state_q[2]	2062	0.3	pass	17 s including ODB load
+placement_parasitics_baseline	NA	0.3	pass	925 s
+placement_parasitics_guarded	NA	0.0 for pathological path	pass	189-190 s
