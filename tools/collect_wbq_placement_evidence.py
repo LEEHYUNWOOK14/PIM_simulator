@@ -28,6 +28,8 @@ CONFIG = ROOT / "flow/designs/sky130hd/normalization_hbm_wbq/config.mk"
 ODB = RESULTS / "3_place.odb"
 SDC = RESULTS / "3_place.sdc"
 DP_LOG = LOGS / "3_5_place_dp.log"
+GP_LOG = LOGS / "3_3_place_gp.log"
+RESIZE_LOG = LOGS / "3_4_place_resized.log"
 FLOORPLAN_LOG = LOGS / "2_1_floorplan.log"
 IOP_LOG = LOGS / "3_2_place_iop.log"
 PLATFORM_CONFIG = ORFS_FLOW / "platforms/sky130hd/config.mk"
@@ -66,7 +68,7 @@ def git_file_sha256(repo: Path, revision: str, relative_path: str) -> str:
 
 def main() -> int:
     required = [
-        RUN_LOG, AUDIT_LOG, NETLIST, CONFIG, ODB, SDC, DP_LOG,
+        RUN_LOG, AUDIT_LOG, NETLIST, CONFIG, ODB, SDC, DP_LOG, GP_LOG, RESIZE_LOG,
         FLOORPLAN_LOG, IOP_LOG,
         PLATFORM_CONFIG, FASTROUTE_TCL,
         INPUT_SDC, RESIZE_TCL, CTS_TCL,
@@ -92,6 +94,8 @@ def main() -> int:
         "placed_sdc": sha256(SDC),
         "run_log": sha256(RUN_LOG),
         "detail_place_log": sha256(DP_LOG),
+        "global_place_log": sha256(GP_LOG),
+        "resize_log": sha256(RESIZE_LOG),
         "independent_audit_log": sha256(AUDIT_LOG),
         "floorplan_log": sha256(FLOORPLAN_LOG),
         "io_placement_log": sha256(IOP_LOG),
@@ -180,6 +184,11 @@ def main() -> int:
         and signal_max_layer == "met5"
         and "/platforms/sky130hd/fastroute.tcl" in floorplan
     )
+    fresh_wbq_floorplan = (
+        "read_db ./results/sky130hd/normalization_hbm_wbq/base/1_synth.odb" in floorplan
+        and "normalization_hbm_top_v2" not in floorplan
+        and "normalization_hbm_top_v4" not in floorplan
+    )
     clock_name = one(r"create_clock\s+-name\s+(\S+)", input_sdc)
     clock_period_ns = one(r"create_clock.*?-period\s+([0-9.]+)", input_sdc, float)
     clock_policy_complete = (
@@ -193,6 +202,7 @@ def main() -> int:
     ).splitlines()
     gate_checks = {
         "terminal_completion": placement_complete,
+        "fresh_wbq_floorplan_from_wbq_synthesis": fresh_wbq_floorplan,
         "independent_reopen_and_legality": audit_complete,
         "launch_input_hashes_match_current": hashes_match,
         "repair_completed": repair is not None and repair["remaining_driver_vertices"] == 0,
@@ -232,6 +242,11 @@ def main() -> int:
         "core_area_um2": one(r"Core area:\s*([0-9.]+) um\^2", run, float),
         "initial_instance_area_um2": one(r"Total instances area:\s*([0-9.]+) um\^2", run, float),
         "effective_utilization": one(r"Effective utilization:\s*([0-9.]+)", run, float),
+        "floorplan_provenance": {
+            "source_checkpoint": "normalization_hbm_wbq/base/1_synth.odb",
+            "pre_slice_checkpoint_reused": False,
+            "evidence_complete": fresh_wbq_floorplan,
+        },
         "routing_layers": {
             "signal_min": signal_min_layer,
             "signal_max": signal_max_layer,
@@ -293,6 +308,8 @@ def main() -> int:
                 "placed_sdc": SDC,
                 "run_log": RUN_LOG,
                 "detail_place_log": DP_LOG,
+                "global_place_log": GP_LOG,
+                "resize_log": RESIZE_LOG,
                 "independent_audit_log": AUDIT_LOG,
                 "floorplan_log": FLOORPLAN_LOG,
                 "io_placement_log": IOP_LOG,
@@ -352,6 +369,7 @@ def main() -> int:
 <div class=\"verdict\"><strong>{verdict}</strong><br>분류: placed<br>실행 Git <code>{esc(payload['placement_run_git_sha'])}</code><br>보고 시각 {esc(payload['captured_at_utc'])}<br>실패 게이트: {esc(failure_summary)}</div>
 <h2>게이트</h2><table>
 <tr><th>latest wbq input hash</th><td>{esc(hashes_match)}</td></tr>
+<tr><th>Fresh wbq floorplan</th><td>{esc(fresh_wbq_floorplan)}; source <code>normalization_hbm_wbq/base/1_synth.odb</code>; pre-slice ODB reused: false</td></tr>
 <tr><th>terminal completion</th><td>{esc(placement_complete)}</td></tr>
 <tr><th>독립 ODB 재개방</th><td>{esc(audit_complete)}</td></tr><tr><th>audit top / current ODB·SDC hash</th><td>{esc(audit_top)} / {esc(audit_hashes_match)}</td></tr>
 <tr><th>legalization violations</th><td>{esc(violations)}</td></tr></table>
