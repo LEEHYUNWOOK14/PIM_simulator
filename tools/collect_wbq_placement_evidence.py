@@ -57,6 +57,13 @@ def kv(text: str, key: str) -> str | None:
     return one(rf"^{re.escape(key)}=(.*)$", text)
 
 
+def git_file_sha256(repo: Path, revision: str, relative_path: str) -> str:
+    data = subprocess.check_output(
+        ["git", "-C", str(repo), "show", f"{revision}:{relative_path}"]
+    )
+    return hashlib.sha256(data).hexdigest()
+
+
 def main() -> int:
     required = [
         RUN_LOG, AUDIT_LOG, NETLIST, CONFIG, ODB, SDC, DP_LOG,
@@ -94,9 +101,22 @@ def main() -> int:
         "orfs_resize_tcl": sha256(RESIZE_TCL),
         "orfs_cts_tcl": sha256(CTS_TCL),
     }
+    placement_run_git_sha = kv(run, "WBQ_PLACE_GIT_SHA")
+    launch_orfs_sha = kv(run, "WBQ_PLACE_ORFS_SHA")
+    current_orfs_sha = subprocess.check_output(
+        ["git", "-C", str(ORFS_ROOT), "rev-parse", "HEAD"], text=True
+    ).strip()
+    current_orfs_dirty = bool(subprocess.check_output(
+        ["git", "-C", str(ORFS_ROOT), "status", "--porcelain"], text=True
+    ).strip())
     launch_hashes = {
         "mapped_netlist": kv(run, "WBQ_PLACE_NETLIST_SHA256"),
         "placement_config": kv(run, "WBQ_PLACE_CONFIG_SHA256"),
+        "input_sdc": git_file_sha256(
+            ROOT,
+            placement_run_git_sha,
+            "flow/designs/sky130hd/normalization_hbm_feasibility/constraint.sdc",
+        ),
     }
     repair_rows = re.findall(
         r"^\s*(?:final|\d+)\s*\|\s*([+-][0-9.]+)%\s*\|\s*(\d+)\s*\|\s*(\d+)\s*\|\s*(\d+)\s*\|\s*(\d+)\s*$",
@@ -180,6 +200,9 @@ def main() -> int:
         "pin_placement_completed": pin_placement_complete and io_pin_count is not None,
         "routing_layer_setup": routing_layer_setup_complete,
         "clock_policy_evidence": clock_policy_complete,
+        "orfs_commit_unchanged_and_clean": (
+            launch_orfs_sha == current_orfs_sha and not current_orfs_dirty
+        ),
     }
 
     payload = {
@@ -188,14 +211,17 @@ def main() -> int:
         "classification": "placed",
         "top": "logic_die_normalization_hbm_top",
         "variant": "wbq",
-        "placement_run_git_sha": kv(run, "WBQ_PLACE_GIT_SHA"),
+        "placement_run_git_sha": placement_run_git_sha,
         "evidence_git_parent_sha": subprocess.check_output(
             ["git", "-C", str(ROOT), "rev-parse", "HEAD"], text=True
         ).strip(),
         "evidence_git_dirty": bool(git_status_paths),
         "evidence_git_status_entry_count": len(git_status_paths),
         "host_os": platform.platform(),
-        "orfs_sha": kv(run, "WBQ_PLACE_ORFS_SHA"),
+        "orfs_sha": launch_orfs_sha,
+        "current_orfs_sha": current_orfs_sha,
+        "orfs_commit_match": launch_orfs_sha == current_orfs_sha,
+        "current_orfs_dirty": current_orfs_dirty,
         "openroad_version": kv(run, "WBQ_PLACE_OPENROAD_VERSION"),
         "start_utc": kv(run, "WBQ_PLACE_START_UTC"),
         "end_utc": kv(run, "WBQ_PLACE_END_UTC"),
@@ -341,7 +367,8 @@ def main() -> int:
 <tr><th>Repair</th><td>{esc(repair_html)}</td></tr><tr><th>Wall / peak RSS</th><td>{esc(overall_elapsed)} / {overall_rss / 1024 / 1024:.2f} GiB</td></tr></table>
 <h2>Provenance와 입력·출력 해시</h2><table>
 <tr><th>Evidence Git / dirty</th><td><code>{esc(payload['evidence_git_parent_sha'])}</code> / {esc(payload['evidence_git_dirty'])} ({payload['evidence_git_status_entry_count']} status entries)</td></tr>
-<tr><th>ORFS / OpenROAD</th><td><code>{esc(payload['orfs_sha'])}</code> / {esc(payload['openroad_version'])}</td></tr>
+<tr><th>ORFS launch/current</th><td><code>{esc(payload['orfs_sha'])}</code> / <code>{esc(payload['current_orfs_sha'])}</code>; match {esc(payload['orfs_commit_match'])}; dirty {esc(payload['current_orfs_dirty'])}</td></tr>
+<tr><th>OpenROAD</th><td>{esc(payload['openroad_version'])}</td></tr>
 <tr><th>OS</th><td>{esc(payload['host_os'])}</td></tr></table>
 <table><tr><th>Artifact</th><th>Path</th><th>Bytes</th><th>SHA-256</th></tr>{artifact_rows}</table>
 <h2>비교 경계·다음 단계</h2>
