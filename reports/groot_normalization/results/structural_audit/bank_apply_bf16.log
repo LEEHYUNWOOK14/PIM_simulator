@@ -1455,8 +1455,8 @@ Optimizing module bf16_mul.
 
 16.20. Executing TECHMAP pass (map to technology primitives).
 
-16.20.1. Executing Verilog-2005 frontend: /home/chandler/.local/oss-cad-suite/lib/../share/yosys/techmap.v
-Parsing Verilog input from `/home/chandler/.local/oss-cad-suite/lib/../share/yosys/techmap.v' to AST representation.
+16.20.1. Executing Verilog-2005 frontend: /home/forstobpim/OpenROAD-flow-scripts/tools/install/yosys/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/home/forstobpim/OpenROAD-flow-scripts/tools/install/yosys/bin/../share/yosys/techmap.v' to AST representation.
 Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
 Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
 Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
@@ -1842,6 +1842,6 @@ Found and reported 0 problems.
         2   bf16_mul
 
 Warnings: 6 unique messages, 6 total
-End of script. Logfile hash: feac758079, time: 1.15s, user: 0.98s, system: 0.08s, MEM: 78.75 MB peak
-Yosys 0.68+48 (git sha1 ff5817c34-dirty, Release, Clang /usr/bin/clang++ 21.1.8)
-Time spent: 19% 1x share (0 sec), 16% 1x techmap (0 sec), ...
+End of script. Logfile hash: 76e5949647, time: 2.06s, user: 2.14s, system: 0.06s, MEM: 83.38 MB peak
+Yosys 0.68+ (git sha1 a5af9d690, Release, GNU /usr/bin/c++ 13.3.0) [github.com/The-OpenROAD-Project/yosys at HEAD]
+Time spent: 20% 50x opt_expr (0 sec), 16% 1x share (0 sec), ...

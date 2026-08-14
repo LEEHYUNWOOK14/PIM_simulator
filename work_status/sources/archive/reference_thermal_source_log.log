@@ -1,0 +1,871 @@
+{
+  "status": "PASS",
+  "checks": {
+    "steady_equation_residual_W": {
+      "value": 2.8421709430404007e-13,
+      "limit": 1e-08,
+      "pass": true
+    },
+    "uniform_symmetry_K": {
+      "value": 4.945377440890297e-12,
+      "limit": 1e-08,
+      "pass": true
+    },
+    "zero_power_ambient_K": {
+      "value": 8.526512829121202e-12,
+      "limit": 1e-07,
+      "pass": true
+    },
+    "grid_convergence_peak_K": {
+      "value": 3.785771696129814e-11,
+      "limit": 0.05,
+      "pass": true
+    },
+    "variants": {
+      "value": {
+        "4Hi": {
+          "peak_K": 306.630546278373,
+          "pass": true
+        },
+        "8Hi": {
+          "peak_K": 309.14257875246653,
+          "pass": true
+        },
+        "12Hi": {
+          "peak_K": 311.7671136227508,
+          "pass": true
+        }
+      },
+      "pass": true
+    },
+    "tsv_effective_comparison_K": {
+      "value": 0.002158885464496052,
+      "pass": true
+    },
+    "analytic_single_slab_K": {
+      "value": 0.0,
+      "limit": 1e-12,
+      "pass": true
+    },
+    "timestep_convergence_K": {
+      "value": 8.942044183868347e-05,
+      "limit": 0.25,
+      "pass": true,
+      "coarse_K": 300.0315151325157,
+      "fine_K": 300.03160455295756
+    }
+  },
+  "disclaimer": "Architectural model verification, not silicon calibration or signoff."
+}
+FLOORPLAN_THERMAL_ADAPTER PASS blocks=8 power_W=4 output=C:\Users\Admin\OneDrive\2026-summer\STOB_semiconductor_pim\STOB_PIM2\output\floorplan_optimization\thermal\balanced\mapped_power.json
+{
+  "status": "PASS",
+  "disclaimer": "Architectural reference thermal model; not calibrated and not signoff.",
+  "profile": "rtl_mapped",
+  "mapped_power_input": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2\\output\\floorplan_optimization\\thermal\\balanced\\mapped_power.json",
+  "grid": [
+    32,
+    16,
+    21
+  ],
+  "stack_count": 1,
+  "dram_dies_per_stack": 8,
+  "input_power_W": 4.0,
+  "peak_temperature_K": 312.24608935630533,
+  "peak_delta_K": 12.246089356305333,
+  "hotspot": {
+    "layer": "logic_die",
+    "x_index": 4,
+    "y_index": 3
+  },
+  "layers": [
+    {
+      "layer": "substrate",
+      "min_K": 306.5845217253348,
+      "mean_K": 309.02602936146434,
+      "max_K": 311.6483409963452
+    },
+    {
+      "layer": "interposer",
+      "min_K": 306.878037693909,
+      "mean_K": 309.43306857016887,
+      "max_K": 312.218368069901
+    },
+    {
+      "layer": "logic_die",
+      "min_K": 306.87746176932455,
+      "mean_K": 309.43480434504613,
+      "max_K": 312.24608935630533
+    },
+    {
+      "layer": "bump_0",
+      "min_K": 306.87158200933726,
+      "mean_K": 309.3605313524696,
+      "max_K": 312.04078927104104
+    },
+    {
+      "layer": "dram_0",
+      "min_K": 306.866526956086,
+      "mean_K": 309.29675907840465,
+      "max_K": 311.86459714180023
+    },
+    {
+      "layer": "bump_1",
+      "min_K": 306.86026708540794,
+      "mean_K": 309.2329868043397,
+      "max_K": 311.702210851565
+    },
+    {
+      "layer": "dram_1",
+      "min_K": 306.85400076462207,
+      "mean_K": 309.16921453027476,
+      "max_K": 311.5398917546188
+    },
+    {
+      "layer": "bump_2",
+      "min_K": 306.8465541631983,
+      "mean_K": 309.10544225620976,
+      "max_K": 311.3886142658487
+    },
+    {
+      "layer": "dram_2",
+      "min_K": 306.8391012524951,
+      "mean_K": 309.04166998214475,
+      "max_K": 311.2373902714197
+    },
+    {
+      "layer": "bump_3",
+      "min_K": 306.8304955987319,
+      "mean_K": 308.9778977080797,
+      "max_K": 311.0960433743303
+    },
+    {
+      "layer": "dram_3",
+      "min_K": 306.8218837919224,
+      "mean_K": 308.91412543401475,
+      "max_K": 310.95534325091035
+    },
+    {
+      "layer": "bump_4",
+      "min_K": 306.8121494752349,
+      "mean_K": 308.8503531599497,
+      "max_K": 310.8212523196681
+    },
+    {
+      "layer": "dram_4",
+      "min_K": 306.80240917543085,
+      "mean_K": 308.78658088588463,
+      "max_K": 310.68719334706975
+    },
+    {
+      "layer": "bump_5",
+      "min_K": 306.7915789679025,
+      "mean_K": 308.7228086118196,
+      "max_K": 310.55834386919594
+    },
+    {
+      "layer": "dram_5",
+      "min_K": 306.78074295907453,
+      "mean_K": 308.65903633775446,
+      "max_K": 310.4295197318923
+    },
+    {
+      "layer": "bump_6",
+      "min_K": 306.76885167127864,
+      "mean_K": 308.59526406368946,
+      "max_K": 310.3048573046588
+    },
+    {
+      "layer": "dram_6",
+      "min_K": 306.7569547740069,
+      "mean_K": 308.5314917896243,
+      "max_K": 310.1802152591549
+    },
+    {
+      "layer": "bump_7",
+      "min_K": 306.74403890015674,
+      "mean_K": 308.4677195155592,
+      "max_K": 310.0589488258603
+    },
+    {
+      "layer": "dram_7",
+      "min_K": 306.7311176167349,
+      "mean_K": 308.4039472414941,
+      "max_K": 309.9376990453547
+    },
+    {
+      "layer": "tim",
+      "min_K": 306.67640490988504,
+      "mean_K": 308.15297671062854,
+      "max_K": 309.4737532088245
+    },
+    {
+      "layer": "lid",
+      "min_K": 306.61715276005185,
+      "mean_K": 307.8820318652595,
+      "max_K": 309.011382935716
+    }
+  ],
+  "external_solver_adapters": {
+    "hotspot": {
+      "url": "https://github.com/uvahotspot/HotSpot",
+      "commit": "f18831e48cef5d62580585cca0d7fab6c71bc3cc",
+      "license": "BSD-style; inspect upstream LICENSE"
+    },
+    "3d_ice": {
+      "url": "https://github.com/esl-epfl/3d-ice",
+      "commit": "4953952a1ef6d38807ff307212a6f15e5b2ef935",
+      "license": "GPL-3.0"
+    }
+  }
+}
+FLOORPLAN_THERMAL_ADAPTER PASS blocks=8 power_W=4 output=C:\Users\Admin\OneDrive\2026-summer\STOB_semiconductor_pim\STOB_PIM2\output\floorplan_optimization\thermal\cost_first\mapped_power.json
+{
+  "status": "PASS",
+  "disclaimer": "Architectural reference thermal model; not calibrated and not signoff.",
+  "profile": "rtl_mapped",
+  "mapped_power_input": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2\\output\\floorplan_optimization\\thermal\\cost_first\\mapped_power.json",
+  "grid": [
+    32,
+    16,
+    21
+  ],
+  "stack_count": 1,
+  "dram_dies_per_stack": 8,
+  "input_power_W": 4.0,
+  "peak_temperature_K": 312.24608935630533,
+  "peak_delta_K": 12.246089356305333,
+  "hotspot": {
+    "layer": "logic_die",
+    "x_index": 4,
+    "y_index": 3
+  },
+  "layers": [
+    {
+      "layer": "substrate",
+      "min_K": 306.5845217253348,
+      "mean_K": 309.02602936146434,
+      "max_K": 311.6483409963452
+    },
+    {
+      "layer": "interposer",
+      "min_K": 306.878037693909,
+      "mean_K": 309.43306857016887,
+      "max_K": 312.218368069901
+    },
+    {
+      "layer": "logic_die",
+      "min_K": 306.87746176932455,
+      "mean_K": 309.43480434504613,
+      "max_K": 312.24608935630533
+    },
+    {
+      "layer": "bump_0",
+      "min_K": 306.87158200933726,
+      "mean_K": 309.3605313524696,
+      "max_K": 312.04078927104104
+    },
+    {
+      "layer": "dram_0",
+      "min_K": 306.866526956086,
+      "mean_K": 309.29675907840465,
+      "max_K": 311.86459714180023
+    },
+    {
+      "layer": "bump_1",
+      "min_K": 306.86026708540794,
+      "mean_K": 309.2329868043397,
+      "max_K": 311.702210851565
+    },
+    {
+      "layer": "dram_1",
+      "min_K": 306.85400076462207,
+      "mean_K": 309.16921453027476,
+      "max_K": 311.5398917546188
+    },
+    {
+      "layer": "bump_2",
+      "min_K": 306.8465541631983,
+      "mean_K": 309.10544225620976,
+      "max_K": 311.3886142658487
+    },
+    {
+      "layer": "dram_2",
+      "min_K": 306.8391012524951,
+      "mean_K": 309.04166998214475,
+      "max_K": 311.2373902714197
+    },
+    {
+      "layer": "bump_3",
+      "min_K": 306.8304955987319,
+      "mean_K": 308.9778977080797,
+      "max_K": 311.0960433743303
+    },
+    {
+      "layer": "dram_3",
+      "min_K": 306.8218837919224,
+      "mean_K": 308.91412543401475,
+      "max_K": 310.95534325091035
+    },
+    {
+      "layer": "bump_4",
+      "min_K": 306.8121494752349,
+      "mean_K": 308.8503531599497,
+      "max_K": 310.8212523196681
+    },
+    {
+      "layer": "dram_4",
+      "min_K": 306.80240917543085,
+      "mean_K": 308.78658088588463,
+      "max_K": 310.68719334706975
+    },
+    {
+      "layer": "bump_5",
+      "min_K": 306.7915789679025,
+      "mean_K": 308.7228086118196,
+      "max_K": 310.55834386919594
+    },
+    {
+      "layer": "dram_5",
+      "min_K": 306.78074295907453,
+      "mean_K": 308.65903633775446,
+      "max_K": 310.4295197318923
+    },
+    {
+      "layer": "bump_6",
+      "min_K": 306.76885167127864,
+      "mean_K": 308.59526406368946,
+      "max_K": 310.3048573046588
+    },
+    {
+      "layer": "dram_6",
+      "min_K": 306.7569547740069,
+      "mean_K": 308.5314917896243,
+      "max_K": 310.1802152591549
+    },
+    {
+      "layer": "bump_7",
+      "min_K": 306.74403890015674,
+      "mean_K": 308.4677195155592,
+      "max_K": 310.0589488258603
+    },
+    {
+      "layer": "dram_7",
+      "min_K": 306.7311176167349,
+      "mean_K": 308.4039472414941,
+      "max_K": 309.9376990453547
+    },
+    {
+      "layer": "tim",
+      "min_K": 306.67640490988504,
+      "mean_K": 308.15297671062854,
+      "max_K": 309.4737532088245
+    },
+    {
+      "layer": "lid",
+      "min_K": 306.61715276005185,
+      "mean_K": 307.8820318652595,
+      "max_K": 309.011382935716
+    }
+  ],
+  "external_solver_adapters": {
+    "hotspot": {
+      "url": "https://github.com/uvahotspot/HotSpot",
+      "commit": "f18831e48cef5d62580585cca0d7fab6c71bc3cc",
+      "license": "BSD-style; inspect upstream LICENSE"
+    },
+    "3d_ice": {
+      "url": "https://github.com/esl-epfl/3d-ice",
+      "commit": "4953952a1ef6d38807ff307212a6f15e5b2ef935",
+      "license": "GPL-3.0"
+    }
+  }
+}
+FLOORPLAN_THERMAL_ADAPTER PASS blocks=8 power_W=4 output=C:\Users\Admin\OneDrive\2026-summer\STOB_semiconductor_pim\STOB_PIM2\output\floorplan_optimization\thermal\manual_baseline\mapped_power.json
+{
+  "status": "PASS",
+  "disclaimer": "Architectural reference thermal model; not calibrated and not signoff.",
+  "profile": "rtl_mapped",
+  "mapped_power_input": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2\\output\\floorplan_optimization\\thermal\\manual_baseline\\mapped_power.json",
+  "grid": [
+    32,
+    16,
+    21
+  ],
+  "stack_count": 1,
+  "dram_dies_per_stack": 8,
+  "input_power_W": 4.0,
+  "peak_temperature_K": 311.70220404983166,
+  "peak_delta_K": 11.702204049831664,
+  "hotspot": {
+    "layer": "logic_die",
+    "x_index": 11,
+    "y_index": 10
+  },
+  "layers": [
+    {
+      "layer": "substrate",
+      "min_K": 307.39310656873585,
+      "mean_K": 309.02602936146434,
+      "max_K": 311.0991468287915
+    },
+    {
+      "layer": "interposer",
+      "min_K": 307.7212318785722,
+      "mean_K": 309.4330685701689,
+      "max_K": 311.66376033725373
+    },
+    {
+      "layer": "logic_die",
+      "min_K": 307.71982172762887,
+      "mean_K": 309.4348043450461,
+      "max_K": 311.70220404983166
+    },
+    {
+      "layer": "bump_0",
+      "min_K": 307.7095092698354,
+      "mean_K": 309.3605313524696,
+      "max_K": 311.4656514670406
+    },
+    {
+      "layer": "dram_0",
+      "min_K": 307.7006447850872,
+      "mean_K": 309.29675907840465,
+      "max_K": 311.26266096616433
+    },
+    {
+      "layer": "bump_1",
+      "min_K": 307.68996083438236,
+      "mean_K": 309.2329868043397,
+      "max_K": 311.0795355711496
+    },
+    {
+      "layer": "dram_1",
+      "min_K": 307.67926722839906,
+      "mean_K": 309.16921453027476,
+      "max_K": 310.8965073763169
+    },
+    {
+      "layer": "bump_2",
+      "min_K": 307.66682280351455,
+      "mean_K": 309.1054422562097,
+      "max_K": 310.7295576401111
+    },
+    {
+      "layer": "dram_2",
+      "min_K": 307.65436911605434,
+      "mean_K": 309.04166998214475,
+      "max_K": 310.5626862370499
+    },
+    {
+      "layer": "bump_3",
+      "min_K": 307.6402411727755,
+      "mean_K": 308.97789770807975,
+      "max_K": 310.40870387744684
+    },
+    {
+      "layer": "dram_3",
+      "min_K": 307.6261043997242,
+      "mean_K": 308.91412543401475,
+      "max_K": 310.2547842920313
+    },
+    {
+      "layer": "bump_4",
+      "min_K": 307.6103768460683,
+      "mean_K": 308.8503531599497,
+      "max_K": 310.1111897282256
+    },
+    {
+      "layer": "dram_4",
+      "min_K": 307.5946409300219,
+      "mean_K": 308.78658088588463,
+      "max_K": 309.96764552698664
+    },
+    {
+      "layer": "bump_5",
+      "min_K": 307.57740358288464,
+      "mean_K": 308.7228086118196,
+      "max_K": 309.83240056334955
+    },
+    {
+      "layer": "dram_5",
+      "min_K": 307.56015836968913,
+      "mean_K": 308.6590363377545,
+      "max_K": 309.69719616702133
+    },
+    {
+      "layer": "bump_6",
+      "min_K": 307.54150590570384,
+      "mean_K": 308.59526406368946,
+      "max_K": 309.5686944450085
+    },
+    {
+      "layer": "dram_6",
+      "min_K": 307.52284609534377,
+      "mean_K": 308.5314917896243,
+      "max_K": 309.44022555122604
+    },
+    {
+      "layer": "bump_7",
+      "min_K": 307.5028770185227,
+      "mean_K": 308.4677195155592,
+      "max_K": 309.3171939182689
+    },
+    {
+      "layer": "dram_7",
+      "min_K": 307.48290113289494,
+      "mean_K": 308.4039472414941,
+      "max_K": 309.194188952951
+    },
+    {
+      "layer": "tim",
+      "min_K": 307.3995318359232,
+      "mean_K": 308.1529767106285,
+      "max_K": 308.7285288917975
+    },
+    {
+      "layer": "lid",
+      "min_K": 307.3093217312362,
+      "mean_K": 307.8820318652595,
+      "max_K": 308.3388405880685
+    }
+  ],
+  "external_solver_adapters": {
+    "hotspot": {
+      "url": "https://github.com/uvahotspot/HotSpot",
+      "commit": "f18831e48cef5d62580585cca0d7fab6c71bc3cc",
+      "license": "BSD-style; inspect upstream LICENSE"
+    },
+    "3d_ice": {
+      "url": "https://github.com/esl-epfl/3d-ice",
+      "commit": "4953952a1ef6d38807ff307212a6f15e5b2ef935",
+      "license": "GPL-3.0"
+    }
+  }
+}
+FLOORPLAN_THERMAL_ADAPTER PASS blocks=8 power_W=4 output=C:\Users\Admin\OneDrive\2026-summer\STOB_semiconductor_pim\STOB_PIM2\output\floorplan_optimization\thermal\thermal_first\mapped_power.json
+{
+  "status": "PASS",
+  "disclaimer": "Architectural reference thermal model; not calibrated and not signoff.",
+  "profile": "rtl_mapped",
+  "mapped_power_input": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2\\output\\floorplan_optimization\\thermal\\thermal_first\\mapped_power.json",
+  "grid": [
+    32,
+    16,
+    21
+  ],
+  "stack_count": 1,
+  "dram_dies_per_stack": 8,
+  "input_power_W": 4.0,
+  "peak_temperature_K": 310.9579749918045,
+  "peak_delta_K": 10.95797499180452,
+  "hotspot": {
+    "layer": "logic_die",
+    "x_index": 19,
+    "y_index": 10
+  },
+  "layers": [
+    {
+      "layer": "substrate",
+      "min_K": 307.44139669010303,
+      "mean_K": 309.02602936146434,
+      "max_K": 310.4435585824219
+    },
+    {
+      "layer": "interposer",
+      "min_K": 307.77159445719843,
+      "mean_K": 309.43306857016887,
+      "max_K": 310.9371205107986
+    },
+    {
+      "layer": "logic_die",
+      "min_K": 307.77013708700184,
+      "mean_K": 309.434804345046,
+      "max_K": 310.9579749918045
+    },
+    {
+      "layer": "bump_0",
+      "min_K": 307.7595721566503,
+      "mean_K": 309.3605313524695,
+      "max_K": 310.7923738886959
+    },
+    {
+      "layer": "dram_0",
+      "min_K": 307.7504906948452,
+      "mean_K": 309.2967590784046,
+      "max_K": 310.6552311622856
+    },
+    {
+      "layer": "bump_1",
+      "min_K": 307.73955362617727,
+      "mean_K": 309.23298680433965,
+      "max_K": 310.52554289594053
+    },
+    {
+      "layer": "dram_1",
+      "min_K": 307.72860671114955,
+      "mean_K": 309.1692145302747,
+      "max_K": 310.395891800991
+    },
+    {
+      "layer": "bump_2",
+      "min_K": 307.7158744613845,
+      "mean_K": 309.1054422562097,
+      "max_K": 310.2725324368329
+    },
+    {
+      "layer": "dram_2",
+      "min_K": 307.703132767718,
+      "mean_K": 309.04166998214475,
+      "max_K": 310.14920464782443
+    },
+    {
+      "layer": "bump_3",
+      "min_K": 307.68868428487923,
+      "mean_K": 308.9778977080797,
+      "max_K": 310.03126145743903
+    },
+    {
+      "layer": "dram_3",
+      "min_K": 307.6742268027796,
+      "mean_K": 308.9141254340147,
+      "max_K": 309.9133453338623
+    },
+    {
+      "layer": "bump_4",
+      "min_K": 307.65814840155053,
+      "mean_K": 308.8503531599497,
+      "max_K": 309.800053648429
+    },
+    {
+      "layer": "dram_4",
+      "min_K": 307.6420614826096,
+      "mean_K": 308.78658088588463,
+      "max_K": 309.68678519013076
+    },
+    {
+      "layer": "bump_5",
+      "min_K": 307.62444583783036,
+      "mean_K": 308.7228086118196,
+      "max_K": 309.57748141216376
+    },
+    {
+      "layer": "dram_5",
+      "min_K": 307.60682218829777,
+      "mean_K": 308.65903633775446,
+      "max_K": 309.4681975046841
+    },
+    {
+      "layer": "bump_6",
+      "min_K": 307.58776729758233,
+      "mean_K": 308.5952640636894,
+      "max_K": 309.36229677419453
+    },
+    {
+      "layer": "dram_6",
+      "min_K": 307.5687049408677,
+      "mean_K": 308.5314917896243,
+      "max_K": 309.256412945195
+    },
+    {
+      "layer": "bump_7",
+      "min_K": 307.54831307479856,
+      "mean_K": 308.46771951555917,
+      "max_K": 309.15339589608936
+    },
+    {
+      "layer": "dram_7",
+      "min_K": 307.527914301637,
+      "mean_K": 308.40394724149405,
+      "max_K": 309.05039310414395
+    },
+    {
+      "layer": "tim",
+      "min_K": 307.4428174055066,
+      "mean_K": 308.15297671062854,
+      "max_K": 308.6569418276381
+    },
+    {
+      "layer": "lid",
+      "min_K": 307.3507407095028,
+      "mean_K": 307.8820318652595,
+      "max_K": 308.25255815268474
+    }
+  ],
+  "external_solver_adapters": {
+    "hotspot": {
+      "url": "https://github.com/uvahotspot/HotSpot",
+      "commit": "f18831e48cef5d62580585cca0d7fab6c71bc3cc",
+      "license": "BSD-style; inspect upstream LICENSE"
+    },
+    "3d_ice": {
+      "url": "https://github.com/esl-epfl/3d-ice",
+      "commit": "4953952a1ef6d38807ff307212a6f15e5b2ef935",
+      "license": "GPL-3.0"
+    }
+  }
+}
+FLOORPLAN_THERMAL_ADAPTER PASS blocks=8 power_W=4 output=C:\Users\Admin\OneDrive\2026-summer\STOB_semiconductor_pim\STOB_PIM2\output\floorplan_optimization\thermal\wirelength_first\mapped_power.json
+{
+  "status": "PASS",
+  "disclaimer": "Architectural reference thermal model; not calibrated and not signoff.",
+  "profile": "rtl_mapped",
+  "mapped_power_input": "C:\\Users\\Admin\\OneDrive\\2026-summer\\STOB_semiconductor_pim\\STOB_PIM2\\output\\floorplan_optimization\\thermal\\wirelength_first\\mapped_power.json",
+  "grid": [
+    32,
+    16,
+    21
+  ],
+  "stack_count": 1,
+  "dram_dies_per_stack": 8,
+  "input_power_W": 4.0,
+  "peak_temperature_K": 313.7350421066808,
+  "peak_delta_K": 13.735042106680794,
+  "hotspot": {
+    "layer": "logic_die",
+    "x_index": 7,
+    "y_index": 3
+  },
+  "layers": [
+    {
+      "layer": "substrate",
+      "min_K": 306.4302742007779,
+      "mean_K": 309.0260293614642,
+      "max_K": 313.06387197662065
+    },
+    {
+      "layer": "interposer",
+      "min_K": 306.7167285549429,
+      "mean_K": 309.43306857016887,
+      "max_K": 313.7041085632776
+    },
+    {
+      "layer": "logic_die",
+      "min_K": 306.7160673793149,
+      "mean_K": 309.434804345046,
+      "max_K": 313.7350421066808
+    },
+    {
+      "layer": "bump_0",
+      "min_K": 306.70984560643836,
+      "mean_K": 309.3605313524695,
+      "max_K": 313.4608873748883
+    },
+    {
+      "layer": "dram_0",
+      "min_K": 306.7044967102579,
+      "mean_K": 309.29675907840453,
+      "max_K": 313.2255871761916
+    },
+    {
+      "layer": "bump_1",
+      "min_K": 306.6979112369033,
+      "mean_K": 309.2329868043396,
+      "max_K": 313.0065238721768
+    },
+    {
+      "layer": "dram_1",
+      "min_K": 306.6913191553365,
+      "mean_K": 309.16921453027464,
+      "max_K": 312.78754189620645
+    },
+    {
+      "layer": "bump_2",
+      "min_K": 306.68352009088335,
+      "mean_K": 309.1054422562097,
+      "max_K": 312.5823968337849
+    },
+    {
+      "layer": "dram_2",
+      "min_K": 306.67571458772363,
+      "mean_K": 309.04166998214464,
+      "max_K": 312.3773209129178
+    },
+    {
+      "layer": "bump_3",
+      "min_K": 306.6667351856876,
+      "mean_K": 308.9778977080797,
+      "max_K": 312.1839759121393
+    },
+    {
+      "layer": "dram_3",
+      "min_K": 306.657749532195,
+      "mean_K": 308.9141254340147,
+      "max_K": 311.9906895209117
+    },
+    {
+      "layer": "bump_4",
+      "min_K": 306.647626135543,
+      "mean_K": 308.85035315994963,
+      "max_K": 311.8073455222651
+    },
+    {
+      "layer": "dram_4",
+      "min_K": 306.6374966901251,
+      "mean_K": 308.7865808858846,
+      "max_K": 311.62405121590695
+    },
+    {
+      "layer": "bump_5",
+      "min_K": 306.62626829509236,
+      "mean_K": 308.7228086118195,
+      "max_K": 311.44919030503956
+    },
+    {
+      "layer": "dram_5",
+      "min_K": 306.6150340670653,
+      "mean_K": 308.6590363377544,
+      "max_K": 311.274371544882
+    },
+    {
+      "layer": "bump_6",
+      "min_K": 306.60274188236315,
+      "mean_K": 308.59526406368934,
+      "max_K": 311.1088058891406
+    },
+    {
+      "layer": "dram_6",
+      "min_K": 306.5904440911609,
+      "mean_K": 308.5314917896243,
+      "max_K": 310.9447875096299
+    },
+    {
+      "layer": "bump_7",
+      "min_K": 306.5771311017023,
+      "mean_K": 308.46771951555917,
+      "max_K": 310.78613866051387
+    },
+    {
+      "layer": "dram_7",
+      "min_K": 306.5638127406425,
+      "mean_K": 308.40394724149405,
+      "max_K": 310.6285124529404
+    },
+    {
+      "layer": "tim",
+      "min_K": 306.50757775408374,
+      "mean_K": 308.1529767106285,
+      "max_K": 310.0577284944244
+    },
+    {
+      "layer": "lid",
+      "min_K": 306.4466868636932,
+      "mean_K": 307.8820318652594,
+      "max_K": 309.51570652927103
+    }
+  ],
+  "external_solver_adapters": {
+    "hotspot": {
+      "url": "https://github.com/uvahotspot/HotSpot",
+      "commit": "f18831e48cef5d62580585cca0d7fab6c71bc3cc",
+      "license": "BSD-style; inspect upstream LICENSE"
+    },
+    "3d_ice": {
+      "url": "https://github.com/esl-epfl/3d-ice",
+      "commit": "4953952a1ef6d38807ff307212a6f15e5b2ef935",
+      "license": "GPL-3.0"
+    }
+  }
+}
+FLOORPLAN_THERMAL_METRICS PASS runs=5 output=C:\Users\Admin\OneDrive\2026-summer\STOB_semiconductor_pim\STOB_PIM2\output\floorplan_optimization\thermal_results.csv
+FLOORPLAN_THERMAL_CANDIDATES PASS output=C:\Users\Admin\OneDrive\2026-summer\STOB_semiconductor_pim\STOB_PIM2\output\floorplan_optimization\thermal

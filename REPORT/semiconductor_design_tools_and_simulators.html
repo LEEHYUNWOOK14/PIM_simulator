@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PIM Simulator 반도체 설계 툴 및 시뮬레이터 조사 보고서</title>
+  <style>
+    :root { --ink:#172033; --muted:#596579; --line:#d9e0e8; --navy:#173f6b; --blue:#eaf2fb; --green:#e7f6ed; --amber:#fff4d6; --gray:#f5f7fa; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:#eef2f6; font-family:system-ui,-apple-system,"Segoe UI",sans-serif; line-height:1.58; }
+    main { max-width:1180px; margin:28px auto; padding:34px 42px; background:white; box-shadow:0 5px 24px #23364d1a; }
+    h1,h2,h3 { color:var(--navy); line-height:1.25; }
+    h1 { margin:0 0 8px; font-size:2rem; }
+    h2 { margin-top:34px; padding-bottom:7px; border-bottom:2px solid var(--line); }
+    h3 { margin-bottom:7px; }
+    p { margin:8px 0; }
+    code { padding:1px 5px; border-radius:4px; background:#f0f3f7; overflow-wrap:anywhere; }
+    table { width:100%; border-collapse:collapse; margin:13px 0 20px; font-size:.94rem; }
+    th,td { padding:10px 11px; border:1px solid var(--line); text-align:left; vertical-align:top; }
+    th { background:#edf3f9; color:#233d5c; }
+    .summary { margin:22px 0; padding:17px 20px; border-left:6px solid #2774ae; background:var(--blue); }
+    .scope { padding:14px 17px; background:var(--gray); color:var(--muted); }
+    .tag { display:inline-block; padding:2px 8px; border-radius:12px; font-size:.8rem; font-weight:700; white-space:nowrap; }
+    .used { background:var(--green); color:#126439; }
+    .integrated { background:var(--amber); color:#785600; }
+    .infra { background:#e9e7f7; color:#493987; }
+    .flow { margin:16px 0; padding:16px; border:1px solid var(--line); background:#fbfcfd; font-family:ui-monospace,SFMono-Regular,Consolas,monospace; white-space:pre-wrap; }
+    ul { margin-top:7px; }
+    footer { margin-top:36px; padding-top:15px; border-top:1px solid var(--line); color:var(--muted); font-size:.88rem; }
+    @media (max-width:720px) { main { margin:0; padding:24px 17px; } table { display:block; overflow-x:auto; } }
+  </style>
+</head>
+<body>
+<main>
+  <h1>반도체 설계 툴 및 시뮬레이터 조사 보고서</h1>
+  <p><strong>대상 저장소:</strong> <code>/home/forstobpim/PIM_simulator</code></p>
+  <p><strong>조사 기준일:</strong> 2026-08-13 UTC · <strong>조사 방식:</strong> 소스, 실행 스크립트, manifest, 기존 로그 및 보고서의 정적 감사</p>
+
+  <div class="summary">
+    이 저장소의 주 설계 흐름은 <strong>PIMSimulator/DRAMSim2 기반 아키텍처 시뮬레이션</strong>,
+    <strong>Icarus Verilog 기반 SystemVerilog 기능 검증</strong>, <strong>Yosys/ABC 합성</strong>,
+    <strong>OpenROAD-flow-scripts와 OpenROAD 기반 Sky130HD 물리 구현</strong>,
+    <strong>KLayout 기반 GDS 검사·시각화</strong>로 구성된다. Python은 벡터 생성, 결과 수집,
+    workload 모델, 전력·열·3D 변환을 잇는 공통 자동화 계층이다.
+  </div>
+
+  <div class="scope">
+    <strong>상태 표기:</strong> <span class="tag used">실행 증거 있음</span>은 저장소 로그·manifest에서 실제 실행이 확인된 도구,
+    <span class="tag integrated">연동/선택 경로</span>는 스크립트나 문서에 인터페이스가 있으나 현재 호스트 실행 증거가 제한적인 도구,
+    <span class="tag infra">지원 인프라</span>는 직접 EDA 엔진이 아닌 빌드·검증 기반을 뜻한다.
+  </div>
+
+  <h2>1. 전체 툴 체인</h2>
+  <div class="flow">C++ PIM workload / memory trace
+        ↓
+PIMSimulator (DRAMSim2 확장) + GoogleTest
+        ↓ architecture/cycle/traffic/power evidence
+SystemVerilog RTL → Icarus Verilog/vvp (주 기능 검증)
+                ↘ Verilator (환경 보유·보조 lint/simulation 가능)
+        ↓
+Yosys + ABC → generic/Sky130HD netlist, cell/area/structural checks
+        ↓
+OpenROAD-flow-scripts → OpenROAD/OpenSTA/CuGR/detailed routing
+        ↓
+ODB/DEF/SPEF/GDS → KLayout batch audit 및 2D/3D 시각화
+        ↓
+Python RTL-to-3D / power / thermal adapters → 3D-ICE, HotSpot, VTK/ParaView, OpenSCAD</div>
+
+  <h2>2. 시뮬레이터와 RTL 검증 도구</h2>
+  <table>
+    <thead><tr><th>도구</th><th>상태</th><th>저장소 내 용도</th><th>확인된 버전/근거</th></tr></thead>
+    <tbody>
+      <tr><td><strong>PIMSimulator</strong></td><td><span class="tag used">실행 증거 있음</span></td><td>HBM2 다중 채널·rank·bank와 PIM command를 cycle 단위로 모델링한다. GEMV, ADD, MUL, ReLU, MobileNetV4 및 normalization 관련 workload의 latency, traffic, bandwidth와 전력 통계를 생성한다.</td><td>저장소 자체 C++ 시뮬레이터. <code>src/</code>, <code>src/tests/</code>, <code>sim</code>, <code>Sconstruct</code>.</td></tr>
+      <tr><td><strong>DRAMSim2</strong></td><td><span class="tag used">실행 증거 있음</span></td><td>PIMSimulator의 메모리 timing·controller 기반. 저장소가 DRAMSim2를 PIM block과 command execution으로 확장한다.</td><td><code>libdramsim/dramsim2</code>, <code>LICENSE-DRAMSIM2</code>, README/PIMSimulator guide.</td></tr>
+      <tr><td><strong>Icarus Verilog + vvp</strong></td><td><span class="tag used">실행 증거 있음</span></td><td>SystemVerilog RTL compile/elaboration 및 self-checking testbench 실행의 주 도구. FP16/BF16 arithmetic, scheduler, normalization, HBM boundary, arbiter와 full-system regression에 사용된다.</td><td>현재 환경 manifest: Icarus Verilog 12.0 stable. <code>rtl/run_tests.sh</code>와 <code>verification/groot_normalization/run_*_test.sh</code>.</td></tr>
+      <tr><td><strong>Verilator</strong></td><td><span class="tag integrated">연동/선택 경로</span></td><td>고속 RTL simulation/lint가 가능한 보조 도구. 환경 기준선에 설치가 확인되지만, 현재 저장소의 주 regression은 Icarus 중심이다.</td><td>현재 환경 manifest: Verilator 5.020.</td></tr>
+      <tr><td><strong>GoogleTest</strong></td><td><span class="tag infra">지원 인프라</span></td><td>C++ PIM kernel, bandwidth, emulator API와 기능·성능 테스트 프레임워크.</td><td><code>src/tests/</code>, <code>./sim --gtest_filter=…</code>, SCons build 문서.</td></tr>
+      <tr><td><strong>Python system/workload models</strong></td><td><span class="tag used">실행 증거 있음</span></td><td>GR00T normalization model, mixed-precision golden model, trace replay, vector 생성, architecture sweep, regression validation과 결과 수집.</td><td>현재 환경 manifest: Python 3.12.3. <code>tools/groot_normalization_*.py</code>, <code>experiment/*.py</code>, <code>verification/**/*.py</code>.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>3. 논리 합성 및 정적 분석</h2>
+  <table>
+    <thead><tr><th>도구</th><th>상태</th><th>저장소 내 용도</th><th>확인된 버전/구성</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Yosys</strong></td><td><span class="tag used">실행 증거 있음</span></td><td>SystemVerilog 읽기, hierarchy/parameter elaboration, generic synthesis, Sky130HD technology mapping, latch/unmapped primitive 검사, cell 및 area 통계 생성.</td><td>GCP 환경 manifest: Yosys 0.68+ (<code>a5af9d690</code>). 이전 desktop 산출물에는 0.68+48 (<code>ff5817c34-dirty</code>)도 기록되어 있어 결과별 provenance 구분이 필요하다.</td></tr>
+      <tr><td><strong>ABC</strong></td><td><span class="tag used">실행 증거 있음</span></td><td>Yosys 내부의 technology mapping 및 timing-oriented logic optimization backend.</td><td>Yosys/ORFS synthesis 로그에 <code>abc</code>와 <code>YOSYS_ABC_DONE</code> 실행 기록.</td></tr>
+      <tr><td><strong>OpenSTA</strong></td><td><span class="tag used">실행 증거 있음</span></td><td>Liberty/SDC/SPEF 기반 setup·hold timing, path delay, clock skew 및 constraint 검사. 주로 OpenROAD 안에서 사용된다.</td><td><code>measure_*sta.tcl</code>, normalization STA audit Tcl, ORFS metrics와 timing reports.</td></tr>
+      <tr><td><strong>Sky130HD platform</strong></td><td><span class="tag infra">지원 인프라</span></td><td>연구용 표준셀 Liberty/LEF/RC/tech 설정. 본 저장소의 합성·배치·배선 proxy 공정이다.</td><td><code>sky130_fd_sc_hd__tt_025C_1v80.lib</code>; manifest SHA-256 <code>ec0e1067…51a8d0d9</code>. 이는 도구가 아니라 PDK/platform 입력이다.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>4. 물리 설계, 배선 및 GDS</h2>
+  <table>
+    <thead><tr><th>도구</th><th>상태</th><th>저장소 내 용도</th><th>확인된 버전/근거</th></tr></thead>
+    <tbody>
+      <tr><td><strong>OpenROAD-flow-scripts (ORFS)</strong></td><td><span class="tag used">실행 증거 있음</span></td><td>Yosys 합성부터 floorplan, placement, CTS, global/detailed route, STA, GDS 생성까지의 자동화 flow. <code>flow/designs/sky130hd/*</code>에 디자인별 config와 SDC가 있다.</td><td>환경 manifest ORFS commit <code>56496f3980fb6e9e58f10c8aea4a98949c0fe5f2</code>.</td></tr>
+      <tr><td><strong>OpenROAD</strong></td><td><span class="tag used">실행 증거 있음</span></td><td>floorplan, global placement, timing/fanout repair, legalization, CTS, global route, detailed route, ODB/DEF/SPEF/GDS 생성과 Tcl 기반 metric 수집.</td><td>OpenROAD <code>26Q3-1080-gab6fd26351</code>; source/submodule SHA <code>ab6fd26351dc449e69059684dc6aa9ae9046eb36</code>.</td></tr>
+      <tr><td><strong>CuGR</strong></td><td><span class="tag used">실행 증거 있음</span></td><td>OpenROAD global router 선택지. normalization HBM physical-feasibility V2~V8 실험에서 congestion 및 overflow 판정에 사용된다.</td><td>라우팅 로그의 <code>PF_GLOBAL_ROUTER=CUGR</code>, Tcl의 <code>-use_cugr</code>.</td></tr>
+      <tr><td><strong>OpenROAD detailed router</strong></td><td><span class="tag used">실행 증거 있음</span></td><td>상세 배선, wire/via 및 DRC·antenna metric 생성. B0에서는 완료됐지만 DRC error가 남았고 B1에서는 메모리 부족 종료 기록이 있다.</td><td>B0 physical metrics와 B1 detailed-route failure log. 결과는 signoff-clean을 의미하지 않는다.</td></tr>
+      <tr><td><strong>KLayout</strong></td><td><span class="tag used">실행 증거 있음</span></td><td>GDS 열기, batch integrity 검사, cell/bounding-box 확인, layout 이미지와 3D stack 시각화. 최종 GDS merge 검사 스크립트에서도 사용된다.</td><td>현재 환경 manifest: KLayout 0.30.7. <code>tools/check_*gds*.py</code>, <code>open_klayout.*</code>.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>5. 전력·열·3D 분석 및 시각화</h2>
+  <table>
+    <thead><tr><th>도구/흐름</th><th>상태</th><th>역할</th><th>주의점</th></tr></thead>
+    <tbody>
+      <tr><td><strong>VCD/SAIF 기반 power flow</strong></td><td><span class="tag used">실행 증거 있음</span></td><td>Icarus RTL activity를 OpenROAD netlist·placement와 결합해 block power 및 energy/op 추정치를 만든다.</td><td>Vector와 activity window에 의존하는 engineering estimate이며 signoff power가 아니다.</td></tr>
+      <tr><td><strong>내장 Python thermal solver</strong></td><td><span class="tag used">실행 증거 있음</span></td><td>HBM2 4/8/12Hi stack의 steady/transient thermal field, convergence, symmetry 및 sweep 결과 생성.</td><td>재료·경계조건 및 추정 power input에 의존한다.</td></tr>
+      <tr><td><strong>3D-ICE</strong></td><td><span class="tag integrated">연동/선택 경로</span></td><td>HBM stack thermal candidate export 및 외부 3D thermal solver 비교를 위한 어댑터.</td><td><code>run_floorplan_3dice_candidates.*</code>, <code>export_floorplan_3dice.py</code>; 외부 solver 설치·실행 여부는 별도 확인 대상.</td></tr>
+      <tr><td><strong>HotSpot</strong></td><td><span class="tag integrated">연동/선택 경로</span></td><td>floorplan/power trace export와 thermal comparison adapter.</td><td>문서가 3D reference model과의 수치 동등성을 주장하지 않는다고 명시한다.</td></tr>
+      <tr><td><strong>ParaView / VTK</strong></td><td><span class="tag integrated">연동/선택 경로</span></td><td>3D temperature field와 floorplan 결과 시각화.</td><td>분석 엔진이 아니라 후처리·시각화 계층.</td></tr>
+      <tr><td><strong>OpenSCAD</strong></td><td><span class="tag integrated">연동/선택 경로</span></td><td>HBM2 die/stack/package의 기하학적 3D 모델 출력 및 확인.</td><td>물리 signoff 도구가 아닌 구조 시각화 도구.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>6. 빌드·자동화 기반</h2>
+  <table>
+    <thead><tr><th>구성요소</th><th>용도</th><th>현재 기록</th></tr></thead>
+    <tbody>
+      <tr><td><strong>GCC/G++</strong></td><td>C++14 PIMSimulator, test 및 vector generator 빌드.</td><td>GCP manifest: GCC/G++ 13.3.0. 과거 WSL profiling에는 G++ 15.2.0이 별도로 기록됨.</td></tr>
+      <tr><td><strong>SCons</strong></td><td>주 C++ simulator, library 및 tests 빌드.</td><td>GCP manifest에 설치 확인. 과거 WSL 기록은 SCons 4.8.1.</td></tr>
+      <tr><td><strong>Bash/PowerShell/CMD wrappers</strong></td><td>Linux/WSL/Windows에서 regression, ORFS, KLayout, thermal 및 GDS flow 재현.</td><td><code>rtl/</code>, <code>verification/</code>, <code>tools/</code>에 플랫폼별 launcher 존재.</td></tr>
+      <tr><td><strong>Python</strong></td><td>manifest/hash 수집, golden vector, metric parser, HTML report, architecture·thermal 분석의 공통 orchestration.</td><td>현재 GCP 기준 Python 3.12.3.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>7. 주요 실행 경로와 근거 파일</h2>
+  <ul>
+    <li><code>README.md</code>, <code>PIMSimulator_GUIDE.md</code>, <code>Sconstruct</code>: C++/DRAMSim2 기반 simulator 및 build/test 계약.</li>
+    <li><code>rtl/run_tests.sh</code>, <code>rtl/run_full_pim_tests.sh</code>: Icarus 기반 RTL regression.</li>
+    <li><code>rtl/yosys_local.sh</code>, <code>rtl/run_full_pim_synthesis.sh</code>: Yosys 합성 진입점.</li>
+    <li><code>verification/groot_normalization/</code>: normalization TB, Yosys, Sky130 mapping, OpenROAD placement/route/STA 스크립트.</li>
+    <li><code>flow/designs/sky130hd/</code>: ORFS config, SDC 및 OpenROAD compatibility Tcl.</li>
+    <li><code>reports/final_integrated_gds_execution/environment_manifest.json</code>: 현재 GCP EDA 버전·경로·해시 기준선.</li>
+    <li><code>b0_baseline_experiment/</code>, <code>b1_logic_die_experiment/</code>: synthesis, CTS, global/detailed route, power와 GDS 실험 증거.</li>
+    <li><code>design/rtl_to_3d/</code>, <code>design/thermal/</code>, <code>tools/rtl_to_3d_power_map.py</code>: RTL·placement·power를 package/thermal 분석으로 전달하는 계층.</li>
+  </ul>
+
+  <h2>8. 결론과 해석 경계</h2>
+  <p>이 저장소는 오픈소스 중심의 완결된 연구용 digital design flow를 갖고 있다. 기능 및 cycle-level 검증은 PIMSimulator와 Icarus,
+    합성은 Yosys/ABC, 물리 구현은 ORFS/OpenROAD/Sky130HD, GDS 검사는 KLayout이 담당한다. Python 기반 workload·power·thermal·3D 도구가
+    이들 산출물을 연결한다.</p>
+  <p>다만 도구가 존재하거나 실행된 사실과 설계가 signoff를 통과했다는 사실은 다르다. 현재 저장소의 physical 결과에는 congestion,
+    detailed-route DRC, timing 및 OOM 실패 기록이 포함되어 있다. 따라서 이 툴 체인은 <strong>연구·비교·feasibility 검증용</strong>이며,
+    foundry signoff, LVS/DRC clean, IR/EM closure 또는 tapeout readiness를 자동으로 의미하지 않는다.</p>
+
+  <footer>
+    본 보고서는 조사 당시 동시 작업 중인 저장소를 대상으로 작성되었다. 기존 변경 파일은 수정하지 않았으며,
+    새 산출물은 이 HTML 파일과 상위 <code>REPORT/</code> 디렉터리뿐이다. 버전 정보는 실행 결과별 manifest를 우선하며,
+    GCP와 과거 desktop/WSL 산출물의 버전 차이를 의도적으로 분리해 기록했다.
+  </footer>
+</main>
+</body>
+</html>

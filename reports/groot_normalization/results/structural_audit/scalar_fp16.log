@@ -1109,7 +1109,7 @@ Optimizing module fp16_add.
 16.8.23. Finished fast OPT passes. (There is nothing left to do.)
 
 16.9. Executing WREDUCE pass (reducing word size of cells).
-Removed top 1 bits (of 2) from port B of cell logic_normalization_scalar_engine.$auto$opt_dff.cc:351:make_patterns_logic$3148 ($ne).
+Removed top 1 bits (of 2) from port B of cell logic_normalization_scalar_engine.$auto$opt_dff.cc:320:make_patterns_logic$3148 ($ne).
 Removed top 24 address bits (of 32) from memory init port fp16_rsqrt_lut256.$auto$mem.cc:351:emit$1034 ($auto$proc_rom.cc:155:do_switch$1032).
 Removed top 28 bits (of 32) from port B of cell fp16_rsqrt_lut256.$div$rtl/fp16_rsqrt_lut256.sv:63$588 ($div).
 Removed top 1 bits (of 16) from mux cell fp16_rsqrt_lut256.$ternary$rtl/fp16_rsqrt_lut256.sv:41$530 ($mux).
@@ -3328,8 +3328,8 @@ Optimizing module fp16_add.
 
 16.20. Executing TECHMAP pass (map to technology primitives).
 
-16.20.1. Executing Verilog-2005 frontend: /home/chandler/.local/oss-cad-suite/lib/../share/yosys/techmap.v
-Parsing Verilog input from `/home/chandler/.local/oss-cad-suite/lib/../share/yosys/techmap.v' to AST representation.
+16.20.1. Executing Verilog-2005 frontend: /home/forstobpim/OpenROAD-flow-scripts/tools/install/yosys/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/home/forstobpim/OpenROAD-flow-scripts/tools/install/yosys/bin/../share/yosys/techmap.v' to AST representation.
 Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
 Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
 Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
@@ -4031,6 +4031,6 @@ Found and reported 0 problems.
         1   fp16_rsqrt_lut256
 
 Warnings: 6 unique messages, 6 total
-End of script. Logfile hash: 90fe2c3392, time: 3.24s, user: 2.69s, system: 0.46s, MEM: 207.61 MB peak
-Yosys 0.68+48 (git sha1 ff5817c34-dirty, Release, Clang /usr/bin/clang++ 21.1.8)
-Time spent: 26% 1x techmap (0 sec), 21% 118x opt_expr (0 sec), ...
+End of script. Logfile hash: ec50ce506a, time: 10.72s, user: 9.58s, system: 0.40s, MEM: 227.68 MB peak
+Yosys 0.68+ (git sha1 a5af9d690, Release, GNU /usr/bin/c++ 13.3.0) [github.com/The-OpenROAD-Project/yosys at HEAD]
+Time spent: 23% 118x opt_expr (2 sec), 21% 1x techmap (2 sec), ...

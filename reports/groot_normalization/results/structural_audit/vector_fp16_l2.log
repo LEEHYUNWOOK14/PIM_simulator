@@ -798,7 +798,7 @@ Optimizing module fp16_add.
 16.8.23. Finished fast OPT passes. (There is nothing left to do.)
 
 16.9. Executing WREDUCE pass (reducing word size of cells).
-Removed top 1 bits (of 2) from port B of cell bank_normalization_vector_reducer.$auto$opt_dff.cc:351:make_patterns_logic$2053 ($ne).
+Removed top 1 bits (of 2) from port B of cell bank_normalization_vector_reducer.$auto$opt_dff.cc:320:make_patterns_logic$2053 ($ne).
 Removed top 15 bits (of 16) from port B of cell bank_normalization_vector_reducer.$eq$rtl/bank_normalization_vector_reducer.sv:102$1029 ($eq).
 Removed top 28 bits (of 32) from port B of cell fp16_mul.$sub$rtl/fp16_mul.sv:24$150 ($sub).
 Removed top 26 bits (of 32) from port Y of cell fp16_mul.$sub$rtl/fp16_mul.sv:24$150 ($sub).
@@ -1193,7 +1193,7 @@ Removed 0 multiplexer ports.
 
 16.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
   Optimizing cells in module \bank_normalization_vector_reducer.
-    New input vector for $reduce_and cell $auto$opt_dff.cc:368:make_patterns_logic$2058: { $logic_and$rtl/bank_normalization_vector_reducer.sv:98$1027_Y $auto$alumacc.cc:564:replace_alu$2084 }
+    New input vector for $reduce_and cell $auto$opt_dff.cc:337:make_patterns_logic$2058: { $logic_and$rtl/bank_normalization_vector_reducer.sv:98$1027_Y $auto$alumacc.cc:564:replace_alu$2084 }
   Optimizing cells in module \bank_normalization_vector_reducer.
   Optimizing cells in module \fp16_mul.
   Optimizing cells in module \fp16_add.
@@ -1584,8 +1584,8 @@ Optimizing module fp16_add.
 
 16.20. Executing TECHMAP pass (map to technology primitives).
 
-16.20.1. Executing Verilog-2005 frontend: /home/chandler/.local/oss-cad-suite/lib/../share/yosys/techmap.v
-Parsing Verilog input from `/home/chandler/.local/oss-cad-suite/lib/../share/yosys/techmap.v' to AST representation.
+16.20.1. Executing Verilog-2005 frontend: /home/forstobpim/OpenROAD-flow-scripts/tools/install/yosys/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/home/forstobpim/OpenROAD-flow-scripts/tools/install/yosys/bin/../share/yosys/techmap.v' to AST representation.
 Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
 Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
 Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
@@ -1974,6 +1974,6 @@ Found and reported 0 problems.
         2   fp16_mul
 
 Warnings: 6 unique messages, 8 total
-End of script. Logfile hash: fa9344cd78, time: 1.20s, user: 1.00s, system: 0.11s, MEM: 81.37 MB peak
-Yosys 0.68+48 (git sha1 ff5817c34-dirty, Release, Clang /usr/bin/clang++ 21.1.8)
-Time spent: 17% 53x opt_expr (0 sec), 17% 1x techmap (0 sec), ...
+End of script. Logfile hash: 7f3d438c1a, time: 4.95s, user: 4.23s, system: 0.10s, MEM: 85.32 MB peak
+Yosys 0.68+ (git sha1 a5af9d690, Release, GNU /usr/bin/c++ 13.3.0) [github.com/The-OpenROAD-Project/yosys at HEAD]
+Time spent: 19% 53x opt_expr (0 sec), 15% 1x share (0 sec), ...

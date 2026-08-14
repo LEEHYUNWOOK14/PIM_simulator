@@ -283,6 +283,17 @@ RESEARCH ARTIFACT — NOT FOR FABRICATION
 | `work_status/` | 프로젝트 진행 기록과 이 README |
 | `work_status/sources/` | 외부 출처·provenance·출처 로그 중앙 인덱스 |
 
+### 작업 기록
+
+현재 변경분은 목적과 검증 단위가 섞이지 않도록 작업별 기록으로 분리했습니다. 시간은 UTC 파일 시각과 실행 로그를 기준으로 하며, 사람이 직접 기록한 시작·종료 시각이 없는 경우에는 `관측 구간` 또는 `산정 불가`로 표시합니다.
+
+| 작업 | 관측 시간 | 기록 |
+|---|---:|---|
+| 외부 출처와 provenance 스냅샷 정리 | 2026-08-14 02:42:17–02:42:27 UTC | [`008 출처 아카이브 구축`](work_status/008_source_provenance_archive.md) |
+| OpenROAD 장시간 작업 분석·모니터링 도구 | 2026-08-14 06:09:02–06:37:49 UTC | [`009 장시간 작업 관측 도구`](work_status/009_long_running_task_observability.md) |
+| WBQ 3_4 정체 진단과 Steiner alpha 실험 | 2026-08-14 06:34:20–08:28:25 UTC | [`010 WBQ repair 정체 진단`](work_status/010_wbq_repair_steiner_diagnostics.md) |
+| 구조 감사 로그 재생성 | 실행시간 산정 불가 | [`011 구조 감사 로그 갱신`](work_status/011_structural_audit_log_refresh.md) |
+
 세부 실행 계약은 [`final_integrated_research_gds_goal_prompt.md`](final_integrated_research_gds_goal_prompt.md), GCP 인수인계는 [`GCP_HANDOFF.md`](GCP_HANDOFF.md), 기존 simulator 사용법은 [`PIMSimulator_GUIDE.md`](PIMSimulator_GUIDE.md)를 참고합니다.
 
 ## 출처와 재현성

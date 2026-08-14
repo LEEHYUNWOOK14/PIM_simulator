@@ -1256,7 +1256,7 @@ Optimizing module bf16_rsqrt_lut256.
 16.8.23. Finished fast OPT passes. (There is nothing left to do.)
 
 16.9. Executing WREDUCE pass (reducing word size of cells).
-Removed top 1 bits (of 2) from port B of cell logic_normalization_reduction_engine.$auto$opt_dff.cc:351:make_patterns_logic$3262 ($ne).
+Removed top 1 bits (of 2) from port B of cell logic_normalization_reduction_engine.$auto$opt_dff.cc:320:make_patterns_logic$3262 ($ne).
 Removed top 3 bits (of 4) from port A of cell logic_normalization_reduction_engine.$shl$rtl/logic_normalization_reduction_engine.sv:49$1005 ($shl).
 Removed top 25 bits (of 32) from port B of cell bf16_mul.$sub$rtl/bf16_mul.sv:22$361 ($sub).
 Removed top 23 bits (of 32) from port Y of cell bf16_mul.$sub$rtl/bf16_mul.sv:22$361 ($sub).
@@ -1354,7 +1354,7 @@ Removed top 23 bits (of 32) from mux cell bf16_add.$procmux$1986 ($mux).
 Removed top 23 bits (of 32) from wire bf16_add.$add$rtl/bf16_add.sv:57$266_Y.
 Removed top 23 bits (of 32) from wire bf16_add.$2\result_exp[31:0].
 Removed top 1 bits (of 9) from wire bf16_add.rounded_sig.
-Removed top 1 bits (of 2) from port B of cell $paramod$e7b30ea3c3087b08e66e7ea65704eaac4cfb0da4\logic_normalization_scalar_engine.$auto$opt_dff.cc:351:make_patterns_logic$3325 ($ne).
+Removed top 1 bits (of 2) from port B of cell $paramod$e7b30ea3c3087b08e66e7ea65704eaac4cfb0da4\logic_normalization_scalar_engine.$auto$opt_dff.cc:320:make_patterns_logic$3325 ($ne).
 Removed top 24 address bits (of 32) from memory init port bf16_rsqrt_lut256.$auto$mem.cc:351:emit$1064 ($auto$proc_rom.cc:155:do_switch$1062).
 Removed top 22 bits (of 32) from port A of cell bf16_rsqrt_lut256.$div$rtl/bf16_rsqrt_lut256.sv:47$733 ($div).
 Removed top 30 bits (of 32) from port B of cell bf16_rsqrt_lut256.$div$rtl/bf16_rsqrt_lut256.sv:47$733 ($div).
@@ -3175,8 +3175,8 @@ Optimizing module bf16_rsqrt_lut256.
 
 16.20. Executing TECHMAP pass (map to technology primitives).
 
-16.20.1. Executing Verilog-2005 frontend: /home/chandler/.local/oss-cad-suite/lib/../share/yosys/techmap.v
-Parsing Verilog input from `/home/chandler/.local/oss-cad-suite/lib/../share/yosys/techmap.v' to AST representation.
+16.20.1. Executing Verilog-2005 frontend: /home/forstobpim/OpenROAD-flow-scripts/tools/install/yosys/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/home/forstobpim/OpenROAD-flow-scripts/tools/install/yosys/bin/../share/yosys/techmap.v' to AST representation.
 Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
 Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
 Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
@@ -3934,6 +3934,6 @@ Found and reported 0 problems.
         2   bf16_add
 
 Warnings: 6 unique messages, 6 total
-End of script. Logfile hash: 48c39653dd, time: 2.93s, user: 2.50s, system: 0.36s, MEM: 204.77 MB peak
-Yosys 0.68+48 (git sha1 ff5817c34-dirty, Release, Clang /usr/bin/clang++ 21.1.8)
-Time spent: 25% 1x techmap (0 sec), 18% 121x opt_expr (0 sec), ...
+End of script. Logfile hash: cdff35dd80, time: 7.73s, user: 7.61s, system: 0.36s, MEM: 221.80 MB peak
+Yosys 0.68+ (git sha1 a5af9d690, Release, GNU /usr/bin/c++ 13.3.0) [github.com/The-OpenROAD-Project/yosys at HEAD]
+Time spent: 24% 1x techmap (1 sec), 20% 121x opt_expr (1 sec), ...

@@ -1,0 +1,55 @@
+OpenROAD 26Q3-1080-gab6fd26351 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 16 thread(s).
+read_liberty /home/forstobpim/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_db ./results/sky130hd/normalization_hbm_wbq/base/3_4_place_resized.odb
+Took 18 seconds: read_db ./results/sky130hd/normalization_hbm_wbq/base/3_4_place_resized.odb
+read_sdc ./results/sky130hd/normalization_hbm_wbq/base/2_floorplan.sdc
+source /home/forstobpim/OpenROAD-flow-scripts/flow/platforms/sky130hd/setRC.tcl
+detailed_placement
+[INFO DPL-0006] Core area: 81513992.13 um^2
+[INFO DPL-0007] Movable instances area: 28278525.10 um^2
+[INFO DPL-0008] Fixed instances area within core: 1358761.91 um^2
+[INFO DPL-0009] Utilization: 36.4%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 4783083 cells
+          |      Total |  Illegal |  Illegal
+Iteration | Violations |    Cells |    Sites
+---------------------------------------------
+        0 |       2561 |       739 |      1822
+        1 |          0 |         0 |         0
+Negotiation phase 1 converged at iteration 1.
+[INFO DPL-0500] Runtime: 86.73s
+Placement Analysis
+---------------------------------
+total displacement   10773481.0 u
+average displacement        2.3 u
+max displacement           22.7 u
+original HPWL        123304616.9 u
+legalized HPWL       130704623.0 u
+delta HPWL                    6 %
+
+Took 89 seconds: detailed_placement
+optimize_mirroring
+[INFO DPL-0020] Mirrored 1311500 instances
+[INFO DPL-0021] HPWL before          130704623.0 u
+[INFO DPL-0022] HPWL after           128873287.5 u
+[INFO DPL-0023] HPWL delta               -1.4 %
+Took 62 seconds: optimize_mirroring
+[INFO FLW-0012] Placement violations .
+estimate_parasitics -placement
+Took 555 seconds: estimate_parasitics -placement
+write_db ./results/sky130hd/normalization_hbm_wbq/base/3_5_place_dp.odb
+Took 15 seconds: write_db ./results/sky130hd/normalization_hbm_wbq/base/3_5_place_dp.odb
+write_sdc -no_timestamp ./results/sky130hd/normalization_hbm_wbq/base/3_place.sdc
+Elapsed time: 12:49.85[h:]min:sec. CPU time: user 755.31 sys 14.38 (99%). Peak memory: 19331828KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_5_place_dp              .odb          769          18878 03883832ca6632a9ccdb

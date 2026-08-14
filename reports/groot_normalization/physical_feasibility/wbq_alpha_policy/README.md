@@ -35,10 +35,11 @@ Prim-Dijkstra reproduction isolated the pathological nets:
 - Placement parasitic estimation fell from 925 seconds to 189-190 seconds when
   the pathological Prim-Dijkstra route was avoided.
 
-Compact measurements are stored in `diagnostic_summary.tsv`.  Raw logs remain
-under `../wbq_pd_net_diagnostics/` and `../wbq_stt_guard_validation/`; they are
-intentionally not committed because the two alpha-zero tree dumps are about
-33 MB each.
+Compact measurements are stored in `diagnostic_summary.tsv`. Raw logs are
+preserved under `../wbq_pd_net_diagnostics/` and
+`../wbq_stt_guard_validation/`. The two alpha-zero tree dumps are about 33 MB
+each, so they are retained as evidence but should not be used as the primary
+human-readable summary.
 
 ## Root cause
 

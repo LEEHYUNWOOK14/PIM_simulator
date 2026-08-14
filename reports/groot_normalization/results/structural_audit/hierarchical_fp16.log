@@ -1717,7 +1717,7 @@ Removed top 31 bits (of 32) from port B of cell hierarchical_normalization_datap
 Removed top 31 bits (of 32) from port B of cell hierarchical_normalization_datapath.$lt$rtl/hierarchical_normalization_datapath.sv:75$1033 ($lt).
 Removed top 1 bits (of 2) from mux cell hierarchical_normalization_datapath.$procmux$1238 ($mux).
 Removed top 1 bits (of 2) from wire hierarchical_normalization_datapath.$2\partial_bank[1:0].
-Removed top 1 bits (of 2) from port B of cell $paramod$6d08270342a98964117cecfd58df101f0d7fd7e7\bank_normalization_local_reducer.$auto$opt_dff.cc:351:make_patterns_logic$3746 ($ne).
+Removed top 1 bits (of 2) from port B of cell $paramod$6d08270342a98964117cecfd58df101f0d7fd7e7\bank_normalization_local_reducer.$auto$opt_dff.cc:320:make_patterns_logic$3746 ($ne).
 Removed top 15 bits (of 16) from port B of cell $paramod$6d08270342a98964117cecfd58df101f0d7fd7e7\bank_normalization_local_reducer.$eq$rtl/bank_normalization_local_reducer.sv:53$1133 ($eq).
 Removed top 24 address bits (of 32) from memory init port fp16_rsqrt_lut256.$auto$mem.cc:351:emit$1158 ($auto$proc_rom.cc:155:do_switch$1156).
 Removed top 28 bits (of 32) from port B of cell fp16_rsqrt_lut256.$div$rtl/fp16_rsqrt_lut256.sv:63$588 ($div).
@@ -1799,9 +1799,9 @@ Removed top 1 bits (of 16) from wire fp16_rsqrt_lut256.$7\approximate_rsqrt$func
 Removed top 26 bits (of 32) from wire fp16_rsqrt_lut256.$sub$rtl/fp16_rsqrt_lut256.sv:57$586_Y.
 Removed top 2 bits (of 8) from wire fp16_rsqrt_lut256.$7\approximate_rsqrt$func$rtl/fp16_rsqrt_lut256.sv:79$441.even_exponent[7:0]$585.
 Removed top 26 bits (of 32) from wire fp16_rsqrt_lut256.$sub$rtl/fp16_rsqrt_lut256.sv:52$583_Y.
-Removed top 1 bits (of 2) from port B of cell $paramod$491ff7aac64cf334793c44cbff0c77c963941fba\logic_normalization_reduction_engine.$auto$opt_dff.cc:351:make_patterns_logic$3797 ($ne).
+Removed top 1 bits (of 2) from port B of cell $paramod$491ff7aac64cf334793c44cbff0c77c963941fba\logic_normalization_reduction_engine.$auto$opt_dff.cc:320:make_patterns_logic$3797 ($ne).
 Removed top 3 bits (of 4) from port A of cell $paramod$491ff7aac64cf334793c44cbff0c77c963941fba\logic_normalization_reduction_engine.$shl$rtl/logic_normalization_reduction_engine.sv:49$1087 ($shl).
-Removed top 1 bits (of 2) from port B of cell $paramod$b28f098732e0d83cc5d7cde6845e1e2080cb02e6\logic_normalization_scalar_engine.$auto$opt_dff.cc:351:make_patterns_logic$3860 ($ne).
+Removed top 1 bits (of 2) from port B of cell $paramod$b28f098732e0d83cc5d7cde6845e1e2080cb02e6\logic_normalization_scalar_engine.$auto$opt_dff.cc:320:make_patterns_logic$3860 ($ne).
 Removed top 28 bits (of 32) from port B of cell fp16_mul.$sub$rtl/fp16_mul.sv:24$150 ($sub).
 Removed top 26 bits (of 32) from port Y of cell fp16_mul.$sub$rtl/fp16_mul.sv:24$150 ($sub).
 Removed top 28 bits (of 32) from port B of cell fp16_mul.$sub$rtl/fp16_mul.sv:25$153 ($sub).
@@ -2303,7 +2303,7 @@ Removed 0 multiplexer ports.
   Optimizing cells in module \hierarchical_normalization_datapath.
   Optimizing cells in module $paramod$b28f098732e0d83cc5d7cde6845e1e2080cb02e6\bank_normalization_apply.
   Optimizing cells in module $paramod$6d08270342a98964117cecfd58df101f0d7fd7e7\bank_normalization_local_reducer.
-    New input vector for $reduce_and cell $auto$opt_dff.cc:368:make_patterns_logic$3734: { $logic_and$rtl/bank_normalization_local_reducer.sv:51$1131_Y $auto$alumacc.cc:564:replace_alu$3922 }
+    New input vector for $reduce_and cell $auto$opt_dff.cc:337:make_patterns_logic$3734: { $logic_and$rtl/bank_normalization_local_reducer.sv:51$1131_Y $auto$alumacc.cc:564:replace_alu$3922 }
   Optimizing cells in module $paramod$6d08270342a98964117cecfd58df101f0d7fd7e7\bank_normalization_local_reducer.
   Optimizing cells in module \fp16_rsqrt_lut256.
   Optimizing cells in module $paramod$491ff7aac64cf334793c44cbff0c77c963941fba\logic_normalization_reduction_engine.
@@ -4250,8 +4250,8 @@ Optimizing module fp16_add.
 
 16.20. Executing TECHMAP pass (map to technology primitives).
 
-16.20.1. Executing Verilog-2005 frontend: /home/chandler/.local/oss-cad-suite/lib/../share/yosys/techmap.v
-Parsing Verilog input from `/home/chandler/.local/oss-cad-suite/lib/../share/yosys/techmap.v' to AST representation.
+16.20.1. Executing Verilog-2005 frontend: /home/forstobpim/OpenROAD-flow-scripts/tools/install/yosys/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/home/forstobpim/OpenROAD-flow-scripts/tools/install/yosys/bin/../share/yosys/techmap.v' to AST representation.
 Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
 Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
 Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
@@ -5209,6 +5209,6 @@ Found and reported 0 problems.
         4   $paramod$b28f098732e0d83cc5d7cde6845e1e2080cb02e6\bank_normalization_apply
 
 Warnings: 6 unique messages, 6 total
-End of script. Logfile hash: 8c7af27317, time: 3.23s, user: 2.78s, system: 0.35s, MEM: 208.94 MB peak
-Yosys 0.68+48 (git sha1 ff5817c34-dirty, Release, Clang /usr/bin/clang++ 21.1.8)
-Time spent: 24% 1x techmap (0 sec), 20% 122x opt_expr (0 sec), ...
+End of script. Logfile hash: 55a07b6b6b, time: 11.93s, user: 10.41s, system: 0.41s, MEM: 228.68 MB peak
+Yosys 0.68+ (git sha1 a5af9d690, Release, GNU /usr/bin/c++ 13.3.0) [github.com/The-OpenROAD-Project/yosys at HEAD]
+Time spent: 22% 122x opt_expr (2 sec), 20% 1x techmap (2 sec), ...

@@ -1,0 +1,429 @@
+{
+  "generated_at": "2026-08-14 06:37:49 UTC",
+  "log_count": 420,
+  "bytes_scanned": 117352549,
+  "time_markers": 111,
+  "incidents": [
+    {
+      "name": "WBQ repair_design gap A",
+      "start": "2026-08-14 00:50:36 UTC",
+      "end": "2026-08-14 03:41:57 UTC",
+      "seconds": 10281,
+      "marker": "2,983,000 → 2,984,000",
+      "delta": "+13 resized, +12 buffers, +13 repaired",
+      "cause": "High-terminal net의 Steiner 후보 edge 탐색으로 추정. 당시 함수 프로파일은 없어 inference.",
+      "resolution": "개입 없이 계산 완료 후 1,000-driver marker 출력."
+    },
+    {
+      "name": "WBQ repair_design gap B",
+      "start": "2026-08-14 03:41:57 UTC",
+      "end": "2026-08-14 06:34:20 UTC",
+      "seconds": 10343,
+      "marker": "2,984,000 → 2,985,000",
+      "delta": "+13 resized, +12 buffers, +13 repaired",
+      "cause": "perf 2회에서 CPU 99.3~100%가 pdr::get_nearest_neighbors()에 집중. 중첩 순회 O(N²).",
+      "resolution": "개입 없이 nearest-neighbor 계산 완료 후 marker 출력."
+    },
+    {
+      "name": "WBQ buffer explosion",
+      "start": "marker 2,980,000",
+      "end": "marker 2,981,000",
+      "seconds": 0,
+      "marker": "2,980,000 → 2,981,000",
+      "delta": "+15 resized, +1,485 buffers, +16 repaired",
+      "cause": "소수의 초대형 fanout/high-terminal net에 region repeater가 대량 삽입된 정황.",
+      "resolution": "buffer 삽입 완료. 이후 STA graph와 Steiner 입력 크기를 키워 후속 비용을 증폭했을 가능성."
+    }
+  ],
+  "top_elapsed": [
+    {
+      "seconds": 2249.3,
+      "cpu": 319,
+      "memory_mb": 13049.76171875,
+      "command": "3_3_place_gp",
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_wbq_orfs_place.log",
+      "line": 524,
+      "kind": "Elapsed"
+    },
+    {
+      "seconds": 1003.13,
+      "cpu": 454,
+      "memory_mb": 12560.83984375,
+      "command": "3_1_place_gp_skip_io",
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_wbq_orfs_place.log",
+      "line": 319,
+      "kind": "Elapsed"
+    },
+    {
+      "seconds": 452.4,
+      "cpu": 100,
+      "memory_mb": 549.296875,
+      "command": "unattributed stage",
+      "path": "/home/forstobpim/PIM_simulator/b1_logic_die_experiment/logs/orfs_synth.log",
+      "line": 432,
+      "kind": "Elapsed"
+    },
+    {
+      "seconds": 229.49,
+      "cpu": 306,
+      "memory_mb": 1999.09765625,
+      "command": "5_2_route",
+      "path": "/home/forstobpim/PIM_simulator/b0_baseline_experiment/results/physical/logs/orfs_all.log",
+      "line": 1719,
+      "kind": "Elapsed"
+    },
+    {
+      "seconds": 229.14,
+      "cpu": 99,
+      "memory_mb": 10974.2578125,
+      "command": "2_4_floorplan_pdn",
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_wbq_orfs_place.log",
+      "line": 157,
+      "kind": "Elapsed"
+    },
+    {
+      "seconds": 171.18,
+      "cpu": 168,
+      "memory_mb": 515.09765625,
+      "command": "3_3_place_gp",
+      "path": "/home/forstobpim/PIM_simulator/b0_baseline_experiment/results/physical/logs/orfs_all.log",
+      "line": 1096,
+      "kind": "Elapsed"
+    },
+    {
+      "seconds": 169.6,
+      "cpu": 231,
+      "memory_mb": 1284.8828125,
+      "command": "3_3_place_gp",
+      "path": "/home/forstobpim/PIM_simulator/reports/floorplan_optimization/results/current_rtl_orfs_do_place.log",
+      "line": 869,
+      "kind": "Elapsed"
+    },
+    {
+      "seconds": 154.26,
+      "cpu": 94,
+      "memory_mb": 282.53515625,
+      "command": "unattributed stage",
+      "path": "/home/forstobpim/PIM_simulator/b0_baseline_experiment/results/physical/logs/orfs_all.log",
+      "line": 387,
+      "kind": "Elapsed"
+    },
+    {
+      "seconds": 135.73,
+      "cpu": 289,
+      "memory_mb": 13251.23046875,
+      "command": "2_1_floorplan",
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_wbq_orfs_place.log",
+      "line": 111,
+      "kind": "Elapsed"
+    },
+    {
+      "seconds": 132.17,
+      "cpu": 331,
+      "memory_mb": 2301.203125,
+      "command": "5_1_grt",
+      "path": "/home/forstobpim/PIM_simulator/reports/floorplan_optimization/results/current_rtl_orfs_do_route.log",
+      "line": 182,
+      "kind": "Elapsed"
+    },
+    {
+      "seconds": 86.4,
+      "cpu": 99,
+      "memory_mb": 8402.8203125,
+      "command": "1_synth",
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_wbq_orfs_place.log",
+      "line": 47,
+      "kind": "Elapsed"
+    },
+    {
+      "seconds": 59.75,
+      "cpu": 277,
+      "memory_mb": 696.16796875,
+      "command": "5_1_grt",
+      "path": "/home/forstobpim/PIM_simulator/b0_baseline_experiment/results/physical/logs/orfs_all.log",
+      "line": 1469,
+      "kind": "Elapsed"
+    },
+    {
+      "seconds": 40.43,
+      "cpu": 99,
+      "memory_mb": 8463.828125,
+      "command": "3_2_place_iop",
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_wbq_orfs_place.log",
+      "line": 343,
+      "kind": "Elapsed"
+    },
+    {
+      "seconds": 37.02,
+      "cpu": 144,
+      "memory_mb": 193.73828125,
+      "command": "3_1_place_gp_skip_io",
+      "path": "/home/forstobpim/PIM_simulator/b0_baseline_experiment/results/physical/logs/orfs_all.log",
+      "line": 631,
+      "kind": "Elapsed"
+    },
+    {
+      "seconds": 36.46,
+      "cpu": 73,
+      "memory_mb": 1104.87109375,
+      "command": "6_report",
+      "path": "/home/forstobpim/PIM_simulator/b0_baseline_experiment/results/physical/logs/orfs_all.log",
+      "line": 1805,
+      "kind": "Elapsed"
+    },
+    {
+      "seconds": 34.45,
+      "cpu": 99,
+      "memory_mb": 6902.53515625,
+      "command": "2_2_floorplan_macro",
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_wbq_orfs_place.log",
+      "line": 126,
+      "kind": "Elapsed"
+    },
+    {
+      "seconds": 30.44,
+      "cpu": 99,
+      "memory_mb": 5334.5,
+      "command": "2_3_floorplan_tapcell",
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_wbq_orfs_place.log",
+      "line": 140,
+      "kind": "Elapsed"
+    },
+    {
+      "seconds": 12.77,
+      "cpu": 298,
+      "memory_mb": 392.5390625,
+      "command": "3_1_place_gp_skip_io",
+      "path": "/home/forstobpim/PIM_simulator/reports/floorplan_optimization/results/current_rtl_orfs_do_place.log",
+      "line": 112,
+      "kind": "Elapsed"
+    }
+  ],
+  "top_took": [
+    {
+      "seconds": 1302,
+      "cpu": null,
+      "memory_mb": null,
+      "command": "global_placement -density 0.36 -pad_left 0 -pad_right 0 -force_center_initial_place -min_phi_coef 0.95 -max_phi_coef 1.05",
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_wbq_orfs_place.log",
+      "line": 519,
+      "kind": "Took"
+    },
+    {
+      "seconds": 1302,
+      "cpu": null,
+      "memory_mb": null,
+      "command": "global_placement -density 0.36 -pad_left 0 -pad_right 0 -force_center_initial_place -min_phi_coef 0.95 -max_phi_coef 1.05",
+      "path": "/home/forstobpim/OpenROAD-flow-scripts/flow/logs/sky130hd/normalization_hbm_wbq/base/3_3_place_gp.log",
+      "line": 177,
+      "kind": "Took"
+    },
+    {
+      "seconds": 972,
+      "cpu": null,
+      "memory_mb": null,
+      "command": "global_placement -skip_io -density 0.36 -pad_left 0 -pad_right 0",
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_wbq_orfs_place.log",
+      "line": 315,
+      "kind": "Took"
+    },
+    {
+      "seconds": 972,
+      "cpu": null,
+      "memory_mb": null,
+      "command": "global_placement -skip_io -density 0.36 -pad_left 0 -pad_right 0",
+      "path": "/home/forstobpim/OpenROAD-flow-scripts/flow/logs/sky130hd/normalization_hbm_wbq/base/3_1_place_gp_skip_io.log",
+      "line": 157,
+      "kind": "Took"
+    },
+    {
+      "seconds": 925,
+      "cpu": null,
+      "memory_mb": null,
+      "command": "estimate_parasitics -placement",
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_wbq_orfs_place.log",
+      "line": 535,
+      "kind": "Took"
+    },
+    {
+      "seconds": 925,
+      "cpu": null,
+      "memory_mb": null,
+      "command": "estimate_parasitics -placement",
+      "path": "/home/forstobpim/OpenROAD-flow-scripts/flow/logs/sky130hd/normalization_hbm_wbq/base/3_4_place_resized.tmp.log",
+      "line": 12,
+      "kind": "Took"
+    },
+    {
+      "seconds": 917,
+      "cpu": null,
+      "memory_mb": null,
+      "command": "estimate_parasitics -placement",
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_wbq_orfs_place.log",
+      "line": 521,
+      "kind": "Took"
+    },
+    {
+      "seconds": 917,
+      "cpu": null,
+      "memory_mb": null,
+      "command": "estimate_parasitics -placement",
+      "path": "/home/forstobpim/OpenROAD-flow-scripts/flow/logs/sky130hd/normalization_hbm_wbq/base/3_3_place_gp.log",
+      "line": 179,
+      "kind": "Took"
+    },
+    {
+      "seconds": 265,
+      "cpu": null,
+      "memory_mb": null,
+      "command": "abc -script /home/chandler/OpenROAD-flow-scripts/flow/scripts/abc_speed.script -liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib -dont_use sky130_fd_sc_hd__probe_p_8 -dont_use sky130_fd_sc_hd__probec_p_8 -dont_use sky130_fd_sc_hd__lpflow_bleeder_1 -dont_use sky130_fd_sc_hd__lpflow_clkbufkapwr_1 -dont_use sky130_fd_sc_hd__lpflow_clkbufkapwr_16 -dont_use sky130_fd_sc_hd__lpflow_clkbufkapwr_2 -dont_use sky130_fd_sc_hd__lpflow_clkbufkapwr_4 -dont_use sky130_fd_sc_hd__lpflow_clkbufkapwr_8 -dont_use sky130_fd_sc_hd__lpflow_clkinvkapwr_1 -dont_use sky130_fd_sc_hd__lpflow_clkinvkapwr_16 -dont_use sky130_fd_sc_hd__lpflow_clkinvkapwr_2 -dont_use sky130_fd_sc_hd__lpflow_clkinvkapwr_4 -dont_use sky130_fd_sc_hd__lpflow_clkinvkapwr_8 -dont_use sky130_fd_sc_hd__lpflow_decapkapwr_12 -dont_use sky130_fd_sc_hd__lpflow_decapkapwr_3 -dont_use sky130_fd_sc_hd__lpflow_decapkapwr_4 -dont_use sky130_fd_sc_hd__lpflow_decapkapwr_6 -dont_use sky130_fd_sc_hd__lpflow_decapkapwr_8 -dont_use sky130_fd_sc_hd__lpflow_inputiso0n_1 -dont_use sky130_fd_sc_hd__lpflow_inputiso0p_1 -dont_use sky130_fd_sc_hd__lpflow_inputiso1n_1 -dont_use sky130_fd_sc_hd__lpflow_inputiso1p_1 -dont_use sky130_fd_sc_hd__lpflow_inputisolatch_1 -dont_use sky130_fd_sc_hd__lpflow_isobufsrc_1 -dont_use sky130_fd_sc_hd__lpflow_isobufsrc_16 -dont_use sky130_fd_sc_hd__lpflow_isobufsrc_2 -dont_use sky130_fd_sc_hd__lpflow_isobufsrc_4 -dont_use sky130_fd_sc_hd__lpflow_isobufsrc_8 -dont_use sky130_fd_sc_hd__lpflow_isobufsrckapwr_16 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_hl_isowell_tap_1 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_hl_isowell_tap_2 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_hl_isowell_tap_4 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_isowell_4 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_isowell_tap_1 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_isowell_tap_2 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_isowell_tap_4 -constr /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b1_logic_die_experiment/orfs/objects/sky130hd/b1_logic_die_baseline/base/abc.constr -D 10.0",
+      "path": "/home/forstobpim/PIM_simulator/b1_logic_die_experiment/logs/orfs_synth.log",
+      "line": 417,
+      "kind": "Took"
+    },
+    {
+      "seconds": 221,
+      "cpu": null,
+      "memory_mb": null,
+      "command": "detailed_route -output_drc /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/reports/sky130hd/b0_bank_only_baseline/base/5_route_drc.rpt -output_maze /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/results/sky130hd/b0_bank_only_baseline/base/maze.log -droute_end_iter 0 -verbose 1 -drc_report_iter_step 5",
+      "path": "/home/forstobpim/PIM_simulator/b0_baseline_experiment/results/physical/logs/orfs_all.log",
+      "line": 1714,
+      "kind": "Took"
+    },
+    {
+      "seconds": 167,
+      "cpu": null,
+      "memory_mb": null,
+      "command": "global_placement -density 0.35 -pad_left 0 -pad_right 0 -routability_driven -timing_driven -force_center_initial_place -min_phi_coef 0.95 -max_phi_coef 1.05",
+      "path": "/home/forstobpim/PIM_simulator/b0_baseline_experiment/results/physical/logs/orfs_all.log",
+      "line": 1093,
+      "kind": "Took"
+    },
+    {
+      "seconds": 165,
+      "cpu": null,
+      "memory_mb": null,
+      "command": "global_placement -density 0.35 -pad_left 0 -pad_right 0 -routability_driven -timing_driven -force_center_initial_place -min_phi_coef 0.95 -max_phi_coef 1.05",
+      "path": "/home/forstobpim/PIM_simulator/reports/floorplan_optimization/results/current_rtl_orfs_do_place.log",
+      "line": 866,
+      "kind": "Took"
+    },
+    {
+      "seconds": 103,
+      "cpu": null,
+      "memory_mb": null,
+      "command": "pin_access",
+      "path": "/home/forstobpim/PIM_simulator/reports/floorplan_optimization/results/current_rtl_orfs_do_route.log",
+      "line": 114,
+      "kind": "Took"
+    },
+    {
+      "seconds": 78,
+      "cpu": null,
+      "memory_mb": null,
+      "command": "abc -script /home/chandler/OpenROAD-flow-scripts/flow/scripts/abc_speed.script -liberty /home/chandler/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib -dont_use sky130_fd_sc_hd__probe_p_8 -dont_use sky130_fd_sc_hd__probec_p_8 -dont_use sky130_fd_sc_hd__lpflow_bleeder_1 -dont_use sky130_fd_sc_hd__lpflow_clkbufkapwr_1 -dont_use sky130_fd_sc_hd__lpflow_clkbufkapwr_16 -dont_use sky130_fd_sc_hd__lpflow_clkbufkapwr_2 -dont_use sky130_fd_sc_hd__lpflow_clkbufkapwr_4 -dont_use sky130_fd_sc_hd__lpflow_clkbufkapwr_8 -dont_use sky130_fd_sc_hd__lpflow_clkinvkapwr_1 -dont_use sky130_fd_sc_hd__lpflow_clkinvkapwr_16 -dont_use sky130_fd_sc_hd__lpflow_clkinvkapwr_2 -dont_use sky130_fd_sc_hd__lpflow_clkinvkapwr_4 -dont_use sky130_fd_sc_hd__lpflow_clkinvkapwr_8 -dont_use sky130_fd_sc_hd__lpflow_decapkapwr_12 -dont_use sky130_fd_sc_hd__lpflow_decapkapwr_3 -dont_use sky130_fd_sc_hd__lpflow_decapkapwr_4 -dont_use sky130_fd_sc_hd__lpflow_decapkapwr_6 -dont_use sky130_fd_sc_hd__lpflow_decapkapwr_8 -dont_use sky130_fd_sc_hd__lpflow_inputiso0n_1 -dont_use sky130_fd_sc_hd__lpflow_inputiso0p_1 -dont_use sky130_fd_sc_hd__lpflow_inputiso1n_1 -dont_use sky130_fd_sc_hd__lpflow_inputiso1p_1 -dont_use sky130_fd_sc_hd__lpflow_inputisolatch_1 -dont_use sky130_fd_sc_hd__lpflow_isobufsrc_1 -dont_use sky130_fd_sc_hd__lpflow_isobufsrc_16 -dont_use sky130_fd_sc_hd__lpflow_isobufsrc_2 -dont_use sky130_fd_sc_hd__lpflow_isobufsrc_4 -dont_use sky130_fd_sc_hd__lpflow_isobufsrc_8 -dont_use sky130_fd_sc_hd__lpflow_isobufsrckapwr_16 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_hl_isowell_tap_1 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_hl_isowell_tap_2 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_hl_isowell_tap_4 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_isowell_4 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_isowell_tap_1 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_isowell_tap_2 -dont_use sky130_fd_sc_hd__lpflow_lsbuf_lh_isowell_tap_4 -constr /mnt/c/Users/Admin/OneDrive/2026-summer/STOB_semiconductor_pim/STOB_PIM2/b0_baseline_experiment/orfs/objects/sky130hd/b0_bank_only_baseline/base/abc.constr -D 10.0",
+      "path": "/home/forstobpim/PIM_simulator/b0_baseline_experiment/results/physical/logs/orfs_all.log",
+      "line": 372,
+      "kind": "Took"
+    },
+    {
+      "seconds": 64,
+      "cpu": null,
+      "memory_mb": null,
+      "command": "link_design logic_die_normalization_hbm_top",
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_wbq_orfs_place.log",
+      "line": 36,
+      "kind": "Took"
+    },
+    {
+      "seconds": 64,
+      "cpu": null,
+      "memory_mb": null,
+      "command": "link_design logic_die_normalization_hbm_top",
+      "path": "/home/forstobpim/OpenROAD-flow-scripts/flow/logs/sky130hd/normalization_hbm_wbq/base/1_synth.log",
+      "line": 10,
+      "kind": "Took"
+    },
+    {
+      "seconds": 52,
+      "cpu": null,
+      "memory_mb": null,
+      "command": "pin_access",
+      "path": "/home/forstobpim/PIM_simulator/b0_baseline_experiment/results/physical/logs/orfs_all.log",
+      "line": 1403,
+      "kind": "Took"
+    },
+    {
+      "seconds": 35,
+      "cpu": null,
+      "memory_mb": null,
+      "command": "global_placement -skip_io -density 0.35 -pad_left 0 -pad_right 0",
+      "path": "/home/forstobpim/PIM_simulator/b0_baseline_experiment/results/physical/logs/orfs_all.log",
+      "line": 628,
+      "kind": "Took"
+    },
+    {
+      "seconds": 18,
+      "cpu": null,
+      "memory_mb": null,
+      "command": "global_route -congestion_report_file ./reports/sky130hd/stob_pim2/base/congestion.rpt -congestion_iterations 30 -congestion_report_iter_step 5 -verbose",
+      "path": "/home/forstobpim/PIM_simulator/reports/floorplan_optimization/results/current_rtl_orfs_do_route.log",
+      "line": 169,
+      "kind": "Took"
+    },
+    {
+      "seconds": 17,
+      "cpu": null,
+      "memory_mb": null,
+      "command": "read_db ./results/sky130hd/normalization_hbm_wbq/base/2_floorplan.odb",
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_wbq_orfs_place.log",
+      "line": 166,
+      "kind": "Took"
+    },
+    {
+      "seconds": 17,
+      "cpu": null,
+      "memory_mb": null,
+      "command": "read_db ./results/sky130hd/normalization_hbm_wbq/base/3_1_place_gp_skip_io.odb",
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_wbq_orfs_place.log",
+      "line": 326,
+      "kind": "Took"
+    },
+    {
+      "seconds": 17,
+      "cpu": null,
+      "memory_mb": null,
+      "command": "read_db ./results/sky130hd/normalization_hbm_wbq/base/3_3_place_gp.odb",
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_wbq_orfs_place.log",
+      "line": 531,
+      "kind": "Took"
+    },
+    {
+      "seconds": 17,
+      "cpu": null,
+      "memory_mb": null,
+      "command": "read_db ./results/sky130hd/normalization_hbm_wbq/base/2_floorplan.odb",
+      "path": "/home/forstobpim/OpenROAD-flow-scripts/flow/logs/sky130hd/normalization_hbm_wbq/base/3_1_place_gp_skip_io.log",
+      "line": 8,
+      "kind": "Took"
+    },
+    {
+      "seconds": 17,
+      "cpu": null,
+      "memory_mb": null,
+      "command": "read_db ./results/sky130hd/normalization_hbm_wbq/base/3_1_place_gp_skip_io.odb",
+      "path": "/home/forstobpim/OpenROAD-flow-scripts/flow/logs/sky130hd/normalization_hbm_wbq/base/3_2_place_iop.log",
+      "line": 8,
+      "kind": "Took"
+    },
+    {
+      "seconds": 17,
+      "cpu": null,
+      "memory_mb": null,
+      "command": "read_db ./results/sky130hd/normalization_hbm_wbq/base/3_3_place_gp.odb",
+      "path": "/home/forstobpim/OpenROAD-flow-scripts/flow/logs/sky130hd/normalization_hbm_wbq/base/3_4_place_resized.tmp.log",
+      "line": 8,
+      "kind": "Took"
+    }
+  ]
+}

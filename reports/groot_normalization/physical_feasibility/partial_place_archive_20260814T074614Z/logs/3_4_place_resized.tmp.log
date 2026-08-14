@@ -1,0 +1,11 @@
+OpenROAD 26Q3-1080-gab6fd26351 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 16 thread(s).
+read_liberty /home/forstobpim/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_db ./results/sky130hd/normalization_hbm_wbq/base/3_3_place_gp.odb
+Took 18 seconds: read_db ./results/sky130hd/normalization_hbm_wbq/base/3_3_place_gp.odb
+read_sdc ./results/sky130hd/normalization_hbm_wbq/base/2_floorplan.sdc
+source /home/forstobpim/OpenROAD-flow-scripts/flow/platforms/sky130hd/setRC.tcl
+estimate_parasitics -placement

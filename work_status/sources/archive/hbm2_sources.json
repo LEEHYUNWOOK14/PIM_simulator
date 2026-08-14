@@ -1,0 +1,27 @@
+{
+  "sources": [
+    {
+      "name": "SAITPublic/PIMSimulator",
+      "url": "https://github.com/SAITPublic/PIMSimulator",
+      "commit": "3703d1f19c8f027360cc33a3243eb271e3bb6898",
+      "path": "ini/HBM2_samsung_2M_16B_x64.ini",
+      "vendored_reference": "references/hbm2/SAIT_HBM2_samsung_2M_16B_x64.ini",
+      "license": "Samsung non-commercial/personal/academic/research-only license; see LICENSE-PIMSimulator"
+    },
+    {
+      "name": "umd-memsys/DRAMsim3",
+      "url": "https://github.com/umd-memsys/DRAMsim3",
+      "commit": "29817593b3389f1337235d63cac515024ab8fd6e",
+      "path": "configs/HBM2_8Gb_x128.ini",
+      "license": "MIT"
+    },
+    {
+      "name": "JEDEC HBM2",
+      "url": "https://www.jedec.org/standards-documents/docs/jesd235",
+      "document": "JESD235 family",
+      "license": "Standard text is not redistributed",
+      "scope": "8 physical channels per stack, 128-bit/channel, 1024-bit stack interface and pseudo-channel architecture"
+    }
+  ],
+  "physical_layout_availability": "No open manufacturing HBM2 DRAM-cell, PHY, TSV-floorplan, or signoff GDS source is included or claimed."
+}
