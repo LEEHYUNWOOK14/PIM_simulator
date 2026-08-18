@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-18T03:35:22.334468+00:00",
+  "variant": "B7",
+  "decision": "PASS",
+  "conditions": {
+    "selected_one_variable_phi_recovery": "PASS",
+    "preauthorization_fail_closed": "PASS",
+    "b6_sealed_gpl0307_before_route": "PASS",
+    "decision_pins_b6_failure": "PASS",
+    "fresh_smoke_pass": "PASS",
+    "fresh_smoke_inputs_match": "PASS",
+    "fresh_smoke_outputs_match": "PASS",
+    "smoke_reopen_target_checkpoint_all_pass": "PASS",
+    "sealed_cheap_gate_9_of_9": "PASS",
+    "sealed_mapped_assertions_20_of_20": "PASS",
+    "sealed_workload_profiles_6_of_6": "PASS",
+    "mapped_netlist_unchanged": "PASS",
+    "only_global_placement_phi_changed": "PASS",
+    "detailed_placement_command_unchanged": "PASS",
+    "anchor_specs_unchanged": "PASS",
+    "failed_phi_removed_at_source_and_runtime_marker_present": "PASS",
+    "full_design_diamond_forbidden": "PASS",
+    "checkpointing_present": "PASS",
+    "runner_exact_pid_and_signal_contract": "PASS",
+    "silence_diagnostics_present": "PASS",
+    "no_prior_b7_placement_attempt": "PASS"
+  },
+  "evidence_reuse_justification": "B7 changes only GPL max_phi_coef; RTL, mapped netlist, SDC, fences, RUDY controls, anchor locks, detailed placement, and route policy remain unchanged.",
+  "inputs": {
+    "b7_eco_decision": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b7/b7_eco_decision.json",
+      "sha256": "ee5a9d1a84fd54d340d91be4291ed0ea19a2e7451aa00ee8d4c6ea7f5b09cafd"
+    },
+    "b7_smoke_report": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b7/physical/b7_smoke_execution_report.json",
+      "sha256": "4da51752041f251ede3a2560f2b5234cb0a4fba5e611899d7b374c5158054b06"
+    },
+    "b6_placement_report": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b6/physical/b6_placement_execution_report.json",
+      "sha256": "108420de037a138e2bec1efe5b4bf8f16e4ff0a67af5f9b2d2394dece9d747b8"
+    },
+    "b5_cheap_gate_manifest": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b5/cheap_gate_manifest.json",
+      "sha256": "cbac1c5e6fd07e49f436ffe15e779fc566b78dae78e0d063d4b1172fb60481ab"
+    },
+    "b5_mapped_locality_audit": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b5/b5_mapped_locality_audit.json",
+      "sha256": "6eccb6a7d421a7171283ab3a7ac395d77dfee19b6b56e37c422a87bbdc6cda4f"
+    },
+    "b5_workload_accuracy": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/results/quad_local_b5_actual_trace/accuracy_summary.json",
+      "sha256": "25db95af3d7a72aa122a1108b5e1e15b07777708b9acb1ae414b6b5d45a2fffb"
+    },
+    "b2_mapped_netlist": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b2/logic_die_normalization_hbm_quad_local_b2_top_sky130.v",
+      "sha256": "674a1b7557aaa6335dd90fa20c87aad3e447de87c00402b8b0ed25a940be1cf5"
+    },
+    "b5_mapped_netlist": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b5/logic_die_normalization_hbm_quad_local_b2_top_sky130.v",
+      "sha256": "674a1b7557aaa6335dd90fa20c87aad3e447de87c00402b8b0ed25a940be1cf5"
+    },
+    "b6_placement_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/wbq_quad_local_b6_targeted_place.tcl",
+      "sha256": "15506d8d0b817cf77d6daf0f0f8f02f36fc48d9ffec4e0eadc5f7d32544a9549"
+    },
+    "b7_placement_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/wbq_quad_local_b7_phi_place.tcl",
+      "sha256": "84f11fb7c00925aab074606b6c7367d5bc204d3409db8b58bdb4e7c9a1a9e959"
+    },
+    "b7_placement_runner": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/run_wbq_quad_local_b7_placement.sh",
+      "sha256": "862d0c9cc20a620173b67c0741541abd265008d9bd9f0724125c4e856003f171"
+    },
+    "silence_snapshot_tool": {
+      "path": "/home/forstobpim/PIM_simulator/tools/capture_openroad_stage_snapshot.py",
+      "sha256": "558a1c599a24db2a1a6ef4a8f89cfdefbfb8ad4e5459f59c47d6e20264d352b2"
+    },
+    "silence_compare_tool": {
+      "path": "/home/forstobpim/PIM_simulator/tools/compare_openroad_stage_snapshots.py",
+      "sha256": "4d58d731d9a21dfdcc9f2a820d5d3dd2ba1a694876ab3c852264ce59365e7a51"
+    }
+  },
+  "authorizes": [
+    "B7_PLACEMENT"
+  ],
+  "next_stage": "B7_PLACEMENT"
+}

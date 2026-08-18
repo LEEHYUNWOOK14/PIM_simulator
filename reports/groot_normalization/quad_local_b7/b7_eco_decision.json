@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-18T03:32:43.571502+00:00",
+  "variant": "B7",
+  "decision": "SELECT_B7_LOWER_MAX_PHI_ECO",
+  "status": "SELECTED_PENDING_SMOKE_AND_AUTHORIZATION",
+  "failure_classification": {
+    "runner_result": "tool_error",
+    "automatic_recovery_class": "tool_bug",
+    "subtype": "GPL-0307 optimizer_numerical_divergence",
+    "not_a_stall": true,
+    "resource_exhaustion": false,
+    "placement_legality_reached": false
+  },
+  "root_cause": {
+    "stage": "B6 routability-driven global placement",
+    "tool_message": "current overflow increased relative to its minimum while HPWL significantly worsened",
+    "source_behavior": "installed OpenROAD raises GPL-0307 and explicitly recommends a smaller max_phi_coef",
+    "observed_wall_seconds": 5215,
+    "observed_peak_rss_kib": 26259484,
+    "observed_exit_code": 1,
+    "global_route_invocations": 0
+  },
+  "selected_eco": {
+    "single_independent_variable": "global_placement.max_phi_coef",
+    "before": 1.05,
+    "after": 1.01,
+    "reason": "use a conservative value within OpenROAD's documented range and directly follow the GPL-0307 diagnostic"
+  },
+  "unchanged_contract": {
+    "min_phi_coef": 0.95,
+    "rtl": "byte-identical",
+    "mapped_netlist": "byte-identical",
+    "sdc": "byte-identical",
+    "fence_geometry": "unchanged",
+    "rudy_policy": "unchanged except max_phi_coef",
+    "locked_anchor_targets": 2,
+    "detailed_placement_policy": "unchanged",
+    "global_route_invocation_limit": 1,
+    "cugr_congestion_iterations": 1
+  },
+  "functional_evidence": {
+    "policy": "reuse sealed B5 cheap 9/9 because B7 changes only one physical optimizer coefficient",
+    "fresh_smoke_required": true,
+    "fresh_physical_authorization_required": true
+  },
+  "inputs": {
+    "b6_placement_report": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b6/physical/b6_placement_execution_report.json",
+      "sha256": "108420de037a138e2bec1efe5b4bf8f16e4ff0a67af5f9b2d2394dece9d747b8"
+    },
+    "b6_placement_log": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b6/physical/b6_place.log",
+      "sha256": "ce4659490f30c8db07146f17ba04d2b52bed2898f80d9374fb4e617b7941137c"
+    },
+    "b6_placement_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/wbq_quad_local_b6_targeted_place.tcl",
+      "sha256": "15506d8d0b817cf77d6daf0f0f8f02f36fc48d9ffec4e0eadc5f7d32544a9549"
+    },
+    "openroad_gpl_source": {
+      "path": "/home/forstobpim/OpenROAD-flow-scripts/tools/OpenROAD/src/gpl/src/nesterovPlace.cpp",
+      "sha256": "3ac87ac1ec81ca23897f4cef0c6cba7fd6593ab7f2e18cf585879b0023bd8ed5"
+    }
+  },
+  "authorizes": [],
+  "next_stage": "B7_SMOKE"
+}

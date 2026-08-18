@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "variant": "B7",
+  "stage": "input_reopen_checkpoint_smoke",
+  "status": "PASS",
+  "start_utc": "2026-08-18T03:32:54Z",
+  "invocation_count": 1,
+  "service": "direct-cli-b7-smoke",
+  "wrapper_pid": 674621,
+  "compute_pid": 675130,
+  "audit_compute_pid": 675431,
+  "inputs": {
+    "decision": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b7/b7_eco_decision.json",
+      "sha256": "ee5a9d1a84fd54d340d91be4291ed0ea19a2e7451aa00ee8d4c6ea7f5b09cafd"
+    },
+    "b2_place_odb": {
+      "path": "/home/forstobpim/OpenROAD-flow-scripts/flow/results/sky130hd/normalization_hbm_quad_local_b2/base/3_place.odb",
+      "sha256": "dd2ef73e7672a0c8937d085c53ab067b6a2d891ee544fcff3359ffc6299b4561"
+    },
+    "b2_place_sdc": {
+      "path": "/home/forstobpim/OpenROAD-flow-scripts/flow/results/sky130hd/normalization_hbm_quad_local_b2/base/3_place.sdc",
+      "sha256": "51ff83730acbf6710614999f79a9dd7d7b8aff7824f4d36a4b05b3c88f33a5fd"
+    },
+    "smoke_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/wbq_quad_local_b7_phi_smoke.tcl",
+      "sha256": "0ddee6f6dbafb3bcabdf0e2da1cba8b13bf3d5cb955cf2e2915bce69d28e6557"
+    },
+    "audit_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/audit_wbq_b7_phi_smoke.tcl",
+      "sha256": "7157254cc5b4c0b5a6867b3d6452f2bff978458aa4589b66feacf59a3cb10eb9"
+    },
+    "placement_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/wbq_quad_local_b7_phi_place.tcl",
+      "sha256": "84f11fb7c00925aab074606b6c7367d5bc204d3409db8b58bdb4e7c9a1a9e959"
+    }
+  },
+  "protected_hashes_before": {
+    "frozen_A": "964adc9cf68aceac1fd6686d7c586ffbd295ed9a35f6b54628ddf81981cbc5ad",
+    "B": "ab6cddf83dee124e9ae388b5cbe8c6fbda6665782870e1c4a57f83a83a174235",
+    "B2": "2c928b19ab5b1dcbcd89ec36d8d0b18963a8b03c9776ecc7325509332e98235d"
+  },
+  "authorizes": [
+    "B7_PHYSICAL_AUTHORIZATION"
+  ],
+  "end_utc": "2026-08-18T03:34:22Z",
+  "exit_code": 0,
+  "audit_exit_code": 0,
+  "termination_signal": null,
+  "protected_hashes_after": {
+    "frozen_A": "964adc9cf68aceac1fd6686d7c586ffbd295ed9a35f6b54628ddf81981cbc5ad",
+    "B": "ab6cddf83dee124e9ae388b5cbe8c6fbda6665782870e1c4a57f83a83a174235",
+    "B2": "2c928b19ab5b1dcbcd89ec36d8d0b18963a8b03c9776ecc7325509332e98235d"
+  },
+  "protected_artifacts_preserved": true,
+  "outputs": {
+    "smoke_odb": {
+      "path": "/dev/shm/wbq_b7_phase6_10/quad_local_b7/b7_smoke.odb",
+      "sha256": "c70afa8055d3bb7b4010e2f5abc919844b3c5a93a8cb51cb93cf27da627b972a"
+    },
+    "log": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b7/physical/b7_smoke.log",
+      "sha256": "6e80e74e19bcd5adb28db9cbdb137281ee53ecdc59d56b5d9ad83422fa8cc868"
+    }
+  },
+  "checks": {
+    "syntax_and_static_policy": "PASS",
+    "input_reopen": "PASS",
+    "target_objects": "PASS",
+    "checkpoint_write": "PASS",
+    "independent_checkpoint_reopen": "PASS"
+  },
+  "next_stage": "B7_PHYSICAL_AUTHORIZATION"
+}

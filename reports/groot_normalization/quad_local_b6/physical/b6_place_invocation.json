@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "variant": "B6",
+  "stage": "targeted_anchor_lock_placement",
+  "status": "FAIL",
+  "invocation_count": 1,
+  "global_route_invocations": 0,
+  "start_utc": "2026-08-18T01:59:19Z",
+  "policy": {
+    "full_design_diamond": false,
+    "locked_anchor_targets": 2,
+    "post_rudy_checkpoint": true,
+    "post_legalize_checkpoint": true
+  },
+  "decision_sha256": "696b5523894a7edebc1a50e3ada53918662c2e2301d80a87fe3d3bc43d128d80",
+  "authorization_sha256": "2a1de34cfff38bd0171bdac1be9ed2151d9b7bfd9d9fbeadb57245f45c4ee11f",
+  "immutable_inputs": {
+    "b2_place_odb": {
+      "path": "/home/forstobpim/OpenROAD-flow-scripts/flow/results/sky130hd/normalization_hbm_quad_local_b2/base/3_place.odb",
+      "sha256": "dd2ef73e7672a0c8937d085c53ab067b6a2d891ee544fcff3359ffc6299b4561"
+    },
+    "b2_place_sdc": {
+      "path": "/home/forstobpim/OpenROAD-flow-scripts/flow/results/sky130hd/normalization_hbm_quad_local_b2/base/3_place.sdc",
+      "sha256": "51ff83730acbf6710614999f79a9dd7d7b8aff7824f4d36a4b05b3c88f33a5fd"
+    }
+  },
+  "protected_hashes_before": {
+    "frozen_A": "964adc9cf68aceac1fd6686d7c586ffbd295ed9a35f6b54628ddf81981cbc5ad",
+    "B": "ab6cddf83dee124e9ae388b5cbe8c6fbda6665782870e1c4a57f83a83a174235",
+    "B2": "2c928b19ab5b1dcbcd89ec36d8d0b18963a8b03c9776ecc7325509332e98235d"
+  },
+  "end_utc": "2026-08-18T03:26:53Z",
+  "exit_code": 1,
+  "audit_invocation_count": 0,
+  "checkpoints": {
+    "post_rudy": {
+      "path": "/dev/shm/wbq_b6_phase6_10/quad_local_b6/b6_rudy.odb",
+      "sha256": ""
+    },
+    "post_legalize": {
+      "path": "/dev/shm/wbq_b6_phase6_10/quad_local_b6/b6_post_legalize.odb",
+      "sha256": ""
+    }
+  },
+  "outputs": {
+    "b6_place_odb": {
+      "path": "/dev/shm/wbq_b6_phase6_10/quad_local_b6/b6_place.odb",
+      "sha256": ""
+    },
+    "b6_place_sdc": {
+      "path": "/dev/shm/wbq_b6_phase6_10/quad_local_b6/b6_place.sdc",
+      "sha256": ""
+    },
+    "log": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b6/physical/b6_place.log",
+      "sha256": "ce4659490f30c8db07146f17ba04d2b52bed2898f80d9374fb4e617b7941137c"
+    }
+  },
+  "placement_legality_and_fence_audit": "FAIL",
+  "protected_hashes_after": {
+    "frozen_A": "964adc9cf68aceac1fd6686d7c586ffbd295ed9a35f6b54628ddf81981cbc5ad",
+    "B": "ab6cddf83dee124e9ae388b5cbe8c6fbda6665782870e1c4a57f83a83a174235",
+    "B2": "2c928b19ab5b1dcbcd89ec36d8d0b18963a8b03c9776ecc7325509332e98235d"
+  },
+  "protected_artifacts_preserved": true,
+  "authorizes": [],
+  "next_stage": null
+}
