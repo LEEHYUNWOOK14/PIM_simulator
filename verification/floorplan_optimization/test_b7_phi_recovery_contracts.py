@@ -91,6 +91,63 @@ class B7RecoveryContractTest(unittest.TestCase):
         ):
             self.assertIn(token, text)
 
+    def test_numeric_and_targeted_reopen_gate_route_authorization(self) -> None:
+        analyzer = (ROOT / "tools/analyze_b7_placement_log.py").read_text()
+        audit_tcl = (ROOT / "verification/groot_normalization/audit_wbq_b7_targeted_placement.tcl").read_text()
+        audit_runner = (ROOT / "verification/groot_normalization/run_wbq_b7_targeted_placement_audit.sh").read_text()
+        authorizer = (ROOT / "tools/authorize_b7_global_route.py").read_text()
+        for token in ("min_phi=0.95 max_phi=1.01", "failed_gpl0307_absent", "WBQ_B7_LOWER_MAX_PHI_PLACE PASS"):
+            self.assertIn(token, analyzer)
+        for token in ('actual_status ne "LOCKED"', "anchors_verified != 2", "outside != 0", "unplaced != 0", 'violations ne ""'):
+            self.assertIn(token, audit_tcl)
+        for token in ("compute_pid", "placement_violations", "B7_GLOBAL_ROUTE_AUTHORIZATION"):
+            self.assertIn(token, audit_runner)
+        for token in (
+            "placement_numeric_analysis",
+            "placement_numeric_inputs_match",
+            "SELECT_B7_LOWER_MAX_PHI_ECO",
+            "global_route_invocation_limit",
+            "cugr_congestion_iterations",
+            "no_prior_route_artifact",
+        ):
+            self.assertIn(token, authorizer)
+
+    def test_global_route_is_single_shot_and_phase6_gate_is_zero_only(self) -> None:
+        tcl = (ROOT / "verification/groot_normalization/wbq_quad_local_b7_global_route.tcl").read_text()
+        runner = (ROOT / "verification/groot_normalization/run_wbq_quad_local_b7_global_route.sh").read_text()
+        gate = (ROOT / "tools/decide_b7_phase6_strict_gate.py").read_text()
+        self.assertEqual(tcl.count("global_route \\"), 1)
+        self.assertIn("$iterations != 1", tcl)
+        self.assertNotIn("WBQ_B6", tcl + runner)
+        for token in (
+            "placement_numeric_analysis",
+            "refusing duplicate",
+            "launcher_pid",
+            "compute_pid",
+            "trap 'on_signal TERM' TERM",
+            "--max-hotspots-in-output 500",
+            "--max-windows-in-output 0",
+        ):
+            self.assertIn(token, runner)
+        for token in (
+            "residual_congestion_zero",
+            "overflow_edges_zero",
+            "input_artifact_hashes_match",
+            "explicit_phase6_pass",
+            "BLOCKED_RESIDUAL_CONGESTION",
+            "B8 ECO",
+        ):
+            self.assertIn(token, gate)
+
+    def test_downstream_frozen_hashes_remain_exact(self) -> None:
+        combined = (ROOT / "verification/groot_normalization/run_wbq_quad_local_b7_global_route.sh").read_text()
+        for digest in (
+            "964adc9cf68aceac1fd6686d7c586ffbd295ed9a35f6b54628ddf81981cbc5ad",
+            "ab6cddf83dee124e9ae388b5cbe8c6fbda6665782870e1c4a57f83a83a174235",
+            "2c928b19ab5b1dcbcd89ec36d8d0b18963a8b03c9776ecc7325509332e98235d",
+        ):
+            self.assertIn(digest, combined)
+
 
 if __name__ == "__main__":
     unittest.main()
