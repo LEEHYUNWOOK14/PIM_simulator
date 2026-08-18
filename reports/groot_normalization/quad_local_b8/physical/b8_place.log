@@ -1,0 +1,110 @@
+WBQ_B8_PLACE_START_UTC=2026-08-18T06:28:54Z
+WBQ_B8_PLACE_INVOCATION_COUNT=1
+WBQ_B8_PLACE_GLOBAL_ROUTE_INVOCATIONS=0
+WBQ_B8_PLACE_SERVICE=wbq-b8-placement.service
+WBQ_B8_PLACE_WRAPPER_PID=834227
+WBQ_B8_PLACE_SINGLE_CHANGE=drc_penalty
+WBQ_B8_PLACE_DRC_PENALTY=100
+WBQ_B8_PLACE_LAUNCHER_PID=835588
+WBQ_B8_PLACE_COMPUTE_PID=835593
+WBQ_B8_ANCHOR_VERIFIED name={u_b2_implementation/u_pcu/u_quad_datapath/load_slew427175} origin_dbu={6347540 2535040} orient={MX} status={LOCKED}
+WBQ_B8_ANCHOR_VERIFIED name={u_b2_implementation/u_quad_local_adapter/wire440835} origin_dbu={4686940 1468800} orient={R180} status={LOCKED}
+WBQ_B8_OFFENDER_TARGET name={u_b2_implementation/u_quad_local_adapter/wire440455}
+WBQ_B8_OFFENDER_TARGET name={u_b2_implementation/u_quad_local_adapter/wire440867}
+WBQ_B8_OFFENDER_TARGET name={u_b2_implementation/u_quad_local_adapter/wire440876}
+WBQ_B8_OFFENDER_TARGET name={u_b2_implementation/u_quad_local_adapter/wire441097}
+WBQ_B8_OFFENDER_TARGET name={u_b2_implementation/u_quad_local_adapter/wire441921}
+WBQ_B8_OFFENDER_TARGET name={u_b2_implementation/u_quad_local_adapter/wire441940}
+WBQ_B8_OFFENDER_TARGET name={u_b2_implementation/u_quad_local_adapter/wire441994}
+WBQ_B8_DRC_RECOVERY_INPUT odb=/dev/shm/wbq_b7_phase6_10/quad_local_b7/b7_rudy.odb
+WBQ_B8_DRC_RECOVERY_POLICY max_displacement={1000 1000} site_window=100 row_window=20 drc_penalty=100 full_design_diamond=0
+[INFO DPL-0006] Core area: 81307911.98 um^2
+[INFO DPL-0007] Movable instances area: 29780115.24 um^2
+[INFO DPL-0008] Fixed instances area within core: 1355097.15 um^2
+[INFO DPL-0009] Utilization: 38.3%
+[INFO DPL-0005] Diamond search max displacement: +/- 2173 sites horizontally, +/- 367 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-100 sites horizontally, +/-20 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-2173 sites, +/-367 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 100.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 4823417 cells
+          |      Total |  Illegal |  Illegal
+Iteration | Violations |    Cells |    Sites
+---------------------------------------------
+        0 |        540 |       256 |       184
+        1 |        504 |       250 |       154
+        2 |        504 |       250 |       154
+        3 |        504 |       250 |       154
+        4 |        504 |       250 |       154
+[WARNING DPL-0700] Negotiation phase 1: violations stuck at 504 for 3 consecutive iterations.
+Using old diamond search for 250 remaining illegal cells.
+diamond recovery: recovered 232/250 stuck cells.
+Negotiation phase 2: isolation point active, 1000 iterations.
+      400 |         32 |        18 |         7
+      403 |         32 |        18 |         7
+[WARNING DPL-0702] Negotiation phase 2: violations stuck at 32 for 3 consecutive iterations. Using diamond search for 18 remaining illegal cells.
+diamond recovery: recovered 0/18 stuck cells.
+[WARNING DPL-0701] NegotiationLegalizer did not fully converge. Violations remain: 18
+[INFO DPL-0500] Runtime: 434.02s
+Placement Analysis
+---------------------------------
+total displacement   15127779.8 u
+average displacement        3.1 u
+max displacement          843.0 u
+original HPWL        95029152.7 u
+legalized HPWL       107554019.9 u
+delta HPWL                   13 %
+
+WBQ_B8_HIGHER_DRC_NEGOTIATION DONE
+WBQ_B8_POST_LEGALIZE_CHECKPOINT PASS odb=/dev/shm/wbq_b8_phase6_10/quad_local_b8/b8_post_legalize.odb
+[INFO DPL-0020] Mirrored 1543272 instances
+[INFO DPL-0021] HPWL before          107554019.9 u
+[INFO DPL-0022] HPWL after           104721198.8 u
+[INFO DPL-0023] HPWL delta               -2.6 %
+[WARNING DPL-0005] Overlap check failed (7).
+ u_b2_implementation/u_quad_local_adapter/wire440455 (sky130_fd_sc_hd__buf_16) overlaps TAP_TAPCELL_ROW_2286_746958 (sky130_fd_sc_hd__tapvpwrvgnd_1)
+ u_b2_implementation/u_quad_local_adapter/wire440867 (sky130_fd_sc_hd__buf_16) overlaps TAP_TAPCELL_ROW_665_217728 (sky130_fd_sc_hd__tapvpwrvgnd_1)
+ u_b2_implementation/u_quad_local_adapter/wire440876 (sky130_fd_sc_hd__buf_16) overlaps TAP_TAPCELL_ROW_672_220013 (sky130_fd_sc_hd__tapvpwrvgnd_1)
+ u_b2_implementation/u_quad_local_adapter/wire441097 (sky130_fd_sc_hd__buf_16) overlaps TAP_TAPCELL_ROW_2570_839479 (sky130_fd_sc_hd__tapvpwrvgnd_1)
+ u_b2_implementation/u_quad_local_adapter/wire441921 (sky130_fd_sc_hd__buf_16) overlaps TAP_TAPCELL_ROW_803_262545 (sky130_fd_sc_hd__tapvpwrvgnd_1)
+ u_b2_implementation/u_quad_local_adapter/wire441940 (sky130_fd_sc_hd__buf_16) overlaps TAP_TAPCELL_ROW_806_263524 (sky130_fd_sc_hd__tapvpwrvgnd_1)
+ u_b2_implementation/u_quad_local_adapter/wire441994 (sky130_fd_sc_hd__buf_16) overlaps TAP_TAPCELL_ROW_791_258627 (sky130_fd_sc_hd__tapvpwrvgnd_1)
+[WARNING DPL-0011] Padding check failed (7).
+ u_b2_implementation/u_quad_local_adapter/wire440455
+ u_b2_implementation/u_quad_local_adapter/wire440867
+ u_b2_implementation/u_quad_local_adapter/wire440876
+ u_b2_implementation/u_quad_local_adapter/wire441097
+ u_b2_implementation/u_quad_local_adapter/wire441921
+ u_b2_implementation/u_quad_local_adapter/wire441940
+ u_b2_implementation/u_quad_local_adapter/wire441994
+[ERROR DPL-0033] detailed placement checks failed during check placement.
+Error: wbq_quad_local_b8_drc_place.tcl, 75 DPL-0033
+Command exited with non-zero status 1
+	Command being timed: "/home/forstobpim/OpenROAD-flow-scripts/tools/install/OpenROAD/bin/openroad -exit -no_init -threads 16 -no_splash /home/forstobpim/PIM_simulator/verification/groot_normalization/wbq_quad_local_b8_drc_place.tcl"
+	User time (seconds): 567.51
+	System time (seconds): 13.04
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 9:40.67
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 13980260
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 5171257
+	Voluntary context switches: 17
+	Involuntary context switches: 3482
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 72
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1
+WBQ_B8_PLACE_EXIT_CODE=1
+WBQ_B8_PLACE_AUDIT_EXIT_CODE=1
+WBQ_B8_PLACE_END_UTC=2026-08-18T06:39:15Z

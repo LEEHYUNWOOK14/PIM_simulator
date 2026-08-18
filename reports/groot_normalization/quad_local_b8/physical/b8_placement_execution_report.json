@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "variant": "B8",
+  "stage": "higher_drc_penalty_placement",
+  "status": "FAIL",
+  "start_utc": "2026-08-18T06:28:54Z",
+  "invocation_count": 1,
+  "global_route_invocations": 0,
+  "service": "wbq-b8-placement.service",
+  "wrapper_pid": 834227,
+  "launcher_pid": 835588,
+  "compute_pid": 835593,
+  "audit_compute_pid": null,
+  "policy": {
+    "single_independent_change": "drc_penalty",
+    "drc_penalty_before": 20,
+    "drc_penalty_after": 100,
+    "full_design_diamond": false,
+    "locked_anchor_targets": 2,
+    "offender_targets": 7,
+    "sealed_b7_rudy_checkpoint": true,
+    "post_legalize_checkpoint": true
+  },
+  "resources_before": {
+    "artifact_free_kib": 44141944,
+    "mem_available_kib": 103455408,
+    "swap_total_kib": 0
+  },
+  "inputs": {
+    "decision": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b8/b8_eco_decision.json",
+      "sha256": "89d45f878b74a3af4478707c6fd87b52a957605288e1aaddb8e88c9e7b5cbe81"
+    },
+    "smoke": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b8/physical/b8_smoke_execution_report.json",
+      "sha256": "3d91e18b85b13d5e68482b700eac85a5f0196a3f41e1f28d5e1b29f0b725f5e8"
+    },
+    "authorization": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b8/b8_physical_authorization.json",
+      "sha256": "4032bb828e570ce870f5b50226168a80126a7bc2d92eda33c7140fdb669a0e14"
+    },
+    "b7_placement_report": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b7/physical/b7_placement_execution_report.json",
+      "sha256": "1da19b35c152629022ba1927f2f5e538b880d3eec90de28f6c8e3e075e961fec"
+    },
+    "b7_rudy_odb": {
+      "path": "/dev/shm/wbq_b7_phase6_10/quad_local_b7/b7_rudy.odb",
+      "sha256": "3149b2b12cb6fc3f4a83910cbfebb2170594d1cbdd4fc7aa87c7ab1a344fb9c3"
+    },
+    "b2_place_sdc": {
+      "path": "/home/forstobpim/OpenROAD-flow-scripts/flow/results/sky130hd/normalization_hbm_quad_local_b2/base/3_place.sdc",
+      "sha256": "51ff83730acbf6710614999f79a9dd7d7b8aff7824f4d36a4b05b3c88f33a5fd"
+    },
+    "placement_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/wbq_quad_local_b8_drc_place.tcl",
+      "sha256": "26a4f627dfc8e468cb620bac3b13923e81b47ce654de5b7bd4e9f5f3f3203e27"
+    },
+    "generic_audit_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/audit_wbq_quad_local_placement.tcl",
+      "sha256": "e1c4e22a3ca3d36cebe8b88f148627810babd7ef3e6d34832b4d29c76426b9ab"
+    }
+  },
+  "protected_hashes_before": {
+    "frozen_A": "964adc9cf68aceac1fd6686d7c586ffbd295ed9a35f6b54628ddf81981cbc5ad",
+    "B": "ab6cddf83dee124e9ae388b5cbe8c6fbda6665782870e1c4a57f83a83a174235",
+    "B2": "2c928b19ab5b1dcbcd89ec36d8d0b18963a8b03c9776ecc7325509332e98235d"
+  },
+  "authorizes": [],
+  "end_utc": "2026-08-18T06:39:15Z",
+  "exit_code": 1,
+  "audit_exit_code": 1,
+  "termination_signal": null,
+  "failure_class": "design_legality_failure",
+  "protected_hashes_after": {
+    "frozen_A": "964adc9cf68aceac1fd6686d7c586ffbd295ed9a35f6b54628ddf81981cbc5ad",
+    "B": "ab6cddf83dee124e9ae388b5cbe8c6fbda6665782870e1c4a57f83a83a174235",
+    "B2": "2c928b19ab5b1dcbcd89ec36d8d0b18963a8b03c9776ecc7325509332e98235d"
+  },
+  "protected_artifacts_preserved": true,
+  "resources_after": {
+    "artifact_free_kib": 40910004,
+    "mem_available_kib": 100216536
+  },
+  "checkpoints": {
+    "post_legalize": {
+      "path": "/dev/shm/wbq_b8_phase6_10/quad_local_b8/b8_post_legalize.odb",
+      "sha256": "1978f27721953156799c104b069af9ae9a2e840b252c4872aab3b7823b7b644b"
+    }
+  },
+  "outputs": {
+    "b8_place_odb": {
+      "path": "/dev/shm/wbq_b8_phase6_10/quad_local_b8/b8_place.odb",
+      "sha256": ""
+    },
+    "b8_place_sdc": {
+      "path": "/dev/shm/wbq_b8_phase6_10/quad_local_b8/b8_place.sdc",
+      "sha256": ""
+    },
+    "log": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b8/physical/b8_place.log",
+      "sha256": "134070ab7a96ea7aaaf1a052d4e5d8a9e0e9ec5ff27a13135fc19acfcc5622f4"
+    }
+  },
+  "runtime_policy_marker": "PASS",
+  "placement_legality_and_fence_audit": "FAIL",
+  "next_stage": null
+}
