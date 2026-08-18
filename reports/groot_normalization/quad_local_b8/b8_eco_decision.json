@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-18T06:24:33.899122+00:00",
+  "variant": "B8",
+  "decision": "SELECT_B8_HIGHER_DRC_PENALTY_ECO",
+  "status": "SELECTED_PENDING_SMOKE_AND_AUTHORIZATION",
+  "failure_classification": {
+    "runner_result": "tool_error",
+    "automatic_recovery_class": "design_legality_failure",
+    "subtype": "seven_movable_buffers_overlap_fixed_tapcells",
+    "not_a_stall": true,
+    "resource_exhaustion": false,
+    "global_placement_passed": true
+  },
+  "root_cause": {
+    "stage": "B7 negotiation detailed placement",
+    "remaining_negotiation_violations": 18,
+    "check_placement_overlaps": 7,
+    "check_placement_padding_violations": 7,
+    "offending_movable_instances": [
+      "u_b2_implementation/u_quad_local_adapter/wire440455",
+      "u_b2_implementation/u_quad_local_adapter/wire440867",
+      "u_b2_implementation/u_quad_local_adapter/wire440876",
+      "u_b2_implementation/u_quad_local_adapter/wire441097",
+      "u_b2_implementation/u_quad_local_adapter/wire441921",
+      "u_b2_implementation/u_quad_local_adapter/wire441940",
+      "u_b2_implementation/u_quad_local_adapter/wire441994"
+    ],
+    "observed_exit_code": 1,
+    "global_route_invocations": 0
+  },
+  "selected_eco": {
+    "single_independent_variable": "detailed_placement.drc_penalty",
+    "before": 20,
+    "after": 100,
+    "input_checkpoint": "sealed B7 post-RUDY ODB",
+    "reason": "the installed legalizer multiplies this coefficient by each candidate's DRC count; a higher value directly discourages the observed fixed-tap overlaps"
+  },
+  "unchanged_contract": {
+    "rtl": "byte-identical",
+    "mapped_netlist": "byte-identical",
+    "sdc": "byte-identical",
+    "fence_geometry": "byte-identical in sealed B7 RUDY ODB",
+    "global_placement_result": "byte-identical sealed B7 RUDY ODB",
+    "locked_anchor_targets": 2,
+    "max_displacement_um": [
+      1000,
+      1000
+    ],
+    "site_search_window": 100,
+    "row_search_window": 20,
+    "full_design_diamond": false,
+    "global_route_invocation_limit": 1,
+    "cugr_congestion_iterations": 1
+  },
+  "functional_evidence": {
+    "policy": "reuse sealed B5 cheap 9/9 because B8 changes only one physical legalizer coefficient",
+    "fresh_smoke_required": true,
+    "fresh_physical_authorization_required": true
+  },
+  "inputs": {
+    "b7_placement_report": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b7/physical/b7_placement_execution_report.json",
+      "sha256": "1da19b35c152629022ba1927f2f5e538b880d3eec90de28f6c8e3e075e961fec"
+    },
+    "b7_placement_log": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b7/physical/b7_place.log",
+      "sha256": "1b2d137d266284ff8474c34396efd1744ff36f33909b8745e0b8b894a503c1aa"
+    },
+    "b7_placement_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/wbq_quad_local_b7_phi_place.tcl",
+      "sha256": "84f11fb7c00925aab074606b6c7367d5bc204d3409db8b58bdb4e7c9a1a9e959"
+    },
+    "b7_rudy_odb": {
+      "path": "/dev/shm/wbq_b7_phase6_10/quad_local_b7/b7_rudy.odb",
+      "sha256": "3149b2b12cb6fc3f4a83910cbfebb2170594d1cbdd4fc7aa87c7ab1a344fb9c3"
+    },
+    "openroad_dpl_source": {
+      "path": "/home/forstobpim/OpenROAD-flow-scripts/tools/OpenROAD/src/dpl/src/NegotiationLegalizerPass.cpp",
+      "sha256": "b57bcdf3836fbf5061ff09fd74ac55c33fa4854977a5ea564421dfb773287a01"
+    }
+  },
+  "authorizes": [],
+  "next_stage": "B8_SMOKE"
+}

@@ -1,0 +1,106 @@
+{
+  "schema_version": 2,
+  "variant": "B7",
+  "stage": "lower_max_phi_placement",
+  "status": "FAIL",
+  "start_utc": "2026-08-18T03:35:44Z",
+  "invocation_count": 1,
+  "global_route_invocations": 0,
+  "service": "wbq-b7-placement.service",
+  "wrapper_pid": 676819,
+  "launcher_pid": 677841,
+  "compute_pid": 677843,
+  "audit_compute_pid": null,
+  "policy": {
+    "single_independent_change": "max_phi_coef",
+    "max_phi_coef": 1.01,
+    "min_phi_coef": 0.95,
+    "full_design_diamond": false,
+    "locked_anchor_targets": 2,
+    "post_rudy_checkpoint": true,
+    "post_legalize_checkpoint": true
+  },
+  "resources_before": {
+    "artifact_free_kib": 53837764,
+    "mem_available_kib": 113257420,
+    "swap_total_kib": 0
+  },
+  "inputs": {
+    "decision": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b7/b7_eco_decision.json",
+      "sha256": "ee5a9d1a84fd54d340d91be4291ed0ea19a2e7451aa00ee8d4c6ea7f5b09cafd"
+    },
+    "smoke": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b7/physical/b7_smoke_execution_report.json",
+      "sha256": "4da51752041f251ede3a2560f2b5234cb0a4fba5e611899d7b374c5158054b06"
+    },
+    "authorization": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b7/b7_physical_authorization.json",
+      "sha256": "153eac619367f26357ba84b326b679389d5821368792afdf9c7419acb302e5e9"
+    },
+    "b2_place_odb": {
+      "path": "/home/forstobpim/OpenROAD-flow-scripts/flow/results/sky130hd/normalization_hbm_quad_local_b2/base/3_place.odb",
+      "sha256": "dd2ef73e7672a0c8937d085c53ab067b6a2d891ee544fcff3359ffc6299b4561"
+    },
+    "b2_place_sdc": {
+      "path": "/home/forstobpim/OpenROAD-flow-scripts/flow/results/sky130hd/normalization_hbm_quad_local_b2/base/3_place.sdc",
+      "sha256": "51ff83730acbf6710614999f79a9dd7d7b8aff7824f4d36a4b05b3c88f33a5fd"
+    },
+    "placement_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/wbq_quad_local_b7_phi_place.tcl",
+      "sha256": "84f11fb7c00925aab074606b6c7367d5bc204d3409db8b58bdb4e7c9a1a9e959"
+    },
+    "generic_audit_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/audit_wbq_quad_local_placement.tcl",
+      "sha256": "e1c4e22a3ca3d36cebe8b88f148627810babd7ef3e6d34832b4d29c76426b9ab"
+    }
+  },
+  "protected_hashes_before": {
+    "frozen_A": "964adc9cf68aceac1fd6686d7c586ffbd295ed9a35f6b54628ddf81981cbc5ad",
+    "B": "ab6cddf83dee124e9ae388b5cbe8c6fbda6665782870e1c4a57f83a83a174235",
+    "B2": "2c928b19ab5b1dcbcd89ec36d8d0b18963a8b03c9776ecc7325509332e98235d"
+  },
+  "authorizes": [],
+  "end_utc": "2026-08-18T06:17:03Z",
+  "exit_code": 1,
+  "audit_exit_code": 1,
+  "termination_signal": null,
+  "failure_class": "tool_error",
+  "protected_hashes_after": {
+    "frozen_A": "964adc9cf68aceac1fd6686d7c586ffbd295ed9a35f6b54628ddf81981cbc5ad",
+    "B": "ab6cddf83dee124e9ae388b5cbe8c6fbda6665782870e1c4a57f83a83a174235",
+    "B2": "2c928b19ab5b1dcbcd89ec36d8d0b18963a8b03c9776ecc7325509332e98235d"
+  },
+  "protected_artifacts_preserved": true,
+  "resources_after": {
+    "artifact_free_kib": 47373884,
+    "mem_available_kib": 106745640
+  },
+  "checkpoints": {
+    "post_rudy": {
+      "path": "/dev/shm/wbq_b7_phase6_10/quad_local_b7/b7_rudy.odb",
+      "sha256": "3149b2b12cb6fc3f4a83910cbfebb2170594d1cbdd4fc7aa87c7ab1a344fb9c3"
+    },
+    "post_legalize": {
+      "path": "/dev/shm/wbq_b7_phase6_10/quad_local_b7/b7_post_legalize.odb",
+      "sha256": "dc44a45e59c626ac20a5ab28b4b2999161782c5ffd231c142cd6442d2b06fb20"
+    }
+  },
+  "outputs": {
+    "b7_place_odb": {
+      "path": "/dev/shm/wbq_b7_phase6_10/quad_local_b7/b7_place.odb",
+      "sha256": ""
+    },
+    "b7_place_sdc": {
+      "path": "/dev/shm/wbq_b7_phase6_10/quad_local_b7/b7_place.sdc",
+      "sha256": ""
+    },
+    "log": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b7/physical/b7_place.log",
+      "sha256": "1b2d137d266284ff8474c34396efd1744ff36f33909b8745e0b8b894a503c1aa"
+    }
+  },
+  "runtime_policy_marker": "PASS",
+  "placement_legality_and_fence_audit": "FAIL",
+  "next_stage": null
+}
