@@ -246,6 +246,7 @@ class B6Phase7To10ContractTest(unittest.TestCase):
             self.assertIn(digest, text)
         for token in (
             "targeted_placement_audit",
+            "placement_numeric_analysis",
             "phase7_authorization",
             "independent_klayout_process",
             '"klayout", "-zz", "-r"',

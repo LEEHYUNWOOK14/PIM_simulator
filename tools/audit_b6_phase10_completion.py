@@ -39,6 +39,7 @@ CHAIN = {
     "sealed_b5_cheap_gate": ROOT / "reports/groot_normalization/quad_local_b5/cheap_gate_manifest.json",
     "physical_authorization": B6 / "b6_physical_authorization.json",
     "placement": B6 / "physical/b6_placement_execution_report.json",
+    "placement_numeric_analysis": B6 / "physical/b6_placement_numeric_analysis.json",
     "targeted_placement_audit": B6 / "physical/b6_targeted_placement_reopen_audit.json",
     "global_route_authorization": B6 / "b6_global_route_authorization.json",
     "global_route": B6 / "physical/b6_global_route_execution_report.json",
@@ -135,6 +136,7 @@ def main() -> int:
         and len(docs["sealed_b5_cheap_gate"].get("gates", [])) == 9,
         "physical_authorization": docs["physical_authorization"].get("decision") == "PASS",
         "placement": docs["placement"].get("status") == "PASS",
+        "placement_numeric_analysis": docs["placement_numeric_analysis"].get("status") == "PASS",
         "targeted_placement_audit": docs["targeted_placement_audit"].get("status") == "PASS"
         and docs["targeted_placement_audit"].get("metrics", {}).get("anchors_verified") == 2
         and docs["targeted_placement_audit"].get("metrics", {}).get("placement_violations") == 0,
@@ -158,6 +160,7 @@ def main() -> int:
     post_metrics = docs["phase6_post_cts"].get("metrics", {})
     phase_checks["post_cts_zero_congestion"] = post_metrics.get("rrr_residual") == 0 and post_metrics.get("overflow_edges") == 0
     detailed_metrics = docs["phase7_detailed_route"].get("metrics", {})
+    placement_metrics = docs["placement_numeric_analysis"].get("metrics", {})
     phase_checks["phase7_timing_and_constraints_quantified"] = all(
         isinstance(detailed_metrics.get(name), (int, float))
         for name in (
@@ -338,6 +341,11 @@ def main() -> int:
         "final_artifact": artifact(final_gds),
         "metrics": {"b6_rrr_residual": congestion.get("rrr_residual"),
                     "b6_overflow_edges": congestion.get("overflow_edges"),
+                    "placement_routability_iterations": placement_metrics.get("routability_iterations"),
+                    "placement_weighted_congestion_initial": placement_metrics.get("weighted_congestion_initial"),
+                    "placement_weighted_congestion_final": placement_metrics.get("weighted_congestion_final"),
+                    "placement_total_overflow_initial": placement_metrics.get("total_overflow_initial"),
+                    "placement_total_overflow_final": placement_metrics.get("total_overflow_final"),
                     "post_cts_rrr_residual": post_metrics.get("rrr_residual"),
                     "post_cts_overflow_edges": post_metrics.get("overflow_edges"),
                     "final_drc_violations": detailed_metrics.get("final_drc_violations"),
