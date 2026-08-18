@@ -30,6 +30,8 @@ class B6RouteContractTest(unittest.TestCase):
             "analyze_variant_residual_congestion.py",
             "--max-hotspots-in-output 500",
             "--max-windows-in-output 0",
+            "targeted_placement_reopen_audit",
+            "B6 targeted placement reopen audit is not PASS",
         ):
             self.assertIn(token, text)
         self.assertNotIn("quad_local_b5", text)

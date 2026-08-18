@@ -9,6 +9,7 @@ report="$root/reports/groot_normalization/quad_local_b6"
 physical="$report/physical"
 artifacts="${WBQ_B6_ARTIFACT_ROOT:-/dev/shm/wbq_b6_phase6_10/quad_local_b6}"
 placement="$physical/b6_placement_execution_report.json"
+targeted_audit="$physical/b6_targeted_placement_reopen_audit.json"
 authorization="$report/b6_global_route_authorization.json"
 place_odb="$artifacts/b6_place.odb"
 place_sdc="$artifacts/b6_place.sdc"
@@ -34,11 +35,11 @@ frozen_b="$root/reports/groot_normalization/quad_local_ab/b_quad_local_global_ro
 frozen_b2="$root/reports/groot_normalization/quad_local_b2/b2_quad_local_global_route.odb"
 
 mkdir -p "$physical" "$artifacts"
-for path in "$placement" "$authorization" "$place_odb" "$place_sdc" "$tcl" "$parser" "$strict_gate" "$snapshot_tool" "$compare_tool" "$runner" \
+for path in "$placement" "$targeted_audit" "$authorization" "$place_odb" "$place_sdc" "$tcl" "$parser" "$strict_gate" "$snapshot_tool" "$compare_tool" "$runner" \
   "$frozen_a" "$frozen_b" "$frozen_b2"; do
   test -s "$path"
 done
-python3 - "$placement" "$authorization" "$place_odb" "$place_sdc" "$runner" "$tcl" "$parser" "$strict_gate" "$snapshot_tool" "$compare_tool" <<'PY'
+python3 - "$placement" "$authorization" "$place_odb" "$place_sdc" "$runner" "$tcl" "$parser" "$strict_gate" "$snapshot_tool" "$compare_tool" "$targeted_audit" <<'PY'
 import hashlib, json, pathlib, sys
 
 def sha(path):
@@ -50,12 +51,15 @@ def sha(path):
 
 placement = json.load(open(sys.argv[1], encoding="utf-8"))
 authorization = json.load(open(sys.argv[2], encoding="utf-8"))
+targeted_audit = json.load(open(sys.argv[11], encoding="utf-8"))
 if placement.get("status") != "PASS" or placement.get("placement_legality_and_fence_audit") != "PASS":
     raise SystemExit("B6 placement and independent audit are not PASS")
 if "B6_SINGLE_GLOBAL_ROUTE" not in placement.get("authorizes", []):
     raise SystemExit("B6 placement does not authorize a global route")
 if authorization.get("decision") != "PASS" or "B6_SINGLE_GLOBAL_ROUTE" not in authorization.get("authorizes", []):
     raise SystemExit("fresh B6 global-route authorization is not PASS")
+if targeted_audit.get("status") != "PASS" or "B6_GLOBAL_ROUTE_AUTHORIZATION" not in targeted_audit.get("authorizes", []):
+    raise SystemExit("B6 targeted placement reopen audit is not PASS")
 for key, text in (("b6_place_odb", sys.argv[3]), ("b6_place_sdc", sys.argv[4])):
     path = pathlib.Path(text)
     if sha(path) != placement["outputs"][key]["sha256"]:
@@ -71,6 +75,9 @@ for key, text in (
     path = pathlib.Path(text)
     if sha(path) != authorization["inputs"][key]["sha256"]:
         raise SystemExit(f"B6 route authorization hash mismatch: {key}")
+targeted_path = pathlib.Path(sys.argv[11])
+if sha(targeted_path) != authorization["inputs"]["targeted_placement_reopen_audit"]["sha256"]:
+    raise SystemExit("B6 route authorization hash mismatch: targeted placement reopen audit")
 print("WBQ_B6_SINGLE_GLOBAL_ROUTE_AUTHORIZATION PASS")
 PY
 
@@ -108,6 +115,7 @@ frozen_b2_before="$(sha256sum "$frozen_b2" | awk '{print $1}')"
 start="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 placement_sha="$(sha256sum "$placement" | awk '{print $1}')"
 authorization_sha="$(sha256sum "$authorization" | awk '{print $1}')"
+targeted_audit_sha="$(sha256sum "$targeted_audit" | awk '{print $1}')"
 place_odb_sha="$(sha256sum "$place_odb" | awk '{print $1}')"
 place_sdc_sha="$(sha256sum "$place_sdc" | awk '{print $1}')"
 runner_sha="$(sha256sum "$runner" | awk '{print $1}')"
@@ -116,13 +124,13 @@ parser_sha="$(sha256sum "$parser" | awk '{print $1}')"
 strict_gate_sha="$(sha256sum "$strict_gate" | awk '{print $1}')"
 snapshot_tool_sha="$(sha256sum "$snapshot_tool" | awk '{print $1}')"
 compare_tool_sha="$(sha256sum "$compare_tool" | awk '{print $1}')"
-python3 - "$attempt" "$start" "$runner_service" "$$" "$placement" "$placement_sha" "$authorization" "$authorization_sha" \
+python3 - "$attempt" "$start" "$runner_service" "$$" "$placement" "$placement_sha" "$targeted_audit" "$targeted_audit_sha" "$authorization" "$authorization_sha" \
   "$place_odb" "$place_odb_sha" "$place_sdc" "$place_sdc_sha" "$runner" "$runner_sha" "$tcl" "$tcl_sha" \
   "$parser" "$parser_sha" "$strict_gate" "$strict_gate_sha" "$snapshot_tool" "$snapshot_tool_sha" "$compare_tool" "$compare_tool_sha" "$free_kib" "$available_kib" \
   "$frozen_a_before" "$frozen_b_before" "$frozen_b2_before" <<'PY'
 import json, sys
 
-(path, start, service, wrapper_pid, placement, placement_sha, authorization, authorization_sha,
+(path, start, service, wrapper_pid, placement, placement_sha, targeted_audit, targeted_audit_sha, authorization, authorization_sha,
  odb, odb_sha, sdc, sdc_sha, runner, runner_sha, tcl, tcl_sha, parser, parser_sha,
  strict_gate, strict_gate_sha, snapshot_tool, snapshot_tool_sha, compare_tool, compare_tool_sha,
  free_kib, available_kib, frozen_a, frozen_b, frozen_b2) = sys.argv[1:]
@@ -148,6 +156,7 @@ payload = {
     "resources_at_start": {"artifact_free_kib": int(free_kib), "mem_available_kib": int(available_kib)},
     "inputs": {
         "placement_manifest": {"path": placement, "sha256": placement_sha},
+        "targeted_placement_reopen_audit": {"path": targeted_audit, "sha256": targeted_audit_sha},
         "route_authorization": {"path": authorization, "sha256": authorization_sha},
         "b6_place_odb": {"path": odb, "sha256": odb_sha},
         "b6_place_sdc": {"path": sdc, "sha256": sdc_sha},
