@@ -299,12 +299,13 @@ def main() -> int:
         completion_tag_width = port_width(scheduler_module, "quad_completion_tag_o")
         completion_valid_width = port_width(scheduler_module, "quad_completion_valid_o")
         check(
-            "central_completion_is_four_narrow_descriptors",
-            completion_tag_width == 64 and completion_valid_width == 4,
+            "central_completion_is_one_aggregated_descriptor",
+            completion_tag_width == 16 and completion_valid_width == 1,
             {
                 "tag_bits": completion_tag_width,
                 "valid_bits": completion_valid_width,
                 "forbidden_bank_tag_bits": 16 * 16,
+                "previous_quad_descriptor_bits": 4 * (16 + 1),
             },
         )
 

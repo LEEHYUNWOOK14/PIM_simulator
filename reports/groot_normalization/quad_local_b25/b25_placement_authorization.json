@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-18T15:31:10.741597+00:00",
+  "variant": "B25",
+  "stage": "placement_authorization",
+  "decision": "PASS",
+  "conditions": {
+    "cheap_gate_pass": "PASS",
+    "mapped_audit_pass": "PASS",
+    "all_inputs_exist": "PASS",
+    "no_prior_attempt": "PASS"
+  },
+  "inputs": {
+    "decision": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b25/b25_eco_decision.json",
+      "sha256": "43ccbd58dfca094f33e7f232b0510857e2ffea2bf3b75c139d347039cbab9cb3"
+    },
+    "cheap_gate": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b25/cheap_gate_manifest.json",
+      "sha256": "a77bef7dd5eaa2734b360092bd3cfab8be9845072f6ee00588ba1b1a01cf503c"
+    },
+    "mapped_netlist": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b25/logic_die_normalization_hbm_quad_local_b2_top_sky130.v",
+      "sha256": "40600420612192d6543cefe32cd621e11042748800e3f8280a4cddf35a2872c6"
+    },
+    "mapped_audit": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b25/b25_mapped_locality_audit.json",
+      "sha256": "e881b3e4737be3396ddc568cd2a26fe176a9a0bbf011106e46d86424f8fca528"
+    },
+    "floorplan_odb": {
+      "path": "/home/forstobpim/OpenROAD-flow-scripts/flow/results/sky130hd/normalization_hbm_quad_local_b25/base/2_floorplan.odb",
+      "sha256": "caf1419e9448da3c70ff26a33e19a4644076423bebdb53912145f9c296a98649"
+    },
+    "floorplan_sdc": {
+      "path": "/home/forstobpim/OpenROAD-flow-scripts/flow/results/sky130hd/normalization_hbm_quad_local_b25/base/2_1_floorplan.sdc",
+      "sha256": "51ff83730acbf6710614999f79a9dd7d7b8aff7824f4d36a4b05b3c88f33a5fd"
+    },
+    "config": {
+      "path": "/home/forstobpim/PIM_simulator/flow/designs/sky130hd/normalization_hbm_quad_local_b25/config.mk",
+      "sha256": "a3d644c9cf913d25f767d5b570ed4b5eff1d91a67eed70ccecabe798a2caa73b"
+    },
+    "runner": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/run_wbq_quad_local_b25_placement.sh",
+      "sha256": "4233f189a549c12c40b8c9a058141fe77a1b9bbae7c020deb75d29ac8b42b98f"
+    },
+    "placement_audit_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/audit_wbq_quad_local_placement.tcl",
+      "sha256": "e1c4e22a3ca3d36cebe8b88f148627810babd7ef3e6d34832b4d29c76426b9ab"
+    }
+  },
+  "authorizes": [
+    "B25_PLACEMENT"
+  ],
+  "next_stage": "B25_PLACEMENT"
+}

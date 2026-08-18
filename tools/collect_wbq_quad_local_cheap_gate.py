@@ -12,9 +12,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PHYSICAL_VARIANT = os.environ.get("WBQ_VARIANT", "")
-if PHYSICAL_VARIANT not in {"", "B3", "B4", "B5"}:
+if PHYSICAL_VARIANT and not (
+    PHYSICAL_VARIANT.startswith("B") and PHYSICAL_VARIANT[1:].isdigit()
+    and int(PHYSICAL_VARIANT[1:]) >= 3
+):
     raise ValueError(f"unsupported WBQ_VARIANT={PHYSICAL_VARIANT!r}")
-NEW_VARIANT = PHYSICAL_VARIANT in {"B3", "B4", "B5"}
+NEW_VARIANT = bool(PHYSICAL_VARIANT)
 B2 = os.environ.get("WBQ_B2", "0") == "1" or NEW_VARIANT
 VARIANT_LOWER = PHYSICAL_VARIANT.lower() if NEW_VARIANT else ""
 REPORT = ROOT / (

@@ -102,8 +102,8 @@ module logic_die_normalization_quad_local_pcu_top #(
     logic [BANKS-1:0] core_writeback_valid, core_writeback_ready, core_writeback_last;
     logic [BANKS-1:0][TAG_WIDTH-1:0] core_writeback_tag;
     logic [BANKS-1:0][LANES-1:0][15:0] core_writeback_data;
-    logic [QUADS-1:0] quad_completion_valid;
-    logic [QUADS-1:0][TAG_WIDTH-1:0] quad_completion_tag;
+    logic quad_completion_valid;
+    logic [TAG_WIDTH-1:0] quad_completion_tag;
     logic scheduler_rst_n, datapath_rst_n, wrapper_rst_n;
 
     initial begin
@@ -135,13 +135,10 @@ module logic_die_normalization_quad_local_pcu_top #(
         for (integer c = 0; c < CONTEXTS; c++)
             completion_bits[c] = '0;
         if (REGISTERED_QUAD_COMPLETION) begin
-            for (integer quad = 0; quad < QUADS; quad++) begin
-                for (integer c = 0; c < CONTEXTS; c++)
-                    if (quad_completion_valid[quad] &&
-                        ctx_valid_q[c] &&
-                        ctx_tag_q[c] == quad_completion_tag[quad])
-                        completion_bits[c][quad*(BANKS/QUADS) +: (BANKS/QUADS)] = '1;
-            end
+            for (integer c = 0; c < CONTEXTS; c++)
+                if (quad_completion_valid && ctx_valid_q[c] &&
+                    ctx_tag_q[c] == quad_completion_tag)
+                    completion_bits[c] = ctx_mask_q[c];
         end else begin
             for (integer bank = 0; bank < BANKS; bank++) begin
                 if (writeback_valid_o[bank] && writeback_ready_i[bank] &&
@@ -294,14 +291,6 @@ module logic_die_normalization_quad_local_pcu_top #(
             end
 
             if (job_valid_i && !(&job_bank_mask_i)) wrapper_error_q <= 1'b1;
-            if (REGISTERED_QUAD_COMPLETION &&
-                ((|quad_completion_valid) && !(&quad_completion_valid)))
-                wrapper_error_q <= 1'b1;
-            if (REGISTERED_QUAD_COMPLETION && (&quad_completion_valid)) begin
-                for (integer quad = 1; quad < QUADS; quad++)
-                    if (quad_completion_tag[quad] != quad_completion_tag[0])
-                        wrapper_error_q <= 1'b1;
-            end
             if (job_fire) begin
                 ctx_valid_q[free_index] <= 1'b1;
                 ctx_tag_q[free_index] <= job_tag_i;

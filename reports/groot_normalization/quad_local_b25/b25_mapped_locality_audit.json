@@ -1,0 +1,460 @@
+{
+  "schema_version": 1,
+  "stage": "mapped",
+  "top": "logic_die_normalization_hbm_quad_local_b2_top",
+  "overall_result": "PASS",
+  "checks": [
+    {
+      "id": "instance_count:normalization_quad_reset_leaf",
+      "result": "PASS",
+      "evidence": {
+        "expected": 62,
+        "actual": 62
+      }
+    },
+    {
+      "id": "instance_count:normalization_quad_bank_scheduler_leaf",
+      "result": "PASS",
+      "evidence": {
+        "expected": 4,
+        "actual": 4
+      }
+    },
+    {
+      "id": "instance_count:mixed_precision_quad_bank_datapath_slice",
+      "result": "PASS",
+      "evidence": {
+        "expected": 4,
+        "actual": 4
+      }
+    },
+    {
+      "id": "instance_count:mixed_precision_quad_reducer4_pipe",
+      "result": "PASS",
+      "evidence": {
+        "expected": 4,
+        "actual": 4
+      }
+    },
+    {
+      "id": "instance_count:mixed_precision_quad_packet_reducer_pipe",
+      "result": "PASS",
+      "evidence": {
+        "expected": 1,
+        "actual": 1
+      }
+    },
+    {
+      "id": "instance_count:normalization_quad_scalar_packet_leaf",
+      "result": "PASS",
+      "evidence": {
+        "expected": 4,
+        "actual": 4
+      }
+    },
+    {
+      "id": "instance_count:normalization_hbm_quad_payload_store",
+      "result": "PASS",
+      "evidence": {
+        "expected": 4,
+        "actual": 4
+      }
+    },
+    {
+      "id": "registered_quad_completion_descriptor_count",
+      "result": "PASS",
+      "evidence": {
+        "expected": 4,
+        "actual": 4
+      }
+    },
+    {
+      "id": "forbidden_absent:normalization_bank_scheduler",
+      "result": "PASS",
+      "evidence": {
+        "actual": 0
+      }
+    },
+    {
+      "id": "forbidden_absent:mixed_precision_global_reducer16_pipe",
+      "result": "PASS",
+      "evidence": {
+        "actual": 0
+      }
+    },
+    {
+      "id": "forbidden_absent:hierarchical_normalization_bank_core_top",
+      "result": "PASS",
+      "evidence": {
+        "actual": 0
+      }
+    },
+    {
+      "id": "forbidden_absent:logic_die_normalization_hbm_top",
+      "result": "PASS",
+      "evidence": {
+        "actual": 0
+      }
+    },
+    {
+      "id": "root_reset_fanout",
+      "result": "PASS",
+      "evidence": {
+        "audited_owner": "$paramod$136d777a16b2c668af26a248c9c3bd0e745d7ab2\\logic_die_normalization_hbm_quad_local_ab_top",
+        "sink_count": 4,
+        "leaf_sink_count": 4,
+        "sinks": [
+          {
+            "cell": "g_quad_reset[0].u_reset_leaf",
+            "type": "normalization_quad_reset_leaf",
+            "port": "rst_ni",
+            "sink_pins": 1
+          },
+          {
+            "cell": "g_quad_reset[1].u_reset_leaf",
+            "type": "normalization_quad_reset_leaf",
+            "port": "rst_ni",
+            "sink_pins": 1
+          },
+          {
+            "cell": "g_quad_reset[2].u_reset_leaf",
+            "type": "normalization_quad_reset_leaf",
+            "port": "rst_ni",
+            "sink_pins": 1
+          },
+          {
+            "cell": "g_quad_reset[3].u_reset_leaf",
+            "type": "normalization_quad_reset_leaf",
+            "port": "rst_ni",
+            "sink_pins": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "hierarchical_reset_leaf_fanout",
+      "result": "PASS",
+      "evidence": {
+        "leaf_count": 62,
+        "mapped_sink_limit": 20000,
+        "maximum_effective_sink_pins": 13671,
+        "largest_leaves": [
+          {
+            "path": "logic_die_normalization_hbm_quad_local_b2_top/u_b2_implementation/u_pcu/u_quad_datapath/g_quad[0].u_bank_slice/g_bank[0].u_apply_reset_leaf",
+            "owner_module": "$paramod$56b6a9c2a77b73852213c5db7080e6889624c69e\\mixed_precision_quad_bank_datapath_slice",
+            "effective_sink_pins": 13671
+          },
+          {
+            "path": "logic_die_normalization_hbm_quad_local_b2_top/u_b2_implementation/u_pcu/u_quad_datapath/g_quad[0].u_bank_slice/g_bank[1].u_apply_reset_leaf",
+            "owner_module": "$paramod$56b6a9c2a77b73852213c5db7080e6889624c69e\\mixed_precision_quad_bank_datapath_slice",
+            "effective_sink_pins": 13671
+          },
+          {
+            "path": "logic_die_normalization_hbm_quad_local_b2_top/u_b2_implementation/u_pcu/u_quad_datapath/g_quad[0].u_bank_slice/g_bank[2].u_apply_reset_leaf",
+            "owner_module": "$paramod$56b6a9c2a77b73852213c5db7080e6889624c69e\\mixed_precision_quad_bank_datapath_slice",
+            "effective_sink_pins": 13671
+          },
+          {
+            "path": "logic_die_normalization_hbm_quad_local_b2_top/u_b2_implementation/u_pcu/u_quad_datapath/g_quad[0].u_bank_slice/g_bank[3].u_apply_reset_leaf",
+            "owner_module": "$paramod$56b6a9c2a77b73852213c5db7080e6889624c69e\\mixed_precision_quad_bank_datapath_slice",
+            "effective_sink_pins": 13671
+          },
+          {
+            "path": "logic_die_normalization_hbm_quad_local_b2_top/u_b2_implementation/u_pcu/u_quad_datapath/g_quad[1].u_bank_slice/g_bank[0].u_apply_reset_leaf",
+            "owner_module": "$paramod$56b6a9c2a77b73852213c5db7080e6889624c69e\\mixed_precision_quad_bank_datapath_slice",
+            "effective_sink_pins": 13671
+          },
+          {
+            "path": "logic_die_normalization_hbm_quad_local_b2_top/u_b2_implementation/u_pcu/u_quad_datapath/g_quad[1].u_bank_slice/g_bank[1].u_apply_reset_leaf",
+            "owner_module": "$paramod$56b6a9c2a77b73852213c5db7080e6889624c69e\\mixed_precision_quad_bank_datapath_slice",
+            "effective_sink_pins": 13671
+          },
+          {
+            "path": "logic_die_normalization_hbm_quad_local_b2_top/u_b2_implementation/u_pcu/u_quad_datapath/g_quad[1].u_bank_slice/g_bank[2].u_apply_reset_leaf",
+            "owner_module": "$paramod$56b6a9c2a77b73852213c5db7080e6889624c69e\\mixed_precision_quad_bank_datapath_slice",
+            "effective_sink_pins": 13671
+          },
+          {
+            "path": "logic_die_normalization_hbm_quad_local_b2_top/u_b2_implementation/u_pcu/u_quad_datapath/g_quad[1].u_bank_slice/g_bank[3].u_apply_reset_leaf",
+            "owner_module": "$paramod$56b6a9c2a77b73852213c5db7080e6889624c69e\\mixed_precision_quad_bank_datapath_slice",
+            "effective_sink_pins": 13671
+          },
+          {
+            "path": "logic_die_normalization_hbm_quad_local_b2_top/u_b2_implementation/u_pcu/u_quad_datapath/g_quad[2].u_bank_slice/g_bank[0].u_apply_reset_leaf",
+            "owner_module": "$paramod$56b6a9c2a77b73852213c5db7080e6889624c69e\\mixed_precision_quad_bank_datapath_slice",
+            "effective_sink_pins": 13671
+          },
+          {
+            "path": "logic_die_normalization_hbm_quad_local_b2_top/u_b2_implementation/u_pcu/u_quad_datapath/g_quad[2].u_bank_slice/g_bank[1].u_apply_reset_leaf",
+            "owner_module": "$paramod$56b6a9c2a77b73852213c5db7080e6889624c69e\\mixed_precision_quad_bank_datapath_slice",
+            "effective_sink_pins": 13671
+          },
+          {
+            "path": "logic_die_normalization_hbm_quad_local_b2_top/u_b2_implementation/u_pcu/u_quad_datapath/g_quad[2].u_bank_slice/g_bank[2].u_apply_reset_leaf",
+            "owner_module": "$paramod$56b6a9c2a77b73852213c5db7080e6889624c69e\\mixed_precision_quad_bank_datapath_slice",
+            "effective_sink_pins": 13671
+          },
+          {
+            "path": "logic_die_normalization_hbm_quad_local_b2_top/u_b2_implementation/u_pcu/u_quad_datapath/g_quad[2].u_bank_slice/g_bank[3].u_apply_reset_leaf",
+            "owner_module": "$paramod$56b6a9c2a77b73852213c5db7080e6889624c69e\\mixed_precision_quad_bank_datapath_slice",
+            "effective_sink_pins": 13671
+          }
+        ]
+      }
+    },
+    {
+      "id": "registered_cross_quad_packet_widths",
+      "result": "PASS",
+      "evidence": {
+        "partial_stat_total_handshake_bits_per_quad": 82,
+        "scalar_return_total_handshake_bits_per_quad": 83,
+        "wide_activation_affine_writeback_payload_is_quad_local": true
+      }
+    },
+    {
+      "id": "no_central_16bank_writeback_tag_consumers",
+      "result": "PASS",
+      "evidence": {
+        "writeback_tag_width": 256,
+        "internal_sink_pins": 0,
+        "internal_sinks": []
+      }
+    },
+    {
+      "id": "central_completion_is_one_aggregated_descriptor",
+      "result": "PASS",
+      "evidence": {
+        "tag_bits": 16,
+        "valid_bits": 1,
+        "forbidden_bank_tag_bits": 256,
+        "previous_quad_descriptor_bits": 68
+      }
+    },
+    {
+      "id": "quad_completion_descriptor_outputs_are_registered",
+      "result": "PASS",
+      "evidence": {
+        "output_bits": 17,
+        "registered_driver_bits": 17,
+        "drivers": [
+          {
+            "cell": "$auto$ff.cc:337:slice$163033",
+            "type": "sky130_fd_sc_hd__dfrtp_1",
+            "bits": 1
+          },
+          {
+            "cell": "$auto$ff.cc:337:slice$163034",
+            "type": "sky130_fd_sc_hd__dfrtp_1",
+            "bits": 1
+          },
+          {
+            "cell": "$auto$ff.cc:337:slice$163035",
+            "type": "sky130_fd_sc_hd__dfrtp_1",
+            "bits": 1
+          },
+          {
+            "cell": "$auto$ff.cc:337:slice$163036",
+            "type": "sky130_fd_sc_hd__dfrtp_1",
+            "bits": 1
+          },
+          {
+            "cell": "$auto$ff.cc:337:slice$163037",
+            "type": "sky130_fd_sc_hd__dfrtp_1",
+            "bits": 1
+          },
+          {
+            "cell": "$auto$ff.cc:337:slice$163038",
+            "type": "sky130_fd_sc_hd__dfrtp_1",
+            "bits": 1
+          },
+          {
+            "cell": "$auto$ff.cc:337:slice$163039",
+            "type": "sky130_fd_sc_hd__dfrtp_1",
+            "bits": 1
+          },
+          {
+            "cell": "$auto$ff.cc:337:slice$163040",
+            "type": "sky130_fd_sc_hd__dfrtp_1",
+            "bits": 1
+          },
+          {
+            "cell": "$auto$ff.cc:337:slice$163041",
+            "type": "sky130_fd_sc_hd__dfrtp_1",
+            "bits": 1
+          },
+          {
+            "cell": "$auto$ff.cc:337:slice$163042",
+            "type": "sky130_fd_sc_hd__dfrtp_1",
+            "bits": 1
+          },
+          {
+            "cell": "$auto$ff.cc:337:slice$163043",
+            "type": "sky130_fd_sc_hd__dfrtp_1",
+            "bits": 1
+          },
+          {
+            "cell": "$auto$ff.cc:337:slice$163044",
+            "type": "sky130_fd_sc_hd__dfrtp_1",
+            "bits": 1
+          },
+          {
+            "cell": "$auto$ff.cc:337:slice$163045",
+            "type": "sky130_fd_sc_hd__dfrtp_1",
+            "bits": 1
+          },
+          {
+            "cell": "$auto$ff.cc:337:slice$163046",
+            "type": "sky130_fd_sc_hd__dfrtp_1",
+            "bits": 1
+          },
+          {
+            "cell": "$auto$ff.cc:337:slice$163047",
+            "type": "sky130_fd_sc_hd__dfrtp_1",
+            "bits": 1
+          },
+          {
+            "cell": "$auto$ff.cc:337:slice$163048",
+            "type": "sky130_fd_sc_hd__dfrtp_1",
+            "bits": 1
+          },
+          {
+            "cell": "$auto$ff.cc:337:slice$163196",
+            "type": "sky130_fd_sc_hd__dfrtp_1",
+            "bits": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "four_disjoint_quad_payload_slices:normalization_quad_local_bank_scheduler",
+      "result": "PASS",
+      "evidence": {
+        "owner": "normalization_quad_local_bank_scheduler",
+        "children": 4,
+        "ports": {
+          "reduction_data_i": {
+            "widths": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "cross_quad_overlap_bits": 0
+          },
+          "replay_x_i": {
+            "widths": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "cross_quad_overlap_bits": 0
+          },
+          "replay_gamma_i": {
+            "widths": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "cross_quad_overlap_bits": 0
+          },
+          "replay_beta_i": {
+            "widths": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "cross_quad_overlap_bits": 0
+          },
+          "core_writeback_data_i": {
+            "widths": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "cross_quad_overlap_bits": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "four_disjoint_quad_payload_slices:mixed_precision_quad_local_multirow_datapath",
+      "result": "PASS",
+      "evidence": {
+        "owner": "mixed_precision_quad_local_multirow_datapath",
+        "children": 4,
+        "ports": {
+          "reduce_data_i": {
+            "widths": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "cross_quad_overlap_bits": 0
+          },
+          "apply_x_i": {
+            "widths": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "cross_quad_overlap_bits": 0
+          },
+          "apply_gamma_i": {
+            "widths": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "cross_quad_overlap_bits": 0
+          },
+          "apply_beta_i": {
+            "widths": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "cross_quad_overlap_bits": 0
+          },
+          "result_data_o": {
+            "widths": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "cross_quad_overlap_bits": 0
+          }
+        }
+      }
+    }
+  ],
+  "recursive_instance_counts": {
+    "normalization_quad_reset_leaf": 62,
+    "normalization_quad_bank_scheduler_leaf": 4,
+    "mixed_precision_quad_bank_datapath_slice": 4,
+    "mixed_precision_quad_reducer4_pipe": 4,
+    "mixed_precision_quad_packet_reducer_pipe": 1,
+    "normalization_quad_scalar_packet_leaf": 4,
+    "normalization_hbm_quad_payload_store": 4,
+    "normalization_registered_quad_completion_descriptor": 4,
+    "normalization_bank_scheduler": 0,
+    "mixed_precision_global_reducer16_pipe": 0,
+    "hierarchical_normalization_bank_core_top": 0,
+    "logic_die_normalization_hbm_top": 0
+  },
+  "cross_quad_contract": {
+    "reduction_order": "(b0+b1)+(b2+b3), then (q0+q1)+(q2+q3)",
+    "registered_partial_stat_packet": true,
+    "registered_scalar_return_packet": true,
+    "registered_quad_completion_descriptor": true,
+    "central_16bank_writeback_tag_consumers": 0
+  }
+}

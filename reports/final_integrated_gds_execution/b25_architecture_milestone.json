@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-18T15:49:28.446145+00:00",
+  "milestone": "B25_AGGREGATED_COMPLETION_DESCRIPTOR_STRUCTURAL_ECO",
+  "status": "PASS",
+  "git": {
+    "branch": "PIM_Simulator",
+    "head_before_milestone_commit": "60023004f56fc6dd8908f67b719eefeb695b967f",
+    "dirty_during_generation": true
+  },
+  "hypothesis": "move all-quad agreement and tag equality checks into the scheduler boundary to remove 51 central interconnect bits and duplicated context comparators",
+  "contract": {
+    "external_interfaces": "byte-identical",
+    "ready_valid_ordering_tag_backpressure": "unchanged",
+    "completion_acceptance": "all four quads valid in the same cycle with identical tags",
+    "rtl_top": "logic_die_normalization_hbm_quad_local_b2_top",
+    "clock_reset_policy": "unchanged"
+  },
+  "measured_structure": {
+    "central_descriptor_bits_before": 68,
+    "central_descriptor_bits_after": 17,
+    "central_interconnect_bits_removed": 51,
+    "registered_output_bits": 17,
+    "central_16bank_writeback_tag_consumers": 0
+  },
+  "gates": [
+    {
+      "id": "bit_exact_reduction",
+      "result": "PASS",
+      "artifact": "reports/groot_normalization/quad_local_b25/bitexact_reduction.log"
+    },
+    {
+      "id": "randomized_ab_differential",
+      "result": "PASS",
+      "artifact": "reports/groot_normalization/quad_local_b25/random_ab_differential.log"
+    },
+    {
+      "id": "writeback_inflight_reset",
+      "result": "PASS",
+      "artifact": "reports/groot_normalization/quad_local_b25/writeback_inflight_reset.log"
+    },
+    {
+      "id": "pcu_ab_matrix",
+      "result": "PASS",
+      "artifact": "reports/groot_normalization/quad_local_b25/pcu_ab_matrix.log"
+    },
+    {
+      "id": "boundary_ab_matrix",
+      "result": "PASS",
+      "artifact": "reports/groot_normalization/quad_local_b25/boundary_ab_matrix.log"
+    },
+    {
+      "id": "rtl_locality_reset_audit",
+      "result": "PASS",
+      "artifact": "reports/groot_normalization/quad_local_b25/b25_rtl_locality_audit.json"
+    },
+    {
+      "id": "mapped_locality_reset_audit",
+      "result": "PASS",
+      "artifact": "reports/groot_normalization/quad_local_b25/b25_mapped_locality_audit.json"
+    },
+    {
+      "id": "odb_quad_fence_capacity",
+      "result": "PASS",
+      "artifact": "reports/groot_normalization/quad_local_b25/b25_floorplan_preflight.log"
+    },
+    {
+      "id": "actual_workload_accuracy",
+      "result": "PASS",
+      "artifact": "reports/groot_normalization/results/quad_local_b25_actual_trace/accuracy_summary.json"
+    }
+  ],
+  "actual_workload": {
+    "schema_version": 1,
+    "variant": "logic_die_normalization_hbm_quad_local_b25_physical_eco",
+    "profiles": [
+      {
+        "profile_id": "action_vlln",
+        "elements": 573440,
+        "c11_bit_mismatches": 0,
+        "pytorch_bit_mismatches": 5,
+        "max_abs": 0.015625,
+        "nonfinite": 0,
+        "threshold": 0.025,
+        "result": "PASS"
+      },
+      {
+        "profile_id": "action_vl_self_attention_norm1",
+        "elements": 573440,
+        "c11_bit_mismatches": 0,
+        "pytorch_bit_mismatches": 7,
+        "max_abs": 0.0078125,
+        "nonfinite": 0,
+        "threshold": 0.025,
+        "result": "PASS"
+      },
+      {
+        "profile_id": "action_vl_self_attention_norm3",
+        "elements": 573440,
+        "c11_bit_mismatches": 0,
+        "pytorch_bit_mismatches": 17,
+        "max_abs": 0.015625,
+        "nonfinite": 0,
+        "threshold": 0.025,
+        "result": "PASS"
+      },
+      {
+        "profile_id": "action_dit_adaln_norm1",
+        "elements": 62976,
+        "c11_bit_mismatches": 0,
+        "pytorch_bit_mismatches": 4,
+        "max_abs": 0.0078125,
+        "nonfinite": 0,
+        "threshold": 0.025,
+        "result": "PASS"
+      },
+      {
+        "profile_id": "action_dit_norm3",
+        "elements": 62976,
+        "c11_bit_mismatches": 0,
+        "pytorch_bit_mismatches": 0,
+        "max_abs": 0.0,
+        "nonfinite": 0,
+        "threshold": 0.025,
+        "result": "PASS"
+      },
+      {
+        "profile_id": "action_dit_norm_out",
+        "elements": 62976,
+        "c11_bit_mismatches": 0,
+        "pytorch_bit_mismatches": 4,
+        "max_abs": 0.0001220703125,
+        "nonfinite": 0,
+        "threshold": 0.025,
+        "result": "PASS"
+      }
+    ],
+    "passed_profiles": 6,
+    "failed_profiles": 0,
+    "overall_result": "PASS"
+  },
+  "inputs": {
+    "eco_decision": {
+      "path": "reports/groot_normalization/quad_local_b25/b25_eco_decision.json",
+      "bytes": 3400,
+      "sha256": "43ccbd58dfca094f33e7f232b0510857e2ffea2bf3b75c139d347039cbab9cb3"
+    },
+    "cheap_gate": {
+      "path": "reports/groot_normalization/quad_local_b25/cheap_gate_manifest.json",
+      "bytes": 8685,
+      "sha256": "a77bef7dd5eaa2734b360092bd3cfab8be9845072f6ee00588ba1b1a01cf503c"
+    },
+    "rtl_locality_audit": {
+      "path": "reports/groot_normalization/quad_local_b25/b25_rtl_locality_audit.json",
+      "bytes": 12306,
+      "sha256": "6fe6b2e41629acbb9d29d9ae8381aec7401e0798ee12e9f671cb03c26c54d6d7"
+    },
+    "mapped_locality_audit": {
+      "path": "reports/groot_normalization/quad_local_b25/b25_mapped_locality_audit.json",
+      "bytes": 14606,
+      "sha256": "e881b3e4737be3396ddc568cd2a26fe176a9a0bbf011106e46d86424f8fca528"
+    },
+    "actual_workload_accuracy": {
+      "path": "reports/groot_normalization/results/quad_local_b25_actual_trace/accuracy_summary.json",
+      "bytes": 1685,
+      "sha256": "05b3426e91637dcd790a04eeb1bb6c22b46dd9cab3b37f08ead7e21dc29d2932"
+    },
+    "physical_config": {
+      "path": "flow/designs/sky130hd/normalization_hbm_quad_local_b25/config.mk",
+      "bytes": 1249,
+      "sha256": "a3d644c9cf913d25f767d5b570ed4b5eff1d91a67eed70ccecabe798a2caa73b"
+    },
+    "scheduler_rtl": {
+      "path": "rtl/normalization_quad_local_bank_scheduler.sv",
+      "bytes": 18897,
+      "sha256": "3786001368d5fc036384a891562f94e3293bbfdcf1338327e378bbc7304e160b"
+    },
+    "pcu_rtl": {
+      "path": "rtl/logic_die_normalization_quad_local_pcu_top.sv",
+      "bytes": 16164,
+      "sha256": "6d50e64fca64fd62dfce2dadb79bb23aef0862624effb4e762663a36df926655"
+    },
+    "report_generator": {
+      "path": "tools/generate_b25_architecture_report.py",
+      "bytes": 8806,
+      "sha256": "3944712f10e3bdc6c8a198e400661b30f16aedf5238fe2c3a919648ff228b316"
+    }
+  },
+  "claim_boundary": "synthesized and cheap-gate validated structural ECO; placement and routing remain pending",
+  "known_limitations": [
+    "No placement or route PASS is claimed by this milestone.",
+    "Sky130HD is a public research proxy and not a proprietary HBM logic process.",
+    "Final manufacturing DRC/LVS, IR/EM, and tape-out signoff are outside scope."
+  ],
+  "next_stage": "B25 legal placement, independent reopen audit, then one authorized global-route invocation",
+  "artifact_label": "RESEARCH ARTIFACT \u2014 NOT FOR FABRICATION"
+}

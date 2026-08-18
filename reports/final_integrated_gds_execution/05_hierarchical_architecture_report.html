@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>B25 hierarchical architecture report</title>
+<style>body{font:15px/1.5 system-ui,sans-serif;max-width:1180px;margin:2rem auto;padding:0 1rem;color:#17202a}table{border-collapse:collapse;width:100%;margin:1rem 0}th,td{border:1px solid #ccd1d1;padding:.45rem;vertical-align:top}th{background:#eef3f5}code{font-size:.82rem;overflow-wrap:anywhere}.pass{color:#087a36;font-weight:700}.fail{color:#b42318;font-weight:700}.banner{padding:.8rem;background:#fff3cd;border:1px solid #e0b000;font-weight:700}</style></head>
+<body><p class="banner">RESEARCH ARTIFACT — NOT FOR FABRICATION</p>
+<h1>Phase 5 — B25 aggregated completion descriptor ECO</h1>
+<p><strong>Verdict:</strong> <span class="pass">PASS</span>. Generated 2026-08-18T15:49:28.446145+00:00; branch <code>PIM_Simulator</code>; pre-commit HEAD <code>60023004f56fc6dd8908f67b719eefeb695b967f</code>.</p>
+<h2>Outcome</h2><p>move all-quad agreement and tag equality checks into the scheduler boundary to remove 51 central interconnect bits and duplicated context comparators</p>
+<table><tr><th>Measured item</th><th>Before</th><th>After/result</th></tr>
+<tr><td>Central completion descriptor</td><td>68 bits</td><td>17 bits</td></tr>
+<tr><td>Central interconnect removed</td><td>—</td><td>51 bits</td></tr>
+<tr><td>Registered descriptor output</td><td>required 17</td><td>17 bits</td></tr>
+<tr><td>Central 16-bank tag consumers</td><td>required 0</td><td>0</td></tr></table>
+<h2>Preserved contract</h2><pre>{
+  &quot;external_interfaces&quot;: &quot;byte-identical&quot;,
+  &quot;ready_valid_ordering_tag_backpressure&quot;: &quot;unchanged&quot;,
+  &quot;completion_acceptance&quot;: &quot;all four quads valid in the same cycle with identical tags&quot;,
+  &quot;rtl_top&quot;: &quot;logic_die_normalization_hbm_quad_local_b2_top&quot;,
+  &quot;clock_reset_policy&quot;: &quot;unchanged&quot;
+}</pre>
+<h2>Cheap gates</h2><table><tr><th>Gate</th><th>Result</th><th>Evidence</th></tr><tr><td>bit_exact_reduction</td><td class='pass'>PASS</td><td>reports/groot_normalization/quad_local_b25/bitexact_reduction.log</td></tr>
+<tr><td>randomized_ab_differential</td><td class='pass'>PASS</td><td>reports/groot_normalization/quad_local_b25/random_ab_differential.log</td></tr>
+<tr><td>writeback_inflight_reset</td><td class='pass'>PASS</td><td>reports/groot_normalization/quad_local_b25/writeback_inflight_reset.log</td></tr>
+<tr><td>pcu_ab_matrix</td><td class='pass'>PASS</td><td>reports/groot_normalization/quad_local_b25/pcu_ab_matrix.log</td></tr>
+<tr><td>boundary_ab_matrix</td><td class='pass'>PASS</td><td>reports/groot_normalization/quad_local_b25/boundary_ab_matrix.log</td></tr>
+<tr><td>rtl_locality_reset_audit</td><td class='pass'>PASS</td><td>reports/groot_normalization/quad_local_b25/b25_rtl_locality_audit.json</td></tr>
+<tr><td>mapped_locality_reset_audit</td><td class='pass'>PASS</td><td>reports/groot_normalization/quad_local_b25/b25_mapped_locality_audit.json</td></tr>
+<tr><td>odb_quad_fence_capacity</td><td class='pass'>PASS</td><td>reports/groot_normalization/quad_local_b25/b25_floorplan_preflight.log</td></tr>
+<tr><td>actual_workload_accuracy</td><td class='pass'>PASS</td><td>reports/groot_normalization/results/quad_local_b25_actual_trace/accuracy_summary.json</td></tr></table>
+<h2>Reproduction commands</h2><pre>bash verification/groot_normalization/run_wbq_quad_local_b25_cheap_gates.sh
+python3 tools/generate_b25_architecture_report.py</pre>
+<h2>Hash-pinned inputs</h2><table><tr><th>Name</th><th>Path</th><th>SHA-256</th></tr><tr><td>eco_decision</td><td><code>reports/groot_normalization/quad_local_b25/b25_eco_decision.json</code></td><td><code>43ccbd58dfca094f33e7f232b0510857e2ffea2bf3b75c139d347039cbab9cb3</code></td></tr>
+<tr><td>cheap_gate</td><td><code>reports/groot_normalization/quad_local_b25/cheap_gate_manifest.json</code></td><td><code>a77bef7dd5eaa2734b360092bd3cfab8be9845072f6ee00588ba1b1a01cf503c</code></td></tr>
+<tr><td>rtl_locality_audit</td><td><code>reports/groot_normalization/quad_local_b25/b25_rtl_locality_audit.json</code></td><td><code>6fe6b2e41629acbb9d29d9ae8381aec7401e0798ee12e9f671cb03c26c54d6d7</code></td></tr>
+<tr><td>mapped_locality_audit</td><td><code>reports/groot_normalization/quad_local_b25/b25_mapped_locality_audit.json</code></td><td><code>e881b3e4737be3396ddc568cd2a26fe176a9a0bbf011106e46d86424f8fca528</code></td></tr>
+<tr><td>actual_workload_accuracy</td><td><code>reports/groot_normalization/results/quad_local_b25_actual_trace/accuracy_summary.json</code></td><td><code>05b3426e91637dcd790a04eeb1bb6c22b46dd9cab3b37f08ead7e21dc29d2932</code></td></tr>
+<tr><td>physical_config</td><td><code>flow/designs/sky130hd/normalization_hbm_quad_local_b25/config.mk</code></td><td><code>a3d644c9cf913d25f767d5b570ed4b5eff1d91a67eed70ccecabe798a2caa73b</code></td></tr>
+<tr><td>scheduler_rtl</td><td><code>rtl/normalization_quad_local_bank_scheduler.sv</code></td><td><code>3786001368d5fc036384a891562f94e3293bbfdcf1338327e378bbc7304e160b</code></td></tr>
+<tr><td>pcu_rtl</td><td><code>rtl/logic_die_normalization_quad_local_pcu_top.sv</code></td><td><code>6d50e64fca64fd62dfce2dadb79bb23aef0862624effb4e762663a36df926655</code></td></tr>
+<tr><td>report_generator</td><td><code>tools/generate_b25_architecture_report.py</code></td><td><code>3944712f10e3bdc6c8a198e400661b30f16aedf5238fe2c3a919648ff228b316</code></td></tr></table>
+<h2>Claim boundary and limitations</h2><p>synthesized and cheap-gate validated structural ECO; placement and routing remain pending</p><ul><li>No placement or route PASS is claimed by this milestone.</li><li>Sky130HD is a public research proxy and not a proprietary HBM logic process.</li><li>Final manufacturing DRC/LVS, IR/EM, and tape-out signoff are outside scope.</li></ul>
+<h2>Next gate</h2><p>B25 legal placement, independent reopen audit, then one authorized global-route invocation</p></body></html>

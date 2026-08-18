@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-18T14:44:47.054319+00:00",
+  "variant": "B25",
+  "decision": "SELECT_B25_AGGREGATED_COMPLETION_DESCRIPTOR_ECO",
+  "status": "SELECTED_PENDING_CHEAP_GATES",
+  "failure_classification": {
+    "automatic_recovery_class": "residual_congestion",
+    "subtype": "central_completion_compare_fabric",
+    "not_a_stall": true
+  },
+  "congestion_evidence": {
+    "best_valid_route": {
+      "variant": "B21",
+      "residual": 455,
+      "overflow_edges": 345
+    },
+    "adjacent_origin_probe": {
+      "variant": "B24",
+      "residual": 487,
+      "overflow_edges": 363
+    },
+    "dominant_region": "central_corridor",
+    "repeated_sources": [
+      "quad_completion_tag",
+      "clk_i"
+    ]
+  },
+  "selected_eco": {
+    "single_independent_variable": "completion_descriptor_transport_structure",
+    "before": "four valid bits plus four 16-bit tags consumed by central PCU",
+    "after": "one all-quad valid bit plus one verified 16-bit tag consumed by central PCU",
+    "hypothesis": "move all-quad agreement and tag equality checks into the scheduler boundary to remove 51 central interconnect bits and duplicated context comparators"
+  },
+  "preserved_contract": {
+    "external_interfaces": "byte-identical",
+    "ready_valid_ordering_tag_backpressure": "unchanged",
+    "completion_acceptance": "all four quads valid in the same cycle with identical tags",
+    "rtl_top": "logic_die_normalization_hbm_quad_local_b2_top",
+    "clock_reset_policy": "unchanged"
+  },
+  "expected_cost": {
+    "latency_cycles": 0,
+    "throughput_change": "none",
+    "area": "reduced central compare fabric"
+  },
+  "success_criteria": [
+    "registered and unregistered random A/B regressions pass",
+    "PCU and HBM boundary regressions pass",
+    "Yosys check reports zero problems and mapped primitives are zero",
+    "mapped audit proves completion boundary width is 17 bits",
+    "legal placement and single-shot global route pass strict zero-congestion gate"
+  ],
+  "inputs": {
+    "b21": {
+      "gate": {
+        "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b21/phase6_decision_gate.json",
+        "sha256": "bd00690038d81ba06a8889cfc62316092b23f2d658f2944d9588c5f8bd6e3aa8"
+      },
+      "analysis": {
+        "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b21/b21_residual_congestion_analysis.json",
+        "sha256": "a900a16d8567a367629b4c631b6185bfc74b91b7e200bf31c9c9cd8202755b32"
+      }
+    },
+    "b24": {
+      "gate": {
+        "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b24/phase6_decision_gate.json",
+        "sha256": "590164a380839a54c358c941d23e7c72e9bfae85e101b6d8d727b31ffe0a8169"
+      },
+      "analysis": {
+        "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b24/b24_residual_congestion_analysis.json",
+        "sha256": "ee1cb6368f699a50db6b4de52a756b9283e945567139745261d5dc61f95bcda7"
+      }
+    }
+  },
+  "rtl_outputs": {
+    "/home/forstobpim/PIM_simulator/rtl/normalization_quad_local_bank_scheduler.sv": "3786001368d5fc036384a891562f94e3293bbfdcf1338327e378bbc7304e160b",
+    "/home/forstobpim/PIM_simulator/rtl/logic_die_normalization_quad_local_pcu_top.sv": "6d50e64fca64fd62dfce2dadb79bb23aef0862624effb4e762663a36df926655"
+  },
+  "authorizes": [],
+  "next_stage": "B25_CHEAP_GATES"
+}

@@ -1,0 +1,7 @@
+profile_id,elements,c11_bit_mismatches,pytorch_bit_mismatches,max_abs,nonfinite,threshold,result
+action_vlln,573440,0,5,0.015625,0,0.025,PASS
+action_vl_self_attention_norm1,573440,0,7,0.0078125,0,0.025,PASS
+action_vl_self_attention_norm3,573440,0,17,0.015625,0,0.025,PASS
+action_dit_adaln_norm1,62976,0,4,0.0078125,0,0.025,PASS
+action_dit_norm3,62976,0,0,0.0,0,0.025,PASS
+action_dit_norm_out,62976,0,4,0.0001220703125,0,0.025,PASS

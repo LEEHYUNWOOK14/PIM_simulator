@@ -4,7 +4,7 @@ root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "$root"
 source "$root/verification/groot_normalization/eda_environment.sh"
 
-if [[ "${WBQ_VARIANT:-}" =~ ^B[345]$ ]]; then
+if [[ "${WBQ_VARIANT:-}" =~ ^B([3-9]|[1-9][0-9])$ ]]; then
   variant_lower="${WBQ_VARIANT,,}"
   report_dir="reports/groot_normalization/quad_local_${variant_lower}"
   top=logic_die_normalization_hbm_quad_local_b2_top

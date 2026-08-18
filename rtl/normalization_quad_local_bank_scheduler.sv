@@ -187,8 +187,8 @@ module normalization_quad_local_bank_scheduler #(
     output logic [31:0] writeback_grants_o,
     output logic [31:0] read_conflict_cycles_o,
     output logic [31:0] bank_skew_cycles_o,
-    output logic [QUADS-1:0] quad_completion_valid_o,
-    output logic [QUADS-1:0][TAG_WIDTH-1:0] quad_completion_tag_o,
+    output logic quad_completion_valid_o,
+    output logic [TAG_WIDTH-1:0] quad_completion_tag_o,
     output logic protocol_error_o
 );
     localparam int unsigned BANKS_PER_QUAD = BANKS/QUADS;
@@ -208,6 +208,9 @@ module normalization_quad_local_bank_scheduler #(
     logic read_rr_q;
     logic [AGE_WIDTH-1:0] reduction_age_q, replay_age_q, writeback_age_q;
     logic [QUADS-1:0] completion_descriptor_error;
+    logic [QUADS-1:0] completion_descriptor_valid;
+    logic [QUADS-1:0][TAG_WIDTH-1:0] completion_descriptor_tag;
+    logic completion_descriptor_mismatch;
 
     initial begin
         if (BANKS != 16 || QUADS != 4 || BANKS_PER_QUAD != 4)
@@ -273,13 +276,22 @@ module normalization_quad_local_bank_scheduler #(
             .writeback_ready_i(bank_writeback_ready_i[LO +: BANKS_PER_QUAD]),
             .writeback_last_i(bank_writeback_last_o[LO +: BANKS_PER_QUAD]),
             .writeback_tag_i(bank_writeback_tag_o[LO +: BANKS_PER_QUAD]),
-            .completion_valid_o(quad_completion_valid_o[quad]),
-            .completion_tag_o(quad_completion_tag_o[quad]),
+            .completion_valid_o(completion_descriptor_valid[quad]),
+            .completion_tag_o(completion_descriptor_tag[quad]),
             .protocol_error_o(completion_descriptor_error[quad])
         );
     end
 
     always_comb begin
+        quad_completion_valid_o = &completion_descriptor_valid;
+        quad_completion_tag_o = completion_descriptor_tag[0];
+        completion_descriptor_mismatch =
+            (|completion_descriptor_valid) && !(&completion_descriptor_valid);
+        if (&completion_descriptor_valid) begin
+            for (integer quad = 1; quad < QUADS; quad++)
+                if (completion_descriptor_tag[quad] != completion_descriptor_tag[0])
+                    completion_descriptor_mismatch = 1'b1;
+        end
         reduction_full = &quad_reduction_full;
         replay_full = &quad_replay_full;
         writeback_full = &quad_writeback_full;
@@ -366,7 +378,7 @@ module normalization_quad_local_bank_scheduler #(
                 (reduction_age_q >= AGE_LIMIT && !reduction_grant) ||
                 (replay_age_q >= AGE_LIMIT && !replay_grant) ||
                 (writeback_age_q >= AGE_LIMIT && !writeback_grant) ||
-                (|completion_descriptor_error))
+                (|completion_descriptor_error) || completion_descriptor_mismatch)
                 protocol_error_o <= 1'b1;
         end
     end

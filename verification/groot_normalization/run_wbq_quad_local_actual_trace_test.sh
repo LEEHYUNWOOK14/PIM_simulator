@@ -9,7 +9,7 @@ if [[ ! -s "$vectors/cases.csv" || ! -s "$vectors/action_vlln_x.hex" ]]; then
   fi
   python3 tools/prepare_groot_multirow_vectors.py --lanes 4
 fi
-if [[ "${WBQ_VARIANT:-}" =~ ^B[345]$ ]]; then
+if [[ "${WBQ_VARIANT:-}" =~ ^B([3-9]|[1-9][0-9])$ ]]; then
   variant_lower="${WBQ_VARIANT,,}"
   results="reports/groot_normalization/results/quad_local_${variant_lower}_actual_trace"
 elif [[ "${WBQ_B2:-0}" == 1 ]]; then
@@ -68,7 +68,7 @@ if [[ -n "${GROOT_PROFILE_FILTER:-}" ]]; then
 fi
 test "$count" -eq 6
 analysis_args=()
-if [[ "${WBQ_VARIANT:-}" =~ ^B[345]$ ]]; then
+if [[ "${WBQ_VARIANT:-}" =~ ^B([3-9]|[1-9][0-9])$ ]]; then
   variant_lower="${WBQ_VARIANT,,}"
   analysis_args+=(--b2 --results "$results" --variant "logic_die_normalization_hbm_quad_local_${variant_lower}_physical_eco")
 elif [[ "${WBQ_B2:-0}" == 1 ]]; then
