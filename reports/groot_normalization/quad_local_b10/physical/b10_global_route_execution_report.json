@@ -1,0 +1,124 @@
+{
+  "schema_version": 2,
+  "variant": "B10",
+  "stage": "single_global_route",
+  "status": "PASS",
+  "failure_class": null,
+  "invocation_count": 1,
+  "cugr_congestion_iterations": 1,
+  "start_utc": "2026-08-18T07:44:00Z",
+  "end_utc": "2026-08-18T08:06:27Z",
+  "exit_code": 0,
+  "direct_parser_exit_code": 0,
+  "termination_signal": null,
+  "service": "wbq-b10-global-route.service",
+  "wrapper_pid": 901555,
+  "launcher_pid": 902028,
+  "compute_pid": 902030,
+  "command": "openroad -exit -no_init -threads 1 -no_splash wbq_quad_local_b10_global_route.tcl",
+  "inputs": {
+    "placement_manifest": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b9/physical/b9_placement_execution_report.json",
+      "sha256": "48ce171e8a8cef865f68da4d74444c837dafda1df2a2dbf5c7c6a196797edd58"
+    },
+    "targeted_placement_reopen_audit": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b9/physical/b9_targeted_placement_reopen_audit.json",
+      "sha256": "835f09ed7f9c178b08309a79bf3f4c7c000c205d052513ef0c1dcc4c97c88f96"
+    },
+    "route_authorization": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b10/b10_global_route_authorization.json",
+      "sha256": "db78cefc1ccc0e01c1aae3f3107d3a96b3646d3c58b8d1423a1f0b42b2a7c4e6"
+    },
+    "b9_place_odb": {
+      "path": "/dev/shm/wbq_b9_phase6_10/quad_local_b9/b9_place.odb",
+      "sha256": "3bb3f2e70ffea8eac012bde25557e750f0346f65270e664bddb90e2ce60143ec"
+    },
+    "b9_place_sdc": {
+      "path": "/dev/shm/wbq_b9_phase6_10/quad_local_b9/b9_place.sdc",
+      "sha256": "51ff83730acbf6710614999f79a9dd7d7b8aff7824f4d36a4b05b3c88f33a5fd"
+    },
+    "route_runner": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/run_wbq_quad_local_b10_global_route.sh",
+      "sha256": "e2b3fd146b8c288e19ec0eaba69e7b60e6e84cbb0bfe25727eff85364d92c05d"
+    },
+    "route_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/wbq_quad_local_b10_global_route.tcl",
+      "sha256": "013672ccea771069f023c63679ccc510fd295c93c0a5e8f7fe2a39739be9f9de"
+    },
+    "direct_numeric_parser": {
+      "path": "/home/forstobpim/PIM_simulator/tools/analyze_variant_residual_congestion.py",
+      "sha256": "2811f95c2e478cd6c5195548386ab4ef1ee6516bc976d61e71b15e6f141cd97d"
+    },
+    "strict_phase6_gate": {
+      "path": "/home/forstobpim/PIM_simulator/tools/decide_b10_phase6_strict_gate.py",
+      "sha256": "7554496315984124bc3d209ee9efa85295a510e290cd55fc00715da2eafee6eb"
+    },
+    "silence_snapshot_tool": {
+      "path": "/home/forstobpim/PIM_simulator/tools/capture_openroad_stage_snapshot.py",
+      "sha256": "558a1c599a24db2a1a6ef4a8f89cfdefbfb8ad4e5459f59c47d6e20264d352b2"
+    },
+    "silence_compare_tool": {
+      "path": "/home/forstobpim/PIM_simulator/tools/compare_openroad_stage_snapshots.py",
+      "sha256": "4d58d731d9a21dfdcc9f2a820d5d3dd2ba1a694876ab3c852264ce59365e7a51"
+    }
+  },
+  "protected_hashes_before": {
+    "frozen_A": "964adc9cf68aceac1fd6686d7c586ffbd295ed9a35f6b54628ddf81981cbc5ad",
+    "B": "ab6cddf83dee124e9ae388b5cbe8c6fbda6665782870e1c4a57f83a83a174235",
+    "B2": "2c928b19ab5b1dcbcd89ec36d8d0b18963a8b03c9776ecc7325509332e98235d"
+  },
+  "protected_hashes_after": {
+    "frozen_A": "964adc9cf68aceac1fd6686d7c586ffbd295ed9a35f6b54628ddf81981cbc5ad",
+    "B": "ab6cddf83dee124e9ae388b5cbe8c6fbda6665782870e1c4a57f83a83a174235",
+    "B2": "2c928b19ab5b1dcbcd89ec36d8d0b18963a8b03c9776ecc7325509332e98235d"
+  },
+  "protected_artifacts_preserved": true,
+  "outputs": {
+    "log": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b10/physical/b10_global_route.log",
+      "exists": true,
+      "bytes": 1972,
+      "sha256": "1edac9668194371cdd5a66524427f59c9bb2d6012e2ee62128756347f811ac55"
+    },
+    "guide": {
+      "path": "/dev/shm/wbq_b10_phase6_10/quad_local_b10/b10_quad_local.route_guide",
+      "exists": true,
+      "bytes": 1384516933,
+      "sha256": "9514ca2021822650075be25f4aaf122bc70f63229e069575e59f2e29fa7f43e9"
+    },
+    "congestion_report": {
+      "path": "/dev/shm/wbq_b10_phase6_10/quad_local_b10/b10_quad_local.congestion.rpt",
+      "exists": true,
+      "bytes": 1442231,
+      "sha256": "17775cc5fc4e64e676d30252dafb0bc763c5cdfe0694ca418771164decfe2b16"
+    },
+    "routed_odb": {
+      "path": "/dev/shm/wbq_b10_phase6_10/quad_local_b10/b10_quad_local_global_route.odb",
+      "exists": true,
+      "bytes": 4378473460,
+      "sha256": "5b49e2465848b20ca7cfbd28d49d32f46c3db460d9bbc73217202fa08ac78e3f"
+    },
+    "routed_sdc": {
+      "path": "/dev/shm/wbq_b10_phase6_10/quad_local_b10/b10_quad_local_global_route.sdc",
+      "exists": true,
+      "bytes": 71889,
+      "sha256": "51ff83730acbf6710614999f79a9dd7d7b8aff7824f4d36a4b05b3c88f33a5fd"
+    },
+    "direct_analysis": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b10/b10_residual_congestion_analysis.json",
+      "exists": true,
+      "bytes": 781645,
+      "sha256": "e2359478e21fdd09285a27b7b7d68f00b2f25bc1cdd444f7accd9ccfe9eb2626"
+    },
+    "direct_analysis_markdown": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b10/b10_residual_congestion_analysis.md",
+      "exists": true,
+      "bytes": 4275,
+      "sha256": "d161bd4255aabc6525b164e25b7849b71160248bdcfcb1d789f045097141e872"
+    }
+  },
+  "authorizes": [
+    "B10_STRICT_PHASE6_EVALUATION"
+  ],
+  "next_stage": "B10_STRICT_PHASE6_EVALUATION"
+}
