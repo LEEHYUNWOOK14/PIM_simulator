@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "variant": "B3",
+  "stage": "incremental_placement",
+  "invocation_count": 1,
+  "start_utc": "2026-08-17T07:48:13Z",
+  "status": "PASS",
+  "artifact_storage": "variant-only tmpfs; volatile; hashes and evidence manifests are persisted in the repository",
+  "cheap_gate_sha256": "6b66760f31f61e801de7da18307f264bf7b470a732a37d47b3622927c048005d",
+  "authorization_sha256": "4aee89a960328b5afc6a3b826c3bae7d41577eb4233d44a8a68936f6532a6f00",
+  "immutable_inputs": {
+    "b2_place_odb": {
+      "path": "/home/forstobpim/OpenROAD-flow-scripts/flow/results/sky130hd/normalization_hbm_quad_local_b2/base/3_place.odb",
+      "sha256": "dd2ef73e7672a0c8937d085c53ab067b6a2d891ee544fcff3359ffc6299b4561"
+    },
+    "b2_place_sdc": {
+      "path": "/home/forstobpim/OpenROAD-flow-scripts/flow/results/sky130hd/normalization_hbm_quad_local_b2/base/3_place.sdc",
+      "sha256": "51ff83730acbf6710614999f79a9dd7d7b8aff7824f4d36a4b05b3c88f33a5fd"
+    }
+  },
+  "end_utc": "2026-08-17T07:54:12Z",
+  "exit_code": 0,
+  "outputs": {
+    "b3_place_odb": {
+      "path": "/dev/shm/wbq_b3_phase6_10/quad_local_b3/b3_place.odb",
+      "sha256": "dd2ef73e7672a0c8937d085c53ab067b6a2d891ee544fcff3359ffc6299b4561"
+    },
+    "b3_place_sdc": {
+      "path": "/dev/shm/wbq_b3_phase6_10/quad_local_b3/b3_place.sdc",
+      "sha256": "51ff83730acbf6710614999f79a9dd7d7b8aff7824f4d36a4b05b3c88f33a5fd"
+    },
+    "log": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b3/physical/b3_place.log",
+      "sha256": "486027157d29fbabfc7987a2b436c437fee571677f96d6f0330f135a72b9bd53"
+    }
+  },
+  "placement_legality_and_fence_audit": "PASS",
+  "authorizes": [
+    "B3_SINGLE_GLOBAL_ROUTE"
+  ],
+  "next_stage": "B3_SINGLE_GLOBAL_ROUTE"
+}

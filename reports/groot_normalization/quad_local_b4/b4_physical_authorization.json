@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-17T11:58:49.600490+00:00",
+  "variant": "B4",
+  "decision": "PASS",
+  "conditions": {
+    "selected_b4_rudy_placement_eco": "PASS",
+    "precheap_decision_fail_closed": "PASS",
+    "cheap_gate_9_of_9": "PASS",
+    "mapped_assertions_20_of_20": "PASS",
+    "workload_profiles_6_of_6": "PASS",
+    "mapped_netlist_byte_identical_to_b2": "PASS",
+    "global_route_invocation_limit_one": "PASS",
+    "cugr_iterations_one": "PASS",
+    "rudy_not_global_route_during_placement": "PASS"
+  },
+  "inputs": {
+    "b4_eco_decision": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b4/b4_eco_decision.json",
+      "sha256": "6621b939abd3fa6a311420a7056634ee9c785bc98c4736df277c44a1a70327f4"
+    },
+    "cheap_gate_manifest": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b4/cheap_gate_manifest.json",
+      "sha256": "b3cfa9dcdd903fec446dadf0b51b3907742b6d31e091fbe843d25499e4fd27e3"
+    },
+    "mapped_locality_audit": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b4/b4_mapped_locality_audit.json",
+      "sha256": "6eccb6a7d421a7171283ab3a7ac395d77dfee19b6b56e37c422a87bbdc6cda4f"
+    },
+    "workload_accuracy": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/results/quad_local_b4_actual_trace/accuracy_summary.json",
+      "sha256": "64cba2a8cdb0b15174ba85125f7a1c237f44c2d8bcc31a2386e3835eb478f0a4"
+    },
+    "b2_mapped_netlist": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b2/logic_die_normalization_hbm_quad_local_b2_top_sky130.v",
+      "sha256": "674a1b7557aaa6335dd90fa20c87aad3e447de87c00402b8b0ed25a940be1cf5"
+    },
+    "b4_mapped_netlist": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b4/logic_die_normalization_hbm_quad_local_b2_top_sky130.v",
+      "sha256": "674a1b7557aaa6335dd90fa20c87aad3e447de87c00402b8b0ed25a940be1cf5"
+    }
+  },
+  "authorizes": [
+    "B4_PLACEMENT",
+    "B4_SINGLE_GLOBAL_ROUTE"
+  ],
+  "next_stage": "B4_PLACEMENT"
+}

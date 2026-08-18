@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-17T14:16:47.574103+00:00",
+  "variant": "B5",
+  "decision": "PASS",
+  "conditions": {
+    "selected_b5_diamond_legalizer_eco": "PASS",
+    "precheap_fail_closed": "PASS",
+    "b4_failed_before_route": "PASS",
+    "cheap_gate_9_of_9": "PASS",
+    "mapped_assertions_20_of_20": "PASS",
+    "workload_profiles_6_of_6": "PASS",
+    "mapped_netlist_byte_identical_to_b2": "PASS",
+    "global_route_limit_one": "PASS",
+    "cugr_iterations_one": "PASS"
+  },
+  "inputs": {
+    "b5_eco_decision": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b5/b5_eco_decision.json",
+      "sha256": "6882196fce5403e96570f26e80354174dbdd48f09253485dd3bac08f640c4b71"
+    },
+    "cheap_gate_manifest": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b5/cheap_gate_manifest.json",
+      "sha256": "cbac1c5e6fd07e49f436ffe15e779fc566b78dae78e0d063d4b1172fb60481ab"
+    },
+    "mapped_locality_audit": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b5/b5_mapped_locality_audit.json",
+      "sha256": "6eccb6a7d421a7171283ab3a7ac395d77dfee19b6b56e37c422a87bbdc6cda4f"
+    },
+    "workload_accuracy": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/results/quad_local_b5_actual_trace/accuracy_summary.json",
+      "sha256": "25db95af3d7a72aa122a1108b5e1e15b07777708b9acb1ae414b6b5d45a2fffb"
+    },
+    "b2_mapped_netlist": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b2/logic_die_normalization_hbm_quad_local_b2_top_sky130.v",
+      "sha256": "674a1b7557aaa6335dd90fa20c87aad3e447de87c00402b8b0ed25a940be1cf5"
+    },
+    "b5_mapped_netlist": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b5/logic_die_normalization_hbm_quad_local_b2_top_sky130.v",
+      "sha256": "674a1b7557aaa6335dd90fa20c87aad3e447de87c00402b8b0ed25a940be1cf5"
+    }
+  },
+  "authorizes": [
+    "B5_PLACEMENT",
+    "B5_SINGLE_GLOBAL_ROUTE"
+  ],
+  "next_stage": "B5_PLACEMENT"
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-17T07:20:01.768184+00:00",
+  "source_analysis": {
+    "path": "reports/groot_normalization/quad_local_b3/b3_cheap_root_cause_analysis.json",
+    "sha256": "5ca545a9dd58d35bbcf033816752af4d01f7da8410cb2ef77cd6bcc35b3058b2"
+  },
+  "decision": "SELECT_B3_ROUTE_EFFORT_ECO",
+  "status": "SELECTED_PENDING_CHEAP_GATES",
+  "change_scope": "B3-only config/run policy; B2 RTL behavior and A/B/B2 artifacts remain frozen",
+  "cugr_congestion_iterations": 10,
+  "global_route_invocation_limit": 1,
+  "new_incremental_placement_required": true,
+  "fallback": "Seal nonzero B3 without reroute; create B4 for a separately justified placement/RTL ECO.",
+  "authorizes": [],
+  "next_stage": "B3_IMPLEMENTATION_AND_CHEAP_GATES"
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-17T05:08:39Z",
+  "phase": 5,
+  "variant": "logic_die_normalization_hbm_quad_local_b2_top",
+  "decision": "ACCEPTED_WITH_RESIDUAL_CONGESTION",
+  "basis": "Frozen A comparison requires both residual congestion and overflow edges to improve.",
+  "conditions": {
+    "cheap_gate_pass": true,
+    "mapped_contract_pass": true,
+    "workload_accuracy_pass": true,
+    "placement_legality_and_fences_pass": true,
+    "global_route_invoked_exactly_once": true,
+    "residual_improves_vs_frozen_A": true,
+    "overflow_edges_improve_vs_frozen_A": true,
+    "route_artifact_hashes_match": true
+  },
+  "metrics": {
+    "frozen_A": {
+      "rrr_residual": 1768,
+      "congestion_windows": 4463,
+      "overflow_edges": 1293,
+      "overflow_tracks": 1395,
+      "maximum_congestion": 4
+    },
+    "quad_local_B": {
+      "rrr_residual": 3323,
+      "congestion_windows": 4357,
+      "overflow_edges": 2413,
+      "overflow_tracks": 3146,
+      "maximum_congestion": 5
+    },
+    "B2": {
+      "rrr_residual": 46,
+      "congestion_windows": 181,
+      "overflow_edges": 39,
+      "overflow_tracks": 40,
+      "maximum_congestion": 2
+    }
+  },
+  "analysis": {
+    "path": "reports/groot_normalization/quad_local_b2/b2_residual_congestion_analysis.json",
+    "sha256": "943dc742e74a93f6d85920ca6ff39b1651e06279bdef5800f0a57ade05515a2c"
+  },
+  "authorizes": [],
+  "next_stage": null,
+  "phase6_authorized": false
+}

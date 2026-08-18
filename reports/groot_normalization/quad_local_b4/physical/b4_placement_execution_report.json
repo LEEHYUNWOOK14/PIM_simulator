@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "variant": "B4",
+  "stage": "rudy_routability_driven_placement",
+  "invocation_count": 1,
+  "start_utc": "2026-08-17T12:00:25Z",
+  "status": "FAIL",
+  "global_route_invocations": 0,
+  "routability_estimator": "RUDY",
+  "artifact_storage": "variant-only tmpfs; volatile; hashes and evidence manifests are persisted in the repository",
+  "cheap_gate_sha256": "b3cfa9dcdd903fec446dadf0b51b3907742b6d31e091fbe843d25499e4fd27e3",
+  "authorization_sha256": "4170dea34ee80cf4e07fd886c06947e83f3a2570077ff80e76fd31cb2b8a4e7d",
+  "immutable_inputs": {
+    "b2_place_odb": {
+      "path": "/home/forstobpim/OpenROAD-flow-scripts/flow/results/sky130hd/normalization_hbm_quad_local_b2/base/3_place.odb",
+      "sha256": "dd2ef73e7672a0c8937d085c53ab067b6a2d891ee544fcff3359ffc6299b4561"
+    },
+    "b2_place_sdc": {
+      "path": "/home/forstobpim/OpenROAD-flow-scripts/flow/results/sky130hd/normalization_hbm_quad_local_b2/base/3_place.sdc",
+      "sha256": "51ff83730acbf6710614999f79a9dd7d7b8aff7824f4d36a4b05b3c88f33a5fd"
+    }
+  },
+  "protected_artifacts_before": {
+    "frozen_a_routed_odb": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_wbq_v4_control_global_route.odb",
+      "sha256": "964adc9cf68aceac1fd6686d7c586ffbd295ed9a35f6b54628ddf81981cbc5ad"
+    },
+    "frozen_b_routed_odb": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_ab/b_quad_local_global_route.odb",
+      "sha256": "ab6cddf83dee124e9ae388b5cbe8c6fbda6665782870e1c4a57f83a83a174235"
+    },
+    "frozen_b2_routed_odb": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b2/b2_quad_local_global_route.odb",
+      "sha256": "2c928b19ab5b1dcbcd89ec36d8d0b18963a8b03c9776ecc7325509332e98235d"
+    }
+  },
+  "end_utc": "2026-08-17T13:41:19Z",
+  "exit_code": 1,
+  "outputs": {
+    "b4_place_odb": {
+      "path": "/dev/shm/wbq_b4_phase6_10/quad_local_b4/b4_place.odb",
+      "sha256": ""
+    },
+    "b4_place_sdc": {
+      "path": "/dev/shm/wbq_b4_phase6_10/quad_local_b4/b4_place.sdc",
+      "sha256": ""
+    },
+    "log": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b4/physical/b4_place.log",
+      "sha256": "9777a4213fbbb9938329decdb8672a2cf4d44bc98b5a8b3e841ae9299fabe79f"
+    }
+  },
+  "placement_legality_and_fence_audit": "FAIL",
+  "protected_artifacts_after": {
+    "frozen_a_routed_odb": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/physical_feasibility/logic_die_normalization_hbm_top_wbq_v4_control_global_route.odb",
+      "sha256": "964adc9cf68aceac1fd6686d7c586ffbd295ed9a35f6b54628ddf81981cbc5ad"
+    },
+    "frozen_b_routed_odb": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_ab/b_quad_local_global_route.odb",
+      "sha256": "ab6cddf83dee124e9ae388b5cbe8c6fbda6665782870e1c4a57f83a83a174235"
+    },
+    "frozen_b2_routed_odb": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b2/b2_quad_local_global_route.odb",
+      "sha256": "2c928b19ab5b1dcbcd89ec36d8d0b18963a8b03c9776ecc7325509332e98235d"
+    }
+  },
+  "protected_artifacts_preserved": true,
+  "authorizes": [],
+  "next_stage": null
+}

@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-17T11:32:38.185412+00:00",
+  "variant": "B4",
+  "decision": "SELECT_B4_RUDY_ROUTABILITY_RESPREAD_ECO",
+  "status": "SELECTED_PENDING_CHEAP_GATES",
+  "change_scope": "B4-only physical placement policy and isolated artifacts; B2/B3 remain immutable",
+  "placement": {
+    "input": "sealed B2 placed ODB/SDC",
+    "skip_initial_place": true,
+    "routability_driven": true,
+    "routability_estimator": "RUDY (no global-route invocation during placement)",
+    "density": 0.49,
+    "fence_geometry_change": false
+  },
+  "global_route": {
+    "invocation_limit": 1,
+    "cugr_congestion_iterations": 1,
+    "reason": "Return to B2's stable single-RRR policy; B4's independent variable is placement."
+  },
+  "b2_baseline": {
+    "rrr_residual": 46,
+    "overflow_edges": 39,
+    "overflow_tracks": 40,
+    "windows": 181
+  },
+  "b3_failure": {
+    "rrr_residual": 5641,
+    "overflow_edges": 2988,
+    "overflow_tracks": 3050,
+    "windows": 18265,
+    "strict_gate": "BLOCKED_RESIDUAL_CONGESTION",
+    "authorizes": []
+  },
+  "candidates": [
+    {
+      "id": "B4_RUDY_ROUTABILITY_RESPREAD",
+      "selected": true,
+      "rtl_or_constraint_change": "B4-only placement policy: read the immutable B2 placed ODB, run one RUDY-based routability-driven global respread from existing coordinates, then legalize into a new B4 checkpoint. RTL/netlist/fence geometry are unchanged.",
+      "exact_target": {
+        "net_families": [
+          "quad completion/context tag",
+          "scalar engine/scalar return",
+          "adapter/payload-store",
+          "Q1 bank3 reduction"
+        ],
+        "central_completion_bbox_um": [
+          4878.3,
+          4595.4,
+          4995.6,
+          4698.9
+        ],
+        "central_scalar_bbox_um": [
+          4367.7,
+          4215.9,
+          4761.0,
+          4485.0
+        ],
+        "q1_overflow_two_bbox_um": [
+          7445.1,
+          1414.5,
+          7452.0,
+          1421.4
+        ]
+      },
+      "expected_central_corridor_effect": "RUDY inflation acts on the measured local demand peaks before legalization, spreading entry points and pin demand without changing logical cones.",
+      "risk": {
+        "function": "none expected; mapped netlist is byte-compared against B2",
+        "timing": "moderate; HPWL can increase and must be reported after routing/CTS",
+        "area": "none at netlist level; placement footprint and four fences are unchanged",
+        "physical": "moderate; global respread can fail convergence or legalization"
+      },
+      "mapped_assertion_and_workload_effect": "No functional change; nevertheless rerun cheap 9/9, mapped 20/20, workload 6/6, and comparator/locality assertions before placement.",
+      "rollback": "Discard only the isolated B4 directory; B2/B3 and their ODBs remain byte-identical.",
+      "cheap_gates": [
+        "cheap gate 9/9",
+        "mapped assertion 20/20",
+        "workload 6/6",
+        "central writeback comparator internal sink pins == 0",
+        "four-fence read-only capacity audit"
+      ],
+      "expected_improvement_basis": "B2 already reduced the problem to 39 low-magnitude overflow edges, 31 in the central corridor. B3 proved that extra RRR without placement change thrashes (46 to 5641). Routability-driven placement is the smallest standard physical intervention that directly changes demand at all measured hotspots before the one allowed route."
+    },
+    {
+      "id": "B4_MORE_RRR",
+      "selected": false,
+      "rejection": "B3 empirical evidence shows ten RRR iterations increased residual 46 to 5641."
+    },
+    {
+      "id": "B4_FUNCTIONAL_RTL_REDESIGN",
+      "selected": false,
+      "rejection": "The comparator cone did not recur and mapped/workload contracts pass; a functional redesign is broader and riskier than a placement-only routability ECO."
+    }
+  ],
+  "inputs": {
+    "b2_direct_analysis": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b2/b2_residual_congestion_analysis.json",
+      "sha256": "943dc742e74a93f6d85920ca6ff39b1651e06279bdef5800f0a57ade05515a2c"
+    },
+    "b3_direct_analysis": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b3/b3_residual_congestion_analysis.json",
+      "sha256": "a9885cc41a9d3f43758c329fec44aba4d1042b077c4e880115d862ab757eebf6"
+    },
+    "b3_strict_gate": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b3/phase6_decision_gate.json",
+      "sha256": "510bc656bbe593916032ef6867990ec63e64561db7f950c832a64fb7f21ec9c6"
+    },
+    "b3_route_log": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b3/physical/b3_global_route.log",
+      "sha256": "ab9a58f0eab82cbda7bb1a366e421265e6dc4d089f70436b448ed11e52cfec0f"
+    }
+  },
+  "authorizes": [],
+  "next_stage": "B4_IMPLEMENTATION_AND_CHEAP_GATES"
+}

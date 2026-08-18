@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-17T04:41:45Z",
+  "variant": "logic_die_normalization_hbm_quad_local_b2_top",
+  "overall_result": "PHASE5_PHYSICAL_PASS_WITH_RESIDUAL_CONGESTION",
+  "cheap_gate": {
+    "result": "PASS",
+    "count": 9,
+    "manifest_sha256": "490d63609b4a3177f5ef7e3ab9336d4a0972d3e28b927e4935da5d525c802e6a",
+    "authorizes": [
+      "B2_PLACEMENT",
+      "B2_GLOBAL_ROUTE"
+    ]
+  },
+  "mapped_contract": {
+    "result": "PASS",
+    "checks": 20,
+    "failed_checks": 0,
+    "registered_quad_completion_descriptors": 4,
+    "central_writeback_tag_internal_sink_pins": 0,
+    "central_completion_tag_bits": 64,
+    "central_completion_valid_bits": 4,
+    "registered_descriptor_driver_bits": 17,
+    "root_reset_fanout": 4,
+    "maximum_effective_reset_leaf_sink_pins": 13671,
+    "reset_leaf_limit": 20000
+  },
+  "accuracy": {
+    "result": "PASS",
+    "profiles_passed": 6,
+    "profiles_failed": 0,
+    "c11_bit_mismatches": 0,
+    "maximum_absolute_error": 0.015625,
+    "threshold": 0.025
+  },
+  "placement": {
+    "result": "PASS",
+    "full_orfs_invocations": 1,
+    "checkpoint_resume": true,
+    "note": "The first detailed legalization failed with 18167 overlaps. Synthesis, floorplan, global placement and resize were not rerun; 3_4_place_resized.odb was respread and legalized.",
+    "fences": 4,
+    "grouped_instances": 3676196,
+    "outside_fence": 0,
+    "unplaced": 0,
+    "legality_violations": 0,
+    "place_odb_sha256": "dd2ef73e7672a0c8937d085c53ab067b6a2d891ee544fcff3359ffc6299b4561",
+    "place_sdc_sha256": "51ff83730acbf6710614999f79a9dd7d7b8aff7824f4d36a4b05b3c88f33a5fd"
+  },
+  "global_route": {
+    "result": "PASS_WITH_RESIDUAL_CONGESTION",
+    "invocation_count": 1,
+    "elapsed_seconds": 1551.58,
+    "peak_rss_kb": 30045884,
+    "rrr_residual": 46,
+    "congestion_report_windows": {
+      "horizontal": 141,
+      "vertical": 40,
+      "total": 181
+    },
+    "artifacts": {
+      "route_guide": {
+        "path": "reports/groot_normalization/quad_local_b2/b2_quad_local.route_guide",
+        "sha256": "8e82c1596745db76905aea0d76f94bea1e10acde04cfdf7a1085e4044119e210"
+      },
+      "congestion_report": {
+        "path": "reports/groot_normalization/quad_local_b2/b2_quad_local.congestion.rpt",
+        "sha256": "253455988e93e3e828e6887f24bdbd982c4f8965b5d8b619bbdd35166e5c9d56"
+      },
+      "routed_odb": {
+        "path": "reports/groot_normalization/quad_local_b2/b2_quad_local_global_route.odb",
+        "sha256": "2c928b19ab5b1dcbcd89ec36d8d0b18963a8b03c9776ecc7325509332e98235d"
+      },
+      "routed_sdc": {
+        "path": "reports/groot_normalization/quad_local_b2/b2_quad_local_global_route.sdc",
+        "sha256": "54a5f6175459c327e0da0cdafc816c88f19b48ab9fffe727c377ea072c74b700"
+      }
+    }
+  },
+  "b_to_b2_route_comparison": {
+    "rrr_residual": {
+      "b": 3323,
+      "b2": 46,
+      "reduction_percent": 98.62
+    },
+    "congestion_report_windows": {
+      "b": 4357,
+      "b2": 181,
+      "reduction_percent": 95.85
+    },
+    "pcu_writeback_tag": {
+      "sink_fanout_b": 2382,
+      "sink_fanout_b2": 791,
+      "fanout_max_b": 21,
+      "fanout_max_b2": 8,
+      "hpwl_median_um_b": 1040.333,
+      "hpwl_median_um_b2": 523.7235,
+      "guide_length_um_b": 493322.4,
+      "guide_length_um_b2": 164599.5,
+      "guide_rectangles_b": 17949,
+      "guide_rectangles_b2": 3973
+    },
+    "b2_quad_completion": {
+      "nets": 68,
+      "sink_fanout_total": 455,
+      "fanout_max": 15,
+      "hpwl_median_um": 603.933,
+      "hpwl_max_um": 998.493,
+      "guide_length_um": 84476.7,
+      "guide_rectangles": 3073,
+      "congested_guide_rectangles": 0
+    }
+  },
+  "a_preservation": {
+    "top": "rtl/logic_die_normalization_hbm_top.sv",
+    "sha256": "6d89452e0f13eef7fa215e636c39d666b9c72960159fb9087ded544171b17526",
+    "git_diff": "CLEAN"
+  },
+  "phase6": {
+    "decision": "BLOCKED",
+    "authorizes": [],
+    "decision_gate_sha256": "4977cb6e0b2dac84d3637db847b7c9cb6d3e43a2f39309a671be8ae5267490b8",
+    "required_next": "Separate review and explicit Phase 6 decision gate PASS"
+  }
+}

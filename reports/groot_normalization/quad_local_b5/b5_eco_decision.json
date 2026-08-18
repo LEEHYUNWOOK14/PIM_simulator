@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-17T13:43:05.333034+00:00",
+  "variant": "B5",
+  "decision": "SELECT_B5_DIAMOND_LEGALIZER_ECO",
+  "status": "SELECTED_PENDING_CHEAP_GATES",
+  "change_scope": "B5-only detailed-placement algorithm; RTL, mapped netlist, fences, RUDY policy, and route policy unchanged",
+  "root_cause": {
+    "stage": "B4 detailed placement legality",
+    "negotiation_remaining_illegal_cells": 4,
+    "actual_overlap_count": 2,
+    "overlaps": [
+      {
+        "cell": "u_b2_implementation/u_pcu/u_quad_datapath/load_slew427175",
+        "master": "sky130_fd_sc_hd__buf_12",
+        "tapcell": "TAP_TAPCELL_ROW_916_299625"
+      },
+      {
+        "cell": "u_b2_implementation/u_quad_local_adapter/wire440835",
+        "master": "sky130_fd_sc_hd__buf_16",
+        "tapcell": "TAP_TAPCELL_ROW_573_187675"
+      }
+    ],
+    "b4_global_route_invocations": 0
+  },
+  "selected_eco": {
+    "rtl_or_constraint_change": "none",
+    "placement_change": "repeat the isolated RUDY respread in B5, then use OpenROAD detailed_placement -use_diamond_legalizer",
+    "exact_target": "the two tapcell overlap sites left by negotiation legalization",
+    "central_corridor_effect": "preserve B4's measured RUDY respread; only legalization policy changes",
+    "risk": {
+      "function": "none expected",
+      "timing": "moderate HPWL displacement",
+      "area": "none",
+      "physical": "diamond legalization may still fail or perturb congestion"
+    },
+    "mapped_assertion_and_workload_effect": "no functional change; rerun cheap 9/9, mapped 20/20, workload 6/6",
+    "rollback": "discard isolated B5 artifacts; B4 remains sealed and B2 remains immutable",
+    "expected_improvement_basis": "OpenROAD provides a separate region-aware diamond legalizer; B4 negotiation recovery itself recovered 30/34 cells using diamond search but failed on the final four after negotiation state was established."
+  },
+  "global_route": {
+    "invocation_limit": 1,
+    "cugr_congestion_iterations": 1
+  },
+  "inputs": {
+    "b4_eco_decision": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b4/b4_eco_decision.json",
+      "sha256": "6621b939abd3fa6a311420a7056634ee9c785bc98c4736df277c44a1a70327f4"
+    },
+    "b4_placement_report": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b4/physical/b4_placement_execution_report.json",
+      "sha256": "e801c1e8e424c009797c74b77099f897b5d320858380b397367d13f15983c4ad"
+    },
+    "b4_placement_log": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b4/physical/b4_place.log",
+      "sha256": "9777a4213fbbb9938329decdb8672a2cf4d44bc98b5a8b3e841ae9299fabe79f"
+    }
+  },
+  "authorizes": [],
+  "next_stage": "B5_IMPLEMENTATION_AND_CHEAP_GATES"
+}

@@ -1,0 +1,77 @@
+{
+  "schema_version": 2,
+  "generated_at": "2026-08-17T05:08:39Z",
+  "phase": 6,
+  "variant": "logic_die_normalization_hbm_quad_local_b2_top",
+  "decision": "BLOCKED_RESIDUAL_CONGESTION",
+  "reason": "Residual congestion and overflow are nonzero; strict Phase 6 release remains fail-closed.",
+  "conditions": {
+    "residual_congestion_zero": {
+      "required": 0,
+      "actual": 46,
+      "result": "FAIL"
+    },
+    "overflow_edges_zero": {
+      "required": 0,
+      "actual": 39,
+      "result": "FAIL"
+    },
+    "input_artifact_hashes_match": {
+      "required": true,
+      "actual": true,
+      "result": "PASS"
+    },
+    "explicit_phase6_pass": {
+      "required": true,
+      "actual": false,
+      "result": "FAIL"
+    }
+  },
+  "artifact_hash_checks": [
+    {
+      "name": "route_guide",
+      "path": "reports/groot_normalization/quad_local_b2/b2_quad_local.route_guide",
+      "expected_sha256": "8e82c1596745db76905aea0d76f94bea1e10acde04cfdf7a1085e4044119e210",
+      "actual_sha256": "8e82c1596745db76905aea0d76f94bea1e10acde04cfdf7a1085e4044119e210",
+      "match": true,
+      "bytes": 1410140224
+    },
+    {
+      "name": "congestion_report",
+      "path": "reports/groot_normalization/quad_local_b2/b2_quad_local.congestion.rpt",
+      "expected_sha256": "253455988e93e3e828e6887f24bdbd982c4f8965b5d8b619bbdd35166e5c9d56",
+      "actual_sha256": "253455988e93e3e828e6887f24bdbd982c4f8965b5d8b619bbdd35166e5c9d56",
+      "match": true,
+      "bytes": 310222
+    },
+    {
+      "name": "routed_odb",
+      "path": "reports/groot_normalization/quad_local_b2/b2_quad_local_global_route.odb",
+      "expected_sha256": "2c928b19ab5b1dcbcd89ec36d8d0b18963a8b03c9776ecc7325509332e98235d",
+      "actual_sha256": "2c928b19ab5b1dcbcd89ec36d8d0b18963a8b03c9776ecc7325509332e98235d",
+      "match": true,
+      "bytes": 4402408875
+    },
+    {
+      "name": "routed_sdc",
+      "path": "reports/groot_normalization/quad_local_b2/b2_quad_local_global_route.sdc",
+      "expected_sha256": "54a5f6175459c327e0da0cdafc816c88f19b48ab9fffe727c377ea072c74b700",
+      "actual_sha256": "54a5f6175459c327e0da0cdafc816c88f19b48ab9fffe727c377ea072c74b700",
+      "match": true,
+      "bytes": 71916
+    }
+  ],
+  "phase5_residual_decision": {
+    "path": "reports/groot_normalization/quad_local_b2/phase5_b2_residual_decision.json",
+    "sha256": "23f04b0662d87d2f2e129a8b1d012286fb61428c93cdc198aca9f503addc7a41",
+    "decision": "ACCEPTED_WITH_RESIDUAL_CONGESTION"
+  },
+  "required_before_release": [
+    "residual congestion equals 0",
+    "overflow edges equal 0",
+    "all input artifact hashes match",
+    "a separate explicit Phase 6 decision returns PASS"
+  ],
+  "authorizes": [],
+  "next_stage": null
+}
