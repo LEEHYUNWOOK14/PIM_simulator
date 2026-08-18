@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "variant": "B12",
+  "stage": "route_pin_grid_smoke",
+  "status": "STARTED",
+  "start_utc": "2026-08-18T08:42:46Z",
+  "invocation_count": 1,
+  "service": "direct-cli-b12-smoke",
+  "wrapper_pid": 949549,
+  "compute_pid": 949559,
+  "audit_compute_pid": 949839,
+  "inputs": {
+    "decision": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b12/b12_eco_decision.json"
+    },
+    "placement": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b9/physical/b9_placement_execution_report.json"
+    },
+    "smoke_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/wbq_b12_route_pin_smoke.tcl"
+    },
+    "audit_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/audit_wbq_b12_route_pin_smoke.tcl"
+    },
+    "b9_place_odb": {
+      "path": "/dev/shm/wbq_b9_phase6_10/quad_local_b9/b9_place.odb"
+    },
+    "b9_place_sdc": {
+      "path": "/dev/shm/wbq_b9_phase6_10/quad_local_b9/b9_place.sdc"
+    }
+  },
+  "authorizes": []
+}
