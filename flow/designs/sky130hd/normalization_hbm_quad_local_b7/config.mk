@@ -4,8 +4,9 @@ export DESIGN_NAME = logic_die_normalization_hbm_quad_local_b2_top
 
 STOB_REPO_ROOT ?= $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../../..)
 export STOB_REPO_ROOT
-# B7 is a physical-only anchor-lock ECO.  This mapped netlist is byte-identical
-# to the sealed B2/B5 netlist and is rechecked by B7 authorization.
+# B7 preserves the anchor-lock ECO and changes only GPL max_phi_coef. This
+# mapped netlist is byte-identical to the sealed B2/B5 netlist and is rechecked
+# by B7 authorization.
 export VERILOG_FILES = $(STOB_REPO_ROOT)/reports/groot_normalization/quad_local_b5/logic_die_normalization_hbm_quad_local_b2_top_sky130.v
 export SYNTH_NETLIST_FILES = $(VERILOG_FILES)
 export SDC_FILE = $(STOB_REPO_ROOT)/flow/designs/sky130hd/normalization_hbm_feasibility/constraint.sdc
