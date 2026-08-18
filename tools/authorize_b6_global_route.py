@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "reports/groot_normalization/quad_local_b6"
 PHYSICAL = REPORT / "physical"
 PLACEMENT = PHYSICAL / "b6_placement_execution_report.json"
+TARGETED_AUDIT = PHYSICAL / "b6_targeted_placement_reopen_audit.json"
 DECISION = REPORT / "b6_eco_decision.json"
 PHYSICAL_AUTH = REPORT / "b6_physical_authorization.json"
 RUNNER = ROOT / "verification/groot_normalization/run_wbq_quad_local_b6_global_route.sh"
@@ -47,6 +48,7 @@ def main() -> int:
     if OUTPUT.exists():
         raise FileExistsError(f"refusing to overwrite B6 route authorization: {OUTPUT}")
     placement = load(PLACEMENT)
+    targeted_audit = load(TARGETED_AUDIT)
     decision = load(DECISION)
     physical_auth = load(PHYSICAL_AUTH)
     runner_text = RUNNER.read_text(encoding="utf-8")
@@ -84,6 +86,12 @@ def main() -> int:
         "placement_audit_pass": placement.get("placement_legality_and_fence_audit") == "PASS",
         "placement_authorizes_one_route": "B6_SINGLE_GLOBAL_ROUTE" in placement.get("authorizes", []),
         "placement_outputs_match": placement_outputs_match,
+        "targeted_reopen_audit_pass": targeted_audit.get("status") == "PASS"
+        and "B6_GLOBAL_ROUTE_AUTHORIZATION" in targeted_audit.get("authorizes", []),
+        "targeted_reopen_anchor_count": targeted_audit.get("metrics", {}).get("anchors_verified") == 2,
+        "targeted_reopen_legality": targeted_audit.get("metrics", {}).get("outside_fence") == 0
+        and targeted_audit.get("metrics", {}).get("unplaced") == 0
+        and targeted_audit.get("metrics", {}).get("placement_violations") == 0,
         "physical_authorization_pass": physical_auth.get("decision") == "PASS",
         "selected_b6_policy": decision.get("decision") == "SELECT_B6_TARGETED_ANCHOR_LOCK_ECO",
         "one_route_invocation": decision.get("global_route", {}).get("invocation_limit") == 1,
@@ -108,6 +116,7 @@ def main() -> int:
         "conditions": {key: "PASS" if value else "FAIL" for key, value in conditions.items()},
         "inputs": {
             "placement_execution_report": evidence(PLACEMENT),
+            "targeted_placement_reopen_audit": evidence(TARGETED_AUDIT),
             "b6_eco_decision": evidence(DECISION),
             "b6_physical_authorization": evidence(PHYSICAL_AUTH),
             "b6_place_odb": evidence(odb) if odb.is_file() else {"path": str(odb), "sha256": None},

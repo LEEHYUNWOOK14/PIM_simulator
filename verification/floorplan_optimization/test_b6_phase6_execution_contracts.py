@@ -44,8 +44,23 @@ class B6RouteContractTest(unittest.TestCase):
             "silence_snapshot_tool",
             "silence_compare_tool",
             "no_prior_route_artifact",
+            "targeted_placement_reopen_audit",
+            "targeted_reopen_anchor_count",
+            "targeted_reopen_legality",
         ):
             self.assertIn(token, text)
+
+    def test_targeted_reopen_audit_rechecks_both_anchors_and_legality(self) -> None:
+        tcl = (ROOT / "verification/groot_normalization/audit_wbq_b6_targeted_placement.tcl").read_text()
+        runner = (ROOT / "verification/groot_normalization/run_wbq_b6_targeted_placement_audit.sh").read_text()
+        self.assertEqual(tcl.count("status={$actual_status}"), 1)
+        self.assertIn('actual_status ne "LOCKED"', tcl)
+        self.assertIn("anchors_verified != 2", tcl)
+        self.assertIn("outside != 0", tcl)
+        self.assertIn("unplaced != 0", tcl)
+        self.assertIn('violations ne ""', tcl)
+        for token in ("compute_pid", "refusing concurrent", "placement_violations", "B6_GLOBAL_ROUTE_AUTHORIZATION"):
+            self.assertIn(token, runner)
 
     def test_strict_gate_has_all_four_release_conditions(self) -> None:
         text = (ROOT / "tools/decide_b6_phase6_strict_gate.py").read_text()
