@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-18T11:07:01.099795+00:00",
+  "variant": "B14",
+  "decision": "SELECT_B14_BUMP_GRID_WIDER_ECO",
+  "status": "SELECTED_PENDING_SMOKE_AND_AUTHORIZATION",
+  "failure_classification": {
+    "automatic_recovery_class": "tool_error",
+    "subtype": "openroad_gridgraph_range_search_assertion",
+    "not_a_stall": true
+  },
+  "selected_eco": {
+    "single_independent_variable": "route_bump_pin_grid_columns",
+    "before": 33,
+    "after": 17,
+    "reason": "B13 columns=33 deterministically triggered OpenROAD GridGraph::rangeSearchRows assertion before route output. Change only the grid column count to 17 and retain met1-met5, sealed placement, SDC, and one-iteration contract."
+  },
+  "unchanged_contract": {
+    "rtl": "byte-identical",
+    "mapped_netlist": "byte-identical",
+    "placement_variant": "reuse sealed B9 legal placement ODB",
+    "sdc": "byte-identical",
+    "route_signal_layers": "met1-met5",
+    "route_clock_layers": "met1-met5",
+    "global_route_invocation_limit": 1,
+    "cugr_congestion_iterations": 1,
+    "bump_pin_grid_columns": 17,
+    "skip_large_fanout_nets": 20000
+  },
+  "functional_evidence": {
+    "fresh_route_pin_smoke_required": true,
+    "fresh_route_authorization_required": true,
+    "placement_reopen_required": true
+  },
+  "inputs": {
+    "b13_execution_manifest": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b13/physical/b13_global_route_execution_report.json",
+      "sha256": "fa9e3bb1ed219efe30ad165d2e80de375968ec4cb103a324eda0a8e80a16c96f"
+    },
+    "b13_route_log": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b13/physical/b13_global_route.log",
+      "sha256": "ceb18934710f3d0601da1a136f13a9fda85f3f4af2296b6cc0d3f3252f0c8ab8"
+    }
+  },
+  "authorizes": [],
+  "next_stage": "B14_SMOKE"
+}

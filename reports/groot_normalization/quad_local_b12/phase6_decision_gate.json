@@ -1,0 +1,103 @@
+{
+  "schema_version": 2,
+  "generated_at_utc": "2026-08-18T10:59:24.871433+00:00",
+  "phase": 6,
+  "variant": "B12",
+  "decision": "BLOCKED_RESIDUAL_CONGESTION",
+  "reason": "One or more strict zero-congestion/hash conditions failed; Phase 6 remains fail-closed.",
+  "conditions": {
+    "residual_congestion_zero": {
+      "required": 0,
+      "actual": 104341,
+      "result": "FAIL"
+    },
+    "overflow_edges_zero": {
+      "required": 0,
+      "actual": 8571,
+      "result": "FAIL"
+    },
+    "input_artifact_hashes_match": {
+      "required": true,
+      "actual": true,
+      "result": "PASS"
+    },
+    "explicit_phase6_pass": {
+      "required": true,
+      "actual": false,
+      "result": "FAIL"
+    }
+  },
+  "artifact_hash_checks": [
+    {
+      "name": "log",
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b12/physical/b12_global_route.log",
+      "expected_sha256": "44379c10c092ad4f22f28c1a0514773063a88b4bd9e0a6b8392d8173438647bd",
+      "actual_sha256": "44379c10c092ad4f22f28c1a0514773063a88b4bd9e0a6b8392d8173438647bd",
+      "match": true
+    },
+    {
+      "name": "guide",
+      "path": "/dev/shm/wbq_b12_phase6_10/quad_local_b12/b12_quad_local.route_guide",
+      "expected_sha256": "b9b6ac758067d80a742da65724d641565d6a1b048e1897ff1432c1394cdd37be",
+      "actual_sha256": "b9b6ac758067d80a742da65724d641565d6a1b048e1897ff1432c1394cdd37be",
+      "match": true
+    },
+    {
+      "name": "congestion_report",
+      "path": "/dev/shm/wbq_b12_phase6_10/quad_local_b12/b12_quad_local.congestion.rpt",
+      "expected_sha256": "17c9635639a42010f3544139e4d056e6a8ea00b2be572815a455a73b12543c37",
+      "actual_sha256": "17c9635639a42010f3544139e4d056e6a8ea00b2be572815a455a73b12543c37",
+      "match": true
+    },
+    {
+      "name": "routed_odb",
+      "path": "/dev/shm/wbq_b12_phase6_10/quad_local_b12/b12_quad_local_global_route.odb",
+      "expected_sha256": "4ca7ad544bcf5adb64b84fc2c591356509b55bc50b28086f56429fd0493089c1",
+      "actual_sha256": "4ca7ad544bcf5adb64b84fc2c591356509b55bc50b28086f56429fd0493089c1",
+      "match": true
+    },
+    {
+      "name": "routed_sdc",
+      "path": "/dev/shm/wbq_b12_phase6_10/quad_local_b12/b12_quad_local_global_route.sdc",
+      "expected_sha256": "51ff83730acbf6710614999f79a9dd7d7b8aff7824f4d36a4b05b3c88f33a5fd",
+      "actual_sha256": "51ff83730acbf6710614999f79a9dd7d7b8aff7824f4d36a4b05b3c88f33a5fd",
+      "match": true
+    },
+    {
+      "name": "direct_analysis",
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b12/b12_residual_congestion_analysis.json",
+      "expected_sha256": "4952de7a9ee1735f983b120f7be275eccc75976fe1ead45ad2218bd09b75ae14",
+      "actual_sha256": "4952de7a9ee1735f983b120f7be275eccc75976fe1ead45ad2218bd09b75ae14",
+      "match": true
+    },
+    {
+      "name": "direct_analysis_markdown",
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b12/b12_residual_congestion_analysis.md",
+      "expected_sha256": "80accd6b0d5a7c51c900a9bf7d4ab06434cebe98ef1af9cf85c986b0c92b3476",
+      "actual_sha256": "80accd6b0d5a7c51c900a9bf7d4ab06434cebe98ef1af9cf85c986b0c92b3476",
+      "match": true
+    }
+  ],
+  "inputs": {
+    "placement_execution_report": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b9/physical/b9_placement_execution_report.json",
+      "sha256": "48ce171e8a8cef865f68da4d74444c837dafda1df2a2dbf5c7c6a196797edd58"
+    },
+    "global_route_authorization": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b12/b12_global_route_authorization.json",
+      "sha256": "d117a90c294411d6a089c3d8492237a0174286aa147d33e816c2df9500a8dce1"
+    },
+    "global_route_execution_report": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b12/physical/b12_global_route_execution_report.json",
+      "sha256": "5fdf3796e8169799d6f1c5d5def5382a12bf67b3b9f49edbe35befabb80ceef6"
+    },
+    "direct_congestion_analysis": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b12/b12_residual_congestion_analysis.json",
+      "sha256": "4952de7a9ee1735f983b120f7be275eccc75976fe1ead45ad2218bd09b75ae14"
+    }
+  },
+  "global_route_invocation_count": 1,
+  "authorizes": [],
+  "next_stage": null,
+  "blocked_recovery": "Seal B12 without reroute; create B12 with one evidence-based ECO and re-run smoke plus authorization."
+}

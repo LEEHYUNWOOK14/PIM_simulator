@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-18T11:13:17.820598+00:00",
+  "variant": "B15",
+  "decision": "SELECT_B15_CLOCK_LAYER_RESTORE_ECO",
+  "status": "SELECTED_PENDING_SMOKE_AND_AUTHORIZATION",
+  "failure_classification": {
+    "automatic_recovery_class": "tool_error",
+    "subtype": "clock_met1_gridgraph_assertion",
+    "not_a_stall": true
+  },
+  "selected_eco": {
+    "single_independent_variable": "route_clock_layer_bottom",
+    "before": "met1",
+    "after": "met2",
+    "reason": "B13/B14 both aborted in GridGraph::rangeSearchRows before output while using clock met1-met5. Restore the successful B9/B10 clock policy met2-met5; retain B14's columns=17 and signal met1-met5."
+  },
+  "unchanged_contract": {
+    "rtl": "byte-identical",
+    "mapped_netlist": "byte-identical",
+    "placement_variant": "reuse sealed B9 legal placement ODB",
+    "sdc": "byte-identical",
+    "route_signal_layers": "met1-met5",
+    "route_clock_layers": "met2-met5",
+    "global_route_invocation_limit": 1,
+    "cugr_congestion_iterations": 1,
+    "bump_pin_grid_columns": 17,
+    "skip_large_fanout_nets": 20000
+  },
+  "functional_evidence": {
+    "fresh_route_pin_smoke_required": true,
+    "fresh_route_authorization_required": true,
+    "placement_reopen_required": true
+  },
+  "inputs": {
+    "b14_execution_manifest": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b14/physical/b14_global_route_execution_report.json",
+      "sha256": "3307173720a61767997bc7adc2b7724a11825946a80e11cd5ec7401a9d206adf"
+    },
+    "b14_route_log": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b14/physical/b14_global_route.log",
+      "sha256": "17d7daa815fd2be22a8a21a5ab2b0ab192f845e3b75a4f487e5a0f00eb71ab24"
+    }
+  },
+  "authorizes": [],
+  "next_stage": "B15_SMOKE"
+}

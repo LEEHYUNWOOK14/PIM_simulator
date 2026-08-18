@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-18T11:00:42.749428+00:00",
+  "variant": "B13",
+  "decision": "SELECT_B13_BUMP_GRID_WIDER_ECO",
+  "status": "SELECTED_PENDING_SMOKE_AND_AUTHORIZATION",
+  "failure_classification": {
+    "automatic_recovery_class": "residual_congestion",
+    "subtype": "B12_signal_layer_change_increased_congestion",
+    "not_a_stall": true
+  },
+  "selected_eco": {
+    "single_independent_variable": "route_bump_pin_grid_columns",
+    "before": 21,
+    "after": 33,
+    "reason": "B12 met2-met5 lower-bound ECO produced 104341 residual and 8571 overflow edges. Restore the proven met1-met5 signal policy and change only the bump grid column count to 33 to reduce vertical pin rows while preserving RTL, netlist, legal placement, SDC, and one-iteration policy."
+  },
+  "unchanged_contract": {
+    "rtl": "byte-identical",
+    "mapped_netlist": "byte-identical",
+    "placement_variant": "reuse sealed B9 legal placement ODB",
+    "sdc": "byte-identical",
+    "route_signal_layers": "met1-met5",
+    "route_clock_layers": "met1-met5",
+    "global_route_invocation_limit": 1,
+    "cugr_congestion_iterations": 1,
+    "bump_pin_grid_columns": 33,
+    "skip_large_fanout_nets": 20000
+  },
+  "observed_b12_metrics": {
+    "rrr_residual": 104341,
+    "overflow_edges": 8571,
+    "overflow_tracks": 9134
+  },
+  "functional_evidence": {
+    "fresh_route_pin_smoke_required": true,
+    "fresh_route_authorization_required": true,
+    "placement_reopen_required": true
+  },
+  "inputs": {
+    "b12_strict_gate": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b12/phase6_decision_gate.json",
+      "sha256": "1494550f28a1834a216122c58dae9d180c0a8ed1a0d09cfbf485f2327a2211c4"
+    },
+    "b12_route_analysis": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b12/b12_residual_congestion_analysis.json",
+      "sha256": "4952de7a9ee1735f983b120f7be275eccc75976fe1ead45ad2218bd09b75ae14"
+    },
+    "b12_route_log": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b12/physical/b12_global_route.log",
+      "sha256": "44379c10c092ad4f22f28c1a0514773063a88b4bd9e0a6b8392d8173438647bd"
+    }
+  },
+  "authorizes": [],
+  "next_stage": "B13_SMOKE"
+}
