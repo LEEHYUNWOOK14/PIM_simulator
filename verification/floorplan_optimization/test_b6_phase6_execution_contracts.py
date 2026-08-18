@@ -167,5 +167,95 @@ class B6PostCtsRouteContractTest(unittest.TestCase):
             self.assertIn(token, text)
 
 
+class B6Phase7DetailedRouteContractTest(unittest.TestCase):
+    def test_phase7_tcl_has_one_detailed_route_and_no_global_route(self) -> None:
+        tcl = (ROOT / "verification/groot_normalization/wbq_b6_phase7_detailed_route.tcl").read_text()
+        audit = (ROOT / "verification/groot_normalization/audit_wbq_b6_phase7_detailed_route.tcl").read_text()
+        self.assertEqual(tcl.count("detailed_route \\"), 1)
+        self.assertNotIn("global_route \\", tcl)
+        self.assertIn("design_is_routed", tcl)
+        self.assertIn("check_antennas", tcl)
+        self.assertIn("WBQ_B6_PHASE7_DETAILED_ROUTE_AUDIT PASS", audit)
+        self.assertIn("clock_net_count < 1", audit)
+
+    def test_phase7_authorizer_pins_hashes_and_zero_congestion(self) -> None:
+        text = (ROOT / "tools/authorize_b6_phase7_detailed_route.py").read_text()
+        for token in (
+            "B6_PHASE7_DETAILED_ROUTE_AUTHORIZATION",
+            "zero_rrr_residual",
+            "zero_overflow_edges",
+            "no_skipped_nets",
+            "runner",
+            "route_tcl",
+            "audit_tcl",
+            "silence_snapshot_tool",
+            "silence_compare_tool",
+            "no_prior_phase7_attempt",
+        ):
+            self.assertIn(token, text)
+
+    def test_phase7_runner_is_one_shot_pid_exact_and_fail_closed(self) -> None:
+        text = (ROOT / "verification/groot_normalization/run_wbq_b6_phase7_detailed_route.sh").read_text()
+        for token in (
+            "phase7_authorization",
+            "launcher_pid",
+            "compute_pid",
+            "audit_compute_pid",
+            "write_fail_closed_manifest",
+            "trap 'on_signal INT' INT",
+            "trap 'on_signal TERM' TERM",
+            "wait \"$launcher_pid\"",
+            "existing B6 Phase 7 artifact prevents overwrite",
+            '"invocation_count": 1',
+            "b6_phase7_timing.rpt",
+            "b6_phase7_max_slew.rpt",
+            "b6_phase7_max_capacitance.rpt",
+            "b6_phase7_max_fanout.rpt",
+        ):
+            self.assertIn(token, text)
+
+
+class B6Phase7To10ContractTest(unittest.TestCase):
+    def test_streamout_overlay_and_merge_tokens_are_b6_only(self) -> None:
+        paths = (
+            ROOT / "tools/run_b6_phase7_rtl_gds_streamout.sh",
+            ROOT / "tools/check_b6_phase7_rtl_gds.py",
+            ROOT / "tools/run_b6_phase8_overlay.sh",
+            ROOT / "tools/run_b6_phase9_final_gds.sh",
+        )
+        combined = "\n".join(path.read_text() for path in paths)
+        self.assertNotIn("B5_PHASE", combined)
+        self.assertNotIn("quad_local_b5", combined)
+        for token in (
+            "B6_PHASE7_RTL_GDS_STREAMOUT",
+            "B6_PHASE8_OVERLAY",
+            "B6_PHASE9_FINAL_GDS_MERGE",
+            "B6_PHASE10_COMPLETION_AUDIT",
+            "minimum-anchor-count 2",
+            "KLAYOUT_WBQ_FINAL_RENDER PASS",
+        ):
+            self.assertIn(token, combined)
+
+    def test_phase10_uses_exact_frozen_hashes_and_independent_klayout(self) -> None:
+        text = (ROOT / "tools/audit_b6_phase10_completion.py").read_text()
+        for digest in (
+            "964adc9cf68aceac1fd6686d7c586ffbd295ed9a35f6b54628ddf81981cbc5ad",
+            "ab6cddf83dee124e9ae388b5cbe8c6fbda6665782870e1c4a57f83a83a174235",
+            "2c928b19ab5b1dcbcd89ec36d8d0b18963a8b03c9776ecc7325509332e98235d",
+        ):
+            self.assertIn(digest, text)
+        for token in (
+            "targeted_placement_audit",
+            "phase7_authorization",
+            "independent_klayout_process",
+            '"klayout", "-zz", "-r"',
+            "byte_identical",
+            "b6_phase10_evidence_matrix.json",
+            "09_final_completion_report.html",
+            "RESEARCH ARTIFACT — NOT FOR FABRICATION",
+        ):
+            self.assertIn(token, text)
+
+
 if __name__ == "__main__":
     unittest.main()
