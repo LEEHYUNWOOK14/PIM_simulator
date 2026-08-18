@@ -40,6 +40,12 @@ reports/final_integrated_gds_plan/final_integrated_gds_project_plan.html
 GCP_HANDOFF.md
 ```
 
+### 0.1 새 Codex 세션 전달용 실행문
+
+새 terminal 또는 새 Codex 세션에서는 아래 문장을 전달하면 된다. 이 파일 자체가 전체 작업 계획과 실행 권한 경계를 담은 최상위 프롬프트다.
+
+> `/home/forstobpim/PIM_simulator/final_integrated_research_gds_goal_prompt.md`를 처음부터 끝까지 읽고 최상위 실행 계약으로 사용하라. 현재 service, OpenROAD PID, log, invocation/report JSON, checkpoint와 artifact hash를 먼저 재검증하고 이미 완료되거나 실행 중인 단계를 중복 시작하지 마라. B6부터 Phase 10까지 모든 gate를 순서대로 수행하라. 장시간 log가 멈추면 4.3.1~4.3.3의 무로그 자동 진단·복구 계약을 적용하여 정상 silent compute와 병적 정체를 구분하고, 병적 정체가 증명되면 실패 variant를 봉인한 뒤 smoke와 새 authorization을 통과한 새 variant로 자동 전환하라. 사용자가 자리에 없다는 이유로 중단하거나 단순 상태 보고로 끝내지 말고 18.1의 terminal condition까지 안전하게 계속하라. 실패를 PASS로 바꾸거나 gate를 우회하지 말고, 기존 A/B/B2와 사용자 변경을 보존하라.
+
 장시간 작업의 기본 반복 단위는 다음과 같다.
 
 ```text
@@ -118,6 +124,32 @@ unknown
 
 기존 V4/V5/V7/V8 ODB, route guide 또는 보고서를 최신 `wbq` 결과로 오인하지 않는다. 최신 RTL의 source hash와 mapped netlist hash가 연결되지 않은 산출물은 비교용 historical evidence로만 사용한다.
 
+### 3.1 2026-08-18 quad-local 최신 재개 상태
+
+이 절은 위의 초기 기준선보다 최신인 B2~B6 실행 상태다. 단, 프로세스와 산출물은 문서를 읽는 시점에 반드시 다시 확인한다. 아래 상태를 근거로 이미 완료된 B2~B5 대형 작업을 재실행하지 않는다.
+
+- B2 Phase 5: `ACCEPTED_WITH_RESIDUAL_CONGESTION`
+- B2 RRR residual: `46`
+- B2 직접 숫자 파싱 overflow: `39 edges / 40 tracks`
+- B2 congestion windows: `181`, at-capacity windows: `142`
+- B2 Phase 6: `BLOCKED_RESIDUAL_CONGESTION`, `authorizes=[]`, `next_stage=null`
+- B3 global route: `RRR residual=5641`, `overflow_edges=2988`, strict Phase 6 BLOCKED
+- B4 RUDY placement: global placement와 negotiation legalizer는 끝났으나 두 movable buffer와 fixed tapcell의 overlap 두 쌍 때문에 placement FAIL, global route 0회
+- B5: full-design diamond legalizer가 3,676,196 grouped cells에 대해 패스당 367,619,600회, 최대 1,102,858,800회의 단일-thread swap을 요구하는 경로에 진입했다. 약 11시간 27분 뒤 증거를 보존하고 SIGTERM으로 종료했으며 placement FAIL, global route 0회다.
+- B6 선택 ECO: B4의 두 문제 buffer를 sealed B2 합법 좌표와 orientation에 `LOCKED`한 뒤 RUDY와 negotiation legalizer를 수행한다. full-design diamond와 실패가 확인된 `UNPLACED` incremental 재삽입 경로는 금지한다.
+- B6 anchor 1: `u_b2_implementation/u_pcu/u_quad_datapath/load_slew427175`, origin DBU `(6347540, 2535040)`, orientation `MX`
+- B6 anchor 2: `u_b2_implementation/u_quad_local_adapter/wire440835`, origin DBU `(4686940, 1468800)`, orientation `R180`
+- B6 anchor smoke와 physical authorization: PASS
+- 문서 갱신 시점의 B6 실행: user service `wbq-b6-placement.service`, 시작 `2026-08-18T01:59:19Z`, global route 0회. 이 문장을 현재 상태로 가정하지 말고 `systemctl`, `pgrep`, invocation/report JSON과 log를 다시 확인한다.
+
+보존해야 하는 routed ODB SHA-256:
+
+```text
+Frozen A  964adc9cf68aceac1fd6686d7c586ffbd295ed9a35f6b54628ddf81981cbc5ad
+B         ab6cddf83dee124e9ae388b5cbe8c6fbda6665782870e1c4a57f83a83a174235
+B2        2c928b19ab5b1dcbcd89ec36d8d0b18963a8b03c9776ecc7325509332e98235d
+```
+
 ## 4. 절대 작업 원칙
 
 ### 4.1 정확성
@@ -145,6 +177,82 @@ unknown
 - 각 대형 단계는 재시작 가능한 ODB/SDC checkpoint를 만든다.
 - 중단된 결과는 `interrupted`, `timeout`, `oom`, `tool_error`, `design_fail` 중 하나로 분류한다.
 - 실패 시 같은 명령을 무한 반복하지 않는다. 원인과 다음 변경 변수를 먼저 문서화한다.
+
+#### 4.3.1 무로그 장시간 실행 자동 진단 계약
+
+로그가 한동안 출력되지 않는다는 사실만으로 정상 계산을 멈추지 않는다. 반대로 프로세스가 존재하고 CPU를 사용한다는 사실만으로 진행 중이라고 단정하지 않는다. 모든 대형 runner에 다음 감시 계약을 적용한다.
+
+1. 대형 작업은 terminal과 분리된 user `systemd` service 또는 동등한 persistent runner로 실행한다. VPN, SSH, VS Code 또는 Codex terminal 연결이 끊겨도 계산이 계속되어야 한다.
+2. 시작 전에 stage, variant, exact command, service, wrapper PID, compute PID, 시작 시각, log, checkpoint, 예상 artifact, 입력 hash, invocation limit을 JSON으로 기록한다.
+3. runner는 `INT`/`TERM`/tool exit를 trap하거나 동등한 방식으로 받아 exit code, signal, 마지막 checkpoint, 산출물 존재 여부, 보호 artifact hash를 fail-closed manifest에 남긴다.
+4. stage별 정상 heartbeat를 정의한다. log mtime뿐 아니라 process CPU time, `/proc/<pid>/io`, RSS, thread 수, output/checkpoint 크기, stage marker를 함께 비교한다.
+5. 기본 감시 주기는 2~5분이다. log mtime이 15분 이상 변하지 않으면 `SILENCE_WARNING`, 30분 이상이면 첫 진단 snapshot, 그 후 10~15분 뒤 두 번째 snapshot을 남긴다. 도구 특성이나 과거 정상 runtime에 더 적합한 기준이 있으면 그 근거를 manifest에 기록하고 조정한다.
+6. 다음을 모두 확인하기 전에는 `PATHOLOGICAL_STALL`로 판정하지 않는다.
+   - 두 개 이상의 snapshot에서 stage와 핵심 stack이 동일하다.
+   - log, checkpoint, output, `/proc/<pid>/io`에 의미 있는 전진이 없다.
+   - thread별 CPU 상태가 비정상적으로 고정되어 있거나 모든 worker가 대기한다.
+   - source 또는 공식 동작을 조사했을 때 계산 복잡도가 현재 설계 크기에서 비현실적이거나 deadlock/무한 retry 근거가 있다.
+   - 과거 유효 runtime 또는 시작 시 계산한 stage budget을 현저히 초과했다.
+7. stage budget은 임의의 고정 timeout으로 만들지 않는다. 가능한 경우 `max(과거 유효 runtime의 3배, 설계 크기·알고리즘 복잡도 기반 상한)`을 사용하고 근거를 기록한다. 시간 초과 하나만으로 종료하지 않는다.
+8. RAM 부족, OOM killer, 지속적인 swap thrashing, tmpfs/디스크의 안전 여유 부족, process `D` state, tool fatal/error는 로그 silence와 별도로 즉시 조사한다.
+
+권장 read-only 진단 묶음:
+
+```bash
+date -u
+systemctl --user status <unit> --no-pager -l
+systemctl --user show <unit> -p ActiveState -p SubState -p MainPID -p ExecMainStatus
+pgrep -a -x openroad
+ps -eo pid,ppid,stat,etime,time,%cpu,%mem,rss,nlwp,wchan:32,cmd --sort=-%cpu
+stat <log> <checkpoint-or-output>
+tail -n 200 <log>
+cat /proc/<compute-pid>/status
+cat /proc/<compute-pid>/io
+df -h /dev/shm /home/forstobpim
+free -h
+vmstat 1 5
+```
+
+두 snapshot으로도 원인이 불명확하고 권한상 안전하면 compute PID에 짧은 debugger attach를 사용하여 모든 thread stack을 수집한 뒤 즉시 detach한다. attach 자체가 프로세스를 잠시 멈출 수 있음을 evidence에 기록한다. stack을 수집하지 못하면 source, symbols, `/proc` 상태와 log로 대체하며 추정을 사실로 표현하지 않는다.
+
+#### 4.3.2 자동 복구 의사결정
+
+`PATHOLOGICAL_STALL` 또는 명확한 resource/tool failure가 확인되면 사용자가 자리에 없더라도 다음 안전 범위 안에서 원인 분석과 복구를 계속한다.
+
+1. 현재 compute PID와 service cgroup을 다시 확인한다. 다른 OpenROAD, shell, Codex, log tail을 종료 대상으로 오인하지 않는다.
+2. 입력 hash, invocation count, global-route count, 마지막 정상 checkpoint와 보호 artifact hash를 먼저 봉인한다.
+3. checkpoint를 새로 쓸 수 있고 resource 위험을 키우지 않는 경우에만 checkpoint를 만든다. 정체된 명령이 checkpoint API를 받을 수 없으면 억지로 쓰지 않는다.
+4. compute process에 먼저 `SIGTERM`을 보내 wrapper가 FAIL manifest를 마무리하게 한다. grace period 뒤에도 살아 있고 데이터 손상 위험이 명확할 때만 정확한 PID에 대한 추가 조치를 검토한다. broad `pkill`, 재귀 삭제, service 전체 오인 종료를 금지한다.
+5. 실패한 variant는 FAIL로 봉인하고 같은 variant의 대형 작업 또는 global route를 재실행하지 않는다.
+6. source와 live stack을 연결해 `algorithmic_explosion`, `deadlock_or_livelock`, `resource_exhaustion`, `log_buffering_only`, `tool_bug`, `design_legality_failure`, `unknown` 중 하나로 분류한다.
+7. 해결 가능한 원인이면 한 개의 독립 변수만 바꾼 새 variant를 만든다. 기존 RTL/netlist/SDC/fence가 바뀌지 않으면 sealed cheap evidence 재사용 근거와 byte hash 일치를 기록한다.
+8. 새 대형 실행 전에 최소 smoke test, syntax/static check, input reopen, target object 존재, checkpoint write, authorization hash를 다시 검증한다. 실행 Tcl 또는 wrapper가 바뀌면 이전 authorization은 폐기하고 새 hash로 재발급한다.
+9. 새 variant의 runner는 이전 실패 경로가 실제로 제거되었는지 source text와 runtime marker 양쪽에서 검증한다.
+10. 정상 진행이 확인되면 계속 감시한다. 단순히 새 작업을 시작했다는 이유로 최종 응답을 내거나 작업을 완료로 선언하지 않는다.
+
+자동 변경 허용 범위:
+
+- 새 variant 디렉터리, runner, Tcl/config, parser, manifest, checkpoint, bounded local physical ECO
+- 같은 기능·netlist를 유지하는 legalizer/placer/router 알고리즘 선택 변경
+- 진단용 read-only script와 stage heartbeat 추가
+- 실패한 실행의 fail-closed evidence 생성
+
+사용자 확인이 필요한 범위:
+
+- RTL 기능, interface, protocol 또는 architecture contract를 바꾸는 변경
+- 유료 자원, 새 외부 서비스, credential 또는 권한 확대
+- 기존 artifact 삭제·덮어쓰기, 광범위한 source/toolchain 변경
+- 제조/signoff 목표로의 범위 확대
+
+단, 이미 승인된 Phase 5 구조 개선 루프 안에서 명시적 evidence와 cheap gate를 갖춘 최소 RTL ECO는 이 문서의 기존 규율에 따라 진행할 수 있다. 기능 계약을 바꾸거나 해석이 여러 가지면 사용자에게 요청한다.
+
+#### 4.3.3 B5에서 확인된 재발 방지 규칙
+
+- 수백만 grouped cells에 full-design `-use_diamond_legalizer`를 적용하지 않는다.
+- OpenROAD `placeGroups()`의 group refine/anneal처럼 셀 수에 비례한 대규모 단일-thread loop는 실행 전 source와 예상 iteration 수를 계산한다.
+- `UNPLACED` status만 설정한 뒤 incremental negotiation이 셀을 자동 재삽입할 것이라고 가정하지 않는다. 작은 ODB smoke로 실제 동작을 먼저 확인한다.
+- B4처럼 위반이 소수의 movable-vs-fixed overlap으로 축소되면 fixed tapcell을 움직이거나 full-design legalizer를 다시 돌리지 않는다. 문제 movable cell의 검증된 합법 anchor 또는 bounded local placement ECO를 우선한다.
+- `check_placement`, 독립 reopen audit, fence audit가 모두 PASS하기 전에 global route를 시작하지 않는다.
 
 ### 4.4 저장소 안전
 
@@ -574,6 +682,35 @@ RESEARCH ARTIFACT — NOT FOR FABRICATION
 - 같은 blocker가 반복되면 증거를 모아 원인을 분류하고 다른 실험 축으로 전환한다.
 - 시간 자체는 중단 기준이 아니다. 정확성, 재현성, 리소스 안전, 목표 경계가 중단 기준이다.
 - 각 단계가 끝날 때 이 문서를 다시 읽고 최종 목표와 비목표에서 벗어나지 않았는지 확인한다.
+
+### 18.1 자율 실행의 terminal condition
+
+- 승인된 장시간 service가 실행 중이거나 로컬에서 진단·수정 가능한 실패가 남아 있으면 작업을 단순 상태 보고로 끝내지 않는다.
+- 사용자가 자리에 없거나 응답하지 않는 것은 blocker가 아니다. 위의 자동 변경 허용 범위 안에서 monitor → diagnose → seal → repair → smoke → new variant 순환을 계속한다.
+- 단계가 정상 종료되면 exit code, marker, output, independent audit, hash를 확인하고 해당 gate가 명시적으로 승인한 다음 단계만 시작한다.
+- 외부 입력·권한·credential·유료 자원 또는 의미가 달라지는 사용자 선택 없이는 더 진행할 수 없을 때만 정확한 blocker와 마지막 안전 checkpoint를 보고한다.
+- 실패를 PASS로 바꾸거나 gate를 우회하는 방식으로 terminal condition을 만족시키지 않는다.
+
+### 18.2 현재 B6부터 Phase 10까지의 재개 계획
+
+1. `wbq-b6-placement.service`, OpenROAD PID, B6 invocation/report/log/checkpoint를 확인한다. 이미 완료됐으면 재실행하지 않는다.
+2. B6 placement가 끝날 때까지 무로그 자동 진단 계약으로 감시한다.
+3. B6 anchor 두 개가 지정 DBU/orientation에서 `LOCKED`인지, placement overlap/padding/fence/unplaced가 모두 0인지 확인하고 별도 OpenROAD reopen audit를 수행한다.
+4. placement FAIL이면 global route를 시작하지 않는다. post-RUDY 또는 post-legalization checkpoint를 보존하고 원인을 분류하여 B7 새 variant를 만든다.
+5. placement PASS이면 B6 전용 global-route Tcl, single-shot wrapper, parser, strict gate가 존재하고 모든 variant/path/hash/token이 B6인지 검토한다. B5 스크립트를 이름만 바꿔 무검증 재사용하지 않는다.
+6. B6 global route를 정확히 1회 실행한다. CUGR congestion iteration도 계약값 1회를 유지하고 invocation count를 manifest에 기록한다.
+7. congestion log를 문자열 비교 AWK가 아니라 Python 직접 숫자 파서로 분석하여 RRR residual, overflow edges/tracks, windows, layer/type/quad/spatial/category, hotspot bbox/source를 생성한다.
+8. strict Phase 6 gate에서 다음 네 조건을 독립적으로 확인한다: `residual=0`, `overflow_edges=0`, 모든 artifact hash 일치, 명시적 Phase 6 PASS.
+9. 하나라도 실패하면 `BLOCKED_RESIDUAL_CONGESTION`, `authorizes=[]`, `next_stage=null`로 B6를 봉인하고 route를 반복하지 않는다. evidence 기반 B7 최소 ECO로 돌아간다.
+10. 모두 PASS일 때만 B6 전용 Phase 6 CTS를 실행하고 clock buffer/net/sink, placement legality, ODB/SDC reopen과 hash를 감사한다.
+11. CTS PASS가 승인한 경우에만 post-CTS global route를 1회 실행한다. post-CTS residual과 overflow도 다시 0이어야 Phase 7을 승인한다.
+12. Phase 7 detailed route에서 terminal completion, output reopen, DRC, antenna, timing/slew/cap/fanout을 수치로 기록한다. 이후 RTL GDS를 stream-out하고 KLayout 독립 readback으로 top, bbox, hierarchy, shape/layer를 검증한다.
+13. Phase 8에서 canonical TSV/micro-bump/HBM overlay와 RTL GDS의 DBU, bbox, orientation, layer policy, 두 개 이상 anchor를 검증한다.
+14. Phase 9에서 RTL GDS와 overlay를 한 번 병합하고 고정 카메라 render를 만든다. anchor residual, top instance 수, die boundary와 output hash를 검사한다.
+15. Phase 10에서 Phase 6~9 PASS chain, 모든 recorded artifact hash, Frozen A/B/B2 보존 hash, OpenROAD 최종 0개, 깨끗한 임시 디렉터리에서 byte-identical GDS 재생성을 독립 감사한다.
+16. 모든 조건이 실제 PASS일 때만 `PHASE10_COMPLETE`를 기록한다. 최종 결과는 항상 `RESEARCH ARTIFACT — NOT FOR FABRICATION`이다.
+
+현재 B6 이후 스크립트를 새로 만들거나 B5 framework에서 parameterize할 때도 각 단계의 preflight/authorization/one-shot/refuse-overwrite/fail-closed 규칙을 유지한다. 다음 Phase는 반드시 이전 manifest의 `authorizes` token과 현재 파일 hash가 동시에 일치할 때만 시작한다.
 
 ## 19. 첫 실행 순서
 

@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-18T01:57:44.053275+00:00",
+  "variant": "B6",
+  "decision": "PASS",
+  "conditions": {
+    "selected_targeted_anchor_lock": "PASS",
+    "preauthorization_fail_closed": "PASS",
+    "b5_failed_before_route": "PASS",
+    "b5_protected_artifacts_preserved": "PASS",
+    "sealed_cheap_gate_9_of_9": "PASS",
+    "sealed_mapped_assertions_20_of_20": "PASS",
+    "sealed_workload_profiles_6_of_6": "PASS",
+    "mapped_netlist_unchanged": "PASS",
+    "exact_two_anchor_targets": "PASS",
+    "full_design_diamond_forbidden": "PASS",
+    "targeted_anchor_lock_present": "PASS",
+    "failed_unplace_path_removed": "PASS",
+    "checkpointing_present": "PASS",
+    "single_route_policy": "PASS"
+  },
+  "evidence_reuse_justification": "B6 changes only detailed-placement recovery commands; RTL, mapped netlist, SDC, fence geometry, and RUDY policy are byte/command identical to the sealed B5 inputs.",
+  "inputs": {
+    "b6_eco_decision": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b6/b6_eco_decision.json",
+      "sha256": "696b5523894a7edebc1a50e3ada53918662c2e2301d80a87fe3d3bc43d128d80"
+    },
+    "b5_placement_report": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b5/physical/b5_placement_execution_report.json",
+      "sha256": "8bdb68f02163333b51f39bb261c0ba223144db1d038fe1fd111f858072eb6316"
+    },
+    "b5_cheap_gate_manifest": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b5/cheap_gate_manifest.json",
+      "sha256": "cbac1c5e6fd07e49f436ffe15e779fc566b78dae78e0d063d4b1172fb60481ab"
+    },
+    "b5_mapped_locality_audit": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b5/b5_mapped_locality_audit.json",
+      "sha256": "6eccb6a7d421a7171283ab3a7ac395d77dfee19b6b56e37c422a87bbdc6cda4f"
+    },
+    "b5_workload_accuracy": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/results/quad_local_b5_actual_trace/accuracy_summary.json",
+      "sha256": "25db95af3d7a72aa122a1108b5e1e15b07777708b9acb1ae414b6b5d45a2fffb"
+    },
+    "b2_mapped_netlist": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b2/logic_die_normalization_hbm_quad_local_b2_top_sky130.v",
+      "sha256": "674a1b7557aaa6335dd90fa20c87aad3e447de87c00402b8b0ed25a940be1cf5"
+    },
+    "b5_mapped_netlist": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b5/logic_die_normalization_hbm_quad_local_b2_top_sky130.v",
+      "sha256": "674a1b7557aaa6335dd90fa20c87aad3e447de87c00402b8b0ed25a940be1cf5"
+    },
+    "b6_placement_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/wbq_quad_local_b6_targeted_place.tcl",
+      "sha256": "15506d8d0b817cf77d6daf0f0f8f02f36fc48d9ffec4e0eadc5f7d32544a9549"
+    }
+  },
+  "authorizes": [
+    "B6_PLACEMENT",
+    "B6_SINGLE_GLOBAL_ROUTE"
+  ],
+  "next_stage": "B6_PLACEMENT"
+}

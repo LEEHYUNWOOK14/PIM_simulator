@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-18T01:57:43.973041+00:00",
+  "variant": "B6",
+  "decision": "SELECT_B6_TARGETED_ANCHOR_LOCK_ECO",
+  "status": "SELECTED_PENDING_AUTHORIZATION",
+  "change_scope": "physical recovery only; RTL, mapped netlist, constraints, fences, RUDY policy, and route policy unchanged",
+  "root_cause": {
+    "stage": "B5 diamond detailed placement",
+    "confirmed_active_stack": [
+      "dpl::Opendp::anneal(dpl::Group*)",
+      "dpl::Opendp::placeGroups()",
+      "dpl::Opendp::diamondDPL()"
+    ],
+    "grouped_cells": 3676196,
+    "anneal_attempts_per_pass": 367619600,
+    "maximum_anneal_passes": 3,
+    "maximum_anneal_attempts": 1102858800,
+    "effective_parallelism": "one active legalizer thread; worker pools idle",
+    "observed_wall_seconds": 41243,
+    "observed_result": "no placement ODB or SDC produced"
+  },
+  "selected_eco": {
+    "algorithm": "lock the two B4 offenders at their sealed, legal B2 anchors before RUDY and use the negotiation legalizer",
+    "anchors": [
+      {
+        "instance": "u_b2_implementation/u_pcu/u_quad_datapath/load_slew427175",
+        "origin_dbu": [
+          6347540,
+          2535040
+        ],
+        "orientation": "MX"
+      },
+      {
+        "instance": "u_b2_implementation/u_quad_local_adapter/wire440835",
+        "origin_dbu": [
+          4686940,
+          1468800
+        ],
+        "orientation": "R180"
+      }
+    ],
+    "reason": "B4 proved that all remaining violations are these two movable buffers colliding with fixed tapcells; preserving each buffer's legal B2 anchor prevents that failure mode while allowing surrounding cells to legalize normally",
+    "diamond_full_design": "forbidden",
+    "primary_max_displacement_um": [
+      1000,
+      1000
+    ],
+    "primary_site_window": 100,
+    "primary_row_window": 20,
+    "checkpoint_policy": "persist post-RUDY and post-legalization ODBs in the isolated B6 artifact root"
+  },
+  "functional_evidence": {
+    "policy": "reuse sealed B5 cheap 9/9 because B6 changes no RTL, mapped netlist, SDC, or fence geometry",
+    "fresh_physical_authorization_required": true
+  },
+  "global_route": {
+    "invocation_limit": 1,
+    "cugr_congestion_iterations": 1
+  },
+  "inputs": {
+    "b5_placement_report": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b5/physical/b5_placement_execution_report.json",
+      "sha256": "8bdb68f02163333b51f39bb261c0ba223144db1d038fe1fd111f858072eb6316"
+    },
+    "b5_placement_log": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b5/physical/b5_place.log",
+      "sha256": "cf78a070a3e0d20e0a106a441ecdd45650f46f51fa293e04d7b8386204a1e1e2"
+    }
+  },
+  "authorizes": [],
+  "next_stage": "B6_PHYSICAL_AUTHORIZATION"
+}
