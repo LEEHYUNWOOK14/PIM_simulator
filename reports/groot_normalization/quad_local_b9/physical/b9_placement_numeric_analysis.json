@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "variant": "B9",
+  "stage": "placement_numeric_analysis",
+  "generated_at_utc": "2026-08-18T07:05:20.289834+00:00",
+  "status": "PASS",
+  "checks": {
+    "placement_manifest_pass": true,
+    "log_hash_matches_manifest": true,
+    "exit_zero": true,
+    "sealed_b7_rudy_input": true,
+    "post_legalize_checkpoint": true,
+    "nine_anchor_runtime_marker": true,
+    "failed_legality_signature_absent": true,
+    "final_place_token": true,
+    "nine_verified_locked_anchors": true,
+    "legal_placement": true,
+    "generic_placement_audit_pass": true,
+    "detailed_placement_runtime_present": true
+  },
+  "inputs": {
+    "placement_manifest": {
+      "path": "reports/groot_normalization/quad_local_b9/physical/b9_placement_execution_report.json",
+      "bytes": 4460,
+      "sha256": "48ce171e8a8cef865f68da4d74444c837dafda1df2a2dbf5c7c6a196797edd58"
+    },
+    "placement_log": {
+      "path": "reports/groot_normalization/quad_local_b9/physical/b9_place.log",
+      "bytes": 6942,
+      "sha256": "05b15e662e7ce425f02e0d4bde5a9e126c23d179a8a74b075602a478a62b6d20"
+    }
+  },
+  "metrics": {
+    "locked_anchor_targets_before": 2,
+    "locked_anchor_targets_after": 9,
+    "added_anchor_targets": 7,
+    "drc_penalty": 100,
+    "anchors_verified": 9,
+    "existing_anchors_verified": 2,
+    "added_anchors_verified": 7,
+    "negotiation_initial_violations": 519,
+    "negotiation_pre_mirroring_remaining_violations": 11,
+    "detailed_placement_runtime_seconds": 361.96,
+    "placement_violations": 0,
+    "elapsed_wall": "8:41.24",
+    "peak_rss_kib": 13981000
+  },
+  "authorizes": [
+    "B9_TARGETED_PLACEMENT_REOPEN_AUDIT"
+  ],
+  "next_stage": "B9_TARGETED_PLACEMENT_REOPEN_AUDIT"
+}

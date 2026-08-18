@@ -82,6 +82,28 @@ class B9AnchorRecoveryContractTest(unittest.TestCase):
         ):
             self.assertIn(token, text)
 
+    def test_numeric_and_targeted_reopen_require_nine_locked_anchors(self) -> None:
+        analyzer = (ROOT / "tools/analyze_b9_placement_log.py").read_text()
+        audit_tcl = (ROOT / "verification/groot_normalization/audit_wbq_b9_targeted_placement.tcl").read_text()
+        audit_runner = (ROOT / "verification/groot_normalization/run_wbq_b9_targeted_placement_audit.sh").read_text()
+        for token in (
+            "nine_anchor_runtime_marker",
+            "nine_verified_locked_anchors",
+            "negotiation_pre_mirroring_remaining_violations",
+            "B9_TARGETED_PLACEMENT_REOPEN_AUDIT",
+        ):
+            self.assertIn(token, analyzer)
+        self.assertEqual(len(re.findall(r"^  \{u_b2_implementation/", audit_tcl, re.MULTILINE)), 9)
+        for token in ('actual_status ne "LOCKED"', "anchors_verified != 9", "outside != 0", "unplaced != 0", 'violations ne ""'):
+            self.assertIn(token, audit_tcl)
+        for token in (
+            "placement_numeric_analysis",
+            "compute_pid",
+            "anchors_locked':9",
+            "B9_GLOBAL_ROUTE_AUTHORIZATION",
+        ):
+            self.assertIn(token, audit_runner)
+
 
 if __name__ == "__main__":
     unittest.main()

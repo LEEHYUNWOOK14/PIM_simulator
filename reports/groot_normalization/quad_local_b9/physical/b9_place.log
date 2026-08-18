@@ -1,0 +1,106 @@
+WBQ_B9_PLACE_START_UTC=2026-08-18T06:50:58Z
+WBQ_B9_PLACE_INVOCATION_COUNT=1
+WBQ_B9_PLACE_GLOBAL_ROUTE_INVOCATIONS=0
+WBQ_B9_PLACE_SERVICE=wbq-b9-placement.service
+WBQ_B9_PLACE_WRAPPER_PID=853869
+WBQ_B9_PLACE_SINGLE_CHANGE=locked_anchor_targets
+WBQ_B9_PLACE_LOCKED_ANCHOR_TARGETS=9
+WBQ_B9_PLACE_DRC_PENALTY=100
+WBQ_B9_PLACE_LAUNCHER_PID=854789
+WBQ_B9_PLACE_COMPUTE_PID=854791
+WBQ_B9_ANCHOR_LOCKED name={u_b2_implementation/u_pcu/u_quad_datapath/load_slew427175} origin_dbu={6347540 2535040} orient={MX} mode={existing}
+WBQ_B9_ANCHOR_LOCKED name={u_b2_implementation/u_quad_local_adapter/wire440835} origin_dbu={4686940 1468800} orient={R180} mode={existing}
+WBQ_B9_ANCHOR_LOCKED name={u_b2_implementation/u_quad_local_adapter/wire440455} origin_dbu={7308480 4417280} orient={MY} mode={added}
+WBQ_B9_ANCHOR_LOCKED name={u_b2_implementation/u_quad_local_adapter/wire440867} origin_dbu={4287200 1392640} orient={MY} mode={added}
+WBQ_B9_ANCHOR_LOCKED name={u_b2_implementation/u_quad_local_adapter/wire440876} origin_dbu={4285360 1479680} orient={R180} mode={added}
+WBQ_B9_ANCHOR_LOCKED name={u_b2_implementation/u_quad_local_adapter/wire441097} origin_dbu={4723740 6636800} orient={R0} mode={added}
+WBQ_B9_ANCHOR_LOCKED name={u_b2_implementation/u_quad_local_adapter/wire441921} origin_dbu={4376900 2186880} orient={MX} mode={added}
+WBQ_B9_ANCHOR_LOCKED name={u_b2_implementation/u_quad_local_adapter/wire441940} origin_dbu={4345620 2208640} orient={R0} mode={added}
+WBQ_B9_ANCHOR_LOCKED name={u_b2_implementation/u_quad_local_adapter/wire441994} origin_dbu={4293640 2224960} orient={MX} mode={added}
+WBQ_B9_ANCHOR_RECOVERY_INPUT odb=/dev/shm/wbq_b7_phase6_10/quad_local_b7/b7_rudy.odb
+WBQ_B9_ANCHOR_RECOVERY_POLICY anchor_targets=9 added_targets=7 max_displacement={1000 1000} site_window=100 row_window=20 drc_penalty=100 full_design_diamond=0
+[INFO DPL-0006] Core area: 81307911.98 um^2
+[INFO DPL-0007] Movable instances area: 29779922.56 um^2
+[INFO DPL-0008] Fixed instances area within core: 1355289.83 um^2
+[INFO DPL-0009] Utilization: 38.3%
+[INFO DPL-0005] Diamond search max displacement: +/- 2173 sites horizontally, +/- 367 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-100 sites horizontally, +/-20 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-2173 sites, +/-367 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 100.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 4823417 cells
+          |      Total |  Illegal |  Illegal
+Iteration | Violations |    Cells |    Sites
+---------------------------------------------
+        0 |        519 |       249 |       177
+        1 |        483 |       243 |       147
+        2 |        483 |       243 |       147
+        3 |        483 |       243 |       147
+        4 |        483 |       243 |       147
+[WARNING DPL-0700] Negotiation phase 1: violations stuck at 483 for 3 consecutive iterations.
+Using old diamond search for 243 remaining illegal cells.
+diamond recovery: recovered 232/243 stuck cells.
+Negotiation phase 2: isolation point active, 1000 iterations.
+      400 |         11 |        11 |         0
+      403 |         11 |        11 |         0
+[WARNING DPL-0702] Negotiation phase 2: violations stuck at 11 for 3 consecutive iterations. Using diamond search for 11 remaining illegal cells.
+diamond recovery: recovered 0/11 stuck cells.
+[WARNING DPL-0701] NegotiationLegalizer did not fully converge. Violations remain: 11
+[INFO DPL-0500] Runtime: 361.96s
+Placement Analysis
+---------------------------------
+total displacement   15127725.5 u
+average displacement        3.1 u
+max displacement          843.0 u
+original HPWL        95030288.8 u
+legalized HPWL       107555083.6 u
+delta HPWL                   13 %
+
+WBQ_B9_NINE_ANCHOR_NEGOTIATION DONE
+WBQ_B9_POST_LEGALIZE_CHECKPOINT PASS odb=/dev/shm/wbq_b9_phase6_10/quad_local_b9/b9_post_legalize.odb
+WBQ_B9_ANCHOR_VERIFIED name={u_b2_implementation/u_pcu/u_quad_datapath/load_slew427175} origin_dbu={6347540 2535040} orient={MX} status={LOCKED} mode={existing}
+WBQ_B9_ANCHOR_VERIFIED name={u_b2_implementation/u_quad_local_adapter/wire440835} origin_dbu={4686940 1468800} orient={R180} status={LOCKED} mode={existing}
+WBQ_B9_ANCHOR_VERIFIED name={u_b2_implementation/u_quad_local_adapter/wire440455} origin_dbu={7308480 4417280} orient={MY} status={LOCKED} mode={added}
+WBQ_B9_ANCHOR_VERIFIED name={u_b2_implementation/u_quad_local_adapter/wire440867} origin_dbu={4287200 1392640} orient={MY} status={LOCKED} mode={added}
+WBQ_B9_ANCHOR_VERIFIED name={u_b2_implementation/u_quad_local_adapter/wire440876} origin_dbu={4285360 1479680} orient={R180} status={LOCKED} mode={added}
+WBQ_B9_ANCHOR_VERIFIED name={u_b2_implementation/u_quad_local_adapter/wire441097} origin_dbu={4723740 6636800} orient={R0} status={LOCKED} mode={added}
+WBQ_B9_ANCHOR_VERIFIED name={u_b2_implementation/u_quad_local_adapter/wire441921} origin_dbu={4376900 2186880} orient={MX} status={LOCKED} mode={added}
+WBQ_B9_ANCHOR_VERIFIED name={u_b2_implementation/u_quad_local_adapter/wire441940} origin_dbu={4345620 2208640} orient={R0} status={LOCKED} mode={added}
+WBQ_B9_ANCHOR_VERIFIED name={u_b2_implementation/u_quad_local_adapter/wire441994} origin_dbu={4293640 2224960} orient={MX} status={LOCKED} mode={added}
+[INFO DPL-0020] Mirrored 1543266 instances
+[INFO DPL-0021] HPWL before          107555083.6 u
+[INFO DPL-0022] HPWL after           104722282.9 u
+[INFO DPL-0023] HPWL delta               -2.6 %
+WBQ_B9_PLACE_LEGALITY violations={}
+WBQ_B9_NINE_ANCHOR_PLACE PASS odb=/dev/shm/wbq_b9_phase6_10/quad_local_b9/b9_place.odb
+	Command being timed: "/home/forstobpim/OpenROAD-flow-scripts/tools/install/OpenROAD/bin/openroad -exit -no_init -threads 16 -no_splash /home/forstobpim/PIM_simulator/verification/groot_normalization/wbq_quad_local_b9_anchor_place.tcl"
+	User time (seconds): 507.85
+	System time (seconds): 13.28
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 8:41.24
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 13981000
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 4673251
+	Voluntary context switches: 30
+	Involuntary context switches: 2904
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 72
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+WBQ_B9_PLACE_EXIT_CODE=0
+WBQ_QUAD_PLACE_FENCES regions=4 grouped=3676196 outside=0 unplaced=0
+WBQ_QUAD_PLACE_LEGALITY violations={}
+WBQ_QUAD_LOCAL_PLACEMENT_AUDIT PASS
+WBQ_B9_PLACE_AUDIT_EXIT_CODE=0
+WBQ_B9_PLACE_END_UTC=2026-08-18T07:01:50Z

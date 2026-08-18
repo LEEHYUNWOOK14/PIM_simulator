@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "variant": "B9",
+  "stage": "nine_anchor_placement",
+  "status": "PASS",
+  "start_utc": "2026-08-18T06:50:58Z",
+  "invocation_count": 1,
+  "global_route_invocations": 0,
+  "service": "wbq-b9-placement.service",
+  "wrapper_pid": 853869,
+  "launcher_pid": 854789,
+  "compute_pid": 854791,
+  "audit_compute_pid": 863457,
+  "policy": {
+    "single_independent_change": "locked_anchor_targets",
+    "locked_anchor_targets_before": 2,
+    "locked_anchor_targets_after": 9,
+    "added_anchor_targets": 7,
+    "drc_penalty": 100,
+    "full_design_diamond": false,
+    "sealed_b7_rudy_checkpoint": true,
+    "post_legalize_checkpoint": true
+  },
+  "resources_before": {
+    "artifact_free_kib": 37678064,
+    "mem_available_kib": 96923284,
+    "swap_total_kib": 0
+  },
+  "inputs": {
+    "decision": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b9/b9_eco_decision.json",
+      "sha256": "d9b6b2e6b7b9bda81f6a96f8549c5fc2ee9a303289ea728f6ffa41c33ab99519"
+    },
+    "smoke": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b9/physical/b9_smoke_execution_report.json",
+      "sha256": "5b76bcc3028b76bf3b686d928323d8e73869f9623934340e7d4741fb1095990b"
+    },
+    "authorization": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b9/b9_physical_authorization.json",
+      "sha256": "92391eac594d65a22764d3e709da53a5b3de1726ee5ad9f94e1443c53b73ccba"
+    },
+    "b7_placement_report": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b7/physical/b7_placement_execution_report.json",
+      "sha256": "1da19b35c152629022ba1927f2f5e538b880d3eec90de28f6c8e3e075e961fec"
+    },
+    "b7_rudy_odb": {
+      "path": "/dev/shm/wbq_b7_phase6_10/quad_local_b7/b7_rudy.odb",
+      "sha256": "3149b2b12cb6fc3f4a83910cbfebb2170594d1cbdd4fc7aa87c7ab1a344fb9c3"
+    },
+    "b2_place_sdc": {
+      "path": "/home/forstobpim/OpenROAD-flow-scripts/flow/results/sky130hd/normalization_hbm_quad_local_b2/base/3_place.sdc",
+      "sha256": "51ff83730acbf6710614999f79a9dd7d7b8aff7824f4d36a4b05b3c88f33a5fd"
+    },
+    "placement_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/wbq_quad_local_b9_anchor_place.tcl",
+      "sha256": "07283749d49e79df7086f0bdb92e898d01711eb78705388866d1943659f02aac"
+    },
+    "generic_audit_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/audit_wbq_quad_local_placement.tcl",
+      "sha256": "e1c4e22a3ca3d36cebe8b88f148627810babd7ef3e6d34832b4d29c76426b9ab"
+    }
+  },
+  "protected_hashes_before": {
+    "frozen_A": "964adc9cf68aceac1fd6686d7c586ffbd295ed9a35f6b54628ddf81981cbc5ad",
+    "B": "ab6cddf83dee124e9ae388b5cbe8c6fbda6665782870e1c4a57f83a83a174235",
+    "B2": "2c928b19ab5b1dcbcd89ec36d8d0b18963a8b03c9776ecc7325509332e98235d"
+  },
+  "authorizes": [
+    "B9_TARGETED_PLACEMENT_REOPEN_AUDIT"
+  ],
+  "end_utc": "2026-08-18T07:01:50Z",
+  "exit_code": 0,
+  "audit_exit_code": 0,
+  "termination_signal": null,
+  "failure_class": null,
+  "protected_hashes_after": {
+    "frozen_A": "964adc9cf68aceac1fd6686d7c586ffbd295ed9a35f6b54628ddf81981cbc5ad",
+    "B": "ab6cddf83dee124e9ae388b5cbe8c6fbda6665782870e1c4a57f83a83a174235",
+    "B2": "2c928b19ab5b1dcbcd89ec36d8d0b18963a8b03c9776ecc7325509332e98235d"
+  },
+  "protected_artifacts_preserved": true,
+  "resources_after": {
+    "artifact_free_kib": 31214112,
+    "mem_available_kib": 90500376
+  },
+  "checkpoints": {
+    "post_legalize": {
+      "path": "/dev/shm/wbq_b9_phase6_10/quad_local_b9/b9_post_legalize.odb",
+      "sha256": "2b2ec1f02b0630d6f48f6b1b3282a940b1d08223616bc7879c944062c35f0645"
+    }
+  },
+  "outputs": {
+    "b9_place_odb": {
+      "path": "/dev/shm/wbq_b9_phase6_10/quad_local_b9/b9_place.odb",
+      "sha256": "3bb3f2e70ffea8eac012bde25557e750f0346f65270e664bddb90e2ce60143ec"
+    },
+    "b9_place_sdc": {
+      "path": "/dev/shm/wbq_b9_phase6_10/quad_local_b9/b9_place.sdc",
+      "sha256": "51ff83730acbf6710614999f79a9dd7d7b8aff7824f4d36a4b05b3c88f33a5fd"
+    },
+    "log": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b9/physical/b9_place.log",
+      "sha256": "05b15e662e7ce425f02e0d4bde5a9e126c23d179a8a74b075602a478a62b6d20"
+    }
+  },
+  "runtime_policy_marker": "PASS",
+  "placement_legality_and_fence_audit": "PASS",
+  "next_stage": "B9_TARGETED_PLACEMENT_REOPEN_AUDIT"
+}
