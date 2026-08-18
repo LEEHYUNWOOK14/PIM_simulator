@@ -1,0 +1,41 @@
+WBQ_B9_GLOBAL_ROUTE_START_UTC=2026-08-18T07:10:34Z
+WBQ_B9_GLOBAL_ROUTE_INVOCATION_COUNT=1
+WBQ_B9_CUGR_CONGESTION_ITERATIONS=1
+WBQ_B9_GLOBAL_ROUTE_SERVICE=wbq-b9-global-route.service
+WBQ_B9_GLOBAL_ROUTE_WRAPPER_PID=873350
+WBQ_B9_GLOBAL_ROUTE_PLACE_ODB_SHA256=3bb3f2e70ffea8eac012bde25557e750f0346f65270e664bddb90e2ce60143ec
+WBQ_B9_GLOBAL_ROUTE_PLACE_SDC_SHA256=51ff83730acbf6710614999f79a9dd7d7b8aff7824f4d36a4b05b3c88f33a5fd
+WBQ_B9_GLOBAL_ROUTE_LAUNCHER_PID=874060
+WBQ_B9_GLOBAL_ROUTE_COMPUTE_PID=874062
+WBQ_B9_ROUTE_BUMP_PIN_COUNT 565
+WBQ_B9_ROUTE_CUGR_CONGESTION_ITERATIONS 1
+[INFO GRT-0280] Skipping net clk_i with 319254 terminals.
+[WARNING GRT-0118] Iterative RRR finished with congestion remaining (448).
+[WARNING GRT-0115] Global routing finished with congestion. Check the congestion regions in the DRC Viewer.
+Design area 31135212 um^2 38% utilization.
+WBQ_B9_SINGLE_GLOBAL_ROUTE PASS
+	Command being timed: "/home/forstobpim/OpenROAD-flow-scripts/tools/install/OpenROAD/bin/openroad -exit -no_init -threads 1 -no_splash /home/forstobpim/PIM_simulator/verification/groot_normalization/wbq_quad_local_b9_global_route.tcl"
+	User time (seconds): 1425.05
+	System time (seconds): 20.39
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 24:05.85
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 29848864
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 15
+	Minor (reclaiming a frame) page faults: 8552438
+	Voluntary context switches: 172
+	Involuntary context switches: 8836
+	Swaps: 0
+	File system inputs: 872
+	File system outputs: 24
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+WBQ_B9_GLOBAL_ROUTE_EXIT_CODE=0
+WBQ_B9_GLOBAL_ROUTE_END_UTC=2026-08-18T07:34:48Z
