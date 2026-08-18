@@ -96,4 +96,3 @@ python3 tools/check_b7_phase7_rtl_gds.py --gds "$gds" --source "$manifest" --log
   --technology "$tech" --cell-gds "$cell_gds" --converter "$converter" --output "$output_manifest"
 grep -q '"status": "PASS"' "$output_manifest"
 echo "WBQ_B7_PHASE7_RTL_GDS_STREAMOUT PASS report=$output_manifest"
-

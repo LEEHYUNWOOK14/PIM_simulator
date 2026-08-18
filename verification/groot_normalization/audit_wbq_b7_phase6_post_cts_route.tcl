@@ -25,4 +25,3 @@ if {$clock_net_count < 1 || !$has_routes || $violations ne ""} {
   error "B7 Phase 6 post-CTS route audit failed"
 }
 puts "WBQ_B7_PHASE6_POST_CTS_ROUTE_AUDIT PASS"
-

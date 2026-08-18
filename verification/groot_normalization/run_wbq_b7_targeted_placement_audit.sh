@@ -116,4 +116,3 @@ trap - INT TERM
 test "$rc" -eq 0
 grep -q '"status": "PASS"' "$report"
 echo "WBQ_B7_TARGETED_PLACEMENT_REOPEN_AUDIT PASS report=$report"
-

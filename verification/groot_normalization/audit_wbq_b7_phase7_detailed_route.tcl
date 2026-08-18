@@ -26,4 +26,3 @@ if {$clock_net_count < 1 || $signal_wire_count < 1 || !$fully_routed} {
   error "B7 Phase 7 detailed-route audit failed"
 }
 puts "WBQ_B7_PHASE7_DETAILED_ROUTE_AUDIT PASS"
-

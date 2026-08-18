@@ -151,4 +151,3 @@ with open(manifest, "x", encoding="utf-8") as stream:
 PY
 grep -q '"status": "PASS"' "$manifest"
 echo "WBQ_B7_PHASE9_FINAL_GDS PASS report=$manifest"
-

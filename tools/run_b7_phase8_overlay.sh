@@ -129,4 +129,3 @@ pathlib.Path(report).write_text(
     encoding="utf-8")
 PY
 echo "WBQ_B7_PHASE8_OVERLAY PASS report=$manifest"
-

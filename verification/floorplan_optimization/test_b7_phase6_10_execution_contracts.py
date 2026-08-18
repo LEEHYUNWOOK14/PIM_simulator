@@ -245,6 +245,10 @@ class B7Phase7To10ContractTest(unittest.TestCase):
         ):
             self.assertIn(digest, text)
         for token in (
+            "sealed_b6_gpl0307_pre_route_failure",
+            "b7_one_variable_phi_decision",
+            "b7_fresh_smoke",
+            "GPL-0307 optimizer_numerical_divergence",
             "targeted_placement_audit",
             "placement_numeric_analysis",
             "phase7_authorization",
@@ -260,4 +264,3 @@ class B7Phase7To10ContractTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

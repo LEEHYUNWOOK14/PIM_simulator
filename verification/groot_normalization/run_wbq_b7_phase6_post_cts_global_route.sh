@@ -376,4 +376,3 @@ test "$audit_rc" -eq 0
 test "$analysis_rc" -eq 0
 grep -q '"status": "PASS"' "$manifest"
 echo "WBQ_B7_PHASE6_POST_CTS_GLOBAL_ROUTE PASS report=$manifest"
-

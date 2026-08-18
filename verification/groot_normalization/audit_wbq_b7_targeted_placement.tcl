@@ -62,4 +62,3 @@ if {$anchors_verified != 2 || $grouped == 0 || $outside != 0 || $unplaced != 0 |
   error "B7 targeted placement reopen audit failed"
 }
 puts "WBQ_B7_TARGETED_PLACEMENT_REOPEN_AUDIT PASS"
-

@@ -59,4 +59,3 @@ report_design_area
 write_db $output_root/b7_quad_local_global_route.odb
 write_sdc -no_timestamp $output_root/b7_quad_local_global_route.sdc
 puts "WBQ_B7_SINGLE_GLOBAL_ROUTE PASS"
-

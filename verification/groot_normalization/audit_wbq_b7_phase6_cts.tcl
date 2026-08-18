@@ -44,4 +44,3 @@ if {$violations ne ""} {
   error "B7 post-CTS checkpoint is not placement-legal: $violations"
 }
 puts "WBQ_B7_PHASE6_CTS_AUDIT PASS"
-

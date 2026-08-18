@@ -367,4 +367,3 @@ test "$rc" -eq 0
 test "$audit_rc" -eq 0
 grep -q '"status": "PASS"' "$manifest"
 echo "WBQ_B7_PHASE6_CTS PASS report=$manifest"
-

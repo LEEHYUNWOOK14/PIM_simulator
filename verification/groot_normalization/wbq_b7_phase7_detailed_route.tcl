@@ -35,4 +35,3 @@ write_sdc -no_timestamp $output_root/b7_phase7_detailed_route.sdc
 write_def $output_root/b7_phase7_detailed_route.def
 write_verilog $output_root/b7_phase7_detailed_route.v
 puts "WBQ_B7_PHASE7_DETAILED_ROUTE PASS"
-

@@ -52,4 +52,3 @@ report_design_area
 write_db $output_root/b7_phase6_post_cts_global_route.odb
 write_sdc -no_timestamp $output_root/b7_phase6_post_cts_global_route.sdc
 puts "WBQ_B7_PHASE6_POST_CTS_GLOBAL_ROUTE PASS"
-
