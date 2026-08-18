@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "variant": "B9",
+  "stage": "b7_rudy_reopen_checkpoint_smoke",
+  "status": "PASS",
+  "start_utc": "2026-08-18T06:47:07Z",
+  "invocation_count": 1,
+  "service": "direct-cli-b9-smoke",
+  "wrapper_pid": 850875,
+  "compute_pid": 851480,
+  "audit_compute_pid": 851823,
+  "inputs": {
+    "decision": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b9/b9_eco_decision.json",
+      "sha256": "d9b6b2e6b7b9bda81f6a96f8549c5fc2ee9a303289ea728f6ffa41c33ab99519"
+    },
+    "b7_placement_report": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b7/physical/b7_placement_execution_report.json",
+      "sha256": "1da19b35c152629022ba1927f2f5e538b880d3eec90de28f6c8e3e075e961fec"
+    },
+    "b7_rudy_odb": {
+      "path": "/dev/shm/wbq_b7_phase6_10/quad_local_b7/b7_rudy.odb",
+      "sha256": "3149b2b12cb6fc3f4a83910cbfebb2170594d1cbdd4fc7aa87c7ab1a344fb9c3"
+    },
+    "b2_place_sdc": {
+      "path": "/home/forstobpim/OpenROAD-flow-scripts/flow/results/sky130hd/normalization_hbm_quad_local_b2/base/3_place.sdc",
+      "sha256": "51ff83730acbf6710614999f79a9dd7d7b8aff7824f4d36a4b05b3c88f33a5fd"
+    },
+    "smoke_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/wbq_quad_local_b9_anchor_smoke.tcl",
+      "sha256": "934ca967748d048dc5dcc0d4115abf5109822f6ff18731a545a72ff0b4122982"
+    },
+    "audit_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/audit_wbq_b9_anchor_smoke.tcl",
+      "sha256": "bd2535ba0b14d40e542913d1bcffc41115a00c3af26e13976273dc6cbe89651c"
+    },
+    "placement_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/wbq_quad_local_b9_anchor_place.tcl",
+      "sha256": "07283749d49e79df7086f0bdb92e898d01711eb78705388866d1943659f02aac"
+    }
+  },
+  "protected_hashes_before": {
+    "frozen_A": "964adc9cf68aceac1fd6686d7c586ffbd295ed9a35f6b54628ddf81981cbc5ad",
+    "B": "ab6cddf83dee124e9ae388b5cbe8c6fbda6665782870e1c4a57f83a83a174235",
+    "B2": "2c928b19ab5b1dcbcd89ec36d8d0b18963a8b03c9776ecc7325509332e98235d"
+  },
+  "authorizes": [
+    "B9_PHYSICAL_AUTHORIZATION"
+  ],
+  "end_utc": "2026-08-18T06:48:35Z",
+  "exit_code": 0,
+  "audit_exit_code": 0,
+  "termination_signal": null,
+  "protected_hashes_after": {
+    "frozen_A": "964adc9cf68aceac1fd6686d7c586ffbd295ed9a35f6b54628ddf81981cbc5ad",
+    "B": "ab6cddf83dee124e9ae388b5cbe8c6fbda6665782870e1c4a57f83a83a174235",
+    "B2": "2c928b19ab5b1dcbcd89ec36d8d0b18963a8b03c9776ecc7325509332e98235d"
+  },
+  "protected_artifacts_preserved": true,
+  "outputs": {
+    "smoke_odb": {
+      "path": "/dev/shm/wbq_b9_phase6_10/quad_local_b9/b9_smoke.odb",
+      "sha256": "2fb0ff0ca1e8d4bea36203486890aaf8d5ccdece9190484add5ed4bdfe75fde8"
+    },
+    "log": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b9/physical/b9_smoke.log",
+      "sha256": "22389173295475fef0b525ca1cbb97e0ed03201e9c7c17a11692566d71dfc72c"
+    }
+  },
+  "checks": {
+    "syntax_and_static_policy": "PASS",
+    "input_reopen": "PASS",
+    "target_objects": "PASS",
+    "checkpoint_write": "PASS",
+    "independent_checkpoint_reopen": "PASS"
+  },
+  "next_stage": "B9_PHYSICAL_AUTHORIZATION"
+}

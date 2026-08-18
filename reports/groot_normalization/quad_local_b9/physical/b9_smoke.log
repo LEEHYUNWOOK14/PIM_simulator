@@ -1,0 +1,26 @@
+WBQ_B9_SMOKE_START_UTC=2026-08-18T06:47:07Z
+WBQ_B9_SMOKE_INVOCATION_COUNT=1
+WBQ_B9_SMOKE_SERVICE=direct-cli-b9-smoke
+WBQ_B9_SMOKE_WRAPPER_PID=850875
+WBQ_B9_SMOKE_STATIC_POLICY anchor_targets=9 drc_penalty=100
+WBQ_B9_SMOKE_ANCHOR name={u_b2_implementation/u_pcu/u_quad_datapath/load_slew427175} origin_dbu={6347540 2535040} orient={MX} status={LOCKED} mode={existing}
+WBQ_B9_SMOKE_ANCHOR name={u_b2_implementation/u_quad_local_adapter/wire440835} origin_dbu={4686940 1468800} orient={R180} status={LOCKED} mode={existing}
+WBQ_B9_SMOKE_OFFENDER name={u_b2_implementation/u_quad_local_adapter/wire440455}
+WBQ_B9_SMOKE_ANCHOR name={u_b2_implementation/u_quad_local_adapter/wire440455} origin_dbu={7308480 4417280} orient={MY} status={LOCKED} mode={added}
+WBQ_B9_SMOKE_OFFENDER name={u_b2_implementation/u_quad_local_adapter/wire440867}
+WBQ_B9_SMOKE_ANCHOR name={u_b2_implementation/u_quad_local_adapter/wire440867} origin_dbu={4287200 1392640} orient={MY} status={LOCKED} mode={added}
+WBQ_B9_SMOKE_OFFENDER name={u_b2_implementation/u_quad_local_adapter/wire440876}
+WBQ_B9_SMOKE_ANCHOR name={u_b2_implementation/u_quad_local_adapter/wire440876} origin_dbu={4285360 1479680} orient={R180} status={LOCKED} mode={added}
+WBQ_B9_SMOKE_OFFENDER name={u_b2_implementation/u_quad_local_adapter/wire441097}
+WBQ_B9_SMOKE_ANCHOR name={u_b2_implementation/u_quad_local_adapter/wire441097} origin_dbu={4723740 6636800} orient={R0} status={LOCKED} mode={added}
+WBQ_B9_SMOKE_OFFENDER name={u_b2_implementation/u_quad_local_adapter/wire441921}
+WBQ_B9_SMOKE_ANCHOR name={u_b2_implementation/u_quad_local_adapter/wire441921} origin_dbu={4376900 2186880} orient={MX} status={LOCKED} mode={added}
+WBQ_B9_SMOKE_OFFENDER name={u_b2_implementation/u_quad_local_adapter/wire441940}
+WBQ_B9_SMOKE_ANCHOR name={u_b2_implementation/u_quad_local_adapter/wire441940} origin_dbu={4345620 2208640} orient={R0} status={LOCKED} mode={added}
+WBQ_B9_SMOKE_OFFENDER name={u_b2_implementation/u_quad_local_adapter/wire441994}
+WBQ_B9_SMOKE_ANCHOR name={u_b2_implementation/u_quad_local_adapter/wire441994} origin_dbu={4293640 2224960} orient={MX} status={LOCKED} mode={added}
+WBQ_B9_SMOKE_INPUT_REOPEN_AND_CHECKPOINT PASS anchors=9 offenders=7
+WBQ_B9_SMOKE_INDEPENDENT_REOPEN PASS anchors=9 offenders=7 fences=4
+WBQ_B9_SMOKE_EXIT_CODE=0
+WBQ_B9_SMOKE_AUDIT_EXIT_CODE=0
+WBQ_B9_SMOKE_END_UTC=2026-08-18T06:48:35Z
