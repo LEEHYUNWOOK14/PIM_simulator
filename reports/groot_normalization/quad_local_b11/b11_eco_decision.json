@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-18T08:09:09.559186+00:00",
+  "variant": "B11",
+  "decision": "SELECT_B11_ROUTE_PIN_GRID_COLUMNS_ECO",
+  "status": "SELECTED_PENDING_SMOKE_AND_AUTHORIZATION",
+  "failure_classification": {
+    "automatic_recovery_class": "residual_congestion",
+    "subtype": "central_corridor_with_top_level_io_contribution",
+    "b9_strict_gate_blocked": true,
+    "not_a_stall": true,
+    "resource_exhaustion": false
+  },
+  "selected_eco": {
+    "single_independent_variable": "route_bump_pin_grid_columns",
+    "before": 25,
+    "after": 21,
+    "reason": "B9's direct parser found 448 residual violations and 346 overflow edges; 338 hotspots are in the central corridor and 289 include top-level I/O/other. Spread the fixed 565 bump terms across 21 rather than 25 columns while preserving RTL, netlist, legal placement, SDC, and route iteration policy."
+  },
+  "unchanged_contract": {
+    "rtl": "byte-identical",
+    "mapped_netlist": "byte-identical",
+    "placement_variant": "reuse sealed B9 legal placement ODB",
+    "sdc": "byte-identical",
+    "fence_geometry": "byte-identical",
+    "route_signal_layers": "met1-met5",
+    "route_clock_layers": "met2-met5",
+    "global_route_invocation_limit": 1,
+    "cugr_congestion_iterations": 1,
+    "skip_large_fanout_nets": 20000
+  },
+  "observed_b9_metrics": {
+    "rrr_residual": 448,
+    "overflow_edges": 346,
+    "overflow_tracks": 412,
+    "central_corridor_hotspots": 338,
+    "top_level_io_hotspots": 289
+  },
+  "functional_evidence": {
+    "fresh_route_pin_smoke_required": true,
+    "fresh_route_authorization_required": true,
+    "placement_reopen_required": true
+  },
+  "inputs": {
+    "b9_strict_gate": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b9/phase6_decision_gate.json",
+      "sha256": "ba0367c82eba6bb041337e67031df866e4125540a3a309988a93804dfed26717"
+    },
+    "b9_route_analysis": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b9/b9_residual_congestion_analysis.json",
+      "sha256": "eb33325aeb1fc031abba111b5f1890007eaa1bed1783ea93994cae569daaee0f"
+    },
+    "b9_route_log": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b9/physical/b9_global_route.log",
+      "sha256": "3989cb10a5b84632285e460865d82c69836b0714e59b54a575d15404c9e292d1"
+    },
+    "b9_route_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/wbq_quad_local_b9_global_route.tcl",
+      "sha256": "e310b62f8efe017badbbc6f34262427ee3d7c034b7ba37ded691717c78caf1cb"
+    },
+    "b9_placement_report": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b9/physical/b9_placement_execution_report.json",
+      "sha256": "48ce171e8a8cef865f68da4d74444c837dafda1df2a2dbf5c7c6a196797edd58"
+    }
+  },
+  "authorizes": [],
+  "next_stage": "B11_SMOKE"
+}
