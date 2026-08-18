@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "variant": "B9",
+  "stage": "targeted_placement_reopen_audit",
+  "status": "STARTED",
+  "start_utc": "2026-08-18T07:05:47Z",
+  "invocation_count": 1,
+  "wrapper_pid": 869034,
+  "compute_pid": 869235,
+  "inputs": {
+    "placement_manifest": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b9/physical/b9_placement_execution_report.json",
+      "sha256": "48ce171e8a8cef865f68da4d74444c837dafda1df2a2dbf5c7c6a196797edd58"
+    },
+    "placement_numeric_analysis": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b9/physical/b9_placement_numeric_analysis.json",
+      "sha256": "fc2271cf551c2b3d2e4e3c0c178ab13dd06b28ff8c5a9fbb2531d3235358d805"
+    },
+    "b9_place_odb": {
+      "path": "/dev/shm/wbq_b9_phase6_10/quad_local_b9/b9_place.odb",
+      "sha256": "3bb3f2e70ffea8eac012bde25557e750f0346f65270e664bddb90e2ce60143ec"
+    },
+    "b9_place_sdc": {
+      "path": "/dev/shm/wbq_b9_phase6_10/quad_local_b9/b9_place.sdc",
+      "sha256": "51ff83730acbf6710614999f79a9dd7d7b8aff7824f4d36a4b05b3c88f33a5fd"
+    },
+    "audit_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/audit_wbq_b9_targeted_placement.tcl",
+      "sha256": "c43f833bad1f8e8896cdc5288cec90b022e69f438cae66f5313ac483d2a0cbf4"
+    }
+  },
+  "required": {
+    "anchors_locked": 9,
+    "outside_fence": 0,
+    "unplaced": 0,
+    "placement_violations": 0
+  }
+}

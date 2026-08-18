@@ -104,6 +104,49 @@ class B9AnchorRecoveryContractTest(unittest.TestCase):
         ):
             self.assertIn(token, audit_runner)
 
+    def test_global_route_is_single_shot_one_iteration_and_b9_only(self) -> None:
+        tcl = (ROOT / "verification/groot_normalization/wbq_quad_local_b9_global_route.tcl").read_text()
+        runner = (ROOT / "verification/groot_normalization/run_wbq_quad_local_b9_global_route.sh").read_text()
+        self.assertEqual(tcl.count("global_route \\"), 1)
+        self.assertIn("$iterations != 1", tcl)
+        self.assertIn("WBQ_B9_SINGLE_GLOBAL_ROUTE PASS", tcl)
+        for token in (
+            "refusing duplicate",
+            'global_route_invocations": 1',
+            "compute_pid",
+            "wrapper_pid",
+            "trap 'on_signal INT' INT",
+            "trap 'on_signal TERM' TERM",
+            "analyze_variant_residual_congestion.py",
+            "--max-hotspots-in-output 500",
+            "--max-windows-in-output 0",
+            "targeted_placement_reopen_audit",
+        ):
+            self.assertIn(token, runner)
+
+    def test_route_authorizer_and_strict_gate_are_fail_closed(self) -> None:
+        authorizer = (ROOT / "tools/authorize_b9_global_route.py").read_text()
+        gate = (ROOT / "tools/decide_b9_phase6_strict_gate.py").read_text()
+        for token in (
+            "SELECT_B9_SEVEN_ADDITIONAL_ANCHORS_ECO",
+            'anchors_verified") == 9',
+            "no_prior_route_artifact",
+            "route_runner",
+            "route_tcl",
+            "silence_snapshot_tool",
+            "silence_compare_tool",
+        ):
+            self.assertIn(token, authorizer)
+        for token in (
+            "residual_congestion_zero",
+            "overflow_edges_zero",
+            "input_artifact_hashes_match",
+            "explicit_phase6_pass",
+            "BLOCKED_RESIDUAL_CONGESTION",
+            "create B10",
+        ):
+            self.assertIn(token, gate)
+
 
 if __name__ == "__main__":
     unittest.main()

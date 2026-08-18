@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "variant": "B9",
+  "stage": "targeted_placement_reopen_audit",
+  "status": "PASS",
+  "start_utc": "2026-08-18T07:05:47Z",
+  "invocation_count": 1,
+  "wrapper_pid": 869034,
+  "compute_pid": 869235,
+  "inputs": {
+    "placement_manifest": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b9/physical/b9_placement_execution_report.json",
+      "sha256": "48ce171e8a8cef865f68da4d74444c837dafda1df2a2dbf5c7c6a196797edd58"
+    },
+    "placement_numeric_analysis": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b9/physical/b9_placement_numeric_analysis.json",
+      "sha256": "fc2271cf551c2b3d2e4e3c0c178ab13dd06b28ff8c5a9fbb2531d3235358d805"
+    },
+    "b9_place_odb": {
+      "path": "/dev/shm/wbq_b9_phase6_10/quad_local_b9/b9_place.odb",
+      "sha256": "3bb3f2e70ffea8eac012bde25557e750f0346f65270e664bddb90e2ce60143ec"
+    },
+    "b9_place_sdc": {
+      "path": "/dev/shm/wbq_b9_phase6_10/quad_local_b9/b9_place.sdc",
+      "sha256": "51ff83730acbf6710614999f79a9dd7d7b8aff7824f4d36a4b05b3c88f33a5fd"
+    },
+    "audit_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/audit_wbq_b9_targeted_placement.tcl",
+      "sha256": "c43f833bad1f8e8896cdc5288cec90b022e69f438cae66f5313ac483d2a0cbf4"
+    }
+  },
+  "required": {
+    "anchors_locked": 9,
+    "outside_fence": 0,
+    "unplaced": 0,
+    "placement_violations": 0
+  },
+  "end_utc": "2026-08-18T07:07:26Z",
+  "exit_code": 0,
+  "termination_signal": null,
+  "metrics": {
+    "anchors_verified": 9,
+    "anchors": [
+      {
+        "instance": "u_b2_implementation/u_pcu/u_quad_datapath/load_slew427175",
+        "origin_dbu": [
+          6347540,
+          2535040
+        ],
+        "orientation": "MX",
+        "status": "LOCKED"
+      },
+      {
+        "instance": "u_b2_implementation/u_quad_local_adapter/wire440835",
+        "origin_dbu": [
+          4686940,
+          1468800
+        ],
+        "orientation": "R180",
+        "status": "LOCKED"
+      },
+      {
+        "instance": "u_b2_implementation/u_quad_local_adapter/wire440455",
+        "origin_dbu": [
+          7308480,
+          4417280
+        ],
+        "orientation": "MY",
+        "status": "LOCKED"
+      },
+      {
+        "instance": "u_b2_implementation/u_quad_local_adapter/wire440867",
+        "origin_dbu": [
+          4287200,
+          1392640
+        ],
+        "orientation": "MY",
+        "status": "LOCKED"
+      },
+      {
+        "instance": "u_b2_implementation/u_quad_local_adapter/wire440876",
+        "origin_dbu": [
+          4285360,
+          1479680
+        ],
+        "orientation": "R180",
+        "status": "LOCKED"
+      },
+      {
+        "instance": "u_b2_implementation/u_quad_local_adapter/wire441097",
+        "origin_dbu": [
+          4723740,
+          6636800
+        ],
+        "orientation": "R0",
+        "status": "LOCKED"
+      },
+      {
+        "instance": "u_b2_implementation/u_quad_local_adapter/wire441921",
+        "origin_dbu": [
+          4376900,
+          2186880
+        ],
+        "orientation": "MX",
+        "status": "LOCKED"
+      },
+      {
+        "instance": "u_b2_implementation/u_quad_local_adapter/wire441940",
+        "origin_dbu": [
+          4345620,
+          2208640
+        ],
+        "orientation": "R0",
+        "status": "LOCKED"
+      },
+      {
+        "instance": "u_b2_implementation/u_quad_local_adapter/wire441994",
+        "origin_dbu": [
+          4293640,
+          2224960
+        ],
+        "orientation": "MX",
+        "status": "LOCKED"
+      }
+    ],
+    "regions": 4,
+    "grouped": 3676196,
+    "outside_fence": 0,
+    "unplaced": 0,
+    "placement_violations": 0
+  },
+  "outputs": {
+    "log": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b9/physical/b9_targeted_placement_reopen_audit.log",
+      "bytes": 2001,
+      "sha256": "95a118f7e4b989b63d594349b86beb153d26d24f903e1a9772b0a67bf093521e"
+    }
+  },
+  "authorizes": [
+    "B9_GLOBAL_ROUTE_AUTHORIZATION"
+  ],
+  "next_stage": "B9_GLOBAL_ROUTE_AUTHORIZATION"
+}
