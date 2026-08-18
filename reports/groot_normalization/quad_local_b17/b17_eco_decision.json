@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-18T11:46:59.740083+00:00",
+  "variant": "B17",
+  "decision": "SELECT_B17_BUMP_PITCH_ECO",
+  "status": "SELECTED_PENDING_SMOKE_AND_AUTHORIZATION",
+  "failure_classification": {
+    "automatic_recovery_class": "residual_congestion",
+    "subtype": "bump_grid_density_after_columns_23",
+    "not_a_stall": true
+  },
+  "selected_eco": {
+    "single_independent_variable": "route_bump_pin_pitch",
+    "before": 250.0,
+    "after": 300.0,
+    "reason": "B16 columns=23 retained residual 492 and 386 overflow edges, while B9-B11 show grid density is dominant. Keep the proven columns=25 and expand only pitch 250 to 300 to spread bump landings."
+  },
+  "unchanged_contract": {
+    "rtl": "byte-identical",
+    "mapped_netlist": "byte-identical",
+    "placement_variant": "reuse sealed B9 legal placement ODB",
+    "sdc": "byte-identical",
+    "route_signal_layers": "met1-met5",
+    "route_clock_layers": "met2-met5",
+    "global_route_invocation_limit": 1,
+    "cugr_congestion_iterations": 1,
+    "bump_pin_grid_columns": 25,
+    "bump_pin_pitch": 300.0,
+    "skip_large_fanout_nets": 20000
+  },
+  "functional_evidence": {
+    "fresh_route_pin_smoke_required": true,
+    "fresh_route_authorization_required": true,
+    "placement_reopen_required": true
+  },
+  "inputs": {
+    "b16_strict_gate": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b16/phase6_decision_gate.json",
+      "sha256": "4aed73a5f25f955a077a4fa6935fa78e68f613907ab702b8b3b5528d325d74d8"
+    },
+    "b16_route_analysis": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b16/b16_residual_congestion_analysis.json",
+      "sha256": "865dbdb62792fdb2f8a5b8ae1b88248d7fac3bb3c345178be6073ce70d3f99a0"
+    }
+  },
+  "authorizes": [],
+  "next_stage": "B17_SMOKE"
+}

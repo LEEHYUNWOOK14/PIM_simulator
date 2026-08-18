@@ -1,0 +1,103 @@
+{
+  "schema_version": 2,
+  "generated_at_utc": "2026-08-18T14:13:36.685682+00:00",
+  "phase": 6,
+  "variant": "B23",
+  "decision": "BLOCKED_RESIDUAL_CONGESTION",
+  "reason": "One or more strict zero-congestion/hash conditions failed; Phase 6 remains fail-closed.",
+  "conditions": {
+    "residual_congestion_zero": {
+      "required": 0,
+      "actual": 463,
+      "result": "FAIL"
+    },
+    "overflow_edges_zero": {
+      "required": 0,
+      "actual": 351,
+      "result": "FAIL"
+    },
+    "input_artifact_hashes_match": {
+      "required": true,
+      "actual": true,
+      "result": "PASS"
+    },
+    "explicit_phase6_pass": {
+      "required": true,
+      "actual": false,
+      "result": "FAIL"
+    }
+  },
+  "artifact_hash_checks": [
+    {
+      "name": "log",
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b23/physical/b23_global_route.log",
+      "expected_sha256": "10d5130048a025762c16662174c9f556e99d86b98dc6e5b6b938395952987230",
+      "actual_sha256": "10d5130048a025762c16662174c9f556e99d86b98dc6e5b6b938395952987230",
+      "match": true
+    },
+    {
+      "name": "guide",
+      "path": "/dev/shm/wbq_b23_phase6_10/quad_local_b23/b23_quad_local.route_guide",
+      "expected_sha256": "f82d882b2699ce068661d18c307971364a2317bb3043b3b3667fc725a97b00cc",
+      "actual_sha256": "f82d882b2699ce068661d18c307971364a2317bb3043b3b3667fc725a97b00cc",
+      "match": true
+    },
+    {
+      "name": "congestion_report",
+      "path": "/dev/shm/wbq_b23_phase6_10/quad_local_b23/b23_quad_local.congestion.rpt",
+      "expected_sha256": "cd33a4728bd04a91b6f62dfb73aaeb6f08f812131c291f0bd6df81b14400ba80",
+      "actual_sha256": "cd33a4728bd04a91b6f62dfb73aaeb6f08f812131c291f0bd6df81b14400ba80",
+      "match": true
+    },
+    {
+      "name": "routed_odb",
+      "path": "/dev/shm/wbq_b23_phase6_10/quad_local_b23/b23_quad_local_global_route.odb",
+      "expected_sha256": "c2507a91642d3c98a61c8368258d9217902d151b5a68d4cdccc8d66fee40840d",
+      "actual_sha256": "c2507a91642d3c98a61c8368258d9217902d151b5a68d4cdccc8d66fee40840d",
+      "match": true
+    },
+    {
+      "name": "routed_sdc",
+      "path": "/dev/shm/wbq_b23_phase6_10/quad_local_b23/b23_quad_local_global_route.sdc",
+      "expected_sha256": "51ff83730acbf6710614999f79a9dd7d7b8aff7824f4d36a4b05b3c88f33a5fd",
+      "actual_sha256": "51ff83730acbf6710614999f79a9dd7d7b8aff7824f4d36a4b05b3c88f33a5fd",
+      "match": true
+    },
+    {
+      "name": "direct_analysis",
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b23/b23_residual_congestion_analysis.json",
+      "expected_sha256": "a4664af13905a69e83942173755b55954a97cf628fea569775f1f39c99622fa5",
+      "actual_sha256": "a4664af13905a69e83942173755b55954a97cf628fea569775f1f39c99622fa5",
+      "match": true
+    },
+    {
+      "name": "direct_analysis_markdown",
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b23/b23_residual_congestion_analysis.md",
+      "expected_sha256": "b519bfa27e880b4f1df39956534ae0cacecfcd61f28f5bb9ed85ed5ea33dabb9",
+      "actual_sha256": "b519bfa27e880b4f1df39956534ae0cacecfcd61f28f5bb9ed85ed5ea33dabb9",
+      "match": true
+    }
+  ],
+  "inputs": {
+    "placement_execution_report": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b9/physical/b9_placement_execution_report.json",
+      "sha256": "48ce171e8a8cef865f68da4d74444c837dafda1df2a2dbf5c7c6a196797edd58"
+    },
+    "global_route_authorization": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b23/b23_global_route_authorization.json",
+      "sha256": "dda5a27dd829ea756a158967bbc4a5b7bd0bdc3ad6cdf62d7f294f6d28008bbb"
+    },
+    "global_route_execution_report": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b23/physical/b23_global_route_execution_report.json",
+      "sha256": "3748b361392bba70a27fb8f157325bf9d156999ba3cf495e200825b8cb469a39"
+    },
+    "direct_congestion_analysis": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b23/b23_residual_congestion_analysis.json",
+      "sha256": "a4664af13905a69e83942173755b55954a97cf628fea569775f1f39c99622fa5"
+    }
+  },
+  "global_route_invocation_count": 1,
+  "authorizes": [],
+  "next_stage": null,
+  "blocked_recovery": "Seal B23 without reroute; create B23 with one evidence-based ECO and re-run smoke plus authorization."
+}

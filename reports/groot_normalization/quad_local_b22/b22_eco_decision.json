@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-18T13:16:58.831433+00:00",
+  "variant": "B22",
+  "decision": "SELECT_B22_BUMP_ORIGIN_ECO",
+  "status": "SELECTED_PENDING_SMOKE_AND_AUTHORIZATION",
+  "failure_classification": {
+    "automatic_recovery_class": "residual_congestion",
+    "subtype": "y_origin_1000_improved_to_455",
+    "not_a_stall": true
+  },
+  "selected_eco": {
+    "single_independent_variable": "route_bump_pin_y_origin",
+    "before": 1000.0,
+    "after": 500.0,
+    "reason": "B21 y-origin=1000 reduced residual to 455 and overflow edges to 345. Move only Y-origin further to 500 while retaining pitch=300, columns=25, layers and all contracts."
+  },
+  "unchanged_contract": {
+    "rtl": "byte-identical",
+    "mapped_netlist": "byte-identical",
+    "placement_variant": "reuse sealed B9 legal placement ODB",
+    "sdc": "byte-identical",
+    "route_signal_layers": "met1-met5",
+    "route_clock_layers": "met2-met5",
+    "global_route_invocation_limit": 1,
+    "cugr_congestion_iterations": 1,
+    "bump_pin_grid_columns": 25,
+    "bump_pin_pitch": 300.0,
+    "bump_pin_y_origin": 500.0,
+    "skip_large_fanout_nets": 20000
+  },
+  "functional_evidence": {
+    "fresh_route_pin_smoke_required": true,
+    "fresh_route_authorization_required": true,
+    "placement_reopen_required": true
+  },
+  "inputs": {
+    "b21_strict_gate": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b21/phase6_decision_gate.json",
+      "sha256": "bd00690038d81ba06a8889cfc62316092b23f2d658f2944d9588c5f8bd6e3aa8"
+    },
+    "b21_route_analysis": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b21/b21_residual_congestion_analysis.json",
+      "sha256": "a900a16d8567a367629b4c631b6185bfc74b91b7e200bf31c9c9cd8202755b32"
+    }
+  },
+  "authorizes": [],
+  "next_stage": "B22_SMOKE"
+}

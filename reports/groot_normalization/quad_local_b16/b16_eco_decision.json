@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-18T11:18:51.331352+00:00",
+  "variant": "B16",
+  "decision": "SELECT_B16_BUMP_GRID_COLUMNS_ECO",
+  "status": "SELECTED_PENDING_SMOKE_AND_AUTHORIZATION",
+  "failure_classification": {
+    "automatic_recovery_class": "tool_error",
+    "subtype": "gridgraph_assertion_at_columns_17",
+    "not_a_stall": true
+  },
+  "selected_eco": {
+    "single_independent_variable": "route_bump_pin_grid_columns",
+    "before": 17,
+    "after": 23,
+    "reason": "B15 columns=17 deterministically asserted in GridGraph before route output. Use columns=23, within the successful 21-29 range, while retaining signal met1-met5, clock met2-met5, sealed placement, SDC, and one iteration."
+  },
+  "unchanged_contract": {
+    "rtl": "byte-identical",
+    "mapped_netlist": "byte-identical",
+    "placement_variant": "reuse sealed B9 legal placement ODB",
+    "sdc": "byte-identical",
+    "route_signal_layers": "met1-met5",
+    "route_clock_layers": "met2-met5",
+    "global_route_invocation_limit": 1,
+    "cugr_congestion_iterations": 1,
+    "bump_pin_grid_columns": 23,
+    "skip_large_fanout_nets": 20000
+  },
+  "functional_evidence": {
+    "fresh_route_pin_smoke_required": true,
+    "fresh_route_authorization_required": true,
+    "placement_reopen_required": true
+  },
+  "inputs": {
+    "b15_execution_manifest": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b15/physical/b15_global_route_execution_report.json",
+      "sha256": "7953ace902dc8db20db79affe764403c86a39872de990df14b2e21f991a43fa9"
+    },
+    "b15_route_log": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b15/physical/b15_global_route.log",
+      "sha256": "4c812872c9732bc8c7e5eb528f9474403bde11a1e0a461a55fc699065084380c"
+    }
+  },
+  "authorizes": [],
+  "next_stage": "B16_SMOKE"
+}

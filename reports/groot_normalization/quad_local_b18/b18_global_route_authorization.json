@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-18T12:15:43.268266+00:00",
+  "variant": "B18",
+  "stage": "single_global_route_authorization",
+  "decision": "PASS",
+  "conditions": {
+    "placement_pass": "PASS",
+    "placement_audit_pass": "PASS",
+    "placement_authorizes_numeric_and_reopen": "PASS",
+    "placement_outputs_match": "PASS",
+    "placement_numeric_analysis_pass": "PASS",
+    "placement_numeric_inputs_match": "PASS",
+    "targeted_reopen_audit_pass": "PASS",
+    "targeted_reopen_anchor_count": "PASS",
+    "targeted_reopen_legality": "PASS",
+    "physical_authorization_pass": "PASS",
+    "selected_b18_policy": "PASS",
+    "one_route_invocation": "PASS",
+    "one_cugr_iteration": "PASS",
+    "b18_only_paths": "PASS",
+    "runner_refuses_duplicates": "PASS",
+    "runner_records_compute_pid": "PASS",
+    "runner_has_signal_traps": "PASS",
+    "direct_numeric_parser": "PASS",
+    "compact_parser_output": "PASS",
+    "tcl_one_iteration_guard": "PASS",
+    "tcl_single_route_command": "PASS",
+    "no_prior_route_artifact": "PASS"
+  },
+  "inputs": {
+    "placement_execution_report": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b9/physical/b9_placement_execution_report.json",
+      "sha256": "48ce171e8a8cef865f68da4d74444c837dafda1df2a2dbf5c7c6a196797edd58"
+    },
+    "placement_numeric_analysis": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b9/physical/b9_placement_numeric_analysis.json",
+      "sha256": "fc2271cf551c2b3d2e4e3c0c178ab13dd06b28ff8c5a9fbb2531d3235358d805"
+    },
+    "targeted_placement_reopen_audit": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b9/physical/b9_targeted_placement_reopen_audit.json",
+      "sha256": "835f09ed7f9c178b08309a79bf3f4c7c000c205d052513ef0c1dcc4c97c88f96"
+    },
+    "b18_eco_decision": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b18/b18_eco_decision.json",
+      "sha256": "d8dc554e901a91b859d4a11369c684efeee30d76fc37d4d1c79831089cbce5d7"
+    },
+    "b18_physical_authorization": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b18/physical/b18_route_pin_smoke_execution_report.json",
+      "sha256": "80507433c546229f0dedc3fdf8c1d97ad2ef5066fd327c7b8bd97db77756c670"
+    },
+    "b9_place_odb": {
+      "path": "/dev/shm/wbq_b9_phase6_10/quad_local_b9/b9_place.odb",
+      "sha256": "3bb3f2e70ffea8eac012bde25557e750f0346f65270e664bddb90e2ce60143ec"
+    },
+    "b9_place_sdc": {
+      "path": "/dev/shm/wbq_b9_phase6_10/quad_local_b9/b9_place.sdc",
+      "sha256": "51ff83730acbf6710614999f79a9dd7d7b8aff7824f4d36a4b05b3c88f33a5fd"
+    },
+    "route_runner": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/run_wbq_quad_local_b18_global_route.sh",
+      "sha256": "120ed08bc9277a5abb87896a3903e05afed9eba03116a7f1d603b1f44efdd949"
+    },
+    "route_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/wbq_quad_local_b18_global_route.tcl",
+      "sha256": "c22d43a0ace558e6a6ab24eac3e0683ef31ee33eb13b9b9ea5b2c39c3f2c85ad"
+    },
+    "direct_numeric_parser": {
+      "path": "/home/forstobpim/PIM_simulator/tools/analyze_variant_residual_congestion.py",
+      "sha256": "2811f95c2e478cd6c5195548386ab4ef1ee6516bc976d61e71b15e6f141cd97d"
+    },
+    "strict_phase6_gate": {
+      "path": "/home/forstobpim/PIM_simulator/tools/decide_b18_phase6_strict_gate.py",
+      "sha256": "55254307412d1385baa8baa1c50349e9da4a8574f1fedb19d1f6da94e4722fe8"
+    },
+    "silence_snapshot_tool": {
+      "path": "/home/forstobpim/PIM_simulator/tools/capture_openroad_stage_snapshot.py",
+      "sha256": "558a1c599a24db2a1a6ef4a8f89cfdefbfb8ad4e5459f59c47d6e20264d352b2"
+    },
+    "silence_compare_tool": {
+      "path": "/home/forstobpim/PIM_simulator/tools/compare_openroad_stage_snapshots.py",
+      "sha256": "4d58d731d9a21dfdcc9f2a820d5d3dd2ba1a694876ab3c852264ce59365e7a51"
+    }
+  },
+  "policy": {
+    "global_route_invocation_limit": 1,
+    "cugr_congestion_iterations": 1,
+    "service": "wbq-b18-global-route.service",
+    "fail_closed": true
+  },
+  "authorizes": [
+    "B18_SINGLE_GLOBAL_ROUTE"
+  ],
+  "next_stage": "B18_SINGLE_GLOBAL_ROUTE"
+}

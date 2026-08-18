@@ -1,0 +1,303 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-18T15:48:57.248419+00:00",
+  "scope": "sealed B16-B24 one-variable pin-grid recovery sequence",
+  "status": "BLOCKED_RESIDUAL_CONGESTION",
+  "variants": [
+    {
+      "variant": "B16",
+      "selected_policy": "SELECT_B16_BUMP_GRID_COLUMNS_ECO",
+      "route_status": "PASS",
+      "failure_class": null,
+      "invocation_count": 1,
+      "cugr_congestion_iterations": 1,
+      "residual": 492,
+      "overflow_edges": 386,
+      "overflow_tracks": 446,
+      "strict_gate": "BLOCKED_RESIDUAL_CONGESTION",
+      "comparison_valid": true,
+      "comparison_exclusion": null
+    },
+    {
+      "variant": "B17",
+      "selected_policy": "SELECT_B17_BUMP_PITCH_ECO",
+      "route_status": "PASS",
+      "failure_class": null,
+      "invocation_count": 1,
+      "cugr_congestion_iterations": 1,
+      "residual": 481,
+      "overflow_edges": 352,
+      "overflow_tracks": 423,
+      "strict_gate": "BLOCKED_RESIDUAL_CONGESTION",
+      "comparison_valid": true,
+      "comparison_exclusion": null
+    },
+    {
+      "variant": "B18",
+      "selected_policy": "SELECT_B18_BUMP_PITCH_ECO",
+      "route_status": "FAIL",
+      "failure_class": "tool_error",
+      "invocation_count": 1,
+      "cugr_congestion_iterations": 1,
+      "residual": null,
+      "overflow_edges": null,
+      "overflow_tracks": null,
+      "strict_gate": null,
+      "comparison_valid": false,
+      "comparison_exclusion": null
+    },
+    {
+      "variant": "B19",
+      "selected_policy": "SELECT_B19_BUMP_PITCH_ECO",
+      "route_status": "FAIL",
+      "failure_class": "tool_error",
+      "invocation_count": 1,
+      "cugr_congestion_iterations": 1,
+      "residual": null,
+      "overflow_edges": null,
+      "overflow_tracks": null,
+      "strict_gate": null,
+      "comparison_valid": false,
+      "comparison_exclusion": null
+    },
+    {
+      "variant": "B20",
+      "selected_policy": "SELECT_B20_BUMP_Y_ORIGIN_ECO",
+      "route_status": "FAIL",
+      "failure_class": "tool_error",
+      "invocation_count": 1,
+      "cugr_congestion_iterations": 1,
+      "residual": null,
+      "overflow_edges": null,
+      "overflow_tracks": null,
+      "strict_gate": null,
+      "comparison_valid": false,
+      "comparison_exclusion": null
+    },
+    {
+      "variant": "B21",
+      "selected_policy": "SELECT_B21_BUMP_ORIGIN_ECO",
+      "route_status": "PASS",
+      "failure_class": null,
+      "invocation_count": 1,
+      "cugr_congestion_iterations": 1,
+      "residual": 455,
+      "overflow_edges": 345,
+      "overflow_tracks": 404,
+      "strict_gate": "BLOCKED_RESIDUAL_CONGESTION",
+      "comparison_valid": true,
+      "comparison_exclusion": null
+    },
+    {
+      "variant": "B22",
+      "selected_policy": "SELECT_B22_BUMP_ORIGIN_ECO",
+      "route_status": "PASS",
+      "failure_class": null,
+      "invocation_count": 1,
+      "cugr_congestion_iterations": 1,
+      "residual": 480,
+      "overflow_edges": 382,
+      "overflow_tracks": 454,
+      "strict_gate": "BLOCKED_RESIDUAL_CONGESTION",
+      "comparison_valid": true,
+      "comparison_exclusion": null
+    },
+    {
+      "variant": "B23",
+      "selected_policy": "SELECT_B23_BUMP_ORIGIN_ECO",
+      "route_status": "PASS",
+      "failure_class": null,
+      "invocation_count": 1,
+      "cugr_congestion_iterations": 1,
+      "residual": 463,
+      "overflow_edges": 351,
+      "overflow_tracks": 415,
+      "strict_gate": "BLOCKED_RESIDUAL_CONGESTION",
+      "comparison_valid": false,
+      "comparison_exclusion": "B23 changed both x and y origin; see integrity audit"
+    },
+    {
+      "variant": "B24",
+      "selected_policy": "SELECT_B24_BUMP_ORIGIN_ECO",
+      "route_status": "PASS",
+      "failure_class": null,
+      "invocation_count": 1,
+      "cugr_congestion_iterations": 1,
+      "residual": 487,
+      "overflow_edges": 363,
+      "overflow_tracks": 441,
+      "strict_gate": "BLOCKED_RESIDUAL_CONGESTION",
+      "comparison_valid": true,
+      "comparison_exclusion": null
+    }
+  ],
+  "best_valid_variant": {
+    "variant": "B21",
+    "selected_policy": "SELECT_B21_BUMP_ORIGIN_ECO",
+    "route_status": "PASS",
+    "failure_class": null,
+    "invocation_count": 1,
+    "cugr_congestion_iterations": 1,
+    "residual": 455,
+    "overflow_edges": 345,
+    "overflow_tracks": 404,
+    "strict_gate": "BLOCKED_RESIDUAL_CONGESTION",
+    "comparison_valid": true,
+    "comparison_exclusion": null
+  },
+  "conclusion": "The best valid pin-grid result remains nonzero; router geometry iteration is sealed and B25 moves to an evidence-based RTL structural ECO.",
+  "inputs": {
+    "B16_decision": {
+      "path": "reports/groot_normalization/quad_local_b16/b16_eco_decision.json",
+      "sha256": "23aabd21c4184a93dd40c57dd9e4258494609704469fa62d0e741d2d79df965f",
+      "bytes": 1871
+    },
+    "B16_route_manifest": {
+      "path": "reports/groot_normalization/quad_local_b16/physical/b16_global_route_execution_report.json",
+      "sha256": "215ae74363feb5ac472c03e997d6378e4fd29a6be7e1ef164a7ba9fa50168515",
+      "bytes": 5560
+    },
+    "B16_analysis": {
+      "path": "reports/groot_normalization/quad_local_b16/b16_residual_congestion_analysis.json",
+      "sha256": "865dbdb62792fdb2f8a5b8ae1b88248d7fac3bb3c345178be6073ce70d3f99a0",
+      "bytes": 845278
+    },
+    "B16_strict_gate": {
+      "path": "reports/groot_normalization/quad_local_b16/phase6_decision_gate.json",
+      "sha256": "4aed73a5f25f955a077a4fa6935fa78e68f613907ab702b8b3b5528d325d74d8",
+      "bytes": 4471
+    },
+    "B17_decision": {
+      "path": "reports/groot_normalization/quad_local_b17/b17_eco_decision.json",
+      "sha256": "ef4c1778e348ddaf64a069effbe08ad41fedb952df21b4de599b3b20df4641da",
+      "bytes": 1856
+    },
+    "B17_route_manifest": {
+      "path": "reports/groot_normalization/quad_local_b17/physical/b17_global_route_execution_report.json",
+      "sha256": "024530ac778036181f45a7549c8bb5fd26c0c93c33ff66f5edf2cc232cba4afc",
+      "bytes": 5566
+    },
+    "B17_analysis": {
+      "path": "reports/groot_normalization/quad_local_b17/b17_residual_congestion_analysis.json",
+      "sha256": "fd18ca9527c0625af55a991537a3974190d8b5343b041ebb1a83d8168c2fb1df",
+      "bytes": 768092
+    },
+    "B17_strict_gate": {
+      "path": "reports/groot_normalization/quad_local_b17/phase6_decision_gate.json",
+      "sha256": "723a3447bf2d82961a334671a522ec0840205977710f93d95e1c565bb0c45bfc",
+      "bytes": 4471
+    },
+    "B18_decision": {
+      "path": "reports/groot_normalization/quad_local_b18/b18_eco_decision.json",
+      "sha256": "d8dc554e901a91b859d4a11369c684efeee30d76fc37d4d1c79831089cbce5d7",
+      "bytes": 1833
+    },
+    "B18_route_manifest": {
+      "path": "reports/groot_normalization/quad_local_b18/physical/b18_global_route_execution_report.json",
+      "sha256": "3e03237d1f5080eb163791349d74c4ffb0d868d46a71216f316e0a571ce8c9e6",
+      "bytes": 5110
+    },
+    "B19_decision": {
+      "path": "reports/groot_normalization/quad_local_b19/b19_eco_decision.json",
+      "sha256": "3dcd5103cc3455ee1565a93d3ba7da569eed5a9b2588fe9fa61a830cf8047b5f",
+      "bytes": 1865
+    },
+    "B19_route_manifest": {
+      "path": "reports/groot_normalization/quad_local_b19/physical/b19_global_route_execution_report.json",
+      "sha256": "024927bb138b99d155b55d5ba7f12445a56340d3fec252e694377dde1108467f",
+      "bytes": 5111
+    },
+    "B20_decision": {
+      "path": "reports/groot_normalization/quad_local_b20/b20_eco_decision.json",
+      "sha256": "5e391ee087179808555363063b10c72bbcf6e9d11423b02a3063cab2bec347a1",
+      "bytes": 1885
+    },
+    "B20_route_manifest": {
+      "path": "reports/groot_normalization/quad_local_b20/physical/b20_global_route_execution_report.json",
+      "sha256": "c28213c12ad8bd8c62a9252f3a47c637cbf138087162d1784bbac27053acfac7",
+      "bytes": 5111
+    },
+    "B21_decision": {
+      "path": "reports/groot_normalization/quad_local_b21/b21_eco_decision.json",
+      "sha256": "362f205a08d8413fdb6eefd797f4a0f8aa05a45992ebad46418cda9b0cd048db",
+      "bytes": 1857
+    },
+    "B21_route_manifest": {
+      "path": "reports/groot_normalization/quad_local_b21/physical/b21_global_route_execution_report.json",
+      "sha256": "2b0b2a80e67052601b77c55a76e85709ec68edab000b3b2bae9de02d02db189d",
+      "bytes": 5560
+    },
+    "B21_analysis": {
+      "path": "reports/groot_normalization/quad_local_b21/b21_residual_congestion_analysis.json",
+      "sha256": "a900a16d8567a367629b4c631b6185bfc74b91b7e200bf31c9c9cd8202755b32",
+      "bytes": 760611
+    },
+    "B21_strict_gate": {
+      "path": "reports/groot_normalization/quad_local_b21/phase6_decision_gate.json",
+      "sha256": "bd00690038d81ba06a8889cfc62316092b23f2d658f2944d9588c5f8bd6e3aa8",
+      "bytes": 4471
+    },
+    "B22_decision": {
+      "path": "reports/groot_normalization/quad_local_b22/b22_eco_decision.json",
+      "sha256": "25754733f6f808ca4ff2dd834ce94f204cf88de17b5907e0684709d9ae037273",
+      "bytes": 1866
+    },
+    "B22_route_manifest": {
+      "path": "reports/groot_normalization/quad_local_b22/physical/b22_global_route_execution_report.json",
+      "sha256": "ee92b5485e3ce3fbf02baf2fd0273aa7bbd5b5d682b91f8677f227d7d80ef1fe",
+      "bytes": 5566
+    },
+    "B22_analysis": {
+      "path": "reports/groot_normalization/quad_local_b22/b22_residual_congestion_analysis.json",
+      "sha256": "96be37afbb047fd9e35a6fa1b086904cd351bdbdea3fe9e27a410bc7ecee994d",
+      "bytes": 817517
+    },
+    "B22_strict_gate": {
+      "path": "reports/groot_normalization/quad_local_b22/phase6_decision_gate.json",
+      "sha256": "2aacd0b1c33565c806a409c848fc62013bbf9e82af87907c5ad98674e06ba13b",
+      "bytes": 4471
+    },
+    "B23_decision": {
+      "path": "reports/groot_normalization/quad_local_b23/b23_eco_decision.json",
+      "sha256": "c60216afddd114739873009673e7b8c4046462fa300e0b450a12f064f1070b37",
+      "bytes": 1963
+    },
+    "B23_route_manifest": {
+      "path": "reports/groot_normalization/quad_local_b23/physical/b23_global_route_execution_report.json",
+      "sha256": "3748b361392bba70a27fb8f157325bf9d156999ba3cf495e200825b8cb469a39",
+      "bytes": 5558
+    },
+    "B23_analysis": {
+      "path": "reports/groot_normalization/quad_local_b23/b23_residual_congestion_analysis.json",
+      "sha256": "a4664af13905a69e83942173755b55954a97cf628fea569775f1f39c99622fa5",
+      "bytes": 762011
+    },
+    "B23_strict_gate": {
+      "path": "reports/groot_normalization/quad_local_b23/phase6_decision_gate.json",
+      "sha256": "b81faf168af770c11d4a7e29de86f6186b4213ed351879a6c8b950692799d519",
+      "bytes": 4471
+    },
+    "B24_decision": {
+      "path": "reports/groot_normalization/quad_local_b24/b24_eco_decision.json",
+      "sha256": "6c2947bab3e7d595d53926442772e2cfde9d42bdb7a6bb0f4f94568454349882",
+      "bytes": 1993
+    },
+    "B24_route_manifest": {
+      "path": "reports/groot_normalization/quad_local_b24/physical/b24_global_route_execution_report.json",
+      "sha256": "4059d7f5a2d93b44688ba7ca313e7e43c3bb3ff9b65e7785fd6578ef6f8c284d",
+      "bytes": 5558
+    },
+    "B24_analysis": {
+      "path": "reports/groot_normalization/quad_local_b24/b24_residual_congestion_analysis.json",
+      "sha256": "ee1cb6368f699a50db6b4de52a756b9283e945567139745261d5dc61f95bcda7",
+      "bytes": 802192
+    },
+    "B24_strict_gate": {
+      "path": "reports/groot_normalization/quad_local_b24/phase6_decision_gate.json",
+      "sha256": "590164a380839a54c358c941d23e7c72e9bfae85e101b6d8d727b31ffe0a8169",
+      "bytes": 4471
+    }
+  },
+  "next_stage": "B25 aggregated completion descriptor structural ECO",
+  "artifact_label": "RESEARCH ARTIFACT \u2014 NOT FOR FABRICATION"
+}

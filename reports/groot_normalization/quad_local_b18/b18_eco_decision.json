@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-18T12:13:24.488669+00:00",
+  "variant": "B18",
+  "decision": "SELECT_B18_BUMP_PITCH_ECO",
+  "status": "SELECTED_PENDING_SMOKE_AND_AUTHORIZATION",
+  "failure_classification": {
+    "automatic_recovery_class": "residual_congestion",
+    "subtype": "pitch_300_improved_but_not_zero",
+    "not_a_stall": true
+  },
+  "selected_eco": {
+    "single_independent_variable": "route_bump_pin_pitch",
+    "before": 300.0,
+    "after": 350.0,
+    "reason": "B17 pitch=300 reduced overflow to 352 and residual to 481. Increase only pitch to 350, retaining columns=25, signal met1-met5, clock met2-met5 and all functional inputs."
+  },
+  "unchanged_contract": {
+    "rtl": "byte-identical",
+    "mapped_netlist": "byte-identical",
+    "placement_variant": "reuse sealed B9 legal placement ODB",
+    "sdc": "byte-identical",
+    "route_signal_layers": "met1-met5",
+    "route_clock_layers": "met2-met5",
+    "global_route_invocation_limit": 1,
+    "cugr_congestion_iterations": 1,
+    "bump_pin_grid_columns": 25,
+    "bump_pin_pitch": 350.0,
+    "skip_large_fanout_nets": 20000
+  },
+  "functional_evidence": {
+    "fresh_route_pin_smoke_required": true,
+    "fresh_route_authorization_required": true,
+    "placement_reopen_required": true
+  },
+  "inputs": {
+    "b17_strict_gate": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b17/phase6_decision_gate.json",
+      "sha256": "723a3447bf2d82961a334671a522ec0840205977710f93d95e1c565bb0c45bfc"
+    },
+    "b17_route_analysis": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b17/b17_residual_congestion_analysis.json",
+      "sha256": "fd18ca9527c0625af55a991537a3974190d8b5343b041ebb1a83d8168c2fb1df"
+    }
+  },
+  "authorizes": [],
+  "next_stage": "B18_SMOKE"
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-18T12:21:13.990558+00:00",
+  "variant": "B19",
+  "decision": "SELECT_B19_BUMP_PITCH_ECO",
+  "status": "SELECTED_PENDING_SMOKE_AND_AUTHORIZATION",
+  "failure_classification": {
+    "automatic_recovery_class": "tool_error",
+    "subtype": "pitch_350_core_boundary_assertion",
+    "not_a_stall": true
+  },
+  "selected_eco": {
+    "single_independent_variable": "route_bump_pin_pitch",
+    "before": 350.0,
+    "after": 340.0,
+    "reason": "B18 pitch=350 placed the final row outside the ~9010um core and asserted in GridGraph. Use pitch=340 (last row 8980um, inside core) while retaining columns=25 and all routing layers/contracts."
+  },
+  "unchanged_contract": {
+    "rtl": "byte-identical",
+    "mapped_netlist": "byte-identical",
+    "placement_variant": "reuse sealed B9 legal placement ODB",
+    "sdc": "byte-identical",
+    "route_signal_layers": "met1-met5",
+    "route_clock_layers": "met2-met5",
+    "global_route_invocation_limit": 1,
+    "cugr_congestion_iterations": 1,
+    "bump_pin_grid_columns": 25,
+    "bump_pin_pitch": 340.0,
+    "skip_large_fanout_nets": 20000
+  },
+  "functional_evidence": {
+    "fresh_route_pin_smoke_required": true,
+    "fresh_route_authorization_required": true,
+    "placement_reopen_required": true
+  },
+  "inputs": {
+    "b18_execution_manifest": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b18/physical/b18_global_route_execution_report.json",
+      "sha256": "3e03237d1f5080eb163791349d74c4ffb0d868d46a71216f316e0a571ce8c9e6"
+    },
+    "b18_route_log": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b18/physical/b18_global_route.log",
+      "sha256": "8006593efac22b41eae5cc63685a086cd3f69c978740bc19ab1fbfeaed745941"
+    }
+  },
+  "authorizes": [],
+  "next_stage": "B19_SMOKE"
+}
