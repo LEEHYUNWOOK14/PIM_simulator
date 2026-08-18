@@ -47,7 +47,7 @@ def main() -> int:
     ]
     overflow = [
         float(value)
-        for value in re.findall(r"Total overflow:\s+([-+0-9.eE]+)", text)
+        for value in re.findall(r"Total routing overflow:\s+([-+0-9.eE]+)", text)
     ]
     locked = re.findall(
         r"^WBQ_B6_ANCHOR_LOCKED name=\{(.+?)\} origin_dbu=\{(\d+) (\d+)\} orient=\{(\S+)\}$",
