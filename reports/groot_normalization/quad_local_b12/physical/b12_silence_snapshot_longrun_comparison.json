@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-18T10:44:33.705648+00:00",
+  "variant": "B12",
+  "stage": "global_route_longrun",
+  "service": "wbq-b12-global-route.service",
+  "compute_pid": 953863,
+  "first_snapshot": "reports/groot_normalization/quad_local_b12/physical/b12_silence_snapshot_4.json",
+  "second_snapshot": "reports/groot_normalization/quad_local_b12/physical/b12_silence_snapshot_5.json",
+  "cpu_seconds_delta": 45.05000000000018,
+  "io_delta": {
+    "cancelled_write_bytes": 0,
+    "rchar": 0,
+    "read_bytes": 0,
+    "syscr": 0,
+    "syscw": 0,
+    "wchar": 0,
+    "write_bytes": 0
+  },
+  "artifact_delta": [
+    {
+      "path": "/dev/shm/wbq_b12_phase6_10/quad_local_b12",
+      "exists_before": true,
+      "exists_after": true,
+      "bytes_before": 60,
+      "bytes_after": 60,
+      "bytes_delta": 0,
+      "mtime_changed": false
+    },
+    {
+      "path": "reports/groot_normalization/quad_local_b12/physical/b12_global_route.log",
+      "exists_before": true,
+      "exists_after": true,
+      "bytes_before": 687,
+      "bytes_after": 687,
+      "bytes_delta": 0,
+      "mtime_changed": false
+    }
+  ],
+  "thread_comparison": [
+    {
+      "tid": 953863,
+      "cpu_ticks_delta": 4505,
+      "state_same": true,
+      "wchan_same": true,
+      "kernel_stack_same": true,
+      "state_before": "R",
+      "state_after": "R",
+      "wchan_before": "0",
+      "wchan_after": "0"
+    }
+  ],
+  "progress_indicators": {
+    "cpu_time_advanced": true,
+    "thread_cpu_advanced": true,
+    "io_advanced": false,
+    "log_or_artifact_advanced": false,
+    "all_common_thread_wait_signatures_unchanged": true
+  },
+  "no_observed_progress_across_two_snapshots": false,
+  "termination_authorized": false,
+  "decision_boundary": "This comparison never declares PATHOLOGICAL_STALL by itself. Confirm unchanged stage/core stacks, resource safety, source-level complexity or deadlock evidence, and a justified stage-budget overrun first."
+}
