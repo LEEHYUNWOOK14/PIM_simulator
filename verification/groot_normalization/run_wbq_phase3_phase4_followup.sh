@@ -18,10 +18,12 @@ placement_json_rel="reports/final_integrated_gds_execution/wbq_placement_manifes
 placement_html_rel="reports/final_integrated_gds_execution/03_wbq_placement_report.html"
 route_json_rel="reports/final_integrated_gds_execution/wbq_global_route_manifest.json"
 route_html_rel="reports/final_integrated_gds_execution/04_wbq_global_route_report.html"
+decision_json_rel="reports/final_integrated_gds_execution/wbq_post_route_decision.json"
 placement_json="$root/$placement_json_rel"
 placement_html="$root/$placement_html_rel"
 route_json="$root/$route_json_rel"
 route_html="$root/$route_html_rel"
+decision_json="$root/$decision_json_rel"
 
 wait_for_pid_exit() {
   local pid="$1"
@@ -71,9 +73,11 @@ commit_reports "Record wbq placement and legalization evidence" \
   "$placement_json_rel" "$placement_html_rel"
 
 bash "$root/verification/groot_normalization/run_normalization_hbm_wbq_v4_control_route.sh"
-python3 "$root/tools/collect_wbq_global_route_evidence.py"
+python3 "$root/tools/run_wbq_post_route_transition.py"
 test -s "$route_json"
 test -s "$route_html"
-commit_reports "Record wbq global route comparison" "$route_json_rel" "$route_html_rel"
+test -s "$decision_json"
+commit_reports "Record wbq global route comparison and next-stage decision" \
+  "$route_json_rel" "$route_html_rel" "$decision_json_rel"
 
 echo "WBQ_PHASE3_PHASE4_FOLLOWUP_END_UTC=$(date -u +%Y-%m-%dT%H:%M:%SZ)"

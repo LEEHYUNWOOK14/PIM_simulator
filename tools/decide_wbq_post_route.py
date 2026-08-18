@@ -11,7 +11,19 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_MANIFEST = ROOT / "reports/final_integrated_gds_execution/wbq_global_route_manifest.json"
-ARTIFACT_KEYS = {"route_log", "route_guide", "congestion_report", "routed_odb", "routed_sdc"}
+SCHEMA_V1_ARTIFACT_KEYS = frozenset(
+    {"route_log", "route_guide", "congestion_report", "routed_odb", "routed_sdc"}
+)
+SCHEMA_V2_ARTIFACT_KEYS = SCHEMA_V1_ARTIFACT_KEYS | {
+    "placement_manifest_at_route_launch"
+}
+SCHEMA_ARTIFACT_KEYS = {
+    1: SCHEMA_V1_ARTIFACT_KEYS,
+    2: SCHEMA_V2_ARTIFACT_KEYS,
+}
+# The current producer contract. Keep the versioned constants above for readers
+# that intentionally construct or validate historical v1 manifests.
+ARTIFACT_KEYS = SCHEMA_V2_ARTIFACT_KEYS
 
 
 def absolute(value: str | Path) -> Path:
@@ -31,26 +43,38 @@ def decide(manifest_path: str | Path) -> dict[str, Any]:
     path = absolute(manifest_path)
     manifest = json.loads(path.read_text(encoding="utf-8-sig"))
     artifacts = manifest.get("artifacts", {})
+    schema_version = manifest.get("schema_version")
+    expected_artifact_keys = (
+        SCHEMA_ARTIFACT_KEYS.get(schema_version)
+        if type(schema_version) is int
+        else None
+    )
     checks: dict[str, bool] = {
-        "schema_version": manifest.get("schema_version") == 1,
+        "schema_version": expected_artifact_keys is not None,
         "top": manifest.get("top") == "logic_die_normalization_hbm_top",
         "variant": manifest.get("variant") == "wbq_v4_control",
         "same_metric_definition": manifest.get("same_metric_definition") is True,
         "placement_gate_pass": manifest.get("placement_gate_pass") is True,
         "placement_input_hashes_match": manifest.get("placement_input_hashes_match") is True,
         "clean_completion": manifest.get("clean_completion") is True,
-        "artifact_inventory": set(artifacts) == ARTIFACT_KEYS,
+        "artifact_inventory": (
+            isinstance(artifacts, dict)
+            and expected_artifact_keys is not None
+            and set(artifacts) == expected_artifact_keys
+        ),
     }
     artifact_results: dict[str, dict[str, Any]] = {}
     if checks["artifact_inventory"]:
-        for name in sorted(ARTIFACT_KEYS):
+        assert expected_artifact_keys is not None
+        for name in sorted(expected_artifact_keys):
             item = artifacts[name]
-            artifact = absolute(item.get("path", ""))
+            artifact = absolute(item.get("path", "")) if isinstance(item, dict) else ROOT
             exists = artifact.is_file() and artifact.stat().st_size > 0
             actual_hash = sha256(artifact) if exists else None
             actual_bytes = artifact.stat().st_size if exists else None
             match = (
-                exists
+                isinstance(item, dict)
+                and exists
                 and actual_hash == item.get("sha256")
                 and actual_bytes == item.get("bytes")
             )
@@ -81,6 +105,7 @@ def decide(manifest_path: str | Path) -> dict[str, Any]:
         "schema_version": 1,
         "source_manifest": str(path),
         "source_manifest_sha256": sha256(path),
+        "source_schema_version": schema_version,
         "verdict": verdict,
         "evidence_valid": evidence_valid,
         "checks": checks,

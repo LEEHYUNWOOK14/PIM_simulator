@@ -16,7 +16,11 @@ set block [ord::get_db_block]
 set inst_count [llength [$block getInsts]]
 set net_count [llength [$block getNets]]
 set bterm_count [llength [$block getBTerms]]
-set violations [check_placement -verbose]
+# Current OpenROAD's check_placement command returns no numeric value.  It
+# raises DPL-0033 when any placement check fails, so reaching the next command
+# is the authoritative zero-violation result.
+check_placement -verbose
+set violations 0
 
 # Preserve physical evidence for the hierarchy that motivated this wbq run.
 # Yosys/OpenROAD flatten hierarchy into instance names, so measure every placed

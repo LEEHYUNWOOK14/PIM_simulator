@@ -1,6 +1,8 @@
 module normalization_hbm_boundary_integration_tb #(
     parameter int WIDTH = 2048,
-    parameter bit RMS_MODE = 1'b0
+    parameter bit RMS_MODE = 1'b0,
+    parameter bit QUAD_LOCAL_AB = 1'b0,
+    parameter bit B2_REGISTERED_QUAD_COMPLETION = 1'b0
 );
     localparam int BANKS = 16;
     localparam int LANES = 8;
@@ -22,6 +24,15 @@ module normalization_hbm_boundary_integration_tb #(
 
     logic clk = 0, rst_n = 0;
     always #5 clk = ~clk;
+    logic [3:0] quad_rst_n;
+    logic control_rst_n;
+    assign control_rst_n = &quad_rst_n;
+
+    for (genvar quad = 0; quad < 4; quad++) begin : g_quad_reset
+        normalization_quad_reset_leaf u_reset_leaf (
+            .clk_i(clk), .rst_ni(rst_n), .quad_rst_ni_o(quad_rst_n[quad])
+        );
+    end
 
     logic launch_valid, launch_ready;
     logic pcu_job_ready, adapter_start_ready;
@@ -59,82 +70,181 @@ module normalization_hbm_boundary_integration_tb #(
 
     assign launch_ready = pcu_job_ready && adapter_start_ready;
 
-    logic_die_normalization_pcu_top #(
-        .BANKS(BANKS), .LANES(LANES), .SCALAR_ENGINES(4), .CONTEXTS(8),
-        .LOCAL_REDUCE_CONTEXTS(2), .APPLY_FIFO_DEPTH(16), .SHARED_RW_PORT(1'b0)
-    ) u_pcu (
-        .clk_i(clk), .rst_ni(rst_n), .counter_clear_i(1'b0),
-        .invocation_valid_i(1'b0), .invocation_ready_o(),
-        .job_valid_i(launch_valid && adapter_start_ready), .job_ready_o(pcu_job_ready),
-        .job_rms_norm_i(RMS_MODE), .job_tag_i(TAG), .job_vectors_per_bank_i(VECTOR_COUNT),
-        .job_inv_hidden_i(WIDTH == 128 ? 32'h3c000000 : 32'h3a000000),
-        .job_epsilon_i(32'h3727c5ac), .job_bank_mask_i('1),
-        .reduction_valid_i(reduction_valid), .reduction_ready_o(reduction_ready),
-        .reduction_data_i(reduction_data),
-        .replay_request_valid_o(replay_request_valid),
-        .replay_request_ready_i(replay_request_ready),
-        .replay_request_tag_o(replay_request_tag),
-        .replay_request_vectors_per_bank_o(replay_request_vectors),
-        .replay_request_bank_mask_o(replay_request_mask),
-        .replay_valid_i(replay_valid), .replay_ready_o(replay_ready),
-        .replay_tag_i(replay_tag), .replay_x_i(replay_x),
-        .replay_gamma_i(replay_gamma), .replay_beta_i(replay_beta),
-        .replay_last_i(replay_last), .writeback_valid_o(pcu_writeback_valid),
-        .writeback_ready_i(pcu_writeback_ready), .writeback_tag_o(pcu_writeback_tag),
-        .writeback_data_o(pcu_writeback_data), .writeback_last_o(pcu_writeback_last),
-        .bank_activation_read_bytes_o(), .bank_affine_read_bytes_o(),
-        .bank_writeback_bytes_o(), .bank_to_logic_partial_bytes_o(),
-        .logic_to_bank_scalar_bytes_o(), .external_control_bytes_o(),
-        .scheduler_reduction_grants_o(), .scheduler_replay_grants_o(),
-        .scheduler_writeback_grants_o(), .scheduler_read_conflict_cycles_o(),
-        .scheduler_bank_skew_cycles_o(), .context_occupancy_o(),
-        .protocol_error_o(protocol_error_pcu)
-    );
+    generate
+        if (QUAD_LOCAL_AB) begin : g_b_pcu_writeback
+            logic_die_normalization_quad_local_pcu_top #(
+                .BANKS(BANKS), .QUADS(4), .LANES(LANES), .SCALAR_ENGINES(4),
+                .CONTEXTS(8), .LOCAL_REDUCE_CONTEXTS(2),
+                .APPLY_FIFO_DEPTH(16), .SHARED_RW_PORT(1'b0),
+                .REGISTERED_QUAD_COMPLETION(B2_REGISTERED_QUAD_COMPLETION)
+            ) u_pcu (
+                .clk_i(clk), .rst_ni(control_rst_n), .quad_rst_ni_i(quad_rst_n),
+                .counter_clear_i(1'b0), .invocation_valid_i(1'b0),
+                .invocation_ready_o(),
+                .job_valid_i(launch_valid && adapter_start_ready),
+                .job_ready_o(pcu_job_ready), .job_rms_norm_i(RMS_MODE),
+                .job_tag_i(TAG), .job_vectors_per_bank_i(VECTOR_COUNT),
+                .job_inv_hidden_i(WIDTH == 128 ? 32'h3c000000 : 32'h3a000000),
+                .job_epsilon_i(32'h3727c5ac), .job_bank_mask_i('1),
+                .reduction_valid_i(reduction_valid), .reduction_ready_o(reduction_ready),
+                .reduction_data_i(reduction_data),
+                .replay_request_valid_o(replay_request_valid),
+                .replay_request_ready_i(replay_request_ready),
+                .replay_request_tag_o(replay_request_tag),
+                .replay_request_vectors_per_bank_o(replay_request_vectors),
+                .replay_request_bank_mask_o(replay_request_mask),
+                .replay_valid_i(replay_valid), .replay_ready_o(replay_ready),
+                .replay_tag_i(replay_tag), .replay_x_i(replay_x),
+                .replay_gamma_i(replay_gamma), .replay_beta_i(replay_beta),
+                .replay_last_i(replay_last), .writeback_valid_o(pcu_writeback_valid),
+                .writeback_ready_i(pcu_writeback_ready),
+                .writeback_tag_o(pcu_writeback_tag),
+                .writeback_data_o(pcu_writeback_data),
+                .writeback_last_o(pcu_writeback_last),
+                .bank_activation_read_bytes_o(), .bank_affine_read_bytes_o(),
+                .bank_writeback_bytes_o(), .bank_to_logic_partial_bytes_o(),
+                .logic_to_bank_scalar_bytes_o(), .external_control_bytes_o(),
+                .scheduler_reduction_grants_o(), .scheduler_replay_grants_o(),
+                .scheduler_writeback_grants_o(), .scheduler_read_conflict_cycles_o(),
+                .scheduler_bank_skew_cycles_o(), .context_occupancy_o(),
+                .protocol_error_o(protocol_error_pcu)
+            );
+            normalization_writeback_quad_local_reset_slice #(
+                .BANKS(BANKS), .QUADS(4), .LANES(LANES)
+            ) u_writeback_slice (
+                .clk_i(clk), .rst_ni(control_rst_n), .quad_rst_ni_i(quad_rst_n),
+                .source_valid_i(pcu_writeback_valid),
+                .source_ready_o(pcu_writeback_ready),
+                .source_tag_i(pcu_writeback_tag),
+                .source_data_i(pcu_writeback_data),
+                .source_last_i(pcu_writeback_last),
+                .sink_valid_o(writeback_valid), .sink_ready_i(writeback_ready),
+                .sink_tag_o(writeback_tag), .sink_data_o(writeback_data),
+                .sink_last_o(writeback_last), .protocol_error_o(protocol_error_slice)
+            );
+        end else begin : g_a_pcu_writeback
+            logic_die_normalization_pcu_top #(
+                .BANKS(BANKS), .LANES(LANES), .SCALAR_ENGINES(4), .CONTEXTS(8),
+                .LOCAL_REDUCE_CONTEXTS(2), .APPLY_FIFO_DEPTH(16),
+                .SHARED_RW_PORT(1'b0)
+            ) u_pcu (
+                .clk_i(clk), .rst_ni(rst_n), .counter_clear_i(1'b0),
+                .invocation_valid_i(1'b0), .invocation_ready_o(),
+                .job_valid_i(launch_valid && adapter_start_ready),
+                .job_ready_o(pcu_job_ready), .job_rms_norm_i(RMS_MODE),
+                .job_tag_i(TAG), .job_vectors_per_bank_i(VECTOR_COUNT),
+                .job_inv_hidden_i(WIDTH == 128 ? 32'h3c000000 : 32'h3a000000),
+                .job_epsilon_i(32'h3727c5ac), .job_bank_mask_i('1),
+                .reduction_valid_i(reduction_valid), .reduction_ready_o(reduction_ready),
+                .reduction_data_i(reduction_data),
+                .replay_request_valid_o(replay_request_valid),
+                .replay_request_ready_i(replay_request_ready),
+                .replay_request_tag_o(replay_request_tag),
+                .replay_request_vectors_per_bank_o(replay_request_vectors),
+                .replay_request_bank_mask_o(replay_request_mask),
+                .replay_valid_i(replay_valid), .replay_ready_o(replay_ready),
+                .replay_tag_i(replay_tag), .replay_x_i(replay_x),
+                .replay_gamma_i(replay_gamma), .replay_beta_i(replay_beta),
+                .replay_last_i(replay_last), .writeback_valid_o(pcu_writeback_valid),
+                .writeback_ready_i(pcu_writeback_ready),
+                .writeback_tag_o(pcu_writeback_tag),
+                .writeback_data_o(pcu_writeback_data),
+                .writeback_last_o(pcu_writeback_last),
+                .bank_activation_read_bytes_o(), .bank_affine_read_bytes_o(),
+                .bank_writeback_bytes_o(), .bank_to_logic_partial_bytes_o(),
+                .logic_to_bank_scalar_bytes_o(), .external_control_bytes_o(),
+                .scheduler_reduction_grants_o(), .scheduler_replay_grants_o(),
+                .scheduler_writeback_grants_o(), .scheduler_read_conflict_cycles_o(),
+                .scheduler_bank_skew_cycles_o(), .context_occupancy_o(),
+                .protocol_error_o(protocol_error_pcu)
+            );
+            normalization_writeback_quad_slice #(
+                .BANKS(BANKS), .QUADS(4), .LANES(LANES)
+            ) u_writeback_slice (
+                .clk_i(clk), .rst_ni(rst_n),
+                .source_valid_i(pcu_writeback_valid),
+                .source_ready_o(pcu_writeback_ready),
+                .source_tag_i(pcu_writeback_tag),
+                .source_data_i(pcu_writeback_data),
+                .source_last_i(pcu_writeback_last),
+                .sink_valid_o(writeback_valid), .sink_ready_i(writeback_ready),
+                .sink_tag_o(writeback_tag), .sink_data_o(writeback_data),
+                .sink_last_o(writeback_last), .protocol_error_o(protocol_error_slice)
+            );
+        end
+    endgenerate
 
-    normalization_writeback_quad_slice #(
-        .BANKS(BANKS), .QUADS(4), .LANES(LANES)
-    ) u_writeback_slice (
-        .clk_i(clk), .rst_ni(rst_n),
-        .source_valid_i(pcu_writeback_valid),
-        .source_ready_o(pcu_writeback_ready),
-        .source_tag_i(pcu_writeback_tag),
-        .source_data_i(pcu_writeback_data),
-        .source_last_i(pcu_writeback_last),
-        .sink_valid_o(writeback_valid), .sink_ready_i(writeback_ready),
-        .sink_tag_o(writeback_tag), .sink_data_o(writeback_data),
-        .sink_last_o(writeback_last), .protocol_error_o(protocol_error_slice)
-    );
-
-    normalization_hbm_boundary_adapter #(
-        .BANKS(BANKS), .LANES(LANES), .ROW_WIDTH(ROW_WIDTH), .COL_WIDTH(COL_WIDTH)
-    ) u_adapter (
-        .clk_i(clk), .rst_ni(rst_n),
-        .start_valid_i(launch_valid && pcu_job_ready), .start_ready_o(adapter_start_ready),
-        .start_tag_i(TAG), .start_vectors_per_bank_i(VECTOR_COUNT), .start_row_i(TEST_ROW),
-        .start_x_base_col_i(X_BASE_COL), .start_affine_base_col_i(AFF_BASE_COL),
-        .start_output_base_col_i(OUT_BASE_COL),
-        .reduction_valid_o(reduction_valid), .reduction_ready_i(reduction_ready),
-        .reduction_data_o(reduction_data),
-        .replay_request_valid_i(replay_request_valid),
-        .replay_request_ready_o(replay_request_ready),
-        .replay_request_tag_i(replay_request_tag),
-        .replay_request_vectors_per_bank_i(replay_request_vectors),
-        .replay_request_bank_mask_i(replay_request_mask),
-        .replay_valid_o(replay_valid), .replay_ready_i(replay_ready),
-        .replay_tag_o(replay_tag), .replay_x_o(replay_x),
-        .replay_gamma_o(replay_gamma), .replay_beta_o(replay_beta),
-        .replay_last_o(replay_last), .writeback_valid_i(writeback_valid),
-        .writeback_ready_o(writeback_ready), .writeback_tag_i(writeback_tag),
-        .writeback_data_i(writeback_data), .writeback_last_i(writeback_last),
-        .cmd_valid_o(cmd_valid), .cmd_ready_i(cmd_ready), .cmd_o(cmd),
-        .cmd_bank_o(cmd_bank), .cmd_row_o(cmd_row), .cmd_col_o(cmd_col),
-        .cmd_write_data_o(cmd_write_data), .cmd_write_mask_o(cmd_write_mask),
-        .read_valid_i(read_valid), .read_ready_o(read_ready), .read_data_i(read_data),
-        .done_o(adapter_done), .protocol_error_o(protocol_error_adapter),
-        .cycle_count_o(adapter_cycles), .act_command_count_o(act_count),
-        .read_command_count_o(read_count), .write_command_count_o(write_count),
-        .pre_command_count_o(pre_count), .command_wait_cycles_o(wait_cycles)
-    );
+    generate
+        if (QUAD_LOCAL_AB) begin : g_quad_local_b
+            normalization_hbm_quad_local_boundary_adapter #(
+                .BANKS(BANKS), .QUADS(4), .LANES(LANES),
+                .ROW_WIDTH(ROW_WIDTH), .COL_WIDTH(COL_WIDTH)
+            ) u_adapter (
+                .clk_i(clk), .rst_ni(control_rst_n), .quad_rst_ni_i(quad_rst_n),
+                .start_valid_i(launch_valid && pcu_job_ready),
+                .start_ready_o(adapter_start_ready),
+                .start_tag_i(TAG), .start_vectors_per_bank_i(VECTOR_COUNT),
+                .start_row_i(TEST_ROW), .start_x_base_col_i(X_BASE_COL),
+                .start_affine_base_col_i(AFF_BASE_COL),
+                .start_output_base_col_i(OUT_BASE_COL),
+                .reduction_valid_o(reduction_valid), .reduction_ready_i(reduction_ready),
+                .reduction_data_o(reduction_data),
+                .replay_request_valid_i(replay_request_valid),
+                .replay_request_ready_o(replay_request_ready),
+                .replay_request_tag_i(replay_request_tag),
+                .replay_request_vectors_per_bank_i(replay_request_vectors),
+                .replay_request_bank_mask_i(replay_request_mask),
+                .replay_valid_o(replay_valid), .replay_ready_i(replay_ready),
+                .replay_tag_o(replay_tag), .replay_x_o(replay_x),
+                .replay_gamma_o(replay_gamma), .replay_beta_o(replay_beta),
+                .replay_last_o(replay_last), .writeback_valid_i(writeback_valid),
+                .writeback_ready_o(writeback_ready), .writeback_tag_i(writeback_tag),
+                .writeback_data_i(writeback_data), .writeback_last_i(writeback_last),
+                .cmd_valid_o(cmd_valid), .cmd_ready_i(cmd_ready), .cmd_o(cmd),
+                .cmd_bank_o(cmd_bank), .cmd_row_o(cmd_row), .cmd_col_o(cmd_col),
+                .cmd_write_data_o(cmd_write_data), .cmd_write_mask_o(cmd_write_mask),
+                .read_valid_i(read_valid), .read_ready_o(read_ready), .read_data_i(read_data),
+                .done_o(adapter_done), .protocol_error_o(protocol_error_adapter),
+                .cycle_count_o(adapter_cycles), .act_command_count_o(act_count),
+                .read_command_count_o(read_count), .write_command_count_o(write_count),
+                .pre_command_count_o(pre_count), .command_wait_cycles_o(wait_cycles)
+            );
+        end else begin : g_baseline_a
+            normalization_hbm_boundary_adapter #(
+                .BANKS(BANKS), .LANES(LANES),
+                .ROW_WIDTH(ROW_WIDTH), .COL_WIDTH(COL_WIDTH)
+            ) u_adapter (
+                .clk_i(clk), .rst_ni(rst_n),
+                .start_valid_i(launch_valid && pcu_job_ready),
+                .start_ready_o(adapter_start_ready),
+                .start_tag_i(TAG), .start_vectors_per_bank_i(VECTOR_COUNT),
+                .start_row_i(TEST_ROW), .start_x_base_col_i(X_BASE_COL),
+                .start_affine_base_col_i(AFF_BASE_COL),
+                .start_output_base_col_i(OUT_BASE_COL),
+                .reduction_valid_o(reduction_valid), .reduction_ready_i(reduction_ready),
+                .reduction_data_o(reduction_data),
+                .replay_request_valid_i(replay_request_valid),
+                .replay_request_ready_o(replay_request_ready),
+                .replay_request_tag_i(replay_request_tag),
+                .replay_request_vectors_per_bank_i(replay_request_vectors),
+                .replay_request_bank_mask_i(replay_request_mask),
+                .replay_valid_o(replay_valid), .replay_ready_i(replay_ready),
+                .replay_tag_o(replay_tag), .replay_x_o(replay_x),
+                .replay_gamma_o(replay_gamma), .replay_beta_o(replay_beta),
+                .replay_last_o(replay_last), .writeback_valid_i(writeback_valid),
+                .writeback_ready_o(writeback_ready), .writeback_tag_i(writeback_tag),
+                .writeback_data_i(writeback_data), .writeback_last_i(writeback_last),
+                .cmd_valid_o(cmd_valid), .cmd_ready_i(cmd_ready), .cmd_o(cmd),
+                .cmd_bank_o(cmd_bank), .cmd_row_o(cmd_row), .cmd_col_o(cmd_col),
+                .cmd_write_data_o(cmd_write_data), .cmd_write_mask_o(cmd_write_mask),
+                .read_valid_i(read_valid), .read_ready_o(read_ready), .read_data_i(read_data),
+                .done_o(adapter_done), .protocol_error_o(protocol_error_adapter),
+                .cycle_count_o(adapter_cycles), .act_command_count_o(act_count),
+                .read_command_count_o(read_count), .write_command_count_o(write_count),
+                .pre_command_count_o(pre_count), .command_wait_cycles_o(wait_cycles)
+            );
+        end
+    endgenerate
 
     dram_bank_array_model #(
         .BANKS(BANKS), .ROWS(ROWS), .COLS(COLS), .PIM_READ_PORTS(1)
@@ -182,6 +292,7 @@ module normalization_hbm_boundary_integration_tb #(
 
         repeat (4) @(negedge clk);
         rst_n = 1;
+        wait (control_rst_n === 1'b1);
         @(negedge clk); launch_valid = 1;
         @(posedge clk); while (!launch_ready) @(posedge clk);
         @(negedge clk); launch_valid = 0;
@@ -213,8 +324,8 @@ module normalization_hbm_boundary_integration_tb #(
                 if (u_dram.memory[b][3][OUT_BASE+X_WORDS-1][255:128] !== {128{1'b1}})
                     $fatal(1, "partial write mask corrupted upper half bank=%0d", b);
 
-        $display("NORMALIZATION_HBM_BOUNDARY_INTEGRATION_TB PASS width=%0d rms=%0d vectors=%0d wall_cycles=%0d adapter_cycles=%0d act=%0d read=%0d write=%0d pre=%0d wait=%0d read_credit_peak=%0d read_credit_final=%0d timing_errors=0",
-            WIDTH, RMS_MODE, VECTORS, wall_cycles, adapter_cycles, act_count,
+        $display("NORMALIZATION_HBM_BOUNDARY_INTEGRATION_TB PASS variant=%0d width=%0d rms=%0d vectors=%0d wall_cycles=%0d adapter_cycles=%0d act=%0d read=%0d write=%0d pre=%0d wait=%0d read_credit_peak=%0d read_credit_final=%0d timing_errors=0",
+            QUAD_LOCAL_AB, WIDTH, RMS_MODE, VECTORS, wall_cycles, adapter_cycles, act_count,
             read_count, write_count, pre_count, wait_cycles,
             peak_outstanding_reads, outstanding_reads);
         $finish;
@@ -222,6 +333,6 @@ module normalization_hbm_boundary_integration_tb #(
 
     initial begin
         repeat (30000) @(negedge clk);
-        $fatal(1, "timeout state=%0d adapter_cycles=%0d", u_adapter.state_q, adapter_cycles);
+        $fatal(1, "timeout variant=%0d adapter_cycles=%0d", QUAD_LOCAL_AB, adapter_cycles);
     end
 endmodule

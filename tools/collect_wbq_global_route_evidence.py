@@ -63,8 +63,16 @@ def main() -> int:
 
     baseline_all = json.loads(BASELINE.read_text(encoding="utf-8"))
     baseline = baseline_all["v4_distributed_landing_pad_route"]
-    placement = json.loads(PLACE_MANIFEST.read_text(encoding="utf-8"))
     log = ROUTE_LOG.read_text(encoding="utf-8", errors="replace")
+    expected_place_manifest_sha = log_value(log, "WBQ_ROUTE_PLACE_MANIFEST_SHA256")
+    launch_place_manifest = PLACE_MANIFEST
+    if sha256(launch_place_manifest) != expected_place_manifest_sha:
+        candidates = OUT.glob("wbq_placement_manifest.route_input_*.json")
+        launch_place_manifest = next(
+            (path for path in candidates if sha256(path) == expected_place_manifest_sha),
+            PLACE_MANIFEST,
+        )
+    placement = json.loads(launch_place_manifest.read_text(encoding="utf-8"))
     summary = parse_kv(SUMMARY)
     sources = parse_kv(SOURCES)
     residuals = re.findall(r"Iterative RRR finished with congestion remaining \((\d+)\)", log)
@@ -92,7 +100,7 @@ def main() -> int:
     )
     place_odb_sha = placement["artifacts"]["placed_odb"]["sha256"]
     place_sdc_sha = placement["artifacts"]["placed_sdc"]["sha256"]
-    place_manifest_sha = sha256(PLACE_MANIFEST)
+    place_manifest_sha = sha256(launch_place_manifest)
     placement_gate_pass = placement.get("gate_pass") is True
     input_hashes_match = (
         log_value(log, "WBQ_ROUTE_PLACE_ODB_SHA256") == place_odb_sha
@@ -123,7 +131,7 @@ def main() -> int:
         "routed_sdc": SDC,
     }
     payload = {
-        "schema_version": 1,
+        "schema_version": 2,
         "captured_at_utc": datetime.now(timezone.utc).isoformat(),
         "classification": "routed_research_artifact" if clean else "unknown",
         "route_run_git_sha": log_value(log, "WBQ_ROUTE_GIT_SHA"),
@@ -166,7 +174,7 @@ def main() -> int:
         "maximum_rss_kbytes": int(rss[-1]) if rss else None,
         "artifacts": {
             name: {"path": str(path), "bytes": path.stat().st_size, "sha256": sha256(path)}
-            for name, path in artifacts.items()
+            for name, path in (artifacts | {"placement_manifest_at_route_launch": launch_place_manifest}).items()
         },
         "claim_boundary": "Same-definition CuGR research control; skipped pre-CTS clock and remaining congestion are explicitly reported, and this is not detailed-route or manufacturing signoff.",
     }

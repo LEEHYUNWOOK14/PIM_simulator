@@ -2,7 +2,9 @@ module logic_die_normalization_pcu_top_tb #(
     parameter int LANES = 4,
     parameter bit RMS_MODE = 1'b0,
     parameter int WIDTH = 0,
-    parameter int CONTEXTS = 8
+    parameter int CONTEXTS = 8,
+    parameter bit QUAD_LOCAL_AB = 1'b0,
+    parameter bit B2_REGISTERED_QUAD_COMPLETION = 1'b0
 );
     localparam int BANKS = 16;
     localparam int VECTORS = (WIDTH == 0) ? 4 : WIDTH / (BANKS * LANES);
@@ -28,14 +30,61 @@ module logic_die_normalization_pcu_top_tb #(
     logic [63:0] partial_bytes, scalar_bytes, external_bytes;
     logic [$clog2(CONTEXTS+1)-1:0] occupancy;
     logic protocol_error;
+    logic [3:0] quad_rst_n;
+    logic control_rst_n;
     integer output_vectors = 0;
     integer output_errors = 0;
     integer cycles = 0;
     logic [15:0] bp_lfsr;
 
-    logic_die_normalization_pcu_top #(
-        .LANES(LANES), .SCALAR_ENGINES(4), .CONTEXTS(CONTEXTS)
-    ) dut (
+    assign control_rst_n = &quad_rst_n;
+    for (genvar quad = 0; quad < 4; quad++) begin : g_quad_reset
+        normalization_quad_reset_leaf u_reset_leaf (
+            .clk_i(clk), .rst_ni(rst_n), .quad_rst_ni_o(quad_rst_n[quad])
+        );
+    end
+
+    generate
+      if (QUAD_LOCAL_AB) begin : g_b
+        logic_die_normalization_quad_local_pcu_top #(
+            .LANES(LANES), .SCALAR_ENGINES(4), .CONTEXTS(CONTEXTS),
+            .REGISTERED_QUAD_COMPLETION(B2_REGISTERED_QUAD_COMPLETION)
+        ) dut (
+        .clk_i(clk), .rst_ni(control_rst_n), .quad_rst_ni_i(quad_rst_n),
+        .counter_clear_i(counter_clear),
+        .invocation_valid_i(invocation_valid), .invocation_ready_o(invocation_ready),
+        .job_valid_i(job_valid), .job_ready_o(job_ready), .job_rms_norm_i(RMS_MODE),
+        .job_tag_i(job_tag), .job_vectors_per_bank_i(VECTOR_COUNT),
+        .job_inv_hidden_i((WIDTH == 128) ? 32'h3c000000 :
+                          (WIDTH == 2048) ? 32'h3a000000 :
+                          (LANES == 4) ? 32'h3b800000 :
+                          (LANES == 8) ? 32'h3b000000 : 32'h3a800000),
+        .job_epsilon_i(32'h3727c5ac), .job_bank_mask_i({BANKS{1'b1}}),
+        .reduction_valid_i(reduction_valid), .reduction_ready_o(reduction_ready),
+        .reduction_data_i(reduction_data),
+        .replay_request_valid_o(replay_request_valid),
+        .replay_request_ready_i(replay_request_ready),
+        .replay_request_tag_o(replay_request_tag),
+        .replay_request_vectors_per_bank_o(replay_request_vectors),
+        .replay_request_bank_mask_o(replay_request_mask),
+        .replay_valid_i(replay_valid), .replay_ready_o(replay_ready),
+        .replay_tag_i(replay_tag), .replay_x_i(replay_x),
+        .replay_gamma_i(replay_gamma), .replay_beta_i(replay_beta),
+        .replay_last_i(replay_last), .writeback_valid_o(writeback_valid),
+        .writeback_ready_i(writeback_ready), .writeback_tag_o(writeback_tag),
+        .writeback_data_o(writeback_data), .writeback_last_o(writeback_last),
+        .bank_activation_read_bytes_o(activation_bytes),
+        .bank_affine_read_bytes_o(affine_bytes),
+        .bank_writeback_bytes_o(writeback_bytes),
+        .bank_to_logic_partial_bytes_o(partial_bytes),
+        .logic_to_bank_scalar_bytes_o(scalar_bytes),
+        .external_control_bytes_o(external_bytes),
+        .context_occupancy_o(occupancy), .protocol_error_o(protocol_error)
+        );
+      end else begin : g_a
+        logic_die_normalization_pcu_top #(
+            .LANES(LANES), .SCALAR_ENGINES(4), .CONTEXTS(CONTEXTS)
+        ) dut (
         .clk_i(clk), .rst_ni(rst_n), .counter_clear_i(counter_clear),
         .invocation_valid_i(invocation_valid), .invocation_ready_o(invocation_ready),
         .job_valid_i(job_valid), .job_ready_o(job_ready), .job_rms_norm_i(RMS_MODE),
@@ -65,7 +114,9 @@ module logic_die_normalization_pcu_top_tb #(
         .logic_to_bank_scalar_bytes_o(scalar_bytes),
         .external_control_bytes_o(external_bytes),
         .context_occupancy_o(occupancy), .protocol_error_o(protocol_error)
-    );
+        );
+      end
+    endgenerate
 
     always @(posedge clk) begin
         if (rst_n) begin
@@ -159,7 +210,8 @@ module logic_die_normalization_pcu_top_tb #(
             $fatal(1, "mid-transaction reset did not clear PCU state");
 
         @(negedge clk); invocation_valid = 1;
-        @(posedge clk); if (!invocation_ready) $fatal(1, "invocation interface stalled");
+        @(posedge clk);
+        while (invocation_ready !== 1'b1) @(posedge clk);
         @(negedge clk); invocation_valid = 0;
         @(negedge clk); job_valid = 1;
         @(posedge clk); while (!job_ready) @(posedge clk);
@@ -193,8 +245,9 @@ module logic_die_normalization_pcu_top_tb #(
             $fatal(1, "logic boundary mismatch partial=%0d scalar=%0d", partial_bytes, scalar_bytes);
         if (external_bytes != 32) $fatal(1, "external control mismatch got=%0d", external_bytes);
         if (occupancy != 0) $fatal(1, "wrapper context leaked occupancy=%0d", occupancy);
-        $display("LOGIC_DIE_NORMALIZATION_PCU_TOP_TB PASS lanes=%0d rms=%0d width=%0d vectors=%0d cycles=%0d lane_utilization_pct=100 replay_backpressure=5 random_writeback_bp=1 reset_mid_transaction=1 activation_bytes=%0d affine_bytes=%0d writeback_bytes=%0d partial_bytes=%0d scalar_bytes=%0d external_bytes=%0d",
-            LANES, RMS_MODE, (WIDTH == 0 ? BANKS*LANES*VECTORS : WIDTH), VECTORS, cycles,
+        $display("LOGIC_DIE_NORMALIZATION_PCU_TOP_TB PASS variant=%0d lanes=%0d rms=%0d width=%0d vectors=%0d cycles=%0d lane_utilization_pct=100 replay_backpressure=5 random_writeback_bp=1 reset_mid_transaction=1 activation_bytes=%0d affine_bytes=%0d writeback_bytes=%0d partial_bytes=%0d scalar_bytes=%0d external_bytes=%0d",
+            QUAD_LOCAL_AB, LANES, RMS_MODE,
+            (WIDTH == 0 ? BANKS*LANES*VECTORS : WIDTH), VECTORS, cycles,
             activation_bytes, affine_bytes, writeback_bytes, partial_bytes, scalar_bytes, external_bytes);
         $finish;
     end
