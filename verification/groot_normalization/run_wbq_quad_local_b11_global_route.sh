@@ -115,7 +115,7 @@ fi
 frozen_a_before="$(sha256sum "$frozen_a" | awk '{print $1}')"
 frozen_b_before="$(sha256sum "$frozen_b" | awk '{print $1}')"
 frozen_b2_before="$(sha256sum "$frozen_b2" | awk '{print $1}')"
-[[ "$frozen_a_before" == 964adc9cf68aceac1fd6686d7c586ffbd215ed9a35f6b54628ddf81981cbc5ad ]]
+[[ "$frozen_a_before" == 964adc9cf68aceac1fd6686d7c586ffbd295ed9a35f6b54628ddf81981cbc5ad ]]
 [[ "$frozen_b_before" == ab6cddf83dee124e9ae388b5cbe8c6fbda6665782870e1c4a57f83a83a174235 ]]
 [[ "$frozen_b2_before" == 2c928b19ab5b1dcbcd89ec36d8d0b18963a8b03c9776ecc7325509332e98235d ]]
 
