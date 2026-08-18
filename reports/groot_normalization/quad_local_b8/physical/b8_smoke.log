@@ -1,0 +1,19 @@
+WBQ_B8_SMOKE_START_UTC=2026-08-18T06:25:19Z
+WBQ_B8_SMOKE_INVOCATION_COUNT=1
+WBQ_B8_SMOKE_SERVICE=direct-cli-b8-smoke
+WBQ_B8_SMOKE_WRAPPER_PID=830266
+WBQ_B8_SMOKE_STATIC_POLICY drc_penalty=100
+WBQ_B8_SMOKE_ANCHOR name={u_b2_implementation/u_pcu/u_quad_datapath/load_slew427175} origin_dbu={6347540 2535040} orient={MX} status={LOCKED}
+WBQ_B8_SMOKE_ANCHOR name={u_b2_implementation/u_quad_local_adapter/wire440835} origin_dbu={4686940 1468800} orient={R180} status={LOCKED}
+WBQ_B8_SMOKE_OFFENDER name={u_b2_implementation/u_quad_local_adapter/wire440455}
+WBQ_B8_SMOKE_OFFENDER name={u_b2_implementation/u_quad_local_adapter/wire440867}
+WBQ_B8_SMOKE_OFFENDER name={u_b2_implementation/u_quad_local_adapter/wire440876}
+WBQ_B8_SMOKE_OFFENDER name={u_b2_implementation/u_quad_local_adapter/wire441097}
+WBQ_B8_SMOKE_OFFENDER name={u_b2_implementation/u_quad_local_adapter/wire441921}
+WBQ_B8_SMOKE_OFFENDER name={u_b2_implementation/u_quad_local_adapter/wire441940}
+WBQ_B8_SMOKE_OFFENDER name={u_b2_implementation/u_quad_local_adapter/wire441994}
+WBQ_B8_SMOKE_INPUT_REOPEN_AND_CHECKPOINT PASS anchors=2 offenders=7
+WBQ_B8_SMOKE_INDEPENDENT_REOPEN PASS anchors=2 offenders=7 fences=4
+WBQ_B8_SMOKE_EXIT_CODE=0
+WBQ_B8_SMOKE_AUDIT_EXIT_CODE=0
+WBQ_B8_SMOKE_END_UTC=2026-08-18T06:26:47Z

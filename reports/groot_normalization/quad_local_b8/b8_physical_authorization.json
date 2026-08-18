@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-18T06:28:01.215314+00:00",
+  "variant": "B8",
+  "decision": "PASS",
+  "conditions": {
+    "selected_one_variable_drc_recovery": "PASS",
+    "preauthorization_fail_closed": "PASS",
+    "b7_sealed_legality_failure_before_route": "PASS",
+    "b7_global_placement_pass_and_legality_failure": "PASS",
+    "decision_pins_b7_failure": "PASS",
+    "sealed_b7_rudy_checkpoint_matches": "PASS",
+    "fresh_smoke_pass": "PASS",
+    "fresh_smoke_inputs_match": "PASS",
+    "fresh_smoke_outputs_match": "PASS",
+    "smoke_reopen_target_checkpoint_all_pass": "PASS",
+    "sealed_cheap_gate_9_of_9": "PASS",
+    "sealed_mapped_assertions_20_of_20": "PASS",
+    "sealed_workload_profiles_6_of_6": "PASS",
+    "mapped_netlist_unchanged": "PASS",
+    "only_detailed_placement_drc_penalty_changed": "PASS",
+    "sealed_global_result_reused_not_recomputed": "PASS",
+    "failed_drc_policy_removed_and_runtime_marker_present": "PASS",
+    "full_design_diamond_forbidden": "PASS",
+    "checkpointing_present": "PASS",
+    "runner_exact_pid_and_signal_contract": "PASS",
+    "silence_diagnostics_present": "PASS",
+    "no_prior_b8_placement_attempt": "PASS"
+  },
+  "evidence_reuse_justification": "B8 changes only the negotiation legalizer DRC penalty and reuses the byte-identical sealed B7 RUDY checkpoint; RTL, netlist, SDC, fences, anchors, and route policy remain unchanged.",
+  "inputs": {
+    "b8_eco_decision": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b8/b8_eco_decision.json",
+      "sha256": "89d45f878b74a3af4478707c6fd87b52a957605288e1aaddb8e88c9e7b5cbe81"
+    },
+    "b8_smoke_report": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b8/physical/b8_smoke_execution_report.json",
+      "sha256": "3d91e18b85b13d5e68482b700eac85a5f0196a3f41e1f28d5e1b29f0b725f5e8"
+    },
+    "b7_placement_report": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b7/physical/b7_placement_execution_report.json",
+      "sha256": "1da19b35c152629022ba1927f2f5e538b880d3eec90de28f6c8e3e075e961fec"
+    },
+    "b7_placement_log": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b7/physical/b7_place.log",
+      "sha256": "1b2d137d266284ff8474c34396efd1744ff36f33909b8745e0b8b894a503c1aa"
+    },
+    "b7_rudy_odb": {
+      "path": "/dev/shm/wbq_b7_phase6_10/quad_local_b7/b7_rudy.odb",
+      "sha256": "3149b2b12cb6fc3f4a83910cbfebb2170594d1cbdd4fc7aa87c7ab1a344fb9c3"
+    },
+    "b5_cheap_gate_manifest": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b5/cheap_gate_manifest.json",
+      "sha256": "cbac1c5e6fd07e49f436ffe15e779fc566b78dae78e0d063d4b1172fb60481ab"
+    },
+    "b5_mapped_locality_audit": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b5/b5_mapped_locality_audit.json",
+      "sha256": "6eccb6a7d421a7171283ab3a7ac395d77dfee19b6b56e37c422a87bbdc6cda4f"
+    },
+    "b5_workload_accuracy": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/results/quad_local_b5_actual_trace/accuracy_summary.json",
+      "sha256": "25db95af3d7a72aa122a1108b5e1e15b07777708b9acb1ae414b6b5d45a2fffb"
+    },
+    "b2_mapped_netlist": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b2/logic_die_normalization_hbm_quad_local_b2_top_sky130.v",
+      "sha256": "674a1b7557aaa6335dd90fa20c87aad3e447de87c00402b8b0ed25a940be1cf5"
+    },
+    "b5_mapped_netlist": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b5/logic_die_normalization_hbm_quad_local_b2_top_sky130.v",
+      "sha256": "674a1b7557aaa6335dd90fa20c87aad3e447de87c00402b8b0ed25a940be1cf5"
+    },
+    "b7_placement_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/wbq_quad_local_b7_phi_place.tcl",
+      "sha256": "84f11fb7c00925aab074606b6c7367d5bc204d3409db8b58bdb4e7c9a1a9e959"
+    },
+    "b8_placement_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/wbq_quad_local_b8_drc_place.tcl",
+      "sha256": "26a4f627dfc8e468cb620bac3b13923e81b47ce654de5b7bd4e9f5f3f3203e27"
+    },
+    "b8_placement_runner": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/run_wbq_quad_local_b8_placement.sh",
+      "sha256": "28a5c9a588c9efd71bc5f7f9702830f5aa4921b7816d1ffd7f8b0eab2e011b86"
+    },
+    "silence_snapshot_tool": {
+      "path": "/home/forstobpim/PIM_simulator/tools/capture_openroad_stage_snapshot.py",
+      "sha256": "558a1c599a24db2a1a6ef4a8f89cfdefbfb8ad4e5459f59c47d6e20264d352b2"
+    },
+    "silence_compare_tool": {
+      "path": "/home/forstobpim/PIM_simulator/tools/compare_openroad_stage_snapshots.py",
+      "sha256": "4d58d731d9a21dfdcc9f2a820d5d3dd2ba1a694876ab3c852264ce59365e7a51"
+    }
+  },
+  "authorizes": [
+    "B8_PLACEMENT"
+  ],
+  "next_stage": "B8_PLACEMENT"
+}
