@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "variant": "B10",
+  "stage": "route_pin_grid_smoke",
+  "status": "PASS",
+  "start_utc": "2026-08-18T07:41:37Z",
+  "invocation_count": 1,
+  "service": "direct-cli-b10-smoke",
+  "wrapper_pid": 899913,
+  "compute_pid": 899942,
+  "audit_compute_pid": 900679,
+  "inputs": {
+    "decision": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b10/b10_eco_decision.json"
+    },
+    "placement": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b9/physical/b9_placement_execution_report.json"
+    },
+    "smoke_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/wbq_b10_route_pin_smoke.tcl"
+    },
+    "audit_tcl": {
+      "path": "/home/forstobpim/PIM_simulator/verification/groot_normalization/audit_wbq_b10_route_pin_smoke.tcl"
+    },
+    "b9_place_odb": {
+      "path": "/dev/shm/wbq_b9_phase6_10/quad_local_b9/b9_place.odb"
+    },
+    "b9_place_sdc": {
+      "path": "/dev/shm/wbq_b9_phase6_10/quad_local_b9/b9_place.sdc"
+    }
+  },
+  "authorizes": [
+    "B10_ROUTE_AUTHORIZATION"
+  ],
+  "end_utc": "2026-08-18T07:42:26Z",
+  "exit_code": 0,
+  "audit_exit_code": 0,
+  "termination_signal": null,
+  "checks": {
+    "input_reopen": "PASS",
+    "checkpoint_write": "PASS",
+    "independent_checkpoint_reopen": "PASS"
+  },
+  "outputs": {
+    "smoke_odb": {
+      "path": "/dev/shm/wbq_b10_phase6_10/quad_local_b10/b10_route_pin_smoke.odb",
+      "sha256": "f19d91982978a65d510f2aa8a6f8b198c79a7fba80b799e4f1f6c4e47d90925b"
+    },
+    "log": {
+      "path": "/home/forstobpim/PIM_simulator/reports/groot_normalization/quad_local_b10/physical/b10_route_pin_smoke.log",
+      "sha256": "52383a54cd3192c42d7b563d6f9d05fcb6c0f6994eb483861afe7477c178aaf7"
+    }
+  },
+  "next_stage": "B10_ROUTE_AUTHORIZATION"
+}
